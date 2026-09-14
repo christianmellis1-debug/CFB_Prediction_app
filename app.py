@@ -1,43 +1,109 @@
-
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.request import urlopen
+from io import BytesIO
 import pandas as pd
 import streamlit as st
-
 from model import MODEL_VERSION, predict_week
 
 st.set_page_config(page_title="College Football Predictor", page_icon="🏈", layout="wide")
 
+@st.cache_data(ttl=3600)
+def download_schedule(season):
+    url = f"https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_{season}.csv"
+    with urlopen(url, timeout=30) as response:
+        return pd.read_csv(BytesIO(response.read()), low_memory=False)
+
+def read_summary(upload, year):
+    path = Path(__file__).parent / "data" / f"cfb_team_summaries_weekly_{year}.csv"
+    if upload is None and not path.exists():
+        return None
+    frame = pd.read_csv(upload if upload is not None else path, low_memory=False)
+    if "season" in frame:
+        frame = frame[pd.to_numeric(frame["season"], errors="coerce") == year]
+        if frame.empty:
+            raise ValueError(f"No team-summary data for {year}.")
+    return frame
+
 st.title("🏈 College Football Predictor")
 st.caption(f"Frozen production model: {MODEL_VERSION}")
-
 with st.sidebar:
-    st.header("Upload data")
-    current_file = st.file_uploader("Current-season team summaries", type="csv")
-    prior_file = st.file_uploader("Prior-season team summaries", type="csv")
-    schedule_file = st.file_uploader("Current-season schedule", type="csv")
-
+    st.header("Data")
+    now = datetime.now(timezone.utc)
+    year = now.year if now.month >= 7 else now.year - 1
+    season = int(st.number_input("Season", min_value=2001, max_value=now.year + 1, value=year))
+    mode = st.radio("Schedule source", ["Automatic download", "Upload CSV"])
+    schedule_file = st.file_uploader("Schedule CSV", type="csv") if mode == "Upload CSV" else None
+    if st.button("Refresh schedule"):
+        download_schedule.clear()
+    st.caption("Automatic schedules refresh hourly while using the app.")
+    current_file = st.file_uploader(f"{season} team summaries", type="csv")
+    prior_file = st.file_uploader(f"{season - 1} team summaries", type="csv")
+    st.caption("Uploads are optional when team summaries are saved with the app.")
     st.divider()
     st.markdown("**V1.4 architecture**")
     st.write("35% offense · 35% defense · 20% venue · 10% SOS")
     st.write("Prior: 75% preseason Elo + 25% prior-season efficiency")
 
-if not (current_file and prior_file and schedule_file):
-    st.info("Upload all three CSVs to generate weekly predictions.")
-    st.markdown("""
-    **Outputs**
-    - Win probability for each team
-    - Predicted winner
-    - Confidence tier
-    - Road-favorite venue risk
-    - Downloadable prediction CSV
-    """)
+if mode == "Upload CSV" and schedule_file is None:
+    st.info("Upload a schedule or select Automatic download.")
+    st.stop()
+try:
+    schedule = pd.read_csv(schedule_file, low_memory=False) if schedule_file is not None else download_schedule(season)
+    required = {"season", "week", "home_id", "away_id", "home_team", "away_team", "home_points", "away_points"}
+    missing = required - set(schedule.columns)
+    if missing:
+        raise ValueError("Missing schedule columns: " + ", ".join(sorted(missing)))
+    schedule = schedule.copy()
+    schedule = schedule[pd.to_numeric(schedule["season"], errors="coerce") == season]
+    if "season_type" in schedule:
+        schedule = schedule[schedule["season_type"].astype(str).str.lower() == "regular"]
+    for col in ["home_division", "away_division"]:
+        if col in schedule:
+            schedule = schedule[schedule[col].astype(str).str.lower() == "fbs"]
+    for col in ["week", "home_id", "away_id", "home_points", "away_points"]:
+        schedule[col] = pd.to_numeric(schedule[col], errors="coerce")
+    schedule = schedule.dropna(subset=["week", "home_id", "away_id"])
+    schedule = schedule[schedule["week"] >= 1]
+    for col in ["completed", "neutral_site"]:
+        if col in schedule:
+            schedule[col] = schedule[col].astype(str).str.lower().isin(["true", "t", "1", "1.0", "yes", "y"])
+    if "start_date" in schedule:
+        schedule = schedule.sort_values("start_date", kind="stable")
+except Exception as exc:
+    st.error(f"Could not load the {season} schedule: {exc}")
+    st.info("Try Refresh schedule, another season, or Upload CSV.")
+    st.stop()
+if schedule.empty:
+    st.warning(f"No regular-season FBS matchups available for {season}.")
+    st.stop()
+
+weeks = sorted(schedule["week"].astype(int).unique().tolist())
+default_week = weeks[-1]
+if "start_date" in schedule:
+    dates = pd.to_datetime(schedule["start_date"], errors="coerce", utc=True)
+    upcoming = schedule[dates >= pd.Timestamp.now(tz="UTC")]
+    if "completed" in upcoming:
+        upcoming = upcoming[~upcoming["completed"]]
+    if not upcoming.empty:
+        default_week = int(upcoming.iloc[0]["week"])
+selected_week = st.selectbox("Week", weeks, index=weeks.index(default_week))
+with st.expander("Weekly matchups", expanded=True):
+    games = schedule[schedule["week"] == selected_week]
+    cols = [c for c in ["away_team", "home_team", "start_date", "completed"] if c in games]
+    st.dataframe(games[cols], hide_index=True, use_container_width=True)
+st.caption("Schedule: sportsdataverse/cfbfastR-data · Regular-season FBS vs. FBS games")
+
+try:
+    current = read_summary(current_file, season)
+    prior = read_summary(prior_file, season - 1)
+except Exception as exc:
+    st.error(f"Could not read team summaries: {exc}")
+    st.stop()
+if current is None or prior is None:
+    st.info("Matchups load automatically. Predictions still require current- and prior-season team summaries. Upload them in the sidebar.")
+    st.caption("Files saved in the repository as data/cfb_team_summaries_weekly_YEAR.csv load automatically. These custom model statistics are separate from the public schedule.")
 else:
-    current = pd.read_csv(current_file, low_memory=False)
-    prior = pd.read_csv(prior_file, low_memory=False)
-    schedule = pd.read_csv(schedule_file, low_memory=False)
-
-    weeks = sorted(pd.to_numeric(schedule["week"], errors="coerce").dropna().astype(int).unique())
-    selected_week = st.selectbox("Week", weeks)
-
     try:
         pred = predict_week(current, prior, schedule, selected_week)
     except Exception as e:
@@ -122,3 +188,4 @@ else:
 
 st.divider()
 st.caption("Model versioning is frozen so future improvements can be tested as V1.5+ without silently changing V1.4.")
+
