@@ -1,0 +1,19 @@
+{
+  "model_version": "V1.4",
+  "weights": {
+    "offense": 0.35,
+    "defense": 0.35,
+    "venue": 0.2,
+    "sos": 0.1
+  },
+  "prior_blend": {
+    "preseason_elo": 0.75,
+    "prior_season_efficiency": 0.25
+  },
+  "calibration_slope": 1.945,
+  "historical_benchmark_2025": {
+    "games": 762,
+    "accuracy": 0.731,
+    "brier": 0.185
+  }
+}
