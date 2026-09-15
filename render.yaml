@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: cfb-predictor-node
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: PREDICTOR_API_URL
+        sync: false
