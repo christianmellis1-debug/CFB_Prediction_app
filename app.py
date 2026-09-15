@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from html import escape
 import json
 from pathlib import Path
@@ -244,7 +245,7 @@ def download_market_odds(date_range):
             for event_id, archived in pool.map(get_archive, missing):
                 if archived:
                     quotes[event_id] = archived
-    return {"quotes": quotes, "retrieved": datetime.now(timezone.utc).strftime("%b %d, %H:%M UTC")}
+    return {"quotes": quotes, "retrieved": datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")}
 
 
 def attach_odds(predictions, games, quotes):
@@ -705,7 +706,7 @@ with cards_tab:
             if len(game) == 1:
                 date = pd.to_datetime(game.iloc[0].get("start_date"), errors="coerce", utc=True)
                 if pd.notna(date):
-                    kickoff = date.strftime("%a, %b %d · %H:%M UTC")
+                    kickoff = date.tz_convert("America/Chicago").strftime("%a, %b %d · %I:%M %p %Z")
             if r["Status"] != "Final":
                 outcome = '<div class="result-box">' + escape(str(r["Status"])) + '</div>'
             cards.append(f"""<article class="pick-card">
