@@ -8,12 +8,13 @@ from decimal import Decimal, ROUND_HALF_UP
 from urllib.parse import urlencode
 from urllib.request import urlopen
 from io import BytesIO
+import base64
 import pandas as pd
 import numpy as np
 import streamlit as st
 from model import MODEL_VERSION, COMPONENT_SPEC, predict_week
 
-st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.png", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
 @st.cache_data(ttl=300)
 def download_schedule(season):
@@ -391,11 +392,14 @@ st.markdown("""
 .odds-prices {display:flex;justify-content:space-between;gap:12px;font-size:14px;margin-top:8px;}
 .odds-prices span {min-width:0;overflow-wrap:anywhere;}
 .risk-note {font-size:12px;margin-top:14px;color:#986a17;}
+.hero-brand {display:flex;align-items:center;gap:22px;position:relative;z-index:1;}
+.hero-mark {font-size:58px;line-height:1;filter:drop-shadow(0 8px 10px #061b1540);}
 @media (max-width:1000px) {.pick-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:600px) {.block-container {padding:4rem 1rem 2rem;}.hero {padding:25px 22px;border-radius:18px;}.pick-grid {grid-template-columns:1fr;}.overview {gap:8px;}.stat {padding:12px 10px;}.stat strong {font-size:23px;}.stat span {font-size:11px;}}
+@media (max-width:600px) {.hero-brand {gap:14px;}.hero-mark {font-size:42px;}}
 </style>
-<div class="hero"><div class="eyebrow">Saturday scouting report · College football</div>
-<h1>Your weekly game plan.</h1><p>Every matchup. A clear pick. Confidence at a glance.</p></div>
+<div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">Saturday scouting report · College football</div>
+<h1>Your weekly game plan.</h1><p>Every matchup. A clear pick. Confidence at a glance.</p></div></div>
 """, unsafe_allow_html=True)
 
 now = datetime.now(timezone.utc)
