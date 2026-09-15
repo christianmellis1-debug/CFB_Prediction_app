@@ -25,3 +25,7 @@ PREDICTOR_API_URL=https://your-api-host.example.com npm start
 ```
 
 `render.yaml` defines both services for deployment together: a Node web service and the FastAPI prediction service. Render wires `PREDICTOR_API_URL` to the API service automatically. The existing Streamlit app remains available during the migration.
+
+## Install it on an iPhone
+
+After the Node site is deployed over HTTPS, open its URL in Safari, tap **Share**, choose **Add to Home Screen**, leave **Open as Web App** enabled, and tap **Add**. It will open full-screen like an app and use `frontend/public/icons/cfb-icon.svg` as its football icon. To change the artwork, replace that file, rebuild/redeploy, then remove and reinstall the Home Screen icon so iOS picks up the new artwork.

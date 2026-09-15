@@ -1,0 +1,13 @@
+{
+  "name": "CFB Predictor",
+  "short_name": "CFB Picks",
+  "description": "College football predictions, confidence, results, and betting value.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#102c26",
+  "theme_color": "#102c26",
+  "icons": [
+    {"src": "/icons/cfb-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
