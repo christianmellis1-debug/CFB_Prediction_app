@@ -7,7 +7,8 @@ import {createProxyMiddleware} from 'http-proxy-middleware';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = Number(process.env.PORT || 3000);
-const apiUrl = process.env.PREDICTOR_API_URL || 'http://localhost:8000';
+const configuredApi = process.env.PREDICTOR_API_URL || 'http://localhost:8000';
+const apiUrl = /^https?:\/\//i.test(configuredApi) ? configuredApi : `https://${configuredApi}`;
 
 app.use(cors());
 app.use('/api', createProxyMiddleware({target: apiUrl, changeOrigin: true, pathRewrite: {'^/api': '/api'}}));
