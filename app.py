@@ -327,6 +327,23 @@ def add_betting_value(predictions):
     return result
 
 
+def team_data_badge(team_id, published, derived, week):
+    """Describe available pregame input without presenting estimates as published stats."""
+    if team_id is None:
+        return ""
+    tid = int(team_id)
+    if tid in derived:
+        label, style = "Estimated from scores", "estimated"
+        note = "Provisional prior profile adjusted using completed FBS-game scores."
+    elif ((published["team_id"] == tid) & (published["through_week"] < week)).any():
+        label, style = "Advanced stats", "advanced"
+        note = "A published current-season snapshot from before this week is available."
+    else:
+        label, style = "Prior data only", "prior"
+        note = "No eligible advanced snapshot or scoring fallback. FCS games are excluded; the feed may also be missing data."
+    return f'<details class="data-quality {style}"><summary>{label}</summary><span>{note}</span></details>'
+
+
 def team_logo_url(team_id):
     """ESPN's public college-football logo endpoint, keyed by team ID."""
     try:
@@ -439,6 +456,16 @@ st.markdown("""
 .odds-prices {display:flex;justify-content:space-between;gap:12px;font-size:14px;margin-top:8px;}
 .odds-prices span {min-width:0;overflow-wrap:anywhere;}
 .risk-note {font-size:12px;margin-top:14px;color:#986a17;}
+.data-quality {font-size:11px;margin-top:5px;max-width:100%;}
+.data-quality summary {cursor:pointer;display:list-item;list-style-position:inside;border-radius:8px;padding:4px 7px;width:fit-content;}
+.data-quality.advanced summary {background:#dff1e5;color:#185431;}
+.data-quality.estimated summary {background:#fff0d1;color:#704900;}
+.data-quality.prior summary {background:#fbe1df;color:#8b2925;}
+.data-quality span {display:block;padding:8px 0;line-height:1.5;}
+.card-details {margin-top:12px;border-top:1px solid #80978b40;padding-top:12px;font-size:12px;}
+.card-details summary {cursor:pointer;min-height:32px;}
+.kickoff {font-size:12px;opacity:.75;margin-bottom:12px;}
+.team-name {min-width:0;flex:1;}
 .hero-brand {display:flex;align-items:center;gap:22px;position:relative;z-index:1;}
 .hero-mark {font-size:58px;line-height:1;filter:drop-shadow(0 8px 10px #061b1540);}
 @media (max-width:1000px) {.pick-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
@@ -521,6 +548,7 @@ try:
     with st.spinner("Loading team statistics and generating predictions..."):
         current = read_summary(current_file, season)
         prior = read_summary(prior_file, season - 1)
+        published_current = current.copy()
         current, derived_team_data = augment_missing_summaries(current, prior, schedule, selected_week)
 except Exception as exc:
     st.error(f"Could not load team summaries: {exc}")
@@ -671,13 +699,23 @@ with cards_tab:
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
             away_logo_html = f'<img class="team-logo" src="{away_logo}" alt="" />' if away_logo else ""
             home_logo_html = f'<img class="team-logo" src="{home_logo}" alt="" />' if home_logo else ""
+            home_badge = team_data_badge(game.iloc[0]["home_id"], published_current, derived_team_data, selected_week) if len(game) == 1 else ""
+            away_badge = team_data_badge(game.iloc[0]["away_id"], published_current, derived_team_data, selected_week) if len(game) == 1 else ""
+            kickoff = "Kickoff time TBD"
+            if len(game) == 1:
+                date = pd.to_datetime(game.iloc[0].get("start_date"), errors="coerce", utc=True)
+                if pd.notna(date):
+                    kickoff = date.strftime("%a, %b %d · %H:%M UTC")
+            if r["Status"] != "Final":
+                outcome = '<div class="result-box">' + escape(str(r["Status"])) + '</div>'
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
-<div class="team-line"><span class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}{escape(str(r['Away Team']))}</span></span><strong>{r['Away Win %']:.1%}</strong></div>
-<div class="team-line"><span class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span></span><strong>{r['Home Win %']:.1%}</strong></div>
+<div class="kickoff">{escape(kickoff)}</div>
+<div class="team-line"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}{escape(str(r['Away Team']))}</span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
+<div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}{risk}{missing_data_note}</article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
         st.markdown('<div class="pick-grid">' + ''.join(cards) + '</div>', unsafe_allow_html=True)
 with table_tab:
     show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
@@ -689,27 +727,34 @@ with scenario_tab:
     st.caption("Simulate flat stakes by confidence tier. This uses all matchups in the scenario weeks, regardless of the search and card filters above.")
     if st.toggle("Calculate betting scenario", value=False):
         selected_scenario_weeks = st.multiselect("Scenario weeks", weeks, default=[w for w in [1, 2] if w in weeks])
-        scenario_mode = st.radio("Scenario strategy", ["Confidence tiers", "Best betting opportunities"], horizontal=True)
+        preset = st.selectbox("Quick setup", ["Original stakes", "$10 per pick", "$10 on value picks only", "Custom stakes"])
+        scenario_mode = "Best betting opportunities" if preset == "$10 on value picks only" else "Confidence tiers"
+        if preset == "Custom stakes":
+            scenario_mode = st.radio("Scenario strategy", ["Confidence tiers", "Best betting opportunities"], horizontal=True)
+        default_amounts = [10.0] * 4 if preset == "$10 per pick" else [10.0, 5.0, 2.5, 1.0]
         stake_columns = st.columns(4)
         stakes = {}
         if scenario_mode == "Confidence tiers":
-            for column, tier, amount in zip(stake_columns, ["High", "Moderate", "Lean", "Toss-up"], [10.0, 5.0, 2.5, 1.0]):
+            for column, tier, amount in zip(stake_columns, ["High", "Moderate", "Lean", "Toss-up"], default_amounts):
                 with column:
-                    stakes[tier] = st.number_input(f"{tier} stake ($)", min_value=0.0, value=amount, step=.5, format="%.2f")
+                    stakes[tier] = st.number_input(f"{tier} stake ($)", min_value=0.0, value=amount, step=.5, format="%.2f", key=f"scenario_{preset}_{tier}")
             st.caption("High includes Very High: 80%+ · Moderate: 70–80% · Lean: 60–70% · Toss-up: under 60%.")
         else:
             with stake_columns[0]:
                 opportunity_stake = st.number_input("Opportunity stake ($)", min_value=0.0, value=10.0, step=.5, format="%.2f")
             stakes = {tier: opportunity_stake for tier in ["High", "Moderate", "Lean", "Toss-up"]}
             st.caption("Includes only picks labeled Strong value or Value: positive expected value, with the model edge thresholds shown above.")
-        st.info("Historical simulation using recalculated pregame-week predictions and archived prices, not a record of bets placed before kickoff. Missing moneylines are excluded; payouts include returned stakes. No parlays or reinvestment. Ties refund the stake; profit is rounded to cents per bet.")
+        st.caption("Only priced, settled bets count toward profit. Total returned includes your original stake.")
+        with st.expander("How this scenario is calculated"):
+            st.write("Historical simulation using recalculated pregame-week predictions and archived prices, not a record of bets placed before kickoff. Missing moneylines are excluded; pending games are not settled. No parlays or reinvestment. Ties refund the stake; profit is rounded to cents per bet.")
         if selected_scenario_weeks:
             try:
                 scenario_frames = []
                 with st.spinner("Calculating your scenario..."):
                     for scenario_week in sorted(selected_scenario_weeks):
                         scenario_games = schedule[schedule["week"] == scenario_week]
-                        week_predictions = predict_all_games(current, prior, schedule, scenario_week)
+                        scenario_current, _ = augment_missing_summaries(published_current, prior, schedule, scenario_week)
+                        week_predictions = predict_all_games(scenario_current, prior, schedule, scenario_week)
                         if week_predictions.empty:
                             continue
                         week_predictions = attach_results(week_predictions, scenario_games)
@@ -724,7 +769,8 @@ with scenario_tab:
                         week_predictions = add_betting_value(attach_odds(week_predictions, scenario_games, quotes))
                         if scenario_mode == "Best betting opportunities":
                             week_predictions = week_predictions[week_predictions["Bet Signal"].isin(["Strong value", "Value"])]
-                        scenario_frames.append(simulate_stakes(week_predictions, stakes))
+                        if not week_predictions.empty:
+                            scenario_frames.append(simulate_stakes(week_predictions, stakes))
                 if scenario_frames:
                     detail = pd.concat(scenario_frames, ignore_index=True)
                     settled = detail[detail["Scenario Status"] == "Settled"]
