@@ -13,7 +13,7 @@ import numpy as np
 import streamlit as st
 from model import MODEL_VERSION, COMPONENT_SPEC, predict_week
 
-st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.png", layout="wide", initial_sidebar_state="collapsed")
 
 @st.cache_data(ttl=300)
 def download_schedule(season):
