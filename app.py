@@ -328,21 +328,41 @@ def add_betting_value(predictions):
     return result
 
 
-def team_data_badge(team_id, published, derived, week):
-    """Describe available pregame input without presenting estimates as published stats."""
+def team_data_details(team_id, published, derived, week):
+    """Return the source label and eligible pregame metrics for a native expander."""
     if team_id is None:
-        return ""
+        return "Data unavailable", "No matching team identifier was found.", {}
     tid = int(team_id)
     if tid in derived:
-        label, style = "Estimated from scores", "estimated"
-        note = "Provisional prior profile adjusted using completed FBS-game scores."
-    elif ((published["team_id"] == tid) & (published["through_week"] < week)).any():
-        label, style = "Advanced stats", "advanced"
-        note = "A published current-season snapshot from before this week is available."
-    else:
-        label, style = "Prior data only", "prior"
-        note = "No eligible advanced snapshot or scoring fallback. FCS games are excluded; the feed may also be missing data."
-    return f'<details class="data-quality {style}"><summary>{label}</summary><span>{note}</span></details>'
+        info = derived[tid]
+        return "Estimated from scores", (
+            f"Provisional metrics from {info['games']} completed FBS game(s), "
+            f"through Week {info['through_week']}. Prior profiles are adjusted using scores; "
+            "these are not published advanced statistics."
+        ), {}
+    rows = published[(published["team_id"] == tid) & (published["through_week"] < week)]
+    if rows.empty:
+        return "Prior data only", (
+            "No eligible current-season advanced snapshot or scoring fallback is available. "
+            "FCS games are excluded from the scoring fallback; advanced summaries may also be missing."
+        ), {}
+    latest = rows.sort_values("through_week").iloc[-1]
+    metrics = {}
+    for column, label, percent in [
+        ("adj_off_epa", "Adjusted offensive EPA", False),
+        ("adj_def_epa", "Adjusted defensive EPA", False),
+        ("success_off", "Offensive success rate", True),
+        ("success_def", "Defensive success rate", True),
+        ("explosive_off", "Offensive explosive-play rate", True),
+        ("explosive_def", "Defensive explosive-play rate", True),
+    ]:
+        value = pd.to_numeric(latest.get(column), errors="coerce")
+        metrics[label] = ("Unavailable" if pd.isna(value) else
+                          f"{value:.1%}" if percent else f"{value:.3f}")
+    return "Advanced stats", (
+        f"Published snapshot through Week {int(latest['through_week'])}, "
+        f"used for the Week {week} prediction. Source: SportsDataverse."
+    ), metrics
 
 
 def team_logo_url(team_id):
@@ -700,8 +720,7 @@ with cards_tab:
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
             away_logo_html = f'<img class="team-logo" src="{away_logo}" alt="" />' if away_logo else ""
             home_logo_html = f'<img class="team-logo" src="{home_logo}" alt="" />' if home_logo else ""
-            home_badge = team_data_badge(game.iloc[0]["home_id"], published_current, derived_team_data, selected_week) if len(game) == 1 else ""
-            away_badge = team_data_badge(game.iloc[0]["away_id"], published_current, derived_team_data, selected_week) if len(game) == 1 else ""
+            home_badge, away_badge = "<!--home-data-->", "<!--away-data-->"
             kickoff = "Kickoff time TBD"
             if len(game) == 1:
                 date = pd.to_datetime(game.iloc[0].get("start_date"), errors="coerce", utc=True)
@@ -717,7 +736,25 @@ with cards_tab:
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
 <div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
-        st.markdown('<div class="pick-grid">' + ''.join(cards) + '</div>', unsafe_allow_html=True)
+        for card_index, (_, pick) in enumerate(filtered.iterrows()):
+            card = cards[card_index].replace('<article class="pick-card">', '').replace('</article>', '')
+            header, rest = card.split("<!--away-data-->", 1)
+            middle, footer = rest.split("<!--home-data-->", 1)
+            # Close team wrappers before inserting Streamlit widgets.
+            header += f"</div><strong>{pick['Away Win %']:.1%}</strong></div>"
+            middle = middle.split("</div>", 2)[-1] + f"</div><strong>{pick['Home Win %']:.1%}</strong></div>"
+            footer = footer.split("</div>", 2)[-1]
+            matchup = games[(games["home_team"] == pick["Home Team"]) & (games["away_team"] == pick["Away Team"])]
+            with st.container(border=True):
+                st.markdown(header, unsafe_allow_html=True)
+                for side, section in [("away", middle), ("home", footer)]:
+                    tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
+                    label, note, metrics = team_data_details(tid, published_current, derived_team_data, selected_week)
+                    with st.expander(f"{pick[side.title() + ' Team']} · {label}"):
+                        st.caption(note)
+                        for metric, value in metrics.items():
+                            st.write(f"**{metric}:** {value}")
+                    st.markdown(section, unsafe_allow_html=True)
 with table_tab:
     show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
     for col in ["Confidence", "Away Win %", "Home Win %"]:
