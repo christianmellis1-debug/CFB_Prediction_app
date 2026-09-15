@@ -480,11 +480,18 @@ except Exception as exc:
     st.stop()
 
 eligible = current[current["through_week"] < selected_week]
+missing_team_ids = set()
+missing_team_names = []
 if selected_week > 1:
     team_ids = set(games["home_id"]) | set(games["away_id"])
-    missing_teams = team_ids - set(eligible["team_id"])
-    if missing_teams:
-        st.warning(f"{len(missing_teams)} teams have no published pregame statistics for this week; their predictions use the model's prior-data fallback.")
+    missing_team_ids = team_ids - set(eligible["team_id"])
+    if missing_team_ids:
+        names = {}
+        for _, game in games.iterrows():
+            names[int(game["home_id"])] = str(game["home_team"])
+            names[int(game["away_id"])] = str(game["away_team"])
+        missing_team_names = sorted(names[tid] for tid in missing_team_ids if tid in names)
+        st.warning(f"{len(missing_team_names)} team{'s' if len(missing_team_names) != 1 else ''} have no published pregame statistics for this week: {', '.join(missing_team_names)}. Their predictions use the model's prior-data fallback.")
     if not eligible.empty and eligible["through_week"].max() < selected_week - 1:
         st.warning(f"Published statistics currently extend through week {int(eligible['through_week'].max())}. Predictions use the latest available pregame snapshot.")
 try:
@@ -594,6 +601,15 @@ with cards_tab:
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
             moneylines = f'<div class="odds-box"><div class="pick-label">Moneyline · {escape(str(r["ML Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["Home ML"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
             game = games[(games["home_team"] == r["Home Team"]) & (games["away_team"] == r["Away Team"])]
+            missing_data_note = ""
+            if len(game) == 1:
+                absent = []
+                if int(game.iloc[0]["home_id"]) in missing_team_ids:
+                    absent.append(str(r["Home Team"]))
+                if int(game.iloc[0]["away_id"]) in missing_team_ids:
+                    absent.append(str(r["Away Team"]))
+                if absent:
+                    missing_data_note = '<div class="risk-note">No pregame statistics: ' + escape(", ".join(absent)) + ' · prior-data fallback</div>'
             away_logo = team_logo_url(game.iloc[0]["away_id"]) if len(game) == 1 else ""
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
             away_logo_html = f'<img class="team-logo" src="{away_logo}" alt="" />' if away_logo else ""
@@ -604,7 +620,7 @@ with cards_tab:
 <div class="team-line"><span class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span></span><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}{risk}</article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}{risk}{missing_data_note}</article>""")
         st.markdown('<div class="pick-grid">' + ''.join(cards) + '</div>', unsafe_allow_html=True)
 with table_tab:
     show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
@@ -701,4 +717,3 @@ st.download_button("Download these picks · CSV", filtered.to_csv(index=False).e
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"])
-
