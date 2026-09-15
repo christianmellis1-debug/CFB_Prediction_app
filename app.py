@@ -442,10 +442,10 @@ def simulate_stakes(predictions, stakes):
         returned = profit = None
         if stake <= 0:
             reason = "No bet · zero stake"
-        elif pick["Status"] != "Final":
-            reason = "Pending final result"
         elif valid_line == "Unavailable":
             reason = "Excluded · missing moneyline"
+        elif pick["Status"] != "Final":
+            reason = "Pending final result"
         else:
             odds = Decimal(valid_line)
             if pick["Actual Winner"] == "Tie":
@@ -455,7 +455,11 @@ def simulate_stakes(predictions, stakes):
                 returned = stake + profit
             else:
                 returned, profit = Decimal("0"), -stake
+        potential = payout_outcomes(stake, valid_line) if stake > 0 else None
         rows.append({
+            "Return if pick wins": potential["Return if win"] if potential else None,
+            "Profit if pick wins": potential["Profit if win"] if potential else None,
+            "Loss if pick loses": potential["Loss if lose"] if potential else None,
             "Week": int(pick["Week"]), "Away Team": pick["Away Team"], "Home Team": pick["Home Team"],
             "Pick": pick["Predicted Winner"], "Tier": tier, "Confidence": confidence,
             "Moneyline": valid_line, "Sportsbook": pick["ML Source"], "Actual Winner": pick["Actual Winner"],
@@ -957,7 +961,7 @@ with scenario_tab:
                 opportunity_stake = st.number_input("Opportunity stake ($)", min_value=0.0, value=10.0, step=.5, format="%.2f")
             stakes = {tier: opportunity_stake for tier in ["High", "Moderate", "Lean", "Toss-up"]}
             st.caption("Includes only picks labeled Strong value or Value: positive expected value, with the model edge thresholds shown above.")
-        st.caption("Only priced, settled bets count toward profit. Total returned includes your original stake.")
+        st.caption("See potential profit if pending picks win, plus actual results for settled bets. Total returned includes your original stake.")
         with st.expander("How this scenario is calculated"):
             st.write("Historical simulation using recalculated pregame-week predictions and archived prices, not a record of bets placed before kickoff. Missing moneylines are excluded; pending games are not settled. No parlays or reinvestment. Ties refund the stake; profit is rounded to cents per bet.")
         if selected_scenario_weeks:
@@ -990,15 +994,32 @@ with scenario_tab:
                     total_stake = settled["Stake"].sum()
                     total_return = settled["Returned"].sum()
                     total_profit = settled["Net Profit"].sum()
+                    pending = detail[detail["Scenario Status"].eq("Pending final result")]
+                    if not pending.empty:
+                        st.markdown("### If the pending predicted winners win")
+                        p1, p2, p3 = st.columns(3)
+                        p1.metric("Pending stakes", f"${pending['Planned Stake'].sum():,.2f}")
+                        p2.metric("Total payout if all win", f"${pending['Return if pick wins'].sum():,.2f}")
+                        p3.metric("Net profit if all win", f"${pending['Profit if pick wins'].sum():+,.2f}")
+                        st.write(f"If all pending picks lose: ${pending['Planned Stake'].sum():,.2f} lost.")
+                        st.caption("Conditional outcomes using available moneylines, not probability-weighted forecasts. Missing lines and zero stakes are excluded. Each pick is a separate bet.")
+                        pending_view = pending[["Week", "Pick", "Moneyline", "Sportsbook", "Planned Stake", "Return if pick wins", "Profit if pick wins", "Loss if pick loses"]]
+                        st.dataframe(pending_view, hide_index=True, use_container_width=True,
+                                     column_config={col: st.column_config.NumberColumn(col, format="$%.2f") for col in ["Planned Stake", "Return if pick wins", "Profit if pick wins", "Loss if pick loses"]})
+                        if not settled.empty:
+                            st.write(f"Combined scenario net profit if pending picks all win: ${total_profit + pending['Profit if pick wins'].sum():+,.2f}; if all lose: ${total_profit - pending['Planned Stake'].sum():+,.2f}.")
+                    st.markdown("### Settled results")
+                    if settled.empty:
+                        st.caption("No bets have settled yet. The figures below are actual results only; potential returns are shown above.")
                     m1, m2, m3 = st.columns(3)
                     m1.metric("Total staked · priced, settled bets", f"${total_stake:,.2f}")
                     m2.metric("Total returned · includes stakes", f"${total_return:,.2f}")
                     m3.metric("Net profit / loss", f"${total_profit:+,.2f}")
                     if total_stake:
                         st.caption(f"ROI: {total_profit / total_stake:.1%} · {len(settled)} settled bets · {int(settled['Won'].sum())} wins / {int(settled['Lost'].sum())} losses")
-                    skipped = detail[detail["Scenario Status"] != "Settled"]
+                    skipped = detail[~detail["Scenario Status"].isin(["Settled", "Pending final result"])]
                     if not skipped.empty:
-                        st.warning(f"{len(skipped)} picks excluded or pending, representing ${skipped['Planned Stake'].sum():,.2f} in additional planned stakes. The displayed profit is not the exact outcome of betting every game.")
+                        st.warning(f"{len(skipped)} picks excluded, representing ${skipped['Planned Stake'].sum():,.2f} in additional planned stakes. The displayed profit is not the exact outcome of betting every game.")
                     money_columns = {name: st.column_config.NumberColumn(name, format="$%.2f") for name in ["Staked", "Returned", "Net Profit"]}
                     for grouping in ["Week", "Tier"]:
                         st.markdown(f"**Results by {grouping.lower()}**")
