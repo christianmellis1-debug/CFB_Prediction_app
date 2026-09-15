@@ -28,4 +28,4 @@ PREDICTOR_API_URL=https://your-api-host.example.com npm start
 
 ## Install it on an iPhone
 
-After the Node site is deployed over HTTPS, open its URL in Safari, tap **Share**, choose **Add to Home Screen**, leave **Open as Web App** enabled, and tap **Add**. It will open full-screen like an app and use `frontend/public/icons/cfb-icon.svg` as its football icon. To change the artwork, replace that file, rebuild/redeploy, then remove and reinstall the Home Screen icon so iOS picks up the new artwork.
+After the Node site is deployed over HTTPS, open its URL in Safari, tap **Share**, choose **Add to Home Screen**, leave **Open as Web App** enabled, and tap **Add**. It will open full-screen like an app and use `assets/cfb_icon.png` as its football icon. To change the artwork, replace that PNG, redeploy, then remove and reinstall the Home Screen icon so iOS picks up the new artwork.

@@ -12,6 +12,7 @@ const apiUrl = /^https?:\/\//i.test(configuredApi) ? configuredApi : `https://${
 
 app.use(cors());
 app.use('/api', createProxyMiddleware({target: apiUrl, changeOrigin: true, pathRewrite: {'^/api': '/api'}}));
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
 app.use((_req, res) => res.sendFile(path.join(__dirname, '..', 'frontend', 'dist', 'index.html')));
 app.listen(port, () => console.log(`CFB Predictor web server listening on ${port}; API: ${apiUrl}`));
