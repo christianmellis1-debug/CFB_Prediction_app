@@ -44,6 +44,18 @@ def read_summary(upload, year):
         raise ValueError(f"{year} summaries contain duplicate team/week rows.")
     return frame
 
+def predict_all_games(current, prior, schedule, week):
+    # Preserve prior-week results for venue history; include every target-week game.
+    model_schedule = schedule.copy()
+    target = pd.to_numeric(model_schedule["week"], errors="coerce") == int(week)
+    if "completed" in model_schedule:
+        model_schedule.loc[target, "completed"] = False
+    predictions = predict_week(current, prior, model_schedule, week)
+    if not predictions.empty and "Game ID" not in predictions:
+        predictions["Game ID"] = None
+    return predictions
+
+
 def attach_results(predictions, games):
     outcomes = games.copy()
     completed = outcomes.get("completed", pd.Series(False, index=outcomes.index)).astype(str).str.lower().isin(["true", "t", "1", "1.0", "yes", "y"])
@@ -201,7 +213,7 @@ if selected_week > 1:
     if not eligible.empty and eligible["through_week"].max() < selected_week - 1:
         st.warning(f"Published statistics currently extend through week {int(eligible['through_week'].max())}. Predictions use the latest available pregame snapshot.")
 try:
-    pred = predict_week(current, prior, schedule, selected_week, include_completed=True)
+    pred = predict_all_games(current, prior, schedule, selected_week)
     if not pred.empty:
         pred = attach_results(pred, games)
 except Exception as e:
