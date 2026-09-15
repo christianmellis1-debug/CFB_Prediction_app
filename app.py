@@ -1,5 +1,8 @@
 from datetime import datetime, timezone
 from html import escape
+import json
+import math
+from urllib.parse import urlencode
 from urllib.request import urlopen
 from io import BytesIO
 import pandas as pd
@@ -81,15 +84,98 @@ def attach_results(predictions, games):
     return result
 
 
-@st.fragment(run_every="60s")
-def watch_results(season, original):
+def format_moneyline(value):
+    if value is None or isinstance(value, bool):
+        return "Unavailable"
+    raw = str(value).strip().replace("−", "-")
+    if raw.upper() in {"EVEN", "EV", "EVS"}:
+        return "+100"
     try:
-        latest = download_schedule(season)
-        if not latest.equals(original):
-            st.rerun()
-        st.caption("Results check automatically while this page is open. Schedule downloads refresh every 5 minutes; finals appear when the source publishes them.")
-    except Exception:
-        st.caption("Results refresh is temporarily unavailable. Showing the last loaded data.")
+        price = float(raw)
+        if not math.isfinite(price) or abs(price) < 100 or not price.is_integer():
+            return "Unavailable"
+        return f"{int(price):+d}"
+    except (ValueError, TypeError):
+        return "Unavailable"
+
+
+def parse_draftkings(payload):
+    if not isinstance(payload, dict) or not isinstance(payload.get("events"), list):
+        raise ValueError("Invalid odds response")
+    quotes = {}
+    for event in payload["events"]:
+        for competition in event.get("competitions", []):
+            sides = {c.get("homeAway"): str(c.get("team", {}).get("id", "")) for c in competition.get("competitors", [])}
+            for odds in competition.get("odds", []):
+                provider = odds.get("provider", {})
+                if str(provider.get("name", "")).lower().replace(" ", "") != "draftkings":
+                    continue
+                prices = {}
+                for side in ("home", "away"):
+                    # ESPN's close field is the current/latest line. Never use the
+                    # opening line as a substitute for an unavailable current market.
+                    market = odds.get("moneyline", {}).get(side, {})
+                    if "close" in market:
+                        value = (market.get("close") or {}).get("odds")
+                    else:
+                        value = odds.get(side + "TeamOdds", {}).get("moneyLine")
+                    prices[side] = format_moneyline(value)
+                quotes[str(event.get("id"))] = {
+                    "home_id": sides.get("home", ""), "away_id": sides.get("away", ""),
+                    "home": prices["home"], "away": prices["away"],
+                    "completed": bool(competition.get("status", {}).get("type", {}).get("completed", False)),
+                }
+                break
+    return quotes
+
+
+@st.cache_data(ttl=300, show_spinner=False)
+def download_odds(date_range):
+    query = urlencode({"dates": date_range, "groups": 80, "limit": 1000})
+    url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?" + query
+    with urlopen(url, timeout=20) as response:
+        payload = json.load(response)
+    return {"quotes": parse_draftkings(payload), "retrieved": datetime.now(timezone.utc).strftime("%b %d, %H:%M UTC")}
+
+
+def attach_odds(predictions, games, quotes):
+    result = predictions.copy()
+    result["DK Away ML"] = "Unavailable"
+    result["DK Home ML"] = "Unavailable"
+    result["Odds Type"] = "Not offered / unavailable"
+    for index, row in result.iterrows():
+        # Exact scheduled event ID plus both team IDs; no fuzzy team-name joins.
+        match = games[(games.home_team == row["Home Team"]) & (games.away_team == row["Away Team"])]
+        if len(match) != 1 or "game_id" not in match:
+            continue
+        game = match.iloc[0]
+        if pd.isna(game.game_id):
+            continue
+        quote = quotes.get(str(int(game.game_id)))
+        if not quote or quote["home_id"] != str(int(game.home_id)) or quote["away_id"] != str(int(game.away_id)):
+            continue
+        result.loc[index, "DK Away ML"] = quote["away"]
+        result.loc[index, "DK Home ML"] = quote["home"]
+        if quote["home"] != "Unavailable" or quote["away"] != "Unavailable":
+            result.loc[index, "Odds Type"] = "Archived line" if quote["completed"] or str(row["Status"]).startswith("Final") else "Latest available line"
+    return result
+
+
+@st.fragment(run_every="60s")
+def watch_results(season, original, date_range, original_odds):
+    if original is not None:
+        try:
+            if not download_schedule(season).equals(original):
+                st.rerun()
+        except Exception:
+            st.caption("Results refresh is temporarily unavailable. Showing the last loaded data.")
+    if date_range:
+        try:
+            if download_odds(date_range)["quotes"] != original_odds:
+                st.rerun()
+        except Exception:
+            st.caption("Odds refresh is temporarily unavailable. Previously displayed lines may be stale.")
+    st.caption("Results and odds check automatically while this page is open. Feeds refresh every 5 minutes and depend on source updates.")
 
 st.markdown("""
 <style>
@@ -121,6 +207,9 @@ st.markdown("""
 .conf-row {display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px;}
 .conf-track {height:6px;background:#80978b30;border-radius:5px;overflow:hidden;}
 .conf-fill {height:100%;background:#41a577;border-radius:5px;}
+.odds-box {border:1px solid #80978b40;border-radius:12px;padding:12px;margin-top:16px;}
+.odds-prices {display:flex;justify-content:space-between;gap:12px;font-size:14px;margin-top:8px;}
+.odds-prices span {min-width:0;overflow-wrap:anywhere;}
 .risk-note {font-size:12px;margin-top:14px;color:#986a17;}
 @media (max-width:1000px) {.pick-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:600px) {.block-container {padding:4rem 1rem 2rem;}.hero {padding:25px 22px;border-radius:18px;}.pick-grid {grid-template-columns:1fr;}.overview {gap:8px;}.stat {padding:12px 10px;}.stat strong {font-size:23px;}.stat span {font-size:11px;}}
@@ -140,7 +229,8 @@ with st.sidebar:
     if st.button("Refresh all data", use_container_width=True):
         download_schedule.clear()
         download_summary.clear()
-    st.caption("Results refresh every 5 minutes; team summaries refresh hourly.")
+        download_odds.clear()
+    st.caption("Results and DraftKings odds refresh every 5 minutes; team summaries refresh hourly.")
     with st.expander("Use your own files"):
         mode = st.radio("Schedule source", ["Automatic download", "Upload CSV"])
         schedule_file = st.file_uploader("Schedule CSV", type="csv") if mode == "Upload CSV" else None
@@ -224,6 +314,19 @@ if pred.empty:
     st.info("No predictions are available for this week. Try another week above.")
     st.stop()
 
+date_range = None
+odds_snapshot = {"quotes": {}, "retrieved": None}
+if "start_date" in games:
+    dates = pd.to_datetime(games["start_date"], errors="coerce", utc=True).dropna()
+    if not dates.empty and (dates.max() - dates.min()).days <= 30:
+        date_range = dates.min().strftime("%Y%m%d") + "-" + dates.max().strftime("%Y%m%d")
+if date_range:
+    try:
+        odds_snapshot = download_odds(date_range)
+    except Exception:
+        st.info("DraftKings odds are temporarily unavailable. Predictions and results are still available.")
+pred = attach_odds(pred, games, odds_snapshot["quotes"])
+
 high_count = int((pred["Confidence"] >= .8).sum())
 close_count = int((pred["Confidence"] < .6).sum())
 st.markdown(f"""<div class="overview">
@@ -237,11 +340,15 @@ st.markdown(f"""<div class="overview">
 <div class="stat"><strong>{int(pred['Status'].eq('Final').sum())} / {len(pred)}</strong><span>Final scores available</span></div>
 <div class="stat"><strong>{correct_count}–{len(graded) - correct_count}</strong><span>Correct – incorrect picks</span></div>
 <div class="stat"><strong>{accuracy}</strong><span>Weekly accuracy · graded games</span></div></div>""", unsafe_allow_html=True)
-if st.button("Refresh scores now"):
+if st.button("Refresh scores & odds now"):
     download_schedule.clear()
+    download_odds.clear()
     st.rerun()
 st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
 st.subheader(f"Week {selected_week} picks & results")
+st.caption("DraftKings moneylines via ESPN · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
+if odds_snapshot["retrieved"]:
+    st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game lines, if provided, are labeled archived.")
 st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
 search_col, confidence_col, sort_col = st.columns([2, 1, 1])
 with search_col:
@@ -284,21 +391,24 @@ with cards_tab:
             venue = "Neutral site" if r["Neutral Site"] else "Away at home"
             outcome_class = "badge" if r["Pick Result"] == "Correct" else "badge incorrect" if r["Pick Result"] == "Incorrect" else "badge close"
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
+            moneylines = f'<div class="odds-box"><div class="pick-label">DraftKings moneyline</div><div class="odds-prices"><span>Away <strong>{escape(str(r["DK Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["DK Home ML"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="team-line"><span class="team-name"><span class="venue-label">Away</span>{escape(str(r['Away Team']))}</span><strong>{r['Away Win %']:.1%}</strong></div>
 <div class="team-line"><span class="team-name"><span class="venue-label">Home</span>{escape(str(r['Home Team']))}</span><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{outcome}{risk}</article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}{risk}</article>""")
         st.markdown('<div class="pick-grid">' + ''.join(cards) + '</div>', unsafe_allow_html=True)
 with table_tab:
-    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
+    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Odds Type", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
     for col in ["Confidence", "Away Win %", "Home Win %"]:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
 with about_tab:
     st.markdown("### Read your picks")
+    st.write("DraftKings moneylines come from ESPN’s published odds feed. +150 means $100 would profit $150; −150 means risking $150 to profit $100. These prices are separate from the model’s win probabilities and do not change its picks.")
+    st.write("Lines can move or be suspended. Unavailable prices are never filled with opening lines or another bookmaker’s odds. Historical lines are shown only when the feed supplies them.")
     st.write("Each card shows both teams’ win probabilities and the predicted winner. A 70% confidence means an estimated 7 wins out of 10 similar matchups—not a guaranteed result.")
     st.markdown("**Confidence guide** · Very high: 90%+ · High: 80–90% · Moderate: 70–80% · Lean: 60–70% · Toss-up: below 60%.")
     st.write("Away-team picks may carry a venue-risk note. Use that as additional context when comparing games.")
@@ -310,5 +420,4 @@ with about_tab:
 st.download_button("Download these picks · CSV", filtered.to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
-if mode == "Automatic download":
-    watch_results(season, original_schedule)
+watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"])
