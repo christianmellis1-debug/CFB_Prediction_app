@@ -7,4 +7,14 @@ services:
     startCommand: npm start
     envVars:
       - key: PREDICTOR_API_URL
-        sync: false
+        fromService:
+          type: web
+          name: cfb-predictor-api
+          property: host
+  - type: web
+    name: cfb-predictor-api
+    runtime: python
+    plan: free
+    rootDir: .
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT

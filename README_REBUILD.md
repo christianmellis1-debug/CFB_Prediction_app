@@ -12,7 +12,7 @@ npm install
 npm run dev
 ```
 
-The frontend reads `VITE_API_URL` (default `http://localhost:8000`). The API exposes `/api/health`, `/api/weeks`, and `/api/predictions`.
+The frontend reads `VITE_API_URL` when running Vite directly; in production it uses the Node server's `/api` proxy. The API exposes `/api/health`, `/api/weeks`, and `/api/predictions`.
 
 ## Node.js deployment
 
@@ -24,4 +24,4 @@ npm run build
 PREDICTOR_API_URL=https://your-api-host.example.com npm start
 ```
 
-`render.yaml` is included for a one-click Node web-service setup. Set `PREDICTOR_API_URL` to the deployed prediction API URL. The existing FastAPI service remains available during the migration so the model and live data stay unchanged while the web runtime moves to Node.
+`render.yaml` defines both services for deployment together: a Node web service and the FastAPI prediction service. Render wires `PREDICTOR_API_URL` to the API service automatically. The existing Streamlit app remains available during the migration.

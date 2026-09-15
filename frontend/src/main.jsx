@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import './styles.css';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// In production the Node server proxies /api to the prediction service.
+// VITE_API_URL is only needed when running the Vite dev server directly.
+const API = import.meta.env.VITE_API_URL || '';
 const pct = value => `${(Number(value || 0) * 100).toFixed(1)}%`;
 
 function GameCard({game}) {
