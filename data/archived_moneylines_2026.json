@@ -1,0 +1,1451 @@
+{
+  "season": 2026,
+  "retrieved_at": "2026-09-15T12:25:54.284710+00:00",
+  "description": "Archived moneylines from ESPN completed-game summaries; prices as supplied by each named provider.",
+  "events": {
+    "401856766": {
+      "week": 1,
+      "home_team": "TCU",
+      "away_team": "North Carolina",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856766",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2628",
+          "away_id": "153",
+          "home": "-305",
+          "away": "+245",
+          "completed": true
+        }
+      }
+    },
+    "401864494": {
+      "week": 1,
+      "home_team": "USC",
+      "away_team": "San Jos\u00e9 State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864494",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "30",
+          "away_id": "23",
+          "home": "-100000",
+          "away": "+5000",
+          "completed": true
+        }
+      }
+    },
+    "401858202": {
+      "week": 1,
+      "home_team": "Virginia",
+      "away_team": "NC State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858202",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "258",
+          "away_id": "152",
+          "home": "-175",
+          "away": "+145",
+          "completed": true
+        }
+      }
+    },
+    "401864577": {
+      "week": 1,
+      "home_team": "North Dakota State",
+      "away_team": "Jacksonville State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864577",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2449",
+          "away_id": "55",
+          "home": "-285",
+          "away": "+230",
+          "completed": true
+        }
+      }
+    },
+    "401866408": {
+      "week": 1,
+      "home_team": "Eastern Michigan",
+      "away_team": "Sacramento State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401866408",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2199",
+          "away_id": "16",
+          "home": "-355",
+          "away": "+280",
+          "completed": true
+        }
+      }
+    },
+    "401858201": {
+      "week": 1,
+      "home_team": "Stanford",
+      "away_team": "Hawai'i",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858201",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "24",
+          "away_id": "62",
+          "home": "-205",
+          "away": "+170",
+          "completed": true
+        }
+      }
+    },
+    "401864570": {
+      "week": 1,
+      "home_team": "Florida State",
+      "away_team": "New Mexico State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864570",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "52",
+          "away_id": "166",
+          "home": "-8000",
+          "away": "+2200",
+          "completed": true
+        }
+      }
+    },
+    "401862693": {
+      "week": 1,
+      "home_team": "UNLV",
+      "away_team": "Memphis",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401862693",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2439",
+          "away_id": "235",
+          "home": "-192",
+          "away": "+160",
+          "completed": true
+        }
+      }
+    },
+    "401858423": {
+      "week": 1,
+      "home_team": "Rutgers",
+      "away_team": "Massachusetts",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858423",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "164",
+          "away_id": "113",
+          "home": "-8000",
+          "away": "+2200",
+          "completed": true
+        }
+      }
+    },
+    "401858204": {
+      "week": 1,
+      "home_team": "Wake Forest",
+      "away_team": "Akron",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858204",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "154",
+          "away_id": "2006",
+          "home": "-3600",
+          "away": "+1500",
+          "completed": true
+        }
+      }
+    },
+    "401856776": {
+      "week": 1,
+      "home_team": "Georgia Tech",
+      "away_team": "Colorado",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856776",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "59",
+          "away_id": "38",
+          "home": "-238",
+          "away": "+195",
+          "completed": true
+        }
+      }
+    },
+    "401858424": {
+      "week": 1,
+      "home_team": "Illinois",
+      "away_team": "UAB",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858424",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "356",
+          "away_id": "5",
+          "home": "-3600",
+          "away": "+1500",
+          "completed": true
+        }
+      }
+    },
+    "401864495": {
+      "week": 1,
+      "home_team": "Eastern Michigan",
+      "away_team": "San Jos\u00e9 State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864495",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2199",
+          "away_id": "23",
+          "home": "-115",
+          "away": "-105",
+          "completed": true
+        }
+      }
+    },
+    "401856664": {
+      "week": 1,
+      "home_team": "Oklahoma",
+      "away_team": "UTEP",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856664",
+      "quotes": {}
+    },
+    "401858429": {
+      "week": 1,
+      "home_team": "Michigan State",
+      "away_team": "Toledo",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858429",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "127",
+          "away_id": "2649",
+          "home": "-395",
+          "away": "+310",
+          "completed": true
+        }
+      }
+    },
+    "401858206": {
+      "week": 1,
+      "home_team": "Stanford",
+      "away_team": "Miami",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858206",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "24",
+          "away_id": "2390",
+          "home": "+1600",
+          "away": "-4000",
+          "completed": true
+        }
+      }
+    },
+    "401858436": {
+      "week": 1,
+      "home_team": "USC",
+      "away_team": "Fresno State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858436",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "30",
+          "away_id": "278",
+          "home": "-2100",
+          "away": "+1100",
+          "completed": true
+        }
+      }
+    },
+    "401858425": {
+      "week": 1,
+      "home_team": "Indiana",
+      "away_team": "North Texas",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858425",
+      "quotes": {}
+    },
+    "401869960": {
+      "week": 1,
+      "home_team": "James Madison",
+      "away_team": "Liberty",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401869960",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "256",
+          "away_id": "2335",
+          "home": "-225",
+          "away": "+185",
+          "completed": true
+        }
+      }
+    },
+    "401858430": {
+      "week": 1,
+      "home_team": "Nebraska",
+      "away_team": "Ohio",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858430",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "158",
+          "away_id": "195",
+          "home": "-2100",
+          "away": "+1100",
+          "completed": true
+        }
+      }
+    },
+    "401856778": {
+      "week": 1,
+      "home_team": "Houston",
+      "away_team": "Oregon State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856778",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "248",
+          "away_id": "204",
+          "home": "-1450",
+          "away": "+850",
+          "completed": true
+        }
+      }
+    },
+    "401856634": {
+      "week": 1,
+      "home_team": "Alabama",
+      "away_team": "East Carolina",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856634",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "333",
+          "away_id": "151",
+          "home": "-6500",
+          "away": "+2000",
+          "completed": true
+        }
+      }
+    },
+    "401856780": {
+      "week": 1,
+      "home_team": "West Virginia",
+      "away_team": "Coastal Carolina",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856780",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "277",
+          "away_id": "324",
+          "home": "-1800",
+          "away": "+1000",
+          "completed": true
+        }
+      }
+    },
+    "401858432": {
+      "week": 1,
+      "home_team": "Ohio State",
+      "away_team": "Ball State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858432",
+      "quotes": {}
+    },
+    "401858207": {
+      "week": 1,
+      "home_team": "Pittsburgh",
+      "away_team": "Miami (OH)",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858207",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "221",
+          "away_id": "193",
+          "home": "-850",
+          "away": "+575",
+          "completed": true
+        }
+      }
+    },
+    "401856665": {
+      "week": 1,
+      "home_team": "South Carolina",
+      "away_team": "Kent State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856665",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2579",
+          "away_id": "2309",
+          "home": "-50000",
+          "away": "+4000",
+          "completed": true
+        }
+      }
+    },
+    "401858209": {
+      "week": 1,
+      "home_team": "Duke",
+      "away_team": "Tulane",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858209",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "150",
+          "away_id": "2655",
+          "home": "-380",
+          "away": "+300",
+          "completed": true
+        }
+      }
+    },
+    "401856667": {
+      "week": 1,
+      "home_team": "Texas",
+      "away_team": "Texas State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856667",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "251",
+          "away_id": "326",
+          "home": "-8000",
+          "away": "+2200",
+          "completed": true
+        }
+      }
+    },
+    "401856777": {
+      "week": 1,
+      "home_team": "Cincinnati",
+      "away_team": "Boston College",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856777",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2132",
+          "away_id": "103",
+          "home": "-285",
+          "away": "+230",
+          "completed": true
+        }
+      }
+    },
+    "401856636": {
+      "week": 1,
+      "home_team": "Auburn",
+      "away_team": "Baylor",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856636",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2",
+          "away_id": "239",
+          "home": "-258",
+          "away": "+210",
+          "completed": true
+        }
+      }
+    },
+    "401858434": {
+      "week": 1,
+      "home_team": "Penn State",
+      "away_team": "Marshall",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858434",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "213",
+          "away_id": "276",
+          "home": "-2100",
+          "away": "+1100",
+          "completed": true
+        }
+      }
+    },
+    "401858433": {
+      "week": 1,
+      "home_team": "Oregon",
+      "away_team": "Boise State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858433",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2483",
+          "away_id": "68",
+          "home": "-2800",
+          "away": "+1300",
+          "completed": true
+        }
+      }
+    },
+    "401856772": {
+      "week": 1,
+      "home_team": "Tulsa",
+      "away_team": "Oklahoma State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856772",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "202",
+          "away_id": "197",
+          "home": "+390",
+          "away": "-520",
+          "completed": true
+        }
+      }
+    },
+    "401858426": {
+      "week": 1,
+      "home_team": "Iowa",
+      "away_team": "Northern Illinois",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858426",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2294",
+          "away_id": "2459",
+          "home": "-10000",
+          "away": "+3000",
+          "completed": true
+        }
+      }
+    },
+    "401860878": {
+      "week": 1,
+      "home_team": "Colorado State",
+      "away_team": "Wyoming",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401860878",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "36",
+          "away_id": "2751",
+          "home": "-130",
+          "away": "+110",
+          "completed": true
+        }
+      }
+    },
+    "401856668": {
+      "week": 1,
+      "home_team": "Texas A&M",
+      "away_team": "Missouri State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856668",
+      "quotes": {}
+    },
+    "401862699": {
+      "week": 1,
+      "home_team": "South Florida",
+      "away_team": "Florida International",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401862699",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "58",
+          "away_id": "2229",
+          "home": "-650",
+          "away": "+470",
+          "completed": true
+        }
+      }
+    },
+    "401870763": {
+      "week": 1,
+      "home_team": "Troy",
+      "away_team": "Sam Houston",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401870763",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2653",
+          "away_id": "2534",
+          "home": "-800",
+          "away": "+550",
+          "completed": true
+        }
+      }
+    },
+    "401862695": {
+      "week": 1,
+      "home_team": "Memphis",
+      "away_team": "Arkansas State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401862695",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "235",
+          "away_id": "2032",
+          "home": "-395",
+          "away": "+310",
+          "completed": true
+        }
+      }
+    },
+    "401856662": {
+      "week": 1,
+      "home_team": "Mississippi State",
+      "away_team": "UL Monroe",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856662",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "344",
+          "away_id": "2433",
+          "home": "-4000",
+          "away": "+1600",
+          "completed": true
+        }
+      }
+    },
+    "401856660": {
+      "week": 1,
+      "home_team": "LSU",
+      "away_team": "Clemson",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856660",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "99",
+          "away_id": "228",
+          "home": "-410",
+          "away": "+320",
+          "completed": true
+        }
+      }
+    },
+    "401858428": {
+      "week": 1,
+      "home_team": "Michigan",
+      "away_team": "Western Michigan",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858428",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "130",
+          "away_id": "2711",
+          "home": "-8000",
+          "away": "+2200",
+          "completed": true
+        }
+      }
+    },
+    "401856637": {
+      "week": 1,
+      "home_team": "Florida",
+      "away_team": "Florida Atlantic",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856637",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "57",
+          "away_id": "2226",
+          "home": "-2400",
+          "away": "+1200",
+          "completed": true
+        }
+      }
+    },
+    "401864497": {
+      "week": 1,
+      "home_team": "Hawai'i",
+      "away_team": "UNLV",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864497",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "62",
+          "away_id": "2439",
+          "home": "+105",
+          "away": "-125",
+          "completed": true
+        }
+      }
+    },
+    "401864498": {
+      "week": 1,
+      "home_team": "New Mexico",
+      "away_team": "Central Michigan",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864498",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "167",
+          "away_id": "2117",
+          "home": "-470",
+          "away": "+360",
+          "completed": true
+        }
+      }
+    },
+    "401864432": {
+      "week": 1,
+      "home_team": "Nevada",
+      "away_team": "Western Kentucky",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864432",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2440",
+          "away_id": "98",
+          "home": "-108",
+          "away": "-112",
+          "completed": true
+        }
+      }
+    },
+    "401858210": {
+      "week": 1,
+      "home_team": "California",
+      "away_team": "UCLA",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858210",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "25",
+          "away_id": "26",
+          "home": "+120",
+          "away": "-142",
+          "completed": true
+        }
+      }
+    },
+    "401858437": {
+      "week": 1,
+      "home_team": "Washington",
+      "away_team": "Washington State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858437",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "264",
+          "away_id": "265",
+          "home": "-2800",
+          "away": "+1300",
+          "completed": true
+        }
+      }
+    },
+    "401856661": {
+      "week": 1,
+      "home_team": "Ole Miss",
+      "away_team": "Louisville",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856661",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "145",
+          "away_id": "97",
+          "home": "-245",
+          "away": "+200",
+          "completed": true
+        }
+      }
+    },
+    "401858438": {
+      "week": 1,
+      "home_team": "Notre Dame",
+      "away_team": "Wisconsin",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858438",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "87",
+          "away_id": "275",
+          "home": "-1800",
+          "away": "+1000",
+          "completed": true
+        }
+      }
+    },
+    "401858212": {
+      "week": 1,
+      "home_team": "Florida State",
+      "away_team": "SMU",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858212",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "52",
+          "away_id": "2567",
+          "home": "+130",
+          "away": "-155",
+          "completed": true
+        }
+      }
+    },
+    "401858214": {
+      "week": 2,
+      "home_team": "Boston College",
+      "away_team": "Rutgers",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858214",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "103",
+          "away_id": "164",
+          "home": "-148",
+          "away": "+124",
+          "completed": true
+        }
+      }
+    },
+    "401856678": {
+      "week": 2,
+      "home_team": "Kansas",
+      "away_team": "Missouri",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856678",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2305",
+          "away_id": "142",
+          "home": "+164",
+          "away": "-198",
+          "completed": true
+        }
+      }
+    },
+    "401856781": {
+      "week": 2,
+      "home_team": "Kansas State",
+      "away_team": "Washington State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856781",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2306",
+          "away_id": "265",
+          "home": "-1000",
+          "away": "+650",
+          "completed": true
+        }
+      }
+    },
+    "401864571": {
+      "week": 2,
+      "home_team": "East Carolina",
+      "away_team": "App State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864571",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "151",
+          "away_id": "2026",
+          "home": "-250",
+          "away": "+205",
+          "completed": true
+        }
+      }
+    },
+    "401856782": {
+      "week": 2,
+      "home_team": "Oklahoma State",
+      "away_team": "Oregon",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856782",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "197",
+          "away_id": "2483",
+          "home": "+1200",
+          "away": "-2400",
+          "completed": true
+        }
+      }
+    },
+    "401862702": {
+      "week": 2,
+      "home_team": "Army",
+      "away_team": "South Florida",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401862702",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "349",
+          "away_id": "58",
+          "home": "-166",
+          "away": "+140",
+          "completed": true
+        }
+      }
+    },
+    "401858224": {
+      "week": 2,
+      "home_team": "Purdue",
+      "away_team": "Wake Forest",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858224",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2509",
+          "away_id": "154",
+          "home": "+120",
+          "away": "-142",
+          "completed": true
+        }
+      }
+    },
+    "401856679": {
+      "week": 2,
+      "home_team": "Michigan",
+      "away_team": "Oklahoma",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856679",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "130",
+          "away_id": "201",
+          "home": "+190",
+          "away": "-230",
+          "completed": true
+        }
+      }
+    },
+    "401858221": {
+      "week": 2,
+      "home_team": "Virginia Tech",
+      "away_team": "Old Dominion",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858221",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "259",
+          "away_id": "295",
+          "home": "-950",
+          "away": "+625",
+          "completed": true
+        }
+      }
+    },
+    "401856683": {
+      "week": 2,
+      "home_team": "Texas A&M",
+      "away_team": "Arizona State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856683",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "245",
+          "away_id": "9",
+          "home": "-800",
+          "away": "+550",
+          "completed": true
+        }
+      }
+    },
+    "401858442": {
+      "week": 2,
+      "home_team": "Temple",
+      "away_team": "Penn State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858442",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "218",
+          "away_id": "213",
+          "home": "+1500",
+          "away": "-3600",
+          "completed": true
+        }
+      }
+    },
+    "401856673": {
+      "week": 2,
+      "home_team": "Georgia",
+      "away_team": "Western Kentucky",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856673",
+      "quotes": {}
+    },
+    "401856790": {
+      "week": 2,
+      "home_team": "Pittsburgh",
+      "away_team": "UCF",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856790",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "221",
+          "away_id": "2116",
+          "home": "-298",
+          "away": "+240",
+          "completed": true
+        }
+      }
+    },
+    "401856674": {
+      "week": 2,
+      "home_team": "Kentucky",
+      "away_team": "Alabama",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856674",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "96",
+          "away_id": "333",
+          "home": "+300",
+          "away": "-380",
+          "completed": true
+        }
+      }
+    },
+    "401858217": {
+      "week": 2,
+      "home_team": "Illinois",
+      "away_team": "Duke",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858217",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "356",
+          "away_id": "150",
+          "home": "-250",
+          "away": "+205",
+          "completed": true
+        }
+      }
+    },
+    "401856677": {
+      "week": 2,
+      "home_team": "Minnesota",
+      "away_team": "Mississippi State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856677",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "135",
+          "away_id": "344",
+          "home": "-110",
+          "away": "-110",
+          "completed": true
+        }
+      }
+    },
+    "401859184": {
+      "week": 2,
+      "home_team": "Notre Dame",
+      "away_team": "Rice",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401859184",
+      "quotes": {}
+    },
+    "401860884": {
+      "week": 2,
+      "home_team": "Texas State",
+      "away_team": "UTSA",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401860884",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "326",
+          "away_id": "2636",
+          "home": "-122",
+          "away": "+102",
+          "completed": true
+        }
+      }
+    },
+    "401858446": {
+      "week": 2,
+      "home_team": "Washington",
+      "away_team": "Utah State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858446",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "264",
+          "away_id": "328",
+          "home": "-6500",
+          "away": "+2000",
+          "completed": true
+        }
+      }
+    },
+    "401856810": {
+      "week": 2,
+      "home_team": "BYU",
+      "away_team": "Arizona",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856810",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "252",
+          "away_id": "12",
+          "home": "-258",
+          "away": "+210",
+          "completed": true
+        }
+      }
+    },
+    "401858216": {
+      "week": 2,
+      "home_team": "Syracuse",
+      "away_team": "California",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858216",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "183",
+          "away_id": "25",
+          "home": "-198",
+          "away": "+164",
+          "completed": true
+        }
+      }
+    },
+    "401858444": {
+      "week": 2,
+      "home_team": "UConn",
+      "away_team": "Maryland",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858444",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "41",
+          "away_id": "120",
+          "home": "+350",
+          "away": "-455",
+          "completed": true
+        }
+      }
+    },
+    "401862708": {
+      "week": 2,
+      "home_team": "UAB",
+      "away_team": "UL Monroe",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401862708",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "5",
+          "away_id": "2433",
+          "home": "-375",
+          "away": "+295",
+          "completed": true
+        }
+      }
+    },
+    "401858440": {
+      "week": 2,
+      "home_team": "Michigan State",
+      "away_team": "Eastern Michigan",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858440",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "127",
+          "away_id": "2199",
+          "home": "-850",
+          "away": "+575",
+          "completed": true
+        }
+      }
+    },
+    "401862705": {
+      "week": 2,
+      "home_team": "North Texas",
+      "away_team": "UNLV",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401862705",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "249",
+          "away_id": "2439",
+          "home": "+124",
+          "away": "-148",
+          "completed": true
+        }
+      }
+    },
+    "401856684": {
+      "week": 2,
+      "home_team": "Vanderbilt",
+      "away_team": "Delaware",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856684",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "238",
+          "away_id": "48",
+          "home": "-1350",
+          "away": "+800",
+          "completed": true
+        }
+      }
+    },
+    "401866418": {
+      "week": 2,
+      "home_team": "Ohio",
+      "away_team": "Jacksonville State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401866418",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "195",
+          "away_id": "55",
+          "home": "-125",
+          "away": "+105",
+          "completed": true
+        }
+      }
+    },
+    "401866414": {
+      "week": 2,
+      "home_team": "Florida International",
+      "away_team": "Buffalo",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401866414",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2229",
+          "away_id": "2084",
+          "home": "-345",
+          "away": "+275",
+          "completed": true
+        }
+      }
+    },
+    "401860881": {
+      "week": 2,
+      "home_team": "Boise State",
+      "away_team": "Memphis",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401860881",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "68",
+          "away_id": "235",
+          "home": "-360",
+          "away": "+285",
+          "completed": true
+        }
+      }
+    },
+    "401869955": {
+      "week": 2,
+      "home_team": "Kennesaw State",
+      "away_team": "Georgia State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401869955",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "338",
+          "away_id": "2247",
+          "home": "-325",
+          "away": "+260",
+          "completed": true
+        }
+      }
+    },
+    "401871045": {
+      "week": 2,
+      "home_team": "Marshall",
+      "away_team": "Middle Tennessee",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401871045",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "276",
+          "away_id": "2393",
+          "home": "-455",
+          "away": "+350",
+          "completed": true
+        }
+      }
+    },
+    "401862707": {
+      "week": 2,
+      "home_team": "Sam Houston",
+      "away_team": "Tulsa",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401862707",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2534",
+          "away_id": "202",
+          "home": "+360",
+          "away": "-470",
+          "completed": true
+        }
+      }
+    },
+    "401856681": {
+      "week": 2,
+      "home_team": "Georgia Tech",
+      "away_team": "Tennessee",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856681",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "59",
+          "away_id": "2633",
+          "home": "+370",
+          "away": "-485",
+          "completed": true
+        }
+      }
+    },
+    "401864575": {
+      "week": 2,
+      "home_team": "Tulane",
+      "away_team": "South Alabama",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864575",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2655",
+          "away_id": "6",
+          "home": "-360",
+          "away": "+285",
+          "completed": true
+        }
+      }
+    },
+    "401858441": {
+      "week": 2,
+      "home_team": "Nebraska",
+      "away_team": "Bowling Green",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858441",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "158",
+          "away_id": "189",
+          "home": "-9000",
+          "away": "+2500",
+          "completed": true
+        }
+      }
+    },
+    "401858443": {
+      "week": 2,
+      "home_team": "UCLA",
+      "away_team": "San Diego State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858443",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "26",
+          "away_id": "21",
+          "home": "-535",
+          "away": "+400",
+          "completed": true
+        }
+      }
+    },
+    "401856783": {
+      "week": 2,
+      "home_team": "Oregon State",
+      "away_team": "Texas Tech",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856783",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "204",
+          "away_id": "2641",
+          "home": "+1300",
+          "away": "-2800",
+          "completed": true
+        }
+      }
+    },
+    "401858219": {
+      "week": 2,
+      "home_team": "Clemson",
+      "away_team": "Georgia Southern",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858219",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "228",
+          "away_id": "290",
+          "home": "-1450",
+          "away": "+850",
+          "completed": true
+        }
+      }
+    },
+    "401862703": {
+      "week": 2,
+      "home_team": "Florida Atlantic",
+      "away_team": "Navy",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401862703",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2226",
+          "away_id": "2426",
+          "home": "+170",
+          "away": "-205",
+          "completed": true
+        }
+      }
+    },
+    "401856682": {
+      "week": 2,
+      "home_team": "Texas",
+      "away_team": "Ohio State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856682",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "251",
+          "away_id": "194",
+          "home": "-142",
+          "away": "+120",
+          "completed": true
+        }
+      }
+    },
+    "401867796": {
+      "week": 2,
+      "home_team": "LSU",
+      "away_team": "Louisiana Tech",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401867796",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "99",
+          "away_id": "2348",
+          "home": "-20000",
+          "away": "+3500",
+          "completed": true
+        }
+      }
+    },
+    "401856788": {
+      "week": 2,
+      "home_team": "Iowa",
+      "away_team": "Iowa State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856788",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2294",
+          "away_id": "66",
+          "home": "-650",
+          "away": "+470",
+          "completed": true
+        }
+      }
+    },
+    "401856676": {
+      "week": 2,
+      "home_team": "Ole Miss",
+      "away_team": "Charlotte",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856676",
+      "quotes": {}
+    },
+    "401856671": {
+      "week": 2,
+      "home_team": "Auburn",
+      "away_team": "Southern Miss",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856671",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2",
+          "away_id": "2572",
+          "home": "-9000",
+          "away": "+2500",
+          "completed": true
+        }
+      }
+    },
+    "401864502": {
+      "week": 2,
+      "home_team": "Air Force",
+      "away_team": "North Dakota State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864502",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "2005",
+          "away_id": "2449",
+          "home": "+102",
+          "away": "-122",
+          "completed": true
+        }
+      }
+    },
+    "401856670": {
+      "week": 2,
+      "home_team": "Utah",
+      "away_team": "Arkansas",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856670",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "254",
+          "away_id": "8",
+          "home": "-625",
+          "away": "+455",
+          "completed": true
+        }
+      }
+    },
+    "401860883": {
+      "week": 2,
+      "home_team": "Fresno State",
+      "away_team": "Sacramento State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401860883",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "278",
+          "away_id": "16",
+          "home": "-950",
+          "away": "+625",
+          "completed": true
+        }
+      }
+    },
+    "401858445": {
+      "week": 2,
+      "home_team": "USC",
+      "away_team": "Louisiana",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858445",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "30",
+          "away_id": "309",
+          "home": "-6500",
+          "away": "+2000",
+          "completed": true
+        }
+      }
+    },
+    "401864578": {
+      "week": 2,
+      "home_team": "Hawai'i",
+      "away_team": "New Mexico State",
+      "source_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864578",
+      "quotes": {
+        "DraftKings": {
+          "home_id": "62",
+          "away_id": "166",
+          "home": "-340",
+          "away": "+270",
+          "completed": true
+        }
+      }
+    }
+  }
+}
