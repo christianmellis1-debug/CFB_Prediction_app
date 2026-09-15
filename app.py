@@ -279,6 +279,14 @@ def add_betting_value(predictions):
     return result
 
 
+def team_logo_url(team_id):
+    """ESPN's public college-football logo endpoint, keyed by team ID."""
+    try:
+        return f"https://a.espncdn.com/i/teamlogos/ncaa/500/{int(team_id)}.png"
+    except (TypeError, ValueError, OverflowError):
+        return ""
+
+
 def simulate_stakes(predictions, stakes):
     rows = []
     for _, pick in predictions.iterrows():
@@ -369,6 +377,8 @@ st.markdown("""
 .badge.close {background:#fff0d1;color:#704900;}
 .team-line {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:15px;}
 .team-name {overflow-wrap:anywhere;}
+.team-identity {display:flex;align-items:center;gap:9px;overflow-wrap:anywhere;}
+.team-logo {width:30px;height:30px;object-fit:contain;flex:0 0 30px;}
 .team-line strong {white-space:nowrap;}
 .venue-label {font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:1px;display:block;}
 .pick-result {border-top:1px solid #80978b40;margin-top:18px;padding-top:16px;}
@@ -579,10 +589,15 @@ with cards_tab:
             outcome_class = "badge" if r["Pick Result"] == "Correct" else "badge incorrect" if r["Pick Result"] == "Incorrect" else "badge close"
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
             moneylines = f'<div class="odds-box"><div class="pick-label">Moneyline · {escape(str(r["ML Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["Home ML"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
+            game = games[(games["home_team"] == r["Home Team"]) & (games["away_team"] == r["Away Team"])]
+            away_logo = team_logo_url(game.iloc[0]["away_id"]) if len(game) == 1 else ""
+            home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
+            away_logo_html = f'<img class="team-logo" src="{away_logo}" alt="" />' if away_logo else ""
+            home_logo_html = f'<img class="team-logo" src="{home_logo}" alt="" />' if home_logo else ""
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
-<div class="team-line"><span class="team-name"><span class="venue-label">Away</span>{escape(str(r['Away Team']))}</span><strong>{r['Away Win %']:.1%}</strong></div>
-<div class="team-line"><span class="team-name"><span class="venue-label">Home</span>{escape(str(r['Home Team']))}</span><strong>{r['Home Win %']:.1%}</strong></div>
+<div class="team-line"><span class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}{escape(str(r['Away Team']))}</span></span><strong>{r['Away Win %']:.1%}</strong></div>
+<div class="team-line"><span class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span></span><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
 <div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}{risk}</article>""")
