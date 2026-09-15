@@ -100,32 +100,36 @@ def format_moneyline(value):
 
 
 def parse_draftkings(payload):
+    """Return every sportsbook's current moneyline for each event.
+
+    DraftKings is preferred in the UI. Other providers are retained as a
+    clearly labeled fallback when DraftKings is unavailable or suspended.
+    """
     if not isinstance(payload, dict) or not isinstance(payload.get("events"), list):
         raise ValueError("Invalid odds response")
     quotes = {}
     for event in payload["events"]:
+        event_quotes = {}
         for competition in event.get("competitions", []):
             sides = {c.get("homeAway"): str(c.get("team", {}).get("id", "")) for c in competition.get("competitors", [])}
+            completed = bool(competition.get("status", {}).get("type", {}).get("completed", False))
             for odds in competition.get("odds", []):
-                provider = odds.get("provider", {})
-                if str(provider.get("name", "")).lower().replace(" ", "") != "draftkings":
+                provider_name = str(odds.get("provider", {}).get("name", "")).strip()
+                if not provider_name:
                     continue
                 prices = {}
                 for side in ("home", "away"):
-                    # ESPN's close field is the current/latest line. Never use the
-                    # opening line as a substitute for an unavailable current market.
                     market = odds.get("moneyline", {}).get(side, {})
-                    if "close" in market:
-                        value = (market.get("close") or {}).get("odds")
-                    else:
-                        value = odds.get(side + "TeamOdds", {}).get("moneyLine")
+                    value = (market.get("close") or {}).get("odds") if "close" in market else odds.get(side + "TeamOdds", {}).get("moneyLine")
                     prices[side] = format_moneyline(value)
-                quotes[str(event.get("id"))] = {
+                if prices["home"] == "Unavailable" and prices["away"] == "Unavailable":
+                    continue
+                event_quotes[provider_name] = {
                     "home_id": sides.get("home", ""), "away_id": sides.get("away", ""),
-                    "home": prices["home"], "away": prices["away"],
-                    "completed": bool(competition.get("status", {}).get("type", {}).get("completed", False)),
+                    "home": prices["home"], "away": prices["away"], "completed": completed,
                 }
-                break
+        if event_quotes:
+            quotes[str(event.get("id"))] = event_quotes
     return quotes
 
 
@@ -142,22 +146,44 @@ def attach_odds(predictions, games, quotes):
     result = predictions.copy()
     result["DK Away ML"] = "Unavailable"
     result["DK Home ML"] = "Unavailable"
+    result["Away ML"] = "Unavailable"
+    result["Home ML"] = "Unavailable"
+    result["ML Source"] = "Unavailable"
     result["Odds Type"] = "Not offered / unavailable"
     for index, row in result.iterrows():
-        # Exact scheduled event ID plus both team IDs; no fuzzy team-name joins.
         match = games[(games.home_team == row["Home Team"]) & (games.away_team == row["Away Team"])]
         if len(match) != 1 or "game_id" not in match:
             continue
         game = match.iloc[0]
         if pd.isna(game.game_id):
             continue
-        quote = quotes.get(str(int(game.game_id)))
-        if not quote or quote["home_id"] != str(int(game.home_id)) or quote["away_id"] != str(int(game.away_id)):
+        event_quotes = quotes.get(str(int(game.game_id)), {})
+        if not isinstance(event_quotes, dict):
             continue
-        result.loc[index, "DK Away ML"] = quote["away"]
-        result.loc[index, "DK Home ML"] = quote["home"]
-        if quote["home"] != "Unavailable" or quote["away"] != "Unavailable":
-            result.loc[index, "Odds Type"] = "Archived line" if quote["completed"] or str(row["Status"]).startswith("Final") else "Latest available line"
+        valid = {}
+        for provider, quote in event_quotes.items():
+            if quote.get("home_id") == str(int(game.home_id)) and quote.get("away_id") == str(int(game.away_id)):
+                valid[provider] = quote
+        if not valid:
+            continue
+        dk_name = next((name for name in valid if name.lower().replace(" ", "") == "draftkings"), None)
+        dk = valid.get(dk_name) if dk_name else None
+        if dk:
+            result.loc[index, "DK Away ML"] = dk["away"]
+            result.loc[index, "DK Home ML"] = dk["home"]
+        # Prefer DraftKings when either side is available. Otherwise choose the
+        # first provider with a current price, preserving the source label.
+        if dk and (dk["home"] != "Unavailable" or dk["away"] != "Unavailable"):
+            selected_name, selected = dk_name, dk
+        else:
+            choices = [(name, quote) for name, quote in valid.items() if quote["home"] != "Unavailable" or quote["away"] != "Unavailable"]
+            if not choices:
+                continue
+            selected_name, selected = choices[0]
+        result.loc[index, "Away ML"] = selected["away"]
+        result.loc[index, "Home ML"] = selected["home"]
+        result.loc[index, "ML Source"] = selected_name
+        result.loc[index, "Odds Type"] = "Archived line" if selected["completed"] or str(row["Status"]).startswith("Final") else "Latest available line"
     return result
 
 
@@ -346,7 +372,7 @@ if st.button("Refresh scores & odds now"):
     st.rerun()
 st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
 st.subheader(f"Week {selected_week} picks & results")
-st.caption("DraftKings moneylines via ESPN · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
+st.caption("DraftKings moneylines via ESPN, with another sportsbook shown when DraftKings is unavailable · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
 if odds_snapshot["retrieved"]:
     st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game lines, if provided, are labeled archived.")
 st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
@@ -391,7 +417,7 @@ with cards_tab:
             venue = "Neutral site" if r["Neutral Site"] else "Away at home"
             outcome_class = "badge" if r["Pick Result"] == "Correct" else "badge incorrect" if r["Pick Result"] == "Incorrect" else "badge close"
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
-            moneylines = f'<div class="odds-box"><div class="pick-label">DraftKings moneyline</div><div class="odds-prices"><span>Away <strong>{escape(str(r["DK Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["DK Home ML"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
+            moneylines = f'<div class="odds-box"><div class="pick-label">Moneyline · {escape(str(r["ML Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["Home ML"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="team-line"><span class="team-name"><span class="venue-label">Away</span>{escape(str(r['Away Team']))}</span><strong>{r['Away Win %']:.1%}</strong></div>
@@ -401,13 +427,13 @@ with cards_tab:
 <div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}{risk}</article>""")
         st.markdown('<div class="pick-grid">' + ''.join(cards) + '</div>', unsafe_allow_html=True)
 with table_tab:
-    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Odds Type", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
+    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
     for col in ["Confidence", "Away Win %", "Home Win %"]:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
 with about_tab:
     st.markdown("### Read your picks")
-    st.write("DraftKings moneylines come from ESPN’s published odds feed. +150 means $100 would profit $150; −150 means risking $150 to profit $100. These prices are separate from the model’s win probabilities and do not change its picks.")
+    st.write("DraftKings moneylines come from ESPN’s published odds feed, with other published sportsbooks used as a labeled fallback when needed. +150 means $100 would profit $150; −150 means risking $150 to profit $100. These prices are separate from the model’s win probabilities and do not change its picks.")
     st.write("Lines can move or be suspended. Unavailable prices are never filled with opening lines or another bookmaker’s odds. Historical lines are shown only when the feed supplies them.")
     st.write("Each card shows both teams’ win probabilities and the predicted winner. A 70% confidence means an estimated 7 wins out of 10 similar matchups—not a guaranteed result.")
     st.markdown("**Confidence guide** · Very high: 90%+ · High: 80–90% · Moderate: 70–80% · Lean: 60–70% · Toss-up: below 60%.")
