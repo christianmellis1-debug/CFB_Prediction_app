@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 import math
+from decimal import Decimal, ROUND_HALF_UP
 from urllib.parse import urlencode
 from urllib.request import urlopen
 from io import BytesIO
@@ -253,6 +254,58 @@ def attach_odds(predictions, games, quotes):
     return result
 
 
+def simulate_stakes(predictions, stakes):
+    rows = []
+    for _, pick in predictions.iterrows():
+        confidence = float(pick["Confidence"])
+        tier = "High" if confidence >= .8 else "Moderate" if confidence >= .7 else "Lean" if confidence >= .6 else "Toss-up"
+        stake = Decimal(str(stakes[tier])).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        line = pick["Home ML"] if pick["Predicted Side"] == "Home" else pick["Away ML"]
+        valid_line = format_moneyline(line)
+        reason = "Settled"
+        returned = profit = None
+        if stake <= 0:
+            reason = "No bet · zero stake"
+        elif pick["Status"] != "Final":
+            reason = "Pending final result"
+        elif valid_line == "Unavailable":
+            reason = "Excluded · missing moneyline"
+        else:
+            odds = Decimal(valid_line)
+            if pick["Actual Winner"] == "Tie":
+                returned, profit = stake, Decimal("0")
+            elif pick["Predicted Winner"] == pick["Actual Winner"]:
+                profit = (stake * (odds / 100 if odds > 0 else 100 / abs(odds))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                returned = stake + profit
+            else:
+                returned, profit = Decimal("0"), -stake
+        rows.append({
+            "Week": int(pick["Week"]), "Away Team": pick["Away Team"], "Home Team": pick["Home Team"],
+            "Pick": pick["Predicted Winner"], "Tier": tier, "Confidence": confidence,
+            "Moneyline": valid_line, "Sportsbook": pick["ML Source"], "Actual Winner": pick["Actual Winner"],
+            "Planned Stake": float(stake), "Stake": float(stake) if reason == "Settled" else 0.0,
+            "Returned": float(returned) if returned is not None else None,
+            "Net Profit": float(profit) if profit is not None else None, "Scenario Status": reason,
+            "Won": reason == "Settled" and pick["Pick Result"] == "Correct",
+            "Lost": reason == "Settled" and pick["Pick Result"] == "Incorrect",
+        })
+    return pd.DataFrame(rows)
+
+
+def summarize_scenario(detail, group):
+    rows = []
+    for key, frame in detail.groupby(group, sort=True):
+        settled = frame[frame["Scenario Status"] == "Settled"]
+        risked = round(settled["Stake"].sum(), 2)
+        net = round(settled["Net Profit"].sum(), 2)
+        rows.append({group: key, "Bets": len(settled), "Won": int(settled["Won"].sum()),
+                     "Lost": int(settled["Lost"].sum()), "Staked": risked,
+                     "Returned": round(settled["Returned"].sum(), 2), "Net Profit": net,
+                     "ROI": net / risked if risked else None,
+                     "Excluded / pending": int((frame["Scenario Status"] != "Settled").sum())})
+    return pd.DataFrame(rows)
+
+
 @st.fragment(run_every="60s")
 def watch_results(season, original, date_range, original_odds):
     if original is not None:
@@ -473,7 +526,7 @@ elif status_filter in ["Correct picks", "Incorrect picks"]:
 
 st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
 
-cards_tab, table_tab, about_tab = st.tabs(["Game cards", "Compare picks", "How it works"])
+cards_tab, table_tab, scenario_tab, about_tab = st.tabs(["Game cards", "Compare picks", "What-if bets", "How it works"])
 with cards_tab:
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
@@ -499,6 +552,71 @@ with table_tab:
     for col in ["Confidence", "Away Win %", "Home Win %"]:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
+with scenario_tab:
+    st.subheader("What if you bet each pick?")
+    st.caption("Simulate flat stakes by confidence tier. This uses all matchups in the scenario weeks, regardless of the search and card filters above.")
+    if st.toggle("Calculate betting scenario", value=False):
+        selected_scenario_weeks = st.multiselect("Scenario weeks", weeks, default=[w for w in [1, 2] if w in weeks])
+        stake_columns = st.columns(4)
+        stakes = {}
+        for column, tier, amount in zip(stake_columns, ["High", "Moderate", "Lean", "Toss-up"], [10.0, 5.0, 2.5, 1.0]):
+            with column:
+                stakes[tier] = st.number_input(f"{tier} stake ($)", min_value=0.0, value=amount, step=.5, format="%.2f")
+        st.caption("High includes Very High: 80%+ · Moderate: 70–80% · Lean: 60–70% · Toss-up: under 60%.")
+        st.info("Historical simulation using recalculated pregame-week predictions and archived prices, not a record of bets placed before kickoff. Missing moneylines are excluded; payouts include returned stakes. No parlays or reinvestment. Ties refund the stake; profit is rounded to cents per bet.")
+        if selected_scenario_weeks:
+            try:
+                scenario_frames = []
+                with st.spinner("Calculating your scenario..."):
+                    for scenario_week in sorted(selected_scenario_weeks):
+                        scenario_games = schedule[schedule["week"] == scenario_week]
+                        week_predictions = predict_all_games(current, prior, schedule, scenario_week)
+                        if week_predictions.empty:
+                            continue
+                        week_predictions = attach_results(week_predictions, scenario_games)
+                        scenario_dates = pd.to_datetime(scenario_games.get("start_date", pd.Series(dtype=str)), errors="coerce", utc=True).dropna()
+                        quotes = {}
+                        if not scenario_dates.empty:
+                            period = scenario_dates.min().strftime("%Y%m%d") + "-" + scenario_dates.max().strftime("%Y%m%d")
+                            try:
+                                quotes = download_market_odds(period)["quotes"]
+                            except Exception:
+                                st.warning(f"Week {scenario_week} odds could not be loaded; those bets are excluded.")
+                        week_predictions = attach_odds(week_predictions, scenario_games, quotes)
+                        scenario_frames.append(simulate_stakes(week_predictions, stakes))
+                if scenario_frames:
+                    detail = pd.concat(scenario_frames, ignore_index=True)
+                    settled = detail[detail["Scenario Status"] == "Settled"]
+                    total_stake = settled["Stake"].sum()
+                    total_return = settled["Returned"].sum()
+                    total_profit = settled["Net Profit"].sum()
+                    m1, m2, m3 = st.columns(3)
+                    m1.metric("Total staked · priced, settled bets", f"${total_stake:,.2f}")
+                    m2.metric("Total returned · includes stakes", f"${total_return:,.2f}")
+                    m3.metric("Net profit / loss", f"${total_profit:+,.2f}")
+                    if total_stake:
+                        st.caption(f"ROI: {total_profit / total_stake:.1%} · {len(settled)} settled bets · {int(settled['Won'].sum())} wins / {int(settled['Lost'].sum())} losses")
+                    skipped = detail[detail["Scenario Status"] != "Settled"]
+                    if not skipped.empty:
+                        st.warning(f"{len(skipped)} picks excluded or pending, representing ${skipped['Planned Stake'].sum():,.2f} in additional planned stakes. The displayed profit is not the exact outcome of betting every game.")
+                    money_columns = {name: st.column_config.NumberColumn(name, format="$%.2f") for name in ["Staked", "Returned", "Net Profit"]}
+                    for grouping in ["Week", "Tier"]:
+                        st.markdown(f"**Results by {grouping.lower()}**")
+                        summary = summarize_scenario(detail, grouping)
+                        summary["ROI"] = summary["ROI"].map(lambda value: f"{value:.1%}" if pd.notna(value) else "—")
+                        st.dataframe(summary, hide_index=True, use_container_width=True, column_config=money_columns)
+                    with st.expander("Every simulated bet"):
+                        view = detail.drop(columns=["Won", "Lost"]).copy()
+                        view["Confidence"] = view["Confidence"].map(lambda value: f"{value:.1%}")
+                        st.dataframe(view, hide_index=True, use_container_width=True)
+                    st.download_button("Download scenario · CSV", detail.to_csv(index=False).encode(), file_name=f"cfb_{season}_betting_scenario.csv", mime="text/csv")
+                else:
+                    st.info("No matchups found for these weeks.")
+            except Exception as exc:
+                st.error(f"Could not calculate this scenario: {exc}")
+        else:
+            st.info("Choose at least one week to calculate a scenario.")
+
 with about_tab:
     st.markdown("### Read your picks")
     st.write("DraftKings moneylines come from ESPN’s published odds feed, with other published sportsbooks used as a labeled fallback when needed. +150 means $100 would profit $150; −150 means risking $150 to profit $100. These prices are separate from the model’s win probabilities and do not change its picks.")
