@@ -160,9 +160,20 @@ def attach_odds(predictions, games, quotes):
         event_quotes = quotes.get(str(int(game.game_id)), {})
         if not isinstance(event_quotes, dict):
             continue
+        # Streamlit can briefly retain a cached response created by the older
+        # single-provider parser during a deploy. Normalize that shape here.
+        if "home_id" in event_quotes and "away_id" in event_quotes:
+            event_quotes = {"DraftKings": event_quotes}
         valid = {}
         for provider, quote in event_quotes.items():
-            if quote.get("home_id") == str(int(game.home_id)) and quote.get("away_id") == str(int(game.away_id)):
+            if not isinstance(quote, dict):
+                continue
+            try:
+                home_id = str(int(game["home_id"]))
+                away_id = str(int(game["away_id"]))
+            except (TypeError, ValueError, OverflowError):
+                continue
+            if quote.get("home_id") == home_id and quote.get("away_id") == away_id:
                 valid[provider] = quote
         if not valid:
             continue
