@@ -8,7 +8,7 @@ from model import MODEL_VERSION, COMPONENT_SPEC, predict_week
 
 st.set_page_config(page_title="College Football Predictor", page_icon="🏈", layout="wide", initial_sidebar_state="collapsed")
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=300)
 def download_schedule(season):
     url = f"https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_{season}.csv"
     with urlopen(url, timeout=30) as response:
@@ -44,6 +44,41 @@ def read_summary(upload, year):
         raise ValueError(f"{year} summaries contain duplicate team/week rows.")
     return frame
 
+def attach_results(predictions, games):
+    outcomes = games.copy()
+    completed = outcomes.get("completed", pd.Series(False, index=outcomes.index)).astype(str).str.lower().isin(["true", "t", "1", "1.0", "yes", "y"])
+    outcomes["Status"] = "Awaiting final"
+    outcomes.loc[completed, "Status"] = "Final · score pending"
+    valid = completed & outcomes["home_points"].notna() & outcomes["away_points"].notna()
+    outcomes.loc[valid, "Status"] = "Final"
+    outcomes["Actual Winner"] = "—"
+    outcomes.loc[valid & (outcomes.home_points > outcomes.away_points), "Actual Winner"] = outcomes["home_team"]
+    outcomes.loc[valid & (outcomes.home_points < outcomes.away_points), "Actual Winner"] = outcomes["away_team"]
+    outcomes.loc[valid & (outcomes.home_points == outcomes.away_points), "Actual Winner"] = "Tie"
+    outcomes["Final Score"] = "—"
+    for i in outcomes.index[valid]:
+        outcomes.loc[i, "Final Score"] = f"{outcomes.loc[i, 'away_team']} {outcomes.loc[i, 'away_points']:g} – {outcomes.loc[i, 'home_team']} {outcomes.loc[i, 'home_points']:g}"
+    outcomes = outcomes.rename(columns={"game_id": "Game ID", "home_team": "Home Team", "away_team": "Away Team"})
+    keys = ["Game ID"] if "Game ID" in outcomes and predictions["Game ID"].notna().all() else ["Home Team", "Away Team"]
+    result = predictions.merge(outcomes[keys + ["Status", "Actual Winner", "Final Score"]], on=keys, how="left", validate="one_to_one")
+    result["Pick Result"] = "Pending"
+    scored = result["Status"].eq("Final") & result["Actual Winner"].ne("Tie")
+    result.loc[scored, "Pick Result"] = "Incorrect"
+    result.loc[scored & result["Predicted Winner"].eq(result["Actual Winner"]), "Pick Result"] = "Correct"
+    result.loc[result["Actual Winner"].eq("Tie"), "Pick Result"] = "Not graded"
+    return result
+
+
+@st.fragment(run_every="60s")
+def watch_results(season, original):
+    try:
+        latest = download_schedule(season)
+        if not latest.equals(original):
+            st.rerun()
+        st.caption("Results check automatically while this page is open. Schedule downloads refresh every 5 minutes; finals appear when the source publishes them.")
+    except Exception:
+        st.caption("Results refresh is temporarily unavailable. Showing the last loaded data.")
+
 st.markdown("""
 <style>
 .block-container {max-width:1280px;padding-top:4rem;padding-bottom:3rem;}
@@ -60,6 +95,9 @@ st.markdown("""
 .pick-card {border:1px solid #80978b55;border-radius:18px;padding:22px;background:var(--secondary-background-color);min-width:0;}
 .card-top {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:20px;font-size:12px;}
 .badge {background:#dff1e5;color:#185431;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:700;white-space:nowrap;}
+.badge.incorrect {background:#fbe1df;color:#8b2925;}
+.result-box {margin-top:16px;padding-top:14px;border-top:1px solid #80978b40;font-size:13px;}
+.result-score {font-size:13px;margin:8px 0;overflow-wrap:anywhere;}
 .badge.close {background:#fff0d1;color:#704900;}
 .team-line {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:15px;}
 .team-name {overflow-wrap:anywhere;}
@@ -90,7 +128,7 @@ with st.sidebar:
     if st.button("Refresh all data", use_container_width=True):
         download_schedule.clear()
         download_summary.clear()
-    st.caption("Downloaded data refreshes hourly while you use the app.")
+    st.caption("Results refresh every 5 minutes; team summaries refresh hourly.")
     with st.expander("Use your own files"):
         mode = st.radio("Schedule source", ["Automatic download", "Upload CSV"])
         schedule_file = st.file_uploader("Schedule CSV", type="csv") if mode == "Upload CSV" else None
@@ -103,6 +141,7 @@ if mode == "Upload CSV" and schedule_file is None:
     st.stop()
 try:
     schedule = pd.read_csv(schedule_file, low_memory=False) if schedule_file is not None else download_schedule(season)
+    original_schedule = schedule.copy()
     required = {"season", "week", "home_id", "away_id", "home_team", "away_team", "home_points", "away_points"}
     missing = required - set(schedule.columns)
     if missing:
@@ -162,7 +201,9 @@ if selected_week > 1:
     if not eligible.empty and eligible["through_week"].max() < selected_week - 1:
         st.warning(f"Published statistics currently extend through week {int(eligible['through_week'].max())}. Predictions use the latest available pregame snapshot.")
 try:
-    pred = predict_week(current, prior, schedule, selected_week)
+    pred = predict_week(current, prior, schedule, selected_week, include_completed=True)
+    if not pred.empty:
+        pred = attach_results(pred, games)
 except Exception as e:
     st.error(str(e))
     st.stop()
@@ -177,7 +218,18 @@ st.markdown(f"""<div class="overview">
 <div class="stat"><strong>{len(pred)}</strong><span>Matchup predictions</span></div>
 <div class="stat"><strong>{high_count}</strong><span>High confidence · 80%+</span></div>
 <div class="stat"><strong>{close_count}</strong><span>Toss-ups · under 60%</span></div></div>""", unsafe_allow_html=True)
-st.subheader(f"Week {selected_week} picks")
+graded = pred[pred["Pick Result"].isin(["Correct", "Incorrect"])]
+correct_count = int(graded["Pick Result"].eq("Correct").sum())
+accuracy = f"{correct_count / len(graded):.1%}" if len(graded) else "—"
+st.markdown(f"""<div class="overview">
+<div class="stat"><strong>{int(pred['Status'].eq('Final').sum())} / {len(pred)}</strong><span>Final scores available</span></div>
+<div class="stat"><strong>{correct_count}–{len(graded) - correct_count}</strong><span>Correct – incorrect picks</span></div>
+<div class="stat"><strong>{accuracy}</strong><span>Weekly accuracy · graded games</span></div></div>""", unsafe_allow_html=True)
+if st.button("Refresh scores now"):
+    download_schedule.clear()
+    st.rerun()
+st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
+st.subheader(f"Week {selected_week} picks & results")
 st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
 search_col, confidence_col, sort_col = st.columns([2, 1, 1])
 with search_col:
@@ -198,11 +250,15 @@ if order == "Closest matchups":
     filtered = filtered.sort_values("Confidence")
 elif order == "Home team A–Z":
     filtered = filtered.sort_values("Home Team")
+status_filter = st.radio("Game results", ["All games", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True)
+if status_filter == "Final":
+    filtered = filtered[filtered["Status"].eq("Final")]
+elif status_filter == "Awaiting final":
+    filtered = filtered[~filtered["Status"].eq("Final")]
+elif status_filter in ["Correct picks", "Incorrect picks"]:
+    filtered = filtered[filtered["Pick Result"].eq(status_filter.split()[0])]
+
 st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
-if "completed" in games and games["completed"].all():
-    st.info("This week is complete. These are model estimates using pregame statistics, not game results.")
-elif "completed" in games and games["completed"].any():
-    st.caption("Completed games are excluded from predictions while this week still has unfinished games.")
 
 cards_tab, table_tab, about_tab = st.tabs(["Game cards", "Compare picks", "How it works"])
 with cards_tab:
@@ -214,16 +270,18 @@ with cards_tab:
             badge_class = "badge close" if r["Confidence"] < .7 else "badge"
             risk = '<div class="risk-note">Away-team pick · ' + escape(str(r["Venue Risk"])) + ' venue risk</div>' if r["Venue Risk"] != "Normal" else ""
             venue = "Neutral site" if r["Neutral Site"] else "Away at home"
+            outcome_class = "badge" if r["Pick Result"] == "Correct" else "badge incorrect" if r["Pick Result"] == "Incorrect" else "badge close"
+            outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="team-line"><span class="team-name"><span class="venue-label">Away</span>{escape(str(r['Away Team']))}</span><strong>{r['Away Win %']:.1%}</strong></div>
 <div class="team-line"><span class="team-name"><span class="venue-label">Home</span>{escape(str(r['Home Team']))}</span><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{risk}</article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{outcome}{risk}</article>""")
         st.markdown('<div class="pick-grid">' + ''.join(cards) + '</div>', unsafe_allow_html=True)
 with table_tab:
-    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "Venue Risk"]].copy()
+    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
     for col in ["Confidence", "Away Win %", "Home Win %"]:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
@@ -239,3 +297,6 @@ with about_tab:
 
 st.download_button("Download these picks · CSV", filtered.to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
+
+if mode == "Automatic download":
+    watch_results(season, original_schedule)
