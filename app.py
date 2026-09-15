@@ -52,6 +52,53 @@ def read_summary(upload, year):
         raise ValueError(f"{year} summaries contain duplicate team/week rows.")
     return frame
 
+
+def augment_missing_summaries(current, prior, schedule, target_week):
+    """Create transparent provisional rows when the weekly feed omits a team.
+
+    The schedule has reliable completed-game scores even when the advanced
+    summary release is late. Clone the team's latest prior-season profile and
+    apply a modest scoring/points-allowed adjustment from completed games.
+    """
+    result = current.copy()
+    derived = {}
+    eligible_ids = set(result.loc[pd.to_numeric(result["through_week"], errors="coerce") < int(target_week), "team_id"].astype(int))
+    games = schedule.copy()
+    if "completed" in games:
+        done = games["completed"].astype(str).str.lower().isin(["true", "t", "1", "1.0", "yes", "y"])
+        games = games[done]
+    games = games[pd.to_numeric(games["week"], errors="coerce") < int(target_week)]
+    games = games[pd.notna(games["home_points"]) & pd.notna(games["away_points"])]
+    if games.empty:
+        return result, derived
+    for tid in set(games["home_id"].astype(int)) | set(games["away_id"].astype(int)):
+        if tid in eligible_ids:
+            continue
+        prior_rows = prior[prior["team_id"].astype(int) == tid]
+        team_games = games[(games["home_id"].astype(int) == tid) | (games["away_id"].astype(int) == tid)]
+        if prior_rows.empty or team_games.empty:
+            continue
+        base = prior_rows.sort_values("through_week").iloc[-1].copy()
+        points_for, points_against = [], []
+        for _, game in team_games.iterrows():
+            if int(game["home_id"]) == tid:
+                points_for.append(float(game["home_points"]))
+                points_against.append(float(game["away_points"]))
+            else:
+                points_for.append(float(game["away_points"]))
+                points_against.append(float(game["home_points"]))
+        # Keep the adjustment deliberately conservative; it supplements the
+        # prior profile rather than pretending a full advanced-stat snapshot.
+        base["season"] = int(target_week and schedule["season"].iloc[0])
+        base["through_week"] = int(pd.to_numeric(team_games["week"], errors="coerce").max())
+        if "adj_off_epa" in base:
+            base["adj_off_epa"] = float(base["adj_off_epa"]) + (sum(points_for) / len(points_for) - 28.0) / 14.0
+        if "adj_def_epa" in base:
+            base["adj_def_epa"] = float(base["adj_def_epa"]) + (sum(points_against) / len(points_against) - 28.0) / 14.0
+        result = pd.concat([result, pd.DataFrame([base])], ignore_index=True)
+        derived[tid] = {"games": len(team_games), "through_week": int(base["through_week"])}
+    return result, derived
+
 def predict_all_games(current, prior, schedule, week):
     # Preserve prior-week results for venue history; include every target-week game.
     model_schedule = schedule.copy()
@@ -474,6 +521,7 @@ try:
     with st.spinner("Loading team statistics and generating predictions..."):
         current = read_summary(current_file, season)
         prior = read_summary(prior_file, season - 1)
+        current, derived_team_data = augment_missing_summaries(current, prior, schedule, selected_week)
 except Exception as exc:
     st.error(f"Could not load team summaries: {exc}")
     st.info("Try Refresh all data. If the selected season is not published yet, choose an available season or supply CSV overrides.")
@@ -482,6 +530,14 @@ except Exception as exc:
 eligible = current[current["through_week"] < selected_week]
 missing_team_ids = set()
 missing_team_names = []
+derived_team_ids = set(derived_team_data)
+if derived_team_ids:
+    derived_names = {}
+    for _, game in games.iterrows():
+        derived_names[int(game["home_id"])] = str(game["home_team"])
+        derived_names[int(game["away_id"])] = str(game["away_team"])
+    derived_list = sorted(derived_names[tid] for tid in derived_team_ids if tid in derived_names)
+    st.info(f"Schedule-derived fallback statistics are being used for: {', '.join(derived_list)}. These provisional metrics combine prior profiles with completed-game scoring data until the advanced summary feed catches up.")
 if selected_week > 1:
     team_ids = set(games["home_id"]) | set(games["away_id"])
     missing_team_ids = team_ids - set(eligible["team_id"])
