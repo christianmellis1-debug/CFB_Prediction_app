@@ -482,6 +482,9 @@ try:
         raise ValueError("Missing schedule columns: " + ", ".join(sorted(missing)))
     schedule = schedule.copy()
     schedule = schedule[pd.to_numeric(schedule["season"], errors="coerce") == season]
+    # Keep a season-wide copy so schedule-derived fallbacks can use completed
+    # FBS-vs-FCS games that are intentionally excluded from prediction cards.
+    fallback_schedule = schedule.copy()
     if "season_type" in schedule:
         schedule = schedule[schedule["season_type"].astype(str).str.lower() == "regular"]
     for col in ["home_division", "away_division"]:
@@ -521,7 +524,7 @@ try:
     with st.spinner("Loading team statistics and generating predictions..."):
         current = read_summary(current_file, season)
         prior = read_summary(prior_file, season - 1)
-        current, derived_team_data = augment_missing_summaries(current, prior, schedule, selected_week)
+        current, derived_team_data = augment_missing_summaries(current, prior, fallback_schedule, selected_week)
 except Exception as exc:
     st.error(f"Could not load team summaries: {exc}")
     st.info("Try Refresh all data. If the selected season is not published yet, choose an available season or supply CSV overrides.")
