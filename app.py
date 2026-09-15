@@ -1,11 +1,12 @@
 from datetime import datetime, timezone
+from html import escape
 from urllib.request import urlopen
 from io import BytesIO
 import pandas as pd
 import streamlit as st
 from model import MODEL_VERSION, COMPONENT_SPEC, predict_week
 
-st.set_page_config(page_title="College Football Predictor", page_icon="🏈", layout="wide")
+st.set_page_config(page_title="College Football Predictor", page_icon="🏈", layout="wide", initial_sidebar_state="collapsed")
 
 @st.cache_data(ttl=3600)
 def download_schedule(season):
@@ -43,26 +44,59 @@ def read_summary(upload, year):
         raise ValueError(f"{year} summaries contain duplicate team/week rows.")
     return frame
 
-st.title("🏈 College Football Predictor")
-st.caption(f"Frozen production model: {MODEL_VERSION}")
-with st.sidebar:
-    st.header("Data")
-    now = datetime.now(timezone.utc)
-    year = now.year if now.month >= 7 else now.year - 1
+st.markdown("""
+<style>
+.block-container {max-width:1280px;padding-top:4rem;padding-bottom:3rem;}
+.hero {background:linear-gradient(115deg,#102c26,#163e35 65%,#265b46);color:#fff;border-radius:24px;padding:32px 36px;margin-bottom:24px;position:relative;overflow:hidden;}
+.hero:after {content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff18;border-radius:50%;right:-60px;top:-100px;box-shadow:0 0 0 45px #ffffff06,0 0 0 90px #ffffff04;pointer-events:none;}
+.eyebrow {font-size:12px;letter-spacing:2px;font-weight:700;color:#bde7ca;text-transform:uppercase;}
+.hero h1 {font-size:clamp(30px,5vw,46px);letter-spacing:-1.5px;margin:8px 0;color:white;line-height:1.12;}
+.hero p {color:#d9e9df;margin:10px 0 0;font-size:16px;}
+.overview {display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 24px;}
+.stat {border:1px solid #80978b40;border-radius:16px;padding:18px 20px;background:var(--secondary-background-color);}
+.stat strong {display:block;font-size:28px;line-height:1.4;letter-spacing:-1px;}
+.stat span {font-size:13px;opacity:.75;}
+.pick-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:14px 0 24px;}
+.pick-card {border:1px solid #80978b55;border-radius:18px;padding:22px;background:var(--secondary-background-color);min-width:0;}
+.card-top {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:20px;font-size:12px;}
+.badge {background:#dff1e5;color:#185431;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:700;white-space:nowrap;}
+.badge.close {background:#fff0d1;color:#704900;}
+.team-line {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:15px;}
+.team-name {overflow-wrap:anywhere;}
+.team-line strong {white-space:nowrap;}
+.venue-label {font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:1px;display:block;}
+.pick-result {border-top:1px solid #80978b40;margin-top:18px;padding-top:16px;}
+.pick-label {font-size:11px;opacity:.7;text-transform:uppercase;letter-spacing:1.3px;}
+.pick-winner {font-weight:750;font-size:21px;margin:4px 0 12px;overflow-wrap:anywhere;}
+.conf-row {display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px;}
+.conf-track {height:6px;background:#80978b30;border-radius:5px;overflow:hidden;}
+.conf-fill {height:100%;background:#41a577;border-radius:5px;}
+.risk-note {font-size:12px;margin-top:14px;color:#986a17;}
+@media (max-width:1000px) {.pick-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:600px) {.block-container {padding:4rem 1rem 2rem;}.hero {padding:25px 22px;border-radius:18px;}.pick-grid {grid-template-columns:1fr;}.overview {gap:8px;}.stat {padding:12px 10px;}.stat strong {font-size:23px;}.stat span {font-size:11px;}}
+</style>
+<div class="hero"><div class="eyebrow">Saturday scouting report · College football</div>
+<h1>Your weekly game plan.</h1><p>Every matchup. A clear pick. Confidence at a glance.</p></div>
+""", unsafe_allow_html=True)
+
+now = datetime.now(timezone.utc)
+year = now.year if now.month >= 7 else now.year - 1
+season_col, week_col = st.columns([1, 2])
+with season_col:
     season = int(st.number_input("Season", min_value=2001, max_value=now.year + 1, value=year))
-    mode = st.radio("Schedule source", ["Automatic download", "Upload CSV"])
-    schedule_file = st.file_uploader("Schedule CSV", type="csv") if mode == "Upload CSV" else None
-    if st.button("Refresh all data"):
+with st.sidebar:
+    st.header("Data settings")
+    st.caption("Schedules and team statistics load automatically. No uploads needed.")
+    if st.button("Refresh all data", use_container_width=True):
         download_schedule.clear()
         download_summary.clear()
-    st.caption("Schedules and team summaries download automatically and refresh hourly while using the app.")
-    with st.expander("Optional CSV overrides"):
+    st.caption("Downloaded data refreshes hourly while you use the app.")
+    with st.expander("Use your own files"):
+        mode = st.radio("Schedule source", ["Automatic download", "Upload CSV"])
+        schedule_file = st.file_uploader("Schedule CSV", type="csv") if mode == "Upload CSV" else None
         current_file = st.file_uploader(f"{season} team summaries", type="csv")
         prior_file = st.file_uploader(f"{season - 1} team summaries", type="csv")
-    st.divider()
-    st.markdown("**V1.4 architecture**")
-    st.write("35% offense · 35% defense · 20% venue · 10% SOS")
-    st.write("Prior: 75% preseason Elo + 25% prior-season efficiency")
+    st.caption(f"Prediction model {MODEL_VERSION}")
 
 if mode == "Upload CSV" and schedule_file is None:
     st.info("Upload a schedule or select Automatic download.")
@@ -106,12 +140,9 @@ if "start_date" in schedule:
         upcoming = upcoming[~upcoming["completed"]]
     if not upcoming.empty:
         default_week = int(upcoming.iloc[0]["week"])
-selected_week = st.selectbox("Week", weeks, index=weeks.index(default_week))
-with st.expander("Weekly matchups", expanded=True):
-    games = schedule[schedule["week"] == selected_week]
-    cols = [c for c in ["away_team", "home_team", "start_date", "completed"] if c in games]
-    st.dataframe(games[cols], hide_index=True, use_container_width=True)
-st.caption("Schedule: sportsdataverse/cfbfastR-data · Regular-season FBS vs. FBS games")
+with week_col:
+    selected_week = st.selectbox("Week", weeks, index=weeks.index(default_week), format_func=lambda w: f"Week {w}")
+games = schedule[schedule["week"] == selected_week]
 
 try:
     with st.spinner("Loading team statistics and generating predictions..."):
@@ -121,7 +152,7 @@ except Exception as exc:
     st.error(f"Could not load team summaries: {exc}")
     st.info("Try Refresh all data. If the selected season is not published yet, choose an available season or supply CSV overrides.")
     st.stop()
-st.caption(f"Team summaries loaded: {season} ({len(current):,} rows), {season - 1} ({len(prior):,} rows).")
+
 eligible = current[current["through_week"] < selected_week]
 if selected_week > 1:
     team_ids = set(games["home_id"]) | set(games["away_id"])
@@ -136,82 +167,75 @@ except Exception as e:
     st.error(str(e))
     st.stop()
 
-tab1, tab2, tab3 = st.tabs(["Predictions", "Game Cards", "Model"])
+if pred.empty:
+    st.info("No predictions are available for this week. Try another week above.")
+    st.stop()
 
-with tab1:
-    if pred.empty:
-        st.warning("No games found for this week.")
+high_count = int((pred["Confidence"] >= .8).sum())
+close_count = int((pred["Confidence"] < .6).sum())
+st.markdown(f"""<div class="overview">
+<div class="stat"><strong>{len(pred)}</strong><span>Matchup predictions</span></div>
+<div class="stat"><strong>{high_count}</strong><span>High confidence · 80%+</span></div>
+<div class="stat"><strong>{close_count}</strong><span>Toss-ups · under 60%</span></div></div>""", unsafe_allow_html=True)
+st.subheader(f"Week {selected_week} picks")
+st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
+search_col, confidence_col, sort_col = st.columns([2, 1, 1])
+with search_col:
+    query = st.text_input("Find a team", placeholder="Search LSU, Texas, Ohio State…")
+with confidence_col:
+    level = st.selectbox("Confidence", ["All confidence levels", "High · 80%+", "Moderate · 70–80%", "Lean · 60–70%", "Toss-up · under 60%"])
+with sort_col:
+    order = st.selectbox("Sort by", ["Highest confidence", "Closest matchups", "Home team A–Z"])
+filtered = pred.copy()
+if query.strip():
+    matched = filtered["Home Team"].str.contains(query.strip(), case=False, regex=False) | filtered["Away Team"].str.contains(query.strip(), case=False, regex=False)
+    filtered = filtered[matched]
+bands = {"High · 80%+": (.8, 1.01), "Moderate · 70–80%": (.7, .8), "Lean · 60–70%": (.6, .7), "Toss-up · under 60%": (0, .6)}
+if level in bands:
+    low, high = bands[level]
+    filtered = filtered[(filtered["Confidence"] >= low) & (filtered["Confidence"] < high)]
+if order == "Closest matchups":
+    filtered = filtered.sort_values("Confidence")
+elif order == "Home team A–Z":
+    filtered = filtered.sort_values("Home Team")
+st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
+if "completed" in games and games["completed"].all():
+    st.info("This week is complete. These are model estimates using pregame statistics, not game results.")
+elif "completed" in games and games["completed"].any():
+    st.caption("Completed games are excluded from predictions while this week still has unfinished games.")
+
+cards_tab, table_tab, about_tab = st.tabs(["Game cards", "Compare picks", "How it works"])
+with cards_tab:
+    if filtered.empty:
+        st.info("No matchups match these filters. Clear your search or choose another confidence level.")
     else:
-        show = pred.copy()
-        for c in ["Away Win %","Home Win %","Confidence"]:
-            show[c] = show[c].map(lambda x: f"{x:.1%}")
-        st.dataframe(
-            show[[
-                "Away Team","Home Team","Away Win %","Home Win %",
-                "Predicted Winner","Confidence","Confidence Label","Venue Risk"
-            ]],
-            use_container_width=True,
-            hide_index=True
-        )
-        st.download_button(
-            "Download predictions",
-            pred.to_csv(index=False).encode(),
-            file_name=f"cfb_{MODEL_VERSION}_week_{selected_week}.csv",
-            mime="text/csv"
-        )
+        cards = []
+        for _, r in filtered.iterrows():
+            badge_class = "badge close" if r["Confidence"] < .7 else "badge"
+            risk = '<div class="risk-note">Away-team pick · ' + escape(str(r["Venue Risk"])) + ' venue risk</div>' if r["Venue Risk"] != "Normal" else ""
+            venue = "Neutral site" if r["Neutral Site"] else "Away at home"
+            cards.append(f"""<article class="pick-card">
+<div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
+<div class="team-line"><span class="team-name"><span class="venue-label">Away</span>{escape(str(r['Away Team']))}</span><strong>{r['Away Win %']:.1%}</strong></div>
+<div class="team-line"><span class="team-name"><span class="venue-label">Home</span>{escape(str(r['Home Team']))}</span><strong>{r['Home Win %']:.1%}</strong></div>
+<div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
+<div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{risk}</article>""")
+        st.markdown('<div class="pick-grid">' + ''.join(cards) + '</div>', unsafe_allow_html=True)
+with table_tab:
+    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "Venue Risk"]].copy()
+    for col in ["Confidence", "Away Win %", "Home Win %"]:
+        show[col] = show[col].map(lambda value: f"{value:.1%}")
+    st.dataframe(show, hide_index=True, use_container_width=True)
+with about_tab:
+    st.markdown("### Read your picks")
+    st.write("Each card shows both teams’ win probabilities and the predicted winner. A 70% confidence means an estimated 7 wins out of 10 similar matchups—not a guaranteed result.")
+    st.markdown("**Confidence guide** · Very high: 90%+ · High: 80–90% · Moderate: 70–80% · Lean: 60–70% · Toss-up: below 60%.")
+    st.write("Away-team picks may carry a venue-risk note. Use that as additional context when comparing games.")
+    with st.expander("Model and data details"):
+        st.write(f"Model {MODEL_VERSION}: 35% offense, 35% defense, 20% venue performance, and 10% strength of schedule.")
+        st.write("Preseason strength combines 75% Elo and 25% prior-season efficiency. Current-season statistics gain weight as the season progresses. Only snapshots from before the selected week are used.")
+        st.caption(f"Loaded {season}: {len(current):,} team-week rows; {season - 1}: {len(prior):,} rows. Source: SportsDataverse / cfbfastR.")
 
-with tab2:
-    for _, r in pred.iterrows():
-        with st.container(border=True):
-            st.subheader(f"{r['Away Team']} at {r['Home Team']}")
-            c1, c2, c3 = st.columns(3)
-            c1.metric("Projected winner", r["Predicted Winner"])
-            c2.metric("Confidence", f"{r['Confidence']:.1%}")
-            c3.metric("Venue risk", r["Venue Risk"])
-            st.progress(float(r["Home Win %"]), text=f"{r['Home Team']} win probability: {r['Home Win %']:.1%}")
-            st.caption(f"{r['Away Team']}: {r['Away Win %']:.1%} · {r['Home Team']}: {r['Home Win %']:.1%}")
-            if r["Predicted Side"] == "Away" and r["Venue Risk"] != "Normal":
-                st.warning("Road-team selection: historical V1.4 diagnostics show elevated contextual risk.")
-
-with tab3:
-    st.markdown("""
-    ### V1.4 frozen model
-    **Core weights**
-    - 35% Offensive efficiency
-    - 35% Defensive efficiency
-    - 20% Team-specific venue performance
-    - 10% Strength of schedule
-
-    **Efficiency composite**
-    - 40% EPA/PPA
-    - 30% Success rate
-    - 15% Explosiveness
-    - 15% Red-zone success proxy
-
-    **Prior strength**
-    - 75% preseason Elo
-    - 25% prior-season efficiency
-
-    **Current-season transition**
-    - W1 30%
-    - W2 40%
-    - W3 50%
-    - W4 60%
-    - W5 65%
-    - W6 70%
-    - W7 75%
-    - W8 80%
-    - W9 85%
-    - W10+ 90%
-
-    **2025 frozen benchmark**
-    - 762 regular-season FBS-vs-FBS games
-    - 73.1% straight-up accuracy
-    - 0.185 Brier score
-
-    Probabilities are estimates, not guarantees.
-    """)
-
-st.divider()
-st.caption("Model versioning is frozen so future improvements can be tested as V1.5+ without silently changing V1.4.")
-
+st.download_button("Download these picks · CSV", filtered.to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
+st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
