@@ -9,6 +9,7 @@ from urllib.parse import urlencode
 from urllib.request import urlopen
 from io import BytesIO
 import pandas as pd
+import numpy as np
 import streamlit as st
 from model import MODEL_VERSION, COMPONENT_SPEC, predict_week
 
@@ -254,6 +255,30 @@ def attach_odds(predictions, games, quotes):
     return result
 
 
+def add_betting_value(predictions):
+    """Add market-implied probability and model value for the selected side."""
+    result = predictions.copy()
+    result["Bet Line"] = result.apply(
+        lambda row: row["Home ML"] if row["Predicted Side"] == "Home" else row["Away ML"], axis=1
+    )
+    line = pd.to_numeric(result["Bet Line"].astype(str).str.replace("+", "", regex=False), errors="coerce")
+    result["Market Implied %"] = np.where(line > 0, 100 / (line + 100), -line / (-line + 100))
+    result.loc[line.isna(), "Market Implied %"] = np.nan
+    result["Model Edge"] = result["Confidence"] - result["Market Implied %"]
+    result["Expected Value"] = np.where(
+        line > 0,
+        result["Confidence"] * (line / 100) - (1 - result["Confidence"]),
+        result["Confidence"] * (100 / line.abs()) - (1 - result["Confidence"]),
+    )
+    result.loc[line.isna(), "Expected Value"] = np.nan
+    result["Bet Signal"] = "Pass"
+    usable = result["Bet Line"].ne("Unavailable") & result["Expected Value"].notna()
+    result.loc[usable & (result["Confidence"] >= .70) & (result["Model Edge"] >= .03) & (result["Expected Value"] > 0), "Bet Signal"] = "Strong value"
+    result.loc[usable & (result["Bet Signal"] == "Pass") & (result["Confidence"] >= .60) & (result["Model Edge"] >= .02) & (result["Expected Value"] > 0), "Bet Signal"] = "Value"
+    result.loc[~usable, "Bet Signal"] = "No line"
+    return result
+
+
 def simulate_stakes(predictions, stakes):
     rows = []
     for _, pick in predictions.iterrows():
@@ -471,7 +496,7 @@ if date_range:
         odds_snapshot = download_market_odds(date_range)
     except Exception:
         st.info("DraftKings odds are temporarily unavailable. Predictions and results are still available.")
-pred = attach_odds(pred, games, odds_snapshot["quotes"])
+pred = add_betting_value(attach_odds(pred, games, odds_snapshot["quotes"]))
 
 high_count = int((pred["Confidence"] >= .8).sum())
 close_count = int((pred["Confidence"] < .6).sum())
@@ -497,6 +522,16 @@ st.caption("DraftKings moneylines via ESPN, with another sportsbook shown when D
 if odds_snapshot["retrieved"]:
     st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
 st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
+value_picks = pred[(pred["Bet Signal"].isin(["Strong value", "Value"])) & pred["Status"].ne("Final")].sort_values(["Bet Signal", "Expected Value"], ascending=[True, False])
+if not value_picks.empty:
+    st.markdown("### Best betting opportunities")
+    st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement.")
+    value_show = value_picks.head(8)[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Bet Line", "ML Source", "Market Implied %", "Model Edge", "Expected Value", "Bet Signal"]].copy()
+    for col in ["Confidence", "Market Implied %", "Model Edge", "Expected Value"]:
+        value_show[col] = value_show[col].map(lambda value: f"{value:.1%}" if pd.notna(value) else "—")
+    st.dataframe(value_show, hide_index=True, use_container_width=True)
+else:
+    st.info("No current game has both a published moneyline and enough model value to qualify as a highlighted opportunity.")
 search_col, confidence_col, sort_col = st.columns([2, 1, 1])
 with search_col:
     query = st.text_input("Find a team", placeholder="Search LSU, Texas, Ohio State…")
@@ -633,3 +668,4 @@ st.download_button("Download these picks · CSV", filtered.to_csv(index=False).e
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"])
+
