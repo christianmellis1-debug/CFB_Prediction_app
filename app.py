@@ -522,14 +522,19 @@ st.caption("DraftKings moneylines via ESPN, with another sportsbook shown when D
 if odds_snapshot["retrieved"]:
     st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
 st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
-value_picks = pred[(pred["Bet Signal"].isin(["Strong value", "Value"])) & pred["Status"].ne("Final")].sort_values(["Bet Signal", "Expected Value"], ascending=[True, False])
+value_picks = pred[pred["Bet Signal"].isin(["Strong value", "Value"])].sort_values(["Bet Signal", "Expected Value"], ascending=[True, False])
 if not value_picks.empty:
     st.markdown("### Best betting opportunities")
-    st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement.")
-    value_show = value_picks.head(8)[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Bet Line", "ML Source", "Market Implied %", "Model Edge", "Expected Value", "Bet Signal"]].copy()
+    st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement. Completed weeks use archived closing prices and include the actual result.")
+    value_show = value_picks.head(12)[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Bet Line", "ML Source", "Market Implied %", "Model Edge", "Expected Value", "Bet Signal", "Status", "Actual Winner", "Pick Result"]].copy()
     for col in ["Confidence", "Market Implied %", "Model Edge", "Expected Value"]:
         value_show[col] = value_show[col].map(lambda value: f"{value:.1%}" if pd.notna(value) else "—")
     st.dataframe(value_show, hide_index=True, use_container_width=True)
+    if pred["Status"].eq("Final").any():
+        graded_value = value_picks[value_picks["Pick Result"].isin(["Correct", "Incorrect"])]
+        if not graded_value.empty:
+            wins = int(graded_value["Pick Result"].eq("Correct").sum())
+            st.caption(f"Highlighted historical picks: {wins}–{len(graded_value) - wins} ({wins / len(graded_value):.1%} accuracy).")
 else:
     st.info("No current game has both a published moneyline and enough model value to qualify as a highlighted opportunity.")
 search_col, confidence_col, sort_col = st.columns([2, 1, 1])
