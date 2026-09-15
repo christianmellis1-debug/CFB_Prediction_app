@@ -145,14 +145,14 @@ def _completed_history(schedule, target_week):
         road_hist[a].append(-diff)
     return home_hist, road_hist
 
-def predict_week(current_summary, prior_summary, schedule, target_week):
+def predict_week(current_summary, prior_summary, schedule, target_week, include_completed=False):
     target_week = int(target_week)
     scores, weeks = build_weekly_scores(current_summary)
     prior_vector = build_prior_profiles(prior_summary, schedule)
     home_hist, road_hist = _completed_history(schedule, target_week)
 
     week_games = schedule[pd.to_numeric(schedule["week"], errors="coerce") == target_week].copy()
-    if "completed" in week_games.columns:
+    if "completed" in week_games.columns and not include_completed:
         completed = week_games["completed"].astype(str).str.lower().isin(["true","t","1","yes","y"])
         if (~completed).any():
             week_games = week_games[~completed]
@@ -201,6 +201,7 @@ def predict_week(current_summary, prior_summary, schedule, target_week):
             winner = g["away_team"]; side = "Away"; conf = away_prob
 
         rows.append({
+            "Game ID": g.get("game_id"),
             "Week": target_week,
             "Away Team": g["away_team"],
             "Home Team": g["home_team"],
@@ -216,3 +217,4 @@ def predict_week(current_summary, prior_summary, schedule, target_week):
         })
 
     return pd.DataFrame(rows).sort_values("Confidence", ascending=False).reset_index(drop=True) if rows else pd.DataFrame()
+
