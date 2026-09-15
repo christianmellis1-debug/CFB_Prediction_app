@@ -597,12 +597,19 @@ with scenario_tab:
     st.caption("Simulate flat stakes by confidence tier. This uses all matchups in the scenario weeks, regardless of the search and card filters above.")
     if st.toggle("Calculate betting scenario", value=False):
         selected_scenario_weeks = st.multiselect("Scenario weeks", weeks, default=[w for w in [1, 2] if w in weeks])
+        scenario_mode = st.radio("Scenario strategy", ["Confidence tiers", "Best betting opportunities"], horizontal=True)
         stake_columns = st.columns(4)
         stakes = {}
-        for column, tier, amount in zip(stake_columns, ["High", "Moderate", "Lean", "Toss-up"], [10.0, 5.0, 2.5, 1.0]):
-            with column:
-                stakes[tier] = st.number_input(f"{tier} stake ($)", min_value=0.0, value=amount, step=.5, format="%.2f")
-        st.caption("High includes Very High: 80%+ · Moderate: 70–80% · Lean: 60–70% · Toss-up: under 60%.")
+        if scenario_mode == "Confidence tiers":
+            for column, tier, amount in zip(stake_columns, ["High", "Moderate", "Lean", "Toss-up"], [10.0, 5.0, 2.5, 1.0]):
+                with column:
+                    stakes[tier] = st.number_input(f"{tier} stake ($)", min_value=0.0, value=amount, step=.5, format="%.2f")
+            st.caption("High includes Very High: 80%+ · Moderate: 70–80% · Lean: 60–70% · Toss-up: under 60%.")
+        else:
+            with stake_columns[0]:
+                opportunity_stake = st.number_input("Opportunity stake ($)", min_value=0.0, value=10.0, step=.5, format="%.2f")
+            stakes = {tier: opportunity_stake for tier in ["High", "Moderate", "Lean", "Toss-up"]}
+            st.caption("Includes only picks labeled Strong value or Value: positive expected value, with the model edge thresholds shown above.")
         st.info("Historical simulation using recalculated pregame-week predictions and archived prices, not a record of bets placed before kickoff. Missing moneylines are excluded; payouts include returned stakes. No parlays or reinvestment. Ties refund the stake; profit is rounded to cents per bet.")
         if selected_scenario_weeks:
             try:
@@ -622,7 +629,9 @@ with scenario_tab:
                                 quotes = download_market_odds(period)["quotes"]
                             except Exception:
                                 st.warning(f"Week {scenario_week} odds could not be loaded; those bets are excluded.")
-                        week_predictions = attach_odds(week_predictions, scenario_games, quotes)
+                        week_predictions = add_betting_value(attach_odds(week_predictions, scenario_games, quotes))
+                        if scenario_mode == "Best betting opportunities":
+                            week_predictions = week_predictions[week_predictions["Bet Signal"].isin(["Strong value", "Value"])]
                         scenario_frames.append(simulate_stakes(week_predictions, stakes))
                 if scenario_frames:
                     detail = pd.concat(scenario_frames, ignore_index=True)
