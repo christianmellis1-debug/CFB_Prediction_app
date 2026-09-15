@@ -1,6 +1,8 @@
 from datetime import datetime, timezone
 from html import escape
 import json
+from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 import math
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -133,13 +135,66 @@ def parse_draftkings(payload):
     return quotes
 
 
+def parse_archived_summary(payload, event_id):
+    header = payload.get("header", {})
+    if str(header.get("id")) != str(event_id):
+        return {}
+    competitions = []
+    for competition in header.get("competitions", []):
+        if not competition.get("status", {}).get("type", {}).get("completed", False):
+            continue
+        archived = dict(competition)
+        archived["odds"] = payload.get("pickcenter", [])
+        competitions.append(archived)
+    return parse_draftkings({"events": [{"id": str(event_id), "competitions": competitions}]}).get(str(event_id), {})
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def download_archived_event(event_id):
+    if not str(event_id).isdigit():
+        return {}
+    url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=" + str(event_id)
+    with urlopen(url, timeout=15) as response:
+        return parse_archived_summary(json.load(response), event_id)
+
+
 @st.cache_data(ttl=300, show_spinner=False)
-def download_odds(date_range):
+def download_market_odds(date_range):
+    # This versioned function replaces the previous single-provider cache.
     query = urlencode({"dates": date_range, "groups": 80, "limit": 1000})
     url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?" + query
     with urlopen(url, timeout=20) as response:
         payload = json.load(response)
-    return {"quotes": parse_draftkings(payload), "retrieved": datetime.now(timezone.utc).strftime("%b %d, %H:%M UTC")}
+    quotes = parse_draftkings(payload)
+    archive_path = Path(__file__).parent / "data" / "archived_moneylines_2026.json"
+    try:
+        saved = json.loads(archive_path.read_text()).get("events", {}) if archive_path.exists() else {}
+    except (OSError, ValueError):
+        saved = {}
+    missing = []
+    for event in payload.get("events", []):
+        event_id = str(event.get("id"))
+        completed = any(c.get("status", {}).get("type", {}).get("completed", False) for c in event.get("competitions", []))
+        if not completed or event_id in quotes:
+            continue
+        stored = saved.get(event_id, {}).get("quotes", {})
+        if stored:
+            quotes[event_id] = stored
+        elif event_id.isdigit():
+            missing.append(event_id)
+    # ESPN's weekly scoreboard omits completed-game prices. Retrieve each
+    # missing game's archived summary, with a daily per-event cache.
+    def get_archive(event_id):
+        try:
+            return event_id, download_archived_event(event_id)
+        except Exception:
+            return event_id, {}
+    if missing:
+        with ThreadPoolExecutor(max_workers=6) as pool:
+            for event_id, archived in pool.map(get_archive, missing):
+                if archived:
+                    quotes[event_id] = archived
+    return {"quotes": quotes, "retrieved": datetime.now(timezone.utc).strftime("%b %d, %H:%M UTC")}
 
 
 def attach_odds(predictions, games, quotes):
@@ -208,7 +263,7 @@ def watch_results(season, original, date_range, original_odds):
             st.caption("Results refresh is temporarily unavailable. Showing the last loaded data.")
     if date_range:
         try:
-            if download_odds(date_range)["quotes"] != original_odds:
+            if download_market_odds(date_range)["quotes"] != original_odds:
                 st.rerun()
         except Exception:
             st.caption("Odds refresh is temporarily unavailable. Previously displayed lines may be stale.")
@@ -266,7 +321,8 @@ with st.sidebar:
     if st.button("Refresh all data", use_container_width=True):
         download_schedule.clear()
         download_summary.clear()
-        download_odds.clear()
+        download_market_odds.clear()
+        download_archived_event.clear()
     st.caption("Results and DraftKings odds refresh every 5 minutes; team summaries refresh hourly.")
     with st.expander("Use your own files"):
         mode = st.radio("Schedule source", ["Automatic download", "Upload CSV"])
@@ -359,7 +415,7 @@ if "start_date" in games:
         date_range = dates.min().strftime("%Y%m%d") + "-" + dates.max().strftime("%Y%m%d")
 if date_range:
     try:
-        odds_snapshot = download_odds(date_range)
+        odds_snapshot = download_market_odds(date_range)
     except Exception:
         st.info("DraftKings odds are temporarily unavailable. Predictions and results are still available.")
 pred = attach_odds(pred, games, odds_snapshot["quotes"])
@@ -379,13 +435,14 @@ st.markdown(f"""<div class="overview">
 <div class="stat"><strong>{accuracy}</strong><span>Weekly accuracy · graded games</span></div></div>""", unsafe_allow_html=True)
 if st.button("Refresh scores & odds now"):
     download_schedule.clear()
-    download_odds.clear()
+    download_market_odds.clear()
+    download_archived_event.clear()
     st.rerun()
 st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
 st.subheader(f"Week {selected_week} picks & results")
 st.caption("DraftKings moneylines via ESPN, with another sportsbook shown when DraftKings is unavailable · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
 if odds_snapshot["retrieved"]:
-    st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game lines, if provided, are labeled archived.")
+    st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
 st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
 search_col, confidence_col, sort_col = st.columns([2, 1, 1])
 with search_col:
@@ -445,7 +502,7 @@ with table_tab:
 with about_tab:
     st.markdown("### Read your picks")
     st.write("DraftKings moneylines come from ESPN’s published odds feed, with other published sportsbooks used as a labeled fallback when needed. +150 means $100 would profit $150; −150 means risking $150 to profit $100. These prices are separate from the model’s win probabilities and do not change its picks.")
-    st.write("Lines can move or be suspended. Unavailable prices are never filled with opening lines or another bookmaker’s odds. Historical lines are shown only when the feed supplies them.")
+    st.write("Lines can move or be suspended. DraftKings is preferred, with labeled sportsbook fallbacks when available. Opening lines are not substituted for current prices. Completed-game moneylines come from archived game summaries and are labeled archived.")
     st.write("Each card shows both teams’ win probabilities and the predicted winner. A 70% confidence means an estimated 7 wins out of 10 similar matchups—not a guaranteed result.")
     st.markdown("**Confidence guide** · Very high: 90%+ · High: 80–90% · Moderate: 70–80% · Lean: 60–70% · Toss-up: below 60%.")
     st.write("Away-team picks may carry a venue-risk note. Use that as additional context when comparing games.")
