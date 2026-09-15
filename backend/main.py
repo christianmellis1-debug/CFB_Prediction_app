@@ -111,6 +111,63 @@ def json_rows(frame: pd.DataFrame):
     return json.loads(frame.where(pd.notna(frame), None).to_json(orient="records"))
 
 
+def _implied(line: str):
+    try:
+        n = float(str(line).replace("+", ""))
+        return 100 / (n + 100) if n > 0 else -n / (-n + 100)
+    except (TypeError, ValueError, ZeroDivisionError):
+        return None
+
+
+def attach_market_context(predicted: pd.DataFrame, games: pd.DataFrame) -> pd.DataFrame:
+    result = predicted.copy()
+    for col, default in (("Away ML", "Unavailable"), ("Home ML", "Unavailable"), ("ML Source", "Unavailable"), ("Odds Type", "Not offered / unavailable")):
+        result[col] = default
+    if "start_date" not in games or games.empty:
+        return result
+    dates = pd.to_datetime(games["start_date"], errors="coerce", utc=True).dropna()
+    if dates.empty:
+        return result
+    period = dates.min().strftime("%Y%m%d") + "-" + dates.max().strftime("%Y%m%d")
+    try:
+        quote_events = odds(period).get("quotes", {})
+    except Exception:
+        quote_events = {}
+    for idx, game in games.iterrows():
+        event_quotes = quote_events.get(str(game.get("game_id")), {})
+        if not event_quotes:
+            continue
+        valid = [q for name, q in event_quotes.items() if isinstance(q, dict)
+                 and str(q.get("home_id")) == str(int(game.home_id))
+                 and str(q.get("away_id")) == str(int(game.away_id))]
+        if not valid:
+            continue
+        named = [(name, q) for name, q in event_quotes.items() if isinstance(q, dict)
+                 and str(q.get("home_id")) == str(int(game.home_id))
+                 and str(q.get("away_id")) == str(int(game.away_id))]
+        dk = next(((name, q) for name, q in named if name.lower().replace(" ", "") == "draftkings"), None)
+        provider, quote = dk or named[0]
+        match = (result["Home Team"] == game.home_team) & (result["Away Team"] == game.away_team)
+        result.loc[match, "Away ML"] = quote.get("away", "Unavailable")
+        result.loc[match, "Home ML"] = quote.get("home", "Unavailable")
+        result.loc[match, "ML Source"] = provider
+        result.loc[match, "Odds Type"] = "Archived line" if bool(game.get("completed", False)) else "Latest available line"
+    result["Bet Line"] = result.apply(lambda r: r["Home ML"] if r["Predicted Side"] == "Home" else r["Away ML"], axis=1)
+    result["Market Implied %"] = result["Bet Line"].map(_implied)
+    result["Model Edge"] = result["Confidence"] - result["Market Implied %"]
+    result["Expected Value"] = result.apply(lambda r: (
+        r["Confidence"] * (float(str(r["Bet Line"]).replace("+", "")) / 100) - (1-r["Confidence"]))
+        if str(r["Bet Line"]).startswith("+") and pd.notna(r["Market Implied %"]) else (
+        r["Confidence"] * (100 / abs(float(str(r["Bet Line"])))) - (1-r["Confidence"]))
+        if pd.notna(r["Market Implied %"]) else None, axis=1)
+    result["Bet Signal"] = "Pass"
+    usable = result["Market Implied %"].notna()
+    result.loc[usable & (result["Confidence"] >= .70) & (result["Model Edge"] >= .03) & (result["Expected Value"] > 0), "Bet Signal"] = "Strong value"
+    result.loc[usable & (result["Bet Signal"] == "Pass") & (result["Confidence"] >= .60) & (result["Model Edge"] >= .02) & (result["Expected Value"] > 0), "Bet Signal"] = "Value"
+    result.loc[~usable, "Bet Signal"] = "No line"
+    return result
+
+
 @app.get("/api/health")
 def health():
     return {"status": "ok", "service": "cfb-predictor-api", "model": "V1.4"}
@@ -147,10 +204,7 @@ def predictions(season: int = Query(..., ge=2001, le=2100), week: int = Query(..
             predicted.loc[match, "Away Logo"] = logo(row.away_id)
             predicted.loc[match, "Home Logo"] = logo(row.home_id)
             predicted.loc[match, "Game ID"] = row.get("game_id")
-        # API responses stay useful even when the odds provider is unavailable.
-        for col, default in (("Away ML", "Unavailable"), ("Home ML", "Unavailable"), ("ML Source", "Unavailable")):
-            predicted[col] = default
+        predicted = attach_market_context(predicted, selected)
         return {"season": season, "week": week, "model": "V1.4", "retrieved": datetime.now(timezone.utc).isoformat(), "games": json_rows(predicted)}
     except Exception as exc:
         raise HTTPException(502, f"Unable to generate predictions: {exc}") from exc
-
