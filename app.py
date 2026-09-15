@@ -89,7 +89,7 @@ def augment_missing_summaries(current, prior, schedule, target_week):
                 points_against.append(float(game["home_points"]))
         # Keep the adjustment deliberately conservative; it supplements the
         # prior profile rather than pretending a full advanced-stat snapshot.
-        base["season"] = int(target_week and schedule["season"].iloc[0])
+        base["season"] = int(pd.to_numeric(schedule["season"], errors="coerce").dropna().iloc[0])
         base["through_week"] = int(pd.to_numeric(team_games["week"], errors="coerce").max())
         if "adj_off_epa" in base:
             base["adj_off_epa"] = float(base["adj_off_epa"]) + (sum(points_for) / len(points_for) - 28.0) / 14.0
