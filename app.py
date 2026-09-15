@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 import math
+from itertools import combinations
+from heapq import nlargest
 from decimal import Decimal, ROUND_HALF_UP
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -375,6 +377,57 @@ def team_logo_url(team_id):
         return f"https://a.espncdn.com/i/teamlogos/ncaa/500/{int(team_id)}.png"
     except (TypeError, ValueError, OverflowError):
         return ""
+
+
+def payout_outcomes(stake, line):
+    """American moneyline payout rounded to cents, including returned stake."""
+    formatted = format_moneyline(line)
+    if formatted == "Unavailable":
+        return None
+    amount = Decimal(str(stake)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    if not amount.is_finite() or amount < 0:
+        raise ValueError("Stake must be a nonnegative amount.")
+    odds = Decimal(formatted)
+    profit = (amount * (odds / 100 if odds > 0 else 100 / abs(odds))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    return {"Stake": float(amount), "Return if win": float(amount + profit),
+            "Profit if win": float(profit), "Loss if lose": float(-amount)}
+
+
+def future_priced_picks(predictions, game_schedule, now_utc):
+    """Require a future kickoff and a published selected-side moneyline."""
+    result = predictions.copy()
+    starts = {(r["home_team"], r["away_team"]): pd.to_datetime(r.get("start_date"), utc=True, errors="coerce")
+              for _, r in game_schedule.iterrows()}
+    mask = []
+    for _, row in result.iterrows():
+        date = starts.get((row["Home Team"], row["Away Team"]))
+        mask.append(pd.notna(date) and date > now_utc and row["Status"] == "Awaiting final"
+                    and format_moneyline(row["Bet Line"]) != "Unavailable")
+    return result.loc[pd.Series(mask, index=result.index, dtype=bool)]
+
+
+def rank_parlays(pool, legs, stake, goal, limit=5):
+    """Exact top combinations within a bounded pool; one sportsbook, distinct teams."""
+    def candidates():
+        for combo in combinations(pool.to_dict("records"), legs):
+            if len({r["ML Source"] for r in combo}) != 1:
+                continue
+            teams = [r[t] for r in combo for t in ("Home Team", "Away Team")]
+            if len(set(teams)) != 2 * legs:
+                continue
+            probability = math.prod(float(r["Confidence"]) for r in combo)
+            multiplier = Decimal("1")
+            for r in combo:
+                odds = Decimal(format_moneyline(r["Bet Line"]))
+                multiplier *= 1 + (odds / 100 if odds > 0 else 100 / abs(odds))
+            amount = Decimal(str(stake)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+            returned = (amount * multiplier).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+            ev = probability * float(multiplier) - 1
+            score = probability if goal == "Highest win probability" else float(multiplier) if goal == "Highest payout" else ev
+            yield {"legs": combo, "probability": probability, "return": float(returned),
+                   "profit": float(returned - amount), "loss": -float(amount),
+                   "ev": ev, "score": score}
+    return nlargest(limit, candidates(), key=lambda x: x["score"])
 
 
 def simulate_stakes(predictions, stakes):
@@ -759,7 +812,7 @@ if quality_filter != "All data":
 st.caption("Published stats means a pregame summary exists; individual metrics may still be missing.")
 st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
 
-cards_tab, table_tab, scenario_tab, about_tab = st.tabs(["Game cards", "Compare picks", "What-if bets", "How it works"])
+cards_tab, table_tab, scenario_tab, parlay_tab, about_tab = st.tabs(["Game cards", "Compare picks", "What-if bets", "Parlay finder", "How it works"])
 with cards_tab:
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
@@ -827,10 +880,66 @@ with table_tab:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
 with scenario_tab:
+    st.subheader(f"Live what-if · Week {selected_week}")
+    st.caption("Choose any season and week above. Payouts use the latest fetched prices and update when you refresh feeds. These are hypothetical picks, not placed bets or locked-in odds.")
+    if st.toggle("Open live calculator", key="live_calc_enabled"):
+        live_pool = pred[pred["Bet Line"].map(format_moneyline).ne("Unavailable")].copy()
+        if live_pool.empty:
+            st.info("No published moneylines for this week. Try another week or refresh the feeds.")
+        else:
+            live_pool["Selection"] = live_pool.apply(lambda r: f"{r['Away Team']} at {r['Home Team']} — pick {r['Predicted Winner']}", axis=1)
+            live_choices = st.multiselect("Choose picks", live_pool["Selection"].tolist(), key=f"live_picks_{season}_{selected_week}")
+            amount = st.number_input("Default stake per pick ($)", min_value=0.0, max_value=100000.0, value=10.0, step=1.0, key="live_default_stake")
+            selected_live = live_pool[live_pool["Selection"].isin(live_choices)]
+            if not selected_live.empty:
+                stake_table = selected_live[["Selection"]].copy()
+                stake_table["Stake"] = amount
+                edited = st.data_editor(stake_table, hide_index=True, disabled=["Selection"], key=f"live_stakes_{season}_{selected_week}_{amount}",
+                                       column_config={"Stake": st.column_config.NumberColumn("Stake ($)", min_value=0.0, max_value=100000.0, step=1.0, required=True)})
+                stake_by_pick = dict(zip(edited["Selection"], edited["Stake"]))
+                live_rows = []
+                for _, pick in selected_live.iterrows():
+                    stake = stake_by_pick.get(pick["Selection"], amount)
+                    if pd.isna(stake):
+                        stake = 0.0
+                    outcomes = payout_outcomes(stake, pick["Bet Line"])
+                    if outcomes is None:
+                        continue
+                    actual_return, actual_profit = None, None
+                    status = str(pick["Status"])
+                    if status == "Final":
+                        if pick["Actual Winner"] == "Tie":
+                            actual_return, actual_profit = outcomes["Stake"], 0.0
+                        elif pick["Actual Winner"] == pick["Predicted Winner"]:
+                            actual_return, actual_profit = outcomes["Return if win"], outcomes["Profit if win"]
+                        else:
+                            actual_return, actual_profit = 0.0, outcomes["Loss if lose"]
+                    live_rows.append({"Pick": pick["Predicted Winner"], "Matchup": pick["Selection"],
+                                      "Moneyline": pick["Bet Line"], "Sportsbook": pick["ML Source"],
+                                      "Line type": pick["Odds Type"], "Status": status, **outcomes,
+                                      "Settled return": actual_return, "Settled profit": actual_profit})
+                live_detail = pd.DataFrame(live_rows)
+                settled_live = live_detail[live_detail["Status"].eq("Final")]
+                pending_live = live_detail[~live_detail["Status"].eq("Final")]
+                st.dataframe(live_detail, hide_index=True, use_container_width=True,
+                             column_config={col: st.column_config.NumberColumn(col, format="$%.2f") for col in
+                                            ["Stake", "Return if win", "Profit if win", "Loss if lose", "Settled return", "Settled profit"]})
+                l1, l2, l3 = st.columns(3)
+                l1.metric("Total selected stakes", f"${live_detail['Stake'].sum():,.2f}")
+                l2.metric("Settled net profit", f"${settled_live['Settled profit'].sum():+,.2f}")
+                l3.metric("Unsettled stakes", f"${pending_live['Stake'].sum():,.2f}")
+                if not pending_live.empty:
+                    st.write(f"If all unsettled picks win: ${pending_live['Return if win'].sum():,.2f} returned, including stakes; ${pending_live['Profit if win'].sum():+,.2f} profit.")
+                    st.write(f"If all unsettled picks lose: ${pending_live['Stake'].sum():,.2f} lost.")
+                st.caption("Final games use archived odds. Unsettled games use available feed prices, which may be delayed or unavailable at the sportsbook. Pending outcomes are hypothetical; ties refund stakes.")
+                st.download_button("Download live scenario", live_detail.to_csv(index=False).encode(), file_name=f"cfb_{season}_week_{selected_week}_live_scenario.csv", mime="text/csv")
+            else:
+                st.info("Select one or more picks to calculate potential returns.")
+    st.divider()
     st.subheader("What if you bet each pick?")
     st.caption("Simulate flat stakes by confidence tier. This uses all matchups in the scenario weeks, regardless of the search and card filters above.")
     if st.toggle("Calculate betting scenario", value=False):
-        selected_scenario_weeks = st.multiselect("Scenario weeks", weeks, default=[w for w in [1, 2] if w in weeks])
+        selected_scenario_weeks = st.multiselect("Scenario weeks", weeks, default=[selected_week])
         preset = st.selectbox("Quick setup", ["Original stakes", "$10 per pick", "$10 on value picks only", "Custom stakes"])
         scenario_mode = "Best betting opportunities" if preset == "$10 on value picks only" else "Confidence tiers"
         if preset == "Custom stakes":
@@ -907,6 +1016,54 @@ with scenario_tab:
                 st.error(f"Could not calculate this scenario: {exc}")
         else:
             st.info("Choose at least one week to calculate a scenario.")
+
+with parlay_tab:
+    st.subheader(f"Parlay finder · Week {selected_week}")
+    st.caption("No AI subscription or paid API. Searches model picks with future kickoffs and available moneylines. Finished games and games already started are excluded.")
+    st.caption("Payouts are estimates from multiplying individual moneylines, not sportsbook parlay quotes. Joint win probabilities assume independent outcomes. Each combination uses one sportsbook and distinct teams.")
+    if st.toggle("Open parlay finder", key="parlay_enabled"):
+        legs = st.selectbox("Number of legs", [2, 3, 4, 5], index=1)
+        parlay_stake = st.number_input("Total parlay stake ($)", min_value=0.0, max_value=100000.0, value=10.0, step=1.0)
+        goal = st.selectbox("Rank by", ["Highest win probability", "Highest payout", "Highest estimated value"])
+        min_conf = st.slider("Minimum model confidence per leg (%)", 50, 95, 60, 5)
+        data_rule = st.selectbox("Parlay team data", ["Any available data", "Published pregame summaries for both teams", "Exclude prior-data-only teams"])
+        pool = future_priced_picks(pred, games, pd.Timestamp.now(tz="UTC"))
+        pool = pool[pool["Confidence"] >= min_conf / 100]
+        if data_rule != "Any available data":
+            allowed = []
+            for _, pick in pool.iterrows():
+                published_both, estimated, prior_only = quality_by_match.get((pick["Home Team"], pick["Away Team"]), (False, False, True))
+                allowed.append(published_both if data_rule == "Published pregame summaries for both teams" else not prior_only)
+            pool = pool.loc[pd.Series(allowed, index=pool.index, dtype=bool)]
+        books = sorted(pool["ML Source"].unique().tolist())
+        book = st.selectbox("Sportsbook", ["Any single sportsbook"] + books)
+        if book != "Any single sportsbook":
+            pool = pool[pool["ML Source"].eq(book)]
+        pool = pool.copy()
+        pool["Decimal odds"] = pool["Bet Line"].map(lambda line: payout_outcomes(100, line)["Return if win"] / 100)
+        sort_column = {"Highest win probability": "Confidence", "Highest payout": "Decimal odds", "Highest estimated value": "Expected Value"}[goal]
+        total_candidates = len(pool)
+        pool = pool.sort_values(sort_column, ascending=False).head(24)
+        st.caption(f"Searching the top {len(pool)} of {total_candidates} eligible model picks by your ranking. All valid {legs}-leg combinations within this pool are compared; results are not a market-wide optimum.")
+        if len(pool) < legs:
+            st.info("Not enough eligible picks. Try another week, fewer legs, or broader filters.")
+        else:
+            results = rank_parlays(pool, legs, parlay_stake, goal)
+            if not results:
+                st.info("No combinations meet the one-sportsbook and distinct-team requirements.")
+            for number, result in enumerate(results, 1):
+                with st.container(border=True):
+                    st.markdown(f"**Option {number} · {result['legs'][0]['ML Source']}**")
+                    for leg in result["legs"]:
+                        st.write(f"{leg['Predicted Winner']} ({leg['Bet Line']}) · {leg['Away Team']} at {leg['Home Team']} · model confidence {leg['Confidence']:.1%}")
+                    p1, p2, p3 = st.columns(3)
+                    p1.metric("Estimated win chance", f"{result['probability']:.1%}")
+                    p2.metric("Return if all win", f"${result['return']:,.2f}")
+                    p3.metric("Profit if all win", f"${result['profit']:,.2f}")
+                    st.caption(f"If any leg loses: ${abs(result['loss']):,.2f} lost. Total returned includes the stake. Ties/voids can change the payout under sportsbook rules.")
+                    st.write(f"Ranked by {goal.lower()} within the displayed search pool. Model-estimated profit per $1 staked: {result['ev']:+.2f}.")
+                    if result["ev"] < 0:
+                        st.caption("The model estimates a negative expected return for this combination.")
 
 with about_tab:
     st.markdown("### Read your picks")
