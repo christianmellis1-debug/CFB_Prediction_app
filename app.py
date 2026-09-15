@@ -482,9 +482,6 @@ try:
         raise ValueError("Missing schedule columns: " + ", ".join(sorted(missing)))
     schedule = schedule.copy()
     schedule = schedule[pd.to_numeric(schedule["season"], errors="coerce") == season]
-    # Keep a season-wide copy so schedule-derived fallbacks can use completed
-    # FBS-vs-FCS games that are intentionally excluded from prediction cards.
-    fallback_schedule = schedule.copy()
     if "season_type" in schedule:
         schedule = schedule[schedule["season_type"].astype(str).str.lower() == "regular"]
     for col in ["home_division", "away_division"]:
@@ -524,7 +521,7 @@ try:
     with st.spinner("Loading team statistics and generating predictions..."):
         current = read_summary(current_file, season)
         prior = read_summary(prior_file, season - 1)
-        current, derived_team_data = augment_missing_summaries(current, prior, fallback_schedule, selected_week)
+        current, derived_team_data = augment_missing_summaries(current, prior, schedule, selected_week)
 except Exception as exc:
     st.error(f"Could not load team summaries: {exc}")
     st.info("Try Refresh all data. If the selected season is not published yet, choose an available season or supply CSV overrides.")
@@ -551,6 +548,7 @@ if selected_week > 1:
             names[int(game["away_id"])] = str(game["away_team"])
         missing_team_names = sorted(names[tid] for tid in missing_team_ids if tid in names)
         st.warning(f"{len(missing_team_names)} team{'s' if len(missing_team_names) != 1 else ''} have no published pregame statistics for this week: {', '.join(missing_team_names)}. Their predictions use the model's prior-data fallback.")
+        st.caption("A team may have played without having updated pregame metrics. FCS opponents are excluded from the schedule-based fallback, so a team whose only completed games were against FCS opponents (such as Northwestern in Week 3) has no qualifying scoring data for that fallback. Advanced team-summary data can also be delayed or missing. These picks rely on prior data until eligible current-season metrics are available.")
     if not eligible.empty and eligible["through_week"].max() < selected_week - 1:
         st.warning(f"Published statistics currently extend through week {int(eligible['through_week'].max())}. Predictions use the latest available pregame snapshot.")
 try:
@@ -668,7 +666,7 @@ with cards_tab:
                 if int(game.iloc[0]["away_id"]) in missing_team_ids:
                     absent.append(str(r["Away Team"]))
                 if absent:
-                    missing_data_note = '<div class="risk-note">No pregame statistics: ' + escape(", ".join(absent)) + ' · prior-data fallback</div>'
+                    missing_data_note = '<div class="risk-note">Updated pregame metrics unavailable: ' + escape(", ".join(absent)) + ' · prior-data fallback. FCS games are excluded from the scoring fallback; advanced summaries may also be delayed or missing.</div>'
             away_logo = team_logo_url(game.iloc[0]["away_id"]) if len(game) == 1 else ""
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
             away_logo_html = f'<img class="team-logo" src="{away_logo}" alt="" />' if away_logo else ""
