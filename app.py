@@ -722,20 +722,21 @@ value_picks = pred[pred["Bet Signal"].isin(["Strong value", "Value"])].sort_valu
 if not value_picks.empty:
     st.markdown("### Model value picks")
     st.caption("Weekly shortlist · includes all games regardless of the filters below.")
-    st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement. Completed weeks use archived closing prices and include the actual result.")
-    for _, value_pick in value_picks.head(12).iterrows():
-        with st.container(border=True):
-            st.markdown(f"**{value_pick['Predicted Winner']} · {value_pick['Bet Line']}**")
-            st.caption(f"{value_pick['Away Team']} at {value_pick['Home Team']} · {value_pick['ML Source']} · {value_pick['Odds Type']}")
-            v1, v2, v3 = st.columns(3)
-            v1.metric("Model chance", f"{value_pick['Confidence']:.1%}")
-            v2.metric("Break-even chance", f"{value_pick['Market Implied %']:.1%}")
-            v3.metric("Model edge", f"{value_pick['Model Edge'] * 100:+.1f} pts")
-            st.caption(f"{value_pick['Bet Signal']} · Estimated profit per $1: {value_pick['Expected Value']:+.2f}")
-            if value_pick["Status"] == "Final":
-                st.write(f"{value_pick['Pick Result']} · {value_pick['Final Score']}")
-            else:
-                st.caption("Awaiting final result")
+    with st.expander("How value picks are selected"):
+        st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement. Completed weeks use archived closing prices and include the actual result.")
+    value_show = value_picks.head(12).copy()
+    value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
+    value_show["Model chance"] = value_show["Confidence"].map(lambda v: f"{v:.1%}")
+    value_show["Break-even"] = value_show["Market Implied %"].map(lambda v: f"{v:.1%}")
+    value_show["Edge"] = value_show["Model Edge"].map(lambda v: f"{v * 100:+.1f} pts")
+    value_show["Est. profit / $1"] = value_show["Expected Value"].map(lambda v: f"{v:+.2f}")
+    value_show = value_show.rename(columns={"Predicted Winner": "Pick", "Bet Line": "Odds",
+                                            "ML Source": "Sportsbook", "Pick Result": "Result"})
+    value_show = value_show[["Pick", "Odds", "Model chance", "Result", "Matchup", "Break-even",
+                             "Edge", "Est. profit / $1", "Sportsbook", "Odds Type", "Final Score"]]
+    st.dataframe(value_show, hide_index=True, use_container_width=True,
+                 height=min(35 * (len(value_show) + 1) + 3, 320))
+    st.caption(f"Showing {len(value_show)} of {len(value_picks)} value picks. Scroll within the table for more rows or columns.")
     if pred["Status"].eq("Final").any():
         graded_value = value_picks[value_picks["Pick Result"].isin(["Correct", "Incorrect"])]
         if not graded_value.empty:
