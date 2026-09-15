@@ -21,7 +21,9 @@ st.set_page_config(page_title="College Football Predictor", page_icon="assets/cf
 def download_schedule(season):
     url = f"https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_{season}.csv"
     with urlopen(url, timeout=30) as response:
-        return pd.read_csv(BytesIO(response.read()), low_memory=False)
+        frame = pd.read_csv(BytesIO(response.read()), low_memory=False)
+        frame.attrs["fetched_at"] = datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")
+        return frame
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def download_summary(year):
@@ -30,7 +32,9 @@ def download_summary(year):
         f"cfb_team_summaries_weekly/cfb_team_summaries_weekly_{year}.csv"
     )
     with urlopen(url, timeout=60) as response:
-        return pd.read_csv(BytesIO(response.read()), low_memory=False)
+        frame = pd.read_csv(BytesIO(response.read()), low_memory=False)
+        frame.attrs["fetched_at"] = datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")
+        return frame
 
 
 def read_summary(upload, year):
@@ -625,12 +629,15 @@ if date_range:
         st.info("DraftKings odds are temporarily unavailable. Predictions and results are still available.")
 pred = add_betting_value(attach_odds(pred, games, odds_snapshot["quotes"]))
 
+st.subheader(f"Week {selected_week} at a glance")
+awaiting_count = int(pred["Status"].ne("Final").sum())
+value_count = int(pred["Bet Signal"].isin(["Strong value", "Value"]).sum())
+st.markdown(f"""<div class="overview">
+<div class="stat"><strong>{awaiting_count}</strong><span>Awaiting final</span></div>
+<div class="stat"><strong>{value_count}</strong><span>Model value picks</span></div>
+<div class="stat"><strong>{len(pred)}</strong><span>Total matchups</span></div></div>""", unsafe_allow_html=True)
 high_count = int((pred["Confidence"] >= .8).sum())
 close_count = int((pred["Confidence"] < .6).sum())
-st.markdown(f"""<div class="overview">
-<div class="stat"><strong>{len(pred)}</strong><span>Matchup predictions</span></div>
-<div class="stat"><strong>{high_count}</strong><span>High confidence · 80%+</span></div>
-<div class="stat"><strong>{close_count}</strong><span>Toss-ups · under 60%</span></div></div>""", unsafe_allow_html=True)
 graded = pred[pred["Pick Result"].isin(["Correct", "Incorrect"])]
 correct_count = int(graded["Pick Result"].eq("Correct").sum())
 accuracy = f"{correct_count / len(graded):.1%}" if len(graded) else "—"
@@ -638,7 +645,12 @@ st.markdown(f"""<div class="overview">
 <div class="stat"><strong>{int(pred['Status'].eq('Final').sum())} / {len(pred)}</strong><span>Final scores available</span></div>
 <div class="stat"><strong>{correct_count}–{len(graded) - correct_count}</strong><span>Correct – incorrect picks</span></div>
 <div class="stat"><strong>{accuracy}</strong><span>Weekly accuracy · graded games</span></div></div>""", unsafe_allow_html=True)
-if st.button("Refresh scores & odds now"):
+schedule_time = original_schedule.attrs.get("fetched_at", "Uploaded CSV" if schedule_file is not None else "Unknown")
+stats_time = published_current.attrs.get("fetched_at", "Uploaded CSV" if current_file is not None else "Unknown")
+st.caption(f"Last fetched · Scores: {schedule_time} · Odds: {odds_snapshot['retrieved'] or 'Unavailable'} · Team stats: {stats_time}")
+st.caption("Fetch times show when the app retrieved the feeds, not when the provider updated them. Scores and odds refresh every 5 minutes; team stats hourly.")
+if st.button("Refresh all feeds now"):
+    download_summary.clear()
     download_schedule.clear()
     download_market_odds.clear()
     download_archived_event.clear()
@@ -651,12 +663,22 @@ if odds_snapshot["retrieved"]:
 st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
 value_picks = pred[pred["Bet Signal"].isin(["Strong value", "Value"])].sort_values(["Bet Signal", "Expected Value"], ascending=[True, False])
 if not value_picks.empty:
-    st.markdown("### Best betting opportunities")
+    st.markdown("### Model value picks")
+    st.caption("Weekly shortlist · includes all games regardless of the filters below.")
     st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement. Completed weeks use archived closing prices and include the actual result.")
-    value_show = value_picks.head(12)[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Bet Line", "ML Source", "Market Implied %", "Model Edge", "Expected Value", "Bet Signal", "Status", "Actual Winner", "Pick Result"]].copy()
-    for col in ["Confidence", "Market Implied %", "Model Edge", "Expected Value"]:
-        value_show[col] = value_show[col].map(lambda value: f"{value:.1%}" if pd.notna(value) else "—")
-    st.dataframe(value_show, hide_index=True, use_container_width=True)
+    for _, value_pick in value_picks.head(12).iterrows():
+        with st.container(border=True):
+            st.markdown(f"**{value_pick['Predicted Winner']} · {value_pick['Bet Line']}**")
+            st.caption(f"{value_pick['Away Team']} at {value_pick['Home Team']} · {value_pick['ML Source']} · {value_pick['Odds Type']}")
+            v1, v2, v3 = st.columns(3)
+            v1.metric("Model chance", f"{value_pick['Confidence']:.1%}")
+            v2.metric("Break-even chance", f"{value_pick['Market Implied %']:.1%}")
+            v3.metric("Model edge", f"{value_pick['Model Edge'] * 100:+.1f} pts")
+            st.caption(f"{value_pick['Bet Signal']} · Estimated profit per $1: {value_pick['Expected Value']:+.2f}")
+            if value_pick["Status"] == "Final":
+                st.write(f"{value_pick['Pick Result']} · {value_pick['Final Score']}")
+            else:
+                st.caption("Awaiting final result")
     if pred["Status"].eq("Final").any():
         graded_value = value_picks[value_picks["Pick Result"].isin(["Correct", "Incorrect"])]
         if not graded_value.empty:
@@ -664,13 +686,30 @@ if not value_picks.empty:
             st.caption(f"Highlighted historical picks: {wins}–{len(graded_value) - wins} ({wins / len(graded_value):.1%} accuracy).")
 else:
     st.info("No current game has both a published moneyline and enough model value to qualify as a highlighted opportunity.")
+def reset_pick_filters():
+    defaults = {"pick_query": "", "pick_level": "All confidence levels",
+                "pick_order": "Highest confidence", "pick_status": "All games",
+                "pick_odds": "All odds", "pick_quality": "All data",
+                "pick_favorites_only": False}
+    for key, value in defaults.items():
+        st.session_state[key] = value
+
+
+st.subheader("Explore matchups")
+team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
+favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
+favorites = st.multiselect("Favorite teams", favorite_choices, key="favorite_teams",
+                           help="Saved during this app session. Choose teams, then turn on Favorites only.")
+st.checkbox("Favorites only", key="pick_favorites_only")
+st.button("Reset filters", on_click=reset_pick_filters,
+          help="Resets matchup filters and keeps your favorite-team list.")
 search_col, confidence_col, sort_col = st.columns([2, 1, 1])
 with search_col:
-    query = st.text_input("Find a team", placeholder="Search LSU, Texas, Ohio State…")
+    query = st.text_input("Find a team", placeholder="Search LSU, Texas, Ohio State…", key="pick_query")
 with confidence_col:
-    level = st.selectbox("Confidence", ["All confidence levels", "High · 80%+", "Moderate · 70–80%", "Lean · 60–70%", "Toss-up · under 60%"])
+    level = st.selectbox("Confidence", ["All confidence levels", "High · 80%+", "Moderate · 70–80%", "Lean · 60–70%", "Toss-up · under 60%"], key="pick_level")
 with sort_col:
-    order = st.selectbox("Sort by", ["Highest confidence", "Closest matchups", "Home team A–Z"])
+    order = st.selectbox("Sort by", ["Highest confidence", "Closest matchups", "Home team A–Z"], key="pick_order")
 filtered = pred.copy()
 if query.strip():
     matched = filtered["Home Team"].str.contains(query.strip(), case=False, regex=False) | filtered["Away Team"].str.contains(query.strip(), case=False, regex=False)
@@ -683,7 +722,7 @@ if order == "Closest matchups":
     filtered = filtered.sort_values("Confidence")
 elif order == "Home team A–Z":
     filtered = filtered.sort_values("Home Team")
-status_filter = st.radio("Game results", ["All games", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True)
+status_filter = st.radio("Game results", ["All games", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True, key="pick_status")
 if status_filter == "Final":
     filtered = filtered[filtered["Status"].eq("Final")]
 elif status_filter == "Awaiting final":
@@ -691,6 +730,33 @@ elif status_filter == "Awaiting final":
 elif status_filter in ["Correct picks", "Incorrect picks"]:
     filtered = filtered[filtered["Pick Result"].eq(status_filter.split()[0])]
 
+odds_col, data_col = st.columns(2)
+with odds_col:
+    odds_filter = st.selectbox("Moneylines", ["All odds", "Pick has moneyline", "Pick missing moneyline"], key="pick_odds")
+with data_col:
+    quality_filter = st.selectbox("Team data", ["All data", "Both teams have published stats", "Includes score estimates", "Includes prior data only"], key="pick_quality")
+if st.session_state.get("pick_favorites_only"):
+    filtered = filtered[filtered["Home Team"].isin(favorites) | filtered["Away Team"].isin(favorites)]
+    if not favorites:
+        st.info("Select a favorite team above to see its matchups.")
+if odds_filter == "Pick has moneyline":
+    filtered = filtered[filtered["Bet Line"].ne("Unavailable")]
+elif odds_filter == "Pick missing moneyline":
+    filtered = filtered[filtered["Bet Line"].eq("Unavailable")]
+published_ids = set(published_current.loc[published_current["through_week"] < selected_week, "team_id"].astype(int))
+quality_by_match = {}
+for _, quality_game in games.iterrows():
+    ids = {int(quality_game["home_id"]), int(quality_game["away_id"])}
+    quality_by_match[(quality_game["home_team"], quality_game["away_team"])] = (
+        ids.issubset(published_ids),
+        bool(ids & set(derived_team_data)),
+        bool(ids - published_ids - set(derived_team_data)),
+    )
+if quality_filter != "All data":
+    quality_index = {"Both teams have published stats": 0, "Includes score estimates": 1, "Includes prior data only": 2}[quality_filter]
+    keep = [quality_by_match.get((r["Home Team"], r["Away Team"]), (False, False, True))[quality_index] for _, r in filtered.iterrows()]
+    filtered = filtered.loc[pd.Series(keep, index=filtered.index, dtype=bool)]
+st.caption("Published stats means a pregame summary exists; individual metrics may still be missing.")
 st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
 
 cards_tab, table_tab, scenario_tab, about_tab = st.tabs(["Game cards", "Compare picks", "What-if bets", "How it works"])
