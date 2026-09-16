@@ -17,6 +17,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 from model import MODEL_VERSION, COMPONENT_SPEC, predict_week
+from bet_tracker_ui import show_bet_tracker
 
 st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
@@ -904,7 +905,7 @@ if quality_filter != "All data":
 st.caption("Published stats means a pregame summary exists; individual metrics may still be missing.")
 st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
 
-cards_tab, table_tab, scenario_tab, parlay_tab, about_tab = st.tabs(["Game cards", "Compare picks", "What-if bets", "Parlay finder", "How it works"])
+cards_tab, table_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Compare picks", "What-if bets", "Parlay finder", "My bets", "How it works"])
 with cards_tab:
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
@@ -1173,6 +1174,11 @@ with parlay_tab:
                     st.write(f"Ranked by {goal.lower()} within the displayed search pool. Model-estimated profit per $1 staked: {result['ev']:+.2f}.")
                     if result["ev"] < 0:
                         st.caption("The model estimates a negative expected return for this combination.")
+
+with tracker_tab:
+    st.subheader("My bets")
+    st.caption("Choose the season and week above to record a game. Final results update when the selected season schedule refreshes. Open older seasons to refresh their tracked results.")
+    show_bet_tracker(schedule, pred, season, selected_week)
 
 with about_tab:
     st.markdown("### Read your picks")
