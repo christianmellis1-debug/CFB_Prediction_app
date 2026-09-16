@@ -10,6 +10,7 @@ from heapq import nlargest
 from decimal import Decimal, ROUND_HALF_UP
 from urllib.parse import urlencode
 from urllib.request import urlopen
+from urllib.error import HTTPError
 from io import BytesIO
 import base64
 import pandas as pd
@@ -215,13 +216,36 @@ def download_archived_event(event_id):
         return parse_archived_summary(json.load(response), event_id)
 
 
+def fetch_scoreboard(date_range):
+    """Retry rejected date ranges as daily requests, retaining event IDs."""
+    def fetch_day(dates):
+        query = urlencode({"dates": dates, "groups": 80, "limit": 1000})
+        url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?" + query
+        with urlopen(url, timeout=20) as response:
+            payload = json.load(response)
+        if not isinstance(payload, dict) or not isinstance(payload.get("events"), list):
+            raise ValueError("Invalid scoreboard response")
+        return payload
+    try:
+        return fetch_day(date_range)
+    except HTTPError as exc:
+        if exc.code != 400 or "-" not in date_range:
+            raise
+    start, end = date_range.split("-", 1)
+    dates = pd.date_range(datetime.strptime(start, "%Y%m%d"), datetime.strptime(end, "%Y%m%d"))
+    if not 1 <= len(dates) <= 31:
+        raise ValueError("Odds date range must cover 1–31 days")
+    events = {}
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        for payload in pool.map(fetch_day, dates.strftime("%Y%m%d").tolist()):
+            for event in payload["events"]:
+                events[str(event["id"])] = event
+    return {"events": list(events.values())}
+
+
 @st.cache_data(ttl=300, show_spinner=False)
 def download_market_odds(date_range):
-    # This versioned function replaces the previous single-provider cache.
-    query = urlencode({"dates": date_range, "groups": 80, "limit": 1000})
-    url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?" + query
-    with urlopen(url, timeout=20) as response:
-        payload = json.load(response)
+    payload = fetch_scoreboard(date_range)
     quotes = parse_draftkings(payload)
     archive_path = Path(__file__).parent / "data" / "archived_moneylines_2026.json"
     try:
