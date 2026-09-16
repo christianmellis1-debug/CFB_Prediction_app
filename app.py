@@ -244,7 +244,30 @@ def fetch_scoreboard(date_range):
 
 
 @st.cache_data(ttl=300, show_spinner=False)
-def download_market_odds(date_range):
+def download_event_moneylines(event_id):
+    """Read current per-game markets, including games omitted by the scoreboard."""
+    if not str(event_id).isdigit():
+        return {}
+    url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=" + str(event_id)
+    with urlopen(url, timeout=15) as response:
+        payload = json.load(response)
+    header = payload.get("header", {})
+    if str(header.get("id")) != str(event_id):
+        raise ValueError("Odds event ID does not match the requested game")
+    competitions = []
+    for competition in header.get("competitions", []):
+        entry = dict(competition)
+        entry["odds"] = payload.get("pickcenter", []) or competition.get("odds", [])
+        competitions.append(entry)
+    return parse_draftkings({"events": [{"id": str(event_id), "competitions": competitions}]}).get(str(event_id), {})
+
+
+def schedule_event_ids(games):
+    return tuple(sorted({str(int(value)) for value in games.get("game_id", pd.Series(dtype=float)).dropna()}))
+
+
+@st.cache_data(ttl=300, show_spinner=False)
+def download_market_odds(date_range, event_ids=()):
     payload = fetch_scoreboard(date_range)
     quotes = parse_draftkings(payload)
     archive_path = Path(__file__).parent / "data" / "archived_moneylines_2026.json"
@@ -275,7 +298,36 @@ def download_market_odds(date_range):
             for event_id, archived in pool.map(get_archive, missing):
                 if archived:
                     quotes[event_id] = archived
-    return {"quotes": quotes, "retrieved": datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")}
+    # Probe every scheduled game with missing/partial DK prices, even when it
+    # was omitted by the weekly scoreboard. Per-event lookups expire in 5 minutes.
+    expected = set(event_ids) | {str(e.get("id")) for e in payload.get("events", [])}
+    targets = []
+    for event_id in expected:
+        dk = next((q for name, q in quotes.get(event_id, {}).items()
+                   if name.lower().replace(" ", "") == "draftkings"), {})
+        if dk.get("home", "Unavailable") == "Unavailable" or dk.get("away", "Unavailable") == "Unavailable":
+            targets.append(event_id)
+    lookup_errors = []
+    def get_current(event_id):
+        try:
+            return event_id, download_event_moneylines(event_id), False
+        except Exception:
+            return event_id, {}, True
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        for event_id, extra, failed in pool.map(get_current, targets):
+            if failed:
+                lookup_errors.append(event_id)
+            providers = quotes.setdefault(event_id, {})
+            for name, quote in extra.items():
+                previous = providers.get(name)
+                if previous is None:
+                    providers[name] = quote
+                elif (previous.get("home_id"), previous.get("away_id")) == (quote.get("home_id"), quote.get("away_id")):
+                    for side in ("home", "away"):
+                        if previous.get(side, "Unavailable") == "Unavailable":
+                            previous[side] = quote.get(side, "Unavailable")
+    return {"quotes": quotes, "lookup_errors": lookup_errors,
+            "retrieved": datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")}
 
 
 def attach_odds(predictions, games, quotes):
@@ -318,12 +370,18 @@ def attach_odds(predictions, games, quotes):
         if dk:
             result.loc[index, "DK Away ML"] = dk["away"]
             result.loc[index, "DK Home ML"] = dk["home"]
-        # Prefer DraftKings when either side is available. Otherwise choose the
-        # first provider with a current price, preserving the source label.
-        if dk and (dk["home"] != "Unavailable" or dk["away"] != "Unavailable"):
+        # Prefer a provider that prices the predicted side. Never combine
+        # opposite sides from different books into one sportsbook quote.
+        predicted_side = "home" if row["Predicted Side"] == "Home" else "away"
+        if dk and dk.get(predicted_side, "Unavailable") != "Unavailable":
             selected_name, selected = dk_name, dk
         else:
-            choices = [(name, quote) for name, quote in valid.items() if quote["home"] != "Unavailable" or quote["away"] != "Unavailable"]
+            choices = [(name, quote) for name, quote in valid.items()
+                       if quote.get(predicted_side, "Unavailable") != "Unavailable"]
+            if not choices:
+                choices = [(name, quote) for name, quote in valid.items()
+                           if quote.get("home", "Unavailable") != "Unavailable"
+                           or quote.get("away", "Unavailable") != "Unavailable"]
             if not choices:
                 continue
             selected_name, selected = choices[0]
@@ -511,7 +569,7 @@ def summarize_scenario(detail, group):
 
 
 @st.fragment(run_every="60s")
-def watch_results(season, original, date_range, original_odds):
+def watch_results(season, original, date_range, original_odds, event_ids=()):
     if original is not None:
         try:
             if not download_schedule(season).equals(original):
@@ -520,7 +578,7 @@ def watch_results(season, original, date_range, original_odds):
             st.caption("Results refresh is temporarily unavailable. Showing the last loaded data.")
     if date_range:
         try:
-            if download_market_odds(date_range)["quotes"] != original_odds:
+            if download_market_odds(date_range, event_ids)["quotes"] != original_odds:
                 st.rerun()
         except Exception:
             st.caption("Odds refresh is temporarily unavailable. Previously displayed lines may be stale.")
@@ -595,6 +653,7 @@ with st.sidebar:
         download_summary.clear()
         download_market_odds.clear()
         download_archived_event.clear()
+        download_event_moneylines.clear()
     st.caption("Results and DraftKings odds refresh every 5 minutes; team summaries refresh hourly.")
     with st.expander("Use your own files"):
         mode = st.radio("Schedule source", ["Automatic download", "Upload CSV"])
@@ -705,10 +764,13 @@ if "start_date" in games:
         date_range = dates.min().strftime("%Y%m%d") + "-" + dates.max().strftime("%Y%m%d")
 if date_range:
     try:
-        odds_snapshot = download_market_odds(date_range)
+        odds_snapshot = download_market_odds(date_range, schedule_event_ids(games))
     except Exception:
         st.info("DraftKings odds are temporarily unavailable. Predictions and results are still available.")
 pred = add_betting_value(attach_odds(pred, games, odds_snapshot["quotes"]))
+if odds_snapshot.get("lookup_errors"):
+    st.warning(f"Individual odds lookups failed for {len(odds_snapshot['lookup_errors'])} games. Missing lines may reflect a retrieval error; try Refresh all feeds now.")
+st.caption(f"Moneyline coverage: {int(pred['Bet Line'].ne('Unavailable').sum())} of {len(pred)} model picks have a price. Unavailable means no matching price was retrieved from the connected feeds, not that every sportsbook lacks one.")
 
 st.subheader(f"Week {selected_week} at a glance")
 awaiting_count = int(pred["Status"].ne("Final").sum())
@@ -735,6 +797,7 @@ if st.button("Refresh all feeds now"):
     download_schedule.clear()
     download_market_odds.clear()
     download_archived_event.clear()
+    download_event_moneylines.clear()
     st.rerun()
 st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
 st.subheader(f"Week {selected_week} picks & results")
@@ -1005,7 +1068,7 @@ with scenario_tab:
                         if not scenario_dates.empty:
                             period = scenario_dates.min().strftime("%Y%m%d") + "-" + scenario_dates.max().strftime("%Y%m%d")
                             try:
-                                quotes = download_market_odds(period)["quotes"]
+                                quotes = download_market_odds(period, schedule_event_ids(scenario_games))["quotes"]
                             except Exception:
                                 st.warning(f"Week {scenario_week} odds could not be loaded; those bets are excluded.")
                         week_predictions = add_betting_value(attach_odds(week_predictions, scenario_games, quotes))
@@ -1126,4 +1189,4 @@ with about_tab:
 st.download_button("Download these picks · CSV", filtered.to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
-watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"])
+watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games))
