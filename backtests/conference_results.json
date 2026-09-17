@@ -1,0 +1,94 @@
+{
+  "method": "Fit a single conference log-odds offset on 2024; hold out 2025. No production change.",
+  "offset": 1.5560572697633837,
+  "seasons": {
+    "2024": {
+      "p4_wins": 78,
+      "games": 86,
+      "actual_p4_win_rate": 0.9069767441860465,
+      "baseline_mean_p4_probability": 0.7228998734337282,
+      "cross_baseline": {
+        "games": 86,
+        "brier": 0.10614324534269623,
+        "log_loss": 0.3485243333897774,
+        "accuracy": 0.8488372093023255
+      },
+      "cross_candidate": {
+        "games": 86,
+        "brier": 0.06691078238376147,
+        "log_loss": 0.22257967117291422,
+        "accuracy": 0.9069767441860465
+      },
+      "all_baseline": {
+        "games": 752,
+        "brier": 0.1944404365956518,
+        "log_loss": 0.5695733314878935,
+        "accuracy": 0.6848404255319149
+      },
+      "all_candidate": {
+        "games": 752,
+        "brier": 0.18995374535300766,
+        "log_loss": 0.5551700855428799,
+        "accuracy": 0.6914893617021277
+      },
+      "by_venue": {
+        "P4 home": {
+          "games": 68,
+          "p4_wins": 63
+        },
+        "P4 away": {
+          "games": 16,
+          "p4_wins": 14
+        },
+        "neutral": {
+          "games": 2,
+          "p4_wins": 1
+        }
+      }
+    },
+    "2025": {
+      "p4_wins": 77,
+      "games": 89,
+      "actual_p4_win_rate": 0.8651685393258427,
+      "baseline_mean_p4_probability": 0.703292317409663,
+      "cross_baseline": {
+        "games": 89,
+        "brier": 0.10908857265879389,
+        "log_loss": 0.3639346104409377,
+        "accuracy": 0.898876404494382
+      },
+      "cross_candidate": {
+        "games": 89,
+        "brier": 0.08980802000379144,
+        "log_loss": 0.285895320494984,
+        "accuracy": 0.8651685393258427
+      },
+      "all_baseline": {
+        "games": 762,
+        "brier": 0.18431757936225335,
+        "log_loss": 0.5457276569692675,
+        "accuracy": 0.7309711286089239
+      },
+      "all_candidate": {
+        "games": 762,
+        "brier": 0.18206565129624916,
+        "log_loss": 0.5366128317656063,
+        "accuracy": 0.7270341207349081
+      },
+      "by_venue": {
+        "P4 home": {
+          "games": 73,
+          "p4_wins": 68
+        },
+        "P4 away": {
+          "games": 15,
+          "p4_wins": 8
+        },
+        "neutral": {
+          "games": 1,
+          "p4_wins": 1
+        }
+      }
+    }
+  }
+}
