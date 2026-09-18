@@ -19,6 +19,7 @@ import streamlit as st
 # Pin the release module so a warm Streamlit process cannot reuse V1.4.
 from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week
 from bet_tracker_ui import show_bet_tracker
+from live_scores import parse_live_scores, overlay_live_scores
 
 st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
@@ -124,7 +125,11 @@ def predict_all_games(current, prior, schedule, week):
 def attach_results(predictions, games):
     outcomes = games.copy()
     completed = outcomes.get("completed", pd.Series(False, index=outcomes.index)).astype(str).str.lower().isin(["true", "t", "1", "1.0", "yes", "y"])
+    for col, default in [("Live State", ""), ("Live Detail", ""), ("Live Score", "—")]:
+        if col not in outcomes:
+            outcomes[col] = default
     outcomes["Status"] = "Awaiting final"
+    outcomes.loc[outcomes["Live State"].eq("in") & ~completed, "Status"] = "In progress"
     outcomes.loc[completed, "Status"] = "Final · score pending"
     valid = completed & outcomes["home_points"].notna() & outcomes["away_points"].notna()
     outcomes.loc[valid, "Status"] = "Final"
@@ -137,7 +142,7 @@ def attach_results(predictions, games):
         outcomes.loc[i, "Final Score"] = f"{outcomes.loc[i, 'away_team']} {outcomes.loc[i, 'away_points']:g} – {outcomes.loc[i, 'home_team']} {outcomes.loc[i, 'home_points']:g}"
     outcomes = outcomes.rename(columns={"game_id": "Game ID", "home_team": "Home Team", "away_team": "Away Team"})
     keys = ["Game ID"] if "Game ID" in outcomes and predictions["Game ID"].notna().all() else ["Home Team", "Away Team"]
-    result = predictions.merge(outcomes[keys + ["Status", "Actual Winner", "Final Score"]], on=keys, how="left", validate="one_to_one")
+    result = predictions.merge(outcomes[keys + ["Status", "Actual Winner", "Final Score", "Live State", "Live Detail", "Live Score"]], on=keys, how="left", validate="one_to_one")
     result["Pick Result"] = "Pending"
     scored = result["Status"].eq("Final") & result["Actual Winner"].ne("Tie")
     result.loc[scored, "Pick Result"] = "Incorrect"
@@ -243,6 +248,12 @@ def fetch_scoreboard(date_range):
             for event in payload["events"]:
                 events[str(event["id"])] = event
     return {"events": list(events.values())}
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def download_live_scores(date_range):
+    return {"games": parse_live_scores(fetch_scoreboard(date_range)),
+            "retrieved": datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M:%S %p %Z")}
 
 
 @st.cache_data(ttl=300, show_spinner=False)
@@ -570,8 +581,16 @@ def summarize_scenario(detail, group):
     return pd.DataFrame(rows)
 
 
-@st.fragment(run_every="60s")
-def watch_results(season, original, date_range, original_odds, event_ids=()):
+@st.fragment(run_every="30s")
+def watch_results(season, original, date_range, original_odds, event_ids=(), original_live=None):
+    if date_range:
+        try:
+            snapshot = download_live_scores(date_range)
+            if snapshot["games"] != (original_live or {}):
+                st.rerun()
+            st.caption("Live scoreboard last checked: " + snapshot["retrieved"])
+        except Exception:
+            st.warning("Live score refresh failed. Displayed scores may be stale; the next check will retry.")
     if original is not None:
         try:
             if not download_schedule(season).equals(original):
@@ -584,7 +603,7 @@ def watch_results(season, original, date_range, original_odds, event_ids=()):
                 st.rerun()
         except Exception:
             st.caption("Odds refresh is temporarily unavailable. Previously displayed lines may be stale.")
-    st.caption("Results and odds check automatically while this page is open. Feeds refresh every 5 minutes and depend on source updates.")
+    st.caption("Live scores refresh about every minute while this page is open; odds and schedule results refresh every 5 minutes. Provider updates may be delayed.")
 
 st.markdown("""
 <style>
@@ -651,12 +670,13 @@ with st.sidebar:
     st.header("Data settings")
     st.caption("Schedules and team statistics load automatically. No uploads needed.")
     if st.button("Refresh all data", use_container_width=True):
+        download_live_scores.clear()
         download_schedule.clear()
         download_summary.clear()
         download_market_odds.clear()
         download_archived_event.clear()
         download_event_moneylines.clear()
-    st.caption("Results and DraftKings odds refresh every 5 minutes; team summaries refresh hourly.")
+    st.caption("Live scores refresh about every minute; odds and schedule results every 5 minutes; team summaries hourly.")
     with st.expander("Use your own files"):
         mode = st.radio("Schedule source", ["Automatic download", "Upload CSV"])
         schedule_file = st.file_uploader("Schedule CSV", type="csv") if mode == "Upload CSV" else None
@@ -748,8 +768,6 @@ if selected_week > 1:
         st.warning(f"Published statistics currently extend through week {int(eligible['through_week'].max())}. Predictions use the latest available pregame snapshot.")
 try:
     pred = predict_all_games(current, prior, schedule, selected_week)
-    if not pred.empty:
-        pred = attach_results(pred, games)
 except Exception as e:
     st.error(str(e))
     st.stop()
@@ -764,6 +782,19 @@ if "start_date" in games:
     dates = pd.to_datetime(games["start_date"], errors="coerce", utc=True).dropna()
     if not dates.empty and (dates.max() - dates.min()).days <= 30:
         date_range = dates.min().strftime("%Y%m%d") + "-" + dates.max().strftime("%Y%m%d")
+live_snapshot = {"games": {}, "retrieved": None}
+if date_range:
+    try:
+        live_snapshot = download_live_scores(date_range)
+        st.session_state["live_scores_" + date_range] = live_snapshot
+    except Exception:
+        live_snapshot = st.session_state.get("live_scores_" + date_range, live_snapshot)
+        st.warning("Live scoreboard is temporarily unavailable. Last loaded scores may be stale.")
+live_games = overlay_live_scores(games, live_snapshot["games"])
+pred = attach_results(pred, live_games)
+if live_snapshot["retrieved"]:
+    st.caption("Live scores via ESPN · last retrieved " + live_snapshot["retrieved"] + ". Updates about every minute while open; feed delays are possible. Predictions remain pregame estimates.")
+
 if date_range:
     try:
         odds_snapshot = download_market_odds(date_range, schedule_event_ids(games))
@@ -796,6 +827,7 @@ st.caption(f"Last fetched · Scores: {schedule_time} · Odds: {odds_snapshot['re
 st.caption("Fetch times show when the app retrieved the feeds, not when the provider updated them. Scores and odds refresh every 5 minutes; team stats hourly.")
 if st.button("Refresh all feeds now"):
     download_summary.clear()
+    download_live_scores.clear()
     download_schedule.clear()
     download_market_odds.clear()
     download_archived_event.clear()
@@ -869,8 +901,10 @@ if order == "Closest matchups":
     filtered = filtered.sort_values("Confidence")
 elif order == "Home team A–Z":
     filtered = filtered.sort_values("Home Team")
-status_filter = st.radio("Game results", ["All games", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True, key="pick_status")
-if status_filter == "Final":
+status_filter = st.radio("Game results", ["All games", "In progress", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True, key="pick_status")
+if status_filter == "In progress":
+    filtered = filtered[filtered["Status"].eq("In progress")]
+elif status_filter == "Final":
     filtered = filtered[filtered["Status"].eq("Final")]
 elif status_filter == "Awaiting final":
     filtered = filtered[~filtered["Status"].eq("Final")]
@@ -940,7 +974,13 @@ with cards_tab:
                 if pd.notna(date):
                     kickoff = date.tz_convert("America/Chicago").strftime("%a, %b %d · %I:%M %p %Z")
             if r["Status"] != "Final":
-                outcome = '<div class="result-box">' + escape(str(r["Status"])) + '</div>'
+                detail = str(r.get("Live Detail", ""))
+                score = str(r.get("Live Score", "—"))
+                label = "LIVE · " + detail if r["Status"] == "In progress" else (detail if any(word in detail.lower() for word in ("delay", "postpon", "cancel", "suspend")) else str(r["Status"]))
+                outcome = '<div class="result-box"><strong>' + escape(label) + '</strong>'
+                if score != "—":
+                    outcome += '<div class="result-score">' + escape(score) + '</div>'
+                outcome += '</div>' 
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
@@ -969,7 +1009,7 @@ with cards_tab:
                             st.write(f"**{metric}:** {value}")
                     st.markdown(section, unsafe_allow_html=True)
 with table_tab:
-    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
+    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Live Detail", "Live Score", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
     for col in ["Confidence", "Away Win %", "Home Win %"]:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
@@ -1179,7 +1219,7 @@ with parlay_tab:
 with tracker_tab:
     st.subheader("My bets")
     st.caption("Choose the season and week above to record a game. Final results update when the selected season schedule refreshes. Open older seasons to refresh their tracked results.")
-    show_bet_tracker(schedule, pred, season, selected_week)
+    show_bet_tracker(overlay_live_scores(schedule, live_snapshot["games"]), pred, season, selected_week)
 
 with about_tab:
     st.markdown("### Read your picks")
@@ -1198,4 +1238,5 @@ with about_tab:
 st.download_button("Download these picks · CSV", filtered.to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
-watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games))
+watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
+
