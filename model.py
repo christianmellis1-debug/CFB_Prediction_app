@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from scipy.special import expit, logit
 
-MODEL_VERSION = "V1.4"
+MODEL_VERSION = "V1.5"
 
 OFFENSE_WEIGHT = 0.35
 DEFENSE_WEIGHT = 0.35
@@ -35,6 +35,35 @@ COMPONENT_SPEC = {
     "so": ("off_strength_faced", 1, None),
     "sd": ("def_strength_faced", 1, None),
 }
+
+
+# Fitted on 2022–23 regular-season P5/G5 games; selected on 2024 and
+# evaluated on 2025. See backtests/EXTENDED_CALIBRATION.md.
+CONFERENCE_LOG_ODDS = 1.2610042485353463
+
+def conference_log_odds(game):
+    """Season-aware regular-season FBS correction; unknown classifications skip."""
+    try:
+        year = int(game.get("season"))
+    except (TypeError, ValueError, OverflowError):
+        return 0.0
+    if year < 2022 or str(game.get("season_type", "")).lower() != "regular":
+        return 0.0
+    if any(str(game.get(side + "_division", "")).lower() != "fbs" for side in ("home", "away")):
+        return 0.0
+    power = {"ACC", "Big Ten", "Big 12", "SEC"}
+    group = {"American Athletic", "Conference USA", "Mid-American", "Mountain West", "Sun Belt"}
+    if year <= 2023:
+        power.add("Pac-12")
+    elif year >= 2026:
+        group.add("Pac-12")
+    home = game.get("home_conference")
+    away = game.get("away_conference")
+    if home in power and away in group:
+        return CONFERENCE_LOG_ODDS
+    if away in power and home in group:
+        return -CONFERENCE_LOG_ODDS
+    return 0.0
 
 def current_season_weight(week):
     week = int(week)
@@ -192,7 +221,7 @@ def predict_week(current_summary, prior_summary, schedule, target_week, include_
         )
 
         raw_home_prob = 1/(1+math.exp(-1.10*score_diff))
-        home_prob = float(expit(CALIBRATION_SLOPE * logit(np.clip(raw_home_prob, 1e-6, 1-1e-6))))
+        home_prob = float(expit(CALIBRATION_SLOPE * logit(np.clip(raw_home_prob, 1e-6, 1-1e-6)) + conference_log_odds(g)))
         away_prob = 1-home_prob
 
         if home_prob >= .5:
