@@ -1190,6 +1190,8 @@ with about_tab:
     with st.expander("Model and data details"):
         st.write(f"Model {MODEL_VERSION}: 35% offense, 35% defense, 20% venue performance, and 10% strength of schedule.")
         st.write("Preseason strength combines 75% Elo and 25% prior-season efficiency. Current-season statistics gain weight as the season progresses. Only snapshots from before the selected week are used.")
+        st.write("V1.5 adds a season-aware conference calibration for regular-season Power-versus-Group FBS matchups. It was fitted on 2022–23 and evaluated on 2024–25. Same-group games, independents, FCS games and postseason games receive no conference adjustment. Missing conference information also skips the adjustment.")
+        st.caption("The adjustment improved historical probability scores but did not improve winner accuracy in every season. It does not establish better betting returns. The realigned 2026 Group of Six is a prospective application; historical scenarios are recalculated using the current model.")
         st.caption(f"Loaded {season}: {len(current):,} team-week rows; {season - 1}: {len(prior):,} rows. Source: SportsDataverse / cfbfastR.")
 
 st.download_button("Download these picks · CSV", filtered.to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
