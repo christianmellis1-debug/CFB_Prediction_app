@@ -7,11 +7,12 @@
 <label class="wide">Game (selected season and week)<select id="game" required></select></label>
 <label>Team you bet on<select id="team" required></select></label><label>Amount bet ($)<input id="stake" type="number" min="0.01" max="100000" step="0.01" value="10" required></label>
 <label>Actual American moneyline<input id="odds" type="number" step="1" placeholder="-150 or +120" required></label><label>Sportsbook<input id="book" maxlength="100" placeholder="Optional"></label>
+<label>Receipt “To Pay” ($, optional)<input id="receiptReturn" type="number" min="0.01" max="1000000000" step="0.01" placeholder="Total returned if won"></label>
 <label>Result<select id="override"><option>Auto</option><option>Won</option><option>Lost</option><option>Push</option><option>Void</option></select></label>
-</div><p class="muted">Enter the odds on your bet receipt. Saving locks your stake and odds; later market movement will not change them. Auto uses final scores. Use a manual result for sportsbook corrections; cash-outs and parlays are not supported here.</p>
+</div><p class="muted">Enter the odds on your bet receipt. For boosts or sportsbook rounding, enter its exact “To Pay” amount, including your stake. Saving locks your stake and odds; later market movement will not change them. Auto uses final scores. Use a manual result for sportsbook corrections; cash-outs and parlays are not supported here.</p>
 <div id="preview"></div><div class="actions"><button class="primary" type="submit">Save bet</button><button id="cancel" type="button">Cancel edit / reset</button></div></form>
 <div class="actions"><label>Statistics scope<select id="scope"><option value="all">All recorded bets</option><option value="season">Selected season</option><option value="week">Selected week</option></select></label></div>
 <h3>Your betting stats</h3><div id="stats" class="stats"></div><p class="muted">Win rate excludes pending bets, pushes and voids. ROI = settled net profit ÷ settled stakes (void stakes excluded). These are your recorded bets, not the model's prediction record.</p>
 <div class="table"><table><thead><tr><th>Pick / matchup</th><th>Season / week</th><th>Stake</th><th>Odds / book</th><th>Result</th><th>Return</th><th>Net profit</th><th>Manage</th></tr></thead><tbody id="rows"></tbody></table></div>
 <p id="empty"></p><details><summary>Backup and restore</summary><p>Export saves all records. Import merges a backup by bet ID; existing records with the same ID are kept. Keep backups private.</p><div class="actions"><button id="backup">Download backup</button><label>Restore backup<input id="restore" type="file" accept="application/json,.json"></label></div></details>
-<script src="core.js"></script><script src="ui.js"></script></body></html>
+<script src="core.js?v=2"></script><script src="ui.js?v=2"></script></body></html>
