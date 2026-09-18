@@ -1,0 +1,404 @@
+{
+  "design": "2022\u201323 fitting; 2024 selection; 2025 evaluation. Previously examined 2025 is not a pristine holdout.",
+  "baseline": {
+    "2022": {
+      "all": {
+        "games": 734,
+        "brier": 0.20723022641014707,
+        "log_loss": 0.6000422642677324,
+        "accuracy": 0.6689373297002725
+      },
+      "cross": {
+        "games": 81,
+        "brier": 0.17587847331520826,
+        "log_loss": 0.5162016389406172,
+        "accuracy": 0.691358024691358
+      }
+    },
+    "2023": {
+      "all": {
+        "games": 750,
+        "brier": 0.18677166057797134,
+        "log_loss": 0.5517717520508839,
+        "accuracy": 0.716
+      },
+      "cross": {
+        "games": 90,
+        "brier": 0.13879603812461536,
+        "log_loss": 0.43637554766845504,
+        "accuracy": 0.8
+      }
+    },
+    "2024": {
+      "all": {
+        "games": 752,
+        "brier": 0.1944404365956518,
+        "log_loss": 0.5695733314878935,
+        "accuracy": 0.6848404255319149
+      },
+      "cross": {
+        "games": 86,
+        "brier": 0.10614324534269623,
+        "log_loss": 0.3485243333897774,
+        "accuracy": 0.8488372093023255
+      }
+    },
+    "2025": {
+      "all": {
+        "games": 762,
+        "brier": 0.18431757936225335,
+        "log_loss": 0.5457276569692675,
+        "accuracy": 0.7309711286089239
+      },
+      "cross": {
+        "games": 89,
+        "brier": 0.10908857265879389,
+        "log_loss": 0.3639346104409377,
+        "accuracy": 0.898876404494382
+      }
+    }
+  },
+  "candidates": [
+    {
+      "mode": "baseline",
+      "shrink": 0.5,
+      "offset": 0.6305021242676732,
+      "scores": {
+        "2024": {
+          "all": {
+            "games": 752,
+            "brier": 0.19087699222435112,
+            "log_loss": 0.55969348251029,
+            "accuracy": 0.6914893617021277
+          },
+          "cross": {
+            "games": 86,
+            "brier": 0.07498382479364865,
+            "log_loss": 0.26213309581817484,
+            "accuracy": 0.9069767441860465
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 762,
+            "brier": 0.18147008308663942,
+            "log_loss": 0.53757055720337,
+            "accuracy": 0.7309711286089239
+          },
+          "cross": {
+            "games": 89,
+            "brier": 0.0847088854451105,
+            "log_loss": 0.29409517199583723,
+            "accuracy": 0.898876404494382
+          }
+        }
+      },
+      "passes_2024": true
+    },
+    {
+      "mode": "baseline",
+      "shrink": 1,
+      "offset": 1.2610042485353463,
+      "scores": {
+        "2024": {
+          "all": {
+            "games": 752,
+            "brier": 0.18987952028450136,
+            "log_loss": 0.5555729289884856,
+            "accuracy": 0.6928191489361702
+          },
+          "cross": {
+            "games": 86,
+            "brier": 0.06626174457542718,
+            "log_loss": 0.22610220920890847,
+            "accuracy": 0.9186046511627907
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 762,
+            "brier": 0.1815145730840217,
+            "log_loss": 0.5357791965086866,
+            "accuracy": 0.7283464566929134
+          },
+          "cross": {
+            "games": 89,
+            "brier": 0.08508979980472044,
+            "log_loss": 0.2787579040256263,
+            "accuracy": 0.8764044943820225
+          }
+        }
+      },
+      "passes_2024": true
+    },
+    {
+      "mode": "separate_z",
+      "shrink": 0,
+      "offset": 0.0,
+      "scores": {
+        "2024": {
+          "all": {
+            "games": 752,
+            "brier": 0.1947046679403503,
+            "log_loss": 0.5700663989549887,
+            "accuracy": 0.6835106382978723
+          },
+          "cross": {
+            "games": 86,
+            "brier": 0.10641260650148458,
+            "log_loss": 0.34885544939119656,
+            "accuracy": 0.8372093023255814
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 762,
+            "brier": 0.18442119536397433,
+            "log_loss": 0.54610765970164,
+            "accuracy": 0.7309711286089239
+          },
+          "cross": {
+            "games": 89,
+            "brier": 0.10920408291008349,
+            "log_loss": 0.3639294625284633,
+            "accuracy": 0.898876404494382
+          }
+        }
+      },
+      "passes_2024": false
+    },
+    {
+      "mode": "separate_z",
+      "shrink": 0.5,
+      "offset": 0.6314025894671587,
+      "scores": {
+        "2024": {
+          "all": {
+            "games": 752,
+            "brier": 0.19116213140899868,
+            "log_loss": 0.5602467022484119,
+            "accuracy": 0.6914893617021277
+          },
+          "cross": {
+            "games": 86,
+            "brier": 0.07543600799478203,
+            "log_loss": 0.2629901944685704,
+            "accuracy": 0.9069767441860465
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 762,
+            "brier": 0.1815151434380887,
+            "log_loss": 0.5378778250712838,
+            "accuracy": 0.7309711286089239
+          },
+          "cross": {
+            "games": 89,
+            "brier": 0.08432305406148952,
+            "log_loss": 0.29346728288428886,
+            "accuracy": 0.898876404494382
+          }
+        }
+      },
+      "passes_2024": true
+    },
+    {
+      "mode": "separate_z",
+      "shrink": 1,
+      "offset": 1.2628051789343173,
+      "scores": {
+        "2024": {
+          "all": {
+            "games": 752,
+            "brier": 0.1901652488977741,
+            "log_loss": 0.5561786923615134,
+            "accuracy": 0.6928191489361702
+          },
+          "cross": {
+            "games": 86,
+            "brier": 0.06671908185012086,
+            "log_loss": 0.2274187591784821,
+            "accuracy": 0.9186046511627907
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 762,
+            "brier": 0.18153188817007906,
+            "log_loss": 0.5360303666825262,
+            "accuracy": 0.7283464566929134
+          },
+          "cross": {
+            "games": 89,
+            "brier": 0.08446641907021647,
+            "log_loss": 0.27764971780301745,
+            "accuracy": 0.8764044943820225
+          }
+        }
+      },
+      "passes_2024": true
+    },
+    {
+      "mode": "raw_only",
+      "shrink": 0,
+      "offset": 0.0,
+      "scores": {
+        "2024": {
+          "all": {
+            "games": 752,
+            "brier": 0.19808063286570318,
+            "log_loss": 0.5804985228233983,
+            "accuracy": 0.6914893617021277
+          },
+          "cross": {
+            "games": 86,
+            "brier": 0.11221128364355655,
+            "log_loss": 0.362897440558177,
+            "accuracy": 0.8372093023255814
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 762,
+            "brier": 0.18999756432854453,
+            "log_loss": 0.5594824205196591,
+            "accuracy": 0.7139107611548556
+          },
+          "cross": {
+            "games": 89,
+            "brier": 0.11820245557803313,
+            "log_loss": 0.38485101834552055,
+            "accuracy": 0.8651685393258427
+          }
+        }
+      },
+      "passes_2024": false
+    },
+    {
+      "mode": "raw_only",
+      "shrink": 0.5,
+      "offset": 0.6887727536561082,
+      "scores": {
+        "2024": {
+          "all": {
+            "games": 752,
+            "brier": 0.19350654109588564,
+            "log_loss": 0.5683618455389181,
+            "accuracy": 0.7007978723404256
+          },
+          "cross": {
+            "games": 86,
+            "brier": 0.07221457421445435,
+            "log_loss": 0.2567720763962106,
+            "accuracy": 0.9186046511627907
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 762,
+            "brier": 0.18645118807851113,
+            "log_loss": 0.5497991850169559,
+            "accuracy": 0.7152230971128609
+          },
+          "cross": {
+            "games": 89,
+            "brier": 0.08783909936988187,
+            "log_loss": 0.3019451143785567,
+            "accuracy": 0.8764044943820225
+          }
+        }
+      },
+      "passes_2024": true
+    },
+    {
+      "mode": "raw_only",
+      "shrink": 1,
+      "offset": 1.3775455073122165,
+      "scores": {
+        "2024": {
+          "all": {
+            "games": 752,
+            "brier": 0.1920589646476863,
+            "log_loss": 0.5631366855056968,
+            "accuracy": 0.7034574468085106
+          },
+          "cross": {
+            "games": 86,
+            "brier": 0.05955669643485072,
+            "log_loss": 0.21108230494292693,
+            "accuracy": 0.9418604651162791
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 762,
+            "brier": 0.1863678624995608,
+            "log_loss": 0.5477669258607708,
+            "accuracy": 0.7139107611548556
+          },
+          "cross": {
+            "games": 89,
+            "brier": 0.08712568261527351,
+            "log_loss": 0.2845453225020053,
+            "accuracy": 0.8651685393258427
+          }
+        }
+      },
+      "passes_2024": true
+    }
+  ],
+  "selected": {
+    "mode": "baseline",
+    "shrink": 1,
+    "offset": 1.2610042485353463,
+    "scores": {
+      "2024": {
+        "all": {
+          "games": 752,
+          "brier": 0.18987952028450136,
+          "log_loss": 0.5555729289884856,
+          "accuracy": 0.6928191489361702
+        },
+        "cross": {
+          "games": 86,
+          "brier": 0.06626174457542718,
+          "log_loss": 0.22610220920890847,
+          "accuracy": 0.9186046511627907
+        }
+      },
+      "2025": {
+        "all": {
+          "games": 762,
+          "brier": 0.1815145730840217,
+          "log_loss": 0.5357791965086866,
+          "accuracy": 0.7283464566929134
+        },
+        "cross": {
+          "games": 89,
+          "brier": 0.08508979980472044,
+          "log_loss": 0.2787579040256263,
+          "accuracy": 0.8764044943820225
+        }
+      }
+    },
+    "passes_2024": true
+  },
+  "passes_2025": true,
+  "brier_difference_bootstrap_95": [
+    -0.006352742143851576,
+    0.0008797030526281328
+  ],
+  "bootstrap_note": "Game-level resampling ignores team/week dependence; descriptive uncertainty only.",
+  "sources": {
+    "schedule2023.csv": "7ffc245da1242fc44c021dae724029074aece78544ba498937cc7703417f0dff",
+    "schedule2022.csv": "bfee92544d7269f764dcb5726ce5c037837cb100a8c6326e0e4c7103a2e6656d",
+    "schedule2024.csv": "3e4f3cab542657015ff73d1b527c41df58e6a17acf5fbe7d6fb518a1aabcac61",
+    "schedule2025.csv": "bfecf10bc5a8ffd2e3b6a76b5f0b03b406e17c1a0e03b2000bdf7e2263712db4",
+    "summary2023.csv": "07889e51ebbabc0e6b82bc084f559c9401168b66ac6ce2d6c6344c24b9226629",
+    "summary2021.csv": "a5d0d20fec5bb033cbec8aa34b40e4e4cdfb9a0e6449455a1205fb975d53b5a9",
+    "summary2024.csv": "a8f9b4b8255de03dfbb5b7d1a16a868d3f62d478bfaf4d5d6c684b5b34e840c6",
+    "summary2022.csv": "96747d5c77929cdf1e9a597b5ee04f6a0eeaf1d73dea3fe95785fef20abfd7fc",
+    "summary2025.csv": "de3206419b30255a09f64a416b6bf5f3cd7d5c2209751fb33ab11e89e5ac2700"
+  }
+}
