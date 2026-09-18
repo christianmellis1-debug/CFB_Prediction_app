@@ -16,7 +16,8 @@ import base64
 import pandas as pd
 import numpy as np
 import streamlit as st
-from model import MODEL_VERSION, COMPONENT_SPEC, predict_week
+# Pin the release module so a warm Streamlit process cannot reuse V1.4.
+from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week
 from bet_tracker_ui import show_bet_tracker
 
 st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
