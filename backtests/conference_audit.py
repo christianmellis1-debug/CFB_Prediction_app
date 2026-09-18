@@ -17,7 +17,7 @@ from scipy.special import expit, logit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from model import predict_week
+from model_v1_4_reference import predict_week
 
 P4 = {'ACC', 'Big Ten', 'Big 12', 'SEC'}
 G5 = {'American Athletic', 'Conference USA', 'Mid-American', 'Mountain West', 'Sun Belt'}
