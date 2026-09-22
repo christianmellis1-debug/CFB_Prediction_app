@@ -16,6 +16,7 @@ import base64
 import pandas as pd
 import numpy as np
 import streamlit as st
+import streamlit.components.v1 as components
 # Pin the release module so a warm Streamlit process cannot reuse V1.4.
 from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week
 from bet_tracker_ui import show_bet_tracker
@@ -24,46 +25,99 @@ from live_scores import parse_live_scores, overlay_live_scores
 st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
 
+
+TOUR_STEPS = [
+    ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
+    ("filters", None, "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
+    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines, and live or final scores. Confidence is an estimate, not a guarantee."),
+    ("compare", "Compare picks", "Compare the slate", "This compact table lets you compare picks without scrolling through individual cards. It follows your matchup filters."),
+    ("results", "Model results", "Check model performance", "Compare wins, losses, and accuracy by confidence level for the selected week or season to date. Only final, decisive games count toward accuracy; matchup filters do not affect this view."),
+    ("scenario", "What-if bets", "Try a betting scenario", "Choose picks and stakes below to see potential profit if they win and the amount lost if they lose. Missing moneylines are excluded. A scenario does not place or record bets."),
+    ("parlay", "Parlay finder", "Build a parlay", "The finder is open below. Choose 2–5 legs, your stake, minimum confidence, and ranking: win probability, payout, or estimated value. It uses future games with available lines from one sportsbook. Payouts are estimates, and joint win chances assume independent outcomes. If there are too few eligible games, try another week or broader filters."),
+    ("tracker", "My bets", "Track your actual bets", "Record the team, actual odds, and stake you placed. Backup and restore imports saved singles and supported moneyline parlays. Records stay in this browser, so download a backup before switching devices or clearing storage."),
+]
+
+
 def set_tour_step(step):
+    previous = st.session_state.get("app_tour_step")
+    if step is not None and 0 <= step < len(TOUR_STEPS):
+        if previous is None or previous == -1:
+            st.session_state["tour_parlay_original"] = st.session_state.get("parlay_enabled", False)
+        tab = TOUR_STEPS[step][1]
+        if tab:
+            st.session_state["main_app_tabs"] = tab
+        if TOUR_STEPS[step][0] == "parlay":
+            st.session_state["parlay_enabled"] = True
+    elif step is None and "tour_parlay_original" in st.session_state:
+        st.session_state["parlay_enabled"] = st.session_state.pop("tour_parlay_original")
     st.session_state["app_tour_step"] = step
+    st.session_state["tour_scroll_token"] = str(datetime.now(timezone.utc).timestamp())
 
 
 def show_app_tour():
-    """Optional, session-scoped walkthrough; never alters filters or bets."""
-    steps = [
-        ("Choose your games", "Use Season and Week below to choose a slate. This app covers regular-season FBS vs. FBS games. Kickoff times use Central Time, with AM/PM."),
-        ("Read a game card", "Game cards show the predicted winner, each team's win chance, and available odds. Confidence is a model estimate, not a guarantee. Live scores update while the app is open; picks remain pregame estimates."),
-        ("Find and compare teams", "Under Explore matchups, search a team, choose favorites, or filter confidence and game status. Compare picks gives you a compact table. Reset filters restores the full slate."),
-        ("Check model performance", "Open Model results to compare wins, losses, and accuracy by confidence level for this week or the season to date. Only final, non-tied games count toward accuracy. These results ignore the matchup filters."),
-        ("Explore a what-if", "What-if bets lets you choose picks and stakes and compare potential profit if they win with the amount lost if they lose. Missing moneylines are excluded. Simulations do not record or place a bet."),
-        ("Understand value and parlays", "Model value picks compare estimated win probability with the available moneyline. Parlay finder combines eligible future picks; its payouts are estimates and joint probabilities assume independent outcomes."),
-        ("Keep your own bet record", "In My bets, record the team, actual odds, and stake you placed. Backup and restore imports your saved bets, including supported moneyline parlays. Records stay in this browser: download backups before changing devices or clearing browser storage."),
-    ]
+    """Offer the tour at the top; render active controls beside their target."""
     step = st.session_state.get("app_tour_step", -1)
     if step == -1:
         with st.container(border=True):
             st.markdown("**Welcome! Would you like a quick tour?**")
-            st.caption("Learn where to find picks, results, simulations, and your bet tracker.")
+            st.caption("We will open each section and guide you through it.")
             start, skip = st.columns(2)
             start.button("Take the tour", on_click=set_tour_step, args=(0,), key="tour_start")
             skip.button("Not now", on_click=set_tour_step, args=(None,), key="tour_skip")
-    elif step is not None:
-        step = max(0, min(int(step), len(steps) - 1))
-        with st.container(border=True):
-            st.caption(f"App tour · Step {step + 1} of {len(steps)}")
-            st.progress((step + 1) / len(steps))
-            title, body = steps[step]
-            st.markdown(f"**{title}**")
-            st.write(body)
-            back, forward, close = st.columns(3)
-            back.button("Back", disabled=step == 0, on_click=set_tour_step, args=(step - 1,), key="tour_back")
-            forward.button("Finish" if step == len(steps) - 1 else "Next",
-                           on_click=set_tour_step,
-                           args=(None if step == len(steps) - 1 else step + 1,), key="tour_next")
-            close.button("Skip tour", on_click=set_tour_step, args=(None,), key="tour_close")
-    else:
+    elif step is None:
         st.button("Take the app tour", on_click=set_tour_step, args=(0,), key="tour_replay")
+    else:
+        resume, stop = st.columns(2)
+        resume.button("Resume current tour step", on_click=set_tour_step, args=(step,), key="tour_resume")
+        stop.button("End tour", on_click=set_tour_step, args=(None,), key="tour_end")
     st.caption("Tour preference is remembered for this session.")
+
+
+def tour_at(target):
+    step = st.session_state.get("app_tour_step")
+    if not isinstance(step, int) or not 0 <= step < len(TOUR_STEPS):
+        return
+    name, tab, title, body = TOUR_STEPS[step]
+    if name != target:
+        return
+    anchor = "cfb-tour-" + target
+    st.markdown(f'<div id="{anchor}" style="scroll-margin-top:5rem"></div>', unsafe_allow_html=True)
+    with st.container(border=True):
+        st.caption(f"App tour · Step {step + 1} of {len(TOUR_STEPS)}")
+        st.progress((step + 1) / len(TOUR_STEPS))
+        st.markdown(f"**{title}**")
+        st.write(body)
+        back, forward, close = st.columns(3)
+        back.button("Back", disabled=step == 0, on_click=set_tour_step, args=(step - 1,), key="tour_back")
+        forward.button("Finish" if step == len(TOUR_STEPS) - 1 else "Next",
+                       on_click=set_tour_step,
+                       args=(None if step == len(TOUR_STEPS) - 1 else step + 1,), key="tour_next")
+        close.button("Skip tour", on_click=set_tour_step, args=(None,), key="tour_close")
+        st.markdown(f"[Jump to this tour step](#{anchor})")
+    # Wait for the selected tab and its target to become visible. The token
+    # prevents score refreshes and unrelated controls from stealing scroll.
+    config = json.dumps({"anchor": anchor, "token": st.session_state.get("tour_scroll_token", "")})
+    components.html("""
+<script>
+const config = """ + config + """;
+let attempts = 0;
+const timer = setInterval(() => {
+  if (++attempts > 80) { clearInterval(timer); return; }
+  try {
+    const doc = window.parent.document;
+    const node = doc.getElementById(config.anchor);
+    if (!node || !node.getClientRects().length) return;
+    if (window.parent.__cfbTourScrollToken === config.token) {
+      clearInterval(timer); return;
+    }
+    window.parent.__cfbTourScrollToken = config.token;
+    node.scrollIntoView({behavior: "smooth", block: "start"});
+    clearInterval(timer);
+  } catch (_) { clearInterval(timer); }
+}, 100);
+window.addEventListener("pagehide", () => clearInterval(timer));
+</script>
+""", height=0)
 
 
 def confidence_performance(frame):
@@ -735,6 +789,7 @@ show_app_tour()
 
 now = datetime.now(timezone.utc)
 year = now.year if now.month >= 7 else now.year - 1
+tour_at("schedule")
 season_col, week_col = st.columns([1, 2])
 with season_col:
     season = int(st.number_input("Season", min_value=2001, max_value=now.year + 1, value=year))
@@ -946,6 +1001,7 @@ def reset_pick_filters():
         st.session_state[key] = value
 
 
+tour_at("filters")
 st.subheader("Explore matchups")
 team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
 favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
@@ -1012,8 +1068,9 @@ if quality_filter != "All data":
 st.caption("Published stats means a pregame summary exists; individual metrics may still be missing.")
 st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
 
-cards_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"])
+cards_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
 with cards_tab:
+    tour_at("cards")
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
     else:
@@ -1081,12 +1138,14 @@ with cards_tab:
                             st.write(f"**{metric}:** {value}")
                     st.markdown(section, unsafe_allow_html=True)
 with table_tab:
+    tour_at("compare")
     show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Live Detail", "Live Score", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
     for col in ["Confidence", "Away Win %", "Home Win %"]:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
 
 with performance_tab:
+    tour_at("results")
     st.subheader("Model results by confidence")
     st.caption("All model picks in the chosen period, independent of matchup filters, moneyline availability, or your personal bets. Accuracy measures picking the winner, not betting profit.")
     performance_scope = st.radio("Results period", ["Selected week", "Season to date"], horizontal=True, key="model_results_period")
@@ -1145,6 +1204,7 @@ with performance_tab:
 
 
 with scenario_tab:
+    tour_at("scenario")
     st.subheader(f"Live what-if · Week {selected_week}")
     st.caption("Choose any season and week above. Payouts use the latest fetched prices and update when you refresh feeds. These are hypothetical picks, not placed bets or locked-in odds.")
     if st.toggle("Open live calculator", key="live_calc_enabled"):
@@ -1300,6 +1360,7 @@ with scenario_tab:
             st.info("Choose at least one week to calculate a scenario.")
 
 with parlay_tab:
+    tour_at("parlay")
     st.subheader(f"Parlay finder · Week {selected_week}")
     st.caption("No AI subscription or paid API. Searches model picks with future kickoffs and available moneylines. Finished games and games already started are excluded.")
     st.caption("Payouts are estimates from multiplying individual moneylines, not sportsbook parlay quotes. Joint win probabilities assume independent outcomes. Each combination uses one sportsbook and distinct teams.")
@@ -1348,6 +1409,7 @@ with parlay_tab:
                         st.caption("The model estimates a negative expected return for this combination.")
 
 with tracker_tab:
+    tour_at("tracker")
     st.subheader("My bets")
     st.caption("Choose the season and week above to record a game. Final results update when the selected season schedule refreshes. Open older seasons to refresh their tracked results.")
     show_bet_tracker(overlay_live_scores(schedule, live_snapshot["games"]), pred, season, selected_week)
