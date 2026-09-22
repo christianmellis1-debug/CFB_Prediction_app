@@ -88,7 +88,7 @@ def confidence_performance(frame):
             "Accuracy": wins / n if n else None,
             "Average model confidence": pd.to_numeric(graded["Confidence"], errors="coerce").mean() if n else None,
             "Awaiting final": int(group["Status"].ne("Final").sum()),
-            "Not graded": int((group["Status"].eq("Final") & ~group["Pick Result"].isin(["Correct", "Incorrect"])).sum(),
+            "Not graded": int((group["Status"].eq("Final") & ~group["Pick Result"].isin(["Correct", "Incorrect"])).sum()),
         })
     return pd.DataFrame(rows)
 
