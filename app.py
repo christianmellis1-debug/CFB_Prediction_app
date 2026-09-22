@@ -23,6 +23,76 @@ from live_scores import parse_live_scores, overlay_live_scores
 
 st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
+
+def set_tour_step(step):
+    st.session_state["app_tour_step"] = step
+
+
+def show_app_tour():
+    """Optional, session-scoped walkthrough; never alters filters or bets."""
+    steps = [
+        ("Choose your games", "Use Season and Week below to choose a slate. This app covers regular-season FBS vs. FBS games. Kickoff times use Central Time, with AM/PM."),
+        ("Read a game card", "Game cards show the predicted winner, each team's win chance, and available odds. Confidence is a model estimate, not a guarantee. Live scores update while the app is open; picks remain pregame estimates."),
+        ("Find and compare teams", "Under Explore matchups, search a team, choose favorites, or filter confidence and game status. Compare picks gives you a compact table. Reset filters restores the full slate."),
+        ("Check model performance", "Open Model results to compare wins, losses, and accuracy by confidence level for this week or the season to date. Only final, non-tied games count toward accuracy. These results ignore the matchup filters."),
+        ("Explore a what-if", "What-if bets lets you choose picks and stakes and compare potential profit if they win with the amount lost if they lose. Missing moneylines are excluded. Simulations do not record or place a bet."),
+        ("Understand value and parlays", "Model value picks compare estimated win probability with the available moneyline. Parlay finder combines eligible future picks; its payouts are estimates and joint probabilities assume independent outcomes."),
+        ("Keep your own bet record", "In My bets, record the team, actual odds, and stake you placed. Backup and restore imports your saved bets, including supported moneyline parlays. Records stay in this browser: download backups before changing devices or clearing browser storage."),
+    ]
+    step = st.session_state.get("app_tour_step", -1)
+    if step == -1:
+        with st.container(border=True):
+            st.markdown("**Welcome! Would you like a quick tour?**")
+            st.caption("Learn where to find picks, results, simulations, and your bet tracker.")
+            start, skip = st.columns(2)
+            start.button("Take the tour", on_click=set_tour_step, args=(0,), key="tour_start")
+            skip.button("Not now", on_click=set_tour_step, args=(None,), key="tour_skip")
+    elif step is not None:
+        step = max(0, min(int(step), len(steps) - 1))
+        with st.container(border=True):
+            st.caption(f"App tour · Step {step + 1} of {len(steps)}")
+            st.progress((step + 1) / len(steps))
+            title, body = steps[step]
+            st.markdown(f"**{title}**")
+            st.write(body)
+            back, forward, close = st.columns(3)
+            back.button("Back", disabled=step == 0, on_click=set_tour_step, args=(step - 1,), key="tour_back")
+            forward.button("Finish" if step == len(steps) - 1 else "Next",
+                           on_click=set_tour_step,
+                           args=(None if step == len(steps) - 1 else step + 1,), key="tour_next")
+            close.button("Skip tour", on_click=set_tour_step, args=(None,), key="tour_close")
+    else:
+        st.button("Take the app tour", on_click=set_tour_step, args=(0,), key="tour_replay")
+    st.caption("Tour preference is remembered for this session.")
+
+
+def confidence_performance(frame):
+    """Grade only final decisive games, using the unrounded pick probability."""
+    confidence = pd.to_numeric(frame["Confidence"], errors="coerce")
+    bands = [
+        ("Very high · 90%+", .9, float("inf")),
+        ("High · 80–90%", .8, .9),
+        ("Moderate · 70–80%", .7, .8),
+        ("Lean · 60–70%", .6, .7),
+        ("Toss-up · under 60%", 0, .6),
+    ]
+    rows = []
+    for label, low, high in bands:
+        group = frame[confidence.ge(low) & confidence.lt(high)]
+        graded = group[group["Status"].eq("Final") & group["Pick Result"].isin(["Correct", "Incorrect"])]
+        wins = int(graded["Pick Result"].eq("Correct").sum())
+        n = len(graded)
+        rows.append({
+            "Confidence level": label, "Picks": len(group), "Graded": n,
+            "Wins": wins, "Losses": n - wins,
+            "Accuracy": wins / n if n else None,
+            "Average model confidence": pd.to_numeric(graded["Confidence"], errors="coerce").mean() if n else None,
+            "Awaiting final": int(group["Status"].ne("Final").sum()),
+            "Not graded": int((group["Status"].eq("Final") & ~group["Pick Result"].isin(["Correct", "Incorrect"])).sum(),
+        })
+    return pd.DataFrame(rows)
+
+
 @st.cache_data(ttl=300)
 def download_schedule(season):
     url = f"https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_{season}.csv"
@@ -661,6 +731,8 @@ st.markdown("""
 <h1>Your weekly game plan.</h1><p>Every matchup. A clear pick. Confidence at a glance.</p></div></div>
 """, unsafe_allow_html=True)
 
+show_app_tour()
+
 now = datetime.now(timezone.utc)
 year = now.year if now.month >= 7 else now.year - 1
 season_col, week_col = st.columns([1, 2])
@@ -940,7 +1012,7 @@ if quality_filter != "All data":
 st.caption("Published stats means a pregame summary exists; individual metrics may still be missing.")
 st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
 
-cards_tab, table_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Compare picks", "What-if bets", "Parlay finder", "My bets", "How it works"])
+cards_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"])
 with cards_tab:
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
@@ -1013,6 +1085,65 @@ with table_tab:
     for col in ["Confidence", "Away Win %", "Home Win %"]:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
+
+with performance_tab:
+    st.subheader("Model results by confidence")
+    st.caption("All model picks in the chosen period, independent of matchup filters, moneyline availability, or your personal bets. Accuracy measures picking the winner, not betting profit.")
+    performance_scope = st.radio("Results period", ["Selected week", "Season to date"], horizontal=True, key="model_results_period")
+    performance_frames = []
+    performance_errors = []
+    results_schedule = overlay_live_scores(schedule, live_snapshot["games"])
+    if performance_scope == "Selected week":
+        performance_frames = [pred]
+    else:
+        completed_mask = results_schedule.get("completed", pd.Series(False, index=results_schedule.index)).astype(str).str.lower().isin(["true", "t", "1", "1.0", "yes", "y"])
+        result_weeks = sorted(results_schedule.loc[completed_mask, "week"].astype(int).unique().tolist())
+        st.caption("Season to date includes weeks with at least one completed game; any unfinished games in those weeks remain ungraded.")
+        with st.spinner("Calculating results from pregame-week statistics..."):
+            for result_week in result_weeks:
+                try:
+                    if result_week == selected_week:
+                        week_result = pred
+                    else:
+                        result_current, _ = augment_missing_summaries(published_current, prior, results_schedule, result_week)
+                        week_result = predict_all_games(result_current, prior, results_schedule, result_week)
+                        if not week_result.empty:
+                            week_result = attach_results(week_result, results_schedule[results_schedule["week"] == result_week])
+                    if week_result.empty:
+                        performance_errors.append(str(result_week))
+                    else:
+                        performance_frames.append(week_result)
+                except Exception:
+                    performance_errors.append(str(result_week))
+    st.caption(f"Historical reconstruction with model {MODEL_VERSION}, using snapshots from before each game week. These are recalculated picks, not an immutable record of predictions saved before kickoff. Revised source data or model updates can change historical results.")
+    if performance_errors:
+        st.warning("Partial results: predictions could not be calculated for week(s) " + ", ".join(performance_errors) + ". Those weeks are excluded.")
+    if performance_frames:
+        performance_detail = pd.concat(performance_frames, ignore_index=True)
+        performance_summary = confidence_performance(performance_detail)
+        total_graded = int(performance_summary["Graded"].sum())
+        total_wins = int(performance_summary["Wins"].sum())
+        r1, r2, r3 = st.columns(3)
+        r1.metric("Graded picks", total_graded)
+        r2.metric("Wins – losses", f"{total_wins} – {total_graded - total_wins}")
+        r3.metric("Winner accuracy", f"{total_wins / total_graded:.1%}" if total_graded else "—")
+        display_summary = performance_summary.copy()
+        for column in ["Accuracy", "Average model confidence"]:
+            display_summary[column] = display_summary[column].map(lambda v: f"{v:.1%}" if pd.notna(v) else "—")
+        st.dataframe(display_summary, hide_index=True, use_container_width=True)
+        st.caption("Average model confidence uses the same graded picks as accuracy. Very high is shown separately from High. Pending games, missing final scores, and ties do not count as wins or losses. Small samples can swing sharply.")
+        if not total_graded:
+            st.info("No final, decisive games to grade in this period yet.")
+        with st.expander("See individual model results"):
+            detail_columns = [c for c in ["Week", "Away Team", "Home Team", "Predicted Winner", "Confidence", "Status", "Actual Winner", "Pick Result", "Final Score"] if c in performance_detail]
+            st.dataframe(performance_detail[detail_columns], hide_index=True, use_container_width=True)
+        st.download_button("Download confidence results · CSV", performance_summary.to_csv(index=False).encode(),
+                           file_name=f"cfb_{season}_{selected_week if performance_scope == 'Selected week' else 'season'}_confidence_results.csv",
+                           mime="text/csv", key="confidence_results_download")
+    else:
+        st.info("No completed-game predictions are available for this period yet.")
+
+
 with scenario_tab:
     st.subheader(f"Live what-if · Week {selected_week}")
     st.caption("Choose any season and week above. Payouts use the latest fetched prices and update when you refresh feeds. These are hypothetical picks, not placed bets or locked-in odds.")
