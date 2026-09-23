@@ -1183,6 +1183,24 @@ with cards_tab:
                 if score != "—":
                     outcome += '<div class="result-score">' + escape(score) + '</div>'
                 outcome += '</div>' 
+            explanation_html = ""
+            if r["Confidence"] < .80:
+                explanation = r.get("Pick Explanation", "")
+                if not isinstance(explanation, str) or not explanation:
+                    explanation = "Detailed model reasoning is loading; refresh after the app restarts."
+                caveats = []
+                if len(game) == 1:
+                    for side_name in ("home", "away"):
+                        tid = int(game.iloc[0][side_name + "_id"])
+                        name = str(game.iloc[0][side_name + "_team"])
+                        if tid in derived_team_ids:
+                            caveats.append(name + " uses provisional scoring-based metrics")
+                        elif tid not in set(eligible["team_id"]):
+                            caveats.append(name + " has no eligible current-season metrics")
+                note = "Ratings blend prior-season information with available pregame data."
+                if caveats:
+                    note += " Limited data: " + "; ".join(caveats) + "."
+                explanation_html = '<div style="margin-top:12px"><div class="pick-label">Why this pick</div><p style="margin:6px 0">' + escape(explanation) + '</p><details class="card-details"><summary>About this reasoning</summary><p>' + escape(note) + ' This explains the pregame model, not live scores or betting value. It does not analyze specific run/pass matchups or injuries.</p></details></div>'
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
@@ -1190,7 +1208,7 @@ with cards_tab:
 <div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{r.get("Line Movement HTML", "")}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{explanation_html}{moneylines}{r.get("Line Movement HTML", "")}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
         for card_index, (_, pick) in enumerate(filtered.iterrows()):
             card = cards[card_index].replace('<article class="pick-card">', '').replace('</article>', '')
             header, rest = card.split("<!--away-data-->", 1)
