@@ -313,11 +313,17 @@ def parse_draftkings(payload):
                     market = odds.get("moneyline", {}).get(side, {})
                     value = (market.get("close") or {}).get("odds") if "close" in market else odds.get(side + "TeamOdds", {}).get("moneyLine")
                     prices[side] = format_moneyline(value)
+                    opening = (market.get("open") or {}).get("odds")
+                    if opening is None:
+                        legacy = (odds.get(side + "TeamOdds", {}).get("open") or {}).get("moneyLine", {})
+                        opening = legacy.get("american", legacy.get("alternateDisplayValue")) if isinstance(legacy, dict) else legacy
+                    prices[side + "_open"] = format_moneyline(opening)
                 if prices["home"] == "Unavailable" and prices["away"] == "Unavailable":
                     continue
                 event_quotes[provider_name] = {
                     "home_id": sides.get("home", ""), "away_id": sides.get("away", ""),
                     "home": prices["home"], "away": prices["away"], "completed": completed,
+                    "home_open": prices["home_open"], "away_open": prices["away_open"],
                 }
         if event_quotes:
             quotes[str(event.get("id"))] = event_quotes
@@ -339,7 +345,7 @@ def parse_archived_summary(payload, event_id):
 
 
 @st.cache_data(ttl=86400, show_spinner=False)
-def download_archived_event(event_id):
+def download_archived_event(event_id, movement_schema=1):
     if not str(event_id).isdigit():
         return {}
     url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=" + str(event_id)
@@ -381,7 +387,7 @@ def download_live_scores(date_range):
 
 
 @st.cache_data(ttl=300, show_spinner=False)
-def download_event_moneylines(event_id):
+def download_event_moneylines(event_id, movement_schema=1):
     """Read current per-game markets, including games omitted by the scoreboard."""
     if not str(event_id).isdigit():
         return {}
@@ -442,7 +448,7 @@ def download_market_odds(date_range, event_ids=()):
     for event_id in expected:
         dk = next((q for name, q in quotes.get(event_id, {}).items()
                    if name.lower().replace(" ", "") == "draftkings"), {})
-        if dk.get("home", "Unavailable") == "Unavailable" or dk.get("away", "Unavailable") == "Unavailable":
+        if any(dk.get(k, "Unavailable") == "Unavailable" for k in ("home", "away", "home_open", "away_open")):
             targets.append(event_id)
     lookup_errors = []
     def get_current(event_id):
@@ -460,7 +466,7 @@ def download_market_odds(date_range, event_ids=()):
                 if previous is None:
                     providers[name] = quote
                 elif (previous.get("home_id"), previous.get("away_id")) == (quote.get("home_id"), quote.get("away_id")):
-                    for side in ("home", "away"):
+                    for side in ("home", "away", "home_open", "away_open"):
                         if previous.get(side, "Unavailable") == "Unavailable":
                             previous[side] = quote.get(side, "Unavailable")
     return {"quotes": quotes, "lookup_errors": lookup_errors,
@@ -475,6 +481,8 @@ def attach_odds(predictions, games, quotes):
     result["Home ML"] = "Unavailable"
     result["ML Source"] = "Unavailable"
     result["Odds Type"] = "Not offered / unavailable"
+    result["Away Opening ML"] = "Unavailable"
+    result["Home Opening ML"] = "Unavailable"
     for index, row in result.iterrows():
         match = games[(games.home_team == row["Home Team"]) & (games.away_team == row["Away Team"])]
         if len(match) != 1 or "game_id" not in match:
@@ -525,8 +533,67 @@ def attach_odds(predictions, games, quotes):
         result.loc[index, "Away ML"] = selected["away"]
         result.loc[index, "Home ML"] = selected["home"]
         result.loc[index, "ML Source"] = selected_name
+        result.loc[index, "Away Opening ML"] = selected.get("away_open", "Unavailable")
+        result.loc[index, "Home Opening ML"] = selected.get("home_open", "Unavailable")
         result.loc[index, "Odds Type"] = "Archived line" if selected["completed"] or str(row["Status"]).startswith("Final") else "Latest available line"
     return result
+
+
+
+def moneyline_probability(line):
+    formatted = format_moneyline(line)
+    if formatted == "Unavailable":
+        return None
+    n = float(formatted)
+    return 100 / (n + 100) if n > 0 else -n / (-n + 100)
+
+
+def line_movement_html(row, history, observed_at):
+    """Opening comparisons plus same-book session observations, never mixed books."""
+    book = str(row.get("ML Source", "Unavailable"))
+    if book == "Unavailable":
+        return ""
+    event = str(row.get("Game ID", ""))
+    valid_event = event not in ("", "None", "nan")
+    notes, session_notes = [], []
+    comparable = 0
+    moved = False
+    for side in ("Away", "Home"):
+        current = format_moneyline(row.get(side + " ML"))
+        opening = format_moneyline(row.get(side + " Opening ML"))
+        team = str(row[side + " Team"])
+        if current == "Unavailable":
+            continue
+        if opening != "Unavailable":
+            comparable += 1
+            if moneyline_probability(current) != moneyline_probability(opening):
+                moved = True
+                direction = "shortened" if moneyline_probability(current) > moneyline_probability(opening) else "lengthened"
+                notes.append(f"{escape(team)}: {escape(opening)} → {escape(current)} ({direction})")
+        if valid_event and observed_at:
+            key = (event, book.casefold().replace(" ", ""), side)
+            old = history.get(key)
+            if old and moneyline_probability(old["line"]) != moneyline_probability(current):
+                old = {"line": current, "previous": old["line"], "changed": observed_at}
+            elif old is None:
+                old = {"line": current, "previous": None, "changed": None}
+            history[key] = old
+            if old["previous"] is not None:
+                moved = True
+                session_notes.append(f"{escape(team)}: {escape(old['previous'])} → {escape(current)} · observed {escape(old['changed'])}")
+    if not moved:
+        message = "No net movement from opening" if comparable == 2 else "Partial opening history; no movement detected on available side" if comparable else "Opening-line history unavailable"
+        return '<div class="venue-label" style="margin-top:8px">' + message + '</div>'
+    title = "Archived moneyline movement" if str(row.get("Status", "")).startswith("Final") else "Live moneyline movement" if row.get("Status") == "In progress" else "Moneyline moved"
+    body = ""
+    if notes:
+        body += "<div><strong>Opening → latest</strong><br>" + "<br>".join(notes) + "</div>"
+    if session_notes:
+        body += "<div style='margin-top:6px'><strong>Last change observed this session</strong><br>" + "<br>".join(session_notes) + "</div>"
+    if not notes and not comparable:
+        body += "<div>Opening history unavailable.</div>"
+    stamp = f"<div style='margin-top:6px'>As of {escape(observed_at)}</div>" if observed_at else ""
+    return f'<details style="margin-top:10px;border-left:3px solid #d89c39;padding-left:10px"><summary style="cursor:pointer"><strong>↔ {title}</strong></summary><div class="venue-label">{escape(book)}{body}{stamp}</div></details>'
 
 
 def add_betting_value(predictions):
@@ -928,6 +995,11 @@ if date_range:
     except Exception:
         st.info("DraftKings odds are temporarily unavailable. Predictions and results are still available.")
 pred = add_betting_value(attach_odds(pred, games, odds_snapshot["quotes"]))
+line_history = st.session_state.setdefault("moneyline_observations_v1", {})
+if st.session_state.get("moneyline_history_season") != season:
+    line_history.clear()
+    st.session_state["moneyline_history_season"] = season
+pred["Line Movement HTML"] = [line_movement_html(row, line_history, odds_snapshot["retrieved"]) for _, row in pred.iterrows()]
 if odds_snapshot.get("lookup_errors"):
     st.warning(f"Individual odds lookups failed for {len(odds_snapshot['lookup_errors'])} games. Missing lines may reflect a retrieval error; try Refresh all feeds now.")
 st.caption(f"Moneyline coverage: {int(pred['Bet Line'].ne('Unavailable').sum())} of {len(pred)} model picks have a price. Unavailable means no matching price was retrieved from the connected feeds, not that every sportsbook lacks one.")
@@ -1071,6 +1143,7 @@ st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regu
 cards_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
 with cards_tab:
     tour_at("cards")
+    st.caption("↔ Moneyline moved compares the same sportsbook’s opening and latest prices. Expand the flag for details. Session changes are tracked while this app session is active; no net change does not mean the line never moved. Fetch times are not the sportsbook’s change times. Shortened = higher implied chance and lower payout; lengthened = the reverse.")
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
     else:
@@ -1117,7 +1190,7 @@ with cards_tab:
 <div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{r.get("Line Movement HTML", "")}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
         for card_index, (_, pick) in enumerate(filtered.iterrows()):
             card = cards[card_index].replace('<article class="pick-card">', '').replace('</article>', '')
             header, rest = card.split("<!--away-data-->", 1)
@@ -1428,7 +1501,7 @@ with about_tab:
         st.caption("The adjustment improved historical probability scores but did not improve winner accuracy in every season. It does not establish better betting returns. The realigned 2026 Group of Six is a prospective application; historical scenarios are recalculated using the current model.")
         st.caption(f"Loaded {season}: {len(current):,} team-week rows; {season - 1}: {len(prior):,} rows. Source: SportsDataverse / cfbfastR.")
 
-st.download_button("Download these picks · CSV", filtered.to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
+st.download_button("Download these picks · CSV", filtered.drop(columns=["Line Movement HTML"], errors="ignore").to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
