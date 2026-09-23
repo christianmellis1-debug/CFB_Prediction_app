@@ -174,6 +174,33 @@ def _completed_history(schedule, target_week):
         road_hist[a].append(-diff)
     return home_hist, road_hist
 
+
+def pick_narrative(winner, opponent, confidence, contributions):
+    """Describe signed model contributions, not causal or matchup-specific claims."""
+    if confidence >= 0.80:
+        return ""
+    labels = {
+        "offense": "the stronger blended offensive rating",
+        "defense": "the stronger blended defensive rating",
+        "schedule": "the stronger schedule-strength rating",
+        "venue": "the model's home/road results adjustment",
+        "conference": "the model's historical conference-strength adjustment",
+    }
+    support = sorted(((k, v) for k, v in contributions.items() if v > 1e-8),
+                     key=lambda item: item[1], reverse=True)
+    against = sorted(((k, v) for k, v in contributions.items() if v < -1e-8),
+                     key=lambda item: item[1])
+    if support:
+        reasons = " and ".join(labels[k] for k, _ in support[:2])
+        text = f"{winner} gets the nod mainly from {reasons}."
+    else:
+        text = f"The model has no meaningful separation between {winner} and {opponent}; this is effectively a coin flip."
+    if against:
+        text += f" The main counterweight is {labels[against[0][0]]}, which favors {opponent}."
+    if confidence < 0.60 and support:
+        text += " The overall edge is small, so this remains a toss-up."
+    return text
+
 def predict_week(current_summary, prior_summary, schedule, target_week, include_completed=False):
     target_week = int(target_week)
     scores, weeks = build_weekly_scores(current_summary)
@@ -229,6 +256,16 @@ def predict_week(current_summary, prior_summary, schedule, target_week, include_
         else:
             winner = g["away_team"]; side = "Away"; conf = away_prob
 
+        direction = 1 if side == "Home" else -1
+        contributions = {
+            "offense": direction * CALIBRATION_SLOPE * 1.10 * OFFENSE_WEIGHT * (hoff-aoff),
+            "defense": direction * CALIBRATION_SLOPE * 1.10 * DEFENSE_WEIGHT * (hdef-adef),
+            "schedule": direction * CALIBRATION_SLOPE * 1.10 * SOS_WEIGHT * (hsos-asos),
+            "venue": direction * CALIBRATION_SLOPE * 1.10 * venue_component,
+            "conference": direction * conference_log_odds(g),
+        }
+        opponent = g["away_team"] if side == "Home" else g["home_team"]
+        explanation = pick_narrative(winner, opponent, conf, contributions)
         rows.append({
             "Game ID": g.get("game_id"),
             "Week": target_week,
@@ -243,6 +280,7 @@ def predict_week(current_summary, prior_summary, schedule, target_week, include_
             "Predicted Side": side,
             "Neutral Site": neutral,
             "Model Version": MODEL_VERSION,
+            "Pick Explanation": explanation,
         })
 
     return pd.DataFrame(rows).sort_values("Confidence", ascending=False).reset_index(drop=True) if rows else pd.DataFrame()
