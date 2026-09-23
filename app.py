@@ -1,6 +1,8 @@
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from html import escape
+from html.parser import HTMLParser
+import re
 import json
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
@@ -658,6 +660,184 @@ def team_data_details(team_id, published, derived, week):
 
 
 
+
+# Free, daily-cached red-zone game logs. Kept separate from model inputs.
+class RedZoneHTMLParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.rows, self.links = [], []
+        self.row = self.cell = self.link = None
+    def handle_starttag(self, tag, attrs):
+        if tag == "tr":
+            self.row = []
+        if tag in ("td", "th") and self.row is not None:
+            self.cell = ""
+        if tag == "a":
+            self.link = [dict(attrs).get("href", ""), ""]
+    def handle_data(self, data):
+        if self.cell is not None:
+            self.cell += data
+        if self.link is not None:
+            self.link[1] += data
+    def handle_endtag(self, tag):
+        if tag in ("td", "th") and self.cell is not None:
+            self.row.append(" ".join(self.cell.split()))
+            self.cell = None
+        if tag == "tr" and self.row is not None:
+            self.rows.append(self.row)
+            self.row = None
+        if tag == "a" and self.link is not None:
+            self.links.append(self.link)
+            self.link = None
+
+
+def red_zone_name(name):
+    name = re.sub(r"[^a-z0-9]", "", str(name).lower())
+    aliases = {"connecticut": "uconn", "massachusetts": "umass",
+               "miamiohio": "miamioh", "miamifl": "miami",
+               "louisianalafayette": "louisiana", "middletennesseestate": "middletennessee",
+               "sanjosestate": "sanjosestate", "southernmississippi": "southernmiss",
+               "floridainternational": "fiu", "centralflorida": "ucf",
+               "southflorida": "usf", "texaselpaso": "utep",
+               "texassanantonio": "utsa", "hawaii": "hawaii"}
+    return aliases.get(name, name)
+
+
+def fetch_red_zone_html(url):
+    with urlopen(url, timeout=12) as response:
+        html = response.read().decode("utf-8", errors="replace")
+    parser = RedZoneHTMLParser()
+    parser.feed(html)
+    return html, parser
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def red_zone_team_index(year):
+    _, parser = fetch_red_zone_html(
+        f"https://cfbstats.com/{int(year)}/leader/national/team/offense/split01/category27/sort01.html")
+    index = {}
+    for href, name in parser.links:
+        match = re.fullmatch(r"/" + str(int(year)) + r"/team/(\d+)/redzone/offense/split.html", href)
+        if match:
+            key = red_zone_name(name)
+            if key in index and index[key] != match.group(1):
+                raise ValueError("Ambiguous red-zone team name")
+            index[key] = match.group(1)
+    if len(index) < 100:
+        raise ValueError("Incomplete red-zone team index")
+    return index
+
+
+def parse_red_zone_log(html, year):
+    parser = RedZoneHTMLParser()
+    parser.feed(html)
+    through = re.search(r"through\s+(\d{2}/\d{2}/\d{4})", html)
+    if not through:
+        raise ValueError("Missing red-zone update date")
+    updated = datetime.strptime(through.group(1), "%m/%d/%Y").date()
+    records = {}
+    for row in parser.rows:
+        if not row or not re.fullmatch(r"\d{2}/\d{2}/\d{2}", row[0]):
+            continue
+        if len(row) != 11:
+            raise ValueError("Unexpected red-zone game row")
+        date = datetime.strptime(row[0], "%m/%d/%y").date()
+        if date.year not in (int(year), int(year)+1):
+            raise ValueError("Wrong red-zone season")
+        attempts, scores, td, fg = [int(row[i]) for i in (4, 5, 7, 9)]
+        if min(attempts, scores, td, fg) < 0 or scores != td+fg or scores > attempts:
+            raise ValueError("Invalid red-zone counts")
+        opponent = red_zone_name(row[1].lstrip("@+ "))
+        key = (date.isoformat(), opponent)
+        if key in records:
+            raise ValueError("Duplicate red-zone game")
+        records[key] = (attempts, td)
+    return {"records": records, "through": updated.isoformat()}
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def red_zone_logs(year, source_id):
+    result = {}
+    for unit in ("offense", "defense"):
+        url = f"https://cfbstats.com/{int(year)}/team/{int(source_id)}/redzone/{unit}/gamelog.html"
+        html, _ = fetch_red_zone_html(url)
+        result[unit] = parse_red_zone_log(html, year)
+    result["checked"] = datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")
+    result["source_id"] = str(source_id)
+    return result
+
+
+def red_zone_totals(logs, schedule, tid, week, year, kickoff):
+    required = {"season", "week", "home_id", "away_id", "home_team", "away_team",
+                "home_division", "away_division", "completed", "start_date"}
+    if not required.issubset(schedule.columns) or pd.isna(kickoff):
+        return None
+    past = schedule[pd.to_numeric(schedule["season"], errors="coerce").eq(int(year))
+                    & pd.to_numeric(schedule["week"], errors="coerce").lt(int(week))]
+    past = past[past["completed"].astype(str).str.lower().isin(["true", "1", "1.0", "t", "yes"])]
+    past = past[past["home_division"].astype(str).str.lower().eq("fbs")
+                & past["away_division"].astype(str).str.lower().eq("fbs")]
+    past = past[(pd.to_numeric(past.home_id, errors="coerce") == int(tid))
+                | (pd.to_numeric(past.away_id, errors="coerce") == int(tid))]
+    totals = {"offense": [0, 0], "defense": [0, 0]}
+    seen = set()
+    for _, game in past.iterrows():
+        start = pd.to_datetime(game.start_date, utc=True, errors="coerce")
+        if pd.isna(start) or start >= kickoff:
+            return None
+        opponent = game.away_team if int(game.home_id) == int(tid) else game.home_team
+        key = (start.tz_convert("America/Chicago").date().isoformat(), red_zone_name(opponent))
+        if key in seen:
+            return None
+        seen.add(key)
+        for unit in totals:
+            record = logs[unit]["records"].get(key)
+            if record is None:
+                return None
+            totals[unit][0] += record[0]
+            totals[unit][1] += record[1]
+    return totals
+
+
+def red_zone_matchup_html(pick, game, schedule, year, week, index):
+    if float(pick["Confidence"]) >= .80 or len(game) != 1:
+        return ""
+    g = game.iloc[0]
+    kickoff = pd.to_datetime(g.get("start_date"), utc=True, errors="coerce")
+    totals, sources = {}, {}
+    try:
+        for side in ("home", "away"):
+            source_id = index.get(red_zone_name(g[side+"_team"]))
+            if source_id is None:
+                return ""
+            sources[side] = red_zone_logs(year, source_id)
+            totals[side] = red_zone_totals(sources[side], schedule, g[side+"_id"], week, year, kickoff)
+            if totals[side] is None:
+                return ""
+    except (OSError, ValueError, KeyError, TypeError, OverflowError):
+        return ""
+    lines = []
+    for attack, defend in (("home", "away"), ("away", "home")):
+        attempts, td = totals[attack]["offense"]
+        allowed_attempts, allowed_td = totals[defend]["defense"]
+        if min(attempts, allowed_attempts) < 10:
+            continue
+        # Display the comparison without treating a difference between unlike
+        # offensive/defensive rates as a calibrated matchup advantage.
+        lines.append(f"{g[attack+'_team']} scored TDs on {td}/{attempts} red-zone trips ({td/attempts:.0%}); "
+                     f"{g[defend+'_team']} allowed TDs on {allowed_td}/{allowed_attempts} opponent trips ({allowed_td/allowed_attempts:.0%}).")
+    if not lines:
+        return ""
+    body = '<div class="pick-label">Red-zone touchdown comparison</div>' + "".join("<p>"+escape(line)+"</p>" for line in lines)
+    body += '<p class="venue-label">Completed FBS games before this week only. At least 10 trips per compared unit; this display threshold is not a validated betting signal. Trip conversion differs from successful-play rate and does not change the model.</p>'
+    for side in ("home", "away"):
+        data = sources[side]
+        through = min(data["offense"]["through"], data["defense"]["through"])
+        url = f"https://cfbstats.com/{int(year)}/team/{int(data['source_id'])}/redzone/offense/gamelog.html"
+        body += f'<p class="venue-label"><a href="{url}" target="_blank" rel="noopener noreferrer">{escape(str(g[side+"_team"]))} · CFBStats</a>: source through {escape(through)}; checked {escape(data["checked"])}. Later games are excluded.</p>'
+    return body
+
+
 def matchup_insights_html(pick, game, published, schedule, week, derived_ids):
     """Descriptive pregame comparisons only; never alter model probabilities."""
     if float(pick["Confidence"]) >= .80 or len(game) != 1:
@@ -745,7 +925,7 @@ def matchup_insights_html(pick, game, published, schedule, week, derived_ids):
     body += (f'<p class="venue-label">Published through Week {int(week)-1}. '
              'At least 2 verified games and 100 plays per unit; comparisons require 30 eligible FBS teams. '
              'Screens use gaps of 3 percentage points for success rate and 1.5 for explosive plays on both sides of the matchup. '
-             'These are descriptive thresholds, not backtested betting signals. Red-zone comparisons are withheld until opportunity counts are available.</p>')
+             'These are descriptive thresholds, not backtested betting signals. Red-zone trip comparisons appear separately below when verified opportunity counts are available.</p>')
     return panel(body)
 
 
@@ -1240,7 +1420,22 @@ with cards_tab:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
     else:
         cards = []
-        for _, r in filtered.iterrows():
+        rz_index = {}
+        if filtered["Confidence"].lt(.80).any():
+            try:
+                rz_index = red_zone_team_index(season)
+            except (OSError, ValueError):
+                pass
+        rz_cards = {}
+        if rz_index:
+            def load_rz_card(item):
+                idx, pick = item
+                match = games[(games["home_team"] == pick["Home Team"]) & (games["away_team"] == pick["Away Team"])]
+                return idx, red_zone_matchup_html(pick, match, schedule, season, selected_week, rz_index)
+            with st.spinner("Checking red-zone matchup data..."):
+                with ThreadPoolExecutor(max_workers=2) as pool:
+                    rz_cards = dict(pool.map(load_rz_card, list(filtered[filtered["Confidence"].lt(.80)].iterrows())))
+        for card_idx, r in filtered.iterrows():
             badge_class = "badge close" if r["Confidence"] < .7 else "badge"
             risk = '<div class="risk-note">Away-team pick · ' + escape(str(r["Venue Risk"])) + ' venue risk</div>' if r["Venue Risk"] != "Normal" else ""
             venue = "Neutral site" if r["Neutral Site"] else "Away at home"
@@ -1294,6 +1489,9 @@ with cards_tab:
                     note += " Limited data: " + "; ".join(caveats) + "."
                 explanation_html = '<div style="margin-top:12px"><div class="pick-label">Why this pick</div><p style="margin:6px 0">' + escape(explanation) + '</p><details class="card-details"><summary>About this reasoning</summary><p>' + escape(note) + ' This explains the pregame model, not live scores or betting value. It does not analyze specific run/pass matchups or injuries.</p></details></div>'
             matchup_html = matchup_insights_html(r, game, published_current, schedule, selected_week, derived_team_ids)
+            red_zone_html = rz_cards.get(card_idx, "")
+            if red_zone_html:
+                matchup_html = matchup_html.replace("</details>", red_zone_html + "</details>")
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
