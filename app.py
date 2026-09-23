@@ -657,6 +657,98 @@ def team_data_details(team_id, published, derived, week):
     ), metrics
 
 
+
+def matchup_insights_html(pick, game, published, schedule, week, derived_ids):
+    """Descriptive pregame comparisons only; never alter model probabilities."""
+    if float(pick["Confidence"]) >= .80 or len(game) != 1:
+        return ""
+    def number(value):
+        try:
+            value = float(value)
+            return value if math.isfinite(value) else None
+        except (ValueError, TypeError):
+            return None
+    def panel(body):
+        return '<details class="card-details"><summary>Matchup insights</summary>' + body + '<p class="venue-label">Descriptive comparisons of published pregame rates, not additional model inputs or predicted matchup rates. Opponent quality and small samples can affect these numbers.</p></details>'
+    needed = {"team_id", "through_week", "valid_games", "plays_off", "plays_def"}
+    if not needed.issubset(published.columns):
+        return panel("<p>Insufficient verified sample information for matchup comparisons.</p>")
+    g = game.iloc[0]
+    ids = [int(g["home_id"]), int(g["away_id"])]
+    if any(tid in derived_ids for tid in ids):
+        return panel("<p>Matchup comparisons are withheld because a team uses provisional metrics.</p>")
+    # Use only the immediately preceding week's published snapshot.
+    pool = published[pd.to_numeric(published["through_week"], errors="coerce").eq(int(week)-1)].copy()
+    fbs_ids = set()
+    if {"home_division", "away_division"}.issubset(schedule.columns):
+        for side in ("home", "away"):
+            rows = schedule[schedule[side+"_division"].astype(str).str.lower().eq("fbs")]
+            fbs_ids.update(pd.to_numeric(rows[side+"_id"], errors="coerce").dropna().astype(int))
+    if not fbs_ids:
+        return panel("<p>FBS reference data is unavailable for matchup comparisons.</p>")
+    pool = pool[pd.to_numeric(pool["team_id"], errors="coerce").isin(fbs_ids)]
+    pool = pool[pd.to_numeric(pool["valid_games"], errors="coerce").ge(2)
+                & pd.to_numeric(pool["plays_off"], errors="coerce").ge(100)
+                & pd.to_numeric(pool["plays_def"], errors="coerce").ge(100)]
+    selected = {}
+    for tid in ids:
+        rows = pool[pd.to_numeric(pool["team_id"], errors="coerce").eq(tid)]
+        if len(rows) != 1:
+            return panel("<p>Not enough recent published data: each team needs at least two verified games and 100 recorded plays on each side of the ball through the previous week.</p>")
+        selected[tid] = rows.iloc[0]
+    candidates = []
+    metrics = [("success", "Successful plays", .03),
+               ("explosive", "Explosive plays", .015),
+               ("red_zone_success", "Red-zone successful plays", .05)]
+    for attacking, defending in (("home", "away"), ("away", "home")):
+        offense = selected[int(g[attacking+"_id"])]
+        defense = selected[int(g[defending+"_id"])]
+        for metric, label, gap in metrics:
+            off_col, def_col = metric+"_off", metric+"_def"
+            if off_col not in pool or def_col not in pool:
+                continue
+            # Red-zone denominators are not in the current feed: omit the
+            # comparison rather than infer reliability from total play counts.
+            if metric == "red_zone_success":
+                continue
+            ov, dv = number(offense.get(off_col)), number(defense.get(def_col))
+            if ov is None or dv is None or not (0 <= ov <= 1 and 0 <= dv <= 1):
+                continue
+            refs = []
+            for col in (off_col, def_col):
+                values = pd.to_numeric(pool[col], errors="coerce")
+                values = values[values.between(0, 1)]
+                if len(values) < 30:
+                    break
+                refs.append(float(values.median()))
+            if len(refs) != 2:
+                continue
+            om, dm = refs
+            if ov >= om+gap and dv >= dm+gap:
+                interpretation = "Potential offensive opportunity"
+                strength = min((ov-om)/gap, (dv-dm)/gap)
+            elif ov <= om-gap and dv <= dm-gap:
+                interpretation = "Potential defensive constraint"
+                strength = min((om-ov)/gap, (dm-dv)/gap)
+            else:
+                continue
+            attack_name, defend_name = str(g[attacking+"_team"]), str(g[defending+"_team"])
+            text = (f"{interpretation}: {attack_name} vs. {defend_name}. "
+                    f"{label}: {attack_name} offense {ov:.1%}; {defend_name} defense allows {dv:.1%}. "
+                    f"Eligible FBS medians: {om:.1%} on offense and {dm:.1%} allowed.")
+            candidates.append((strength, text))
+    candidates.sort(key=lambda item: item[0], reverse=True)
+    if candidates:
+        body = "".join("<p>"+escape(text)+"</p>" for _, text in candidates[:2])
+    else:
+        body = "<p>No clear success-rate or explosive-play matchup stands out under these screening rules.</p>"
+    body += (f'<p class="venue-label">Published through Week {int(week)-1}. '
+             'At least 2 verified games and 100 plays per unit; comparisons require 30 eligible FBS teams. '
+             'Screens use gaps of 3 percentage points for success rate and 1.5 for explosive plays on both sides of the matchup. '
+             'These are descriptive thresholds, not backtested betting signals. Red-zone comparisons are withheld until opportunity counts are available.</p>')
+    return panel(body)
+
+
 def team_logo_url(team_id):
     """ESPN's public college-football logo endpoint, keyed by team ID."""
     try:
@@ -1201,6 +1293,7 @@ with cards_tab:
                 if caveats:
                     note += " Limited data: " + "; ".join(caveats) + "."
                 explanation_html = '<div style="margin-top:12px"><div class="pick-label">Why this pick</div><p style="margin:6px 0">' + escape(explanation) + '</p><details class="card-details"><summary>About this reasoning</summary><p>' + escape(note) + ' This explains the pregame model, not live scores or betting value. It does not analyze specific run/pass matchups or injuries.</p></details></div>'
+            matchup_html = matchup_insights_html(r, game, published_current, schedule, selected_week, derived_team_ids)
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
@@ -1208,7 +1301,7 @@ with cards_tab:
 <div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{explanation_html}{moneylines}{r.get("Line Movement HTML", "")}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{explanation_html}{matchup_html}{moneylines}{r.get("Line Movement HTML", "")}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
         for card_index, (_, pick) in enumerate(filtered.iterrows()):
             card = cards[card_index].replace('<article class="pick-card">', '').replace('</article>', '')
             header, rest = card.split("<!--away-data-->", 1)
