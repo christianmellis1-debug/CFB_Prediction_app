@@ -30,7 +30,7 @@ st.set_page_config(page_title="College Football Predictor", page_icon="assets/cf
 
 TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
-    ("filters", None, "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
+    ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
     ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines, and live or final scores. Confidence is an estimate, not a guarantee."),
     ("compare", "Compare picks", "Compare the slate", "This compact table lets you compare picks without scrolling through individual cards. It follows your matchup filters."),
     ("results", "Model results", "Check model performance", "Compare wins, losses, and accuracy by confidence level for the selected week or season to date. Only final, decisive games count toward accuracy; matchup filters do not affect this view."),
@@ -1211,9 +1211,48 @@ st.markdown("""
  [class*="st-key-matchup_card_"] {padding:13px;border-radius:15px;}
  .team-identity {font-size:14px;}
 }
+
+/* Matchday dashboard: redesigned hierarchy and distinct destination views. */
+.hero {background:#102c29;padding:22px 26px;border-radius:18px;margin:0 0 6px;border-left:5px solid #b5ed73;}
+.hero:after {width:340px;height:340px;right:-80px;top:-220px;border-color:#b5ed7335;}
+.hero-mark {display:none;}
+.hero h1 {font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-1.8px;}
+.brand-dot {color:#b5ed73;}
+.eyebrow {color:#b5ed73;font-size:10px;letter-spacing:2px;}
+.hero p {color:#d5e5df;font-size:13px;margin-top:4px;}
+.week-dashboard {margin:4px 0 14px;padding:20px 22px;background:var(--secondary-background-color);border:1px solid #80978b35;border-radius:18px;}
+.week-heading {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+.section-kicker {font-size:10px;letter-spacing:1.8px;opacity:.75;font-weight:700;}
+.week-heading h2 {font-size:26px;letter-spacing:-1px;margin:2px 0 0;padding:0;}
+.week-state {font-size:11px;padding:7px 10px;border:1px solid #80978b50;border-radius:30px;white-space:nowrap;}
+.dashboard-metrics {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+.dashboard-metrics>div {border-left:3px solid #58ae87;padding-left:12px;}
+.dashboard-metrics strong {font-size:26px;font-variant-numeric:tabular-nums;letter-spacing:-.7px;display:block;}
+.dashboard-metrics span {font-size:11px;opacity:.8;display:block;margin-top:3px;}
+[data-testid="stTabs"] [data-baseweb="tab-list"] {background:var(--secondary-background-color);padding:8px;border-radius:14px;gap:5px;}
+[data-testid="stTabs"] [data-baseweb="tab"] {border:0;font-weight:650;}
+[class*="st-key-matchup_card_"] {border-top:3px solid #58ae87;}
+.team-line {padding:10px 0;margin:0;border-bottom:1px solid #80978b25;}
+.team-identity {font-size:17px;}
+.pick-result {display:grid;grid-template-columns:1fr auto;gap:2px 12px;background:#58ae8710;border:0;border-left:3px solid #58ae87;border-radius:0 10px 10px 0;}
+.pick-result .pick-label,.pick-result .conf-track {grid-column:1/-1;}
+.pick-result .pick-winner {font-size:18px;margin:2px 0 6px;}
+.pick-result .conf-row {align-items:center;gap:8px;margin:0;}
+.pick-result .conf-row>span {display:none;}
+.pick-result .conf-row strong {font-size:22px;}
+@media(max-width:640px){
+ .hero {padding:16px 18px;}
+ .hero h1 {font-size:32px;}
+ .week-dashboard {padding:16px;}
+ .dashboard-metrics {grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 10px;}
+ .dashboard-metrics strong {font-size:25px;}
+ .week-heading {margin-bottom:16px;}
+ .team-identity {font-size:15px;}
+ .pick-result .pick-winner {font-size:17px;}
+}
 </style>
-<div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">Saturday scouting report · College football</div>
-<h1>Your weekly game plan.</h1><p>Picks, live scores & your betting dashboard.</p></div></div></div>
+<div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
+<h1>CFB Predictor<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
 """, unsafe_allow_html=True)
 
 show_app_tour()
@@ -1289,6 +1328,10 @@ if "start_date" in schedule:
 with week_col:
     selected_week = st.selectbox("Week", weeks, index=weeks.index(default_week), format_func=lambda w: f"Week {w}")
 games = schedule[schedule["week"] == selected_week]
+dashboard_summary = st.empty()
+cards_tab, value_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Value shortlist", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
+with about_tab:
+    feed_details = st.expander("Feed health & data notes", expanded=False)
 
 try:
     with st.spinner("Loading team statistics and generating predictions..."):
@@ -1301,30 +1344,31 @@ except Exception as exc:
     st.info("Try Refresh all data. If the selected season is not published yet, choose an available season or supply CSV overrides.")
     st.stop()
 
-eligible = current[current["through_week"] < selected_week]
-missing_team_ids = set()
-missing_team_names = []
-derived_team_ids = set(derived_team_data)
-if derived_team_ids:
-    derived_names = {}
-    for _, game in games.iterrows():
-        derived_names[int(game["home_id"])] = str(game["home_team"])
-        derived_names[int(game["away_id"])] = str(game["away_team"])
-    derived_list = sorted(derived_names[tid] for tid in derived_team_ids if tid in derived_names)
-    st.info(f"Schedule-derived fallback statistics are being used for: {', '.join(derived_list)}. These provisional metrics combine prior profiles with completed-game scoring data until the advanced summary feed catches up.")
-if selected_week > 1:
-    team_ids = set(games["home_id"]) | set(games["away_id"])
-    missing_team_ids = team_ids - set(eligible["team_id"])
-    if missing_team_ids:
-        names = {}
+with feed_details:
+    eligible = current[current["through_week"] < selected_week]
+    missing_team_ids = set()
+    missing_team_names = []
+    derived_team_ids = set(derived_team_data)
+    if derived_team_ids:
+        derived_names = {}
         for _, game in games.iterrows():
-            names[int(game["home_id"])] = str(game["home_team"])
-            names[int(game["away_id"])] = str(game["away_team"])
-        missing_team_names = sorted(names[tid] for tid in missing_team_ids if tid in names)
-        st.warning(f"{len(missing_team_names)} team{'s' if len(missing_team_names) != 1 else ''} have no published pregame statistics for this week: {', '.join(missing_team_names)}. Their predictions use the model's prior-data fallback.")
-        st.caption("A team may have played without having updated pregame metrics. FCS opponents are excluded from the schedule-based fallback, so a team whose only completed games were against FCS opponents (such as Northwestern in Week 3) has no qualifying scoring data for that fallback. Advanced team-summary data can also be delayed or missing. These picks rely on prior data until eligible current-season metrics are available.")
-    if not eligible.empty and eligible["through_week"].max() < selected_week - 1:
-        st.warning(f"Published statistics currently extend through week {int(eligible['through_week'].max())}. Predictions use the latest available pregame snapshot.")
+            derived_names[int(game["home_id"])] = str(game["home_team"])
+            derived_names[int(game["away_id"])] = str(game["away_team"])
+        derived_list = sorted(derived_names[tid] for tid in derived_team_ids if tid in derived_names)
+        st.info(f"Schedule-derived fallback statistics are being used for: {', '.join(derived_list)}. These provisional metrics combine prior profiles with completed-game scoring data until the advanced summary feed catches up.")
+    if selected_week > 1:
+        team_ids = set(games["home_id"]) | set(games["away_id"])
+        missing_team_ids = team_ids - set(eligible["team_id"])
+        if missing_team_ids:
+            names = {}
+            for _, game in games.iterrows():
+                names[int(game["home_id"])] = str(game["home_team"])
+                names[int(game["away_id"])] = str(game["away_team"])
+            missing_team_names = sorted(names[tid] for tid in missing_team_ids if tid in names)
+            st.warning(f"{len(missing_team_names)} team{'s' if len(missing_team_names) != 1 else ''} have no published pregame statistics for this week: {', '.join(missing_team_names)}. Their predictions use the model's prior-data fallback.")
+            st.caption("A team may have played without having updated pregame metrics. FCS opponents are excluded from the schedule-based fallback, so a team whose only completed games were against FCS opponents (such as Northwestern in Week 3) has no qualifying scoring data for that fallback. Advanced team-summary data can also be delayed or missing. These picks rely on prior data until eligible current-season metrics are available.")
+        if not eligible.empty and eligible["through_week"].max() < selected_week - 1:
+            st.warning(f"Published statistics currently extend through week {int(eligible['through_week'].max())}. Predictions use the latest available pregame snapshot.")
 try:
     pred = predict_all_games(current, prior, schedule, selected_week)
 except Exception as e:
@@ -1354,7 +1398,7 @@ if live_snapshot.get("missing_event_ids"):
 live_games = overlay_live_scores(games, live_snapshot["games"])
 pred = attach_results(pred, live_games)
 if live_snapshot["retrieved"]:
-    st.caption("Live scores via ESPN · last retrieved " + live_snapshot["retrieved"] + ". Updates about every minute while open; feed delays are possible. Predictions remain pregame estimates.")
+    feed_details.caption("Live scores via ESPN · last retrieved " + live_snapshot["retrieved"] + ". Updates about every minute while open; feed delays are possible. Predictions remain pregame estimates.")
 
 if date_range:
     try:
@@ -1369,69 +1413,63 @@ if st.session_state.get("moneyline_history_season") != season:
 pred["Line Movement HTML"] = [line_movement_html(row, line_history, odds_snapshot["retrieved"]) for _, row in pred.iterrows()]
 if odds_snapshot.get("lookup_errors"):
     st.warning(f"Individual odds lookups failed for {len(odds_snapshot['lookup_errors'])} games. Missing lines may reflect a retrieval error; try Refresh all feeds now.")
-st.caption(f"Moneyline coverage: {int(pred['Bet Line'].ne('Unavailable').sum())} of {len(pred)} model picks have a price. Unavailable means no matching price was retrieved from the connected feeds, not that every sportsbook lacks one.")
+feed_details.caption(f"Moneyline coverage: {int(pred['Bet Line'].ne('Unavailable').sum())} of {len(pred)} model picks have a price. Unavailable means no matching price was retrieved from the connected feeds, not that every sportsbook lacks one.")
 
-st.subheader(f"Week {selected_week} at a glance")
 awaiting_count = int(pred["Status"].ne("Final").sum())
 value_count = int(pred["Bet Signal"].isin(["Strong value", "Value"]).sum())
-st.markdown(f"""<div class="overview">
-<div class="stat"><strong>{awaiting_count}</strong><span>Awaiting final</span></div>
-<div class="stat"><strong>{value_count}</strong><span>Model value picks</span></div>
-<div class="stat"><strong>{len(pred)}</strong><span>Total matchups</span></div></div>""", unsafe_allow_html=True)
 high_count = int((pred["Confidence"] >= .8).sum())
 close_count = int((pred["Confidence"] < .6).sum())
 graded = pred[pred["Pick Result"].isin(["Correct", "Incorrect"])]
 correct_count = int(graded["Pick Result"].eq("Correct").sum())
 accuracy = f"{correct_count / len(graded):.1%}" if len(graded) else "—"
-st.markdown(f"""<div class="overview">
-<div class="stat"><strong>{int(pred['Status'].eq('Final').sum())} / {len(pred)}</strong><span>Final scores available</span></div>
-<div class="stat"><strong>{correct_count}–{len(graded) - correct_count}</strong><span>Correct – incorrect picks</span></div>
-<div class="stat"><strong>{accuracy}</strong><span>Weekly accuracy · graded games</span></div></div>""", unsafe_allow_html=True)
-schedule_time = original_schedule.attrs.get("fetched_at", "Uploaded CSV" if schedule_file is not None else "Unknown")
-stats_time = published_current.attrs.get("fetched_at", "Uploaded CSV" if current_file is not None else "Unknown")
-st.caption(f"Last fetched · Scores: {schedule_time} · Odds: {odds_snapshot['retrieved'] or 'Unavailable'} · Team stats: {stats_time}")
-st.caption("Fetch times show when the app retrieved the feeds, not when the provider updated them. Scores and odds refresh every 5 minutes; team stats hourly.")
-if st.button("Refresh all feeds now"):
-    download_summary.clear()
-    download_live_scores.clear()
-    download_live_event.clear()
-    download_schedule.clear()
-    download_market_odds.clear()
-    download_archived_event.clear()
-    download_event_moneylines.clear()
-    st.rerun()
-st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
-st.subheader(f"Week {selected_week} picks & results")
-st.caption("DraftKings moneylines via ESPN, with another sportsbook shown when DraftKings is unavailable · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
-if odds_snapshot["retrieved"]:
-    st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
-st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
-value_picks = pred[pred["Bet Signal"].isin(["Strong value", "Value"])].sort_values(["Bet Signal", "Expected Value"], ascending=[True, False])
-if not value_picks.empty:
-    st.markdown("### Model value picks")
-    st.caption("Weekly shortlist · includes all games regardless of the filters below.")
-    with st.expander("How value picks are selected"):
-        st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement. Completed weeks use archived closing prices and include the actual result.")
-    value_show = value_picks.head(12).copy()
-    value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
-    value_show["Model chance"] = value_show["Confidence"].map(lambda v: f"{v:.1%}")
-    value_show["Break-even"] = value_show["Market Implied %"].map(lambda v: f"{v:.1%}")
-    value_show["Edge"] = value_show["Model Edge"].map(lambda v: f"{v * 100:+.1f} pts")
-    value_show["Est. profit / $1"] = value_show["Expected Value"].map(lambda v: f"{v:+.2f}")
-    value_show = value_show.rename(columns={"Predicted Winner": "Pick", "Bet Line": "Odds",
-                                            "ML Source": "Sportsbook", "Pick Result": "Result"})
-    value_show = value_show[["Pick", "Odds", "Model chance", "Result", "Matchup", "Break-even",
-                             "Edge", "Est. profit / $1", "Sportsbook", "Odds Type", "Final Score"]]
-    st.dataframe(value_show, hide_index=True, use_container_width=True,
-                 height=min(35 * (len(value_show) + 1) + 3, 320))
-    st.caption(f"Showing {len(value_show)} of {len(value_picks)} value picks. Scroll within the table for more rows or columns.")
-    if pred["Status"].eq("Final").any():
-        graded_value = value_picks[value_picks["Pick Result"].isin(["Correct", "Incorrect"])]
-        if not graded_value.empty:
-            wins = int(graded_value["Pick Result"].eq("Correct").sum())
-            st.caption(f"Highlighted historical picks: {wins}–{len(graded_value) - wins} ({wins / len(graded_value):.1%} accuracy).")
-else:
-    st.info("No current game has both a published moneyline and enough model value to qualify as a highlighted opportunity.")
+week_state = "All games final" if awaiting_count == 0 else f"{awaiting_count} awaiting final"
+dashboard_summary.markdown(f"""<section class="week-dashboard"><div class="week-heading"><div><span class="section-kicker">{season} SEASON</span><h2>Week {selected_week}</h2></div><span class="week-state">{week_state}</span></div><div class="dashboard-metrics"><div><strong>{len(pred)}</strong><span>Matchups</span></div><div><strong>{correct_count}–{len(graded)-correct_count}</strong><span>Pick record</span></div><div><strong>{accuracy}</strong><span>Graded accuracy</span></div><div><strong>{value_count}</strong><span>Model value picks</span></div></div></section>""", unsafe_allow_html=True)
+with feed_details:
+    schedule_time = original_schedule.attrs.get("fetched_at", "Uploaded CSV" if schedule_file is not None else "Unknown")
+    stats_time = published_current.attrs.get("fetched_at", "Uploaded CSV" if current_file is not None else "Unknown")
+    st.caption(f"Last fetched · Scores: {schedule_time} · Odds: {odds_snapshot['retrieved'] or 'Unavailable'} · Team stats: {stats_time}")
+    st.caption("Fetch times show when the app retrieved the feeds, not when the provider updated them. Live scores refresh about every minute while open; schedule and odds every 5 minutes; team stats hourly.")
+    if st.button("Refresh all feeds now"):
+        download_summary.clear()
+        download_live_scores.clear()
+        download_live_event.clear()
+        download_schedule.clear()
+        download_market_odds.clear()
+        download_archived_event.clear()
+        download_event_moneylines.clear()
+        st.rerun()
+    st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
+    st.caption("DraftKings moneylines via ESPN, with another sportsbook shown when DraftKings is unavailable · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
+    if odds_snapshot["retrieved"]:
+        st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
+    st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
+with value_tab:
+    value_picks = pred[pred["Bet Signal"].isin(["Strong value", "Value"])].sort_values(["Bet Signal", "Expected Value"], ascending=[True, False])
+    if not value_picks.empty:
+        st.markdown("### Model value picks")
+        st.caption("Weekly shortlist · includes all games regardless of the filters below.")
+        with st.expander("How value picks are selected"):
+            st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement. Completed weeks use archived closing prices and include the actual result.")
+        value_show = value_picks.head(12).copy()
+        value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
+        value_show["Model chance"] = value_show["Confidence"].map(lambda v: f"{v:.1%}")
+        value_show["Break-even"] = value_show["Market Implied %"].map(lambda v: f"{v:.1%}")
+        value_show["Edge"] = value_show["Model Edge"].map(lambda v: f"{v * 100:+.1f} pts")
+        value_show["Est. profit / $1"] = value_show["Expected Value"].map(lambda v: f"{v:+.2f}")
+        value_show = value_show.rename(columns={"Predicted Winner": "Pick", "Bet Line": "Odds",
+                                                "ML Source": "Sportsbook", "Pick Result": "Result"})
+        value_show = value_show[["Pick", "Odds", "Model chance", "Result", "Matchup", "Break-even",
+                                 "Edge", "Est. profit / $1", "Sportsbook", "Odds Type", "Final Score"]]
+        st.dataframe(value_show, hide_index=True, use_container_width=True,
+                     height=min(35 * (len(value_show) + 1) + 3, 320))
+        st.caption(f"Showing {len(value_show)} of {len(value_picks)} value picks. Scroll within the table for more rows or columns.")
+        if pred["Status"].eq("Final").any():
+            graded_value = value_picks[value_picks["Pick Result"].isin(["Correct", "Incorrect"])]
+            if not graded_value.empty:
+                wins = int(graded_value["Pick Result"].eq("Correct").sum())
+                st.caption(f"Highlighted historical picks: {wins}–{len(graded_value) - wins} ({wins / len(graded_value):.1%} accuracy).")
+    else:
+        st.info("No current game has both a published moneyline and enough model value to qualify as a highlighted opportunity.")
 def reset_pick_filters():
     defaults = {"pick_query": "", "pick_level": "All confidence levels",
                 "pick_order": "Highest confidence", "pick_status": "All games",
@@ -1441,76 +1479,77 @@ def reset_pick_filters():
         st.session_state[key] = value
 
 
-tour_at("filters")
-st.subheader("Explore matchups")
-with st.expander("Favorite teams & saved filters", expanded=False):
-    team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
-    favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
-    favorites = st.multiselect("Favorite teams", favorite_choices, key="favorite_teams",
-                               help="Saved during this app session. Choose teams, then turn on Favorites only.")
-    st.checkbox("Favorites only", key="pick_favorites_only")
-    st.button("Reset filters", on_click=reset_pick_filters,
-              help="Resets matchup filters and keeps your favorite-team list.")
-search_col, confidence_col, sort_col = st.columns([2, 1, 1])
-with search_col:
-    query = st.text_input("Find a team", placeholder="Search LSU, Texas, Ohio State…", key="pick_query")
-with confidence_col:
-    level = st.selectbox("Confidence", ["All confidence levels", "High · 80%+", "Moderate · 70–80%", "Lean · 60–70%", "Toss-up · under 60%"], key="pick_level")
-with sort_col:
-    order = st.selectbox("Sort by", ["Highest confidence", "Closest matchups", "Home team A–Z"], key="pick_order")
-filtered = pred.copy()
-if query.strip():
-    matched = filtered["Home Team"].str.contains(query.strip(), case=False, regex=False) | filtered["Away Team"].str.contains(query.strip(), case=False, regex=False)
-    filtered = filtered[matched]
-bands = {"High · 80%+": (.8, 1.01), "Moderate · 70–80%": (.7, .8), "Lean · 60–70%": (.6, .7), "Toss-up · under 60%": (0, .6)}
-if level in bands:
-    low, high = bands[level]
-    filtered = filtered[(filtered["Confidence"] >= low) & (filtered["Confidence"] < high)]
-if order == "Closest matchups":
-    filtered = filtered.sort_values("Confidence")
-elif order == "Home team A–Z":
-    filtered = filtered.sort_values("Home Team")
-status_filter = st.radio("Game results", ["All games", "In progress", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True, key="pick_status")
-if status_filter == "In progress":
-    filtered = filtered[filtered["Status"].eq("In progress")]
-elif status_filter == "Final":
-    filtered = filtered[filtered["Status"].eq("Final")]
-elif status_filter == "Awaiting final":
-    filtered = filtered[~filtered["Status"].eq("Final")]
-elif status_filter in ["Correct picks", "Incorrect picks"]:
-    filtered = filtered[filtered["Pick Result"].eq(status_filter.split()[0])]
-
-with st.expander("More filters · odds & team data", expanded=False):
-    odds_col, data_col = st.columns(2)
-    with odds_col:
-        odds_filter = st.selectbox("Moneylines", ["All odds", "Pick has moneyline", "Pick missing moneyline"], key="pick_odds")
-    with data_col:
-        quality_filter = st.selectbox("Team data", ["All data", "Both teams have published stats", "Includes score estimates", "Includes prior data only"], key="pick_quality")
-if st.session_state.get("pick_favorites_only"):
-    filtered = filtered[filtered["Home Team"].isin(favorites) | filtered["Away Team"].isin(favorites)]
-    if not favorites:
-        st.info("Select a favorite team above to see its matchups.")
-if odds_filter == "Pick has moneyline":
-    filtered = filtered[filtered["Bet Line"].ne("Unavailable")]
-elif odds_filter == "Pick missing moneyline":
-    filtered = filtered[filtered["Bet Line"].eq("Unavailable")]
-published_ids = set(published_current.loc[published_current["through_week"] < selected_week, "team_id"].astype(int))
-quality_by_match = {}
-for _, quality_game in games.iterrows():
-    ids = {int(quality_game["home_id"]), int(quality_game["away_id"])}
-    quality_by_match[(quality_game["home_team"], quality_game["away_team"])] = (
-        ids.issubset(published_ids),
-        bool(ids & set(derived_team_data)),
-        bool(ids - published_ids - set(derived_team_data)),
-    )
-if quality_filter != "All data":
-    quality_index = {"Both teams have published stats": 0, "Includes score estimates": 1, "Includes prior data only": 2}[quality_filter]
-    keep = [quality_by_match.get((r["Home Team"], r["Away Team"]), (False, False, True))[quality_index] for _, r in filtered.iterrows()]
-    filtered = filtered.loc[pd.Series(keep, index=filtered.index, dtype=bool)]
-st.caption("Published stats means a pregame summary exists; individual metrics may still be missing.")
-st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
-
-cards_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
+with cards_tab:
+    tour_at("filters")
+    st.subheader("Matchup center")
+    st.caption("Search your team or browse the slate. Open a card’s details for the full analysis.")
+    search_col, confidence_col, sort_col = st.columns([2, 1, 1])
+    with search_col:
+        query = st.text_input("Find a team", placeholder="Search LSU, Texas, Ohio State…", key="pick_query")
+    with confidence_col:
+        level = st.selectbox("Confidence", ["All confidence levels", "High · 80%+", "Moderate · 70–80%", "Lean · 60–70%", "Toss-up · under 60%"], key="pick_level")
+    with sort_col:
+        order = st.selectbox("Sort by", ["Highest confidence", "Closest matchups", "Home team A–Z"], key="pick_order")
+    with st.expander("Favorite teams & saved filters", expanded=False):
+        team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
+        favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
+        favorites = st.multiselect("Favorite teams", favorite_choices, key="favorite_teams",
+                                   help="Saved during this app session. Choose teams, then turn on Favorites only.")
+        st.checkbox("Favorites only", key="pick_favorites_only")
+        st.button("Reset filters", on_click=reset_pick_filters,
+                  help="Resets matchup filters and keeps your favorite-team list.")
+    filtered = pred.copy()
+    if query.strip():
+        matched = filtered["Home Team"].str.contains(query.strip(), case=False, regex=False) | filtered["Away Team"].str.contains(query.strip(), case=False, regex=False)
+        filtered = filtered[matched]
+    bands = {"High · 80%+": (.8, 1.01), "Moderate · 70–80%": (.7, .8), "Lean · 60–70%": (.6, .7), "Toss-up · under 60%": (0, .6)}
+    if level in bands:
+        low, high = bands[level]
+        filtered = filtered[(filtered["Confidence"] >= low) & (filtered["Confidence"] < high)]
+    if order == "Closest matchups":
+        filtered = filtered.sort_values("Confidence")
+    elif order == "Home team A–Z":
+        filtered = filtered.sort_values("Home Team")
+    status_filter = st.radio("Game results", ["All games", "In progress", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True, key="pick_status")
+    if status_filter == "In progress":
+        filtered = filtered[filtered["Status"].eq("In progress")]
+    elif status_filter == "Final":
+        filtered = filtered[filtered["Status"].eq("Final")]
+    elif status_filter == "Awaiting final":
+        filtered = filtered[~filtered["Status"].eq("Final")]
+    elif status_filter in ["Correct picks", "Incorrect picks"]:
+        filtered = filtered[filtered["Pick Result"].eq(status_filter.split()[0])]
+    
+    with st.expander("More filters · odds & team data", expanded=False):
+        odds_col, data_col = st.columns(2)
+        with odds_col:
+            odds_filter = st.selectbox("Moneylines", ["All odds", "Pick has moneyline", "Pick missing moneyline"], key="pick_odds")
+        with data_col:
+            quality_filter = st.selectbox("Team data", ["All data", "Both teams have published stats", "Includes score estimates", "Includes prior data only"], key="pick_quality")
+    if st.session_state.get("pick_favorites_only"):
+        filtered = filtered[filtered["Home Team"].isin(favorites) | filtered["Away Team"].isin(favorites)]
+        if not favorites:
+            st.info("Select a favorite team above to see its matchups.")
+    if odds_filter == "Pick has moneyline":
+        filtered = filtered[filtered["Bet Line"].ne("Unavailable")]
+    elif odds_filter == "Pick missing moneyline":
+        filtered = filtered[filtered["Bet Line"].eq("Unavailable")]
+    published_ids = set(published_current.loc[published_current["through_week"] < selected_week, "team_id"].astype(int))
+    quality_by_match = {}
+    for _, quality_game in games.iterrows():
+        ids = {int(quality_game["home_id"]), int(quality_game["away_id"])}
+        quality_by_match[(quality_game["home_team"], quality_game["away_team"])] = (
+            ids.issubset(published_ids),
+            bool(ids & set(derived_team_data)),
+            bool(ids - published_ids - set(derived_team_data)),
+        )
+    if quality_filter != "All data":
+        quality_index = {"Both teams have published stats": 0, "Includes score estimates": 1, "Includes prior data only": 2}[quality_filter]
+        keep = [quality_by_match.get((r["Home Team"], r["Away Team"]), (False, False, True))[quality_index] for _, r in filtered.iterrows()]
+        filtered = filtered.loc[pd.Series(keep, index=filtered.index, dtype=bool)]
+    st.caption("Published stats means a pregame summary exists; individual metrics may still be missing.")
+    st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
+    
 with cards_tab:
     tour_at("cards")
     with st.expander("Understanding line-movement flags", expanded=False):
@@ -1555,7 +1594,16 @@ with cards_tab:
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
             away_logo_html = f'<img class="team-logo" src="{away_logo}" alt="" />' if away_logo else ""
             home_logo_html = f'<img class="team-logo" src="{home_logo}" alt="" />' if home_logo else ""
-            home_badge, away_badge = "<!--home-data-->", "<!--away-data-->"
+            home_badge, away_badge = "", ""
+            if len(game) == 1:
+                for data_side in ("home", "away"):
+                    data_label, _, _ = team_data_details(game.iloc[0][data_side + "_id"], published_current, derived_team_data, selected_week)
+                    if data_label != "Advanced stats":
+                        data_badge = '<span class="badge close" style="display:inline-block;margin-top:5px">' + escape(data_label) + '</span>'
+                        if data_side == "home":
+                            home_badge = data_badge
+                        else:
+                            away_badge = data_badge
             kickoff = "Kickoff time TBD"
             if len(game) == 1:
                 date = pd.to_datetime(game.iloc[0].get("start_date"), errors="coerce", utc=True)
@@ -1603,23 +1651,18 @@ with cards_tab:
             if card_index % 2 == 0:
                 card_columns = st.columns(2, gap="medium")
             card = cards[card_index].replace('<article class="pick-card">', '').replace('</article>', '')
-            header, rest = card.split("<!--away-data-->", 1)
-            middle, footer = rest.split("<!--home-data-->", 1)
-            # Close team wrappers before inserting Streamlit widgets.
-            header += f"</div><strong>{pick['Away Win %']:.1%}</strong></div>"
-            middle = middle.split("</div>", 2)[-1] + f"</div><strong>{pick['Home Win %']:.1%}</strong></div>"
-            footer = footer.split("</div>", 2)[-1]
+            card = card.replace("<!--away-data-->", "").replace("<!--home-data-->", "")
             matchup = games[(games["home_team"] == pick["Home Team"]) & (games["away_team"] == pick["Away Team"])]
             with card_columns[card_index % 2], st.container(border=True, key=f"matchup_card_{season}_{selected_week}_{card_index}"):
-                st.markdown(header, unsafe_allow_html=True)
-                for side, section in [("away", middle), ("home", footer)]:
-                    tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
-                    label, note, metrics = team_data_details(tid, published_current, derived_team_data, selected_week)
-                    with st.expander(f"{pick[side.title() + ' Team']} · {label}"):
+                st.markdown(card, unsafe_allow_html=True)
+                with st.expander("Team statistics & data quality"):
+                    for side in ("away", "home"):
+                        tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
+                        label, note, metrics = team_data_details(tid, published_current, derived_team_data, selected_week)
+                        st.markdown(f"**{pick[side.title() + ' Team']} · {label}**")
                         st.caption(note)
                         for metric, value in metrics.items():
                             st.write(f"**{metric}:** {value}")
-                    st.markdown(section, unsafe_allow_html=True)
 with table_tab:
     tour_at("compare")
     show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Live Detail", "Live Score", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
