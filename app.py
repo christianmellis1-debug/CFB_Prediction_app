@@ -1269,6 +1269,45 @@ st.markdown("""
  .team-identity {font-size:15px;}
  .pick-result .pick-winner {font-size:17px;}
 }
+
+/* Distinct section navigation; keep native tab labels and tour targets intact. */
+.st-key-main_app_tabs [role="tablist"] {
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;
+ width:100%;overflow:visible;border:0;padding:8px 0 18px;
+}
+.st-key-main_app_tabs [role="tab"] {
+ display:flex;align-items:center;justify-content:flex-start;gap:12px;
+ min-width:0;min-height:58px;height:auto;padding:14px 16px;margin:0;
+ border:1px solid #80978b65;border-radius:12px;background:var(--secondary-background-color);
+ color:var(--text-color);white-space:normal;box-sizing:border-box;
+ transition:background .15s,border-color .15s;cursor:pointer;
+}
+.st-key-main_app_tabs [role="tab"] p {font-size:14px;font-weight:650;line-height:1.3;margin:0;}
+.st-key-main_app_tabs [role="tab"]:hover {border-color:#58ae87;background:#58ae8720;}
+.st-key-main_app_tabs [role="tab"][aria-selected="true"] {
+ background:#164f43;color:#fff;border:2px solid #6ac59a;padding:13px 15px;
+ box-shadow:0 2px 8px #00000015;
+}
+.st-key-main_app_tabs [role="tab"]:focus-visible {outline:3px solid #74bfa0;outline-offset:3px;}
+.st-key-main_app_tabs .react-aria-SelectionIndicator {display:none;}
+.st-key-main_app_tabs [role="tab"]::before {
+ content:"";display:block;flex:0 0 22px;width:22px;height:22px;background:currentColor;
+ mask:var(--nav-icon) center/contain no-repeat;-webkit-mask:var(--nav-icon) center/contain no-repeat;
+}
+@media(max-width:640px){
+ .st-key-main_app_tabs [role="tablist"] {grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-bottom:18px;}
+ .st-key-main_app_tabs [role="tab"] {padding:13px 12px;gap:10px;min-height:56px;}
+ .st-key-main_app_tabs [role="tab"][aria-selected="true"] {padding:12px 11px;}
+ .st-key-main_app_tabs [role="tab"] p {font-size:13px;}
+}
+.st-key-main_app_tabs [role="tab"][data-key="0"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIxNCIgeT0iMyIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIzIiB5PSIxNCIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIxNCIgeT0iMTQiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIyIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="1"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTEyIDMgMi44IDUuNyA2LjIuOS00LjUgNC40IDEuMSA2LjItNS42LTMtNS42IDMgMS4xLTYuMkwzIDkuNmw2LjItLjlaIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="2"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgN2gxNm0tNC00IDQgNC00IDRNMjAgMTdING00LTQtNCA0IDQgNCIvPjwvc3ZnPg=="); }
+.st-key-main_app_tabs [role="tab"][data-key="3"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgM3YxOGgxN005IDE2di01bTUgNVY3bTUgOVY0Ii8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="4"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iNCIgeT0iMyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxwYXRoIGQ9Ik04IDdoOE04IDEyaDJtNCAwaDJtLTggNWgybTQgMGgyIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="5"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iNiIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjE5IiByPSIyIi8+PHBhdGggZD0iTTYgN3Y0bDYgNiA2LTZWNyIvPjwvc3ZnPg=="); }
+.st-key-main_app_tabs [role="tab"][data-key="6"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTYgM2gxMnYxOGwtMy0yLTMgMi0zLTItMyAyWk05IDdoNm0tNiA0aDZtLTYgNGgzIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="7"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOSIvPjxwYXRoIGQ9Ik0xMiAxMXY2bTAtMTB2MSIvPjwvc3ZnPg=="); }
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
 <h1>CFB Predictor<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
