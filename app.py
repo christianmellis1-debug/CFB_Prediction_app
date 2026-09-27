@@ -971,6 +971,25 @@ def team_logo_url(team_id):
         return ""
 
 
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def embedded_team_logos(urls):
+    """Serve cached logo bytes with the cards instead of relying on phone CDN access."""
+    def download(url):
+        try:
+            with urlopen(url, timeout=4) as response:
+                data = response.read(500_001)
+            if data.startswith(b"\x89PNG\r\n\x1a\n") and len(data) <= 500_000:
+                return url, "data:image/png;base64," + base64.b64encode(data).decode("ascii")
+        except (OSError, ValueError):
+            pass
+        # Keep the original image URL if this server cannot retrieve the logo.
+        return url, url
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        return dict(pool.map(download, urls))
+
+
 def payout_outcomes(stake, line):
     """American moneyline payout rounded to cents, including returned stake."""
     formatted = format_moneyline(line)
@@ -1176,7 +1195,7 @@ st.markdown("""
 .kickoff {margin-bottom:10px;line-height:1.5;}
 .team-line {margin:8px 0;gap:10px;font-size:15px;}
 .team-line strong {font-size:17px;font-variant-numeric:tabular-nums;}
-.team-logo {width:28px;height:28px;flex-basis:28px;}
+.team-logo {display:block;width:34px!important;height:34px!important;min-width:34px;max-width:34px;flex:0 0 34px;object-fit:contain;background:#f8fafc;border-radius:6px;padding:3px;box-sizing:border-box;}
 .team-identity {font-weight:650;gap:8px;}
 .venue-label {font-size:10px;opacity:.75;letter-spacing:.7px;}
 .pick-result {padding:12px 14px;margin-top:10px;border:1px solid #4bb48b44;border-radius:12px;background:#4bb48b0c;}
@@ -1558,6 +1577,11 @@ with cards_tab:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
     else:
         cards = []
+        logo_urls = tuple(sorted({
+            url for column in ("away_id", "home_id")
+            for team_id in games[column] if (url := team_logo_url(team_id))
+        }))
+        logo_sources = embedded_team_logos(logo_urls)
         rz_index = {}
         if filtered["Confidence"].lt(.80).any():
             try:
@@ -1592,8 +1616,8 @@ with cards_tab:
                     missing_data_note = '<div class="risk-note">Updated pregame metrics unavailable: ' + escape(", ".join(absent)) + ' · prior-data fallback. FCS games are excluded from the scoring fallback; advanced summaries may also be delayed or missing.</div>'
             away_logo = team_logo_url(game.iloc[0]["away_id"]) if len(game) == 1 else ""
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
-            away_logo_html = f'<img class="team-logo" src="{away_logo}" alt="" />' if away_logo else ""
-            home_logo_html = f'<img class="team-logo" src="{home_logo}" alt="" />' if home_logo else ""
+            away_logo_html = f'<img class="team-logo" src="{logo_sources.get(away_logo, away_logo)}" alt="{escape(str(r['Away Team']), quote=True)} logo" width="34" height="34" />' if away_logo else ""
+            home_logo_html = f'<img class="team-logo" src="{logo_sources.get(home_logo, home_logo)}" alt="{escape(str(r['Home Team']), quote=True)} logo" width="34" height="34" />' if home_logo else ""
             home_badge, away_badge = "", ""
             if len(game) == 1:
                 for data_side in ("home", "away"):
