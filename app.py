@@ -383,8 +383,42 @@ def fetch_scoreboard(date_range):
 
 
 @st.cache_data(ttl=60, show_spinner=False)
-def download_live_scores(date_range):
-    return {"games": parse_live_scores(fetch_scoreboard(date_range)),
+def download_live_event(event_id):
+    """Read an omitted game's official status; never infer final from kickoff."""
+    if not str(event_id).isdigit():
+        return {}
+    url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=" + str(event_id)
+    with urlopen(url, timeout=15) as response:
+        payload = json.load(response)
+    header = payload.get("header", {})
+    if str(header.get("id")) != str(event_id):
+        raise ValueError("Game summary identity mismatch")
+    return parse_live_scores({"events": [header]})
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def download_live_scores(date_range, event_ids=()):
+    # A successful scoreboard response can still omit games. Reconcile against
+    # the selected schedule, not the number of events returned by the feed.
+    errors = []
+    try:
+        scores = parse_live_scores(fetch_scoreboard(date_range))
+    except Exception:
+        if not event_ids:
+            raise
+        scores = {}
+    missing = [str(event_id) for event_id in event_ids if str(event_id) not in scores]
+    def fetch_missing(event_id):
+        try:
+            return event_id, download_live_event(event_id)
+        except Exception:
+            return event_id, {}
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        for event_id, extra in pool.map(fetch_missing, missing):
+            if event_id not in extra:
+                errors.append(event_id)
+            scores.update(extra)
+    return {"games": scores, "missing_event_ids": errors,
             "retrieved": datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M:%S %p %Z")}
 
 
@@ -1048,7 +1082,7 @@ def summarize_scenario(detail, group):
 def watch_results(season, original, date_range, original_odds, event_ids=(), original_live=None):
     if date_range:
         try:
-            snapshot = download_live_scores(date_range)
+            snapshot = download_live_scores(date_range, event_ids)
             if snapshot["games"] != (original_live or {}):
                 st.rerun()
             st.caption("Live scoreboard last checked: " + snapshot["retrieved"])
@@ -1137,6 +1171,7 @@ with st.sidebar:
     st.caption("Schedules and team statistics load automatically. No uploads needed.")
     if st.button("Refresh all data", use_container_width=True):
         download_live_scores.clear()
+        download_live_event.clear()
         download_schedule.clear()
         download_summary.clear()
         download_market_odds.clear()
@@ -1251,11 +1286,13 @@ if "start_date" in games:
 live_snapshot = {"games": {}, "retrieved": None}
 if date_range:
     try:
-        live_snapshot = download_live_scores(date_range)
+        live_snapshot = download_live_scores(date_range, schedule_event_ids(games))
         st.session_state["live_scores_" + date_range] = live_snapshot
     except Exception:
         live_snapshot = st.session_state.get("live_scores_" + date_range, live_snapshot)
         st.warning("Live scoreboard is temporarily unavailable. Last loaded scores may be stale.")
+if live_snapshot.get("missing_event_ids"):
+    st.warning(f"Could not refresh {len(live_snapshot['missing_event_ids'])} game result(s). Their schedule status is shown until the next refresh.")
 live_games = overlay_live_scores(games, live_snapshot["games"])
 pred = attach_results(pred, live_games)
 if live_snapshot["retrieved"]:
@@ -1299,6 +1336,7 @@ st.caption("Fetch times show when the app retrieved the feeds, not when the prov
 if st.button("Refresh all feeds now"):
     download_summary.clear()
     download_live_scores.clear()
+    download_live_event.clear()
     download_schedule.clear()
     download_market_odds.clear()
     download_archived_event.clear()
@@ -1814,4 +1852,5 @@ st.download_button("Download these picks · CSV", filtered.drop(columns=["Line M
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
+
 
