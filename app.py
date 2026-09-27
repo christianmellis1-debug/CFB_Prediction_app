@@ -1153,9 +1153,67 @@ st.markdown("""
 @media (max-width:1000px) {.pick-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:600px) {.block-container {padding:4rem 1rem 2rem;}.hero {padding:25px 22px;border-radius:18px;}.pick-grid {grid-template-columns:1fr;}.overview {gap:8px;}.stat {padding:12px 10px;}.stat strong {font-size:23px;}.stat span {font-size:11px;}}
 @media (max-width:600px) {.hero-brand {gap:14px;}.hero-mark {font-size:42px;}}
+
+/* Responsive dashboard skin; native theme colors preserve light/dark mode. */
+.block-container {max-width:1320px;padding-top:3.5rem;padding-bottom:3rem;}
+.hero {padding:24px 28px;margin-bottom:8px;border-radius:20px;background:linear-gradient(120deg,#102b29,#164f43);border:1px solid #82cbb32b;}
+.hero h1 {font-size:clamp(26px,4vw,38px);letter-spacing:-1.1px;margin:5px 0;}
+.hero p {font-size:14px;margin-top:6px;line-height:1.55;}
+.hero-brand {gap:18px;}
+.hero-mark {font-size:32px;background:#ffffff10;border:1px solid #ffffff25;border-radius:16px;padding:12px;}
+.eyebrow {font-size:10px;letter-spacing:1.8px;color:#aee8d0;}
+.overview {gap:10px;margin:8px 0 12px;}
+.stat {padding:14px 18px;border-radius:14px;border-color:#80978b30;background:var(--secondary-background-color);}
+.stat strong {font-size:26px;font-variant-numeric:tabular-nums;letter-spacing:-.7px;}
+.stat span {font-size:12px;opacity:.8;}
+[data-testid="stTabs"] [data-baseweb="tab-list"] {gap:6px;padding:6px 2px 10px;overflow-x:auto;scrollbar-width:thin;}
+[data-testid="stTabs"] [data-baseweb="tab"] {height:42px;white-space:nowrap;border-radius:10px;padding:0 14px;border:1px solid #80978b30;}
+[data-testid="stTabs"] [aria-selected="true"] {background:#164f43;color:#fff;border-color:#164f43;}
+[data-testid="stTabs"] [data-baseweb="tab-highlight"] {background:#4bb48b;height:2px;}
+[class*="st-key-matchup_card_"] {border-radius:18px;border:1px solid #80978b40;background:var(--secondary-background-color);padding:16px;}
+[class*="st-key-matchup_card_"] [data-testid="stExpander"] {font-size:12px;}
+.card-top {margin-bottom:8px;font-size:11px;letter-spacing:.3px;}
+.kickoff {margin-bottom:10px;line-height:1.5;}
+.team-line {margin:8px 0;gap:10px;font-size:15px;}
+.team-line strong {font-size:17px;font-variant-numeric:tabular-nums;}
+.team-logo {width:28px;height:28px;flex-basis:28px;}
+.team-identity {font-weight:650;gap:8px;}
+.venue-label {font-size:10px;opacity:.75;letter-spacing:.7px;}
+.pick-result {padding:12px 14px;margin-top:10px;border:1px solid #4bb48b44;border-radius:12px;background:#4bb48b0c;}
+.pick-winner {font-size:20px;margin:3px 0 8px;}
+.pick-label {font-size:10px;letter-spacing:1px;opacity:.8;}
+.conf-track {height:5px;}
+.conf-fill {background:linear-gradient(90deg,#299c76,#6bcea4);}
+.conf-row {font-size:12px;}
+.odds-box {margin-top:10px;padding:10px 12px;border-radius:12px;}
+.odds-prices {font-variant-numeric:tabular-nums;}
+.result-box {margin-top:10px;padding-top:10px;line-height:1.5;}
+.result-score {margin:6px 0;font-weight:600;}
+.badge {font-size:10px;padding:5px 9px;letter-spacing:.2px;}
+.card-details {margin-top:8px;padding-top:9px;line-height:1.6;}
+.card-details summary {min-height:36px;display:list-item;list-style-position:inside;font-weight:600;padding:6px 0;}
+.card-details summary:focus-visible {outline:2px solid #4bb48b;outline-offset:3px;border-radius:4px;}
+[data-testid="stButton"] button {border-radius:10px;min-height:42px;}
+[data-testid="stTextInput"] input {min-height:42px;}
+@media (max-width:640px) {
+ .block-container {padding:3.6rem .85rem 2rem;}
+ .hero {padding:18px;border-radius:16px;}
+ .hero-mark {font-size:25px;padding:9px;border-radius:12px;}
+ .hero-brand {gap:12px;}
+ .hero h1 {font-size:27px;letter-spacing:-.8px;}
+ .hero p {font-size:13px;}
+ .eyebrow {font-size:9px;letter-spacing:1.2px;}
+ .overview {gap:6px;}
+ .stat {padding:11px 9px;border-radius:12px;}
+ .stat strong {font-size:23px;}
+ .stat span {font-size:10px;line-height:1.4;display:block;}
+ [data-testid="stTabs"] [data-baseweb="tab"] {font-size:13px;padding:0 11px;}
+ [class*="st-key-matchup_card_"] {padding:13px;border-radius:15px;}
+ .team-identity {font-size:14px;}
+}
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">Saturday scouting report · College football</div>
-<h1>Your weekly game plan.</h1><p>Every matchup. A clear pick. Confidence at a glance.</p></div></div>
+<h1>Your weekly game plan.</h1><p>Picks, live scores & your betting dashboard.</p></div></div></div>
 """, unsafe_allow_html=True)
 
 show_app_tour()
@@ -1385,13 +1443,14 @@ def reset_pick_filters():
 
 tour_at("filters")
 st.subheader("Explore matchups")
-team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
-favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
-favorites = st.multiselect("Favorite teams", favorite_choices, key="favorite_teams",
-                           help="Saved during this app session. Choose teams, then turn on Favorites only.")
-st.checkbox("Favorites only", key="pick_favorites_only")
-st.button("Reset filters", on_click=reset_pick_filters,
-          help="Resets matchup filters and keeps your favorite-team list.")
+with st.expander("Favorite teams & saved filters", expanded=False):
+    team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
+    favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
+    favorites = st.multiselect("Favorite teams", favorite_choices, key="favorite_teams",
+                               help="Saved during this app session. Choose teams, then turn on Favorites only.")
+    st.checkbox("Favorites only", key="pick_favorites_only")
+    st.button("Reset filters", on_click=reset_pick_filters,
+              help="Resets matchup filters and keeps your favorite-team list.")
 search_col, confidence_col, sort_col = st.columns([2, 1, 1])
 with search_col:
     query = st.text_input("Find a team", placeholder="Search LSU, Texas, Ohio State…", key="pick_query")
@@ -1421,11 +1480,12 @@ elif status_filter == "Awaiting final":
 elif status_filter in ["Correct picks", "Incorrect picks"]:
     filtered = filtered[filtered["Pick Result"].eq(status_filter.split()[0])]
 
-odds_col, data_col = st.columns(2)
-with odds_col:
-    odds_filter = st.selectbox("Moneylines", ["All odds", "Pick has moneyline", "Pick missing moneyline"], key="pick_odds")
-with data_col:
-    quality_filter = st.selectbox("Team data", ["All data", "Both teams have published stats", "Includes score estimates", "Includes prior data only"], key="pick_quality")
+with st.expander("More filters · odds & team data", expanded=False):
+    odds_col, data_col = st.columns(2)
+    with odds_col:
+        odds_filter = st.selectbox("Moneylines", ["All odds", "Pick has moneyline", "Pick missing moneyline"], key="pick_odds")
+    with data_col:
+        quality_filter = st.selectbox("Team data", ["All data", "Both teams have published stats", "Includes score estimates", "Includes prior data only"], key="pick_quality")
 if st.session_state.get("pick_favorites_only"):
     filtered = filtered[filtered["Home Team"].isin(favorites) | filtered["Away Team"].isin(favorites)]
     if not favorites:
@@ -1453,7 +1513,8 @@ st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regu
 cards_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
 with cards_tab:
     tour_at("cards")
-    st.caption("↔ Moneyline moved compares the same sportsbook’s opening and latest prices. Expand the flag for details. Session changes are tracked while this app session is active; no net change does not mean the line never moved. Fetch times are not the sportsbook’s change times. Shortened = higher implied chance and lower payout; lengthened = the reverse.")
+    with st.expander("Understanding line-movement flags", expanded=False):
+        st.caption("↔ Moneyline moved compares the same sportsbook’s opening and latest prices. Expand the flag for details. Session changes are tracked while this app session is active; no net change does not mean the line never moved. Fetch times are not the sportsbook’s change times. Shortened = higher implied chance and lower payout; lengthened = the reverse.")
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
     else:
@@ -1525,7 +1586,7 @@ with cards_tab:
                 note = "Ratings blend prior-season information with available pregame data."
                 if caveats:
                     note += " Limited data: " + "; ".join(caveats) + "."
-                explanation_html = '<div style="margin-top:12px"><div class="pick-label">Why this pick</div><p style="margin:6px 0">' + escape(explanation) + '</p><details class="card-details"><summary>About this reasoning</summary><p>' + escape(note) + ' This explains the pregame model, not live scores or betting value. It does not analyze specific run/pass matchups or injuries.</p></details></div>'
+                explanation_html = '<details class="card-details"><summary>Why this pick</summary><p>' + escape(explanation) + '</p><p>' + escape(note) + ' This explains the pregame model, not live scores or betting value. It does not analyze specific run/pass matchups or injuries.</p></details>'
             matchup_html = matchup_insights_html(r, game, published_current, schedule, selected_week, derived_team_ids)
             red_zone_html = rz_cards.get(card_idx, "")
             if red_zone_html:
@@ -1537,8 +1598,10 @@ with cards_tab:
 <div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{explanation_html}{matchup_html}{moneylines}{r.get("Line Movement HTML", "")}{outcome}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{outcome}{moneylines}{r.get("Line Movement HTML", "")}{explanation_html}{matchup_html}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
         for card_index, (_, pick) in enumerate(filtered.iterrows()):
+            if card_index % 2 == 0:
+                card_columns = st.columns(2, gap="medium")
             card = cards[card_index].replace('<article class="pick-card">', '').replace('</article>', '')
             header, rest = card.split("<!--away-data-->", 1)
             middle, footer = rest.split("<!--home-data-->", 1)
@@ -1547,7 +1610,7 @@ with cards_tab:
             middle = middle.split("</div>", 2)[-1] + f"</div><strong>{pick['Home Win %']:.1%}</strong></div>"
             footer = footer.split("</div>", 2)[-1]
             matchup = games[(games["home_team"] == pick["Home Team"]) & (games["away_team"] == pick["Away Team"])]
-            with st.container(border=True):
+            with card_columns[card_index % 2], st.container(border=True, key=f"matchup_card_{season}_{selected_week}_{card_index}"):
                 st.markdown(header, unsafe_allow_html=True)
                 for side, section in [("away", middle), ("home", footer)]:
                     tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
@@ -1852,5 +1915,6 @@ st.download_button("Download these picks · CSV", filtered.drop(columns=["Line M
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
+
 
 
