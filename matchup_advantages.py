@@ -6,7 +6,10 @@ P4={'ACC','Big Ten','Big 12','SEC'}
 G6={'American Athletic','Conference USA','Mid-American','Mountain West','Sun Belt','Pac-12'}
 LABELS=('Rushing matchup estimate','Completion matchup estimate','Run defense · YPC allowed','Pass defense · completion allowed')
 
-def conference_group(value):
+def conference_group(value, team=None):
+    # Treat Notre Dame as P4 for research scope, despite its independent conference.
+    if str(team).strip().casefold() == 'notre dame':
+        return 'P4'
     return 'P4' if value in P4 else 'G6' if value in G6 else None
 
 def build_advantages(schedule, boxes, week):
@@ -30,9 +33,9 @@ def build_advantages(schedule, boxes, week):
     past=s[completed&s.week.lt(int(week))&s.home_points.notna()&s.away_points.notna()]
     out={}
     for _,g in targets.iterrows():
-        gid=str(int(g.game_id));hg=conference_group(g.home_conference);ag=conference_group(g.away_conference)
+        gid=str(int(g.game_id));hg=conference_group(g.home_conference,g.get('home_team'));ag=conference_group(g.away_conference,g.get('away_team'))
         if hg is None or hg!=ag:
-            out[gid]={'status':'outside','reason':'Applies to P4 vs. P4 and G6 vs. G6 only.'};continue
+            out[gid]={'status':'outside','reason':'Applies to P4 vs. P4 and G6 vs. G6 only. Notre Dame is treated as P4.'};continue
         if pd.isna(g.start):
             out[gid]={'status':'missing','reason':'Kickoff date unavailable.'};continue
         history=past[past.start.lt(g.start)]

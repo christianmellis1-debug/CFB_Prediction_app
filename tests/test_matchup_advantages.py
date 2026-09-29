@@ -25,4 +25,16 @@ class AdvantageTests(unittest.TestCase):
   self.assertEqual(assess(r,'home')['count'],0)
   r['home'][0]=6;self.assertTrue(assess(r,'home')['flag'])
   r['home'][1]=.7;self.assertFalse(assess(r,'home')['flag'])
+ def test_notre_dame_is_p4_on_either_side(self):
+  for side in ('home','away'):
+   with self.subTest(side=side):
+    s=self.s.copy()
+    s.loc[1,side+'_conference']='FBS Independents'
+    s.loc[1,side+'_team']='Notre Dame'
+    r=build_advantages(s,self.b,2)['2']
+    self.assertEqual(r['status'],'ok');self.assertEqual(r['group'],'P4')
+    s.loc[1,('away' if side=='home' else 'home')+'_conference']='Sun Belt'
+    self.assertEqual(build_advantages(s,self.b,2)['2']['status'],'outside')
+    s.loc[1,side+'_team']='UConn'
+    self.assertEqual(build_advantages(s,self.b,2)['2']['status'],'outside')
 if __name__=='__main__':unittest.main()
