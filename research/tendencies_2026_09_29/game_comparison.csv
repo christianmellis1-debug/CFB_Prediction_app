@@ -1,0 +1,1303 @@
+season,game_id,group,baseline_pick,baseline_win,weighted_pick,weighted_win
+2024,401628340,P4,Kentucky,0.0,Kentucky,0.0
+2024,401628345,P4,Oklahoma,1.0,Oklahoma,1.0
+2024,401628347,P4,Michigan,0.0,Michigan,0.0
+2024,401628350,P4,Alabama,1.0,Alabama,1.0
+2024,401628353,P4,Florida,0.0,Florida,0.0
+2024,401628354,P4,Georgia,1.0,Georgia,1.0
+2024,401628355,P4,Ole Miss,1.0,Ole Miss,1.0
+2024,401628357,P4,,,Boston College,0.0
+2024,401628359,P4,South Carolina,0.0,South Carolina,0.0
+2024,401628363,P4,,,Arkansas,1.0
+2024,401628365,P4,LSU,1.0,LSU,1.0
+2024,401628367,P4,Mississippi State,0.0,Mississippi State,0.0
+2024,401628368,P4,Missouri,1.0,Missouri,1.0
+2024,401628369,P4,,,,
+2024,401628373,P4,,,Arkansas,0.0
+2024,401628374,P4,Alabama,1.0,Alabama,1.0
+2024,401628375,P4,Auburn,0.0,Auburn,0.0
+2024,401628377,P4,Ole Miss,0.0,Ole Miss,0.0
+2024,401628378,P4,Texas,1.0,Texas,1.0
+2024,401628379,P4,Tennessee,0.0,Tennessee,0.0
+2024,401628380,P4,,,UCF,0.0
+2024,401628381,P4,Auburn,0.0,Auburn,0.0
+2024,401628382,P4,,,,
+2024,401628383,P4,Missouri,0.0,Missouri,0.0
+2024,401628384,P4,Alabama,0.0,Alabama,0.0
+2024,401628385,P4,,,,
+2024,401628386,P4,Georgia,1.0,Georgia,1.0
+2024,401628387,P4,Kentucky,0.0,Kentucky,0.0
+2024,401628388,P4,Ole Miss,0.0,Ole Miss,0.0
+2024,401628390,P4,Texas,1.0,Texas,1.0
+2024,401628391,P4,Tennessee,1.0,Tennessee,1.0
+2024,401628392,P4,LSU,1.0,LSU,1.0
+2024,401628393,P4,,,Kentucky,0.0
+2024,401628394,P4,Texas A&M,1.0,Texas A&M,1.0
+2024,401628395,P4,Missouri,1.0,Missouri,1.0
+2024,401628396,P4,,,,
+2024,401628397,P4,,,Tennessee,1.0
+2024,401628398,P4,Texas,0.0,Texas,0.0
+2024,401628400,P4,Alabama,1.0,Alabama,1.0
+2024,401628401,P4,,,,
+2024,401628402,P4,Ole Miss,1.0,Ole Miss,1.0
+2024,401628403,P4,Arkansas,1.0,Arkansas,1.0
+2024,401628404,P4,Texas A&M,1.0,Texas A&M,1.0
+2024,401628405,P4,Texas,1.0,Texas,1.0
+2024,401628406,P4,Ole Miss,1.0,Ole Miss,1.0
+2024,401628407,P4,Auburn,0.0,Auburn,0.0
+2024,401628408,P4,,,Georgia,1.0
+2024,401628411,P4,,,Texas A&M,0.0
+2024,401628412,P4,Tennessee,1.0,Tennessee,1.0
+2024,401628413,P4,Alabama,1.0,Alabama,1.0
+2024,401628414,P4,Ole Miss,1.0,Ole Miss,1.0
+2024,401628415,P4,,,Oklahoma,0.0
+2024,401628416,P4,Tennessee,1.0,Tennessee,1.0
+2024,401628417,P4,Texas,1.0,Texas,1.0
+2024,401628418,P4,South Carolina,1.0,South Carolina,1.0
+2024,401628419,P4,Texas,1.0,Texas,1.0
+2024,401628420,P4,Florida,1.0,Florida,1.0
+2024,401628421,P4,Tennessee,0.0,Tennessee,0.0
+2024,401628423,P4,South Carolina,1.0,South Carolina,1.0
+2024,401628428,P4,Auburn,1.0,Auburn,1.0
+2024,401628429,P4,Ole Miss,0.0,Ole Miss,0.0
+2024,401628431,P4,LSU,1.0,LSU,1.0
+2024,401628432,P4,Missouri,1.0,Missouri,1.0
+2024,401628433,P4,Alabama,0.0,Alabama,0.0
+2024,401628436,P4,Texas,1.0,Texas,1.0
+2024,401628437,P4,Auburn,0.0,Auburn,0.0
+2024,401628438,P4,Florida,1.0,Florida,1.0
+2024,401628439,P4,Georgia,1.0,Georgia,1.0
+2024,401628440,P4,Louisville,1.0,Louisville,1.0
+2024,401628441,P4,,,LSU,1.0
+2024,401628442,P4,Ole Miss,1.0,Ole Miss,1.0
+2024,401628443,P4,Missouri,1.0,Missouri,1.0
+2024,401628444,P4,Clemson,0.0,Clemson,0.0
+2024,401628445,P4,Texas,1.0,Texas,1.0
+2024,401628446,P4,Tennessee,1.0,Tennessee,1.0
+2024,401628465,P4,Maryland,0.0,Maryland,0.0
+2024,401628476,P4,Indiana,1.0,Indiana,1.0
+2024,401628478,P4,Maryland,1.0,Maryland,1.0
+2024,401628485,P4,Nebraska,0.0,Nebraska,0.0
+2024,401628487,P4,Iowa,1.0,Iowa,1.0
+2024,401628489,P4,Michigan,1.0,Michigan,1.0
+2024,401628490,P4,Boston College,1.0,Boston College,1.0
+2024,401628491,P4,Washington,1.0,Washington,1.0
+2024,401628494,P4,Virginia Tech,0.0,Virginia Tech,0.0
+2024,401628495,P4,Penn State,1.0,Penn State,1.0
+2024,401628496,P4,,,Indiana,1.0
+2024,401628497,P4,Michigan,1.0,Michigan,1.0
+2024,401628498,P4,Ohio State,1.0,Ohio State,1.0
+2024,401628499,P4,Nebraska,1.0,Nebraska,1.0
+2024,401628500,P4,Oregon,1.0,Oregon,1.0
+2024,401628501,P4,Washington,0.0,Washington,0.0
+2024,401628502,P4,USC,1.0,USC,1.0
+2024,401628503,P4,Indiana,1.0,Indiana,1.0
+2024,401628504,P4,Ohio State,1.0,Ohio State,1.0
+2024,401628505,P4,Washington,1.0,Washington,1.0
+2024,401628506,P4,Oregon,1.0,Oregon,1.0
+2024,401628507,P4,Minnesota,1.0,Minnesota,1.0
+2024,401628508,P4,Nebraska,1.0,Nebraska,1.0
+2024,401628509,P4,Wisconsin,1.0,Wisconsin,1.0
+2024,401628510,P4,Penn State,1.0,Penn State,1.0
+2024,401628511,P4,Illinois,1.0,Illinois,1.0
+2024,401628512,P4,,,Iowa,1.0
+2024,401628513,P4,Maryland,0.0,Maryland,0.0
+2024,401628514,P4,Minnesota,1.0,Minnesota,1.0
+2024,401628515,P4,,,Ohio State,0.0
+2024,401628516,P4,Penn State,1.0,Penn State,1.0
+2024,401628517,P4,Rutgers,0.0,Rutgers,0.0
+2024,401628518,P4,,,Michigan,0.0
+2024,401628519,P4,,,,
+2024,401628520,P4,Iowa,0.0,Iowa,0.0
+2024,401628521,P4,Maryland,1.0,Maryland,1.0
+2024,401628522,P4,Wisconsin,1.0,Wisconsin,1.0
+2024,401628523,P4,Oregon,1.0,Oregon,1.0
+2024,401628524,P4,,,,
+2024,401628525,P4,Oregon,1.0,Oregon,1.0
+2024,401628526,P4,Indiana,1.0,Indiana,1.0
+2024,401628527,P4,,,,
+2024,401628528,P4,Maryland,0.0,Maryland,0.0
+2024,401628529,P4,Michigan,1.0,Michigan,1.0
+2024,401628530,P4,Ohio State,1.0,Ohio State,1.0
+2024,401628531,P4,Penn State,1.0,Penn State,1.0
+2024,401628532,P4,USC,1.0,USC,1.0
+2024,401628533,P4,Minnesota,1.0,Minnesota,1.0
+2024,401628534,P4,Indiana,1.0,Indiana,1.0
+2024,401628535,P4,Iowa,1.0,Iowa,1.0
+2024,401628536,P4,,,Michigan,0.0
+2024,401628537,P4,Nebraska,0.0,Nebraska,0.0
+2024,401628538,P4,Northwestern,1.0,Northwestern,1.0
+2024,401628539,P4,,,Ohio State,1.0
+2024,401628540,P4,Washington,1.0,Washington,1.0
+2024,401628541,P4,Indiana,1.0,Indiana,1.0
+2024,401628542,P4,,,Iowa,0.0
+2024,401628543,P4,Oregon,1.0,Oregon,1.0
+2024,401628544,P4,Minnesota,0.0,Minnesota,0.0
+2024,401628545,P4,Ohio State,1.0,Ohio State,1.0
+2024,401628546,P4,Penn State,1.0,Penn State,1.0
+2024,401628547,P4,Michigan State,0.0,Michigan State,0.0
+2024,401628548,P4,Maryland,0.0,Maryland,0.0
+2024,401628549,P4,Nebraska,0.0,Nebraska,0.0
+2024,401628550,P4,Ohio State,1.0,Ohio State,1.0
+2024,401628551,P4,Oregon,1.0,Oregon,1.0
+2024,401628552,P4,Penn State,1.0,Penn State,1.0
+2024,401628553,P4,Washington,1.0,Washington,1.0
+2024,401628554,P4,Illinois,1.0,Illinois,1.0
+2024,401628555,P4,Ohio State,1.0,Ohio State,1.0
+2024,401628556,P4,Maryland,0.0,Maryland,0.0
+2024,401628557,P4,Michigan,1.0,Michigan,1.0
+2024,401628558,P4,Michigan State,1.0,Michigan State,1.0
+2024,401628559,P4,Penn State,1.0,Penn State,1.0
+2024,401628560,P4,Nebraska,1.0,Nebraska,1.0
+2024,401628561,P4,UCLA,0.0,UCLA,0.0
+2024,401628562,P4,Iowa,1.0,Iowa,1.0
+2024,401628563,P4,Illinois,1.0,Illinois,1.0
+2024,401628564,P4,Indiana,1.0,Indiana,1.0
+2024,401628565,P4,Penn State,1.0,Penn State,1.0
+2024,401628566,P4,Ohio State,0.0,Ohio State,0.0
+2024,401628567,P4,Michigan State,0.0,Michigan State,0.0
+2024,401628568,P4,Minnesota,1.0,Minnesota,1.0
+2024,401628569,P4,Oregon,1.0,Oregon,1.0
+2024,401628571,P4,Notre Dame,1.0,Notre Dame,1.0
+2024,401628572,G6,Oregon State,1.0,Oregon State,1.0
+2024,401628980,P4,Notre Dame,1.0,Notre Dame,1.0
+2024,401628981,P4,Notre Dame,1.0,Notre Dame,1.0
+2024,401628982,P4,Notre Dame,1.0,Notre Dame,1.0
+2024,401628984,P4,Notre Dame,1.0,Notre Dame,1.0
+2024,401628985,P4,Notre Dame,1.0,Notre Dame,1.0
+2024,401629045,G6,,,Army,1.0
+2024,401634766,P4,Stanford,1.0,Stanford,1.0
+2024,401634767,P4,Miami,1.0,Miami,1.0
+2024,401634768,P4,Virginia Tech,1.0,Virginia Tech,1.0
+2024,401634769,P4,Duke,1.0,Duke,1.0
+2024,401634770,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2024,401634771,P4,Boston College,0.0,Boston College,0.0
+2024,401634772,P4,Georgia Tech,1.0,Georgia Tech,1.0
+2024,401634773,P4,California,1.0,California,1.0
+2024,401635516,P4,NC State,1.0,NC State,1.0
+2024,401635517,P4,Louisville,0.0,Louisville,0.0
+2024,401635534,P4,Georgia Tech,0.0,Georgia Tech,0.0
+2024,401635547,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2024,401635551,P4,California,0.0,California,0.0
+2024,401635552,P4,Clemson,1.0,Clemson,1.0
+2024,401635554,P4,Louisville,1.0,Louisville,1.0
+2024,401635557,P4,SMU,1.0,SMU,1.0
+2024,401635561,P4,Clemson,1.0,Clemson,1.0
+2024,401635562,P4,Duke,1.0,Duke,1.0
+2024,401635563,P4,SMU,1.0,SMU,1.0
+2024,401635567,P4,,,,
+2024,401635568,P4,California,0.0,California,0.0
+2024,401635569,P4,Clemson,1.0,Clemson,1.0
+2024,401635570,P4,Georgia Tech,1.0,Georgia Tech,1.0
+2024,401635571,P4,SMU,1.0,SMU,1.0
+2024,401635572,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2024,401635573,P4,,,Stanford,0.0
+2024,401635574,P4,NC State,0.0,NC State,0.0
+2024,401635575,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2024,401635576,P4,Clemson,1.0,Clemson,1.0
+2024,401635577,P4,Georgia Tech,1.0,Georgia Tech,1.0
+2024,401635578,P4,Virginia,0.0,Virginia,0.0
+2024,401635580,P4,SMU,1.0,SMU,1.0
+2024,401635581,P4,California,0.0,California,0.0
+2024,401635582,P4,,,Clemson,1.0
+2024,401635583,P4,North Carolina,1.0,North Carolina,1.0
+2024,401635587,P4,California,0.0,California,0.0
+2024,401635588,P4,Clemson,1.0,Clemson,1.0
+2024,401635589,P4,Miami,1.0,Miami,1.0
+2024,401635590,P4,SMU,1.0,SMU,1.0
+2024,401635595,P4,SMU,1.0,SMU,1.0
+2024,401635596,P4,Miami,1.0,Miami,1.0
+2024,401635597,P4,Virginia Tech,1.0,Virginia Tech,1.0
+2024,401635598,P4,Virginia,0.0,Virginia,0.0
+2024,401635599,P4,Stanford,0.0,Stanford,0.0
+2024,401635600,P4,Clemson,0.0,Clemson,0.0
+2024,401635601,P4,Miami,1.0,Miami,1.0
+2024,401635602,P4,North Carolina,1.0,North Carolina,1.0
+2024,401635604,P4,Virginia Tech,0.0,Virginia Tech,0.0
+2024,401635606,P4,Boston College,1.0,Boston College,1.0
+2024,401635607,P4,,,Virginia Tech,0.0
+2024,401635608,P4,Duke,1.0,Duke,1.0
+2024,401635609,P4,Miami,0.0,Miami,0.0
+2024,401635610,P4,Pittsburgh,0.0,Pittsburgh,0.0
+2024,401635612,P4,North Carolina,0.0,North Carolina,0.0
+2024,401635613,P4,California,1.0,California,1.0
+2024,401635615,P4,Virginia Tech,0.0,Virginia Tech,0.0
+2024,401635617,P4,Pittsburgh,0.0,Pittsburgh,0.0
+2024,401635618,P4,Miami,1.0,Miami,1.0
+2024,401635619,P4,SMU,1.0,SMU,1.0
+2024,401635620,P4,Pittsburgh,0.0,Pittsburgh,0.0
+2024,401635621,P4,SMU,1.0,SMU,1.0
+2024,401635622,P4,Duke,1.0,Duke,1.0
+2024,401635623,P4,Miami,0.0,Miami,0.0
+2024,401635624,P4,North Carolina,0.0,North Carolina,0.0
+2024,401635627,P4,,,Pittsburgh,0.0
+2024,401635638,P4,NC State,0.0,NC State,0.0
+2024,401635640,P4,Virginia Tech,1.0,Virginia Tech,1.0
+2024,401636864,P4,Kansas State,1.0,Kansas State,1.0
+2024,401636866,P4,,,UCF,1.0
+2024,401636872,P4,BYU,1.0,BYU,1.0
+2024,401636873,P4,,,Cincinnati,1.0
+2024,401636874,P4,Baylor,0.0,Baylor,0.0
+2024,401636876,P4,Utah,1.0,Utah,1.0
+2024,401636877,P4,,,Arizona State,0.0
+2024,401636879,P4,Kansas,0.0,Kansas,0.0
+2024,401636880,P4,,,Baylor,0.0
+2024,401636881,P4,Iowa State,1.0,Iowa State,1.0
+2024,401636882,P4,Kansas,0.0,Kansas,0.0
+2024,401636883,P4,,,Oklahoma State,0.0
+2024,401636884,P4,,,Texas Tech,1.0
+2024,401636885,P4,,,UCF,0.0
+2024,401636886,P4,Utah,0.0,Utah,0.0
+2024,401636887,P4,Arizona,0.0,Arizona,0.0
+2024,401636888,P4,Arizona State,1.0,Arizona State,1.0
+2024,401636889,P4,Iowa State,1.0,Iowa State,1.0
+2024,401636890,P4,Oklahoma State,0.0,Oklahoma State,0.0
+2024,401636891,P4,,,TCU,0.0
+2024,401636892,P4,Arizona State,1.0,Arizona State,1.0
+2024,401636893,P4,BYU,1.0,BYU,1.0
+2024,401636894,P4,,,Colorado,0.0
+2024,401636895,P4,,,UCF,0.0
+2024,401636896,P4,Iowa State,1.0,Iowa State,1.0
+2024,401636897,P4,,,Colorado,1.0
+2024,401636898,P4,BYU,1.0,BYU,1.0
+2024,401636899,P4,Arizona State,0.0,Arizona State,0.0
+2024,401636900,P4,Iowa State,1.0,Iowa State,1.0
+2024,401636901,P4,Kansas,1.0,Kansas,1.0
+2024,401636902,P4,Texas Tech,0.0,Texas Tech,0.0
+2024,401636903,P4,Utah,0.0,Utah,0.0
+2024,401636904,P4,Kansas State,1.0,Kansas State,1.0
+2024,401636905,P4,Arizona,0.0,Arizona,0.0
+2024,401636906,P4,Baylor,1.0,Baylor,1.0
+2024,401636907,P4,Colorado,1.0,Colorado,1.0
+2024,401636908,P4,Utah,0.0,Utah,0.0
+2024,401636909,P4,Kansas State,1.0,Kansas State,1.0
+2024,401636910,P4,TCU,1.0,TCU,1.0
+2024,401636911,P4,,,UCF,0.0
+2024,401636912,P4,Baylor,1.0,Baylor,1.0
+2024,401636913,P4,,,Kansas State,0.0
+2024,401636914,P4,Iowa State,0.0,Iowa State,0.0
+2024,401636915,P4,,,Arizona State,1.0
+2024,401636916,P4,UCF,1.0,UCF,1.0
+2024,401636917,P4,Arizona State,1.0,Arizona State,1.0
+2024,401636918,P4,Cincinnati,0.0,Cincinnati,0.0
+2024,401636919,P4,Iowa State,0.0,Iowa State,0.0
+2024,401636920,P4,TCU,1.0,TCU,1.0
+2024,401636921,P4,,,Colorado,1.0
+2024,401636922,P4,,,,
+2024,401636923,P4,Houston,0.0,Houston,0.0
+2024,401636924,P4,BYU,0.0,BYU,0.0
+2024,401636925,P4,Colorado,1.0,Colorado,1.0
+2024,401636926,P4,Iowa State,1.0,Iowa State,1.0
+2024,401636927,P4,,,Kansas State,0.0
+2024,401636929,P4,Baylor,1.0,Baylor,1.0
+2024,401636930,P4,Arizona State,1.0,Arizona State,1.0
+2024,401636931,P4,,,Baylor,1.0
+2024,401636932,P4,Colorado,0.0,Colorado,0.0
+2024,401636933,P4,Kansas State,1.0,Kansas State,1.0
+2024,401636934,P4,,,Oklahoma State,0.0
+2024,401636935,P4,TCU,1.0,TCU,1.0
+2024,401636936,P4,,,Utah,0.0
+2024,401636937,P4,UCF,0.0,UCF,0.0
+2024,401636938,P4,Colorado,1.0,Colorado,1.0
+2024,401636939,P4,UCF,0.0,UCF,0.0
+2024,401636940,P4,Arizona State,1.0,Arizona State,1.0
+2024,401636941,P4,Baylor,1.0,Baylor,1.0
+2024,401636942,P4,BYU,1.0,BYU,1.0
+2024,401636943,P4,,,TCU,1.0
+2024,401636944,P4,Iowa State,1.0,Iowa State,1.0
+2024,401636945,P4,Texas Tech,1.0,Texas Tech,1.0
+2024,401640980,G6,,,Florida International,0.0
+2024,401640981,G6,Florida International,1.0,Florida International,1.0
+2024,401640982,G6,Liberty,1.0,Liberty,1.0
+2024,401640983,G6,Florida International,0.0,Florida International,0.0
+2024,401640984,G6,Sam Houston,1.0,Sam Houston,1.0
+2024,401640985,G6,Florida International,1.0,Florida International,1.0
+2024,401640986,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2024,401640987,G6,Florida International,0.0,Florida International,0.0
+2024,401640988,G6,Florida International,1.0,Florida International,1.0
+2024,401640990,G6,Liberty,1.0,Liberty,1.0
+2024,401640991,G6,Liberty,1.0,Liberty,1.0
+2024,401640993,G6,Liberty,0.0,Liberty,0.0
+2024,401640994,G6,Liberty,0.0,Liberty,0.0
+2024,401640995,G6,Liberty,1.0,Liberty,1.0
+2024,401640996,G6,Liberty,1.0,Liberty,1.0
+2024,401640997,G6,Sam Houston,1.0,Sam Houston,1.0
+2024,401640999,G6,,,,
+2024,401641000,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2024,401641001,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2024,401641002,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2024,401641003,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2024,401641004,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2024,401641005,G6,,,Jacksonville State,1.0
+2024,401641006,G6,Jacksonville State,0.0,Jacksonville State,0.0
+2024,401641008,G6,,,Louisiana Tech,0.0
+2024,401641009,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2024,401641010,G6,Louisiana Tech,0.0,Louisiana Tech,0.0
+2024,401641011,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2024,401641012,G6,Sam Houston,1.0,Sam Houston,1.0
+2024,401641013,G6,,,Louisiana Tech,1.0
+2024,401641014,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2024,401641017,G6,San José State,1.0,San José State,1.0
+2024,401641019,G6,Middle Tennessee,1.0,Middle Tennessee,1.0
+2024,401641020,G6,Western Kentucky,1.0,Western Kentucky,1.0
+2024,401641021,G6,UTEP,1.0,UTEP,1.0
+2024,401641022,G6,Sam Houston,1.0,Sam Houston,1.0
+2024,401641024,G6,,,Western Kentucky,1.0
+2024,401641025,G6,Memphis,1.0,Memphis,1.0
+2024,401641026,G6,UTEP,0.0,UTEP,0.0
+2024,401641027,G6,,,New Mexico State,1.0
+2024,401641028,G6,UTEP,0.0,UTEP,0.0
+2024,401641029,G6,Sam Houston,1.0,Sam Houston,1.0
+2024,401641030,G6,Western Kentucky,1.0,Western Kentucky,1.0
+2024,401641031,G6,,,New Mexico State,0.0
+2024,401641033,G6,Fresno State,1.0,Fresno State,1.0
+2024,401641034,G6,Sam Houston,1.0,Sam Houston,1.0
+2024,401641035,G6,,,New Mexico State,0.0
+2024,401641036,G6,Western Kentucky,1.0,Western Kentucky,1.0
+2024,401641037,G6,Toledo,0.0,Toledo,0.0
+2024,401641038,G6,Sam Houston,0.0,Sam Houston,0.0
+2024,401641040,G6,Hawai'i,0.0,Hawai'i,0.0
+2024,401641041,G6,Texas State,0.0,Texas State,0.0
+2024,401643708,G6,Nevada,0.0,Nevada,0.0
+2024,401643711,G6,Fresno State,1.0,Fresno State,1.0
+2024,401643714,G6,,,Washington State,1.0
+2024,401643715,G6,Temple,1.0,Temple,1.0
+2024,401643716,G6,North Texas,1.0,North Texas,1.0
+2024,401643718,G6,Air Force,0.0,Air Force,0.0
+2024,401643719,G6,Boise State,1.0,Boise State,1.0
+2024,401643720,G6,UNLV,1.0,UNLV,1.0
+2024,401643721,G6,Central Michigan,1.0,Central Michigan,1.0
+2024,401643722,G6,Navy,1.0,Navy,1.0
+2024,401643723,G6,Boise State,1.0,Boise State,1.0
+2024,401643724,G6,Oregon State,1.0,Oregon State,1.0
+2024,401643725,G6,Hawai'i,0.0,Hawai'i,0.0
+2024,401643726,G6,San José State,1.0,San José State,1.0
+2024,401643727,G6,New Mexico,1.0,New Mexico,1.0
+2024,401643728,G6,Boise State,1.0,Boise State,1.0
+2024,401643729,G6,San José State,0.0,San José State,0.0
+2024,401643730,G6,Fresno State,0.0,Fresno State,0.0
+2024,401643731,G6,Nevada,1.0,Nevada,1.0
+2024,401643732,G6,San Diego State,1.0,San Diego State,1.0
+2024,401643733,G6,UNLV,1.0,UNLV,1.0
+2024,401643734,G6,,,,
+2024,401643735,G6,Fresno State,1.0,Fresno State,1.0
+2024,401643736,G6,,,Hawai'i,0.0
+2024,401643737,G6,New Mexico,1.0,New Mexico,1.0
+2024,401643738,G6,San José State,1.0,San José State,1.0
+2024,401643739,G6,UNLV,1.0,UNLV,1.0
+2024,401643740,G6,UNLV,0.0,UNLV,0.0
+2024,401643741,G6,Colorado State,1.0,Colorado State,1.0
+2024,401643742,G6,,,Fresno State,1.0
+2024,401643743,G6,Nevada,0.0,Nevada,0.0
+2024,401643744,G6,San Diego State,0.0,San Diego State,0.0
+2024,401643745,G6,Wyoming,0.0,Wyoming,0.0
+2024,401643746,G6,Army,1.0,Army,1.0
+2024,401643747,G6,Boise State,1.0,Boise State,1.0
+2024,401643748,G6,,,Colorado State,1.0
+2024,401643749,G6,Fresno State,0.0,Fresno State,0.0
+2024,401643750,G6,,,,
+2024,401643751,G6,Fresno State,0.0,Fresno State,0.0
+2024,401643752,G6,Boise State,1.0,Boise State,1.0
+2024,401643753,G6,UNLV,1.0,UNLV,1.0
+2024,401643754,G6,San Diego State,0.0,San Diego State,0.0
+2024,401643755,G6,San José State,1.0,San José State,1.0
+2024,401643756,G6,Washington State,1.0,Washington State,1.0
+2024,401643757,G6,Oregon State,0.0,Oregon State,0.0
+2024,401643758,G6,Boise State,1.0,Boise State,1.0
+2024,401643759,G6,Colorado State,1.0,Colorado State,1.0
+2024,401643760,G6,,,Utah State,1.0
+2024,401643761,G6,New Mexico,1.0,New Mexico,1.0
+2024,401643762,G6,UNLV,1.0,UNLV,1.0
+2024,401643763,G6,Nevada,0.0,Nevada,0.0
+2024,401643764,G6,Boise State,1.0,Boise State,1.0
+2024,401643765,G6,Fresno State,1.0,Fresno State,1.0
+2024,401643766,G6,Utah State,1.0,Utah State,1.0
+2024,401643767,G6,UNLV,1.0,UNLV,1.0
+2024,401643768,G6,,,Air Force,1.0
+2024,401643769,G6,Boise State,1.0,Boise State,1.0
+2024,401643770,G6,Colorado State,1.0,Colorado State,1.0
+2024,401643771,G6,New Mexico,0.0,New Mexico,0.0
+2024,401643772,G6,UNLV,1.0,UNLV,1.0
+2024,401643773,G6,Washington State,0.0,Washington State,0.0
+2024,401643781,G6,Ohio,1.0,Ohio,1.0
+2024,401643785,G6,East Carolina,0.0,East Carolina,0.0
+2024,401643786,G6,Coastal Carolina,1.0,Coastal Carolina,1.0
+2024,401643789,G6,South Florida,1.0,South Florida,1.0
+2024,401643790,G6,South Alabama,1.0,South Alabama,1.0
+2024,401643791,G6,Louisiana,0.0,Louisiana,0.0
+2024,401643792,G6,Georgia State,0.0,Georgia State,0.0
+2024,401643793,G6,James Madison,1.0,James Madison,1.0
+2024,401643794,G6,,,Marshall,1.0
+2024,401643795,G6,,,Bowling Green,0.0
+2024,401643796,G6,UL Monroe,1.0,UL Monroe,1.0
+2024,401643797,G6,Texas State,1.0,Texas State,1.0
+2024,401643798,G6,Coastal Carolina,1.0,Coastal Carolina,1.0
+2024,401643799,G6,Marshall,1.0,Marshall,1.0
+2024,401643800,G6,,,Arkansas State,1.0
+2024,401643801,G6,James Madison,0.0,James Madison,0.0
+2024,401643802,G6,Louisiana,1.0,Louisiana,1.0
+2024,401643803,G6,James Madison,1.0,James Madison,1.0
+2024,401643804,G6,Marshall,0.0,Marshall,0.0
+2024,401643805,G6,,,Georgia State,0.0
+2024,401643806,G6,Louisiana,1.0,Louisiana,1.0
+2024,401643807,G6,UL Monroe,1.0,UL Monroe,1.0
+2024,401643808,G6,Texas State,1.0,Texas State,1.0
+2024,401643809,G6,South Alabama,1.0,South Alabama,1.0
+2024,401643810,G6,Marshall,1.0,Marshall,1.0
+2024,401643811,G6,Louisiana,1.0,Louisiana,1.0
+2024,401643812,G6,James Madison,0.0,James Madison,0.0
+2024,401643813,G6,Texas State,0.0,Texas State,0.0
+2024,401643814,G6,Arkansas State,1.0,Arkansas State,1.0
+2024,401643815,G6,Old Dominion,1.0,Old Dominion,1.0
+2024,401643816,G6,Georgia State,0.0,Georgia State,0.0
+2024,401643817,G6,James Madison,1.0,James Madison,1.0
+2024,401643818,G6,Arkansas State,1.0,Arkansas State,1.0
+2024,401643819,G6,South Alabama,1.0,South Alabama,1.0
+2024,401643820,G6,Texas State,0.0,Texas State,0.0
+2024,401643821,G6,Old Dominion,0.0,Old Dominion,0.0
+2024,401643822,G6,UL Monroe,0.0,UL Monroe,0.0
+2024,401643823,G6,South Alabama,0.0,South Alabama,0.0
+2024,401643824,G6,Coastal Carolina,0.0,Coastal Carolina,0.0
+2024,401643825,G6,Coastal Carolina,1.0,Coastal Carolina,1.0
+2024,401643826,G6,James Madison,1.0,James Madison,1.0
+2024,401643827,G6,Louisiana,1.0,Louisiana,1.0
+2024,401643828,G6,,,,
+2024,401643829,G6,Marshall,1.0,Marshall,1.0
+2024,401643830,G6,Georgia Southern,0.0,Georgia Southern,0.0
+2024,401643831,G6,Georgia State,0.0,Georgia State,0.0
+2024,401643832,G6,Marshall,1.0,Marshall,1.0
+2024,401643833,G6,James Madison,1.0,James Madison,1.0
+2024,401643834,G6,Louisiana,0.0,Louisiana,0.0
+2024,401643835,G6,Texas State,1.0,Texas State,1.0
+2024,401643836,G6,James Madison,0.0,James Madison,0.0
+2024,401643837,G6,Coastal Carolina,0.0,Coastal Carolina,0.0
+2024,401643838,G6,,,Old Dominion,0.0
+2024,401643839,G6,UL Monroe,0.0,UL Monroe,0.0
+2024,401643840,G6,Louisiana,1.0,Louisiana,1.0
+2024,401643841,G6,South Alabama,1.0,South Alabama,1.0
+2024,401643842,G6,Texas State,0.0,Texas State,0.0
+2024,401643843,G6,Texas State,1.0,Texas State,1.0
+2024,401643844,G6,Georgia Southern,1.0,Georgia Southern,1.0
+2024,401643845,G6,Coastal Carolina,1.0,Coastal Carolina,1.0
+2024,401643846,G6,James Madison,0.0,James Madison,0.0
+2024,401643847,G6,,,Old Dominion,1.0
+2024,401643848,G6,Louisiana,1.0,Louisiana,1.0
+2024,401643849,G6,Troy,1.0,Troy,1.0
+2024,401644684,G6,Toledo,1.0,Toledo,1.0
+2024,401644685,G6,Eastern Michigan,0.0,Eastern Michigan,0.0
+2024,401644686,G6,Miami (OH),1.0,Miami (OH),1.0
+2024,401644687,G6,Miami (OH),1.0,Miami (OH),1.0
+2024,401644688,G6,Miami (OH),1.0,Miami (OH),1.0
+2024,401644689,G6,Miami (OH),1.0,Miami (OH),1.0
+2024,401644690,G6,Northern Illinois,0.0,Northern Illinois,0.0
+2024,401644691,G6,Miami (OH),1.0,Miami (OH),1.0
+2024,401644735,G6,Central Michigan,1.0,Central Michigan,1.0
+2024,401644736,G6,Northern Illinois,0.0,Northern Illinois,0.0
+2024,401644738,G6,Ohio,1.0,Ohio,1.0
+2024,401644739,G6,,,,
+2024,401644740,G6,Bowling Green,1.0,Bowling Green,1.0
+2024,401644741,G6,Western Michigan,1.0,Western Michigan,1.0
+2024,401644742,G6,Western Michigan,1.0,Western Michigan,1.0
+2024,401644743,G6,Kent State,0.0,Kent State,0.0
+2024,401644744,G6,Bowling Green,0.0,Bowling Green,0.0
+2024,401644745,G6,Toledo,0.0,Toledo,0.0
+2024,401644746,G6,Ohio,1.0,Ohio,1.0
+2024,401644748,G6,Bowling Green,1.0,Bowling Green,1.0
+2024,401644749,G6,Buffalo,0.0,Buffalo,0.0
+2024,401644750,G6,Eastern Michigan,1.0,Eastern Michigan,1.0
+2024,401644751,G6,Northern Illinois,0.0,Northern Illinois,0.0
+2024,401644752,G6,Eastern Michigan,0.0,Eastern Michigan,0.0
+2024,401644753,G6,Northern Illinois,0.0,Northern Illinois,0.0
+2024,401644754,G6,Toledo,0.0,Toledo,0.0
+2024,401644755,G6,Ohio,1.0,Ohio,1.0
+2024,401644756,G6,Western Michigan,1.0,Western Michigan,1.0
+2024,401644757,G6,Buffalo,1.0,Buffalo,1.0
+2024,401644758,G6,Toledo,1.0,Toledo,1.0
+2024,401644760,G6,Bowling Green,1.0,Bowling Green,1.0
+2024,401644761,G6,Ohio,1.0,Ohio,1.0
+2024,401644762,G6,,,Northern Illinois,1.0
+2024,401644763,G6,Buffalo,1.0,Buffalo,1.0
+2024,401644764,G6,Bowling Green,1.0,Bowling Green,1.0
+2024,401644765,G6,Toledo,1.0,Toledo,1.0
+2024,401644766,G6,Northern Illinois,1.0,Northern Illinois,1.0
+2024,401644767,G6,,,Ohio,1.0
+2024,401644769,G6,Akron,1.0,Akron,1.0
+2024,401644770,G6,Central Michigan,1.0,Central Michigan,1.0
+2024,401644772,G6,Buffalo,1.0,Buffalo,1.0
+2024,401644773,G6,Toledo,0.0,Toledo,0.0
+2024,401644774,G6,Bowling Green,1.0,Bowling Green,1.0
+2024,401644775,G6,Toledo,0.0,Toledo,0.0
+2024,401644776,G6,Buffalo,1.0,Buffalo,1.0
+2024,401644777,G6,,,Ohio,1.0
+2024,401644779,G6,Northern Illinois,1.0,Northern Illinois,1.0
+2024,401644780,G6,Western Michigan,1.0,Western Michigan,1.0
+2024,401645328,G6,Army,1.0,Army,1.0
+2024,401645329,G6,Navy,1.0,Navy,1.0
+2024,401645331,G6,,,Army,1.0
+2024,401645332,G6,,,Navy,1.0
+2024,401645333,G6,Rice,0.0,Rice,0.0
+2024,401645334,G6,East Carolina,1.0,East Carolina,1.0
+2024,401645336,G6,,,North Texas,1.0
+2024,401645337,G6,,,South Florida,0.0
+2024,401645338,G6,,,Tulane,1.0
+2024,401645339,G6,,,Army,1.0
+2024,401645340,G6,East Carolina,0.0,East Carolina,0.0
+2024,401645341,G6,Memphis,1.0,Memphis,1.0
+2024,401645342,G6,Army,1.0,Army,1.0
+2024,401645343,G6,,,,
+2024,401645344,G6,,,Rice,1.0
+2024,401645345,G6,South Florida,1.0,South Florida,1.0
+2024,401645346,G6,Army,1.0,Army,1.0
+2024,401645347,G6,Navy,1.0,Navy,1.0
+2024,401645348,G6,,,UTSA,1.0
+2024,401645349,G6,Memphis,1.0,Memphis,1.0
+2024,401645350,G6,Tulane,1.0,Tulane,1.0
+2024,401645351,G6,,,Tulsa,0.0
+2024,401645352,G6,East Carolina,1.0,East Carolina,1.0
+2024,401645353,G6,Memphis,1.0,Memphis,1.0
+2024,401645354,G6,Tulane,1.0,Tulane,1.0
+2024,401645355,G6,UTSA,0.0,UTSA,0.0
+2024,401645356,G6,Tulane,1.0,Tulane,1.0
+2024,401645357,G6,Florida Atlantic,0.0,Florida Atlantic,0.0
+2024,401645358,G6,,,UAB,1.0
+2024,401645359,G6,Memphis,0.0,Memphis,0.0
+2024,401645360,G6,,,,
+2024,401645361,G6,,,East Carolina,1.0
+2024,401645362,G6,Memphis,1.0,Memphis,1.0
+2024,401645363,G6,Navy,1.0,Navy,1.0
+2024,401645364,G6,Tulane,1.0,Tulane,1.0
+2024,401645365,G6,East Carolina,1.0,East Carolina,1.0
+2024,401645366,G6,UTSA,1.0,UTSA,1.0
+2024,401645367,G6,Memphis,1.0,Memphis,1.0
+2024,401645368,G6,South Florida,1.0,South Florida,1.0
+2024,401645369,G6,,,Florida Atlantic,0.0
+2024,401645370,G6,Tulane,1.0,Tulane,1.0
+2024,401645371,G6,Florida Atlantic,0.0,Florida Atlantic,0.0
+2024,401645372,G6,East Carolina,1.0,East Carolina,1.0
+2024,401645373,G6,Rice,0.0,Rice,0.0
+2024,401645374,G6,UTSA,1.0,UTSA,1.0
+2024,401645375,G6,South Florida,1.0,South Florida,1.0
+2024,401645376,G6,Tulane,0.0,Tulane,0.0
+2024,401645377,G6,UAB,0.0,UAB,0.0
+2024,401645378,G6,,,Army,1.0
+2024,401645379,G6,East Carolina,0.0,East Carolina,0.0
+2024,401645380,G6,,,Tulsa,0.0
+2024,401645381,G6,North Texas,1.0,North Texas,1.0
+2024,401645382,G6,Rice,1.0,Rice,1.0
+2024,401645383,G6,Army,0.0,Army,0.0
+2024,401673462,G6,Army,1.0,Army,1.0
+2024,401673463,P4,SMU,0.0,SMU,0.0
+2024,401673464,P4,Penn State,0.0,Penn State,0.0
+2024,401673465,P4,Arizona State,1.0,Arizona State,1.0
+2024,401673466,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2024,401673467,G6,Miami (OH),0.0,Miami (OH),0.0
+2024,401673468,G6,UNLV,0.0,UNLV,0.0
+2024,401673469,P4,Texas,0.0,Texas,0.0
+2024,401673470,G6,Louisiana,0.0,Louisiana,0.0
+2025,401752686,P4,Kentucky,0.0,Kentucky,0.0
+2025,401752696,P4,,,,
+2025,401752699,P4,LSU,1.0,LSU,1.0
+2025,401752700,P4,,,Arkansas,0.0
+2025,401752704,P4,South Carolina,0.0,South Carolina,0.0
+2025,401752705,P4,Tennessee,0.0,Tennessee,0.0
+2025,401752707,P4,Texas A&M,1.0,Texas A&M,1.0
+2025,401752709,P4,Miami,1.0,Miami,1.0
+2025,401752713,P4,Missouri,1.0,Missouri,1.0
+2025,401752714,P4,,,Auburn,0.0
+2025,401752717,P4,Notre Dame,1.0,Notre Dame,1.0
+2025,401752718,P4,,,Georgia,0.0
+2025,401752719,P4,,,LSU,0.0
+2025,401752720,P4,Mississippi State,0.0,Mississippi State,0.0
+2025,401752722,P4,,,Kentucky,0.0
+2025,401752724,P4,Auburn,0.0,Auburn,0.0
+2025,401752726,P4,Alabama,1.0,Alabama,1.0
+2025,401752727,P4,Texas,0.0,Texas,0.0
+2025,401752728,P4,Georgia,1.0,Georgia,1.0
+2025,401752730,P4,Texas A&M,1.0,Texas A&M,1.0
+2025,401752731,P4,Auburn,0.0,Auburn,0.0
+2025,401752732,P4,,,LSU,1.0
+2025,401752734,P4,Missouri,0.0,Missouri,0.0
+2025,401752735,P4,,,,
+2025,401752736,P4,Oklahoma,0.0,Oklahoma,0.0
+2025,401752737,P4,Texas A&M,1.0,Texas A&M,1.0
+2025,401752738,P4,Alabama,1.0,Alabama,1.0
+2025,401752739,P4,Texas A&M,1.0,Texas A&M,1.0
+2025,401752740,P4,Missouri,1.0,Missouri,1.0
+2025,401752741,P4,Florida,1.0,Florida,1.0
+2025,401752742,P4,Georgia,1.0,Georgia,1.0
+2025,401752743,P4,Texas,1.0,Texas,1.0
+2025,401752744,P4,South Carolina,0.0,South Carolina,0.0
+2025,401752745,P4,LSU,0.0,LSU,0.0
+2025,401752746,P4,Auburn,1.0,Auburn,1.0
+2025,401752747,P4,,,Tennessee,1.0
+2025,401752748,P4,LSU,0.0,LSU,0.0
+2025,401752749,P4,,,Texas,1.0
+2025,401752750,P4,Oklahoma,0.0,Oklahoma,0.0
+2025,401752751,P4,,,,
+2025,401752752,P4,Missouri,0.0,Missouri,0.0
+2025,401752753,P4,Mississippi State,1.0,Mississippi State,1.0
+2025,401752754,P4,Auburn,0.0,Auburn,0.0
+2025,401752755,P4,Georgia,1.0,Georgia,1.0
+2025,401752756,P4,South Carolina,0.0,South Carolina,0.0
+2025,401752757,P4,Oklahoma,1.0,Oklahoma,1.0
+2025,401752758,P4,Texas,1.0,Texas,1.0
+2025,401752759,P4,,,Alabama,1.0
+2025,401752760,P4,Kentucky,1.0,Kentucky,1.0
+2025,401752762,P4,,,,
+2025,401752763,P4,Missouri,0.0,Missouri,0.0
+2025,401752764,P4,Auburn,0.0,Auburn,0.0
+2025,401752765,P4,,,Alabama,0.0
+2025,401752766,P4,,,Texas,0.0
+2025,401752768,P4,LSU,1.0,LSU,1.0
+2025,401752769,P4,Ole Miss,1.0,Ole Miss,1.0
+2025,401752770,P4,Missouri,1.0,Missouri,1.0
+2025,401752772,P4,Texas A&M,1.0,Texas A&M,1.0
+2025,401752775,P4,Tennessee,1.0,Tennessee,1.0
+2025,401752778,P4,,,,
+2025,401752780,P4,Texas,1.0,Texas,1.0
+2025,401752782,P4,,,Vanderbilt,1.0
+2025,401752783,P4,Missouri,1.0,Missouri,1.0
+2025,401752784,P4,Auburn,0.0,Auburn,0.0
+2025,401752785,P4,,,Florida State,0.0
+2025,401752786,P4,Georgia,1.0,Georgia,1.0
+2025,401752787,P4,Louisville,1.0,Louisville,1.0
+2025,401752788,P4,,,Ole Miss,1.0
+2025,401752789,P4,,,LSU,0.0
+2025,401752790,P4,,,,
+2025,401752791,P4,,,,
+2025,401752792,P4,Texas,1.0,Texas,1.0
+2025,401752831,P4,Oregon,1.0,Oregon,1.0
+2025,401752832,P4,USC,1.0,USC,1.0
+2025,401752840,P4,,,Minnesota,0.0
+2025,401752843,P4,Indiana,1.0,Indiana,1.0
+2025,401752844,P4,,,Iowa,1.0
+2025,401752845,P4,Wisconsin,0.0,Wisconsin,0.0
+2025,401752846,P4,,,Michigan,1.0
+2025,401752847,P4,USC,1.0,USC,1.0
+2025,401752848,P4,Notre Dame,1.0,Notre Dame,1.0
+2025,401752849,P4,Minnesota,1.0,Minnesota,1.0
+2025,401752850,P4,USC,0.0,USC,0.0
+2025,401752851,P4,UCLA,0.0,UCLA,0.0
+2025,401752852,P4,Washington,0.0,Washington,0.0
+2025,401752853,P4,Indiana,1.0,Indiana,1.0
+2025,401752854,P4,,,,
+2025,401752855,P4,Penn State,0.0,Penn State,0.0
+2025,401752856,P4,,,Michigan,1.0
+2025,401752857,P4,Maryland,0.0,Maryland,0.0
+2025,401752859,P4,Ohio State,1.0,Ohio State,1.0
+2025,401752860,P4,Nebraska,1.0,Nebraska,1.0
+2025,401752861,P4,Illinois,1.0,Illinois,1.0
+2025,401752862,P4,Washington,1.0,Washington,1.0
+2025,401752863,P4,Michigan State,0.0,Michigan State,0.0
+2025,401752864,P4,Minnesota,1.0,Minnesota,1.0
+2025,401752865,P4,Ohio State,1.0,Ohio State,1.0
+2025,401752866,P4,Penn State,0.0,Penn State,0.0
+2025,401752867,P4,Maryland,0.0,Maryland,0.0
+2025,401752868,P4,,,Michigan,0.0
+2025,401752869,P4,Iowa,1.0,Iowa,1.0
+2025,401752870,P4,Oregon,0.0,Oregon,0.0
+2025,401752871,P4,Notre Dame,1.0,Notre Dame,1.0
+2025,401752872,P4,,,,
+2025,401752873,P4,,,Michigan,1.0
+2025,401752874,P4,Northwestern,1.0,Northwestern,1.0
+2025,401752875,P4,Iowa,1.0,Iowa,1.0
+2025,401752876,P4,Oregon,1.0,Oregon,1.0
+2025,401752877,P4,Ohio State,1.0,Ohio State,1.0
+2025,401752878,P4,Indiana,1.0,Indiana,1.0
+2025,401752879,P4,Maryland,0.0,Maryland,0.0
+2025,401752880,P4,Washington,1.0,Washington,1.0
+2025,401752881,P4,Michigan,1.0,Michigan,1.0
+2025,401752882,P4,Iowa,1.0,Iowa,1.0
+2025,401752883,P4,Nebraska,1.0,Nebraska,1.0
+2025,401752884,P4,Purdue,0.0,Purdue,0.0
+2025,401752885,P4,Indiana,1.0,Indiana,1.0
+2025,401752886,P4,Oregon,1.0,Oregon,1.0
+2025,401752887,P4,Indiana,1.0,Indiana,1.0
+2025,401752888,P4,Minnesota,1.0,Minnesota,1.0
+2025,401752889,P4,Ohio State,1.0,Ohio State,1.0
+2025,401752890,P4,Michigan,1.0,Michigan,1.0
+2025,401752891,P4,Illinois,1.0,Illinois,1.0
+2025,401752892,P4,,,USC,1.0
+2025,401752893,P4,Indiana,1.0,Indiana,1.0
+2025,401752894,P4,Maryland,0.0,Maryland,0.0
+2025,401752895,P4,Nebraska,1.0,Nebraska,1.0
+2025,401752896,P4,USC,1.0,USC,1.0
+2025,401752897,P4,Ohio State,1.0,Ohio State,1.0
+2025,401752898,P4,,,,
+2025,401752899,P4,Washington,0.0,Washington,0.0
+2025,401752900,P4,Ohio State,1.0,Ohio State,1.0
+2025,401752901,P4,Indiana,1.0,Indiana,1.0
+2025,401752902,P4,Washington,1.0,Washington,1.0
+2025,401752903,P4,Penn State,1.0,Penn State,1.0
+2025,401752904,P4,Oregon,1.0,Oregon,1.0
+2025,401752905,P4,Michigan,1.0,Michigan,1.0
+2025,401752906,P4,,,Illinois,1.0
+2025,401752907,P4,Iowa,0.0,Iowa,0.0
+2025,401752908,P4,Penn State,1.0,Penn State,1.0
+2025,401752909,P4,,,Northwestern,1.0
+2025,401752910,P4,Washington,1.0,Washington,1.0
+2025,401752911,P4,Oregon,1.0,Oregon,1.0
+2025,401752912,P4,Ohio State,1.0,Ohio State,1.0
+2025,401752913,P4,Iowa,1.0,Iowa,1.0
+2025,401752914,P4,,,,
+2025,401752915,P4,,,Wisconsin,1.0
+2025,401752916,P4,,,Iowa,1.0
+2025,401752917,P4,Oregon,1.0,Oregon,1.0
+2025,401752918,P4,Minnesota,1.0,Minnesota,1.0
+2025,401752919,P4,USC,1.0,USC,1.0
+2025,401752920,P4,Penn State,1.0,Penn State,1.0
+2025,401752921,P4,,,Michigan,0.0
+2025,401752922,P4,Illinois,1.0,Illinois,1.0
+2025,401752923,P4,Maryland,0.0,Maryland,0.0
+2025,401752924,P4,Indiana,1.0,Indiana,1.0
+2025,401752937,G6,Oregon State,0.0,Oregon State,0.0
+2025,401752940,G6,App State,1.0,App State,1.0
+2025,401752942,P4,SMU,0.0,SMU,0.0
+2025,401752943,G6,,,,
+2025,401752944,G6,Oregon State,0.0,Oregon State,0.0
+2025,401752945,G6,Oregon State,0.0,Oregon State,0.0
+2025,401752946,G6,,,Washington State,1.0
+2025,401752949,G6,,,Washington State,0.0
+2025,401752950,G6,Colorado State,0.0,Colorado State,0.0
+2025,401752952,G6,Toledo,0.0,Toledo,0.0
+2025,401752953,G6,Louisiana Tech,0.0,Louisiana Tech,0.0
+2025,401752954,G6,James Madison,1.0,James Madison,1.0
+2025,401754371,P4,,,California,1.0
+2025,401754372,P4,California,0.0,California,0.0
+2025,401754524,P4,,,NC State,1.0
+2025,401754531,P4,Wake Forest,0.0,Wake Forest,0.0
+2025,401754533,P4,,,Boston College,0.0
+2025,401754537,P4,Clemson,0.0,Clemson,0.0
+2025,401754538,P4,,,NC State,0.0
+2025,401754539,P4,Virginia,1.0,Virginia,1.0
+2025,401754543,P4,Florida State,0.0,Florida State,0.0
+2025,401754544,P4,,,Boston College,0.0
+2025,401754545,P4,Syracuse,0.0,Syracuse,0.0
+2025,401754546,P4,Georgia Tech,1.0,Georgia Tech,1.0
+2025,401754547,P4,,,Louisville,1.0
+2025,401754548,P4,NC State,0.0,NC State,0.0
+2025,401754550,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2025,401754551,P4,Duke,1.0,Duke,1.0
+2025,401754552,P4,Clemson,1.0,Clemson,1.0
+2025,401754553,P4,,,Florida State,0.0
+2025,401754554,P4,Louisville,0.0,Louisville,0.0
+2025,401754555,P4,SMU,1.0,SMU,1.0
+2025,401754556,P4,Wake Forest,1.0,Wake Forest,1.0
+2025,401754558,P4,Clemson,1.0,Clemson,1.0
+2025,401754559,P4,,,Florida State,0.0
+2025,401754560,P4,Georgia Tech,1.0,Georgia Tech,1.0
+2025,401754561,P4,SMU,1.0,SMU,1.0
+2025,401754562,P4,Notre Dame,1.0,Notre Dame,1.0
+2025,401754564,P4,Miami,0.0,Miami,0.0
+2025,401754565,P4,SMU,1.0,SMU,1.0
+2025,401754566,P4,Duke,0.0,Duke,0.0
+2025,401754567,P4,Florida State,0.0,Florida State,0.0
+2025,401754568,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2025,401754570,P4,Louisville,1.0,Louisville,1.0
+2025,401754571,P4,Georgia Tech,1.0,Georgia Tech,1.0
+2025,401754572,P4,Miami,1.0,Miami,1.0
+2025,401754573,P4,Virginia,1.0,Virginia,1.0
+2025,401754574,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2025,401754575,P4,North Carolina,1.0,North Carolina,1.0
+2025,401754576,P4,Virginia,1.0,Virginia,1.0
+2025,401754577,P4,Clemson,0.0,Clemson,0.0
+2025,401754578,P4,,,Florida State,1.0
+2025,401754579,P4,Georgia Tech,0.0,Georgia Tech,0.0
+2025,401754580,P4,Louisville,1.0,Louisville,1.0
+2025,401754581,P4,SMU,1.0,SMU,1.0
+2025,401754582,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2025,401754583,P4,Notre Dame,1.0,Notre Dame,1.0
+2025,401754584,P4,SMU,1.0,SMU,1.0
+2025,401754585,P4,Louisville,0.0,Louisville,0.0
+2025,401754586,P4,Florida State,0.0,Florida State,0.0
+2025,401754587,P4,Miami,1.0,Miami,1.0
+2025,401754588,P4,North Carolina,1.0,North Carolina,1.0
+2025,401754589,P4,Virginia,0.0,Virginia,0.0
+2025,401754591,P4,Louisville,0.0,Louisville,0.0
+2025,401754592,P4,Georgia Tech,1.0,Georgia Tech,1.0
+2025,401754593,P4,Virginia,1.0,Virginia,1.0
+2025,401754594,P4,Florida State,1.0,Florida State,1.0
+2025,401754595,P4,Miami,1.0,Miami,1.0
+2025,401754596,P4,,,,
+2025,401754597,P4,Notre Dame,1.0,Notre Dame,1.0
+2025,401754598,P4,Florida State,0.0,Florida State,0.0
+2025,401754599,P4,,,California,0.0
+2025,401754600,P4,North Carolina,0.0,North Carolina,0.0
+2025,401754601,P4,Georgia Tech,0.0,Georgia Tech,0.0
+2025,401754602,P4,,,,
+2025,401754603,P4,Miami,1.0,Miami,1.0
+2025,401754604,P4,Notre Dame,1.0,Notre Dame,1.0
+2025,401754608,P4,Boston College,1.0,Boston College,1.0
+2025,401754609,P4,SMU,0.0,SMU,0.0
+2025,401754610,P4,Wake Forest,0.0,Wake Forest,0.0
+2025,401754611,P4,Miami,1.0,Miami,1.0
+2025,401754612,P4,,,NC State,1.0
+2025,401754613,P4,Virginia,1.0,Virginia,1.0
+2025,401754614,P4,Notre Dame,1.0,Notre Dame,1.0
+2025,401754623,P4,Georgia Tech,1.0,Georgia Tech,1.0
+2025,401754636,P4,TCU,1.0,TCU,1.0
+2025,401754638,P4,,,,
+2025,401754640,P4,UCF,1.0,UCF,1.0
+2025,401756888,P4,Arizona,1.0,Arizona,1.0
+2025,401756893,P4,,,Houston,1.0
+2025,401756896,P4,Arizona State,1.0,Arizona State,1.0
+2025,401756899,P4,Kansas,1.0,Kansas,1.0
+2025,401756901,P4,,,Texas Tech,1.0
+2025,401756902,P4,TCU,0.0,TCU,0.0
+2025,401756903,P4,BYU,1.0,BYU,1.0
+2025,401756904,P4,Arizona,0.0,Arizona,0.0
+2025,401756905,P4,Kansas,0.0,Kansas,0.0
+2025,401756906,P4,,,UCF,0.0
+2025,401756907,P4,,,,
+2025,401756908,P4,Utah,1.0,Utah,1.0
+2025,401756909,P4,BYU,1.0,BYU,1.0
+2025,401756910,P4,Arizona,1.0,Arizona,1.0
+2025,401756911,P4,Kansas State,0.0,Kansas State,0.0
+2025,401756912,P4,,,Cincinnati,1.0
+2025,401756913,P4,Texas Tech,1.0,Texas Tech,1.0
+2025,401756914,P4,TCU,1.0,TCU,1.0
+2025,401756915,P4,,,Kansas,1.0
+2025,401756916,P4,Arizona,0.0,Arizona,0.0
+2025,401756917,P4,,,Cincinnati,1.0
+2025,401756918,P4,Colorado,1.0,Colorado,1.0
+2025,401756919,P4,Kansas State,1.0,Kansas State,1.0
+2025,401756920,P4,Houston,1.0,Houston,1.0
+2025,401756921,P4,Texas Tech,1.0,Texas Tech,1.0
+2025,401756922,P4,,,Arizona State,0.0
+2025,401756923,P4,Texas Tech,0.0,Texas Tech,0.0
+2025,401756924,P4,,,,
+2025,401756925,P4,Arizona,0.0,Arizona,0.0
+2025,401756926,P4,Cincinnati,1.0,Cincinnati,1.0
+2025,401756927,P4,TCU,1.0,TCU,1.0
+2025,401756928,P4,UCF,1.0,UCF,1.0
+2025,401756929,P4,Arizona State,0.0,Arizona State,0.0
+2025,401756930,P4,Cincinnati,1.0,Cincinnati,1.0
+2025,401756931,P4,BYU,1.0,BYU,1.0
+2025,401756932,P4,Kansas State,1.0,Kansas State,1.0
+2025,401756933,P4,Texas Tech,1.0,Texas Tech,1.0
+2025,401756934,P4,Utah,1.0,Utah,1.0
+2025,401756935,P4,TCU,1.0,TCU,1.0
+2025,401756936,P4,UCF,0.0,UCF,0.0
+2025,401756937,P4,Arizona,1.0,Arizona,1.0
+2025,401756938,P4,Houston,0.0,Houston,0.0
+2025,401756939,P4,,,Arizona State,1.0
+2025,401756940,P4,Kansas,1.0,Kansas,1.0
+2025,401756941,P4,,,,
+2025,401756942,P4,Utah,1.0,Utah,1.0
+2025,401756943,P4,Arizona,1.0,Arizona,1.0
+2025,401756944,P4,TCU,0.0,TCU,0.0
+2025,401756945,P4,Texas Tech,1.0,Texas Tech,1.0
+2025,401756946,P4,,,UCF,0.0
+2025,401756947,P4,West Virginia,1.0,West Virginia,1.0
+2025,401756948,P4,Arizona State,1.0,Arizona State,1.0
+2025,401756949,P4,Utah,1.0,Utah,1.0
+2025,401756950,P4,,,,
+2025,401756951,P4,Arizona,1.0,Arizona,1.0
+2025,401756952,P4,Kansas State,1.0,Kansas State,1.0
+2025,401756953,P4,Texas Tech,1.0,Texas Tech,1.0
+2025,401756954,P4,Arizona,1.0,Arizona,1.0
+2025,401756955,P4,BYU,1.0,BYU,1.0
+2025,401756956,P4,,,Arizona State,1.0
+2025,401756957,P4,TCU,1.0,TCU,1.0
+2025,401756958,P4,Iowa State,1.0,Iowa State,1.0
+2025,401756959,P4,UCF,1.0,UCF,1.0
+2025,401756960,P4,Utah,1.0,Utah,1.0
+2025,401756961,P4,,,Arizona State,0.0
+2025,401756962,P4,Houston,1.0,Houston,1.0
+2025,401756963,P4,BYU,1.0,BYU,1.0
+2025,401756964,P4,Utah,1.0,Utah,1.0
+2025,401756965,P4,Kansas State,1.0,Kansas State,1.0
+2025,401756966,P4,Iowa State,1.0,Iowa State,1.0
+2025,401756967,P4,TCU,1.0,TCU,1.0
+2025,401756968,P4,Texas Tech,1.0,Texas Tech,1.0
+2025,401757228,G6,Marshall,0.0,Marshall,0.0
+2025,401757230,G6,,,Hawai'i,1.0
+2025,401757232,G6,Toledo,1.0,Toledo,1.0
+2025,401757233,G6,,,,
+2025,401757234,G6,Jacksonville State,0.0,Jacksonville State,0.0
+2025,401757256,G6,Bowling Green,1.0,Bowling Green,1.0
+2025,401757257,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2025,401757258,G6,Nevada,0.0,Nevada,0.0
+2025,401757259,G6,Florida International,0.0,Florida International,0.0
+2025,401757261,G6,,,Kennesaw State,1.0
+2025,401757262,G6,,,James Madison,1.0
+2025,401757263,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2025,401757264,G6,,,Marshall,1.0
+2025,401757267,G6,UTEP,0.0,UTEP,0.0
+2025,401757268,G6,Western Kentucky,1.0,Western Kentucky,1.0
+2025,401757269,G6,,,Jacksonville State,0.0
+2025,401757270,G6,Kennesaw State,1.0,Kennesaw State,1.0
+2025,401757271,G6,Old Dominion,1.0,Old Dominion,1.0
+2025,401757272,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2025,401757273,G6,Western Kentucky,1.0,Western Kentucky,1.0
+2025,401757274,G6,,,,
+2025,401757275,G6,New Mexico State,1.0,New Mexico State,1.0
+2025,401757276,G6,,,Western Kentucky,1.0
+2025,401757277,G6,UTEP,0.0,UTEP,0.0
+2025,401757278,G6,Middle Tennessee,0.0,Middle Tennessee,0.0
+2025,401757279,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2025,401757280,G6,Louisiana Tech,0.0,Louisiana Tech,0.0
+2025,401757281,G6,Western Kentucky,0.0,Western Kentucky,0.0
+2025,401757282,G6,Liberty,1.0,Liberty,1.0
+2025,401757283,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2025,401757284,G6,UTEP,1.0,UTEP,1.0
+2025,401757285,G6,Kennesaw State,1.0,Kennesaw State,1.0
+2025,401757286,G6,Louisiana Tech,0.0,Louisiana Tech,0.0
+2025,401757287,G6,Middle Tennessee,0.0,Middle Tennessee,0.0
+2025,401757288,G6,New Mexico State,0.0,New Mexico State,0.0
+2025,401757289,G6,Kennesaw State,1.0,Kennesaw State,1.0
+2025,401757290,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2025,401757291,G6,Florida International,0.0,Florida International,0.0
+2025,401757292,G6,,,Jacksonville State,1.0
+2025,401757293,G6,Liberty,1.0,Liberty,1.0
+2025,401757294,G6,Western Kentucky,1.0,Western Kentucky,1.0
+2025,401757295,G6,Louisiana Tech,0.0,Louisiana Tech,0.0
+2025,401757296,G6,Middle Tennessee,0.0,Middle Tennessee,0.0
+2025,401757297,G6,,,,
+2025,401757298,G6,,,,
+2025,401757299,G6,Liberty,0.0,Liberty,0.0
+2025,401757300,G6,Delaware,0.0,Delaware,0.0
+2025,401757301,G6,Liberty,0.0,Liberty,0.0
+2025,401757302,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2025,401757303,G6,,,Western Kentucky,1.0
+2025,401757304,G6,UTEP,0.0,UTEP,0.0
+2025,401757305,G6,Jacksonville State,0.0,Jacksonville State,0.0
+2025,401757306,G6,Kennesaw State,1.0,Kennesaw State,1.0
+2025,401757307,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2025,401757308,G6,Middle Tennessee,1.0,Middle Tennessee,1.0
+2025,401757309,G6,UTEP,0.0,UTEP,0.0
+2025,401757310,G6,UTEP,0.0,UTEP,0.0
+2025,401757311,G6,Florida International,1.0,Florida International,1.0
+2025,401757312,G6,Jacksonville State,1.0,Jacksonville State,1.0
+2025,401757313,G6,,,Liberty,0.0
+2025,401757314,G6,Louisiana Tech,1.0,Louisiana Tech,1.0
+2025,401757315,G6,,,,
+2025,401760372,G6,Boise State,1.0,Boise State,1.0
+2025,401760373,G6,UTSA,1.0,UTSA,1.0
+2025,401760374,G6,Hawai'i,0.0,Hawai'i,0.0
+2025,401760376,G6,UNLV,1.0,UNLV,1.0
+2025,401760378,G6,Hawai'i,1.0,Hawai'i,1.0
+2025,401760379,G6,App State,0.0,App State,0.0
+2025,401760380,G6,San Diego State,1.0,San Diego State,1.0
+2025,401760381,G6,Navy,1.0,Navy,1.0
+2025,401760382,G6,San Diego State,1.0,San Diego State,1.0
+2025,401760383,G6,Fresno State,1.0,Fresno State,1.0
+2025,401760384,G6,New Mexico,0.0,New Mexico,0.0
+2025,401760385,G6,UNLV,1.0,UNLV,1.0
+2025,401760386,G6,UNLV,1.0,UNLV,1.0
+2025,401760387,G6,,,,
+2025,401760388,G6,Fresno State,0.0,Fresno State,0.0
+2025,401760389,G6,,,,
+2025,401760390,G6,San Diego State,1.0,San Diego State,1.0
+2025,401760391,G6,Wyoming,1.0,Wyoming,1.0
+2025,401760392,G6,Wyoming,0.0,Wyoming,0.0
+2025,401760393,G6,,,,
+2025,401760394,G6,,,Hawai'i,1.0
+2025,401760395,G6,New Mexico,1.0,New Mexico,1.0
+2025,401760396,G6,Utah State,1.0,Utah State,1.0
+2025,401760397,G6,Boise State,1.0,Boise State,1.0
+2025,401760398,G6,Wyoming,1.0,Wyoming,1.0
+2025,401760399,G6,San Diego State,1.0,San Diego State,1.0
+2025,401760400,G6,,,New Mexico,1.0
+2025,401760401,G6,Army,1.0,Army,1.0
+2025,401760402,G6,Boise State,0.0,Boise State,0.0
+2025,401760403,G6,San José State,1.0,San José State,1.0
+2025,401760404,G6,UNLV,0.0,UNLV,0.0
+2025,401760405,G6,San Diego State,1.0,San Diego State,1.0
+2025,401760406,G6,San José State,0.0,San José State,0.0
+2025,401760407,G6,UNLV,1.0,UNLV,1.0
+2025,401760408,G6,San Diego State,0.0,San Diego State,0.0
+2025,401760409,G6,Utah State,1.0,Utah State,1.0
+2025,401760410,G6,San Diego State,1.0,San Diego State,1.0
+2025,401760411,G6,New Mexico,1.0,New Mexico,1.0
+2025,401760412,G6,Fresno State,1.0,Fresno State,1.0
+2025,401760413,G6,San José State,0.0,San José State,0.0
+2025,401760414,G6,UNLV,1.0,UNLV,1.0
+2025,401760415,G6,,,,
+2025,401760416,G6,Boise State,1.0,Boise State,1.0
+2025,401760417,G6,Fresno State,0.0,Fresno State,0.0
+2025,401760418,G6,,,Hawai'i,0.0
+2025,401760419,G6,Wyoming,0.0,Wyoming,0.0
+2025,401760420,G6,San Diego State,1.0,San Diego State,1.0
+2025,401760421,G6,Colorado State,0.0,Colorado State,0.0
+2025,401760422,G6,Boise State,1.0,Boise State,1.0
+2025,401760423,G6,,,Fresno State,1.0
+2025,401760424,G6,,,Hawai'i,1.0
+2025,401760425,G6,UNLV,1.0,UNLV,1.0
+2025,401760426,G6,San Diego State,0.0,San Diego State,0.0
+2025,401761603,G6,Texas State,1.0,Texas State,1.0
+2025,401761604,G6,,,East Carolina,1.0
+2025,401761607,G6,App State,0.0,App State,0.0
+2025,401761608,G6,Memphis,1.0,Memphis,1.0
+2025,401761610,G6,Eastern Michigan,1.0,Eastern Michigan,1.0
+2025,401761611,G6,South Alabama,0.0,South Alabama,0.0
+2025,401761613,G6,Buffalo,0.0,Buffalo,0.0
+2025,401761614,G6,James Madison,1.0,James Madison,1.0
+2025,401761615,G6,Marshall,0.0,Marshall,0.0
+2025,401761616,G6,UL Monroe,1.0,UL Monroe,1.0
+2025,401761617,G6,North Texas,1.0,North Texas,1.0
+2025,401761618,G6,James Madison,1.0,James Madison,1.0
+2025,401761619,G6,Old Dominion,1.0,Old Dominion,1.0
+2025,401761620,G6,Texas State,0.0,Texas State,0.0
+2025,401761621,G6,,,,
+2025,401761622,G6,Southern Miss,1.0,Southern Miss,1.0
+2025,401761623,G6,UL Monroe,0.0,UL Monroe,0.0
+2025,401761624,G6,,,Georgia State,0.0
+2025,401761625,G6,James Madison,1.0,James Madison,1.0
+2025,401761626,G6,Marshall,1.0,Marshall,1.0
+2025,401761627,G6,Texas State,0.0,Texas State,0.0
+2025,401761628,G6,South Alabama,0.0,South Alabama,0.0
+2025,401761629,G6,App State,0.0,App State,0.0
+2025,401761630,G6,Georgia State,0.0,Georgia State,0.0
+2025,401761631,G6,James Madison,1.0,James Madison,1.0
+2025,401761632,G6,Marshall,1.0,Marshall,1.0
+2025,401761633,G6,UL Monroe,0.0,UL Monroe,0.0
+2025,401761634,G6,South Alabama,1.0,South Alabama,1.0
+2025,401761635,G6,App State,0.0,App State,0.0
+2025,401761636,G6,,,Arkansas State,1.0
+2025,401761637,G6,Southern Miss,1.0,Southern Miss,1.0
+2025,401761638,G6,Troy,1.0,Troy,1.0
+2025,401761639,G6,James Madison,1.0,James Madison,1.0
+2025,401761640,G6,Marshall,0.0,Marshall,0.0
+2025,401761641,G6,Old Dominion,1.0,Old Dominion,1.0
+2025,401761642,G6,South Alabama,0.0,South Alabama,0.0
+2025,401761643,G6,Troy,0.0,Troy,0.0
+2025,401761644,G6,App State,0.0,App State,0.0
+2025,401761645,G6,Coastal Carolina,1.0,Coastal Carolina,1.0
+2025,401761646,G6,,,James Madison,1.0
+2025,401761647,G6,Southern Miss,1.0,Southern Miss,1.0
+2025,401761648,G6,Texas State,0.0,Texas State,0.0
+2025,401761649,G6,Old Dominion,1.0,Old Dominion,1.0
+2025,401761650,G6,,,Coastal Carolina,0.0
+2025,401761651,G6,Marshall,1.0,Marshall,1.0
+2025,401761652,G6,James Madison,1.0,James Madison,1.0
+2025,401761653,G6,,,UL Monroe,0.0
+2025,401761654,G6,Southern Miss,0.0,Southern Miss,0.0
+2025,401761655,G6,Arkansas State,0.0,Arkansas State,0.0
+2025,401761656,G6,Marshall,0.0,Marshall,0.0
+2025,401761657,G6,,,Old Dominion,1.0
+2025,401761658,G6,,,Southern Miss,0.0
+2025,401761659,G6,Texas State,1.0,Texas State,1.0
+2025,401761660,G6,Troy,1.0,Troy,1.0
+2025,401761661,G6,App State,0.0,App State,0.0
+2025,401761662,G6,James Madison,1.0,James Madison,1.0
+2025,401761663,G6,Marshall,0.0,Marshall,0.0
+2025,401761664,G6,Old Dominion,1.0,Old Dominion,1.0
+2025,401761665,G6,UL Monroe,0.0,UL Monroe,0.0
+2025,401761666,G6,Southern Miss,0.0,Southern Miss,0.0
+2025,401761667,G6,,,Texas State,1.0
+2025,401761668,G6,Southern Miss,1.0,Southern Miss,1.0
+2025,401762441,G6,UTSA,0.0,UTSA,0.0
+2025,401762442,G6,North Texas,1.0,North Texas,1.0
+2025,401762443,G6,Tulane,0.0,Tulane,0.0
+2025,401762463,G6,,,,
+2025,401762465,G6,,,,
+2025,401762468,G6,Rice,1.0,Rice,1.0
+2025,401762469,G6,North Texas,1.0,North Texas,1.0
+2025,401762471,G6,East Carolina,1.0,East Carolina,1.0
+2025,401762472,G6,Memphis,1.0,Memphis,1.0
+2025,401762473,G6,Navy,1.0,Navy,1.0
+2025,401762474,G6,Tulane,1.0,Tulane,1.0
+2025,401762475,G6,South Florida,1.0,South Florida,1.0
+2025,401762476,G6,,,Army,1.0
+2025,401762477,G6,Rice,0.0,Rice,0.0
+2025,401762478,G6,Memphis,1.0,Memphis,1.0
+2025,401762479,G6,Temple,1.0,Temple,1.0
+2025,401762480,G6,Tulane,1.0,Tulane,1.0
+2025,401762481,G6,North Texas,0.0,North Texas,0.0
+2025,401762482,G6,UAB,0.0,UAB,0.0
+2025,401762483,G6,Army,1.0,Army,1.0
+2025,401762484,G6,Navy,1.0,Navy,1.0
+2025,401762485,G6,,,UTSA,1.0
+2025,401762486,G6,East Carolina,1.0,East Carolina,1.0
+2025,401762487,G6,Memphis,0.0,Memphis,0.0
+2025,401762488,G6,Tulane,1.0,Tulane,1.0
+2025,401762489,G6,Temple,1.0,Temple,1.0
+2025,401762490,G6,South Florida,1.0,South Florida,1.0
+2025,401762491,G6,North Texas,1.0,North Texas,1.0
+2025,401762492,G6,North Texas,1.0,North Texas,1.0
+2025,401762493,G6,Navy,1.0,Navy,1.0
+2025,401762494,G6,Memphis,1.0,Memphis,1.0
+2025,401762495,G6,,,Tulsa,0.0
+2025,401762497,G6,,,Memphis,1.0
+2025,401762498,G6,Temple,0.0,Temple,0.0
+2025,401762499,G6,North Texas,1.0,North Texas,1.0
+2025,401762500,G6,South Florida,1.0,South Florida,1.0
+2025,401762501,G6,Memphis,0.0,Memphis,0.0
+2025,401762502,G6,Rice,1.0,Rice,1.0
+2025,401762503,G6,,,Army,1.0
+2025,401762504,G6,East Carolina,1.0,East Carolina,1.0
+2025,401762505,G6,Tulsa,0.0,Tulsa,0.0
+2025,401762506,G6,North Texas,1.0,North Texas,1.0
+2025,401762507,G6,UTSA,1.0,UTSA,1.0
+2025,401762508,G6,Memphis,0.0,Memphis,0.0
+2025,401762509,G6,Tulane,1.0,Tulane,1.0
+2025,401762510,G6,South Florida,0.0,South Florida,0.0
+2025,401762511,G6,South Florida,1.0,South Florida,1.0
+2025,401762512,G6,Army,0.0,Army,0.0
+2025,401762513,G6,UTSA,1.0,UTSA,1.0
+2025,401762514,G6,North Texas,1.0,North Texas,1.0
+2025,401762515,G6,Temple,0.0,Temple,0.0
+2025,401762516,G6,Memphis,0.0,Memphis,0.0
+2025,401762517,G6,Tulsa,0.0,Tulsa,0.0
+2025,401762518,G6,Tulane,1.0,Tulane,1.0
+2025,401762519,G6,East Carolina,1.0,East Carolina,1.0
+2025,401762520,G6,South Florida,1.0,South Florida,1.0
+2025,401762521,G6,Navy,1.0,Navy,1.0
+2025,401762817,G6,Buffalo,1.0,Buffalo,1.0
+2025,401762820,G6,Toledo,0.0,Toledo,0.0
+2025,401762824,G6,Toledo,1.0,Toledo,1.0
+2025,401762825,G6,Bowling Green,0.0,Bowling Green,0.0
+2025,401762826,G6,Central Michigan,1.0,Central Michigan,1.0
+2025,401762829,G6,Central Michigan,0.0,Central Michigan,0.0
+2025,401762830,G6,Ohio,0.0,Ohio,0.0
+2025,401762831,G6,Buffalo,1.0,Buffalo,1.0
+2025,401762832,G6,Western Michigan,1.0,Western Michigan,1.0
+2025,401762833,G6,Miami (OH),1.0,Miami (OH),1.0
+2025,401762834,G6,Western Michigan,1.0,Western Michigan,1.0
+2025,401762835,G6,Toledo,0.0,Toledo,0.0
+2025,401762836,G6,,,Northern Illinois,0.0
+2025,401762837,G6,,,Kent State,1.0
+2025,401762838,G6,Akron,0.0,Akron,0.0
+2025,401762839,G6,Bowling Green,0.0,Bowling Green,0.0
+2025,401762840,G6,Buffalo,1.0,Buffalo,1.0
+2025,401762841,G6,,,Miami (OH),1.0
+2025,401762842,G6,Toledo,1.0,Toledo,1.0
+2025,401762843,G6,,,Northern Illinois,0.0
+2025,401762844,G6,Buffalo,0.0,Buffalo,0.0
+2025,401762845,G6,Northern Illinois,1.0,Northern Illinois,1.0
+2025,401762846,G6,Bowling Green,0.0,Bowling Green,0.0
+2025,401762847,G6,Central Michigan,1.0,Central Michigan,1.0
+2025,401762848,G6,,,Ohio,1.0
+2025,401762849,G6,Buffalo,1.0,Buffalo,1.0
+2025,401762850,G6,,,Western Michigan,1.0
+2025,401762851,G6,Akron,1.0,Akron,1.0
+2025,401762852,G6,Miami (OH),0.0,Miami (OH),0.0
+2025,401762853,G6,Ball State,1.0,Ball State,1.0
+2025,401762854,G6,Toledo,1.0,Toledo,1.0
+2025,401762855,G6,,,Bowling Green,0.0
+2025,401762856,G6,Akron,0.0,Akron,0.0
+2025,401762857,G6,Western Michigan,1.0,Western Michigan,1.0
+2025,401762858,G6,,,Buffalo,0.0
+2025,401762859,G6,Northern Illinois,1.0,Northern Illinois,1.0
+2025,401762860,G6,Toledo,1.0,Toledo,1.0
+2025,401762861,G6,Eastern Michigan,1.0,Eastern Michigan,1.0
+2025,401762862,G6,Bowling Green,0.0,Bowling Green,0.0
+2025,401762863,G6,Ohio,1.0,Ohio,1.0
+2025,401762864,G6,Western Michigan,1.0,Western Michigan,1.0
+2025,401762865,G6,Buffalo,0.0,Buffalo,0.0
+2025,401762866,G6,Central Michigan,1.0,Central Michigan,1.0
+2025,401762867,G6,Toledo,1.0,Toledo,1.0
+2025,401762868,G6,Bowling Green,1.0,Bowling Green,1.0
+2025,401762869,G6,Western Michigan,1.0,Western Michigan,1.0
+2025,401762870,G6,Buffalo,0.0,Buffalo,0.0
+2025,401762871,G6,Northern Illinois,0.0,Northern Illinois,0.0
+2025,401762872,G6,Toledo,1.0,Toledo,1.0
+2025,401762873,G6,Northern Illinois,0.0,Northern Illinois,0.0
+2025,401762874,G6,,,Miami (OH),1.0
+2025,401762875,G6,Miami (OH),1.0,Miami (OH),1.0
+2025,401777324,G6,,,Tulane,1.0
+2025,401777325,G6,Jacksonville State,0.0,Jacksonville State,0.0
+2025,401777326,G6,,,,
+2025,401777327,P4,Texas Tech,1.0,Texas Tech,1.0
+2025,401777328,P4,Virginia,0.0,Virginia,0.0
+2025,401777329,G6,Miami (OH),0.0,Miami (OH),0.0
+2025,401777351,P4,Georgia,1.0,Georgia,1.0
+2025,401777352,G6,James Madison,1.0,James Madison,1.0
+2025,401777353,P4,Ohio State,0.0,Ohio State,0.0
+2026,401856679,P4,Oklahoma,0.0,Oklahoma,0.0
+2026,401856682,P4,Ohio State,0.0,Ohio State,0.0
+2026,401856685,P4,Alabama,1.0,Alabama,1.0
+2026,401856686,P4,Georgia,1.0,Georgia,1.0
+2026,401856687,P4,,,,
+2026,401856688,P4,LSU,0.0,LSU,0.0
+2026,401856691,P4,South Carolina,0.0,South Carolina,0.0
+2026,401856694,P4,Texas A&M,0.0,Texas A&M,0.0
+2026,401856695,P4,Vanderbilt,1.0,Vanderbilt,1.0
+2026,401856696,P4,Alabama,1.0,Alabama,1.0
+2026,401856698,P4,Auburn,1.0,Auburn,1.0
+2026,401856699,P4,Florida,1.0,Florida,1.0
+2026,401856700,P4,Georgia,1.0,Georgia,1.0
+2026,401856702,P4,LSU,1.0,LSU,1.0
+2026,401856703,P4,Missouri,0.0,Missouri,0.0
+2026,401856704,P4,,,Tennessee,0.0
+2026,401856782,P4,Oregon,0.0,Oregon,0.0
+2026,401856802,P4,Virginia,0.0,West Virginia,1.0
+2026,401856811,P4,,,Houston,0.0
+2026,401856812,P4,Arizona State,1.0,Arizona State,1.0
+2026,401856813,P4,Baylor,1.0,Baylor,1.0
+2026,401856814,P4,Kansas State,0.0,Kansas State,0.0
+2026,401856815,P4,,,UCF,1.0
+2026,401856816,P4,,,Iowa State,0.0
+2026,401856881,P4,West Virginia,0.0,West Virginia,0.0
+2026,401858214,P4,Boston College,1.0,Boston College,1.0
+2026,401858217,P4,,,Duke,1.0
+2026,401858225,P4,Pittsburgh,1.0,Pittsburgh,1.0
+2026,401858226,P4,,,Wake Forest,0.0
+2026,401858229,P4,Clemson,1.0,Clemson,1.0
+2026,401858230,P4,,,,
+2026,401858231,P4,Duke,1.0,Duke,1.0
+2026,401858232,P4,Maryland,0.0,Maryland,0.0
+2026,401858234,P4,,,,
+2026,401858240,P4,Stanford,1.0,Stanford,1.0
+2026,401858242,P4,Virginia Tech,1.0,Virginia Tech,1.0
+2026,401858243,P4,Louisville,0.0,Louisville,0.0
+2026,401858453,P4,Notre Dame,1.0,Notre Dame,1.0
+2026,401858457,P4,USC,1.0,USC,1.0
+2026,401858458,P4,UCLA,1.0,UCLA,1.0
+2026,401858461,P4,Indiana,1.0,Indiana,1.0
+2026,401858462,P4,,,UCLA,1.0
+2026,401858463,P4,Iowa,1.0,Iowa,1.0
+2026,401858464,P4,Nebraska,1.0,Nebraska,1.0
+2026,401858465,P4,Ohio State,1.0,Ohio State,1.0
+2026,401858466,P4,Penn State,0.0,Penn State,0.0
+2026,401858467,P4,Notre Dame,1.0,Notre Dame,1.0
+2026,401858469,P4,USC,0.0,USC,0.0
+2026,401858470,P4,Washington,0.0,Washington,0.0
+2026,401860881,G6,Memphis,0.0,Memphis,0.0
+2026,401860883,G6,Sacramento State,0.0,Sacramento State,0.0
+2026,401860887,G6,James Madison,1.0,James Madison,1.0
+2026,401860888,G6,Fresno State,1.0,Fresno State,1.0
+2026,401860889,G6,North Texas,0.0,North Texas,0.0
+2026,401860891,G6,Fresno State,1.0,Fresno State,1.0
+2026,401860893,G6,Toledo,1.0,Toledo,1.0
+2026,401860894,G6,Troy,0.0,Troy,0.0
+2026,401860895,G6,Oregon State,1.0,Oregon State,1.0
+2026,401860896,G6,UTSA,1.0,UTSA,1.0
+2026,401860897,G6,Western Michigan,0.0,Western Michigan,0.0
+2026,401862705,G6,UNLV,0.0,UNLV,0.0
+2026,401862707,G6,,,Sam Houston,0.0
+2026,401862708,G6,,,UAB,1.0
+2026,401862710,G6,Old Dominion,0.0,Old Dominion,0.0
+2026,401862771,G6,,,Florida Atlantic,1.0
+2026,401862773,G6,Western Michigan,1.0,Western Michigan,1.0
+2026,401862774,G6,Toledo,1.0,Toledo,1.0
+2026,401862776,G6,Louisiana,1.0,Louisiana,1.0
+2026,401862778,G6,UAB,1.0,UAB,1.0
+2026,401862779,G6,Temple,0.0,Temple,0.0
+2026,401862780,G6,Louisiana,1.0,Louisiana,1.0
+2026,401862782,G6,Florida Atlantic,1.0,Florida Atlantic,1.0
+2026,401862784,G6,Tulane,1.0,Tulane,1.0
+2026,401862785,G6,South Florida,1.0,South Florida,1.0
+2026,401864443,G6,Nevada,0.0,Nevada,0.0
+2026,401864507,G6,North Dakota State,1.0,North Dakota State,1.0
+2026,401864508,G6,Central Michigan,1.0,Central Michigan,1.0
+2026,401864509,G6,Nevada,0.0,Nevada,0.0
+2026,401864510,G6,Hawai'i,0.0,Hawai'i,0.0
+2026,401864511,G6,Georgia State,1.0,Georgia State,1.0
+2026,401864512,G6,UNLV,1.0,UNLV,1.0
+2026,401864574,G6,App State,1.0,App State,1.0
+2026,401864578,G6,Hawai'i,1.0,Hawai'i,1.0
+2026,401864579,G6,New Mexico,1.0,New Mexico,1.0
+2026,401866418,G6,Ohio,1.0,Ohio,1.0
+2026,401866422,G6,Liberty,1.0,Liberty,1.0
+2026,401866423,G6,South Alabama,1.0,South Alabama,1.0
+2026,401866425,G6,Ball State,0.0,Ball State,0.0
+2026,401866429,G6,Massachusetts,1.0,Massachusetts,1.0
+2026,401869931,G6,,,Kennesaw State,0.0
+2026,401869940,G6,Delaware,1.0,Delaware,1.0
+2026,401869941,G6,,,Coastal Carolina,0.0
+2026,401869948,G6,,,,
+2026,401869961,G6,,,Old Dominion,0.0
+2026,401871047,G6,Marshall,1.0,Marshall,1.0
+2026,401871048,G6,Middle Tennessee,0.0,Middle Tennessee,0.0

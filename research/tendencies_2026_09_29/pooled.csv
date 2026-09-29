@@ -1,0 +1,24 @@
+group,offense_advantages,style,teams,wins,losses,win_rate
+G6,Both,Balanced,6,5,1,0.8333333333333334
+G6,Both,Pass majority,73,45,28,0.6164383561643836
+G6,Both,Run majority,281,191,90,0.6797153024911032
+G6,Neither,Balanced,2,1,1,0.5
+G6,Neither,Pass majority,141,44,97,0.3120567375886525
+G6,Neither,Run majority,217,74,143,0.34101382488479265
+G6,Pass only,Balanced,3,1,2,0.3333333333333333
+G6,Pass only,Pass majority,126,51,75,0.40476190476190477
+G6,Pass only,Run majority,146,64,82,0.4383561643835616
+G6,Rush only,Balanced,1,1,0,1.0
+G6,Rush only,Pass majority,53,24,29,0.4528301886792453
+G6,Rush only,Run majority,221,134,87,0.6063348416289592
+P4,Both,Pass majority,92,58,34,0.6304347826086957
+P4,Both,Run majority,318,239,79,0.7515723270440252
+P4,Neither,Balanced,4,2,2,0.5
+P4,Neither,Pass majority,142,48,94,0.3380281690140845
+P4,Neither,Run majority,264,63,201,0.23863636363636365
+P4,Pass only,Balanced,4,3,1,0.75
+P4,Pass only,Pass majority,100,51,49,0.51
+P4,Pass only,Run majority,153,69,84,0.45098039215686275
+P4,Rush only,Balanced,2,0,2,0.0
+P4,Rush only,Pass majority,57,29,28,0.5087719298245614
+P4,Rush only,Run majority,198,105,93,0.5303030303030303
