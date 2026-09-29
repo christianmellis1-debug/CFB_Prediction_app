@@ -1,10 +1,10 @@
-"""Four-metric research flag; never modifies model probabilities or selections."""
+"""Five-metric research flag; never modifies model probabilities or selections."""
 from html import escape
 import numpy as np
 import pandas as pd
 P4={'ACC','Big Ten','Big 12','SEC'}
 G6={'American Athletic','Conference USA','Mid-American','Mountain West','Sun Belt','Pac-12'}
-LABELS=('Rushing matchup estimate','Completion matchup estimate','Run defense · YPC allowed','Pass defense · completion allowed')
+LABELS=('Rushing matchup estimate','Completion matchup estimate','Run defense · YPC allowed','Pass defense · completion allowed','Turnover margin · per game')
 
 def conference_group(value, team=None):
     # Treat Notre Dame as P4 for research scope, despite its independent conference.
@@ -23,6 +23,9 @@ def build_advantages(schedule, boxes, week):
     b=boxes.copy()
     for c in ('game_id','team_id','rushingYards','rushingAttempts'):
         b[c]=pd.to_numeric(b[c],errors='coerce')
+    for c in ('turnovers','fumblesLost','interceptions'):
+        b[c]=pd.to_numeric(b.get(c, pd.Series(np.nan,index=b.index)),errors='coerce')
+    b['to_valid']=np.isfinite(b[['turnovers','fumblesLost','interceptions']]).all(axis=1) & b[['turnovers','fumblesLost','interceptions']].ge(0).all(axis=1) & b[['turnovers','fumblesLost','interceptions']].mod(1).eq(0).all(axis=1) & b.turnovers.eq(b.fumblesLost+b.interceptions)
     pairs=b.completionAttempts.astype(str).str.extract(r'^\s*(\d+)\s*[/−-]\s*(\d+)\s*$')
     b['comp']=pd.to_numeric(pairs[0],errors='coerce');b['att']=pd.to_numeric(pairs[1],errors='coerce')
     valid=np.isfinite(b[['rushingYards','rushingAttempts','comp','att']]).all(axis=1)&b.rushingAttempts.gt(0)&b.rushingAttempts.mod(1).eq(0)&b.comp.ge(0)&b.att.ge(b.comp)
@@ -44,33 +47,35 @@ def build_advantages(schedule, boxes, week):
             games=history[history.home_id.eq(tid)|history.away_id.eq(tid)]
             if games.empty:
                 reason='At least one team has no earlier-week FBS game this season.';break
-            totals=np.zeros(8)
+            totals=np.zeros(10)
             for _,old in games.iterrows():
                 opp=old.away_id if old.home_id==tid else old.home_id
                 keys=[(old.game_id,tid),(old.game_id,opp)]
                 if not all(k in lookup.index for k in keys):
                     reason='Earlier-week FBS box scores are incomplete or invalid.';break
                 own,other=[lookup.loc[k] for k in keys]
-                totals+=np.array([own.rushingYards,own.rushingAttempts,own.comp,own.att,other.rushingYards,other.rushingAttempts,other.comp,other.att])
+                if not own.to_valid or not other.to_valid:
+                    reason='Earlier-week FBS turnover data are missing or inconsistent.';break
+                totals+=np.array([own.rushingYards,own.rushingAttempts,own.comp,own.att,other.rushingYards,other.rushingAttempts,other.comp,other.att,own.turnovers,other.turnovers])
             if reason:break
             if min(totals[[1,3,5,7]])<=0:
-                reason='Not enough rushing or passing attempts to calculate all four metrics.';break
-            profiles.append(dict(off_run=totals[0]/totals[1],off_pass=totals[2]/totals[3],def_run=totals[4]/totals[5],def_pass=totals[6]/totals[7],games=len(games)))
+                reason='Not enough rushing or passing attempts to calculate all five metrics.';break
+            profiles.append(dict(off_run=totals[0]/totals[1],off_pass=totals[2]/totals[3],def_run=totals[4]/totals[5],def_pass=totals[6]/totals[7],games=len(games),margin=(totals[9]-totals[8])/len(games)))
         if reason:
             out[gid]={'status':'missing','reason':reason};continue
         h,a=profiles
-        hv=[(h['off_run']+a['def_run'])/2,(h['off_pass']+a['def_pass'])/2,h['def_run'],h['def_pass']]
-        av=[(a['off_run']+h['def_run'])/2,(a['off_pass']+h['def_pass'])/2,a['def_run'],a['def_pass']]
+        hv=[(h['off_run']+a['def_run'])/2,(h['off_pass']+a['def_pass'])/2,h['def_run'],h['def_pass'],h['margin']]
+        av=[(a['off_run']+h['def_run'])/2,(a['off_pass']+h['def_pass'])/2,a['def_run'],a['def_pass'],a['margin']]
         out[gid]={'status':'ok','home':hv,'away':av,'home_games':h['games'],'away_games':a['games'],'group':hg}
     return out
 
 def assess(record, side):
     if record.get('status')!='ok':return None
     own=record[side];other=record['away' if side=='home' else 'home']
-    deltas=[(x-y)*(1 if i<2 else -1) for i,(x,y) in enumerate(zip(own,other))]
+    deltas=[(x-y)*(1 if i in (0,1,4) else -1) for i,(x,y) in enumerate(zip(own,other))]
     outcomes=['Advantage' if v>1e-10 else 'Tied' if abs(v)<=1e-10 else 'Disadvantage' for v in deltas]
     count=outcomes.count('Advantage')
-    return dict(count=count,flag=count<=1,outcomes=outcomes)
+    return dict(count=count,flag=count<=2,outcomes=outcomes)
 
 def advantage_html(record, side, picked_team):
     status=record.get('status')
@@ -78,10 +83,10 @@ def advantage_html(record, side, picked_team):
         label='Not assessed' if status=='outside' else 'Not enough data'
         return '<details class="card-details"><summary>Advantage check · '+label+'</summary><p>'+escape(record.get('reason','Pregame box scores unavailable.'))+'</p></details>'
     scored=assess(record,side);count=scored['count'];team=escape(str(picked_team))
-    banner=(f'<div style="margin-top:10px;padding:10px 12px;border-left:4px solid #e9a23b;border-radius:6px;background:#e9a23b18"><strong>⚠ Matchup risk · {count}/4 advantages</strong><br><span>{team} has limited support from these four metrics.</span></div>' if scored['flag'] else '')
+    banner=(f'<div style="margin-top:10px;padding:10px 12px;border-left:4px solid #e9a23b;border-radius:6px;background:#e9a23b18"><strong>⚠ Matchup risk · {count}/5 advantages</strong><br><span>{team} has limited support from these five metrics.</span></div>' if scored['flag'] else '')
     other='away' if side=='home' else 'home';items=[]
     for i,label in enumerate(LABELS):
-        fmt=(lambda x:f'{x:.1%}') if i in (1,3) else (lambda x:f'{x:.2f} YPC')
-        direction='higher is better' if i<2 else 'lower is better'
+        fmt=(lambda x:f'{x:+.2f} per game') if i==4 else (lambda x:f'{x:.1%}') if i in (1,3) else (lambda x:f'{x:.2f} YPC')
+        direction='higher is better' if i in (0,1,4) else 'lower is better'
         items.append(f'<li><strong>{label}</strong>: {fmt(record[side][i])} vs {fmt(record[other][i])} · {scored["outcomes"][i]} ({direction})</li>')
-    return banner+f'<details class="card-details"><summary>Four-metric check · {count}/4 advantages</summary><p>Values compare {team} with its opponent.</p><ul>'+''.join(items)+f'</ul><p>Earlier-week FBS games: pick {record[side+"_games"]}, opponent {record[other+"_games"]}. Rates use total yards/completions divided by total attempts. Ties do not count as advantages.</p><p>This research flag is not a loss probability. Metrics overlap, and no flag does not mean a safe bet. Current model confidence and value labels are unchanged.</p></details>'
+    return banner+f'<details class="card-details"><summary>Five-metric check · {count}/5 advantages</summary><p>Values compare {team} with its opponent.</p><ul>'+''.join(items)+f'</ul><p>Earlier-week FBS games: pick {record[side+"_games"]}, opponent {record[other+"_games"]}. Rates use total yards/completions divided by total attempts. Turnover margin = (takeaways minus giveaways) / earlier-week FBS games. Ties do not count as advantages.</p><p>This research flag is not a loss probability. Metrics overlap, and no flag does not mean a safe bet. Current model confidence and value labels are unchanged.</p></details>'

@@ -34,7 +34,7 @@ TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
     ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines, and live or final scores. Confidence is an estimate, not a guarantee."),
-    ("risky", "Risky picks", "Review matchup warnings", "This tab lists every predicted winner with zero or one of the four matchup advantages for the selected week. The exclamation warning also appears on its game card. Missing data is shown separately, and this flag does not change the prediction."),
+    ("risky", "Risky picks", "Review matchup warnings", "This tab lists every predicted winner with two or fewer of the five matchup advantages for the selected week. The exclamation warning also appears on its game card. Missing data is shown separately, and this flag does not change the prediction."),
     ("compare", "Compare picks", "Compare the slate", "This compact table lets you compare picks without scrolling through individual cards. It follows your matchup filters."),
     ("results", "Model results", "Check model performance", "Compare wins, losses, and accuracy by confidence level for the selected week or season to date. Only final, decisive games count toward accuracy; matchup filters do not affect this view."),
     ("scenario", "What-if bets", "Try a betting scenario", "Choose picks and stakes below to see potential profit if they win and the amount lost if they lose. Missing moneylines are excluded. A scenario does not place or record bets."),
@@ -1728,7 +1728,7 @@ with cards_tab:
             is_risky = scored is not None and scored["flag"]
             if is_risky:
                 risky_indices.append(card_idx)
-            warning = ('<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;border-radius:10px;background:#e9a23b20"><span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9a23b;color:#171717;font-size:25px;font-weight:900">!</span><div><strong>RISKY PICK · MATCHUP WARNING</strong><br><span>' + str(scored["count"]) + '/4 advantages for ' + escape(str(r["Predicted Winner"])) + '</span></div></div>') if is_risky else ""
+            warning = ('<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;border-radius:10px;background:#e9a23b20"><span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9a23b;color:#171717;font-size:25px;font-weight:900">!</span><div><strong>RISKY PICK · MATCHUP WARNING</strong><br><span>' + str(scored["count"]) + '/5 advantages for ' + escape(str(r["Predicted Winner"])) + '</span></div></div>') if is_risky else ""
             cards[card_idx] = f"""<article class="pick-card">{warning}
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
@@ -1759,7 +1759,7 @@ with cards_tab:
             tour_at("risky")
             st.subheader(f"Risky picks · {len(risky_indices)}")
             st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
-            st.write("A warning means the predicted winner has 0 or 1 of the four matchup advantages. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
+            st.write("A warning means the predicted winner has 0, 1 or 2 of the five matchup advantages. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
             if not advantage_checks:
                 st.info(advantage_error)
             elif risky_indices:
