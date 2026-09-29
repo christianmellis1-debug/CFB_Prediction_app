@@ -22,6 +22,7 @@ import streamlit.components.v1 as components
 # Pin the release module so a warm Streamlit process cannot reuse V1.4.
 from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week
 from bet_tracker_ui import show_bet_tracker
+from matchup_advantages import build_advantages, advantage_html
 from shadow_tracking import show_shadow_tracking
 from live_scores import parse_live_scores, overlay_live_scores
 
@@ -655,6 +656,13 @@ def add_betting_value(predictions):
     result.loc[usable & (result["Bet Signal"] == "Pass") & (result["Confidence"] >= .60) & (result["Model Edge"] >= .02) & (result["Expected Value"] > 0), "Bet Signal"] = "Value"
     result.loc[~usable, "Bet Signal"] = "No line"
     return result
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def download_advantage_boxes(year):
+    url = f"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_team_box/team_box_{int(year)}.csv"
+    with urlopen(url, timeout=20) as response:
+        return pd.read_csv(BytesIO(response.read()), low_memory=False)
 
 
 def team_data_details(team_id, published, derived, week):
@@ -1330,6 +1338,7 @@ with st.sidebar:
         download_live_event.clear()
         download_schedule.clear()
         download_summary.clear()
+        download_advantage_boxes.clear()
         download_market_odds.clear()
         download_archived_event.clear()
         download_event_moneylines.clear()
@@ -1490,6 +1499,7 @@ with feed_details:
     st.caption("Fetch times show when the app retrieved the feeds, not when the provider updated them. Live scores refresh about every minute while open; schedule and odds every 5 minutes; team stats hourly.")
     if st.button("Refresh all feeds now"):
         download_summary.clear()
+        download_advantage_boxes.clear()
         download_live_scores.clear()
         download_live_event.clear()
         download_schedule.clear()
@@ -1617,6 +1627,12 @@ with cards_tab:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
     else:
         cards = []
+        try:
+            advantage_checks = build_advantages(schedule, download_advantage_boxes(season), selected_week)
+            advantage_error = "Not enough earlier-week FBS data."
+        except (OSError, ValueError, KeyError, TypeError):
+            advantage_checks = {}
+            advantage_error = "Pregame box-score feed unavailable. Try Refresh all data; missing data is not a risk rating."
         logo_urls = tuple(sorted({
             url for column in ("away_id", "home_id")
             for team_id in games[column] if (url := team_logo_url(team_id))
@@ -1703,6 +1719,8 @@ with cards_tab:
             red_zone_html = rz_cards.get(card_idx, "")
             if red_zone_html:
                 matchup_html = matchup_html.replace("</details>", red_zone_html + "</details>")
+            check = advantage_checks.get(str(int(game.iloc[0]['game_id'])), {"status":"missing", "reason":advantage_error}) if len(game) == 1 else {"status":"missing", "reason":"Game could not be matched."}
+            advantage_note = advantage_html(check, "home" if r["Predicted Side"] == "Home" else "away", r["Predicted Winner"])
             cards.append(f"""<article class="pick-card">
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
@@ -1710,7 +1728,7 @@ with cards_tab:
 <div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{outcome}{moneylines}{r.get("Line Movement HTML", "")}{explanation_html}{matchup_html}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{advantage_note}{outcome}{moneylines}{r.get("Line Movement HTML", "")}{explanation_html}{matchup_html}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
         for card_index, (_, pick) in enumerate(filtered.iterrows()):
             if card_index % 2 == 0:
                 card_columns = st.columns(2, gap="medium")
@@ -2023,6 +2041,7 @@ st.download_button("Download these picks · CSV", filtered.drop(columns=["Line M
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
+
 
 
 
