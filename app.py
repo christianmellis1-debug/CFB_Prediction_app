@@ -22,6 +22,10 @@ import streamlit.components.v1 as components
 # Pin the release module so a warm Streamlit process cannot reuse V1.4.
 from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week
 from bet_tracker_ui import show_bet_tracker
+import importlib
+import matchup_advantages
+# Streamlit may retain imported modules after a source-only deployment.
+importlib.reload(matchup_advantages)
 from matchup_advantages import build_advantages, advantage_html, assess
 from shadow_tracking import show_shadow_tracking
 from live_scores import parse_live_scores, overlay_live_scores
@@ -2063,7 +2067,6 @@ st.download_button("Download these picks · CSV", filtered.drop(columns=["Line M
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
-
 
 
 
