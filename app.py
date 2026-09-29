@@ -22,6 +22,7 @@ import streamlit.components.v1 as components
 # Pin the release module so a warm Streamlit process cannot reuse V1.4.
 from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week
 from bet_tracker_ui import show_bet_tracker
+from shadow_tracking import show_shadow_tracking
 from live_scores import parse_live_scores, overlay_live_scores
 
 st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
@@ -1734,6 +1735,7 @@ with table_tab:
     st.dataframe(show, hide_index=True, use_container_width=True)
 
 with performance_tab:
+    show_shadow_tracking(st, season, selected_week)
     tour_at("results")
     st.subheader("Model results by confidence")
     st.caption("All model picks in the chosen period, independent of matchup filters, moneyline availability, or your personal bets. Accuracy measures picking the winner, not betting profit.")
