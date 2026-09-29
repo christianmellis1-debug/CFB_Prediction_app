@@ -22,7 +22,7 @@ import streamlit.components.v1 as components
 # Pin the release module so a warm Streamlit process cannot reuse V1.4.
 from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week
 from bet_tracker_ui import show_bet_tracker
-from matchup_advantages import build_advantages, advantage_html
+from matchup_advantages import build_advantages, advantage_html, assess
 from shadow_tracking import show_shadow_tracking
 from live_scores import parse_live_scores, overlay_live_scores
 
@@ -34,6 +34,7 @@ TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
     ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines, and live or final scores. Confidence is an estimate, not a guarantee."),
+    ("risky", "Risky picks", "Review matchup warnings", "This tab lists every predicted winner with zero or one of the four matchup advantages for the selected week. The exclamation warning also appears on its game card. Missing data is shown separately, and this flag does not change the prediction."),
     ("compare", "Compare picks", "Compare the slate", "This compact table lets you compare picks without scrolling through individual cards. It follows your matchup filters."),
     ("results", "Model results", "Check model performance", "Compare wins, losses, and accuracy by confidence level for the selected week or season to date. Only final, decisive games count toward accuracy; matchup filters do not affect this view."),
     ("scenario", "What-if bets", "Try a betting scenario", "Choose picks and stakes below to see potential profit if they win and the amount lost if they lose. Missing moneylines are excluded. A scenario does not place or record bets."),
@@ -1281,7 +1282,7 @@ st.markdown("""
 
 /* Distinct section navigation; keep native tab labels and tour targets intact. */
 .st-key-main_app_tabs [role="tablist"] {
- display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
  width:100%;overflow:visible;border:0;padding:8px 0 18px;
 }
 .st-key-main_app_tabs [role="tab"] {
@@ -1309,14 +1310,15 @@ st.markdown("""
  .st-key-main_app_tabs [role="tab"][aria-selected="true"] {padding:12px 11px;}
  .st-key-main_app_tabs [role="tab"] p {font-size:13px;}
 }
+.st-key-main_app_tabs [role="tab"][data-key="1"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAzIDIgMjFoMjBMMTIgM1oiLz48cGF0aCBkPSJNMTIgOXY1bTAgM3YxIi8+PC9zdmc+"); }
 .st-key-main_app_tabs [role="tab"][data-key="0"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIxNCIgeT0iMyIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIzIiB5PSIxNCIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIxNCIgeT0iMTQiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIyIi8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="1"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTEyIDMgMi44IDUuNyA2LjIuOS00LjUgNC40IDEuMSA2LjItNS42LTMtNS42IDMgMS4xLTYuMkwzIDkuNmw2LjItLjlaIi8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="2"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgN2gxNm0tNC00IDQgNC00IDRNMjAgMTdING00LTQtNCA0IDQgNCIvPjwvc3ZnPg=="); }
-.st-key-main_app_tabs [role="tab"][data-key="3"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgM3YxOGgxN005IDE2di01bTUgNVY3bTUgOVY0Ii8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="4"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iNCIgeT0iMyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxwYXRoIGQ9Ik04IDdoOE04IDEyaDJtNCAwaDJtLTggNWgybTQgMGgyIi8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="5"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iNiIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjE5IiByPSIyIi8+PHBhdGggZD0iTTYgN3Y0bDYgNiA2LTZWNyIvPjwvc3ZnPg=="); }
-.st-key-main_app_tabs [role="tab"][data-key="6"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTYgM2gxMnYxOGwtMy0yLTMgMi0zLTItMyAyWk05IDdoNm0tNiA0aDZtLTYgNGgzIi8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="7"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOSIvPjxwYXRoIGQ9Ik0xMiAxMXY2bTAtMTB2MSIvPjwvc3ZnPg=="); }
+.st-key-main_app_tabs [role="tab"][data-key="2"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTEyIDMgMi44IDUuNyA2LjIuOS00LjUgNC40IDEuMSA2LjItNS42LTMtNS42IDMgMS4xLTYuMkwzIDkuNmw2LjItLjlaIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="3"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgN2gxNm0tNC00IDQgNC00IDRNMjAgMTdING00LTQtNCA0IDQgNCIvPjwvc3ZnPg=="); }
+.st-key-main_app_tabs [role="tab"][data-key="4"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgM3YxOGgxN005IDE2di01bTUgNVY3bTUgOVY0Ii8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="5"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iNCIgeT0iMyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxwYXRoIGQ9Ik04IDdoOE04IDEyaDJtNCAwaDJtLTggNWgybTQgMGgyIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="6"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iNiIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjE5IiByPSIyIi8+PHBhdGggZD0iTTYgN3Y0bDYgNiA2LTZWNyIvPjwvc3ZnPg=="); }
+.st-key-main_app_tabs [role="tab"][data-key="7"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTYgM2gxMnYxOGwtMy0yLTMgMi0zLTItMyAyWk05IDdoNm0tNiA0aDZtLTYgNGgzIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="8"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOSIvPjxwYXRoIGQ9Ik0xMiAxMXY2bTAtMTB2MSIvPjwvc3ZnPg=="); }
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
 <h1>CFB Predictor<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
@@ -1397,7 +1399,7 @@ with week_col:
     selected_week = st.selectbox("Week", weeks, index=weeks.index(default_week), format_func=lambda w: f"Week {w}")
 games = schedule[schedule["week"] == selected_week]
 dashboard_summary = st.empty()
-cards_tab, value_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Value shortlist", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
+cards_tab, risky_tab, value_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Risky picks", "Value shortlist", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
 with about_tab:
     feed_details = st.expander("Feed health & data notes", expanded=False)
 
@@ -1625,8 +1627,9 @@ with cards_tab:
         st.caption("↔ Moneyline moved compares the same sportsbook’s opening and latest prices. Expand the flag for details. Session changes are tracked while this app session is active; no net change does not mean the line never moved. Fetch times are not the sportsbook’s change times. Shortened = higher implied chance and lower payout; lengthened = the reverse.")
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
-    else:
-        cards = []
+    if not pred.empty:
+        cards = {}
+        risky_indices = []
         try:
             advantage_checks = build_advantages(schedule, download_advantage_boxes(season), selected_week)
             advantage_error = "Not enough earlier-week FBS data."
@@ -1639,7 +1642,7 @@ with cards_tab:
         }))
         logo_sources = embedded_team_logos(logo_urls)
         rz_index = {}
-        if filtered["Confidence"].lt(.80).any():
+        if pred["Confidence"].lt(.80).any():
             try:
                 rz_index = red_zone_team_index(season)
             except (OSError, ValueError):
@@ -1652,8 +1655,8 @@ with cards_tab:
                 return idx, red_zone_matchup_html(pick, match, schedule, season, selected_week, rz_index)
             with st.spinner("Checking red-zone matchup data..."):
                 with ThreadPoolExecutor(max_workers=2) as pool:
-                    rz_cards = dict(pool.map(load_rz_card, list(filtered[filtered["Confidence"].lt(.80)].iterrows())))
-        for card_idx, r in filtered.iterrows():
+                    rz_cards = dict(pool.map(load_rz_card, list(pred[pred["Confidence"].lt(.80)].iterrows())))
+        for card_idx, r in pred.iterrows():
             badge_class = "badge close" if r["Confidence"] < .7 else "badge"
             risk = '<div class="risk-note">Away-team pick · ' + escape(str(r["Venue Risk"])) + ' venue risk</div>' if r["Venue Risk"] != "Normal" else ""
             venue = "Neutral site" if r["Neutral Site"] else "Away at home"
@@ -1721,30 +1724,49 @@ with cards_tab:
                 matchup_html = matchup_html.replace("</details>", red_zone_html + "</details>")
             check = advantage_checks.get(str(int(game.iloc[0]['game_id'])), {"status":"missing", "reason":advantage_error}) if len(game) == 1 else {"status":"missing", "reason":"Game could not be matched."}
             advantage_note = advantage_html(check, "home" if r["Predicted Side"] == "Home" else "away", r["Predicted Winner"])
-            cards.append(f"""<article class="pick-card">
+            scored = assess(check, "home" if r["Predicted Side"] == "Home" else "away")
+            is_risky = scored is not None and scored["flag"]
+            if is_risky:
+                risky_indices.append(card_idx)
+            warning = ('<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;border-radius:10px;background:#e9a23b20"><span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9a23b;color:#171717;font-size:25px;font-weight:900">!</span><div><strong>RISKY PICK · MATCHUP WARNING</strong><br><span>' + str(scored["count"]) + '/4 advantages for ' + escape(str(r["Predicted Winner"])) + '</span></div></div>') if is_risky else ""
+            cards[card_idx] = f"""<article class="pick-card">{warning}
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
 <div class="team-line"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}{escape(str(r['Away Team']))}</span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
 <div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{advantage_note}{outcome}{moneylines}{r.get("Line Movement HTML", "")}{explanation_html}{matchup_html}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>""")
-        for card_index, (_, pick) in enumerate(filtered.iterrows()):
-            if card_index % 2 == 0:
-                card_columns = st.columns(2, gap="medium")
-            card = cards[card_index].replace('<article class="pick-card">', '').replace('</article>', '')
-            card = card.replace("<!--away-data-->", "").replace("<!--home-data-->", "")
-            matchup = games[(games["home_team"] == pick["Home Team"]) & (games["away_team"] == pick["Away Team"])]
-            with card_columns[card_index % 2], st.container(border=True, key=f"matchup_card_{season}_{selected_week}_{card_index}"):
-                st.markdown(card, unsafe_allow_html=True)
-                with st.expander("Team statistics & data quality"):
-                    for side in ("away", "home"):
-                        tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
-                        label, note, metrics = team_data_details(tid, published_current, derived_team_data, selected_week)
-                        st.markdown(f"**{pick[side.title() + ' Team']} · {label}**")
-                        st.caption(note)
-                        for metric, value in metrics.items():
-                            st.write(f"**{metric}:** {value}")
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{advantage_note}{outcome}{moneylines}{r.get("Line Movement HTML", "")}{explanation_html}{matchup_html}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>"""
+        def render_pick_cards(rows, prefix):
+            for card_index, (row_id, pick) in enumerate(rows.iterrows()):
+                if card_index % 2 == 0:
+                    card_columns = st.columns(2, gap="medium")
+                card = cards[row_id].replace('<article class="pick-card">', '').replace('</article>', '')
+                card = card.replace("<!--away-data-->", "").replace("<!--home-data-->", "")
+                matchup = games[(games["home_team"] == pick["Home Team"]) & (games["away_team"] == pick["Away Team"])]
+                with card_columns[card_index % 2], st.container(border=True, key=f"{prefix}_card_{season}_{selected_week}_{card_index}"):
+                    st.markdown(card, unsafe_allow_html=True)
+                    with st.expander("Team statistics & data quality"):
+                        for side in ("away", "home"):
+                            tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
+                            label, note, metrics = team_data_details(tid, published_current, derived_team_data, selected_week)
+                            st.markdown(f"**{pick[side.title() + ' Team']} · {label}**")
+                            st.caption(note)
+                            for metric, value in metrics.items():
+                                st.write(f"**{metric}:** {value}")
+        render_pick_cards(filtered, "matchup")
+        with risky_tab:
+            tour_at("risky")
+            st.subheader(f"Risky picks · {len(risky_indices)}")
+            st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
+            st.write("A warning means the predicted winner has 0 or 1 of the four matchup advantages. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
+            if not advantage_checks:
+                st.info(advantage_error)
+            elif risky_indices:
+                render_pick_cards(pred.loc[risky_indices], "risky")
+            else:
+                st.info("No assessed picks meet the risk threshold this week.")
+            st.caption("Games with missing metrics are not rated as risky. No warning does not mean a safe bet. Picks and model confidence are unchanged.")
 with table_tab:
     tour_at("compare")
     show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Live Detail", "Live Score", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
