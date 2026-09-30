@@ -1,9 +1,10 @@
 {
   "experiment": "v15-market-blend-2026-09-28",
-  "last_run": "2026-09-30T19:22:51.576019+00:00",
+  "last_run": "2026-09-30T23:52:14.428837+00:00",
   "results": {},
   "run_summary": {
-    "eligible_schedule_games": 1,
+    "eligible_schedule_games": 3,
+    "new_snapshots": 2,
     "skipped: No same-book two-sided moneyline": 1
   },
   "snapshots": {
@@ -1877,6 +1878,40 @@
       "season": 2026,
       "week": 5
     },
+    "401871051": {
+      "away": "Jacksonville State",
+      "away_id": "55",
+      "away_ml": -142.0,
+      "blend_probability": 0.5902064524458833,
+      "blend_signal": "Pass",
+      "captured_at": "2026-09-30T23:52:14.303073+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401871051",
+      "home": "Kennesaw State",
+      "home_id": "338",
+      "home_ml": 120.0,
+      "kickoff": "2026-10-07T23:00:00+00:00",
+      "market_probability": 0.5634920634920635,
+      "model_probability": 0.7213045885408833,
+      "model_signal": "Strong value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -142.0,
+      "picked_side": "away",
+      "picked_team": "Jacksonville State",
+      "provenance": {
+        "code_commit": "88f475d51e4c7dcb6d6624bec21e7deb1c7baeb1",
+        "current_summary_sha256": "c47bc9fbc93c307a25342e34a2e44e2915dd312d58a8e2e879ec6c4bad8da8ac",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "8d27503ea0c6e6acacee1c19b1c65f212816445c6f93b01abd42eae4682bda53",
+        "schedule_sha256": "6ca3d97a4d4a78a5fb93250a24e877f8f699b9c29a313e38e786eb8135c3c007",
+        "summary_cutoff_exclusive": 6
+      },
+      "provider": "DraftKings",
+      "season": 2026,
+      "week": 6
+    },
     "401871089": {
       "away": "UL Monroe",
       "away_id": "2433",
@@ -1910,6 +1945,40 @@
       "provider": "DraftKings",
       "season": 2026,
       "week": 5
+    },
+    "401871090": {
+      "away": "Southern Miss",
+      "away_id": "2572",
+      "away_ml": 270.0,
+      "blend_probability": 0.7305885621222366,
+      "blend_signal": "Pass",
+      "captured_at": "2026-09-30T23:52:14.329185+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401871090",
+      "home": "Troy",
+      "home_id": "2653",
+      "home_ml": -340.0,
+      "kickoff": "2026-10-07T00:00:00+00:00",
+      "market_probability": 0.740871613663133,
+      "model_probability": 0.6801255366451896,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -340.0,
+      "picked_side": "home",
+      "picked_team": "Troy",
+      "provenance": {
+        "code_commit": "88f475d51e4c7dcb6d6624bec21e7deb1c7baeb1",
+        "current_summary_sha256": "c47bc9fbc93c307a25342e34a2e44e2915dd312d58a8e2e879ec6c4bad8da8ac",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "8d27503ea0c6e6acacee1c19b1c65f212816445c6f93b01abd42eae4682bda53",
+        "schedule_sha256": "6ca3d97a4d4a78a5fb93250a24e877f8f699b9c29a313e38e786eb8135c3c007",
+        "summary_cutoff_exclusive": 6
+      },
+      "provider": "DraftKings",
+      "season": 2026,
+      "week": 6
     }
   }
 }
