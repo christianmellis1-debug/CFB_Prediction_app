@@ -1,0 +1,80 @@
+period,metric,condition,bets,wins,losses,win_rate,profit
+2024,venue,Away,47,21,26,0.44680851063829785,-22.5
+2024,venue,Home,35,16,19,0.45714285714285713,-9.5
+2024,venue,Neutral,7,7,0,1.0,77.5
+2024,offensive_ypc,Advantage,35,17,18,0.4857142857142857,7.0
+2024,offensive_ypc,Disadvantage,47,23,24,0.48936170212765956,22.5
+2024,offensive_ypc,Missing,7,4,3,0.5714285714285714,16.0
+2024,defensive_ypc,Advantage,36,18,18,0.5,17.0
+2024,defensive_ypc,Disadvantage,46,22,24,0.4782608695652174,12.5
+2024,defensive_ypc,Missing,7,4,3,0.5714285714285714,16.0
+2024,turnover_margin,Advantage,25,17,8,0.68,109.0
+2024,turnover_margin,Disadvantage,50,19,31,0.38,-97.5
+2024,turnover_margin,Missing,7,4,3,0.5714285714285714,16.0
+2024,turnover_margin,Tied,7,4,3,0.5714285714285714,18.0
+2024,combined,Home + higher offensive YPC,9,5,4,0.5555555555555556,15.5
+2024,combined,Home + higher YPC + lower allowed YPC,2,2,0,1.0,21.0
+2024,combined,All four advantages,2,2,0,1.0,21.0
+2024–2025,venue,Away,79,38,41,0.4810126582278481,18.5
+2024–2025,venue,Home,56,26,30,0.4642857142857143,-5.46
+2024–2025,venue,Neutral,9,8,1,0.8888888888888888,79.5
+2024–2025,offensive_ypc,Advantage,55,29,26,0.5272727272727272,62.52
+2024–2025,offensive_ypc,Disadvantage,76,35,41,0.4605263157894737,-14.48
+2024–2025,offensive_ypc,Missing,13,8,5,0.6153846153846154,44.5
+2024–2025,defensive_ypc,Advantage,62,31,31,0.5,31.02
+2024–2025,defensive_ypc,Disadvantage,69,33,36,0.4782608695652174,17.02
+2024–2025,defensive_ypc,Missing,13,8,5,0.6153846153846154,44.5
+2024–2025,turnover_margin,Advantage,52,32,20,0.6153846153846154,151.04
+2024–2025,turnover_margin,Disadvantage,71,28,43,0.39436619718309857,-111.0
+2024–2025,turnover_margin,Missing,13,8,5,0.6153846153846154,44.5
+2024–2025,turnover_margin,Tied,8,4,4,0.5,8.0
+2024–2025,combined,Home + higher offensive YPC,17,10,7,0.5882352941176471,43.02
+2024–2025,combined,Home + higher YPC + lower allowed YPC,5,4,1,0.8,33.02
+2024–2025,combined,All four advantages,3,3,0,1.0,30.52
+2025,venue,Away,32,17,15,0.53125,41.0
+2025,venue,Home,21,10,11,0.47619047619047616,4.04
+2025,venue,Neutral,2,1,1,0.5,2.0
+2025,offensive_ypc,Advantage,20,12,8,0.6,55.52
+2025,offensive_ypc,Disadvantage,29,12,17,0.41379310344827586,-36.98
+2025,offensive_ypc,Missing,6,4,2,0.6666666666666666,28.5
+2025,defensive_ypc,Advantage,26,13,13,0.5,14.02
+2025,defensive_ypc,Disadvantage,23,11,12,0.4782608695652174,4.52
+2025,defensive_ypc,Missing,6,4,2,0.6666666666666666,28.5
+2025,turnover_margin,Advantage,27,15,12,0.5555555555555556,42.04
+2025,turnover_margin,Disadvantage,21,9,12,0.42857142857142855,-13.5
+2025,turnover_margin,Missing,6,4,2,0.6666666666666666,28.5
+2025,turnover_margin,Tied,1,0,1,0.0,-10.0
+2025,combined,Home + higher offensive YPC,8,5,3,0.625,27.52
+2025,combined,Home + higher YPC + lower allowed YPC,3,2,1,0.6666666666666666,12.02
+2025,combined,All four advantages,1,1,0,1.0,9.52
+2026,venue,Away,6,3,3,0.5,1.02
+2026,venue,Home,9,3,6,0.3333333333333333,-25.94
+2026,offensive_ypc,Advantage,7,4,3,0.5714285714285714,10.28
+2026,offensive_ypc,Disadvantage,6,2,4,0.3333333333333333,-15.2
+2026,offensive_ypc,Missing,2,0,2,0.0,-20.0
+2026,defensive_ypc,Advantage,7,1,6,0.14285714285714285,-50.48
+2026,defensive_ypc,Disadvantage,6,5,1,0.8333333333333334,45.56
+2026,defensive_ypc,Missing,2,0,2,0.0,-20.0
+2026,turnover_margin,Advantage,3,2,1,0.6666666666666666,10.52
+2026,turnover_margin,Disadvantage,9,4,5,0.4444444444444444,-5.44
+2026,turnover_margin,Missing,2,0,2,0.0,-20.0
+2026,turnover_margin,Tied,1,0,1,0.0,-10.0
+2026,combined,Home + higher offensive YPC,2,1,1,0.5,-0.74
+2026,combined,Home + higher YPC + lower allowed YPC,1,0,1,0.0,-10.0
+2026,combined,All four advantages,0,0,0,,0.0
+All,venue,Away,85,41,44,0.4823529411764706,19.52
+All,venue,Home,65,29,36,0.4461538461538462,-31.4
+All,venue,Neutral,9,8,1,0.8888888888888888,79.5
+All,offensive_ypc,Advantage,62,33,29,0.532258064516129,72.8
+All,offensive_ypc,Disadvantage,82,37,45,0.45121951219512196,-29.68
+All,offensive_ypc,Missing,15,8,7,0.5333333333333333,24.5
+All,defensive_ypc,Advantage,69,32,37,0.463768115942029,-19.46
+All,defensive_ypc,Disadvantage,75,38,37,0.5066666666666667,62.58
+All,defensive_ypc,Missing,15,8,7,0.5333333333333333,24.5
+All,turnover_margin,Advantage,55,34,21,0.6181818181818182,161.56
+All,turnover_margin,Disadvantage,80,32,48,0.4,-116.44
+All,turnover_margin,Missing,15,8,7,0.5333333333333333,24.5
+All,turnover_margin,Tied,9,4,5,0.4444444444444444,-2.0
+All,combined,Home + higher offensive YPC,19,11,8,0.5789473684210527,42.28
+All,combined,Home + higher YPC + lower allowed YPC,6,4,2,0.6666666666666666,23.02
+All,combined,All four advantages,3,3,0,1.0,30.52
