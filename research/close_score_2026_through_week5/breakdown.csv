@@ -1,0 +1,35 @@
+group,advantages,style,games,wins,losses,rate
+G6,0,Pass majority,1,1,0,1.0
+G6,0,Run majority,4,0,4,0.0
+G6,1,Balanced,2,0,2,0.0
+G6,1,Pass majority,7,2,5,0.2857142857142857
+G6,1,Run majority,6,4,2,0.6666666666666666
+G6,2,Balanced,1,0,1,0.0
+G6,2,Pass majority,9,3,6,0.3333333333333333
+G6,2,Run majority,16,7,9,0.4375
+G6,3,Pass majority,6,2,4,0.3333333333333333
+G6,3,Run majority,13,10,3,0.7692307692307693
+G6,4,Balanced,2,2,0,1.0
+G6,4,Pass majority,10,6,4,0.6
+G6,4,Run majority,17,11,6,0.6470588235294118
+G6,5,Pass majority,5,3,2,0.6
+G6,5,Run majority,7,5,2,0.7142857142857143
+G6,6,Pass majority,1,1,0,1.0
+G6,6,Run majority,5,4,1,0.8
+P4,0,Pass majority,4,0,4,0.0
+P4,0,Run majority,3,1,2,0.3333333333333333
+P4,1,Pass majority,6,5,1,0.8333333333333334
+P4,1,Run majority,14,3,11,0.21428571428571427
+P4,2,Pass majority,12,5,7,0.4166666666666667
+P4,2,Run majority,13,4,9,0.3076923076923077
+P4,3,Balanced,1,1,0,1.0
+P4,3,Pass majority,9,4,5,0.4444444444444444
+P4,3,Run majority,16,7,9,0.4375
+P4,4,Balanced,1,0,1,0.0
+P4,4,Pass majority,8,6,2,0.75
+P4,4,Run majority,18,13,5,0.7222222222222222
+P4,5,Balanced,1,1,0,1.0
+P4,5,Pass majority,7,4,3,0.5714285714285714
+P4,5,Run majority,11,6,5,0.5454545454545454
+P4,6,Pass majority,2,2,0,1.0
+P4,6,Run majority,5,4,1,0.8

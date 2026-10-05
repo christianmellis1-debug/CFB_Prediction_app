@@ -1,0 +1,299 @@
+week,game_id,group,team,side,advantages,win,style,reason,close_run,close_drop
+2,401858214,P4,Boston College,home,5,1,Missing,Fewer than 30 prior close-score plays,10,7
+2,401858214,P4,Rutgers,away,1,0,Missing,Fewer than 30 prior close-score plays,10,8
+2,401856782,P4,Oklahoma State,home,1,1,Pass majority,,22,25
+2,401856782,P4,Oregon,away,5,0,Pass majority,,15,27
+2,401856679,P4,Michigan,home,2,1,Run majority,,17,14
+2,401856679,P4,Oklahoma,away,4,0,Missing,Fewer than 30 prior close-score plays,9,3
+2,401862708,G6,UAB,home,3,1,Missing,Fewer than 30 prior close-score plays,14,8
+2,401862708,G6,UL Monroe,away,3,0,Missing,Fewer than 30 prior close-score plays,1,3
+2,401858217,P4,Illinois,home,3,0,Missing,Fewer than 30 prior close-score plays,14,9
+2,401858217,P4,Duke,away,3,1,Run majority,,22,10
+2,401862705,G6,North Texas,home,2,1,Missing,Fewer than 30 prior close-score plays,5,7
+2,401862705,G6,UNLV,away,4,0,Run majority,,45,39
+2,401860881,G6,Boise State,home,2,1,Run majority,,23,19
+2,401860881,G6,Memphis,away,4,0,Run majority,,48,30
+2,401866418,G6,Ohio,home,4,1,Pass majority,,18,21
+2,401866418,G6,Jacksonville State,away,1,0,Missing,Fewer than 30 prior close-score plays,11,9
+2,401862707,G6,Sam Houston,home,3,0,Pass majority,,13,33
+2,401862707,G6,Tulsa,away,3,1,Run majority,,18,15
+2,401856682,P4,Texas,home,2,1,Missing,Fewer than 30 prior close-score plays,4,7
+2,401856682,P4,Ohio State,away,4,0,Missing,Fewer than 30 prior close-score plays,8,11
+2,401860883,G6,Fresno State,home,2,1,Missing,Fewer than 30 prior close-score plays,8,6
+2,401860883,G6,Sacramento State,away,4,0,Missing,Fewer than 30 prior close-score plays,6,15
+2,401864578,G6,Hawai'i,home,4,1,Pass majority,,19,40
+2,401864578,G6,New Mexico State,away,2,0,Missing,Fewer than 30 prior close-score plays,7,15
+3,401858225,P4,Pittsburgh,home,6,1,Pass majority,,24,33
+3,401858225,P4,Syracuse,away,0,0,Pass majority,,23,33
+3,401858226,P4,Wake Forest,home,3,0,Run majority,,36,32
+3,401858226,P4,Miami,away,3,1,Missing,Fewer than 30 prior close-score plays,2,6
+3,401856811,P4,Texas Tech,home,3,1,Balanced,,26,26
+3,401856811,P4,Houston,away,3,0,Pass majority,,15,16
+3,401869940,G6,Delaware,home,5,1,Missing,Fewer than 30 prior close-score plays,7,12
+3,401869940,G6,Coastal Carolina,away,0,0,Missing,Fewer than 30 prior close-score plays,5,7
+3,401860889,G6,Texas State,home,1,1,Run majority,,40,29
+3,401860889,G6,North Texas,away,5,0,Missing,Fewer than 30 prior close-score plays,8,18
+3,401856686,P4,Arkansas,home,1,0,Missing,Fewer than 30 prior close-score plays,8,15
+3,401856686,P4,Georgia,away,5,1,Missing,Fewer than 30 prior close-score plays,2,2
+3,401858229,P4,Clemson,home,4,1,Run majority,,19,16
+3,401858229,P4,North Carolina,away,2,0,Pass majority,,18,23
+3,401856812,P4,Kansas,home,1,0,Run majority,,16,15
+3,401856812,P4,Arizona State,away,4,1,Pass majority,,17,26
+3,401856695,P4,Vanderbilt,home,6,1,Missing,Fewer than 30 prior close-score plays,14,11
+3,401856695,P4,NC State,away,0,0,Missing,Fewer than 30 prior close-score plays,2,6
+3,401864508,G6,Central Michigan,home,4,1,Missing,Fewer than 30 prior close-score plays,3,3
+3,401864508,G6,Wyoming,away,2,0,Run majority,,25,18
+3,401862774,G6,Toledo,home,3,1,Missing,Fewer than 30 prior close-score plays,7,8
+3,401862774,G6,Temple,away,2,0,Run majority,,18,16
+3,401858230,P4,Louisville,home,3,1,Run majority,,26,19
+3,401858230,P4,SMU,away,3,0,Pass majority,,20,26
+3,401856694,P4,Texas A&M,home,6,0,Run majority,,29,28
+3,401856694,P4,Kentucky,away,0,1,Run majority,,19,18
+3,401858457,P4,Rutgers,home,1,0,Run majority,,21,11
+3,401858457,P4,USC,away,5,1,Run majority,,50,43
+3,401856685,P4,Alabama,home,5,1,Run majority,,32,27
+3,401856685,P4,Florida State,away,1,0,Run majority,,53,31
+3,401858231,P4,Duke,home,5,1,Run majority,,36,19
+3,401858231,P4,Stanford,away,1,0,Run majority,,27,26
+3,401866422,G6,Liberty,home,5,1,Missing,Fewer than 30 prior close-score plays,18,8
+3,401866422,G6,Ball State,away,0,0,Missing,Fewer than 30 prior close-score plays,3,6
+3,401856691,P4,South Carolina,home,4,0,Missing,Fewer than 30 prior close-score plays,12,10
+3,401856691,P4,Mississippi State,away,2,1,Missing,Fewer than 30 prior close-score plays,13,14
+3,401862771,G6,Florida Atlantic,home,3,1,Pass majority,,13,33
+3,401862771,G6,Florida International,away,3,0,Pass majority,,23,41
+3,401862710,G6,Old Dominion,home,3,0,Missing,Fewer than 30 prior close-score plays,2,1
+3,401862710,G6,East Carolina,away,2,1,Run majority,,17,13
+3,401864574,G6,App State,home,4,1,Run majority,,23,17
+3,401864574,G6,Charlotte,away,2,0,Missing,Fewer than 30 prior close-score plays,5,5
+3,401871047,G6,Missouri State,home,1,0,Missing,Fewer than 30 prior close-score plays,1,8
+3,401871047,G6,Marshall,away,4,1,Run majority,,23,14
+3,401864443,G6,Middle Tennessee,home,2,1,Pass majority,,18,29
+3,401864443,G6,Nevada,away,4,0,Missing,Fewer than 30 prior close-score plays,12,9
+3,401866423,G6,South Alabama,home,3,1,Run majority,,26,24
+3,401866423,G6,Ohio,away,2,0,Pass majority,,26,27
+3,401869948,G6,Jacksonville State,home,3,1,Run majority,,33,28
+3,401869948,G6,Georgia Southern,away,3,0,Missing,Fewer than 30 prior close-score plays,2,7
+3,401862773,G6,Rice,home,2,0,Missing,Fewer than 30 prior close-score plays,4,2
+3,401862773,G6,Western Michigan,away,4,1,Run majority,,25,18
+3,401856687,P4,Auburn,home,3,0,Run majority,,36,30
+3,401856687,P4,Florida,away,3,1,Missing,Fewer than 30 prior close-score plays,6,4
+3,401858232,P4,Maryland,home,5,0,Pass majority,,13,20
+3,401858232,P4,Virginia Tech,away,0,1,Missing,Fewer than 30 prior close-score plays,11,13
+3,401856802,P4,Virginia,home,3,0,Missing,Fewer than 30 prior close-score plays,13,1
+3,401856802,P4,West Virginia,away,2,1,Missing,Fewer than 30 prior close-score plays,10,4
+3,401858453,P4,Notre Dame,home,4,1,Pass majority,,19,23
+3,401858453,P4,Michigan State,away,2,0,Run majority,,44,31
+3,401856688,P4,Ole Miss,home,1,1,Run majority,,37,34
+3,401856688,P4,LSU,away,5,0,Run majority,,33,17
+3,401862776,G6,Louisiana,home,4,1,Missing,Fewer than 30 prior close-score plays,4,2
+3,401862776,G6,UAB,away,2,0,Run majority,,36,18
+3,401860887,G6,San Diego State,home,2,0,Run majority,,22,11
+3,401860887,G6,James Madison,away,3,1,Missing,Fewer than 30 prior close-score plays,17,7
+3,401864507,G6,Sacramento State,home,1,0,Pass majority,,13,25
+3,401864507,G6,North Dakota State,away,5,1,Run majority,,33,27
+3,401860888,G6,San José State,home,2,0,Pass majority,,21,30
+3,401860888,G6,Fresno State,away,4,1,Balanced,,17,17
+3,401858458,P4,UCLA,home,5,1,Balanced,,40,40
+3,401858458,P4,Purdue,away,1,0,Missing,Fewer than 30 prior close-score plays,10,12
+4,401869941,G6,Coastal Carolina,home,3,0,Pass majority,,22,27
+4,401869941,G6,Liberty,away,3,1,Run majority,,31,19
+4,401862779,G6,Temple,home,4,0,Run majority,,49,30
+4,401862779,G6,Army,away,2,1,Run majority,,34,6
+4,401862778,G6,UAB,home,4,1,Run majority,,42,25
+4,401862778,G6,Navy,away,2,0,Missing,Fewer than 30 prior close-score plays,12,7
+4,401858461,P4,Indiana,home,4,1,Run majority,,21,19
+4,401858461,P4,Northwestern,away,2,0,Missing,Fewer than 30 prior close-score plays,18,6
+4,401858234,P4,California,home,3,0,Pass majority,,41,49
+4,401858234,P4,Clemson,away,3,1,Run majority,,30,27
+4,401856813,P4,Baylor,home,4,1,Run majority,,40,38
+4,401856813,P4,Colorado,away,2,0,Run majority,,45,24
+4,401858243,P4,Louisville,home,5,0,Run majority,,52,35
+4,401858243,P4,Wake Forest,away,1,1,Run majority,,43,39
+4,401864512,G6,Akron,home,2,0,Missing,Fewer than 30 prior close-score plays,6,11
+4,401864512,G6,UNLV,away,4,1,Run majority,,50,44
+4,401860893,G6,Toledo,home,4,1,Balanced,,22,22
+4,401860893,G6,San Diego State,away,1,0,Run majority,,28,14
+4,401858465,P4,Ohio State,home,6,1,Pass majority,,23,29
+4,401858465,P4,Illinois,away,0,0,Run majority,,36,32
+4,401860896,G6,UTSA,home,5,1,Pass majority,,30,32
+4,401860896,G6,Colorado State,away,1,0,Pass majority,,18,28
+4,401858242,P4,Boston College,home,2,0,Missing,Fewer than 30 prior close-score plays,17,11
+4,401858242,P4,Virginia Tech,away,4,1,Pass majority,,25,30
+4,401856704,P4,Tennessee,home,3,0,Run majority,,27,22
+4,401856704,P4,Texas,away,3,1,Pass majority,,17,22
+4,401866425,G6,Kent State,home,2,1,Missing,Fewer than 30 prior close-score plays,9,9
+4,401866425,G6,Ball State,away,4,0,Missing,Fewer than 30 prior close-score plays,10,16
+4,401858462,P4,Maryland,home,3,0,Pass majority,,16,22
+4,401858462,P4,UCLA,away,3,1,Run majority,,68,61
+4,401864511,G6,Georgia State,home,4,1,Run majority,,30,20
+4,401864511,G6,Northern Illinois,away,2,0,Pass majority,,9,22
+4,401858467,P4,Purdue,home,2,0,Pass majority,,17,26
+4,401858467,P4,Notre Dame,away,4,1,Run majority,,44,41
+4,401864510,G6,Wyoming,home,2,1,Run majority,,32,23
+4,401864510,G6,Hawai'i,away,4,0,Pass majority,,30,61
+4,401856699,P4,Florida,home,6,1,Run majority,,31,21
+4,401856699,P4,Ole Miss,away,0,0,Pass majority,,44,54
+4,401858463,P4,Michigan,home,1,0,Run majority,,66,47
+4,401858463,P4,Iowa,away,5,1,Pass majority,,17,22
+4,401856700,P4,Georgia,home,5,1,Missing,Fewer than 30 prior close-score plays,17,8
+4,401856700,P4,Oklahoma,away,1,0,Run majority,,40,35
+4,401856815,P4,UCF,home,3,1,Pass majority,,27,31
+4,401856815,P4,TCU,away,3,0,Run majority,,52,42
+4,401856816,P4,Iowa State,home,3,0,Run majority,,35,20
+4,401856816,P4,Utah,away,3,1,Run majority,,18,17
+4,401864579,G6,New Mexico State,home,1,0,Pass majority,,17,27
+4,401864579,G6,New Mexico,away,5,1,Run majority,,35,31
+4,401860897,G6,Western Michigan,home,4,0,Run majority,,51,32
+4,401860897,G6,Boise State,away,1,1,Run majority,,46,39
+4,401856698,P4,Auburn,home,4,1,Run majority,,43,41
+4,401856698,P4,Vanderbilt,away,2,0,Run majority,,17,15
+4,401858466,P4,Penn State,home,5,0,Run majority,,26,20
+4,401858466,P4,Wisconsin,away,1,1,Pass majority,,27,32
+4,401858464,P4,Michigan State,home,1,0,Run majority,,51,33
+4,401858464,P4,Nebraska,away,5,1,Run majority,,36,33
+4,401862785,G6,Bowling Green,home,1,0,Missing,Fewer than 30 prior close-score plays,13,16
+4,401862785,G6,South Florida,away,5,1,Run majority,,42,28
+4,401869961,G6,Old Dominion,home,3,0,Run majority,,37,17
+4,401869961,G6,James Madison,away,3,1,Run majority,,27,16
+4,401862780,G6,Charlotte,home,2,0,Run majority,,19,18
+4,401862780,G6,Louisiana,away,3,1,Run majority,,29,9
+4,401856814,P4,Cincinnati,home,2,1,Run majority,,22,15
+4,401856814,P4,Kansas State,away,4,0,Balanced,,43,43
+4,401862784,G6,Tulane,home,5,1,Run majority,,40,33
+4,401862784,G6,Southern Miss,away,1,0,Missing,Fewer than 30 prior close-score plays,4,12
+4,401871048,G6,Jacksonville State,home,2,1,Run majority,,38,29
+4,401871048,G6,Middle Tennessee,away,4,0,Pass majority,,38,50
+4,401856881,P4,West Virginia,home,5,0,Run majority,,42,19
+4,401856881,P4,Oklahoma State,away,1,1,Pass majority,,45,57
+4,401856696,P4,Alabama,home,6,1,Run majority,,46,37
+4,401856696,P4,South Carolina,away,0,0,Run majority,,31,22
+4,401869931,G6,Arkansas State,home,3,1,Run majority,,34,25
+4,401869931,G6,Kennesaw State,away,3,0,Missing,Fewer than 30 prior close-score plays,12,8
+4,401858469,P4,USC,home,4,0,Run majority,,64,61
+4,401858469,P4,Oregon,away,1,1,Pass majority,,26,40
+4,401860894,G6,Utah State,home,1,1,Pass majority,,16,17
+4,401860894,G6,Troy,away,5,0,Run majority,,48,43
+4,401856702,P4,LSU,home,4,1,Run majority,,39,19
+4,401856702,P4,Texas A&M,away,2,0,Run majority,,51,46
+4,401856703,P4,Mississippi State,home,2,1,Pass majority,,18,26
+4,401856703,P4,Missouri,away,4,0,Run majority,,33,30
+4,401862782,G6,UL Monroe,home,2,0,Run majority,,33,12
+4,401862782,G6,Florida Atlantic,away,4,1,Pass majority,,31,59
+4,401866429,G6,Sacramento State,home,1,0,Pass majority,,14,27
+4,401866429,G6,Massachusetts,away,5,1,Missing,Fewer than 30 prior close-score plays,12,10
+4,401860895,G6,UTEP,home,2,0,Missing,Fewer than 30 prior close-score plays,15,8
+4,401860895,G6,Oregon State,away,4,1,Pass majority,,25,41
+4,401860891,G6,Fresno State,home,6,1,Pass majority,,33,35
+4,401860891,G6,Rice,away,0,0,Run majority,,34,9
+4,401864509,G6,Nevada,home,4,0,Run majority,,38,28
+4,401864509,G6,Air Force,away,2,1,Missing,Fewer than 30 prior close-score plays,3,0
+4,401858240,P4,Stanford,home,4,1,Run majority,,37,36
+4,401858240,P4,Georgia Tech,away,2,0,Pass majority,,24,38
+4,401858470,P4,Washington,home,5,0,Pass majority,,33,42
+4,401858470,P4,Minnesota,away,1,1,Pass majority,,13,18
+5,401871049,G6,New Mexico State,home,4,1,Pass majority,,22,31
+5,401871049,G6,Western Kentucky,away,2,0,Pass majority,,24,25
+5,401862786,G6,Tulsa,home,5,0,Pass majority,,45,46
+5,401862786,G6,North Texas,away,1,1,Pass majority,,25,45
+5,401871050,G6,Delaware,home,2,0,Pass majority,,25,42
+5,401871050,G6,Liberty,away,3,1,Run majority,,59,36
+5,401858245,P4,Virginia Tech,home,2,0,Pass majority,,50,52
+5,401858245,P4,Pittsburgh,away,4,1,Pass majority,,37,41
+5,401858476,P4,Northwestern,home,2,1,Run majority,,27,15
+5,401858476,P4,Penn State,away,4,0,Run majority,,46,33
+5,401862787,G6,Charlotte,home,2,0,Pass majority,,25,29
+5,401862787,G6,Memphis,away,4,1,Run majority,,61,37
+5,401858246,P4,SMU,home,5,1,Pass majority,,62,71
+5,401858246,P4,Boston College,away,1,0,Run majority,,41,30
+5,401856707,P4,Mississippi State,home,2,0,Pass majority,,37,50
+5,401856707,P4,Alabama,away,4,1,Run majority,,51,44
+5,401858251,P4,Wake Forest,home,3,1,Run majority,,67,56
+5,401858251,P4,Stanford,away,3,0,Run majority,,56,55
+5,401858250,P4,North Carolina,home,1,0,Pass majority,,30,36
+5,401858250,P4,Notre Dame,away,5,1,Run majority,,50,47
+5,401856822,P4,Iowa State,home,4,1,Run majority,,41,23
+5,401856822,P4,West Virginia,away,2,0,Run majority,,95,29
+5,401856819,P4,Houston,home,4,1,Run majority,,60,50
+5,401856819,P4,UCF,away,2,0,Pass majority,,45,50
+5,401862791,G6,Air Force,home,4,1,Run majority,,46,5
+5,401862791,G6,Navy,away,2,0,Run majority,,47,13
+5,401858474,P4,Minnesota,home,3,1,Pass majority,,26,32
+5,401858474,P4,Michigan,away,3,0,Run majority,,96,68
+5,401858479,P4,Wisconsin,home,5,1,Pass majority,,33,36
+5,401858479,P4,Michigan State,away,1,0,Run majority,,60,42
+5,401856705,P4,Georgia,home,5,1,Run majority,,26,18
+5,401856705,P4,Vanderbilt,away,1,0,Run majority,,31,25
+5,401866432,G6,Buffalo,home,2,0,Missing,Fewer than 30 prior close-score plays,9,11
+5,401866432,G6,Western Michigan,away,4,1,Run majority,,57,38
+5,401866431,G6,Ball State,home,1,0,Balanced,,20,20
+5,401866431,G6,Toledo,away,5,1,Run majority,,46,36
+5,401866433,G6,Massachusetts,home,6,0,Run majority,,25,21
+5,401866433,G6,Eastern Michigan,away,0,1,Pass majority,,42,66
+5,401866434,G6,Kent State,home,2,0,Run majority,,23,19
+5,401866434,G6,Ohio,away,3,1,Pass majority,,34,36
+5,401864515,G6,North Dakota State,home,6,1,Run majority,,34,31
+5,401864515,G6,Wyoming,away,0,0,Run majority,,48,39
+5,401866477,G6,Miami (OH),home,5,0,Pass majority,,21,34
+5,401866477,G6,Bowling Green,away,1,1,Run majority,,35,33
+5,401866430,G6,Central Michigan,home,4,1,Run majority,,32,12
+5,401866430,G6,Akron,away,2,0,Balanced,,26,26
+5,401856710,P4,Tennessee,home,4,1,Run majority,,53,44
+5,401856710,P4,Auburn,away,2,0,Run majority,,56,55
+5,401858253,P4,Florida State,home,1,1,Run majority,,74,43
+5,401858253,P4,Virginia,away,5,0,Run majority,,53,34
+5,401858248,P4,NC State,home,2,1,Run majority,,23,21
+5,401858248,P4,Louisville,away,4,0,Run majority,,76,58
+5,401869956,G6,Georgia State,home,4,1,Run majority,,48,34
+5,401869956,G6,Old Dominion,away,1,0,Run majority,,40,22
+5,401858473,P4,Iowa,home,4,0,Pass majority,,32,33
+5,401858473,P4,Ohio State,away,2,1,Pass majority,,38,49
+5,401856708,P4,Missouri,home,4,1,Pass majority,,49,51
+5,401856708,P4,Florida,away,2,0,Run majority,,52,33
+5,401869962,G6,James Madison,home,6,1,Run majority,,33,26
+5,401869962,G6,Marshall,away,0,0,Run majority,,48,34
+5,401858475,P4,Nebraska,home,6,1,Run majority,,49,43
+5,401858475,P4,Maryland,away,0,0,Pass majority,,25,32
+5,401864514,G6,New Mexico,home,6,1,Run majority,,45,38
+5,401864514,G6,UTEP,away,0,0,Missing,Fewer than 30 prior close-score plays,17,9
+5,401858472,P4,Illinois,home,4,0,Pass majority,,39,42
+5,401858472,P4,Purdue,away,2,1,Pass majority,,27,37
+5,401856709,P4,South Carolina,home,2,0,Run majority,,39,31
+5,401856709,P4,Kentucky,away,4,1,Run majority,,59,55
+5,401860899,G6,Colorado State,home,4,0,Pass majority,,24,35
+5,401860899,G6,Oregon State,away,2,1,Pass majority,,30,49
+5,401856818,P4,TCU,home,3,0,Run majority,,70,67
+5,401856818,P4,BYU,away,3,1,Run majority,,22,21
+5,401871089,G6,South Alabama,home,2,1,Run majority,,56,45
+5,401871089,G6,UL Monroe,away,4,0,Run majority,,40,23
+5,401869942,G6,Coastal Carolina,home,1,0,Pass majority,,40,49
+5,401869942,G6,Georgia Southern,away,5,1,Pass majority,,31,44
+5,401862788,G6,Rice,home,2,0,Run majority,,61,18
+5,401862788,G6,UTSA,away,4,1,Pass majority,,41,47
+5,401856711,P4,Texas A&M,home,6,1,Run majority,,66,58
+5,401856711,P4,Arkansas,away,0,0,Pass majority,,26,31
+5,401862792,G6,South Florida,home,5,0,Run majority,,63,38
+5,401862792,G6,Temple,away,1,1,Run majority,,69,39
+5,401858478,P4,USC,home,4,1,Run majority,,79,77
+5,401858478,P4,Washington,away,2,0,Pass majority,,35,47
+5,401858249,P4,Clemson,home,2,0,Run majority,,60,44
+5,401858249,P4,Miami,away,4,1,Pass majority,,21,32
+5,401856821,P4,Colorado,home,3,0,Run majority,,68,43
+5,401856821,P4,Texas Tech,away,2,1,Pass majority,,47,48
+5,401869842,G6,Louisiana Tech,home,3,1,Run majority,,19,15
+5,401869842,G6,Army,away,3,0,Run majority,,71,12
+5,401860898,G6,Boise State,home,3,1,Run majority,,64,52
+5,401860898,G6,Utah State,away,3,0,Pass majority,,34,35
+5,401858477,P4,Rutgers,home,1,0,Run majority,,24,20
+5,401858477,P4,Indiana,away,5,1,Pass majority,,42,43
+5,401869932,G6,Louisiana,home,6,1,Run majority,,52,25
+5,401869932,G6,Arkansas State,away,0,0,Run majority,,52,49
+5,401860921,G6,Washington State,home,1,0,Balanced,,36,36
+5,401860921,G6,Fresno State,away,5,1,Pass majority,,53,61
+5,401860900,G6,San Diego State,home,2,1,Run majority,,39,28
+5,401860900,G6,Texas State,away,3,0,Run majority,,66,46
+5,401856817,P4,Arizona State,home,3,0,Pass majority,,33,39
+5,401856817,P4,Baylor,away,3,1,Pass majority,,57,67
+5,401856820,P4,Arizona,home,2,1,Pass majority,,42,71
+5,401856820,P4,Cincinnati,away,4,0,Run majority,,45,25
+5,401864513,G6,Hawai'i,home,4,0,Pass majority,,36,72
+5,401864513,G6,San José State,away,2,1,Pass majority,,39,40

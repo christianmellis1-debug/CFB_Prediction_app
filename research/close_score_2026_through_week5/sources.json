@@ -1,0 +1,11 @@
+{
+  "urls": {
+    "schedule.csv": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2026.csv",
+    "boxes.csv": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_team_box/team_box_2026.csv"
+  },
+  "hashes": {
+    "schedule.csv": "d05722efc3e397cfe0e3d6a96ca26bc3479b8a614b3e6a63aed8e760c964f45f",
+    "boxes.csv": "7a3cea699f2ceae284aa47aa07510b51ac796049e139c5b68eda8d459036f873"
+  },
+  "pbp_counts_sha256": "2425e889fd4243eb697bc02f399626f67464279570ae168d0fdaada1cb0b619d"
+}
