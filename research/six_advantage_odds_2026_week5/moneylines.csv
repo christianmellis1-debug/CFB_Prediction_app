@@ -1,0 +1,15 @@
+week,group,team,opponent,result,open,close,source,url,game_id
+3,P4,Pittsburgh,Syracuse,W 27–13,-375,-425,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858225,401858225
+3,P4,Texas A&M,Kentucky,L 21–31,-600,-850,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856694,401856694
+3,P4,Vanderbilt,NC State,W 35–31,-175,-155,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856695,401856695
+4,G6,Fresno State,Rice,W 38–24,-520,-500,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401860891,401860891
+4,P4,Alabama,South Carolina,W 49–18,-455,-520,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856696,401856696
+4,P4,Florida,Ole Miss,W 52–28,-115,-175,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856699,401856699
+4,P4,Ohio State,Illinois,W 42–19,-6500,-4000,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858465,401858465
+5,G6,James Madison,Marshall,W 45–17,-700,-750,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401869962,401869962
+5,G6,Louisiana,Arkansas State,W 23–20,-175,-205,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401869932,401869932
+5,G6,Massachusetts,Eastern Michigan,L 14–38,-130,-218,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401866433,401866433
+5,G6,New Mexico,UTEP,W 61–7,-2100,-3200,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864514,401864514
+5,G6,North Dakota State,Wyoming,W 28–0,-1800,-950,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401864515,401864515
+5,P4,Nebraska,Maryland,W 48–23,-550,-700,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401858475,401858475
+5,P4,Texas A&M,Arkansas,W 34–7,-700,-600,DraftKings,https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401856711,401856711
