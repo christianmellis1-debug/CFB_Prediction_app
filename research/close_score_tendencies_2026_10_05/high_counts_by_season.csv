@@ -1,0 +1,18 @@
+season,group,close_style,games,wins
+2024,G6,Balanced,2,1
+2024,G6,Pass majority,42,30
+2024,G6,Run majority,53,41
+2024,P4,Balanced,2,2
+2024,P4,Pass majority,56,38
+2024,P4,Run majority,51,41
+2025,G6,Balanced,1,0
+2025,G6,Pass majority,30,18
+2025,G6,Run majority,87,59
+2025,P4,Balanced,3,2
+2025,P4,Pass majority,57,42
+2025,P4,Run majority,63,51
+2026,G6,Pass majority,2,2
+2026,G6,Run majority,5,4
+2026,P4,Balanced,1,1
+2026,P4,Pass majority,6,3
+2026,P4,Run majority,11,6

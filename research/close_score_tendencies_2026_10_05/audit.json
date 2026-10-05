@@ -1,0 +1,32 @@
+[
+  {
+    "season": 2024,
+    "pbp_games": 737,
+    "duplicated_games": 0,
+    "classified_plays": 96315,
+    "close_plays": 42831,
+    "sacks_in_close": 1130,
+    "identified_scrambles_in_close": 0,
+    "excluded_kneels_spikes": 863
+  },
+  {
+    "season": 2025,
+    "pbp_games": 762,
+    "duplicated_games": 0,
+    "classified_plays": 100140,
+    "close_plays": 44414,
+    "sacks_in_close": 1116,
+    "identified_scrambles_in_close": 0,
+    "excluded_kneels_spikes": 964
+  },
+  {
+    "season": 2026,
+    "pbp_games": 271,
+    "duplicated_games": 0,
+    "classified_plays": 35117,
+    "close_plays": 14831,
+    "sacks_in_close": 402,
+    "identified_scrambles_in_close": 0,
+    "excluded_kneels_spikes": 343
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "2026_through_week": 4,
+  "max_pregame_score_margin": 8,
+  "quarters": [
+    1,
+    2,
+    3
+  ],
+  "exclude_q2_final_seconds": 120,
+  "minimum_prior_close_plays": 30,
+  "rush_majority_threshold": 0.5,
+  "notes": "All thresholds fixed before inspecting outcome tables. Earlier-week completed FBS games only. Sacks and text-identified scrambles count as dropbacks; kneels, spikes, no-plays, negated plays excluded. Unidentified scrambles may remain in rushing."
+}
