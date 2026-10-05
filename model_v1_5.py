@@ -122,6 +122,14 @@ def build_weekly_scores(df):
     return scores, weeks
 
 def build_prior_profiles(prior_summary, schedule):
+    # A 2026 FBS entrant must not inherit an FCS efficiency/Elo prior.
+    entrants = set()
+    years = pd.to_numeric(schedule.get('season', pd.Series(dtype=float)), errors='coerce')
+    if years.eq(2026).any():
+        for side in ('home', 'away'):
+            names = schedule[side + '_team'].astype(str).str.casefold()
+            entrants.update(pd.to_numeric(schedule.loc[names.isin(['sacramento state', 'sac state', 'sacramento state hornets']), side + '_id'], errors='coerce').dropna().astype(int))
+    prior_summary = prior_summary[~pd.to_numeric(prior_summary.team_id, errors='coerce').isin(entrants)].copy()
     p_scores, p_weeks = build_weekly_scores(prior_summary)
     prior_eff = {tid: p_scores[(tid, max(ws))] for tid, ws in p_weeks.items()}
 
@@ -140,6 +148,8 @@ def build_prior_profiles(prior_summary, schedule):
     prior_elo = dict(zip(elo["team_id"].astype(int), elo["elo_z"]))
 
     def prior_vector(tid):
+        if tid in entrants:
+            return (0.0, 0.0, 0.0)
         eff = prior_eff.get(tid, (0.0,0.0,0.0))
         ez = prior_elo.get(tid, 0.0)
         return (
@@ -202,6 +212,8 @@ def pick_narrative(winner, opponent, confidence, contributions):
     return text
 
 def predict_week(current_summary, prior_summary, schedule, target_week, include_completed=False):
+    from matchup_advantages import normalize_fbs_schedule
+    schedule = normalize_fbs_schedule(schedule)
     target_week = int(target_week)
     scores, weeks = build_weekly_scores(current_summary)
     prior_vector = build_prior_profiles(prior_summary, schedule)
@@ -285,3 +297,49 @@ def predict_week(current_summary, prior_summary, schedule, target_week, include_
 
     return pd.DataFrame(rows).sort_values("Confidence", ascending=False).reset_index(drop=True) if rows else pd.DataFrame()
 
+
+
+def add_waterfall_value(predictions, schedule, boxes, week):
+    """Annotate aggregated predictions without replacing the core model winner."""
+    from matchup_advantages import build_waterfall_profiles, select_waterfall
+    result = predictions.copy()
+    profiles = build_waterfall_profiles(schedule, boxes, week)
+    card = select_waterfall(result, schedule, profiles)
+    defaults = {'Value Selected': False, 'Value Tier': '', 'Value Stage': 0,
+                'Value Pick': '', 'Value Side': '', 'Value Line': 'Unavailable',
+                'Value Reason': '', 'Value Rank': 0, 'Value Result': 'Pending',
+                'Bet Signal': 'Pass'}
+    for key, default in defaults.items():
+        result[key] = default
+    ids = pd.to_numeric(result.get('Game ID', pd.Series(index=result.index, dtype=float)), errors='coerce')
+    for pick in card:
+        mask = ids.eq(pick['Game ID'])
+        for key, value in pick.items():
+            if key != 'Game ID':
+                result.loc[mask, key] = value
+        result.loc[mask, 'Value Selected'] = True
+        result.loc[mask, 'Bet Signal'] = pick['Value Tier']
+    if {'Status', 'Actual Winner'}.issubset(result):
+        final = result['Value Selected'] & result.Status.eq('Final')
+        decisive = final & result['Actual Winner'].notna() & ~result['Actual Winner'].isin(['Tie', '—', ''])
+        result.loc[decisive, 'Value Result'] = np.where(
+            result.loc[decisive, 'Value Pick'].eq(result.loc[decisive, 'Actual Winner']), 'Correct', 'Incorrect')
+        result.loc[final & result['Actual Winner'].eq('Tie'), 'Value Result'] = 'Not graded'
+    result.attrs['waterfall'] = {'count': len(card), 'minimum': 12, 'maximum': 18,
+                                'shortfall': max(0, 12-len(card)),
+                                'method': 'waterfall-v1', 'retrospective': True}
+    return result
+
+
+def waterfall_scenario_rows(predictions):
+    """Adapt selected sides/prices for the existing simulation, on a copy only."""
+    result = predictions[predictions['Value Selected']].copy()
+    result['Predicted Winner'] = result['Value Pick']
+    result['Predicted Side'] = result['Value Side']
+    result['Pick Result'] = result['Value Result']
+    result['Home ML'] = result['DK Home ML']
+    result['Away ML'] = result['DK Away ML']
+    result['Bet Line'] = result['Value Line']
+    result['ML Source'] = 'DraftKings'
+    result['Confidence'] = np.where(result['Value Side'].eq('Home'), result['Home Win %'], result['Away Win %'])
+    return result

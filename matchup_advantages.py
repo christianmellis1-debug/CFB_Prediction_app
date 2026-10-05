@@ -90,3 +90,164 @@ def advantage_html(record, side, picked_team):
         direction='higher is better' if i in (0,1,4) else 'lower is better'
         items.append(f'<li><strong>{label}</strong>: {fmt(record[side][i])} vs {fmt(record[other][i])} · {scored["outcomes"][i]} ({direction})</li>')
     return banner+f'<details class="card-details"><summary>Five-metric check · {count}/5 advantages</summary><p>Values compare {team} with its opponent.</p><ul>'+''.join(items)+f'</ul><p>Earlier-week FBS games: pick {record[side+"_games"]}, opponent {record[other+"_games"]}. Rates use total yards/completions divided by total attempts. Turnover margin = (takeaways minus giveaways) / earlier-week FBS games. Ties do not count as advantages.</p><p>This research flag is not a loss probability. Metrics overlap, and no flag does not mean a safe bet. Current model confidence and value labels are unchanged.</p></details>'
+
+
+# Raw profiles for the waterfall are deliberately separate from blended risk metrics.
+def normalize_fbs_schedule(schedule):
+    """Season-aware eligibility; missing division metadata fails closed."""
+    s = schedule.copy()
+    years = pd.to_numeric(s.get('season', pd.Series(index=s.index, dtype=float)), errors='coerce')
+    for side in ('home', 'away'):
+        col = side + '_division'
+        if col not in s:
+            s[col] = None
+        names = s.get(side + '_team', pd.Series('', index=s.index)).astype(str).str.strip().str.casefold()
+        sac = names.isin(['sacramento state', 'sac state', 'sacramento state hornets'])
+        s.loc[sac & years.ge(2026), col] = 'fbs'
+        s.loc[sac & years.lt(2026), col] = 'fcs'
+        s.loc[sac & years.ge(2026), side + '_conference'] = 'Mid-American'
+    return s[s.home_division.astype(str).str.lower().eq('fbs') &
+             s.away_division.astype(str).str.lower().eq('fbs')].copy()
+
+
+def build_waterfall_profiles(schedule, boxes, week):
+    """Raw current-season FBS-only rates before the target week AND kickoff.
+
+    No prior-season fallback, partial-history averages, or passing-stat dependency.
+    off_run/def_run use total yards / total attempts; margin is per FBS game.
+    """
+    s = normalize_fbs_schedule(schedule)
+    required = {'season', 'week', 'game_id', 'home_id', 'away_id', 'start_date', 'completed'}
+    if not required.issubset(s):
+        return {}
+    for col in ('season', 'week', 'game_id', 'home_id', 'away_id'):
+        s[col] = pd.to_numeric(s[col], errors='coerce')
+    s = s.dropna(subset=['season', 'week', 'game_id', 'home_id', 'away_id'])
+    s['start'] = pd.to_datetime(s.start_date, utc=True, errors='coerce')
+    completed = s.completed.astype(str).str.lower().isin(['true', 't', '1', '1.0', 'yes', 'y'])
+    cols = ['game_id', 'team_id', 'rushingYards', 'rushingAttempts', 'turnovers', 'fumblesLost', 'interceptions']
+    if not set(cols).issubset(boxes):
+        return {}
+    b = boxes[cols].apply(pd.to_numeric, errors='coerce')
+    valid = np.isfinite(b).all(axis=1) & ~b.duplicated(['game_id', 'team_id'], keep=False)
+    valid &= b.rushingAttempts.gt(0) & b.rushingAttempts.mod(1).eq(0)
+    to = b[['turnovers', 'fumblesLost', 'interceptions']]
+    valid &= to.ge(0).all(axis=1) & to.mod(1).eq(0).all(axis=1)
+    valid &= b.turnovers.eq(b.fumblesLost + b.interceptions)
+    lookup = b[valid].set_index(['game_id', 'team_id'])
+    out = {}
+    for _, g in s[s.week.eq(int(week))].iterrows():
+        gid = str(int(g.game_id))
+        record = {'status': 'missing', 'reason': 'Incomplete earlier-week FBS history.'}
+        out[gid] = record
+        if pd.isna(g.start) or s.game_id.eq(g.game_id).sum() != 1:
+            continue
+        history = s[completed & s.season.eq(g.season) & s.week.lt(g.week) & s.start.lt(g.start)]
+        profiles = {}
+        for side in ('home', 'away'):
+            tid = g[side + '_id']
+            games = history[history.home_id.eq(tid) | history.away_id.eq(tid)]
+            if games.empty or games.game_id.duplicated().any():
+                break
+            totals = np.zeros(6)
+            for _, old in games.iterrows():
+                opp = old.away_id if old.home_id == tid else old.home_id
+                keys = [(old.game_id, tid), (old.game_id, opp)]
+                if not all(k in lookup.index for k in keys):
+                    break
+                own, other = [lookup.loc[k] for k in keys]
+                totals += [own.rushingYards, own.rushingAttempts, other.rushingYards,
+                           other.rushingAttempts, own.turnovers, other.turnovers]
+            else:
+                profiles[side] = {'off_run': totals[0] / totals[1],
+                                  'def_run': totals[2] / totals[3],
+                                  'margin': (totals[5] - totals[4]) / len(games),
+                                  'games': len(games)}
+        if len(profiles) == 2:
+            record.update(status='ok', reason='', **profiles)
+    return out
+
+
+WATERFALL_TIERS = {
+    1: 'Tier 1: Gold Standard Underdog',
+    2: 'Tier 2: Moneyline Parlay Anchor',
+    3: 'Tier 3: Moderate Favorite Clear',
+}
+
+
+def select_waterfall(predictions, schedule, profiles, minimum=12, maximum=18):
+    """Weekly sequential card. Tier 1 up to 18; tiers 2/3 fill to 12.
+
+    Deterministic kickoff/game-ID ordering within stages; no probability-edge rank.
+    Historical rows are retrospective selections, never proof of a saved live pick.
+    """
+    if not 1 <= minimum <= maximum <= 18:
+        raise ValueError('Require 1 <= minimum <= maximum <= 18')
+    games = normalize_fbs_schedule(schedule).copy()
+    if 'game_id' not in games:
+        return []
+    games['_id'] = pd.to_numeric(games.game_id, errors='coerce')
+    games = games.dropna(subset=['_id'])
+    games = games[~games._id.duplicated(keep=False)].set_index('_id')
+    candidates = {1: [], 2: [], 3: []}
+    seen = set()
+    for _, row in predictions.iterrows():
+        try:
+            gid = int(row['Game ID'])
+            hline, aline = float(row['DK Home ML']), float(row['DK Away ML'])
+        except (KeyError, TypeError, ValueError, OverflowError):
+            continue
+        if gid in seen or gid not in games.index:
+            continue
+        seen.add(gid)
+        if not all(np.isfinite(n) and abs(n) >= 100 and n.is_integer() for n in (hline, aline)):
+            continue
+        # Require a priced favorite and underdog from the same DraftKings quote.
+        if hline < 0 < aline:
+            fav, dog = 'home', 'away'
+        elif aline < 0 < hline:
+            fav, dog = 'away', 'home'
+        else:
+            continue
+        game = games.loc[gid]
+        rec = profiles.get(str(gid), {})
+        if rec.get('status') != 'ok':
+            continue
+        f, d = rec[fav], rec[dog]
+        if not all(np.isfinite(p.get(k, np.nan)) for p in (f, d) for k in ('off_run', 'def_run', 'margin')):
+            continue
+        neutral_raw = str(game.get('neutral_site', '')).lower()
+        if neutral_raw not in ('true', 't', '1', '1.0', 'yes', 'y', 'false', 'f', '0', '0.0', 'no', 'n'):
+            continue
+        neutral = neutral_raw in ('true', 't', '1', '1.0', 'yes', 'y')
+        lines = {'home': hline, 'away': aline}
+        stage, side, reason = None, None, ''
+        sweep = d['off_run'] > f['off_run'] and d['def_run'] < f['def_run'] and d['margin'] > f['margin']
+        if 100 <= lines[dog] <= 170 and sweep and not neutral:
+            stage, side = 1, dog
+            reason = ('Home sweep' if dog == 'home' else 'Road Sweep') + ': higher offensive YPC, lower defensive YPC allowed, better turnover margin/game.'
+        try:
+            confidence = float(row.get('Confidence', np.nan))
+        except (ValueError, TypeError):
+            confidence = np.nan
+        if stage is None and -600 <= lines[fav] <= -280 and row.get('Predicted Winner') == game[fav + '_team'] and .70 <= confidence <= 1 and f['def_run'] < d['off_run'] and f['margin'] >= d['margin']:
+            stage, side = 2, fav
+            reason = 'Core model agrees at 70%+; defensive YPC allowed below opposing offensive YPC; turnover margin/game at least equal.'
+        if stage is None and -275 <= lines[fav] <= -205 and f['off_run'] > d['def_run'] and f['def_run'] < d['off_run'] and f['margin'] > d['margin']:
+            stage, side = 3, fav
+            reason = 'Offensive YPC above opposing defensive YPC allowed; defensive YPC allowed below opposing offensive YPC; better turnover margin/game.'
+        if stage:
+            candidates[stage].append({'Game ID': gid, 'Value Tier': WATERFALL_TIERS[stage],
+                'Value Stage': stage, 'Value Pick': game[side + '_team'], 'Value Side': side.title(),
+                'Value Line': f'{int(lines[side]):+d}', 'Value Reason': reason,
+                '_sort': (str(game.get('start_date', '')), gid)})
+    card = []
+    for stage in (1, 2, 3):
+        if len(card) >= maximum or (stage > 1 and len(card) >= minimum):
+            break
+        limit = maximum if stage == 1 else minimum
+        for item in sorted(candidates[stage], key=lambda c: c['_sort'])[:limit-len(card)]:
+            item.pop('_sort')
+            item['Value Rank'] = len(card) + 1
+            card.append(item)
+    return card

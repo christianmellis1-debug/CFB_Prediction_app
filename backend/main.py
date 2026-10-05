@@ -13,7 +13,8 @@ import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from model import predict_week
+from model_v1_5 import predict_week, add_waterfall_value
+from matchup_advantages import normalize_fbs_schedule
 
 ROOT = Path(__file__).resolve().parents[1]
 app = FastAPI(title="CFB Predictor API", version="1.0.0")
@@ -35,9 +36,7 @@ def schedule(season: int) -> pd.DataFrame:
     frame = frame[pd.to_numeric(frame["season"], errors="coerce") == season].copy()
     if "season_type" in frame:
         frame = frame[frame["season_type"].astype(str).str.lower() == "regular"]
-    for col in ("home_division", "away_division"):
-        if col in frame:
-            frame = frame[frame[col].astype(str).str.lower() == "fbs"]
+    frame = normalize_fbs_schedule(frame)
     for col in ("week", "home_id", "away_id", "home_points", "away_points"):
         if col in frame:
             frame[col] = pd.to_numeric(frame[col], errors="coerce")
@@ -121,7 +120,7 @@ def _implied(line: str):
 
 def attach_market_context(predicted: pd.DataFrame, games: pd.DataFrame) -> pd.DataFrame:
     result = predicted.copy()
-    for col, default in (("Away ML", "Unavailable"), ("Home ML", "Unavailable"), ("ML Source", "Unavailable"), ("Odds Type", "Not offered / unavailable")):
+    for col, default in (("DK Away ML", "Unavailable"), ("DK Home ML", "Unavailable"), ("Away ML", "Unavailable"), ("Home ML", "Unavailable"), ("ML Source", "Unavailable"), ("Odds Type", "Not offered / unavailable")):
         result[col] = default
     if "start_date" not in games or games.empty:
         return result
@@ -134,7 +133,7 @@ def attach_market_context(predicted: pd.DataFrame, games: pd.DataFrame) -> pd.Da
     except Exception:
         quote_events = {}
     for idx, game in games.iterrows():
-        event_quotes = quote_events.get(str(game.get("game_id")), {})
+        event_quotes = quote_events.get(str(int(game["game_id"])), {})
         if not event_quotes:
             continue
         valid = [q for name, q in event_quotes.items() if isinstance(q, dict)
@@ -148,6 +147,9 @@ def attach_market_context(predicted: pd.DataFrame, games: pd.DataFrame) -> pd.Da
         dk = next(((name, q) for name, q in named if name.lower().replace(" ", "") == "draftkings"), None)
         provider, quote = dk or named[0]
         match = (result["Home Team"] == game.home_team) & (result["Away Team"] == game.away_team)
+        if dk:
+            result.loc[match, "DK Away ML"] = dk[1].get("away", "Unavailable")
+            result.loc[match, "DK Home ML"] = dk[1].get("home", "Unavailable")
         result.loc[match, "Away ML"] = quote.get("away", "Unavailable")
         result.loc[match, "Home ML"] = quote.get("home", "Unavailable")
         result.loc[match, "ML Source"] = provider
@@ -160,17 +162,12 @@ def attach_market_context(predicted: pd.DataFrame, games: pd.DataFrame) -> pd.Da
         if str(r["Bet Line"]).startswith("+") and pd.notna(r["Market Implied %"]) else (
         r["Confidence"] * (100 / abs(float(str(r["Bet Line"])))) - (1-r["Confidence"]))
         if pd.notna(r["Market Implied %"]) else None, axis=1)
-    result["Bet Signal"] = "Pass"
-    usable = result["Market Implied %"].notna()
-    result.loc[usable & (result["Confidence"] >= .70) & (result["Model Edge"] >= .03) & (result["Expected Value"] > 0), "Bet Signal"] = "Strong value"
-    result.loc[usable & (result["Bet Signal"] == "Pass") & (result["Confidence"] >= .60) & (result["Model Edge"] >= .02) & (result["Expected Value"] > 0), "Bet Signal"] = "Value"
-    result.loc[~usable, "Bet Signal"] = "No line"
     return result
 
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "service": "cfb-predictor-api", "model": "V1.4"}
+    return {"status": "ok", "service": "cfb-predictor-api", "model": "V1.5"}
 
 
 @app.get("/api/weeks")
@@ -205,6 +202,14 @@ def predictions(season: int = Query(..., ge=2001, le=2100), week: int = Query(..
             predicted.loc[match, "Home Logo"] = logo(row.home_id)
             predicted.loc[match, "Game ID"] = row.get("game_id")
         predicted = attach_market_context(predicted, selected)
-        return {"season": season, "week": week, "model": "V1.4", "retrieved": datetime.now(timezone.utc).isoformat(), "games": json_rows(predicted)}
+        try:
+            boxes = _read_csv_url(f"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_team_box/team_box_{season}.csv")
+            value_error = None
+        except Exception:
+            boxes = pd.DataFrame()
+            value_error = "FBS box-score feed unavailable; no Value Picks generated."
+        predicted = add_waterfall_value(predicted, games, boxes, week)
+        return {"season": season, "week": week, "model": "V1.5", "retrieved": datetime.now(timezone.utc).isoformat(), "games": json_rows(predicted), "value_card": json_rows(predicted[predicted["Value Selected"]].sort_values("Value Rank")), "value_card_status": predicted.attrs["waterfall"], "value_error": value_error}
     except Exception as exc:
         raise HTTPException(502, f"Unable to generate predictions: {exc}") from exc
+

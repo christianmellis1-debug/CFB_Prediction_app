@@ -19,14 +19,17 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import streamlit.components.v1 as components
-# Pin the release module so a warm Streamlit process cannot reuse V1.4.
-from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week
+# Reload the release module so a warm Streamlit process picks up waterfall functions.
+import importlib
+import model_v1_5
+importlib.reload(model_v1_5)
+from model_v1_5 import MODEL_VERSION, COMPONENT_SPEC, predict_week, add_waterfall_value, waterfall_scenario_rows
 from bet_tracker_ui import show_bet_tracker
 import importlib
 import matchup_advantages
 # Streamlit may retain imported modules after a source-only deployment.
 importlib.reload(matchup_advantages)
-from matchup_advantages import build_advantages, advantage_html, assess
+from matchup_advantages import build_advantages, advantage_html, assess, normalize_fbs_schedule
 from shadow_tracking import show_shadow_tracking
 from live_scores import parse_live_scores, overlay_live_scores
 
@@ -655,11 +658,6 @@ def add_betting_value(predictions):
         result["Confidence"] * (100 / line.abs()) - (1 - result["Confidence"]),
     )
     result.loc[line.isna(), "Expected Value"] = np.nan
-    result["Bet Signal"] = "Pass"
-    usable = result["Bet Line"].ne("Unavailable") & result["Expected Value"].notna()
-    result.loc[usable & (result["Confidence"] >= .70) & (result["Model Edge"] >= .03) & (result["Expected Value"] > 0), "Bet Signal"] = "Strong value"
-    result.loc[usable & (result["Bet Signal"] == "Pass") & (result["Confidence"] >= .60) & (result["Model Edge"] >= .02) & (result["Expected Value"] > 0), "Bet Signal"] = "Value"
-    result.loc[~usable, "Bet Signal"] = "No line"
     return result
 
 
@@ -1370,9 +1368,7 @@ try:
     schedule = schedule[pd.to_numeric(schedule["season"], errors="coerce") == season]
     if "season_type" in schedule:
         schedule = schedule[schedule["season_type"].astype(str).str.lower() == "regular"]
-    for col in ["home_division", "away_division"]:
-        if col in schedule:
-            schedule = schedule[schedule[col].astype(str).str.lower() == "fbs"]
+    schedule = normalize_fbs_schedule(schedule)
     for col in ["week", "home_id", "away_id", "home_points", "away_points"]:
         schedule[col] = pd.to_numeric(schedule[col], errors="coerce")
     schedule = schedule.dropna(subset=["week", "home_id", "away_id"])
@@ -1480,6 +1476,12 @@ if date_range:
     except Exception:
         st.info("DraftKings odds are temporarily unavailable. Predictions and results are still available.")
 pred = add_betting_value(attach_odds(pred, games, odds_snapshot["quotes"]))
+try:
+    waterfall_boxes = download_advantage_boxes(season)
+except Exception:
+    waterfall_boxes = pd.DataFrame()
+    st.warning("Value Picks unavailable: FBS box scores could not be loaded. Refresh feeds to retry.")
+pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week)
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
 if st.session_state.get("moneyline_history_season") != season:
     line_history.clear()
@@ -1490,7 +1492,7 @@ if odds_snapshot.get("lookup_errors"):
 feed_details.caption(f"Moneyline coverage: {int(pred['Bet Line'].ne('Unavailable').sum())} of {len(pred)} model picks have a price. Unavailable means no matching price was retrieved from the connected feeds, not that every sportsbook lacks one.")
 
 awaiting_count = int(pred["Status"].ne("Final").sum())
-value_count = int(pred["Bet Signal"].isin(["Strong value", "Value"]).sum())
+value_count = int(pred["Value Selected"].sum())
 high_count = int((pred["Confidence"] >= .8).sum())
 close_count = int((pred["Confidence"] < .6).sum())
 graded = pred[pred["Pick Result"].isin(["Correct", "Incorrect"])]
@@ -1519,32 +1521,27 @@ with feed_details:
         st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
     st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
 with value_tab:
-    value_picks = pred[pred["Bet Signal"].isin(["Strong value", "Value"])].sort_values(["Bet Signal", "Expected Value"], ascending=[True, False])
+    st.markdown("### Value Picks · Three-stage waterfall")
+    st.caption("DraftKings only · current-season FBS-only metrics · selections can differ from the core model.")
+    value_picks = pred[pred["Value Selected"]].sort_values("Value Rank")
+    st.caption(f"{len(value_picks)} selected · target 12–18. Odds retrieved {odds_snapshot['retrieved'] or 'unavailable'}.")
+    if len(value_picks) < 12:
+        st.info(f"{12-len(value_picks)} below target. No gates or odds limits were relaxed.")
+    with st.expander("How Value Picks are selected", expanded=False):
+        st.write("Tier 1: +100 to +170 underdogs sweeping offensive YPC, defensive YPC allowed and turnover margin/game; home or Road Sweep, excluding neutral sites. Take all, capped at 18. If fewer than 12, Tier 2 fills toward 12: −280 to −600 favorites with 70%+ core model support, the defensive rushing gate and at least equal turnover margin. Tier 3 fills remaining places to 12: −205 to −275 favorites clearing both rushing gates and a better turnover margin. Kickoff time then game ID breaks ordering ties.")
+        st.caption("A selection rule is not a calibrated win probability or proof of positive expected return. These tiers have not established an accuracy improvement. Historical cards are recalculated using archived prices; they are not saved pregame selections. Live/latest lines can change membership as feeds refresh.")
     if not value_picks.empty:
-        st.markdown("### Model value picks")
-        st.caption("Weekly shortlist · includes all games regardless of the filters below.")
-        with st.expander("How value picks are selected"):
-            st.caption("These picks combine the model’s win probability with the available moneyline. Model edge is the model confidence minus the market-implied probability; expected value estimates profit per $1 staked before sportsbook limits and line movement. Completed weeks use archived closing prices and include the actual result.")
-        value_show = value_picks.head(12).copy()
+        value_show = value_picks.copy()
         value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
-        value_show["Model chance"] = value_show["Confidence"].map(lambda v: f"{v:.1%}")
-        value_show["Break-even"] = value_show["Market Implied %"].map(lambda v: f"{v:.1%}")
-        value_show["Edge"] = value_show["Model Edge"].map(lambda v: f"{v * 100:+.1f} pts")
-        value_show["Est. profit / $1"] = value_show["Expected Value"].map(lambda v: f"{v:+.2f}")
-        value_show = value_show.rename(columns={"Predicted Winner": "Pick", "Bet Line": "Odds",
-                                                "ML Source": "Sportsbook", "Pick Result": "Result"})
-        value_show = value_show[["Pick", "Odds", "Model chance", "Result", "Matchup", "Break-even",
-                                 "Edge", "Est. profit / $1", "Sportsbook", "Odds Type", "Final Score"]]
-        st.dataframe(value_show, hide_index=True, use_container_width=True,
-                     height=min(35 * (len(value_show) + 1) + 3, 320))
-        st.caption(f"Showing {len(value_show)} of {len(value_picks)} value picks. Scroll within the table for more rows or columns.")
-        if pred["Status"].eq("Final").any():
-            graded_value = value_picks[value_picks["Pick Result"].isin(["Correct", "Incorrect"])]
-            if not graded_value.empty:
-                wins = int(graded_value["Pick Result"].eq("Correct").sum())
-                st.caption(f"Highlighted historical picks: {wins}–{len(graded_value) - wins} ({wins / len(graded_value):.1%} accuracy).")
+        value_show["Model chance for selection"] = np.where(value_show["Value Side"].eq("Home"), value_show["Home Win %"], value_show["Away Win %"])
+        value_show["Model chance for selection"] = value_show["Model chance for selection"].map(lambda v: f"{v:.1%}")
+        st.dataframe(value_show[["Value Rank", "Value Tier", "Value Pick", "Value Line", "Value Result", "Matchup", "Model chance for selection", "Value Reason", "Status"]], hide_index=True, use_container_width=True)
+        graded_value = value_picks[value_picks["Value Result"].isin(["Correct", "Incorrect"])]
+        if not graded_value.empty:
+            wins = int(graded_value["Value Result"].eq("Correct").sum())
+            st.caption(f"Recalculated selections: {wins}–{len(graded_value)-wins} ({wins/len(graded_value):.1%}). Core-model results are reported separately.")
     else:
-        st.info("No current game has both a published moneyline and enough model value to qualify as a highlighted opportunity.")
+        st.info("No games qualify with verified FBS histories and DraftKings prices.")
 def reset_pick_filters():
     defaults = {"pick_query": "", "pick_level": "All confidence levels",
                 "pick_order": "Highest confidence", "pick_status": "All games",
@@ -1733,7 +1730,8 @@ with cards_tab:
             if is_risky:
                 risky_indices.append(card_idx)
             warning = ('<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;border-radius:10px;background:#e9a23b20"><span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9a23b;color:#171717;font-size:25px;font-weight:900">!</span><div><strong>RISKY PICK · MATCHUP WARNING</strong><br><span>' + str(scored["count"]) + '/5 advantages for ' + escape(str(r["Predicted Winner"])) + '</span></div></div>') if is_risky else ""
-            cards[card_idx] = f"""<article class="pick-card">{warning}
+            waterfall_note = ('<div class="result-box"><strong>' + escape(str(r['Value Tier'])) + '</strong><div>' + escape(str(r['Value Pick'])) + ' · DraftKings ' + escape(str(r['Value Line'])) + '</div></div>') if r.get('Value Selected', False) else ''
+            cards[card_idx] = f"""<article class="pick-card">{waterfall_note}{warning}
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
 <div class="team-line"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}{escape(str(r['Away Team']))}</span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
@@ -1916,7 +1914,7 @@ with scenario_tab:
             with stake_columns[0]:
                 opportunity_stake = st.number_input("Opportunity stake ($)", min_value=0.0, value=10.0, step=.5, format="%.2f")
             stakes = {tier: opportunity_stake for tier in ["High", "Moderate", "Lean", "Toss-up"]}
-            st.caption("Includes only picks labeled Strong value or Value: positive expected value, with the model edge thresholds shown above.")
+            st.caption("Uses the waterfall selections and their DraftKings moneylines, even when the selected team differs from the core model. Equal stake per selection.")
         st.caption("See potential profit if pending picks win, plus actual results for settled bets. Total returned includes your original stake.")
         with st.expander("How this scenario is calculated"):
             st.write("Historical simulation using recalculated pregame-week predictions and archived prices, not a record of bets placed before kickoff. Missing moneylines are excluded; pending games are not settled. No parlays or reinvestment. Ties refund the stake; profit is rounded to cents per bet.")
@@ -1941,7 +1939,8 @@ with scenario_tab:
                                 st.warning(f"Week {scenario_week} odds could not be loaded; those bets are excluded.")
                         week_predictions = add_betting_value(attach_odds(week_predictions, scenario_games, quotes))
                         if scenario_mode == "Best betting opportunities":
-                            week_predictions = week_predictions[week_predictions["Bet Signal"].isin(["Strong value", "Value"])]
+                            week_predictions = add_waterfall_value(week_predictions, schedule, waterfall_boxes, scenario_week)
+                            week_predictions = waterfall_scenario_rows(week_predictions)
                         if not week_predictions.empty:
                             scenario_frames.append(simulate_stakes(week_predictions, stakes))
                 if scenario_frames:
@@ -2067,6 +2066,7 @@ st.download_button("Download these picks · CSV", filtered.drop(columns=["Line M
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
+
 
 
 
