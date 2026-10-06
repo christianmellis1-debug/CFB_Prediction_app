@@ -1,0 +1,720 @@
+{
+  "2024": {
+    "counts": {
+      "exact_ok": 671,
+      "fast_ok": 694,
+      "status_mismatch": 23,
+      "value_mismatch": 592,
+      "compared": 799
+    },
+    "examples": [
+      {
+        "gid": "401634765",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401635533",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401628471",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401628470",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401645323",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401636616",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401635534",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 4.2,
+            "def_run": 6.717948717948718,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 5.928571428571429,
+            "def_run": 4.133333333333334,
+            "margin": 0.0,
+            "games": 2
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 4.982142857142857,
+            "def_run": 5.3,
+            "margin": 1.0,
+            "games": 2
+          },
+          "away": {
+            "off_run": 5.7075471698113205,
+            "def_run": 4.020408163265306,
+            "margin": -0.6666666666666666,
+            "games": 3
+          }
+        }
+      },
+      {
+        "gid": "401628347",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 4.352941176470588,
+            "def_run": 0.4090909090909091,
+            "margin": 1.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 4.634146341463414,
+            "def_run": 3.6875,
+            "margin": 1.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 3.0941176470588236,
+            "def_run": 1.5098039215686274,
+            "margin": 1.5,
+            "games": 2
+          },
+          "away": {
+            "off_run": 4.006756756756757,
+            "def_run": 3.7906976744186047,
+            "margin": 0.0,
+            "games": 4
+          }
+        }
+      },
+      {
+        "gid": "401643784",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401628977",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401628464",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401629040",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401645324",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401628340",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 6.166666666666667,
+            "def_run": 0.4166666666666667,
+            "margin": 1.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 3.107142857142857,
+            "def_run": 3.176470588235294,
+            "margin": 3.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 6.166666666666667,
+            "def_run": 0.4166666666666667,
+            "margin": 1.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 3.4157303370786516,
+            "def_run": 4.217391304347826,
+            "margin": 2.0,
+            "games": 2
+          }
+        }
+      },
+      {
+        "gid": "401628473",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401635535",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401635537",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 3.5853658536585367,
+            "def_run": 2.393939393939394,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 4.225806451612903,
+            "def_run": 4.85,
+            "margin": -1.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 3.5217391304347827,
+            "def_run": 3.6582278481012658,
+            "margin": -0.5,
+            "games": 2
+          },
+          "away": {
+            "off_run": 4.225806451612903,
+            "def_run": 4.85,
+            "margin": -1.0,
+            "games": 1
+          }
+        }
+      },
+      {
+        "gid": "401643783",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401643778",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401643781",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 6.717948717948718,
+            "def_run": 4.2,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 4.545454545454546,
+            "def_run": 3.0588235294117645,
+            "margin": 0.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 5.8352941176470585,
+            "def_run": 2.5846153846153848,
+            "margin": 0.0,
+            "games": 2
+          },
+          "away": {
+            "off_run": 5.859154929577465,
+            "def_run": 3.3088235294117645,
+            "margin": 0.0,
+            "games": 2
+          }
+        }
+      }
+    ]
+  },
+  "2025": {
+    "counts": {
+      "exact_ok": 679,
+      "fast_ok": 699,
+      "status_mismatch": 20,
+      "value_mismatch": 584,
+      "compared": 808
+    },
+    "examples": [
+      {
+        "gid": "401754528",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401752822",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401754524",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 2.9166666666666665,
+            "def_run": 1.0344827586206897,
+            "margin": -1.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 3.813953488372093,
+            "def_run": 3.033333333333333,
+            "margin": 3.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 3.2028985507246377,
+            "def_run": 2.753846153846154,
+            "margin": 0.5,
+            "games": 2
+          },
+          "away": {
+            "off_run": 3.261904761904762,
+            "def_run": 4.032258064516129,
+            "margin": 1.5,
+            "games": 2
+          }
+        }
+      },
+      {
+        "gid": "401752693",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 4.486486486486487,
+            "def_run": 2.264705882352941,
+            "margin": -1.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 3.125,
+            "def_run": 4.627450980392157,
+            "margin": -3.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 5.728571428571429,
+            "def_run": 3.486111111111111,
+            "margin": 0.5,
+            "games": 2
+          },
+          "away": {
+            "off_run": 3.125,
+            "def_run": 4.627450980392157,
+            "margin": -3.0,
+            "games": 1
+          }
+        }
+      },
+      {
+        "gid": "401752811",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401752812",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 5.421052631578948,
+            "def_run": 9.478260869565217,
+            "margin": 2.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 3.6744186046511627,
+            "def_run": 2.765957446808511,
+            "margin": 0.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 4.375,
+            "def_run": 5.103448275862069,
+            "margin": 1.75,
+            "games": 4
+          },
+          "away": {
+            "off_run": 4.246753246753247,
+            "def_run": 4.811111111111111,
+            "margin": -1.0,
+            "games": 2
+          }
+        }
+      },
+      {
+        "gid": "401752825",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401754618",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401754529",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401754525",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401752694",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 4.695652173913044,
+            "def_run": 6.151515151515151,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 3.8484848484848486,
+            "def_run": 2.942857142857143,
+            "margin": 1.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 3.396551724137931,
+            "def_run": 6.19672131147541,
+            "margin": -1.0,
+            "games": 2
+          },
+          "away": {
+            "off_run": 3.169491525423729,
+            "def_run": 4.7105263157894735,
+            "margin": 1.5,
+            "games": 2
+          }
+        }
+      },
+      {
+        "gid": "401762461",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401756881",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401754637",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401752686",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 5.116279069767442,
+            "def_run": 2.0344827586206895,
+            "margin": -1.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 6.704545454545454,
+            "def_run": 5.457142857142857,
+            "margin": -1.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 5.116279069767442,
+            "def_run": 2.0344827586206895,
+            "margin": -1.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 5.380952380952381,
+            "def_run": 3.9554140127388533,
+            "margin": 0.5,
+            "games": 4
+          }
+        }
+      },
+      {
+        "gid": "401752689",
+        "week": 2,
+        "type": "status",
+        "exact": "missing",
+        "fast": "ok"
+      },
+      {
+        "gid": "401761603",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 6.151515151515151,
+            "def_run": 4.695652173913044,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 10.051282051282051,
+            "def_run": 4.333333333333333,
+            "margin": 0.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 5.328767123287672,
+            "def_run": 3.5961538461538463,
+            "margin": 1.0,
+            "games": 2
+          },
+          "away": {
+            "off_run": 7.9125,
+            "def_run": 3.1818181818181817,
+            "margin": 1.0,
+            "games": 2
+          }
+        }
+      },
+      {
+        "gid": "401752937",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 2.4074074074074074,
+            "def_run": 3.8125,
+            "margin": -2.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 5.243243243243243,
+            "def_run": 4.932203389830509,
+            "margin": -2.5,
+            "games": 2
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 2.4074074074074074,
+            "def_run": 3.8125,
+            "margin": -2.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 4.59349593495935,
+            "def_run": 4.8352941176470585,
+            "margin": -1.0,
+            "games": 3
+          }
+        }
+      },
+      {
+        "gid": "401752818",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 3.972972972972973,
+            "def_run": 6.483870967741935,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 1.5454545454545454,
+            "def_run": 3.8372093023255816,
+            "margin": -1.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 3.972972972972973,
+            "def_run": 6.483870967741935,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 3.2083333333333335,
+            "def_run": 3.717391304347826,
+            "margin": -1.5,
+            "games": 2
+          }
+        }
+      },
+      {
+        "gid": "401757228",
+        "week": 2,
+        "type": "values",
+        "exact": {
+          "status": "ok",
+          "reason": "",
+          "home": {
+            "off_run": 2.5161290322580645,
+            "def_run": 5.431818181818182,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 2.2413793103448274,
+            "def_run": 7.766666666666667,
+            "margin": -2.0,
+            "games": 1
+          }
+        },
+        "fast": {
+          "status": "ok",
+          "home": {
+            "off_run": 2.5161290322580645,
+            "def_run": 5.431818181818182,
+            "margin": 0.0,
+            "games": 1
+          },
+          "away": {
+            "off_run": 1.696969696969697,
+            "def_run": 5.527272727272727,
+            "margin": -2.0,
+            "games": 2
+          }
+        }
+      }
+    ]
+  },
+  "2026": {
+    "counts": {
+      "exact_ok": 183,
+      "fast_ok": 183,
+      "status_mismatch": 0,
+      "value_mismatch": 0,
+      "compared": 271
+    },
+    "examples": []
+  }
+}
