@@ -77,23 +77,59 @@ def moneyline(value):
         return "Unavailable"
 
 
+def spreadline(value):
+    if value is None or isinstance(value, bool):
+        return "Unavailable"
+    raw = str(value).strip().replace("−", "-").replace(" ", "")
+    if raw.upper() in {"PK", "PICK", "PICKEM", "PICK'EM"}:
+        return "+0"
+    try:
+        number = float(raw.replace("+", ""))
+        if not math.isfinite(number) or abs(number) > 100:
+            return "Unavailable"
+        return f"{int(number):+d}" if number.is_integer() else f"{number:+.1f}"
+    except (TypeError, ValueError):
+        return "Unavailable"
+
+
 def parse_quotes(payload: dict) -> dict:
     quotes = {}
     for event in payload.get("events", []):
         event_quotes = {}
         for competition in event.get("competitions", []):
-            sides = {c.get("homeAway"): str(c.get("team", {}).get("id", "")) for c in competition.get("competitors", [])}
-            for odds in competition.get("odds", []):
-                provider = str(odds.get("provider", {}).get("name", "")).strip()
+            sides = {x.get("homeAway"): str(x.get("team", {}).get("id", "")) for x in competition.get("competitors", [])}
+            for odds_data in competition.get("odds", []):
+                provider = str(odds_data.get("provider", {}).get("name", "")).strip()
                 if not provider:
                     continue
                 prices = {}
                 for side in ("home", "away"):
-                    market = odds.get("moneyline", {}).get(side, {})
-                    value = (market.get("close") or {}).get("odds") if "close" in market else odds.get(side + "TeamOdds", {}).get("moneyLine")
-                    prices[side] = moneyline(value)
-                if prices["home"] != "Unavailable" or prices["away"] != "Unavailable":
-                    event_quotes[provider] = {"home_id": sides.get("home", ""), "away_id": sides.get("away", ""), **prices}
+                    ml_market = odds_data.get("moneyline", {}).get(side, {})
+                    ml_value = (ml_market.get("close") or {}).get("odds")
+                    if ml_value is None:
+                        ml_value = odds_data.get(side + "TeamOdds", {}).get("moneyLine")
+                    prices[side] = moneyline(ml_value)
+
+                    spread_market = odds_data.get("pointSpread", {}).get(side, {})
+                    spread_value = (spread_market.get("close") or {}).get("line")
+                    spread_price = (spread_market.get("close") or {}).get("odds")
+                    if spread_value is None and odds_data.get("spread") is not None:
+                        try:
+                            home_spread = float(odds_data.get("spread"))
+                            spread_value = home_spread if side == "home" else -home_spread
+                        except (TypeError, ValueError):
+                            pass
+                    if spread_price is None:
+                        spread_price = odds_data.get(side + "TeamOdds", {}).get("spreadOdds")
+                    prices[side + "_spread"] = spreadline(spread_value)
+                    prices[side + "_spread_odds"] = moneyline(spread_price)
+
+                if all(prices[k] == "Unavailable" for k in ("home", "away", "home_spread", "away_spread")):
+                    continue
+                event_quotes[provider] = {
+                    "home_id": sides.get("home", ""), "away_id": sides.get("away", ""),
+                    **prices,
+                }
         if event_quotes:
             quotes[str(event.get("id"))] = event_quotes
     return quotes
@@ -120,7 +156,15 @@ def _implied(line: str):
 
 def attach_market_context(predicted: pd.DataFrame, games: pd.DataFrame) -> pd.DataFrame:
     result = predicted.copy()
-    for col, default in (("DK Away ML", "Unavailable"), ("DK Home ML", "Unavailable"), ("Away ML", "Unavailable"), ("Home ML", "Unavailable"), ("ML Source", "Unavailable"), ("Odds Type", "Not offered / unavailable")):
+    defaults = (
+        ("DK Away ML", "Unavailable"), ("DK Home ML", "Unavailable"),
+        ("Away ML", "Unavailable"), ("Home ML", "Unavailable"), ("ML Source", "Unavailable"),
+        ("DK Away Spread", "Unavailable"), ("DK Home Spread", "Unavailable"),
+        ("Away Spread", "Unavailable"), ("Home Spread", "Unavailable"), ("Spread Source", "Unavailable"),
+        ("Away Spread Odds", "Unavailable"), ("Home Spread Odds", "Unavailable"),
+        ("Odds Type", "Not offered / unavailable"),
+    )
+    for col, default in defaults:
         result[col] = default
     if "start_date" not in games or games.empty:
         return result
@@ -132,28 +176,43 @@ def attach_market_context(predicted: pd.DataFrame, games: pd.DataFrame) -> pd.Da
         quote_events = odds(period).get("quotes", {})
     except Exception:
         quote_events = {}
-    for idx, game in games.iterrows():
+
+    for _, game in games.iterrows():
         event_quotes = quote_events.get(str(int(game["game_id"])), {})
         if not event_quotes:
-            continue
-        valid = [q for name, q in event_quotes.items() if isinstance(q, dict)
-                 and str(q.get("home_id")) == str(int(game.home_id))
-                 and str(q.get("away_id")) == str(int(game.away_id))]
-        if not valid:
             continue
         named = [(name, q) for name, q in event_quotes.items() if isinstance(q, dict)
                  and str(q.get("home_id")) == str(int(game.home_id))
                  and str(q.get("away_id")) == str(int(game.away_id))]
+        if not named:
+            continue
         dk = next(((name, q) for name, q in named if name.lower().replace(" ", "") == "draftkings"), None)
-        provider, quote = dk or named[0]
         match = (result["Home Team"] == game.home_team) & (result["Away Team"] == game.away_team)
+
         if dk:
             result.loc[match, "DK Away ML"] = dk[1].get("away", "Unavailable")
             result.loc[match, "DK Home ML"] = dk[1].get("home", "Unavailable")
-        result.loc[match, "Away ML"] = quote.get("away", "Unavailable")
-        result.loc[match, "Home ML"] = quote.get("home", "Unavailable")
-        result.loc[match, "ML Source"] = provider
+            result.loc[match, "DK Away Spread"] = dk[1].get("away_spread", "Unavailable")
+            result.loc[match, "DK Home Spread"] = dk[1].get("home_spread", "Unavailable")
+
+        ml_named = [(name, q) for name, q in named if q.get("home", "Unavailable") != "Unavailable" or q.get("away", "Unavailable") != "Unavailable"]
+        ml = dk if dk and (dk[1].get("home", "Unavailable") != "Unavailable" or dk[1].get("away", "Unavailable") != "Unavailable") else (ml_named[0] if ml_named else None)
+        if ml:
+            result.loc[match, "Away ML"] = ml[1].get("away", "Unavailable")
+            result.loc[match, "Home ML"] = ml[1].get("home", "Unavailable")
+            result.loc[match, "ML Source"] = ml[0]
+
+        spread_named = [(name, q) for name, q in named if q.get("home_spread", "Unavailable") != "Unavailable" and q.get("away_spread", "Unavailable") != "Unavailable"]
+        spread = dk if dk and dk[1].get("home_spread", "Unavailable") != "Unavailable" and dk[1].get("away_spread", "Unavailable") != "Unavailable" else (spread_named[0] if spread_named else None)
+        if spread:
+            result.loc[match, "Away Spread"] = spread[1].get("away_spread", "Unavailable")
+            result.loc[match, "Home Spread"] = spread[1].get("home_spread", "Unavailable")
+            result.loc[match, "Away Spread Odds"] = spread[1].get("away_spread_odds", "Unavailable")
+            result.loc[match, "Home Spread Odds"] = spread[1].get("home_spread_odds", "Unavailable")
+            result.loc[match, "Spread Source"] = spread[0]
+
         result.loc[match, "Odds Type"] = "Archived line" if bool(game.get("completed", False)) else "Latest available line"
+
     result["Bet Line"] = result.apply(lambda r: r["Home ML"] if r["Predicted Side"] == "Home" else r["Away ML"], axis=1)
     result["Market Implied %"] = result["Bet Line"].map(_implied)
     result["Model Edge"] = result["Confidence"] - result["Market Implied %"]
