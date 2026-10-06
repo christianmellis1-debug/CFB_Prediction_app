@@ -42,7 +42,7 @@ st.set_page_config(page_title="College Football Predictor", page_icon="assets/cf
 TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
-    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, and live or final scores. Confidence is an estimate, not a guarantee."),
+    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores. Confidence is an estimate, not a guarantee."),
     ("risky", "Risky picks", "Review matchup warnings", "This tab lists every predicted winner with two or fewer of the five matchup advantages for the selected week. The exclamation warning also appears on its game card. Missing data is shown separately, and this flag does not change the prediction."),
     ("compare", "Compare picks", "Compare the slate", "This compact table lets you compare picks without scrolling through individual cards. It follows your matchup filters."),
     ("results", "Model results", "Check model performance", "Compare wins, losses, and accuracy by confidence level for the selected week or season to date. Only final, decisive games count toward accuracy; matchup filters do not affect this view."),
@@ -1040,6 +1040,68 @@ def matchup_insights_html(pick, game, published, schedule, week, derived_ids):
     return panel(body)
 
 
+def weather_card_html(weather):
+    """Compact game-window forecast panel for matchup cards."""
+    weather = weather or {}
+    status = str(weather.get("status") or "missing")
+    if status == "indoor":
+        venue = str(weather.get("venue_name") or "Indoor venue")
+        return (
+            '<div class="result-box" style="margin-top:10px">'
+            '<div class="pick-label">Game weather</div>'
+            f'<strong>{escape(venue)}</strong><div>Indoor venue · outdoor weather is not expected to affect play.</div></div>'
+        )
+    if status != "ok":
+        reason = str(weather.get("reason") or "Forecast unavailable.")
+        return (
+            '<div class="result-box" style="margin-top:10px">'
+            '<div class="pick-label">Game weather</div>'
+            f'<div>{escape(reason)}</div></div>'
+        )
+
+    def finite(value):
+        try:
+            value = float(value)
+            return value if math.isfinite(value) else None
+        except (TypeError, ValueError):
+            return None
+
+    condition = str(weather.get("condition") or weather.get("weather_type") or "Forecast")
+    temp = finite(weather.get("temperature_f"))
+    feels = finite(weather.get("feels_like_f"))
+    precip = finite(weather.get("precip_mm"))
+    snow = finite(weather.get("snowfall"))
+    wind = finite(weather.get("max_wind_mph"))
+    gust = finite(weather.get("max_gust_mph"))
+    source = str(weather.get("source_type") or "Forecast")
+    location = str(weather.get("location") or "").strip()
+    details = []
+    if temp is not None:
+        temp_text = f"{temp:.0f}°F"
+        if feels is not None and abs(feels-temp) >= 3:
+            temp_text += f" · feels {feels:.0f}°F"
+        details.append(temp_text)
+    if precip is not None:
+        details.append(f"Precip {precip:.1f} mm")
+    if snow is not None and snow > 0:
+        details.append(f"Snow {snow:.1f}")
+    if wind is not None:
+        details.append(f"Wind up to {wind:.0f} mph")
+    if gust is not None:
+        details.append(f"Gusts {gust:.0f} mph")
+    headline = "⚠ Inclement-weather threshold met" if weather.get("inclement") is True else source
+    border = "#e9a23b" if weather.get("inclement") is True else "#58ae87"
+    loc = f" · {escape(location)}" if location else ""
+    return (
+        f'<div class="result-box" style="margin-top:10px;border-left:4px solid {border}">'
+        f'<div class="pick-label">{escape(headline)}</div>'
+        f'<strong>{escape(condition)}</strong>{loc}'
+        f'<div>{" · ".join(escape(x) for x in details)}</div>'
+        '<div class="venue-label" style="margin-top:6px">Game window: kickoff through approximately four hours after kickoff. '
+        'Inclement threshold: ≥1.0 mm precipitation, any snow, sustained wind ≥20 mph, gusts ≥30 mph, or thunderstorms.</div></div>'
+    )
+
+
 def team_logo_url(team_id):
     """ESPN's public college-football logo endpoint, keyed by team ID."""
     try:
@@ -1558,17 +1620,23 @@ except Exception:
     st.warning("Value Picks unavailable: FBS box scores could not be loaded. Refresh feeds to retry.")
 weather_checks = {}
 weather_candidates = []
+try:
+    week_weather_ids = tuple(
+        int(gid) for gid in pd.to_numeric(pred.get("Game ID"), errors="coerce").dropna().astype(int).unique()
+    )
+    if week_weather_ids:
+        weather_checks = value_weather_context(schedule, selected_week, week_weather_ids)
+except Exception:
+    weather_checks = {}
 if not waterfall_boxes.empty:
     try:
         weather_profiles = build_waterfall_profiles(schedule, waterfall_boxes, selected_week)
         weather_candidates = weather_tier_candidate_ids(pred, schedule, weather_profiles)
-        if weather_candidates:
-            weather_checks = value_weather_context(schedule, selected_week, tuple(weather_candidates))
     except Exception:
-        weather_checks = {}
+        weather_candidates = []
 if weather_candidates:
     missing_weather = sum(
-        weather_checks.get(str(int(gid)), {}).get("status") not in ("ok", "indoor", "neutral")
+        weather_checks.get(str(int(gid)), {}).get("status") not in ("ok", "indoor")
         for gid in weather_candidates
     )
     if missing_weather:
@@ -1585,6 +1653,10 @@ pred["Line Movement HTML"] = [line_movement_html(row, line_history, odds_snapsho
 if odds_snapshot.get("lookup_errors"):
     st.warning(f"Individual odds lookups failed for {len(odds_snapshot['lookup_errors'])} games. Missing lines may reflect a retrieval error; try Refresh all feeds now.")
 feed_details.caption(f"Market coverage: {int(pred['Bet Line'].ne('Unavailable').sum())} of {len(pred)} model picks have a moneyline; {int(pred['Home Spread'].ne('Unavailable').sum())} of {len(pred)} matchups have a spread. Unavailable means no matching price was retrieved from the connected feeds.")
+weather_ok = sum(1 for wx in weather_checks.values() if wx.get("status") in ("ok", "indoor"))
+feed_details.caption(
+    f"Weather coverage: {weather_ok} of {len(pred)} matchups resolved. Outdoor forecasts use the kickoff hour through four hours after kickoff; indoor venues are labeled separately."
+)
 
 awaiting_count = int(pred["Status"].ne("Final").sum())
 value_count = int(pred["Value Selected"].sum())
@@ -1615,6 +1687,7 @@ with feed_details:
     st.caption("DraftKings moneylines and spreads via ESPN, with another sportsbook shown when DraftKings is unavailable · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
     if odds_snapshot["retrieved"]:
         st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
+    st.caption("Weather via Open-Meteo using ESPN venue metadata. Forecasts are cached for 15 minutes and can change as kickoff approaches.")
     st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
 with value_tab:
     st.markdown("### Value Picks · Five-stage waterfall")
@@ -1766,6 +1839,10 @@ with cards_tab:
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
             moneylines = f'<div class="odds-box"><div class="pick-label">Moneyline · {escape(str(r["ML Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["Home ML"]))}</strong></span></div><div class="pick-label" style="margin-top:10px">Spread · {escape(str(r["Spread Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away Spread"]))}</strong></span><span>Home <strong>{escape(str(r["Home Spread"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
             game = games[(games["home_team"] == r["Home Team"]) & (games["away_team"] == r["Away Team"])]
+            game_weather = {}
+            if len(game) == 1 and pd.notna(game.iloc[0].get("game_id")):
+                game_weather = weather_checks.get(str(int(game.iloc[0]["game_id"])), {})
+            weather_html = weather_card_html(game_weather)
             missing_data_note = ""
             if len(game) == 1:
                 absent = []
@@ -1837,6 +1914,7 @@ with cards_tab:
             cards[card_idx] = f"""<article class="pick-card">{waterfall_note}{warning}
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
+{weather_html}
 <div class="team-line"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}{escape(str(r['Away Team']))}</span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
 <div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
