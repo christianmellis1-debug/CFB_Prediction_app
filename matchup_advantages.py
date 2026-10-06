@@ -200,6 +200,38 @@ def _six_of_six_band(line):
     return 3, '6/6 Heavy Favorite'
 
 
+def weather_tier_candidate_ids(predictions, schedule, profiles):
+    """Games that satisfy Tier 2's non-weather gates and therefore need weather."""
+    games = normalize_fbs_schedule(schedule).copy()
+    if 'game_id' not in games:
+        return []
+    games['_id'] = pd.to_numeric(games.game_id, errors='coerce')
+    games = games.dropna(subset=['_id'])
+    games = games[~games._id.duplicated(keep=False)].set_index('_id')
+    ids = []
+    seen = set()
+    for _, row in predictions.iterrows():
+        try:
+            gid = int(row['Game ID'])
+        except (KeyError, TypeError, ValueError, OverflowError):
+            continue
+        if gid in seen or gid not in games.index:
+            continue
+        seen.add(gid)
+        game = games.loc[gid]
+        neutral_raw = str(game.get('neutral_site', '')).lower()
+        if neutral_raw not in ('false', 'f', '0', '0.0', 'no', 'n'):
+            continue
+        rec = profiles.get(str(gid), {})
+        spread = _spread_number(row.get('Home Spread'))
+        if (rec.get('status') == 'ok'
+                and rec['home']['def_run'] < rec['away']['def_run']
+                and rec['home']['margin'] > rec['away']['margin']
+                and np.isfinite(spread) and spread > -14):
+            ids.append(gid)
+    return ids
+
+
 def select_waterfall(predictions, schedule, profiles, advantage_checks=None, weather_checks=None,
                      minimum=12, maximum=18):
     """Weekly sequential card with ATS tiers first.
