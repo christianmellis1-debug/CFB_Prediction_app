@@ -1,0 +1,1122 @@
+{
+  "definition": {
+    "precip_mm_total_gte": 1.0,
+    "snowfall_gt": 0,
+    "sustained_wind_mph_gte": 20.0,
+    "gust_mph_gte": 30.0,
+    "thunder_codes": [
+      95,
+      96,
+      99
+    ],
+    "window": "kickoff hour through +4h"
+  },
+  "coverage": {
+    "target_fbs_games": 1785,
+    "indoor_games": 55,
+    "outdoor_weather_available": 1730,
+    "outdoor_weather_missing": 0,
+    "inclement_games": 147,
+    "inclement_with_profiles": 130,
+    "ordinary_games": 1583,
+    "weather_batch_errors": 0,
+    "venue_metadata_missing": 0,
+    "geocodes_missing": 0
+  },
+  "inclement": {
+    "off": {
+      "games": 130,
+      "wins": 71,
+      "losses": 59,
+      "win_rate": 0.5461538461538461,
+      "wilson_low": 0.4604711849762164,
+      "wilson_high": 0.6291870378782622,
+      "vs_ordinary_pp": -8.027472527472534
+    },
+    "def": {
+      "games": 130,
+      "wins": 69,
+      "losses": 61,
+      "win_rate": 0.5307692307692308,
+      "wilson_low": 0.4453328226886355,
+      "wilson_high": 0.614439325881017,
+      "vs_ordinary_pp": -7.82372023973168
+    },
+    "both": {
+      "games": 60,
+      "wins": 35,
+      "losses": 25,
+      "win_rate": 0.5833333333333334,
+      "wilson_low": 0.45727854313239624,
+      "wilson_high": 0.6993591351212818,
+      "vs_ordinary_pp": -12.568826768318509
+    },
+    "home": {
+      "games": 143,
+      "wins": 98,
+      "losses": 45,
+      "win_rate": 0.6853146853146853,
+      "wilson_low": 0.6051973318926688,
+      "wilson_high": 0.7557358096693955,
+      "vs_ordinary_pp": 9.024654774168074
+    },
+    "to": {
+      "games": 123,
+      "wins": 87,
+      "losses": 36,
+      "win_rate": 0.7073170731707317,
+      "wilson_low": 0.6216067635828231,
+      "wilson_high": 0.7804695268455537,
+      "vs_ordinary_pp": 11.382729270139025
+    },
+    "def_to": {
+      "games": 64,
+      "wins": 46,
+      "losses": 18,
+      "win_rate": 0.71875,
+      "wilson_low": 0.598658376004965,
+      "wilson_high": 0.8140677389451542,
+      "vs_ordinary_pp": 4.955808080808078
+    },
+    "both_to": {
+      "games": 39,
+      "wins": 27,
+      "losses": 12,
+      "win_rate": 0.6923076923076923,
+      "wilson_low": 0.535784513844354,
+      "wilson_high": 0.8143424655401694,
+      "vs_ordinary_pp": -4.578754578754585
+    },
+    "home_def": {
+      "games": 65,
+      "wins": 45,
+      "losses": 20,
+      "win_rate": 0.6923076923076923,
+      "wilson_low": 0.5720212794770567,
+      "wilson_high": 0.7911312329572853,
+      "vs_ordinary_pp": 0.033061494379549305
+    },
+    "home_to": {
+      "games": 56,
+      "wins": 49,
+      "losses": 7,
+      "win_rate": 0.875,
+      "wilson_low": 0.763742793023606,
+      "wilson_high": 0.9381100986103075,
+      "vs_ordinary_pp": 19.96554364471669
+    },
+    "home_both": {
+      "games": 27,
+      "wins": 24,
+      "losses": 3,
+      "win_rate": 0.8888888888888888,
+      "wilson_low": 0.7194181745602705,
+      "wilson_high": 0.9614803521050127,
+      "vs_ordinary_pp": 11.111111111111105
+    },
+    "home_def_to": {
+      "games": 29,
+      "wins": 26,
+      "losses": 3,
+      "win_rate": 0.896551724137931,
+      "wilson_low": 0.7361455275293085,
+      "wilson_high": 0.9641857596186989,
+      "vs_ordinary_pp": 14.779550523245844
+    },
+    "home_both_to": {
+      "games": 19,
+      "wins": 17,
+      "losses": 2,
+      "win_rate": 0.8947368421052632,
+      "wilson_low": 0.686054495051583,
+      "wilson_high": 0.9706420586049034,
+      "vs_ordinary_pp": 11.27819548872181
+    }
+  },
+  "ordinary_control": {
+    "off": {
+      "games": 1400,
+      "wins": 877,
+      "losses": 523,
+      "win_rate": 0.6264285714285714,
+      "wilson_low": 0.6007744620225847,
+      "wilson_high": 0.6513907395215212
+    },
+    "def": {
+      "games": 1399,
+      "wins": 852,
+      "losses": 547,
+      "win_rate": 0.6090064331665476,
+      "wilson_low": 0.5831704964697708,
+      "wilson_high": 0.6342453543290649
+    },
+    "both": {
+      "games": 787,
+      "wins": 558,
+      "losses": 229,
+      "win_rate": 0.7090216010165185,
+      "wilson_low": 0.6763328553498564,
+      "wilson_high": 0.739679655878688
+    },
+    "home": {
+      "games": 1541,
+      "wins": 917,
+      "losses": 624,
+      "win_rate": 0.5950681375730046,
+      "wilson_low": 0.5703518836586504,
+      "wilson_high": 0.619311574394266
+    },
+    "to": {
+      "games": 1321,
+      "wins": 784,
+      "losses": 537,
+      "win_rate": 0.5934897804693414,
+      "wilson_low": 0.5667678639242524,
+      "wilson_high": 0.6196695184767833
+    },
+    "def_to": {
+      "games": 792,
+      "wins": 530,
+      "losses": 262,
+      "win_rate": 0.6691919191919192,
+      "wilson_low": 0.6356756737770941,
+      "wilson_high": 0.7010747549514369
+    },
+    "both_to": {
+      "games": 504,
+      "wins": 372,
+      "losses": 132,
+      "win_rate": 0.7380952380952381,
+      "wilson_low": 0.6980115883583293,
+      "wilson_high": 0.7745767147661096
+    },
+    "home_def": {
+      "games": 698,
+      "wins": 483,
+      "losses": 215,
+      "win_rate": 0.6919770773638968,
+      "wilson_low": 0.6567535702338365,
+      "wilson_high": 0.7250989731320738
+    },
+    "home_to": {
+      "games": 653,
+      "wins": 441,
+      "losses": 212,
+      "win_rate": 0.6753445635528331,
+      "wilson_low": 0.6384947364987431,
+      "wilson_high": 0.7101433521972226
+    },
+    "home_both": {
+      "games": 396,
+      "wins": 308,
+      "losses": 88,
+      "win_rate": 0.7777777777777778,
+      "wilson_low": 0.7342710820753825,
+      "wilson_high": 0.8159468042075856
+    },
+    "home_def_to": {
+      "games": 402,
+      "wins": 301,
+      "losses": 101,
+      "win_rate": 0.7487562189054726,
+      "wilson_low": 0.7041375379784233,
+      "wilson_high": 0.7886655654984013
+    },
+    "home_both_to": {
+      "games": 266,
+      "wins": 208,
+      "losses": 58,
+      "win_rate": 0.7819548872180451,
+      "wilson_low": 0.7285095060955655,
+      "wilson_high": 0.8273721667080347
+    }
+  },
+  "by_season": {
+    "2024": {
+      "off": {
+        "games": 45,
+        "wins": 24,
+        "losses": 21,
+        "win_rate": 0.5333333333333333,
+        "wilson_low": 0.3907720886241046,
+        "wilson_high": 0.6706509605798527
+      },
+      "def": {
+        "games": 45,
+        "wins": 23,
+        "losses": 22,
+        "win_rate": 0.5111111111111111,
+        "wilson_low": 0.3700422432648975,
+        "wilson_high": 0.6504321064697549
+      },
+      "both": {
+        "games": 24,
+        "wins": 13,
+        "losses": 11,
+        "win_rate": 0.5416666666666666,
+        "wilson_low": 0.35074553553106635,
+        "wilson_high": 0.7210894164831857
+      },
+      "home": {
+        "games": 45,
+        "wins": 32,
+        "losses": 13,
+        "win_rate": 0.7111111111111111,
+        "wilson_low": 0.5663118252773978,
+        "wilson_high": 0.8227008196809984
+      },
+      "to": {
+        "games": 42,
+        "wins": 29,
+        "losses": 13,
+        "win_rate": 0.6904761904761905,
+        "wilson_low": 0.5397372223365942,
+        "wilson_high": 0.8092907348027727
+      },
+      "def_to": {
+        "games": 19,
+        "wins": 13,
+        "losses": 6,
+        "win_rate": 0.6842105263157895,
+        "wilson_low": 0.4601001017506463,
+        "wilson_high": 0.846358289955714
+      },
+      "both_to": {
+        "games": 14,
+        "wins": 9,
+        "losses": 5,
+        "win_rate": 0.6428571428571429,
+        "wilson_low": 0.3876400468214042,
+        "wilson_high": 0.8365550926279727
+      },
+      "home_def": {
+        "games": 17,
+        "wins": 13,
+        "losses": 4,
+        "win_rate": 0.7647058823529411,
+        "wilson_low": 0.5273775411082839,
+        "wilson_high": 0.9044511092832406
+      },
+      "home_to": {
+        "games": 19,
+        "wins": 16,
+        "losses": 3,
+        "win_rate": 0.8421052631578947,
+        "wilson_low": 0.6243407235682331,
+        "wilson_high": 0.9447962896007217
+      },
+      "home_both": {
+        "games": 8,
+        "wins": 8,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.6755843804891231,
+        "wilson_high": 1.0
+      },
+      "home_def_to": {
+        "games": 6,
+        "wins": 6,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.6096569663469354,
+        "wilson_high": 0.9999999999999999
+      },
+      "home_both_to": {
+        "games": 5,
+        "wins": 5,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.5655085052479191,
+        "wilson_high": 1.0
+      }
+    },
+    "2025": {
+      "off": {
+        "games": 62,
+        "wins": 33,
+        "losses": 29,
+        "win_rate": 0.532258064516129,
+        "wilson_low": 0.40983817375848014,
+        "wilson_high": 0.6509136913237779
+      },
+      "def": {
+        "games": 62,
+        "wins": 34,
+        "losses": 28,
+        "win_rate": 0.5483870967741935,
+        "wilson_low": 0.42532294530598713,
+        "wilson_high": 0.6658048523173997
+      },
+      "both": {
+        "games": 27,
+        "wins": 16,
+        "losses": 11,
+        "win_rate": 0.5925925925925926,
+        "wilson_low": 0.4072638305536409,
+        "wilson_high": 0.7548548662714265
+      },
+      "home": {
+        "games": 67,
+        "wins": 47,
+        "losses": 20,
+        "win_rate": 0.7014925373134329,
+        "wilson_low": 0.5834456017927899,
+        "wilson_high": 0.7976863884502311
+      },
+      "to": {
+        "games": 60,
+        "wins": 42,
+        "losses": 18,
+        "win_rate": 0.7,
+        "wilson_low": 0.5749105303360957,
+        "wilson_high": 0.801019897472731
+      },
+      "def_to": {
+        "games": 36,
+        "wins": 25,
+        "losses": 11,
+        "win_rate": 0.6944444444444444,
+        "wilson_low": 0.5314342132091627,
+        "wilson_high": 0.8199572971719464
+      },
+      "both_to": {
+        "games": 19,
+        "wins": 13,
+        "losses": 6,
+        "win_rate": 0.6842105263157895,
+        "wilson_low": 0.4601001017506463,
+        "wilson_high": 0.846358289955714
+      },
+      "home_def": {
+        "games": 34,
+        "wins": 24,
+        "losses": 10,
+        "win_rate": 0.7058823529411765,
+        "wilson_low": 0.5383077411853625,
+        "wilson_high": 0.8316554739006805
+      },
+      "home_to": {
+        "games": 26,
+        "wins": 24,
+        "losses": 2,
+        "win_rate": 0.9230769230769231,
+        "wilson_low": 0.7585805251948495,
+        "wilson_high": 0.9786453608166245
+      },
+      "home_both": {
+        "games": 13,
+        "wins": 11,
+        "losses": 2,
+        "win_rate": 0.8461538461538461,
+        "wilson_low": 0.5776482949136899,
+        "wilson_high": 0.9567427368172621
+      },
+      "home_def_to": {
+        "games": 17,
+        "wins": 15,
+        "losses": 2,
+        "win_rate": 0.8823529411764706,
+        "wilson_low": 0.6566315750229009,
+        "wilson_high": 0.967120919987079
+      },
+      "home_both_to": {
+        "games": 9,
+        "wins": 8,
+        "losses": 1,
+        "win_rate": 0.8888888888888888,
+        "wilson_low": 0.5649937852319399,
+        "wilson_high": 0.9801096286728695
+      }
+    },
+    "2026": {
+      "off": {
+        "games": 23,
+        "wins": 14,
+        "losses": 9,
+        "win_rate": 0.6086956521739131,
+        "wilson_low": 0.4078517960374599,
+        "wilson_high": 0.7784262201761787
+      },
+      "def": {
+        "games": 23,
+        "wins": 12,
+        "losses": 11,
+        "win_rate": 0.5217391304347826,
+        "wilson_low": 0.3296242986421849,
+        "wilson_high": 0.7076313046005427
+      },
+      "both": {
+        "games": 9,
+        "wins": 6,
+        "losses": 3,
+        "win_rate": 0.6666666666666666,
+        "wilson_low": 0.35419734749908977,
+        "wilson_high": 0.879418401317257
+      },
+      "home": {
+        "games": 31,
+        "wins": 19,
+        "losses": 12,
+        "win_rate": 0.6129032258064516,
+        "wilson_low": 0.4382380114113197,
+        "wilson_high": 0.7626712464872843
+      },
+      "to": {
+        "games": 21,
+        "wins": 16,
+        "losses": 5,
+        "win_rate": 0.7619047619047619,
+        "wilson_low": 0.5490841802765406,
+        "wilson_high": 0.8937214361088773
+      },
+      "def_to": {
+        "games": 9,
+        "wins": 8,
+        "losses": 1,
+        "win_rate": 0.8888888888888888,
+        "wilson_low": 0.5649937852319399,
+        "wilson_high": 0.9801096286728695
+      },
+      "both_to": {
+        "games": 6,
+        "wins": 5,
+        "losses": 1,
+        "win_rate": 0.8333333333333334,
+        "wilson_low": 0.43649056343635395,
+        "wilson_high": 0.9699474141282697
+      },
+      "home_def": {
+        "games": 14,
+        "wins": 8,
+        "losses": 6,
+        "win_rate": 0.5714285714285714,
+        "wilson_low": 0.32590266902869364,
+        "wilson_high": 0.7861949006959947
+      },
+      "home_to": {
+        "games": 11,
+        "wins": 9,
+        "losses": 2,
+        "win_rate": 0.8181818181818182,
+        "wilson_low": 0.5230138624217553,
+        "wilson_high": 0.9486333993289995
+      },
+      "home_both": {
+        "games": 6,
+        "wins": 5,
+        "losses": 1,
+        "win_rate": 0.8333333333333334,
+        "wilson_low": 0.43649056343635395,
+        "wilson_high": 0.9699474141282697
+      },
+      "home_def_to": {
+        "games": 6,
+        "wins": 5,
+        "losses": 1,
+        "win_rate": 0.8333333333333334,
+        "wilson_low": 0.43649056343635395,
+        "wilson_high": 0.9699474141282697
+      },
+      "home_both_to": {
+        "games": 5,
+        "wins": 4,
+        "losses": 1,
+        "win_rate": 0.8,
+        "wilson_low": 0.3755282641185388,
+        "wilson_high": 0.9637768390302125
+      }
+    }
+  },
+  "by_weather_type": {
+    "Wet/snow + wind": {
+      "off": {
+        "games": 11,
+        "wins": 6,
+        "losses": 5,
+        "win_rate": 0.5454545454545454,
+        "wilson_low": 0.28008775568998817,
+        "wilson_high": 0.7872904245601196
+      },
+      "def": {
+        "games": 11,
+        "wins": 7,
+        "losses": 4,
+        "win_rate": 0.6363636363636364,
+        "wilson_low": 0.35379677689163724,
+        "wilson_high": 0.8483377638586862
+      },
+      "both": {
+        "games": 4,
+        "wins": 3,
+        "losses": 1,
+        "win_rate": 0.75,
+        "wilson_low": 0.3006360524426366,
+        "wilson_high": 0.9544139373553637
+      },
+      "home": {
+        "games": 11,
+        "wins": 4,
+        "losses": 7,
+        "win_rate": 0.36363636363636365,
+        "wilson_low": 0.15166223614131383,
+        "wilson_high": 0.6462032231083628
+      },
+      "to": {
+        "games": 11,
+        "wins": 9,
+        "losses": 2,
+        "win_rate": 0.8181818181818182,
+        "wilson_low": 0.5230138624217553,
+        "wilson_high": 0.9486333993289995
+      },
+      "def_to": {
+        "games": 7,
+        "wins": 6,
+        "losses": 1,
+        "win_rate": 0.8571428571428571,
+        "wilson_low": 0.48686549668097007,
+        "wilson_high": 0.9743210440510253
+      },
+      "both_to": {
+        "games": 4,
+        "wins": 3,
+        "losses": 1,
+        "win_rate": 0.75,
+        "wilson_low": 0.3006360524426366,
+        "wilson_high": 0.9544139373553637
+      },
+      "home_def": {
+        "games": 6,
+        "wins": 3,
+        "losses": 3,
+        "win_rate": 0.5,
+        "wilson_low": 0.18761280689940868,
+        "wilson_high": 0.8123871931005913
+      },
+      "home_to": {
+        "games": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.34237195288961925,
+        "wilson_high": 1.0
+      },
+      "home_both": {
+        "games": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.34237195288961925,
+        "wilson_high": 1.0
+      },
+      "home_def_to": {
+        "games": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.34237195288961925,
+        "wilson_high": 1.0
+      },
+      "home_both_to": {
+        "games": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.34237195288961925,
+        "wilson_high": 1.0
+      }
+    },
+    "Wet/snow only": {
+      "off": {
+        "games": 71,
+        "wins": 42,
+        "losses": 29,
+        "win_rate": 0.5915492957746479,
+        "wilson_low": 0.4753857081544497,
+        "wilson_high": 0.6983144799762155
+      },
+      "def": {
+        "games": 71,
+        "wins": 37,
+        "losses": 34,
+        "win_rate": 0.5211267605633803,
+        "wilson_low": 0.40685796250044975,
+        "wilson_high": 0.6332266962989344
+      },
+      "both": {
+        "games": 32,
+        "wins": 20,
+        "losses": 12,
+        "win_rate": 0.625,
+        "wilson_low": 0.45254100589525126,
+        "wilson_high": 0.7706633153404079
+      },
+      "home": {
+        "games": 84,
+        "wins": 62,
+        "losses": 22,
+        "win_rate": 0.7380952380952381,
+        "wilson_low": 0.6351486149043319,
+        "wilson_high": 0.8202164968422665
+      },
+      "to": {
+        "games": 67,
+        "wins": 51,
+        "losses": 16,
+        "win_rate": 0.7611940298507462,
+        "wilson_low": 0.6467400924582429,
+        "wilson_high": 0.8473198948938214
+      },
+      "def_to": {
+        "games": 37,
+        "wins": 28,
+        "losses": 9,
+        "win_rate": 0.7567567567567568,
+        "wilson_low": 0.5988239750929105,
+        "wilson_high": 0.8663879656733671
+      },
+      "both_to": {
+        "games": 21,
+        "wins": 17,
+        "losses": 4,
+        "win_rate": 0.8095238095238095,
+        "wilson_low": 0.599990134607267,
+        "wilson_high": 0.9233255938482269
+      },
+      "home_def": {
+        "games": 35,
+        "wins": 25,
+        "losses": 10,
+        "win_rate": 0.7142857142857143,
+        "wilson_low": 0.5494475193017891,
+        "wilson_high": 0.8367363660170444
+      },
+      "home_to": {
+        "games": 33,
+        "wins": 31,
+        "losses": 2,
+        "win_rate": 0.9393939393939394,
+        "wilson_low": 0.8039341828220181,
+        "wilson_high": 0.9832194695709291
+      },
+      "home_both": {
+        "games": 13,
+        "wins": 13,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.7718981569447083,
+        "wilson_high": 1.0
+      },
+      "home_def_to": {
+        "games": 18,
+        "wins": 17,
+        "losses": 1,
+        "win_rate": 0.9444444444444444,
+        "wilson_low": 0.7424220019799247,
+        "wilson_high": 0.9901250641690756
+      },
+      "home_both_to": {
+        "games": 11,
+        "wins": 11,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.7411599827511859,
+        "wilson_high": 1.0
+      }
+    },
+    "Wind only": {
+      "off": {
+        "games": 48,
+        "wins": 23,
+        "losses": 25,
+        "win_rate": 0.4791666666666667,
+        "wilson_low": 0.34471090015787464,
+        "wilson_high": 0.6167100436401562
+      },
+      "def": {
+        "games": 48,
+        "wins": 25,
+        "losses": 23,
+        "win_rate": 0.5208333333333334,
+        "wilson_low": 0.3832899563598438,
+        "wilson_high": 0.6552890998421255
+      },
+      "both": {
+        "games": 24,
+        "wins": 12,
+        "losses": 12,
+        "win_rate": 0.5,
+        "wilson_low": 0.31427131627763083,
+        "wilson_high": 0.6857286837223692
+      },
+      "home": {
+        "games": 48,
+        "wins": 32,
+        "losses": 16,
+        "win_rate": 0.6666666666666666,
+        "wilson_low": 0.5253984633247204,
+        "wilson_high": 0.783233986291032
+      },
+      "to": {
+        "games": 45,
+        "wins": 27,
+        "losses": 18,
+        "win_rate": 0.6,
+        "wilson_low": 0.4545159420914473,
+        "wilson_high": 0.7297532055204246
+      },
+      "def_to": {
+        "games": 20,
+        "wins": 12,
+        "losses": 8,
+        "win_rate": 0.6,
+        "wilson_low": 0.3865779423152061,
+        "wilson_high": 0.7811960325858074
+      },
+      "both_to": {
+        "games": 14,
+        "wins": 7,
+        "losses": 7,
+        "win_rate": 0.5,
+        "wilson_low": 0.2679886791947528,
+        "wilson_high": 0.7320113208052472
+      },
+      "home_def": {
+        "games": 24,
+        "wins": 17,
+        "losses": 7,
+        "win_rate": 0.7083333333333334,
+        "wilson_low": 0.508319363412903,
+        "wilson_high": 0.8508553966583573
+      },
+      "home_to": {
+        "games": 21,
+        "wins": 16,
+        "losses": 5,
+        "win_rate": 0.7619047619047619,
+        "wilson_low": 0.5490841802765406,
+        "wilson_high": 0.8937214361088773
+      },
+      "home_both": {
+        "games": 12,
+        "wins": 9,
+        "losses": 3,
+        "win_rate": 0.75,
+        "wilson_low": 0.46768966087934005,
+        "wilson_high": 0.9110599603710386
+      },
+      "home_def_to": {
+        "games": 9,
+        "wins": 7,
+        "losses": 2,
+        "win_rate": 0.7777777777777778,
+        "wilson_low": 0.4525833436728054,
+        "wilson_high": 0.9367762376877727
+      },
+      "home_both_to": {
+        "games": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 0.6666666666666666,
+        "wilson_low": 0.29998832134152864,
+        "wilson_high": 0.9032306674407831
+      }
+    }
+  },
+  "by_group": {
+    "G6/G6": {
+      "off": {
+        "games": 51,
+        "wins": 29,
+        "losses": 22,
+        "win_rate": 0.5686274509803921,
+        "wilson_low": 0.4326506123505807,
+        "wilson_high": 0.694989719076657
+      },
+      "def": {
+        "games": 51,
+        "wins": 22,
+        "losses": 29,
+        "win_rate": 0.43137254901960786,
+        "wilson_low": 0.3050102809233431,
+        "wilson_high": 0.5673493876494193
+      },
+      "both": {
+        "games": 24,
+        "wins": 12,
+        "losses": 12,
+        "win_rate": 0.5,
+        "wilson_low": 0.31427131627763083,
+        "wilson_high": 0.6857286837223692
+      },
+      "home": {
+        "games": 53,
+        "wins": 33,
+        "losses": 20,
+        "win_rate": 0.6226415094339622,
+        "wilson_low": 0.4880665023609231,
+        "wilson_high": 0.7406392342826617
+      },
+      "to": {
+        "games": 48,
+        "wins": 34,
+        "losses": 14,
+        "win_rate": 0.7083333333333334,
+        "wilson_low": 0.5682047226383247,
+        "wilson_high": 0.8175858393813662
+      },
+      "def_to": {
+        "games": 29,
+        "wins": 18,
+        "losses": 11,
+        "win_rate": 0.6206896551724138,
+        "wilson_low": 0.44002226209284956,
+        "wilson_high": 0.7731220426913266
+      },
+      "both_to": {
+        "games": 20,
+        "wins": 11,
+        "losses": 9,
+        "win_rate": 0.55,
+        "wilson_low": 0.3420820083075997,
+        "wilson_high": 0.7418049791429071
+      },
+      "home_def": {
+        "games": 24,
+        "wins": 13,
+        "losses": 11,
+        "win_rate": 0.5416666666666666,
+        "wilson_low": 0.35074553553106635,
+        "wilson_high": 0.7210894164831857
+      },
+      "home_to": {
+        "games": 21,
+        "wins": 18,
+        "losses": 3,
+        "win_rate": 0.8571428571428571,
+        "wilson_low": 0.6536350585077049,
+        "wilson_high": 0.950190782017865
+      },
+      "home_both": {
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "win_rate": 0.75,
+        "wilson_low": 0.40926987910258916,
+        "wilson_high": 0.9285223111419724
+      },
+      "home_def_to": {
+        "games": 12,
+        "wins": 10,
+        "losses": 2,
+        "win_rate": 0.8333333333333334,
+        "wilson_low": 0.5519636426153274,
+        "wilson_high": 0.9530358523851776
+      },
+      "home_both_to": {
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "win_rate": 0.75,
+        "wilson_low": 0.40926987910258916,
+        "wilson_high": 0.9285223111419724
+      }
+    },
+    "Mixed/Other": {
+      "off": {
+        "games": 15,
+        "wins": 10,
+        "losses": 5,
+        "win_rate": 0.6666666666666666,
+        "wilson_low": 0.41713125151212976,
+        "wilson_high": 0.8482389930530876
+      },
+      "def": {
+        "games": 15,
+        "wins": 9,
+        "losses": 6,
+        "win_rate": 0.6,
+        "wilson_low": 0.357464427565077,
+        "wilson_high": 0.8017577191740534
+      },
+      "both": {
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "win_rate": 0.75,
+        "wilson_low": 0.40926987910258916,
+        "wilson_high": 0.9285223111419724
+      },
+      "home": {
+        "games": 22,
+        "wins": 20,
+        "losses": 2,
+        "win_rate": 0.9090909090909091,
+        "wilson_low": 0.7218461934161421,
+        "wilson_high": 0.9747051037171622
+      },
+      "to": {
+        "games": 15,
+        "wins": 12,
+        "losses": 3,
+        "win_rate": 0.8,
+        "wilson_low": 0.5481406466534955,
+        "wilson_high": 0.9295257935638959
+      },
+      "def_to": {
+        "games": 6,
+        "wins": 6,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.6096569663469354,
+        "wilson_high": 0.9999999999999999
+      },
+      "both_to": {
+        "games": 5,
+        "wins": 5,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.5655085052479191,
+        "wilson_high": 1.0
+      },
+      "home_def": {
+        "games": 8,
+        "wins": 8,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.6755843804891231,
+        "wilson_high": 1.0
+      },
+      "home_to": {
+        "games": 9,
+        "wins": 9,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.7008472464490407,
+        "wilson_high": 1.0
+      },
+      "home_both": {
+        "games": 5,
+        "wins": 5,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.5655085052479191,
+        "wilson_high": 1.0
+      },
+      "home_def_to": {
+        "games": 5,
+        "wins": 5,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.5655085052479191,
+        "wilson_high": 1.0
+      },
+      "home_both_to": {
+        "games": 4,
+        "wins": 4,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.5100999795960008,
+        "wilson_high": 1.0
+      }
+    },
+    "P4/P4": {
+      "off": {
+        "games": 64,
+        "wins": 32,
+        "losses": 32,
+        "win_rate": 0.5,
+        "wilson_low": 0.38101888493214947,
+        "wilson_high": 0.6189811150678505
+      },
+      "def": {
+        "games": 64,
+        "wins": 38,
+        "losses": 26,
+        "win_rate": 0.59375,
+        "wilson_low": 0.471449865045497,
+        "wilson_high": 0.7054327556474111
+      },
+      "both": {
+        "games": 28,
+        "wins": 17,
+        "losses": 11,
+        "win_rate": 0.6071428571428571,
+        "wilson_low": 0.42408726034906297,
+        "wilson_high": 0.7643454817241996
+      },
+      "home": {
+        "games": 68,
+        "wins": 45,
+        "losses": 23,
+        "win_rate": 0.6617647058823529,
+        "wilson_low": 0.5433701723652863,
+        "wilson_high": 0.7628590875621094
+      },
+      "to": {
+        "games": 60,
+        "wins": 41,
+        "losses": 19,
+        "win_rate": 0.6833333333333333,
+        "wilson_low": 0.5576599505698345,
+        "wilson_high": 0.7869429415882567
+      },
+      "def_to": {
+        "games": 29,
+        "wins": 22,
+        "losses": 7,
+        "win_rate": 0.7586206896551724,
+        "wilson_low": 0.578920477816713,
+        "wilson_high": 0.8778173181493787
+      },
+      "both_to": {
+        "games": 14,
+        "wins": 11,
+        "losses": 3,
+        "win_rate": 0.7857142857142857,
+        "wilson_low": 0.5241027622679172,
+        "wilson_high": 0.9242875166308363
+      },
+      "home_def": {
+        "games": 33,
+        "wins": 24,
+        "losses": 9,
+        "win_rate": 0.7272727272727273,
+        "wilson_low": 0.5578211674561319,
+        "wilson_high": 0.849327273436772
+      },
+      "home_to": {
+        "games": 26,
+        "wins": 22,
+        "losses": 4,
+        "win_rate": 0.8461538461538461,
+        "wilson_low": 0.6646841558168644,
+        "wilson_high": 0.9385006600107053
+      },
+      "home_both": {
+        "games": 14,
+        "wins": 13,
+        "losses": 1,
+        "win_rate": 0.9285714285714286,
+        "wilson_low": 0.685307304460422,
+        "wilson_high": 0.9872781138877084
+      },
+      "home_def_to": {
+        "games": 12,
+        "wins": 11,
+        "losses": 1,
+        "win_rate": 0.9166666666666666,
+        "wilson_low": 0.6461140782014047,
+        "wilson_high": 0.9851352905492264
+      },
+      "home_both_to": {
+        "games": 7,
+        "wins": 7,
+        "losses": 0,
+        "win_rate": 1.0,
+        "wilson_low": 0.6456611570247934,
+        "wilson_high": 1.0
+      }
+    }
+  }
+}
