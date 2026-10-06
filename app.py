@@ -40,7 +40,7 @@ st.set_page_config(page_title="College Football Predictor", page_icon="assets/cf
 TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
-    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines, and live or final scores. Confidence is an estimate, not a guarantee."),
+    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, and live or final scores. Confidence is an estimate, not a guarantee."),
     ("risky", "Risky picks", "Review matchup warnings", "This tab lists every predicted winner with two or fewer of the five matchup advantages for the selected week. The exclamation warning also appears on its game card. Missing data is shown separately, and this flag does not change the prediction."),
     ("compare", "Compare picks", "Compare the slate", "This compact table lets you compare picks without scrolling through individual cards. It follows your matchup filters."),
     ("results", "Model results", "Check model performance", "Compare wins, losses, and accuracy by confidence level for the selected week or season to date. Only final, decisive games count toward accuracy; matchup filters do not affect this view."),
@@ -302,19 +302,30 @@ def format_moneyline(value):
         return "Unavailable"
 
 
-def parse_draftkings(payload):
-    """Return every sportsbook's current moneyline for each event.
+def format_spread(value):
+    if value is None or isinstance(value, bool):
+        return "Unavailable"
+    raw = str(value).strip().replace("−", "-").replace(" ", "")
+    if raw.upper() in {"PK", "PICK", "PICKEM", "PICK'EM"}:
+        return "+0"
+    try:
+        number = float(raw.replace("+", ""))
+        if not math.isfinite(number) or abs(number) > 100:
+            return "Unavailable"
+        return f"{int(number):+d}" if number.is_integer() else f"{number:+.1f}"
+    except (ValueError, TypeError):
+        return "Unavailable"
 
-    DraftKings is preferred in the UI. Other providers are retained as a
-    clearly labeled fallback when DraftKings is unavailable or suspended.
-    """
+
+def parse_draftkings(payload):
+    """Return each sportsbook's current moneyline and point spread for each event."""
     if not isinstance(payload, dict) or not isinstance(payload.get("events"), list):
         raise ValueError("Invalid odds response")
     quotes = {}
     for event in payload["events"]:
         event_quotes = {}
         for competition in event.get("competitions", []):
-            sides = {c.get("homeAway"): str(c.get("team", {}).get("id", "")) for c in competition.get("competitors", [])}
+            sides = {x.get("homeAway"): str(x.get("team", {}).get("id", "")) for x in competition.get("competitors", [])}
             completed = bool(competition.get("status", {}).get("type", {}).get("completed", False))
             for odds in competition.get("odds", []):
                 provider_name = str(odds.get("provider", {}).get("name", "")).strip()
@@ -322,25 +333,49 @@ def parse_draftkings(payload):
                     continue
                 prices = {}
                 for side in ("home", "away"):
-                    market = odds.get("moneyline", {}).get(side, {})
-                    value = (market.get("close") or {}).get("odds") if "close" in market else odds.get(side + "TeamOdds", {}).get("moneyLine")
-                    prices[side] = format_moneyline(value)
-                    opening = (market.get("open") or {}).get("odds")
-                    if opening is None:
+                    ml_market = odds.get("moneyline", {}).get(side, {})
+                    ml_close = (ml_market.get("close") or {}).get("odds")
+                    if ml_close is None:
+                        ml_close = odds.get(side + "TeamOdds", {}).get("moneyLine")
+                    prices[side] = format_moneyline(ml_close)
+                    ml_open = (ml_market.get("open") or {}).get("odds")
+                    if ml_open is None:
                         legacy = (odds.get(side + "TeamOdds", {}).get("open") or {}).get("moneyLine", {})
-                        opening = legacy.get("american", legacy.get("alternateDisplayValue")) if isinstance(legacy, dict) else legacy
-                    prices[side + "_open"] = format_moneyline(opening)
-                if prices["home"] == "Unavailable" and prices["away"] == "Unavailable":
+                        ml_open = legacy.get("american", legacy.get("alternateDisplayValue")) if isinstance(legacy, dict) else legacy
+                    prices[side + "_open"] = format_moneyline(ml_open)
+
+                    spread_market = odds.get("pointSpread", {}).get(side, {})
+                    spread_close = (spread_market.get("close") or {}).get("line")
+                    spread_price = (spread_market.get("close") or {}).get("odds")
+                    spread_open = (spread_market.get("open") or {}).get("line")
+                    spread_open_price = (spread_market.get("open") or {}).get("odds")
+                    if spread_close is None and odds.get("spread") is not None:
+                        try:
+                            home_spread = float(odds.get("spread"))
+                            spread_close = home_spread if side == "home" else -home_spread
+                        except (TypeError, ValueError):
+                            pass
+                    if spread_price is None:
+                        spread_price = odds.get(side + "TeamOdds", {}).get("spreadOdds")
+                    prices[side + "_spread"] = format_spread(spread_close)
+                    prices[side + "_spread_odds"] = format_moneyline(spread_price)
+                    prices[side + "_spread_open"] = format_spread(spread_open)
+                    prices[side + "_spread_open_odds"] = format_moneyline(spread_open_price)
+
+                if all(prices[k] == "Unavailable" for k in ("home", "away", "home_spread", "away_spread")):
                     continue
                 event_quotes[provider_name] = {
                     "home_id": sides.get("home", ""), "away_id": sides.get("away", ""),
                     "home": prices["home"], "away": prices["away"], "completed": completed,
                     "home_open": prices["home_open"], "away_open": prices["away_open"],
+                    "home_spread": prices["home_spread"], "away_spread": prices["away_spread"],
+                    "home_spread_odds": prices["home_spread_odds"], "away_spread_odds": prices["away_spread_odds"],
+                    "home_spread_open": prices["home_spread_open"], "away_spread_open": prices["away_spread_open"],
+                    "home_spread_open_odds": prices["home_spread_open_odds"], "away_spread_open_odds": prices["away_spread_open_odds"],
                 }
         if event_quotes:
             quotes[str(event.get("id"))] = event_quotes
     return quotes
-
 
 def parse_archived_summary(payload, event_id):
     header = payload.get("header", {})
@@ -494,7 +529,7 @@ def download_market_odds(date_range, event_ids=()):
     for event_id in expected:
         dk = next((q for name, q in quotes.get(event_id, {}).items()
                    if name.lower().replace(" ", "") == "draftkings"), {})
-        if any(dk.get(k, "Unavailable") == "Unavailable" for k in ("home", "away", "home_open", "away_open")):
+        if any(dk.get(k, "Unavailable") == "Unavailable" for k in ("home", "away", "home_open", "away_open", "home_spread", "away_spread")):
             targets.append(event_id)
     lookup_errors = []
     def get_current(event_id):
@@ -512,7 +547,10 @@ def download_market_odds(date_range, event_ids=()):
                 if previous is None:
                     providers[name] = quote
                 elif (previous.get("home_id"), previous.get("away_id")) == (quote.get("home_id"), quote.get("away_id")):
-                    for side in ("home", "away", "home_open", "away_open"):
+                    for side in ("home", "away", "home_open", "away_open",
+                                 "home_spread", "away_spread", "home_spread_odds", "away_spread_odds",
+                                 "home_spread_open", "away_spread_open",
+                                 "home_spread_open_odds", "away_spread_open_odds"):
                         if previous.get(side, "Unavailable") == "Unavailable":
                             previous[side] = quote.get(side, "Unavailable")
     return {"quotes": quotes, "lookup_errors": lookup_errors,
@@ -521,14 +559,19 @@ def download_market_odds(date_range, event_ids=()):
 
 def attach_odds(predictions, games, quotes):
     result = predictions.copy()
-    result["DK Away ML"] = "Unavailable"
-    result["DK Home ML"] = "Unavailable"
-    result["Away ML"] = "Unavailable"
-    result["Home ML"] = "Unavailable"
-    result["ML Source"] = "Unavailable"
-    result["Odds Type"] = "Not offered / unavailable"
-    result["Away Opening ML"] = "Unavailable"
-    result["Home Opening ML"] = "Unavailable"
+    defaults = {
+        "DK Away ML": "Unavailable", "DK Home ML": "Unavailable",
+        "Away ML": "Unavailable", "Home ML": "Unavailable", "ML Source": "Unavailable",
+        "DK Away Spread": "Unavailable", "DK Home Spread": "Unavailable",
+        "Away Spread": "Unavailable", "Home Spread": "Unavailable", "Spread Source": "Unavailable",
+        "Away Spread Odds": "Unavailable", "Home Spread Odds": "Unavailable",
+        "Away Opening Spread": "Unavailable", "Home Opening Spread": "Unavailable",
+        "Odds Type": "Not offered / unavailable",
+        "Away Opening ML": "Unavailable", "Home Opening ML": "Unavailable",
+    }
+    for col, default in defaults.items():
+        result[col] = default
+
     for index, row in result.iterrows():
         match = games[(games.home_team == row["Home Team"]) & (games.away_team == row["Away Team"])]
         if len(match) != 1 or "game_id" not in match:
@@ -539,8 +582,6 @@ def attach_odds(predictions, games, quotes):
         event_quotes = quotes.get(str(int(game.game_id)), {})
         if not isinstance(event_quotes, dict):
             continue
-        # Streamlit can briefly retain a cached response created by the older
-        # single-provider parser during a deploy. Normalize that shape here.
         if "home_id" in event_quotes and "away_id" in event_quotes:
             event_quotes = {"DraftKings": event_quotes}
         valid = {}
@@ -556,35 +597,52 @@ def attach_odds(predictions, games, quotes):
                 valid[provider] = quote
         if not valid:
             continue
+
         dk_name = next((name for name in valid if name.lower().replace(" ", "") == "draftkings"), None)
         dk = valid.get(dk_name) if dk_name else None
         if dk:
-            result.loc[index, "DK Away ML"] = dk["away"]
-            result.loc[index, "DK Home ML"] = dk["home"]
-        # Prefer a provider that prices the predicted side. Never combine
-        # opposite sides from different books into one sportsbook quote.
+            result.loc[index, "DK Away ML"] = dk.get("away", "Unavailable")
+            result.loc[index, "DK Home ML"] = dk.get("home", "Unavailable")
+            result.loc[index, "DK Away Spread"] = dk.get("away_spread", "Unavailable")
+            result.loc[index, "DK Home Spread"] = dk.get("home_spread", "Unavailable")
+
         predicted_side = "home" if row["Predicted Side"] == "Home" else "away"
+        ml_choices = [(name, quote) for name, quote in valid.items()
+                      if quote.get(predicted_side, "Unavailable") != "Unavailable"]
         if dk and dk.get(predicted_side, "Unavailable") != "Unavailable":
-            selected_name, selected = dk_name, dk
+            ml_name, ml_quote = dk_name, dk
+        elif ml_choices:
+            ml_name, ml_quote = ml_choices[0]
         else:
-            choices = [(name, quote) for name, quote in valid.items()
-                       if quote.get(predicted_side, "Unavailable") != "Unavailable"]
-            if not choices:
-                choices = [(name, quote) for name, quote in valid.items()
-                           if quote.get("home", "Unavailable") != "Unavailable"
-                           or quote.get("away", "Unavailable") != "Unavailable"]
-            if not choices:
-                continue
-            selected_name, selected = choices[0]
-        result.loc[index, "Away ML"] = selected["away"]
-        result.loc[index, "Home ML"] = selected["home"]
-        result.loc[index, "ML Source"] = selected_name
-        result.loc[index, "Away Opening ML"] = selected.get("away_open", "Unavailable")
-        result.loc[index, "Home Opening ML"] = selected.get("home_open", "Unavailable")
-        result.loc[index, "Odds Type"] = "Archived line" if selected["completed"] or str(row["Status"]).startswith("Final") else "Latest available line"
+            ml_name, ml_quote = None, None
+        if ml_quote is not None:
+            result.loc[index, "Away ML"] = ml_quote.get("away", "Unavailable")
+            result.loc[index, "Home ML"] = ml_quote.get("home", "Unavailable")
+            result.loc[index, "ML Source"] = ml_name
+            result.loc[index, "Away Opening ML"] = ml_quote.get("away_open", "Unavailable")
+            result.loc[index, "Home Opening ML"] = ml_quote.get("home_open", "Unavailable")
+
+        spread_choices = [(name, quote) for name, quote in valid.items()
+                          if quote.get("home_spread", "Unavailable") != "Unavailable"
+                          and quote.get("away_spread", "Unavailable") != "Unavailable"]
+        if dk and dk.get("home_spread", "Unavailable") != "Unavailable" and dk.get("away_spread", "Unavailable") != "Unavailable":
+            spread_name, spread_quote = dk_name, dk
+        elif spread_choices:
+            spread_name, spread_quote = spread_choices[0]
+        else:
+            spread_name, spread_quote = None, None
+        if spread_quote is not None:
+            result.loc[index, "Away Spread"] = spread_quote.get("away_spread", "Unavailable")
+            result.loc[index, "Home Spread"] = spread_quote.get("home_spread", "Unavailable")
+            result.loc[index, "Spread Source"] = spread_name
+            result.loc[index, "Away Spread Odds"] = spread_quote.get("away_spread_odds", "Unavailable")
+            result.loc[index, "Home Spread Odds"] = spread_quote.get("home_spread_odds", "Unavailable")
+            result.loc[index, "Away Opening Spread"] = spread_quote.get("away_spread_open", "Unavailable")
+            result.loc[index, "Home Opening Spread"] = spread_quote.get("home_spread_open", "Unavailable")
+
+        completed = bool((ml_quote or spread_quote or {}).get("completed", False))
+        result.loc[index, "Odds Type"] = "Archived line" if completed or str(row["Status"]).startswith("Final") else "Latest available line"
     return result
-
-
 
 def moneyline_probability(line):
     formatted = format_moneyline(line)
@@ -1059,20 +1117,29 @@ def simulate_stakes(predictions, stakes):
         confidence = float(pick["Confidence"])
         tier = "High" if confidence >= .8 else "Moderate" if confidence >= .7 else "Lean" if confidence >= .6 else "Toss-up"
         stake = Decimal(str(stakes[tier])).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
-        line = pick["Home ML"] if pick["Predicted Side"] == "Home" else pick["Away ML"]
+        if "Bet Line" in pick and pd.notna(pick["Bet Line"]):
+            line = pick["Bet Line"]
+        else:
+            line = pick["Home ML"] if pick["Predicted Side"] == "Home" else pick["Away ML"]
         valid_line = format_moneyline(line)
         reason = "Settled"
         returned = profit = None
         if stake <= 0:
             reason = "No bet · zero stake"
         elif valid_line == "Unavailable":
-            reason = "Excluded · missing moneyline"
+            reason = "Excluded · missing bet price"
         elif pick["Status"] != "Final":
             reason = "Pending final result"
         else:
             odds = Decimal(valid_line)
-            if pick["Actual Winner"] == "Tie":
+            grade = str(pick.get("Pick Result", ""))
+            if grade in ("Push", "Not graded") or pick.get("Actual Winner") == "Tie":
                 returned, profit = stake, Decimal("0")
+            elif grade == "Correct":
+                profit = (stake * (odds / 100 if odds > 0 else 100 / abs(odds))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                returned = stake + profit
+            elif grade == "Incorrect":
+                returned, profit = Decimal("0"), -stake
             elif pick["Predicted Winner"] == pick["Actual Winner"]:
                 profit = (stake * (odds / 100 if odds > 0 else 100 / abs(odds))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
                 returned = stake + profit
@@ -1084,8 +1151,9 @@ def simulate_stakes(predictions, stakes):
             "Profit if pick wins": potential["Profit if win"] if potential else None,
             "Loss if pick loses": potential["Loss if lose"] if potential else None,
             "Week": int(pick["Week"]), "Away Team": pick["Away Team"], "Home Team": pick["Home Team"],
-            "Pick": pick["Predicted Winner"], "Tier": tier, "Confidence": confidence,
-            "Moneyline": valid_line, "Sportsbook": pick["ML Source"], "Actual Winner": pick["Actual Winner"],
+            "Pick": pick["Predicted Winner"], "Bet": pick.get("Bet Display", pick["Predicted Winner"]),
+            "Market": pick.get("Bet Market", "Moneyline"), "Tier": tier, "Confidence": confidence,
+            "Odds": valid_line, "Moneyline": valid_line, "Sportsbook": pick["ML Source"], "Actual Winner": pick["Actual Winner"],
             "Planned Stake": float(stake), "Stake": float(stake) if reason == "Settled" else 0.0,
             "Returned": float(returned) if returned is not None else None,
             "Net Profit": float(profit) if profit is not None else None, "Scenario Status": reason,
@@ -1489,7 +1557,7 @@ if st.session_state.get("moneyline_history_season") != season:
 pred["Line Movement HTML"] = [line_movement_html(row, line_history, odds_snapshot["retrieved"]) for _, row in pred.iterrows()]
 if odds_snapshot.get("lookup_errors"):
     st.warning(f"Individual odds lookups failed for {len(odds_snapshot['lookup_errors'])} games. Missing lines may reflect a retrieval error; try Refresh all feeds now.")
-feed_details.caption(f"Moneyline coverage: {int(pred['Bet Line'].ne('Unavailable').sum())} of {len(pred)} model picks have a price. Unavailable means no matching price was retrieved from the connected feeds, not that every sportsbook lacks one.")
+feed_details.caption(f"Market coverage: {int(pred['Bet Line'].ne('Unavailable').sum())} of {len(pred)} model picks have a moneyline; {int(pred['Home Spread'].ne('Unavailable').sum())} of {len(pred)} matchups have a spread. Unavailable means no matching price was retrieved from the connected feeds.")
 
 awaiting_count = int(pred["Status"].ne("Final").sum())
 value_count = int(pred["Value Selected"].sum())
@@ -1516,7 +1584,7 @@ with feed_details:
         download_event_moneylines.clear()
         st.rerun()
     st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
-    st.caption("DraftKings moneylines via ESPN, with another sportsbook shown when DraftKings is unavailable · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
+    st.caption("DraftKings moneylines and spreads via ESPN, with another sportsbook shown when DraftKings is unavailable · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
     if odds_snapshot["retrieved"]:
         st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
     st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
@@ -1528,20 +1596,20 @@ with value_tab:
     if len(value_picks) < 12:
         st.info(f"{12-len(value_picks)} below target. No gates or odds limits were relaxed.")
     with st.expander("How Value Picks are selected", expanded=False):
-        st.write("Tier 1: +100 to +170 underdogs sweeping offensive YPC, defensive YPC allowed and turnover margin/game; home or Road Sweep, excluding neutral sites. Take all, capped at 18. If fewer than 12, Tier 2 fills toward 12: −280 to −600 favorites with 70%+ core model support, the defensive rushing gate and at least equal turnover margin. Tier 3 fills remaining places to 12: −205 to −275 favorites clearing both rushing gates and a better turnover margin. Kickoff time then game ID breaks ordering ties.")
-        st.caption("A selection rule is not a calibrated win probability or proof of positive expected return. These tiers have not established an accuracy improvement. Historical cards are recalculated using archived prices; they are not saved pregame selections. Live/latest lines can change membership as feeds refresh.")
+        st.write("Tier 1: exact 6/6 ATS Dominance — the home team owns all five statistical advantages plus home field. Every 6/6 qualifier with an available spread is eligible; the spread ranks it as Prime (−7 to −13.5), Standard (short favorite), Market Disagreement (underdog), or Heavy Favorite. If fewer than 12 selections, the existing moneyline rules fill toward 12 as Tiers 2–4.")
+        st.caption("The 6/6 qualifier is statistical and does not change when the spread moves; the latest available spread changes only the ATS number and ranking band. Historical cards are recalculated from archived data and are not immutable pregame records.")
     if not value_picks.empty:
         value_show = value_picks.copy()
         value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
         value_show["Model chance for selection"] = np.where(value_show["Value Side"].eq("Home"), value_show["Home Win %"], value_show["Away Win %"])
         value_show["Model chance for selection"] = value_show["Model chance for selection"].map(lambda v: f"{v:.1%}")
-        st.dataframe(value_show[["Value Rank", "Value Tier", "Value Pick", "Value Line", "Value Result", "Matchup", "Model chance for selection", "Value Reason", "Status"]], hide_index=True, use_container_width=True)
+        st.dataframe(value_show[["Value Rank", "Value Tier", "Value Band", "Value Pick", "Value Market", "Value Line", "Value Price", "Value Source", "Value Result", "Matchup", "Model chance for selection", "Value Reason", "Status"]], hide_index=True, use_container_width=True)
         graded_value = value_picks[value_picks["Value Result"].isin(["Correct", "Incorrect"])]
         if not graded_value.empty:
             wins = int(graded_value["Value Result"].eq("Correct").sum())
             st.caption(f"Recalculated selections: {wins}–{len(graded_value)-wins} ({wins/len(graded_value):.1%}). Core-model results are reported separately.")
     else:
-        st.info("No games qualify with verified FBS histories and DraftKings prices.")
+        st.info("No games qualify with verified FBS histories and available market prices.")
 def reset_pick_filters():
     defaults = {"pick_query": "", "pick_level": "All confidence levels",
                 "pick_order": "Highest confidence", "pick_status": "All games",
@@ -1663,7 +1731,7 @@ with cards_tab:
             venue = "Neutral site" if r["Neutral Site"] else "Away at home"
             outcome_class = "badge" if r["Pick Result"] == "Correct" else "badge incorrect" if r["Pick Result"] == "Incorrect" else "badge close"
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
-            moneylines = f'<div class="odds-box"><div class="pick-label">Moneyline · {escape(str(r["ML Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["Home ML"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
+            moneylines = f'<div class="odds-box"><div class="pick-label">Moneyline · {escape(str(r["ML Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["Home ML"]))}</strong></span></div><div class="pick-label" style="margin-top:10px">Spread · {escape(str(r["Spread Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away Spread"]))}</strong></span><span>Home <strong>{escape(str(r["Home Spread"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
             game = games[(games["home_team"] == r["Home Team"]) & (games["away_team"] == r["Away Team"])]
             missing_data_note = ""
             if len(game) == 1:
@@ -1676,8 +1744,10 @@ with cards_tab:
                     missing_data_note = '<div class="risk-note">Updated pregame metrics unavailable: ' + escape(", ".join(absent)) + ' · prior-data fallback. FCS games are excluded from the scoring fallback; advanced summaries may also be delayed or missing.</div>'
             away_logo = team_logo_url(game.iloc[0]["away_id"]) if len(game) == 1 else ""
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
-            away_logo_html = f'<img class="team-logo" src="{logo_sources.get(away_logo, away_logo)}" alt="{escape(str(r['Away Team']), quote=True)} logo" width="34" height="34" />' if away_logo else ""
-            home_logo_html = f'<img class="team-logo" src="{logo_sources.get(home_logo, home_logo)}" alt="{escape(str(r['Home Team']), quote=True)} logo" width="34" height="34" />' if home_logo else ""
+            away_alt = escape(str(r["Away Team"]), quote=True)
+            home_alt = escape(str(r["Home Team"]), quote=True)
+            away_logo_html = f'<img class="team-logo" src="{logo_sources.get(away_logo, away_logo)}" alt="{away_alt} logo" width="34" height="34" />' if away_logo else ""
+            home_logo_html = f'<img class="team-logo" src="{logo_sources.get(home_logo, home_logo)}" alt="{home_alt} logo" width="34" height="34" />' if home_logo else ""
             home_badge, away_badge = "", ""
             if len(game) == 1:
                 for data_side in ("home", "away"):
@@ -1730,7 +1800,7 @@ with cards_tab:
             if is_risky:
                 risky_indices.append(card_idx)
             warning = ('<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;border-radius:10px;background:#e9a23b20"><span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9a23b;color:#171717;font-size:25px;font-weight:900">!</span><div><strong>RISKY PICK · MATCHUP WARNING</strong><br><span>' + str(scored["count"]) + '/5 advantages for ' + escape(str(r["Predicted Winner"])) + '</span></div></div>') if is_risky else ""
-            waterfall_note = ('<div class="result-box"><strong>' + escape(str(r['Value Tier'])) + '</strong><div>' + escape(str(r['Value Pick'])) + ' · DraftKings ' + escape(str(r['Value Line'])) + '</div></div>') if r.get('Value Selected', False) else ''
+            waterfall_note = ('<div class="result-box"><strong>' + escape(str(r['Value Tier'])) + '</strong><div>' + escape(str(r['Value Pick'])) + ' · ' + escape(str(r.get('Value Market', ''))) + ' ' + escape(str(r['Value Line'])) + ' · ' + escape(str(r.get('Value Source', 'Unavailable'))) + '</div></div>') if r.get('Value Selected', False) else ''
             cards[card_idx] = f"""<article class="pick-card">{waterfall_note}{warning}
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
@@ -1771,7 +1841,7 @@ with cards_tab:
             st.caption("Games with missing metrics are not rated as risky. No warning does not mean a safe bet. Picks and model confidence are unchanged.")
 with table_tab:
     tour_at("compare")
-    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "Away ML", "Home ML", "ML Source", "Odds Type", "Status", "Live Detail", "Live Score", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
+    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "DK Away Spread", "DK Home Spread", "Away ML", "Home ML", "ML Source", "Away Spread", "Home Spread", "Spread Source", "Odds Type", "Status", "Live Detail", "Live Score", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
     for col in ["Confidence", "Away Win %", "Home Win %"]:
         show[col] = show[col].map(lambda value: f"{value:.1%}")
     st.dataframe(show, hide_index=True, use_container_width=True)
@@ -1957,8 +2027,8 @@ with scenario_tab:
                         p2.metric("Total payout if all win", f"${pending['Return if pick wins'].sum():,.2f}")
                         p3.metric("Net profit if all win", f"${pending['Profit if pick wins'].sum():+,.2f}")
                         st.write(f"If all pending picks lose: ${pending['Planned Stake'].sum():,.2f} lost.")
-                        st.caption("Conditional outcomes using available moneylines, not probability-weighted forecasts. Missing lines and zero stakes are excluded. Each pick is a separate bet.")
-                        pending_view = pending[["Week", "Pick", "Moneyline", "Sportsbook", "Planned Stake", "Return if pick wins", "Profit if pick wins", "Loss if pick loses"]]
+                        st.caption("Conditional outcomes using available sportsbook prices, not probability-weighted forecasts. Missing lines and zero stakes are excluded. Each pick is a separate bet.")
+                        pending_view = pending[["Week", "Bet", "Market", "Odds", "Sportsbook", "Planned Stake", "Return if pick wins", "Profit if pick wins", "Loss if pick loses"]]
                         st.dataframe(pending_view, hide_index=True, use_container_width=True,
                                      column_config={col: st.column_config.NumberColumn(col, format="$%.2f") for col in ["Planned Stake", "Return if pick wins", "Profit if pick wins", "Loss if pick loses"]})
                         if not settled.empty:

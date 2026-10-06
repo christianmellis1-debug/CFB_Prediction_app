@@ -1,47 +1,80 @@
-# Three-stage Value Picks waterfall
+# Value Picks waterfall v2 — 6/6 ATS first
 
-Selection method: waterfall-v1. This replaces the probability-edge labels in the Streamlit app and Python API. It is a rule-based selection layer, not a retrained or newly calibrated probability model. No claim of a higher hit rate or positive returns has been validated.
+The production Value Picks layer now starts with **exact 6/6 ATS Dominance** and keeps the prior moneyline waterfall underneath it. The core V1.5 winner model is unchanged.
 
-## Exact integration points
+## Stage 1 — exact 6/6 ATS Dominance
 
-- `matchup_advantages.py`: `normalize_fbs_schedule`, `build_waterfall_profiles`, `select_waterfall`. The existing five-metric research risk flag remains separate.
-- `model_v1_5.py`: `predict_week` is the core aggregation function. Its output is annotated by `add_waterfall_value` after DraftKings quotes are attached. `waterfall_scenario_rows` adapts selected sides/prices on a copy for the existing simulator. `build_prior_profiles` excludes Sacramento State's pre-2026 efficiency profile and neutralizes its 2026 prior vector.
-- `app.py`: `predict_all_games` → `attach_results` → `attach_odds` → `add_betting_value` (diagnostic fields only) → `add_waterfall_value`. The Value Picks tab, count, game-card badge and best-opportunities scenario consume `Value Selected`. `Predicted Winner`, `Confidence`, and model grading remain separate.
-- `backend/main.py`: `/api/predictions` now uses V1.5 and the same annotation function after `attach_market_context`. API responses include `value_card`, `value_card_status`, and a feed error if box scores cannot load. Backend dependencies already include SciPy.
-- `tests/test_waterfall.py`: boundary, gates, missing-data, leakage, classification, ordering, cap and integration tests.
+A game qualifies when the **home team** owns all five pregame statistical advantages and also owns home field:
 
-## Statistics contract
+1. Better rushing matchup estimate
+2. Better completion matchup estimate
+3. Lower defensive rushing yards per carry allowed
+4. Lower defensive completion percentage allowed
+5. Better turnover margin per game
+6. Home-field advantage
 
-Input fields are `rushingYards`, `rushingAttempts`, `turnovers`, `fumblesLost`, `interceptions`, `game_id`, and `team_id` from the existing team box-score feed. Schedule metadata supplies season, week, kickoff, completion and subdivision.
+The statistical comparison uses only completed, earlier-week, current-season FBS games available before kickoff. Ties do not count as advantages. The comparison applies only to P4-vs-P4 and G6-vs-G6 games; Notre Dame is treated as P4. Neutral-site games cannot be 6/6.
 
-| Profile key | Calculation |
-| --- | --- |
-| `off_run` | Own total rushing yards / own total rushing attempts |
-| `def_run` | Opponents' total rushing yards / opponents' total rushing attempts |
-| `margin` | (Opponents' turnovers − own turnovers) / eligible games |
-| `games` | Number of eligible prior FBS games |
+The sportsbook spread does **not** determine whether a team is 6/6. A spread is required only to publish an actionable ATS selection.
 
-Both participating teams must be FBS in the season of the game. For every target, profiles use only completed current-season games in an earlier week and before target kickoff. FCS games never enter sums or denominators. The target game's stats and prior-season profiles never enter these gates. Missing/inconsistent/duplicate box-score rows fail closed instead of averaging partial histories. Turnover totals must match interceptions plus fumbles lost. Passing data are not required.
+### Stage 1 ranking bands
 
-Sacramento State is FBS from 2026 and FCS before 2026 even if supplied metadata is stale. Official announcement: https://getsomemaction.com/news/2026/2/16/sacramento-state-joins-mid-american-conference-as-football-only-member.aspx . All other teams use season-specific schedule subdivision metadata; missing metadata is excluded. No conference-group restriction is imposed beyond FBS vs FBS, consistent with this requested waterfall.
+- **Prime 6/6**: spread from -7 through -13.5
+- **Standard 6/6**: short favorite, greater than -7 through pick'em
+- **6/6 Market Disagreement**: the 6/6 home team is an underdog
+- **6/6 Heavy Favorite**: more than -13.5
 
-## Selection rules and volume
+Every exact 6/6 qualifier remains eligible. These bands rank the selections; they do not weaken or strengthen the statistical gate.
 
-1. **Tier 1: Gold Standard Underdog**: DraftKings +100 through +170 inclusive. Higher offensive YPC, lower defensive YPC allowed and strictly better turnover margin/game than favorite. Must be home or a true away Road Sweep; neutral sites do not qualify.
-2. **Tier 2: Moneyline Parlay Anchor**: DraftKings −600 through −280 inclusive. Core model selects favorite at 0.70–1.00 confidence; favorite defensive YPC allowed < underdog offensive YPC; favorite turnover margin/game >= underdog's.
-3. **Tier 3: Moderate Favorite Clear**: DraftKings −275 through −205 inclusive. Favorite offensive YPC > underdog defensive YPC allowed AND favorite defensive YPC allowed < underdog offensive YPC; strictly better turnover margin/game.
+## Lower waterfall stages
 
-Both sides must have valid DraftKings prices from a matched quote, with a negative favorite and positive underdog. Generic/fallback-book lines do not qualify. Moneyline gaps remain gaps. Missing stats never pass a gate. No model-agreement requirement is added to tiers 1 or 3.
+If Stage 1 produces fewer than the target card size of 12, the existing moneyline rules fill toward 12:
 
-Volume interpretation: take all Tier 1 qualifiers up to the maximum 18. If fewer than 12, fill toward 12 with Tier 2, then Tier 3. Stop once within the 12–18 window; never weaken gates to reach 12. Within each stage order by kickoff then game ID. A short card displays its count and shortfall. These parameters are not tuned against outcomes.
+2. **Gold Standard Underdog**: DraftKings +100 through +170 with the existing rushing/turnover sweep rules.
+3. **Moneyline Parlay Anchor**: DraftKings -600 through -280, core model selects the favorite at 70%+, with the existing defensive rushing and turnover gates.
+4. **Moderate Favorite Clear**: DraftKings -275 through -205 with both rushing gates and the better turnover margin.
 
-`Value Pick`, `Value Side`, `Value Line`, `Value Tier`, `Value Stage`, `Value Reason`, `Value Rank`, `Value Selected`, and `Value Result` explicitly distinguish waterfall selections from core model predictions. Historical results and what-if payouts grade the waterfall-selected side and its DraftKings price. The core performance tab still grades core predictions.
+The card remains capped at 18. Gates are never relaxed merely to hit the target.
 
-## Limits and verification
+## Spread support
 
-- 22 tests pass (14 new waterfall/integration tests plus 8 existing risk-flag tests). Syntax compilation passes for all four production files.
-- A saved-data Week 5 integration smoke run produced 56 core predictions and 6 selections with locally available DraftKings quotes. This was not an exhaustive current-feed scan or an accuracy backtest.
-- The local runtime lacks FastAPI, so full HTTP startup was not run. The API market function and JSON output were tested in isolation; deployed requirements already list FastAPI and SciPy.
-- The shortlist recalculates with available prices and box scores. It is not a durable, locked record of selections issued before kickoff. Completed cards are retrospective; latest/live prices may change card membership. A future prospective performance claim requires timestamped pregame snapshots.
-- Model chance, implied probability and EV fields remain available to other existing tools (such as the parlay finder), but never determine waterfall membership.
-- A high favorite hit rate alone does not establish profit. Odds ranges constrain prices but cannot guarantee protection from statistical outliers.
+The ESPN sportsbook payload supplies side-specific point-spread values, opening spreads, and spread prices. DraftKings is preferred; another sportsbook may be used as a clearly labeled fallback when DraftKings is unavailable.
+
+The Streamlit app and API now retain both markets simultaneously:
+
+- Home / away moneyline
+- Home / away spread
+- Spread price
+- Moneyline source
+- Spread source
+- Opening spread when supplied by the feed
+
+Game cards and the comparison table show spreads alongside moneylines. Stage 1 displays the selected spread and sportsbook source.
+
+## Grading
+
+Moneyline tiers continue to grade the selected straight-up winner.
+
+Stage 1 grades ATS from the selected side's final scoring margin plus its stored/displayed spread:
+
+- Positive adjusted margin: **Correct**
+- Negative adjusted margin: **Incorrect**
+- Zero adjusted margin: **Push**
+
+Pushes are excluded from win/loss accuracy.
+
+## Historical and prospective interpretation
+
+The 2026 research sample that motivated Stage 1 produced 12-2 straight-up and 10-4 ATS across the first 14 exact 6/6 qualifiers. That is promising but remains a small sample and is not a guarantee of future performance.
+
+Historical cards in the live app are recalculated from archived/currently retrievable source data. They are not immutable proof of a line captured before kickoff unless a separate frozen snapshot exists.
+
+## Implementation points
+
+- matchup_advantages.py: exact 6/6 selection, ranking bands, and lower waterfall rules.
+- model_v1_5.py: combines the six-metric checks with the waterfall and grades spread selections ATS.
+- app.py: parses and displays spreads, passes spread prices into Value Picks, and supports ATS settlement in scenarios.
+- backend/main.py: exposes the same spread fields to API consumers.
+- tests/test_waterfall.py: validates all four stages, Stage 1 ranking, missing-line behavior, ATS covers/pushes, spread parsing, API spread fields, and scenario settlement.
+
+Validation on the feature branch: **31 unit/integration tests passed**, and Python syntax compilation passed for the production modules.

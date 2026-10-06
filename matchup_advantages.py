@@ -169,17 +169,42 @@ def build_waterfall_profiles(schedule, boxes, week):
 
 
 WATERFALL_TIERS = {
-    1: 'Tier 1: Gold Standard Underdog',
-    2: 'Tier 2: Moneyline Parlay Anchor',
-    3: 'Tier 3: Moderate Favorite Clear',
+    1: 'Tier 1: 6/6 ATS Dominance',
+    2: 'Tier 2: Gold Standard Underdog',
+    3: 'Tier 3: Moneyline Parlay Anchor',
+    4: 'Tier 4: Moderate Favorite Clear',
 }
 
 
-def select_waterfall(predictions, schedule, profiles, minimum=12, maximum=18):
-    """Weekly sequential card. Tier 1 up to 18; tiers 2/3 fill to 12.
+def _spread_number(value):
+    if value is None or isinstance(value, bool):
+        return np.nan
+    raw = str(value).strip().replace('−', '-').replace('+', '')
+    if raw.upper() in ('PK', 'PICK', 'PICKEM', "PICK'EM"):
+        return 0.0
+    try:
+        number = float(raw)
+        return number if np.isfinite(number) else np.nan
+    except (TypeError, ValueError):
+        return np.nan
 
-    Deterministic kickoff/game-ID ordering within stages; no probability-edge rank.
-    Historical rows are retrospective selections, never proof of a saved live pick.
+
+def _six_of_six_band(line):
+    if -13.5 <= line <= -7:
+        return 0, 'Prime 6/6'
+    if -7 < line <= 0:
+        return 1, 'Standard 6/6'
+    if line > 0:
+        return 2, '6/6 Market Disagreement'
+    return 3, '6/6 Heavy Favorite'
+
+
+def select_waterfall(predictions, schedule, profiles, advantage_checks=None, minimum=12, maximum=18):
+    """Weekly sequential card with exact 6/6 ATS dominance first.
+
+    Stage 1 membership is determined by the six matchup advantages, not market price.
+    The available spread is the ATS line and only controls ranking within Stage 1.
+    Lower stages preserve the existing DraftKings-moneyline rules.
     """
     if not 1 <= minimum <= maximum <= 18:
         raise ValueError('Require 1 <= minimum <= maximum <= 18')
@@ -189,60 +214,104 @@ def select_waterfall(predictions, schedule, profiles, minimum=12, maximum=18):
     games['_id'] = pd.to_numeric(games.game_id, errors='coerce')
     games = games.dropna(subset=['_id'])
     games = games[~games._id.duplicated(keep=False)].set_index('_id')
-    candidates = {1: [], 2: [], 3: []}
+    candidates = {1: [], 2: [], 3: [], 4: []}
+    advantage_checks = advantage_checks or {}
     seen = set()
+
     for _, row in predictions.iterrows():
         try:
             gid = int(row['Game ID'])
-            hline, aline = float(row['DK Home ML']), float(row['DK Away ML'])
         except (KeyError, TypeError, ValueError, OverflowError):
             continue
         if gid in seen or gid not in games.index:
             continue
         seen.add(gid)
+        game = games.loc[gid]
+        neutral_raw = str(game.get('neutral_site', '')).lower()
+        if neutral_raw not in ('true', 't', '1', '1.0', 'yes', 'y', 'false', 'f', '0', '0.0', 'no', 'n'):
+            continue
+        neutral = neutral_raw in ('true', 't', '1', '1.0', 'yes', 'y')
+
+        # Stage 1: exact six-of-six = all five statistical advantages + home field.
+        # The spread never creates/removes the statistical qualifier; it supplies
+        # the ATS number and ranking band. A missing spread fails closed because
+        # there is no actionable ATS pick to publish.
+        check = advantage_checks.get(str(gid), {})
+        home_check = assess(check, 'home') if check.get('status') == 'ok' else None
+        spread = _spread_number(row.get('Home Spread'))
+        if not neutral and home_check and home_check['count'] == 5 and np.isfinite(spread):
+            band_order, band = _six_of_six_band(spread)
+            spread_text = str(row.get('Home Spread', '')).strip() or f'{spread:+g}'
+            candidates[1].append({
+                'Game ID': gid,
+                'Value Tier': WATERFALL_TIERS[1],
+                'Value Stage': 1,
+                'Value Pick': game['home_team'],
+                'Value Side': 'Home',
+                'Value Line': spread_text,
+                'Value Price': row.get('Home Spread Odds', 'Unavailable'),
+                'Value Market': 'Spread',
+                'Value Source': row.get('Spread Source', 'Unavailable'),
+                'Value Band': band,
+                'Value Reason': 'Exact 6/6: home team owns all five statistical matchup advantages plus home field.',
+                '_sort': (band_order, str(game.get('start_date', '')), gid),
+            })
+            continue
+
+        # Existing moneyline waterfall remains intact below Stage 1.
+        try:
+            hline, aline = float(row['DK Home ML']), float(row['DK Away ML'])
+        except (KeyError, TypeError, ValueError, OverflowError):
+            continue
         if not all(np.isfinite(n) and abs(n) >= 100 and n.is_integer() for n in (hline, aline)):
             continue
-        # Require a priced favorite and underdog from the same DraftKings quote.
         if hline < 0 < aline:
             fav, dog = 'home', 'away'
         elif aline < 0 < hline:
             fav, dog = 'away', 'home'
         else:
             continue
-        game = games.loc[gid]
         rec = profiles.get(str(gid), {})
         if rec.get('status') != 'ok':
             continue
         f, d = rec[fav], rec[dog]
         if not all(np.isfinite(p.get(k, np.nan)) for p in (f, d) for k in ('off_run', 'def_run', 'margin')):
             continue
-        neutral_raw = str(game.get('neutral_site', '')).lower()
-        if neutral_raw not in ('true', 't', '1', '1.0', 'yes', 'y', 'false', 'f', '0', '0.0', 'no', 'n'):
-            continue
-        neutral = neutral_raw in ('true', 't', '1', '1.0', 'yes', 'y')
         lines = {'home': hline, 'away': aline}
         stage, side, reason = None, None, ''
         sweep = d['off_run'] > f['off_run'] and d['def_run'] < f['def_run'] and d['margin'] > f['margin']
         if 100 <= lines[dog] <= 170 and sweep and not neutral:
-            stage, side = 1, dog
+            stage, side = 2, dog
             reason = ('Home sweep' if dog == 'home' else 'Road Sweep') + ': higher offensive YPC, lower defensive YPC allowed, better turnover margin/game.'
         try:
             confidence = float(row.get('Confidence', np.nan))
         except (ValueError, TypeError):
             confidence = np.nan
         if stage is None and -600 <= lines[fav] <= -280 and row.get('Predicted Winner') == game[fav + '_team'] and .70 <= confidence <= 1 and f['def_run'] < d['off_run'] and f['margin'] >= d['margin']:
-            stage, side = 2, fav
+            stage, side = 3, fav
             reason = 'Core model agrees at 70%+; defensive YPC allowed below opposing offensive YPC; turnover margin/game at least equal.'
         if stage is None and -275 <= lines[fav] <= -205 and f['off_run'] > d['def_run'] and f['def_run'] < d['off_run'] and f['margin'] > d['margin']:
-            stage, side = 3, fav
+            stage, side = 4, fav
             reason = 'Offensive YPC above opposing defensive YPC allowed; defensive YPC allowed below opposing offensive YPC; better turnover margin/game.'
         if stage:
-            candidates[stage].append({'Game ID': gid, 'Value Tier': WATERFALL_TIERS[stage],
-                'Value Stage': stage, 'Value Pick': game[side + '_team'], 'Value Side': side.title(),
-                'Value Line': f'{int(lines[side]):+d}', 'Value Reason': reason,
-                '_sort': (str(game.get('start_date', '')), gid)})
+            line_text = f'{int(lines[side]):+d}'
+            candidates[stage].append({
+                'Game ID': gid,
+                'Value Tier': WATERFALL_TIERS[stage],
+                'Value Stage': stage,
+                'Value Pick': game[side + '_team'],
+                'Value Side': side.title(),
+                'Value Line': line_text,
+                'Value Price': line_text,
+                'Value Market': 'Moneyline',
+                'Value Source': 'DraftKings',
+                'Value Band': '',
+                'Value Reason': reason,
+                '_sort': (str(game.get('start_date', '')), gid),
+            })
+
     card = []
-    for stage in (1, 2, 3):
+    for stage in (1, 2, 3, 4):
         if len(card) >= maximum or (stage > 1 and len(card) >= minimum):
             break
         limit = maximum if stage == 1 else minimum
