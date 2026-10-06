@@ -1117,7 +1117,10 @@ def simulate_stakes(predictions, stakes):
         confidence = float(pick["Confidence"])
         tier = "High" if confidence >= .8 else "Moderate" if confidence >= .7 else "Lean" if confidence >= .6 else "Toss-up"
         stake = Decimal(str(stakes[tier])).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
-        line = pick.get("Bet Line", pick["Home ML"] if pick["Predicted Side"] == "Home" else pick["Away ML"])
+        if "Bet Line" in pick and pd.notna(pick["Bet Line"]):
+            line = pick["Bet Line"]
+        else:
+            line = pick["Home ML"] if pick["Predicted Side"] == "Home" else pick["Away ML"]
         valid_line = format_moneyline(line)
         reason = "Settled"
         returned = profit = None
