@@ -159,35 +159,52 @@ for vid,v in venues.items():
     if v.get('indoor') is False and g.get('latitude') is not None:
         venue_geo[vid]=g
 
-# Weather only for actual game dates, batched coordinates.
+# Weather only for actual game dates, batched coordinates. Requests run in parallel.
 weather={}; weather_errors=[]
+weather_tasks=[]
 for date0,day_games in target.groupby('game_date_utc'):
     date1=(pd.Timestamp(date0)+pd.Timedelta(days=1)).date().isoformat()
     for season,sg in day_games.groupby('season'):
         vids=sorted({str(int(v)) for v in pd.to_numeric(sg.venue_id,errors='coerce').dropna().unique() if str(int(v)) in venue_geo})
         for i in range(0,len(vids),12):
-            batch=vids[i:i+12]
-            params={
-              'latitude':','.join(str(venue_geo[v]['latitude']) for v in batch),
-              'longitude':','.join(str(venue_geo[v]['longitude']) for v in batch),
-              'start_date':date0,'end_date':date1,'timezone':'UTC','wind_speed_unit':'mph',
-              'hourly':'precipitation,snowfall,weather_code,wind_speed_10m,wind_gusts_10m'}
-            try:
-                p=get_json('https://historical-forecast-api.open-meteo.com/v1/forecast',params,timeout=30)
-                ps=p if isinstance(p,list) else [p]
-                if len(ps)!=len(batch): raise ValueError('weather batch length mismatch')
-                for vid,item in zip(batch,ps):
-                    h=item.get('hourly') or {}
-                    weather[(int(season),vid,date0)]=pd.DataFrame({
-                        'time':pd.to_datetime(h.get('time',[]),utc=True,errors='coerce'),
-                        'precipitation':pd.to_numeric(pd.Series(h.get('precipitation',[])),errors='coerce'),
-                        'snowfall':pd.to_numeric(pd.Series(h.get('snowfall',[])),errors='coerce'),
-                        'weather_code':pd.to_numeric(pd.Series(h.get('weather_code',[])),errors='coerce'),
-                        'wind_speed_10m':pd.to_numeric(pd.Series(h.get('wind_speed_10m',[])),errors='coerce'),
-                        'wind_gusts_10m':pd.to_numeric(pd.Series(h.get('wind_gusts_10m',[])),errors='coerce')})
-            except Exception as e:
-                weather_errors.append({'season':int(season),'date':date0,'venues':batch,'error':repr(e)})
-    print('weather date',date0,'done',flush=True)
+            weather_tasks.append((int(season),date0,date1,vids[i:i+12]))
+
+def fetch_weather_task(task):
+    season,date0,date1,batch=task
+    params={
+      'latitude':','.join(str(venue_geo[v]['latitude']) for v in batch),
+      'longitude':','.join(str(venue_geo[v]['longitude']) for v in batch),
+      'start_date':date0,'end_date':date1,'timezone':'UTC','wind_speed_unit':'mph',
+      'hourly':'precipitation,snowfall,weather_code,wind_speed_10m,wind_gusts_10m'}
+    try:
+        p=get_json('https://historical-forecast-api.open-meteo.com/v1/forecast',params,timeout=30)
+        ps=p if isinstance(p,list) else [p]
+        if len(ps)!=len(batch): raise ValueError('weather batch length mismatch')
+        result=[]
+        for vid,item in zip(batch,ps):
+            h=item.get('hourly') or {}
+            frame=pd.DataFrame({
+                'time':pd.to_datetime(h.get('time',[]),utc=True,errors='coerce'),
+                'precipitation':pd.to_numeric(pd.Series(h.get('precipitation',[])),errors='coerce'),
+                'snowfall':pd.to_numeric(pd.Series(h.get('snowfall',[])),errors='coerce'),
+                'weather_code':pd.to_numeric(pd.Series(h.get('weather_code',[])),errors='coerce'),
+                'wind_speed_10m':pd.to_numeric(pd.Series(h.get('wind_speed_10m',[])),errors='coerce'),
+                'wind_gusts_10m':pd.to_numeric(pd.Series(h.get('wind_gusts_10m',[])),errors='coerce')})
+            result.append(((season,vid,date0),frame))
+        return result,None
+    except Exception as e:
+        return [],{'season':season,'date':date0,'venues':batch,'error':repr(e)}
+
+with ThreadPoolExecutor(max_workers=16) as ex:
+    futs=[ex.submit(fetch_weather_task,t) for t in weather_tasks]
+    done=0
+    for f in as_completed(futs):
+        result,error=f.result()
+        for key,frame in result: weather[key]=frame
+        if error: weather_errors.append(error)
+        done+=1
+        if done % 25 == 0: print('weather batches',done,'of',len(weather_tasks),flush=True)
+print('weather retrieval complete',len(weather_tasks),'batches; errors',len(weather_errors),flush=True)
 
 rows=[]
 for _,g in target.iterrows():
