@@ -1,0 +1,30 @@
+name: Weather Tier 2 market validation
+on:
+  push:
+    branches: [research/weather-tier2-market-validation]
+    paths:
+      - research/weather_tier2_market_validation/run.py
+      - .github/workflows/weather-tier2-market-validation.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-tier2-market-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3
+      - run: python -u research/weather_tier2_market_validation/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/weather_tier2_market_validation
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record weather Tier 2 market validation'
+            git push origin HEAD:research/weather-tier2-market-validation
+          fi
