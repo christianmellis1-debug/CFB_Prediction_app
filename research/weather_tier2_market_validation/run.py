@@ -77,12 +77,28 @@ def choose_quote(p):
 
 rows=[]; errors=[]
 for rec in cand.to_dict('records'):
-    gid=int(rec['game_id'])
-    url='https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event='+str(gid)
-    try:
-        p=get_json(url); q=choose_quote(p)
-    except Exception as e:
-        q=None; errors.append({'game_id':gid,'error':repr(e)})
+    gid=int(rec['game_id']); season=int(rec['season'])
+    q=None; errs=[]
+    # 2024-2025: prefer the archived ESPN BET closing record used in our earlier historical pricing work.
+    if season<=2025:
+        archive='https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/events/'+str(gid)+'/competitions/'+str(gid)+'/odds/58?lang=en&region=us'
+        try:
+            aq=parse_provider(get_json(archive))
+            if aq['home_ml'] is not None or aq['home_spread'] is not None: q=aq
+        except Exception as e: errs.append('archive58:'+repr(e))
+    # Fallback / 2026 source: historical event summary, preferring DraftKings when present.
+    if q is None or q['home_ml'] is None or q['home_spread'] is None:
+        url='https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event='+str(gid)
+        try:
+            sq=choose_quote(get_json(url))
+            if sq is not None:
+                if q is None: q=sq
+                else:
+                    for key in ('home_ml','home_spread','spread_price','details'):
+                        if q.get(key) is None and sq.get(key) is not None: q[key]=sq[key]
+                    if not q.get('provider'): q['provider']=sq.get('provider')
+        except Exception as e: errs.append('summary:'+repr(e))
+    if errs and q is None: errors.append({'game_id':gid,'error':' | '.join(errs)})
     hp=float(rec['home_points']); ap=float(rec['away_points']); margin=hp-ap; win=margin>0
     home_ml=q['home_ml'] if q else None
     spread=q['home_spread'] if q else None
