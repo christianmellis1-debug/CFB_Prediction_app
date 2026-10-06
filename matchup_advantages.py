@@ -171,7 +171,7 @@ def build_waterfall_profiles(schedule, boxes, week):
 WATERFALL_TIERS = {
     1: 'Tier 1: 6/6 ATS Dominance',
     2: 'Tier 2: Weather Defensive Edge ATS',
-    3: 'Tier 3: Gold Standard Underdog',
+    3: 'Tier 3: P4 Turnover Underdog ML',
     4: 'Tier 4: Moneyline Parlay Anchor',
     5: 'Tier 5: Moderate Favorite Clear',
 }
@@ -240,7 +240,10 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
     Tier 2 is the frozen weather defensive-edge ATS rule:
     outdoor inclement weather, non-neutral home team, lower pregame defensive
     rushing YPC allowed, better pregame turnover margin/game, and spread > -14.
-    Lower stages preserve the prior moneyline rules.
+    Tier 3 is the P4 short-underdog turnover rule:
+    P4 vs P4, market favorite -110 through -150, and underdog pregame
+    turnover margin/game at least +1.0 better than the favorite.
+    Tiers 4 and 5 preserve the prior moneyline rules.
     """
     if not 1 <= minimum <= maximum <= 18:
         raise ValueError('Require 1 <= minimum <= maximum <= 18')
@@ -345,10 +348,18 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
             continue
         lines = {'home': hline, 'away': aline}
         stage, side, reason = None, None, ''
-        sweep = d['off_run'] > f['off_run'] and d['def_run'] < f['def_run'] and d['margin'] > f['margin']
-        if 100 <= lines[dog] <= 170 and sweep and not neutral:
+        fav_group = conference_group(game.get(fav + '_conference'), game.get(fav + '_team'))
+        dog_group = conference_group(game.get(dog + '_conference'), game.get(dog + '_team'))
+        turnover_edge = d['margin'] - f['margin']
+        if (-150 <= lines[fav] <= -110
+                and fav_group == 'P4' and dog_group == 'P4'
+                and turnover_edge >= 1.0 - 1e-10):
             stage, side = 3, dog
-            reason = ('Home sweep' if dog == 'home' else 'Road Sweep') + ': higher offensive YPC, lower defensive YPC allowed, better turnover margin/game.'
+            reason = (
+                f'P4 vs P4 short underdog: favorite priced {int(lines[fav]):+d}; '
+                f'underdog turnover margin/game edge {turnover_edge:+.2f}. '
+                'Recommended bet is the underdog moneyline.'
+            )
         try:
             confidence = float(row.get('Confidence', np.nan))
         except (ValueError, TypeError):
