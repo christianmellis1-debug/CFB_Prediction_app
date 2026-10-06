@@ -1,6 +1,6 @@
 {
   "experiment": "v15-market-blend-2026-09-28",
-  "last_run": "2026-10-06T19:33:28.560604+00:00",
+  "last_run": "2026-10-06T23:50:12.532024+00:00",
   "results": {
     "401856705": {
       "away_score": 14.0,
@@ -340,8 +340,8 @@
     }
   },
   "run_summary": {
-    "eligible_schedule_games": 2,
-    "skipped: No same-book two-sided moneyline": 2
+    "eligible_schedule_games": 3,
+    "skipped: No same-book two-sided moneyline": 3
   },
   "snapshots": {
     "401856705": {
