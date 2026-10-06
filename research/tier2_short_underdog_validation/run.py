@@ -8,7 +8,7 @@ BASE=ROOT/'research/short_p4_underdogs_2026_10_05'
 OUT=Path(__file__).resolve().parent
 OUT.mkdir(parents=True, exist_ok=True)
 df=pd.read_csv(BASE/'game_details.csv')
-sel=df[df['turnover_margin'].eq('Advantage')].copy()
+sel=df[df['turnover_margin'].ne('Missing')].copy()
 
 schedules={}
 for season in sorted(sel.season.unique()):
@@ -56,6 +56,12 @@ for rec in sel.to_dict('records'):
         errors.append({'game_id':gid,'error':'team match'}); continue
     try:
         payload=fetch_json(rec['url']); spread=side_spread(payload,side)
+        if not math.isfinite(spread):
+            summary=fetch_json('https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event='+str(gid))
+            for candidate in summary.get('pickcenter',[]):
+                candidate_spread=side_spread(candidate,side)
+                if math.isfinite(candidate_spread):
+                    payload=candidate; spread=candidate_spread; break
     except Exception as e:
         payload={}; spread=math.nan; errors.append({'game_id':gid,'error':repr(e)})
     try:
@@ -85,17 +91,19 @@ def summary(frame):
             'ats_graded':len(ats),'ats_w':aw,'ats_l':al,'ats_p':ap,
             'ats_win_rate_ex_push':aw/(aw+al) if aw+al else None,'missing_spread':int(frame.dog_spread.isna().sum())}
 
-report={'fixed_rule':summary(out),'by_season':{},'secondary_checks':{}}
-for y,g in out.groupby('season'): report['by_season'][str(int(y))]=summary(g)
+fixed=out[out.turnover_margin.eq('Advantage')].copy()
+report={'fixed_rule':summary(fixed),'by_season':{},'turnover_comparison':{},'secondary_checks':{}}
+for y,g in fixed.groupby('season'): report['by_season'][str(int(y))]=summary(g)
+for condition,g in out.groupby('turnover_margin'): report['turnover_comparison'][condition]=summary(g)
 checks={
- 'turnover_edge_ge_0_5':out.turnover_edge>=0.5,
- 'turnover_edge_ge_1_0':out.turnover_edge>=1.0,
- 'turnover_edge_ge_1_25':out.turnover_edge>=1.25,
- 'higher_off_ypc':out.offensive_ypc.eq('Advantage'),
- 'lower_def_ypc':out.defensive_ypc.eq('Advantage'),
- 'both_ypc':out.offensive_ypc.eq('Advantage') & out.defensive_ypc.eq('Advantage')}
+ 'turnover_edge_ge_0_5':fixed.turnover_edge>=0.5,
+ 'turnover_edge_ge_1_0':fixed.turnover_edge>=1.0,
+ 'turnover_edge_ge_1_25':fixed.turnover_edge>=1.25,
+ 'higher_off_ypc':fixed.offensive_ypc.eq('Advantage'),
+ 'lower_def_ypc':fixed.defensive_ypc.eq('Advantage'),
+ 'both_ypc':fixed.offensive_ypc.eq('Advantage') & fixed.defensive_ypc.eq('Advantage')}
 for label,mask in checks.items():
-    f=out[mask]
+    f=fixed[mask]
     report['secondary_checks'][label]={'overall':summary(f),'by_season':{str(int(y)):summary(g) for y,g in f.groupby('season')}}
 (OUT/'summary.json').write_text(json.dumps(report,indent=2))
 print(json.dumps(report,indent=2))
