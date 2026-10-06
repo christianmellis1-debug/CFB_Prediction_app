@@ -170,9 +170,10 @@ def build_waterfall_profiles(schedule, boxes, week):
 
 WATERFALL_TIERS = {
     1: 'Tier 1: 6/6 ATS Dominance',
-    2: 'Tier 2: Gold Standard Underdog',
-    3: 'Tier 3: Moneyline Parlay Anchor',
-    4: 'Tier 4: Moderate Favorite Clear',
+    2: 'Tier 2: Weather Defensive Edge ATS',
+    3: 'Tier 3: Gold Standard Underdog',
+    4: 'Tier 4: Moneyline Parlay Anchor',
+    5: 'Tier 5: Moderate Favorite Clear',
 }
 
 
@@ -199,12 +200,15 @@ def _six_of_six_band(line):
     return 3, '6/6 Heavy Favorite'
 
 
-def select_waterfall(predictions, schedule, profiles, advantage_checks=None, minimum=12, maximum=18):
-    """Weekly sequential card with exact 6/6 ATS dominance first.
+def select_waterfall(predictions, schedule, profiles, advantage_checks=None, weather_checks=None,
+                     minimum=12, maximum=18):
+    """Weekly sequential card with ATS tiers first.
 
-    Stage 1 membership is determined by the six matchup advantages, not market price.
-    The available spread is the ATS line and only controls ranking within Stage 1.
-    Lower stages preserve the existing DraftKings-moneyline rules.
+    Tier 1 is exact 6/6 ATS dominance.
+    Tier 2 is the frozen weather defensive-edge ATS rule:
+    outdoor inclement weather, non-neutral home team, lower pregame defensive
+    rushing YPC allowed, better pregame turnover margin/game, and spread > -14.
+    Lower stages preserve the prior moneyline rules.
     """
     if not 1 <= minimum <= maximum <= 18:
         raise ValueError('Require 1 <= minimum <= maximum <= 18')
@@ -214,8 +218,9 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, min
     games['_id'] = pd.to_numeric(games.game_id, errors='coerce')
     games = games.dropna(subset=['_id'])
     games = games[~games._id.duplicated(keep=False)].set_index('_id')
-    candidates = {1: [], 2: [], 3: [], 4: []}
+    candidates = {1: [], 2: [], 3: [], 4: [], 5: []}
     advantage_checks = advantage_checks or {}
+    weather_checks = weather_checks or {}
     seen = set()
 
     for _, row in predictions.iterrows():
@@ -232,10 +237,7 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, min
             continue
         neutral = neutral_raw in ('true', 't', '1', '1.0', 'yes', 'y')
 
-        # Stage 1: exact six-of-six = all five statistical advantages + home field.
-        # The spread never creates/removes the statistical qualifier; it supplies
-        # the ATS number and ranking band. A missing spread fails closed because
-        # there is no actionable ATS pick to publish.
+        # Tier 1: exact six-of-six = all five statistical advantages + home field.
         check = advantage_checks.get(str(gid), {})
         home_check = assess(check, 'home') if check.get('status') == 'ok' else None
         spread = _spread_number(row.get('Home Spread'))
@@ -258,7 +260,40 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, min
             })
             continue
 
-        # Existing moneyline waterfall remains intact below Stage 1.
+        rec = profiles.get(str(gid), {})
+
+        # Tier 2: frozen weather defensive-edge ATS rule.
+        # The -14 exclusion is part of the published rule because the validation
+        # sample was 12-2-1 ATS when the selected home team's spread was > -14,
+        # while -14 or larger favorites were 7-7 ATS.
+        weather = weather_checks.get(str(gid), {})
+        if (not neutral and rec.get('status') == 'ok'
+                and weather.get('status') == 'ok' and weather.get('inclement') is True
+                and rec['home']['def_run'] < rec['away']['def_run']
+                and rec['home']['margin'] > rec['away']['margin']
+                and np.isfinite(spread) and spread > -14):
+            spread_text = str(row.get('Home Spread', '')).strip() or f'{spread:+g}'
+            weather_type = str(weather.get('weather_type') or 'Inclement weather')
+            candidates[2].append({
+                'Game ID': gid,
+                'Value Tier': WATERFALL_TIERS[2],
+                'Value Stage': 2,
+                'Value Pick': game['home_team'],
+                'Value Side': 'Home',
+                'Value Line': spread_text,
+                'Value Price': row.get('Home Spread Odds', 'Unavailable'),
+                'Value Market': 'Spread',
+                'Value Source': row.get('Spread Source', 'Unavailable'),
+                'Value Band': weather_type,
+                'Value Reason': (
+                    f'{weather_type}: home team has lower defensive YPC allowed and '
+                    'better turnover margin/game; validated ATS rule excludes spreads of -14 or shorter.'
+                ),
+                '_sort': (spread, str(game.get('start_date', '')), gid),
+            })
+            continue
+
+        # Existing moneyline waterfall remains intact below the two ATS tiers.
         try:
             hline, aline = float(row['DK Home ML']), float(row['DK Away ML'])
         except (KeyError, TypeError, ValueError, OverflowError):
@@ -271,7 +306,6 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, min
             fav, dog = 'away', 'home'
         else:
             continue
-        rec = profiles.get(str(gid), {})
         if rec.get('status') != 'ok':
             continue
         f, d = rec[fav], rec[dog]
@@ -281,17 +315,17 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, min
         stage, side, reason = None, None, ''
         sweep = d['off_run'] > f['off_run'] and d['def_run'] < f['def_run'] and d['margin'] > f['margin']
         if 100 <= lines[dog] <= 170 and sweep and not neutral:
-            stage, side = 2, dog
+            stage, side = 3, dog
             reason = ('Home sweep' if dog == 'home' else 'Road Sweep') + ': higher offensive YPC, lower defensive YPC allowed, better turnover margin/game.'
         try:
             confidence = float(row.get('Confidence', np.nan))
         except (ValueError, TypeError):
             confidence = np.nan
         if stage is None and -600 <= lines[fav] <= -280 and row.get('Predicted Winner') == game[fav + '_team'] and .70 <= confidence <= 1 and f['def_run'] < d['off_run'] and f['margin'] >= d['margin']:
-            stage, side = 3, fav
+            stage, side = 4, fav
             reason = 'Core model agrees at 70%+; defensive YPC allowed below opposing offensive YPC; turnover margin/game at least equal.'
         if stage is None and -275 <= lines[fav] <= -205 and f['off_run'] > d['def_run'] and f['def_run'] < d['off_run'] and f['margin'] > d['margin']:
-            stage, side = 4, fav
+            stage, side = 5, fav
             reason = 'Offensive YPC above opposing defensive YPC allowed; defensive YPC allowed below opposing offensive YPC; better turnover margin/game.'
         if stage:
             line_text = f'{int(lines[side]):+d}'
@@ -311,11 +345,11 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, min
             })
 
     card = []
-    for stage in (1, 2, 3, 4):
+    for stage in (1, 2, 3, 4, 5):
         if len(card) >= maximum or (stage > 1 and len(card) >= minimum):
             break
         limit = maximum if stage == 1 else minimum
-        for item in sorted(candidates[stage], key=lambda c: c['_sort'])[:limit-len(card)]:
+        for item in sorted(candidates[stage], key=lambda candidate: candidate['_sort'])[:limit-len(card)]:
             item.pop('_sort')
             item['Value Rank'] = len(card) + 1
             card.append(item)
