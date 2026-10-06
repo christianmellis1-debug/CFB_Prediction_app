@@ -1,0 +1,31 @@
+name: Parallel weather Tier 2 recovery
+on:
+  push:
+    branches: [research/weather-tier2-parallel-recovery]
+    paths:
+      - research/weather_tier2_market_validation/recover_parallel.py
+      - .github/workflows/weather-tier2-parallel-recovery.yml
+permissions:
+  contents: write
+jobs:
+  recover-grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-tier2-parallel-recovery
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python -u research/weather_tier2_market_validation/recover_parallel.py
+      - run: python -u research/weather_tier2_market_validation/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/weather_ypc_validation/game_details_hfa_turnover.csv research/weather_ypc_validation/weather_errors_tier2_parallel.csv research/weather_tier2_market_validation
+          if ! git diff --cached --quiet; then
+            git commit -m 'Recover parallel weather Tier 2 sample and market grades'
+            git push origin HEAD:research/weather-tier2-parallel-recovery
+          fi
