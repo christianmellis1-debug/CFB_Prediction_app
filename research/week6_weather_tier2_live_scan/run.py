@@ -1,8 +1,12 @@
 from pathlib import Path
+import sys
 from urllib.request import urlopen
 from io import BytesIO
 import json
 import pandas as pd
+
+ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT))
 
 from backend.main import attach_market_context
 from matchup_advantages import build_waterfall_profiles, weather_tier_candidate_ids
@@ -10,7 +14,7 @@ from weather_context import build_weather_context
 
 SEASON=2026
 WEEK=6
-OUT=Path('research/week6_weather_tier2_live_scan')
+OUT=ROOT/'research/week6_weather_tier2_live_scan'
 OUT.mkdir(parents=True,exist_ok=True)
 
 def read_csv(url):
