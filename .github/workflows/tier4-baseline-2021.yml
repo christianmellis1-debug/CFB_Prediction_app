@@ -1,0 +1,26 @@
+name: Build Tier 4 2021 baseline
+on:
+  push:
+    branches: [research/tier4-90pct-validation]
+    paths:
+      - research/tier4_90pct_validation/build_baseline_2021.py
+      - .github/workflows/tier4-baseline-2021.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python -u research/tier4_90pct_validation/build_baseline_2021.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/tier4_90pct_validation/baseline_2021.csv research/tier4_90pct_validation/baseline_2021_errors.csv
+          git commit -m 'Record full 2021 Tier 4 baseline' || exit 0
+          git push origin HEAD:research/tier4-90pct-validation
