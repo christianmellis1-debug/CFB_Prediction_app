@@ -1,0 +1,30 @@
+name: Tier 2 validation
+on:
+  push:
+    branches: [research/tier2-short-underdog-validation]
+    paths:
+      - research/tier2_short_underdog_validation/run.py
+      - .github/workflows/tier2-validation.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/tier2-short-underdog-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3
+      - run: python research/tier2_short_underdog_validation/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/tier2_short_underdog_validation
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Tier 2 validation results'
+            git push origin HEAD:research/tier2-short-underdog-validation
+          fi
