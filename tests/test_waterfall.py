@@ -128,9 +128,18 @@ class WaterfallTests(unittest.TestCase):
         p.update({'DK Home ML': 'Unavailable', 'DK Away ML': 'Unavailable'})
         self.assertEqual(self.select(g, p, r, check), [])
 
-    def test_existing_moneyline_boundaries_remain(self):
+    def test_moneyline_boundaries_remain(self):
+        # Tier 3 is keyed to the favorite price, while Tiers 4/5 are selected favorites.
+        for favorite_line in (-110, -150):
+            g, p, r, check = self.fixture(3)
+            p['DK Away ML'] = str(favorite_line)
+            self.assertTrue(self.select(g, p, r, check), favorite_line)
+        for favorite_line in (-109, -151):
+            g, p, r, check = self.fixture(3)
+            p['DK Away ML'] = str(favorite_line)
+            self.assertFalse(self.select(g, p, r, check), favorite_line)
+
         specs = [
-            (3, [100, 170], [99, 171]),
             (4, [-280, -600], [-279, -601]),
             (5, [-205, -275], [-204, -276]),
         ]
@@ -139,6 +148,31 @@ class WaterfallTests(unittest.TestCase):
                 g, p, r, check = self.fixture(stage)
                 p['DK Home ML'] = str(line)
                 self.assertEqual(bool(self.select(g, p, r, check)), line in good, (stage, line))
+
+    def test_tier3_requires_p4_and_turnover_edge_at_least_one(self):
+        g, p, r, check = self.fixture(3)
+        card = self.select(g, p, r, check)
+        self.assertEqual(card[0]['Value Stage'], 3)
+        self.assertEqual(card[0]['Value Market'], 'Moneyline')
+        self.assertEqual(card[0]['Value Pick'], 'Home')
+        self.assertEqual(card[0]['Value Line'], '+120')
+        self.assertIn('turnover margin/game edge +1.00', card[0]['Value Reason'])
+
+        # The strong-turnover threshold is inclusive at +1.0 and fails below it.
+        r2 = {**r, 'home': dict(r['home']), 'away': dict(r['away'])}
+        r2['home']['margin'] = 0.99
+        r2['away']['margin'] = 0.0
+        self.assertFalse(self.select(g, p, r2, check))
+
+        # Both teams must be P4; Notre Dame remains P4 through conference_group().
+        g2 = dict(g)
+        g2['home_conference'] = 'Mountain West'
+        self.assertFalse(self.select(g2, p, r, check))
+
+        # Neutral-site P4 games remain eligible; venue was not a gate in the validated rule.
+        g3 = dict(g)
+        g3['neutral_site'] = True
+        self.assertTrue(self.select(g3, p, r, check))
 
     def test_old_moneyline_ties_and_model_gate(self):
         for stage in (3, 4, 5):

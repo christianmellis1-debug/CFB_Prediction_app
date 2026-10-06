@@ -66,11 +66,35 @@ Market-bucket analysis then showed a large difference by spread:
 
 The -14 exclusion was adopted after this market-bucket analysis, so the resulting 12-2-1 subgroup is **post-hoc and must be tracked prospectively**. The app should not present 85.7% as an expected future accuracy rate.
 
+## Tier 3: P4 Turnover Underdog ML
+
+If Tiers 1 and 2 do not fill the card, Tier 3 looks for a short P4 underdog with a large pregame turnover edge:
+
+- P4 vs P4 only; Notre Dame is treated as P4.
+- Market favorite must be **-110 through -150 inclusive**.
+- Select the underdog only when its pregame turnover margin/game is at least **+1.0 better** than the favorite's.
+- Earlier current-season FBS games only.
+- Home, road, and neutral-site P4 games are eligible.
+- **Recommended bet: underdog moneyline.**
+
+### Tier 3 research basis
+
+The broader fixed rule (P4 short underdog with any better turnover margin/game) went **34-21 (61.8%)** with about **+29.4% flat-risk moneyline ROI** across 2024, 2025, and 2026 through Week 5.
+
+The stronger +1.0 turnover-edge subgroup went **23-9 (71.9%)** with about **+52.0% flat-risk moneyline ROI**:
+
+- 2024: **15-5**
+- 2025: **7-4**
+- 2026 through Week 5: **1-0**
+
+The +1.0 threshold was identified during exploratory subgroup analysis, so these results are **post-hoc and must be tracked prospectively**. The app should not present 71.9% as an expected future accuracy rate.
+
+A competing P4 +100 to +120 rushing/defense/turnover sweep rule went 8-3, but all 11 of those games were already contained within the broader turnover-edge cohort. The turnover signal therefore supplies the Tier 3 selection rule without requiring the extra YPC gates.
+
 ## Lower waterfall tiers
 
-If Tiers 1 and 2 produce fewer than the target card size of 12, the existing moneyline rules fill toward 12:
+If Tiers 1-3 produce fewer than the target card size of 12, the remaining moneyline rules fill toward 12:
 
-3. **Gold Standard Underdog**: DraftKings +100 through +170 with the existing rushing/turnover sweep rules.
 4. **Moneyline Parlay Anchor**: DraftKings -600 through -280, core model selects the favorite at 70%+, with the existing defensive rushing and turnover gates.
 5. **Moderate Favorite Clear**: DraftKings -275 through -205 with both rushing gates and the better turnover margin.
 
@@ -93,7 +117,7 @@ Pushes are excluded from win/loss accuracy. Moneyline tiers continue to grade th
 ## Implementation points
 
 - **weather_context.py**: ESPN venue lookup, Open-Meteo game-window weather, and the locked inclement thresholds.
-- **matchup_advantages.py**: Tier 1 and Tier 2 qualification, five-stage priority, and lower moneyline rules.
+- **matchup_advantages.py**: Tier 1, Tier 2, and Tier 3 qualification, five-stage priority, and lower moneyline rules.
 - **model_v1_5.py**: waterfall annotation and market-aware grading.
 - **app.py**: candidate-only cached weather lookup and explicit Recommended Bet display.
 - **backend/main.py**: same Tier 2 weather context for API output.
