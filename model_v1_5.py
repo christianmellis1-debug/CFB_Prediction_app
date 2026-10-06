@@ -300,17 +300,23 @@ def predict_week(current_summary, prior_summary, schedule, target_week, include_
 
 
 def add_waterfall_value(predictions, schedule, boxes, week):
-    """Annotate aggregated predictions without replacing the core model winner."""
-    from matchup_advantages import build_waterfall_profiles, select_waterfall
+    """Annotate predictions with the waterfall without replacing the core model winner."""
+    from matchup_advantages import build_advantages, build_waterfall_profiles, select_waterfall
+
     result = predictions.copy()
     profiles = build_waterfall_profiles(schedule, boxes, week)
-    card = select_waterfall(result, schedule, profiles)
-    defaults = {'Value Selected': False, 'Value Tier': '', 'Value Stage': 0,
-                'Value Pick': '', 'Value Side': '', 'Value Line': 'Unavailable',
-                'Value Reason': '', 'Value Rank': 0, 'Value Result': 'Pending',
-                'Bet Signal': 'Pass'}
+    advantage_checks = build_advantages(schedule, boxes, week)
+    card = select_waterfall(result, schedule, profiles, advantage_checks=advantage_checks)
+    defaults = {
+        'Value Selected': False, 'Value Tier': '', 'Value Stage': 0,
+        'Value Pick': '', 'Value Side': '', 'Value Line': 'Unavailable',
+        'Value Price': 'Unavailable', 'Value Market': '', 'Value Source': '',
+        'Value Band': '', 'Value Reason': '', 'Value Rank': 0,
+        'Value Result': 'Pending', 'Bet Signal': 'Pass',
+    }
     for key, default in defaults.items():
         result[key] = default
+
     ids = pd.to_numeric(result.get('Game ID', pd.Series(index=result.index, dtype=float)), errors='coerce')
     for pick in card:
         mask = ids.eq(pick['Game ID'])
@@ -319,15 +325,53 @@ def add_waterfall_value(predictions, schedule, boxes, week):
                 result.loc[mask, key] = value
         result.loc[mask, 'Value Selected'] = True
         result.loc[mask, 'Bet Signal'] = pick['Value Tier']
-    if {'Status', 'Actual Winner'}.issubset(result):
+
+    if 'Status' in result:
         final = result['Value Selected'] & result.Status.eq('Final')
-        decisive = final & result['Actual Winner'].notna() & ~result['Actual Winner'].isin(['Tie', '—', ''])
+
+        # Moneyline tiers continue to grade the selected straight-up winner.
+        ml = final & result['Value Market'].eq('Moneyline')
+        decisive = ml & result.get('Actual Winner', pd.Series('—', index=result.index)).notna()
+        decisive &= ~result.get('Actual Winner', pd.Series('—', index=result.index)).isin(['Tie', '—', ''])
         result.loc[decisive, 'Value Result'] = np.where(
-            result.loc[decisive, 'Value Pick'].eq(result.loc[decisive, 'Actual Winner']), 'Correct', 'Incorrect')
-        result.loc[final & result['Actual Winner'].eq('Tie'), 'Value Result'] = 'Not graded'
-    result.attrs['waterfall'] = {'count': len(card), 'minimum': 12, 'maximum': 18,
-                                'shortfall': max(0, 12-len(card)),
-                                'method': 'waterfall-v1', 'retrospective': True}
+            result.loc[decisive, 'Value Pick'].eq(result.loc[decisive, 'Actual Winner']),
+            'Correct', 'Incorrect')
+        if 'Actual Winner' in result:
+            result.loc[ml & result['Actual Winner'].eq('Tie'), 'Value Result'] = 'Not graded'
+
+        # Stage 1 grades against the stored spread, including pushes.
+        if 'game_id' in schedule:
+            game_ids = pd.to_numeric(schedule['game_id'], errors='coerce')
+            for idx in result.index[final & result['Value Market'].eq('Spread')]:
+                try:
+                    gid = int(ids.loc[idx])
+                    spread = float(str(result.loc[idx, 'Value Line']).replace('+', '').replace('−', '-'))
+                except (TypeError, ValueError, OverflowError):
+                    result.loc[idx, 'Value Result'] = 'Not graded'
+                    continue
+                match = schedule.loc[game_ids.eq(gid)]
+                if len(match) != 1:
+                    result.loc[idx, 'Value Result'] = 'Not graded'
+                    continue
+                game = match.iloc[0]
+                try:
+                    home_points = float(game['home_points'])
+                    away_points = float(game['away_points'])
+                except (KeyError, TypeError, ValueError):
+                    result.loc[idx, 'Value Result'] = 'Not graded'
+                    continue
+                if not np.isfinite(home_points) or not np.isfinite(away_points):
+                    result.loc[idx, 'Value Result'] = 'Not graded'
+                    continue
+                margin = home_points - away_points if result.loc[idx, 'Value Side'] == 'Home' else away_points - home_points
+                ats = margin + spread
+                result.loc[idx, 'Value Result'] = 'Correct' if ats > 1e-10 else 'Incorrect' if ats < -1e-10 else 'Push'
+
+    result.attrs['waterfall'] = {
+        'count': len(card), 'minimum': 12, 'maximum': 18,
+        'shortfall': max(0, 12-len(card)),
+        'method': 'waterfall-v2-6of6-ats', 'retrospective': True,
+    }
     return result
 
 
@@ -337,9 +381,9 @@ def waterfall_scenario_rows(predictions):
     result['Predicted Winner'] = result['Value Pick']
     result['Predicted Side'] = result['Value Side']
     result['Pick Result'] = result['Value Result']
-    result['Home ML'] = result['DK Home ML']
-    result['Away ML'] = result['DK Away ML']
-    result['Bet Line'] = result['Value Line']
-    result['ML Source'] = 'DraftKings'
+    result['Bet Market'] = result['Value Market']
+    result['Bet Display'] = result['Value Pick'].astype(str) + ' ' + result['Value Line'].astype(str)
+    result['Bet Line'] = result['Value Price']
+    result['ML Source'] = result['Value Source']
     result['Confidence'] = np.where(result['Value Side'].eq('Home'), result['Home Win %'], result['Away Win %'])
     return result
