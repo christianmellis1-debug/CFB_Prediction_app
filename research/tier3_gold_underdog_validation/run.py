@@ -5,10 +5,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import json, math, time
 import pandas as pd
 
-from matchup_advantages import build_waterfall_profiles, normalize_fbs_schedule, conference_group
-
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
+from matchup_advantages import build_waterfall_profiles, normalize_fbs_schedule, conference_group
 OUT=Path(__file__).resolve().parent
 OUT.mkdir(parents=True,exist_ok=True)
 
