@@ -1,0 +1,20 @@
+name: Validate weather Tier 2 feature
+on:
+  push:
+    branches: [feature/weather-tier2-ats]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/weather-tier2-ats
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest tests.test_waterfall -v
+      - run: python -m py_compile matchup_advantages.py model_v1_5.py app.py backend/main.py weather_context.py
