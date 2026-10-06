@@ -1,0 +1,15 @@
+game_id,error
+401405077,missing paired moneyline
+401404149,missing paired moneyline
+401405085,missing paired moneyline
+401404150,missing paired moneyline
+401405104,missing paired moneyline
+401403916,missing paired moneyline
+401411143,missing paired moneyline
+401405129,missing paired moneyline
+401520232,missing paired moneyline
+401520252,missing paired moneyline
+401520322,missing paired moneyline
+401531918,<HTTPError 404: 'Not Found'>
+401520435,<HTTPError 404: 'Not Found'>
+401531927,<HTTPError 404: 'Not Found'>
