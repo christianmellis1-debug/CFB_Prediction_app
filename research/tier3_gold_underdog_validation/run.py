@@ -250,6 +250,7 @@ for grp,s in report['by_group'].items():
 lines += ['','## Price buckets','','| Price | ML record | ML ROI | ATS |','|---|---:|---:|---:|']
 for name,s in report['price_buckets'].items():
     ats=f"{s['ats_w']}–{s['ats_l']}–{s['ats_p']}" if s['ats_graded'] else '—'
-    lines.append(f"| {name} | {rec(s)} | {'—' if s['ml_roi'] is None else f'{s['ml_roi']:.1%}'} | {ats} |")
+    roi='—' if s['ml_roi'] is None else f"{s['ml_roi']:.1%}"
+    lines.append(f"| {name} | {rec(s)} | {roi} | {ats} |")
 (OUT/'README.md').write_text('\n'.join(lines)+'\n')
 print(json.dumps(report,indent=2),flush=True)
