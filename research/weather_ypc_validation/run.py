@@ -99,42 +99,42 @@ for vid,v in venues.items():
     if v.get('indoor') is False and g.get('latitude') is not None and g.get('longitude') is not None:
         venue_geo[vid]=g
 
-# Fetch hourly historical forecasts in coordinate batches for each season.
+# Fetch hourly historical forecasts only for actual game dates.
 weather={}; weather_errors=[]
-for season in SEASONS:
-    season_games=target[target.season.eq(season)]
-    vids=[]
-    for v in pd.to_numeric(season_games.venue_id,errors='coerce').dropna().unique():
-        vid=str(int(v))
-        if vid in venue_geo:vids.append(vid)
-    vids=sorted(set(vids))
-    if not vids:continue
-    start=season_games.start.min().date().isoformat()
-    end=(season_games.start.max()+pd.Timedelta(days=1)).date().isoformat()
-    for i in range(0,len(vids),8):
-        batch=vids[i:i+8]
-        params={
-          'latitude':','.join(str(venue_geo[v]['latitude']) for v in batch),
-          'longitude':','.join(str(venue_geo[v]['longitude']) for v in batch),
-          'start_date':start,'end_date':end,'timezone':'UTC','wind_speed_unit':'mph',
-          'hourly':'precipitation,snowfall,weather_code,wind_speed_10m,wind_gusts_10m'}
-        try:
-            p=get_json('https://historical-forecast-api.open-meteo.com/v1/forecast',params)
-            payloads=p if isinstance(p,list) else [p]
-            if len(payloads)!=len(batch):raise ValueError(f'weather batch length {len(payloads)} != {len(batch)}')
-            for vid,item in zip(batch,payloads):
-                h=item.get('hourly') or {}
-                times=pd.to_datetime(h.get('time',[]),utc=True,errors='coerce')
-                frame=pd.DataFrame({
-                    'time':times,
-                    'precipitation':pd.to_numeric(pd.Series(h.get('precipitation',[])),errors='coerce'),
-                    'snowfall':pd.to_numeric(pd.Series(h.get('snowfall',[])),errors='coerce'),
-                    'weather_code':pd.to_numeric(pd.Series(h.get('weather_code',[])),errors='coerce'),
-                    'wind_speed_10m':pd.to_numeric(pd.Series(h.get('wind_speed_10m',[])),errors='coerce'),
-                    'wind_gusts_10m':pd.to_numeric(pd.Series(h.get('wind_gusts_10m',[])),errors='coerce')})
-                weather[(season,vid)]=frame.dropna(subset=['time'])
-        except Exception as e:
-            weather_errors.append({'season':season,'venues':batch,'error':repr(e)})
+target['game_date_utc']=target.start.dt.date.astype(str)
+for date0,day_games in target.groupby('game_date_utc'):
+    date1=(pd.Timestamp(date0)+pd.Timedelta(days=1)).date().isoformat()
+    # Same date can contain games from only one season in this study, but key by season too.
+    for season,season_day_games in day_games.groupby('season'):
+        vids=[]
+        for v in pd.to_numeric(season_day_games.venue_id,errors='coerce').dropna().unique():
+            vid=str(int(v))
+            if vid in venue_geo:vids.append(vid)
+        vids=sorted(set(vids))
+        for i in range(0,len(vids),8):
+            batch=vids[i:i+8]
+            params={
+              'latitude':','.join(str(venue_geo[v]['latitude']) for v in batch),
+              'longitude':','.join(str(venue_geo[v]['longitude']) for v in batch),
+              'start_date':date0,'end_date':date1,'timezone':'UTC','wind_speed_unit':'mph',
+              'hourly':'precipitation,snowfall,weather_code,wind_speed_10m,wind_gusts_10m'}
+            try:
+                p=get_json('https://historical-forecast-api.open-meteo.com/v1/forecast',params)
+                payloads=p if isinstance(p,list) else [p]
+                if len(payloads)!=len(batch):raise ValueError(f'weather batch length {len(payloads)} != {len(batch)}')
+                for vid,item in zip(batch,payloads):
+                    h=item.get('hourly') or {}
+                    times=pd.to_datetime(h.get('time',[]),utc=True,errors='coerce')
+                    frame=pd.DataFrame({
+                        'time':times,
+                        'precipitation':pd.to_numeric(pd.Series(h.get('precipitation',[])),errors='coerce'),
+                        'snowfall':pd.to_numeric(pd.Series(h.get('snowfall',[])),errors='coerce'),
+                        'weather_code':pd.to_numeric(pd.Series(h.get('weather_code',[])),errors='coerce'),
+                        'wind_speed_10m':pd.to_numeric(pd.Series(h.get('wind_speed_10m',[])),errors='coerce'),
+                        'wind_gusts_10m':pd.to_numeric(pd.Series(h.get('wind_gusts_10m',[])),errors='coerce')})
+                    weather[(int(season),vid,date0)]=frame.dropna(subset=['time'])
+            except Exception as e:
+                weather_errors.append({'season':int(season),'date':date0,'venues':batch,'error':repr(e)})
 
 # Build pregame raw rushing profiles by target week.
 profiles={}
@@ -162,7 +162,7 @@ for _,g in target.iterrows():
     except: winner=None
     row['winner_side']=winner
     # Weather window is kickoff hour through four hours after kickoff.
-    wf=weather.get((season,vid))
+    wf=weather.get((season,vid,g.start.date().isoformat()))
     if indoor is False and wf is not None and not wf.empty:
         start=g.start.floor('h'); end=start+pd.Timedelta(hours=4)
         w=wf[(wf.time>=start)&(wf.time<=end)]
