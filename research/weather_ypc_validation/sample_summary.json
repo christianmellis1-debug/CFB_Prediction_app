@@ -1,0 +1,2249 @@
+{
+  "401635547": {
+    "top_keys": [
+      "againstTheSpread",
+      "boxscore",
+      "broadcasts",
+      "drives",
+      "format",
+      "gameInfo",
+      "header",
+      "leaders",
+      "meta",
+      "news",
+      "odds",
+      "pickcenter",
+      "scoringPlays",
+      "standings",
+      "videos",
+      "wallclockAvailable",
+      "winprobability"
+    ],
+    "gameInfo": {
+      "venue": {
+        "id": "3752",
+        "guid": "cba1fd96-fceb-3ccd-89bc-ec61231f9bd9",
+        "fullName": "Acrisure Stadium",
+        "address": {
+          "city": "Pittsburgh",
+          "state": "PA",
+          "zipCode": "15212",
+          "country": "USA"
+        },
+        "grass": true,
+        "images": [
+          {
+            "href": "https://a.espncdn.com/i/venues/college-football/day/interior/3752.jpg",
+            "width": 2000,
+            "height": 1125,
+            "alt": "",
+            "rel": [
+              "full",
+              "day",
+              "interior"
+            ]
+          }
+        ]
+      },
+      "attendance": 66087
+    },
+    "header_competition": {
+      "id": "401635547",
+      "uid": "s:20~l:23~e:401635547~c:401635547",
+      "date": "2024-09-14T19:30Z",
+      "dateValid": true,
+      "neutralSite": false,
+      "conferenceCompetition": false,
+      "boxscoreAvailable": true,
+      "commentaryAvailable": false,
+      "liveAvailable": false,
+      "onWatchESPN": true,
+      "recent": false,
+      "wallclockAvailable": true,
+      "boxscoreSource": "full",
+      "playByPlaySource": "full",
+      "competitors": [
+        {
+          "id": "221",
+          "uid": "s:20~l:23~t:221",
+          "order": 0,
+          "homeAway": "home",
+          "winner": true,
+          "team": {
+            "id": "221",
+            "guid": "f09e85bd-989f-dcff-53ac-0feda69b8959",
+            "uid": "s:20~l:23~t:221",
+            "location": "Pittsburgh",
+            "name": "Panthers",
+            "nickname": "Pitt",
+            "abbreviation": "PITT",
+            "displayName": "Pittsburgh Panthers",
+            "color": "003594",
+            "alternateColor": "ffb81c",
+            "logos": [
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/221.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "default"
+                ],
+                "lastUpdated": "2025-12-19T22:33Z"
+              },
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/221.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "dark"
+                ],
+                "lastUpdated": "2025-12-19T22:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/primary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/primary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/primary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/primary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/primary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/primary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/secondary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/secondary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/secondary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/secondary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/secondary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f09e85bd-989f-dcff-53ac-0feda69b8959/logos/secondary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:38Z"
+              }
+            ],
+            "groups": {
+              "id": "1"
+            },
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/college-football/team/_/id/221/pittsburgh-panthers",
+                "text": "Clubhouse"
+              }
+            ]
+          },
+          "score": "38",
+          "linescores": [
+            {
+              "displayValue": "10"
+            },
+            {
+              "displayValue": "7"
+            },
+            {
+              "displayValue": "7"
+            },
+            {
+              "displayValue": "14"
+            }
+          ],
+          "record": [
+            {
+              "type": "total",
+              "summary": "3-0",
+              "displayValue": "3-0"
+            },
+            {
+              "type": "home",
+              "summary": "2-0",
+              "displayValue": "2-0"
+            },
+            {
+              "type": "vsconf",
+              "summary": "0-0",
+              "displayValue": "0-0"
+            }
+          ],
+          "possession": false
+        },
+        {
+          "id": "277",
+          "uid": "s:20~l:23~t:277",
+          "order": 1,
+          "homeAway": "away",
+          "winner": false,
+          "team": {
+            "id": "277",
+            "guid": "e5ca2c6f-2389-9da3-43cd-995fad2e06c5",
+            "uid": "s:20~l:23~t:277",
+            "location": "West Virginia",
+            "name": "Mountaineers",
+            "nickname": "West Virginia",
+            "abbreviation": "WVU",
+            "displayName": "West Virginia Mountaineers",
+            "color": "eaaa00",
+            "alternateColor": "002855",
+            "logos": [
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/277.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "default"
+                ],
+                "lastUpdated": "2025-12-23T01:44Z"
+              },
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/277.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "dark"
+                ],
+                "lastUpdated": "2025-12-23T01:44Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/primary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/primary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/primary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/primary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/primary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/primary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/secondary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/secondary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/secondary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/secondary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/secondary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/e5ca2c6f-2389-9da3-43cd-995fad2e06c5/logos/secondary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              }
+            ],
+            "groups": {
+              "id": "4"
+            },
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/college-football/team/_/id/277/west-virginia-mountaineers",
+                "text": "Clubhouse"
+              }
+            ]
+          },
+          "score": "34",
+          "linescores": [
+            {
+              "displayValue": "7"
+            },
+            {
+              "displayValue": "10"
+            },
+            {
+              "displayValue": "7"
+            },
+            {
+              "displayValue": "10"
+            }
+          ],
+          "record": [
+            {
+              "type": "total",
+              "summary": "1-2",
+              "displayValue": "1-2"
+            },
+            {
+              "type": "road",
+              "summary": "0-1",
+              "displayValue": "0-1"
+            },
+            {
+              "type": "vsconf",
+              "summary": "0-0",
+              "displayValue": "0-0"
+            }
+          ],
+          "possession": false
+        }
+      ],
+      "status": {
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "broadcasts": [
+        {
+          "type": {
+            "id": "1",
+            "shortName": "TV"
+          },
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "ESPN2"
+          },
+          "lang": "en",
+          "region": "us",
+          "isNational": true
+        }
+      ],
+      "boxscoreMinutes": true
+    },
+    "weather": null
+  },
+  "401628487": {
+    "top_keys": [
+      "againstTheSpread",
+      "article",
+      "boxscore",
+      "broadcasts",
+      "drives",
+      "format",
+      "gameInfo",
+      "header",
+      "leaders",
+      "meta",
+      "news",
+      "odds",
+      "pickcenter",
+      "scoringPlays",
+      "standings",
+      "videos",
+      "wallclockAvailable",
+      "winprobability"
+    ],
+    "gameInfo": {
+      "venue": {
+        "id": "3953",
+        "guid": "5e913a56-62fe-3024-b9cb-8a064e81f2e7",
+        "fullName": "Huntington Bank Stadium",
+        "address": {
+          "city": "Minneapolis",
+          "state": "MN",
+          "zipCode": "55455",
+          "country": "USA"
+        },
+        "grass": false,
+        "images": [
+          {
+            "href": "https://a.espncdn.com/i/venues/college-football/day/interior/3953.jpg",
+            "width": 2000,
+            "height": 1125,
+            "alt": "",
+            "rel": [
+              "full",
+              "day",
+              "interior"
+            ]
+          }
+        ]
+      },
+      "attendance": 52048
+    },
+    "header_competition": {
+      "id": "401628487",
+      "uid": "s:20~l:23~e:401628487~c:401628487",
+      "date": "2024-09-21T23:30Z",
+      "dateValid": true,
+      "neutralSite": false,
+      "conferenceCompetition": true,
+      "boxscoreAvailable": true,
+      "commentaryAvailable": false,
+      "liveAvailable": false,
+      "onWatchESPN": false,
+      "recent": false,
+      "wallclockAvailable": true,
+      "boxscoreSource": "full",
+      "playByPlaySource": "full",
+      "competitors": [
+        {
+          "id": "135",
+          "uid": "s:20~l:23~t:135",
+          "order": 0,
+          "homeAway": "home",
+          "winner": false,
+          "team": {
+            "id": "135",
+            "guid": "8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2",
+            "uid": "s:20~l:23~t:135",
+            "location": "Minnesota",
+            "name": "Golden Gophers",
+            "nickname": "Minnesota",
+            "abbreviation": "MINN",
+            "displayName": "Minnesota Golden Gophers",
+            "color": "5e0a2f",
+            "alternateColor": "fab41c",
+            "logos": [
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/135.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "default"
+                ],
+                "lastUpdated": "2025-12-23T01:44Z"
+              },
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/135.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "dark"
+                ],
+                "lastUpdated": "2025-12-23T01:44Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/primary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/primary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/primary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/primary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/primary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/primary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/secondary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/secondary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/secondary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/secondary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/secondary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/8389ae8e-d0ed-c4e5-b903-fcc01fc30fc2/logos/secondary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:34Z"
+              }
+            ],
+            "groups": {
+              "id": "5"
+            },
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/college-football/team/_/id/135/minnesota-golden-gophers",
+                "text": "Clubhouse"
+              }
+            ]
+          },
+          "score": "14",
+          "linescores": [
+            {
+              "displayValue": "0"
+            },
+            {
+              "displayValue": "14"
+            },
+            {
+              "displayValue": "0"
+            },
+            {
+              "displayValue": "0"
+            }
+          ],
+          "record": [
+            {
+              "type": "total",
+              "summary": "2-2",
+              "displayValue": "2-2"
+            },
+            {
+              "type": "home",
+              "summary": "2-2",
+              "displayValue": "2-2"
+            },
+            {
+              "type": "vsconf",
+              "summary": "0-1",
+              "displayValue": "0-1"
+            }
+          ],
+          "possession": false
+        },
+        {
+          "id": "2294",
+          "uid": "s:20~l:23~t:2294",
+          "order": 1,
+          "homeAway": "away",
+          "winner": true,
+          "team": {
+            "id": "2294",
+            "guid": "dbe71bf8-160a-45af-c855-b444d68fbe76",
+            "uid": "s:20~l:23~t:2294",
+            "location": "Iowa",
+            "name": "Hawkeyes",
+            "nickname": "Iowa",
+            "abbreviation": "IOWA",
+            "displayName": "Iowa Hawkeyes",
+            "color": "231f20",
+            "alternateColor": "fcd116",
+            "logos": [
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "default"
+                ],
+                "lastUpdated": "2025-12-23T01:44Z"
+              },
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/2294.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "dark"
+                ],
+                "lastUpdated": "2025-12-23T01:44Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/primary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/primary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/primary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/primary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/primary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/primary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/secondary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/secondary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/secondary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/secondary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/secondary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/dbe71bf8-160a-45af-c855-b444d68fbe76/logos/secondary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:29Z"
+              }
+            ],
+            "groups": {
+              "id": "5"
+            },
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/college-football/team/_/id/2294/iowa-hawkeyes",
+                "text": "Clubhouse"
+              }
+            ]
+          },
+          "score": "31",
+          "linescores": [
+            {
+              "displayValue": "7"
+            },
+            {
+              "displayValue": "0"
+            },
+            {
+              "displayValue": "17"
+            },
+            {
+              "displayValue": "7"
+            }
+          ],
+          "record": [
+            {
+              "type": "total",
+              "summary": "3-1",
+              "displayValue": "3-1"
+            },
+            {
+              "type": "road",
+              "summary": "1-0",
+              "displayValue": "1-0"
+            },
+            {
+              "type": "vsconf",
+              "summary": "1-0",
+              "displayValue": "1-0"
+            }
+          ],
+          "possession": false
+        }
+      ],
+      "status": {
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "broadcasts": [
+        {
+          "type": {
+            "id": "1",
+            "shortName": "TV"
+          },
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "NBC"
+          },
+          "lang": "en",
+          "region": "us",
+          "isNational": true
+        }
+      ],
+      "groups": {
+        "id": "5",
+        "name": "Big Ten Conference",
+        "abbreviation": "big10",
+        "shortName": "Big Ten",
+        "midsizeName": "Big Ten"
+      },
+      "boxscoreMinutes": true
+    },
+    "weather": null
+  },
+  "401628414": {
+    "top_keys": [
+      "againstTheSpread",
+      "article",
+      "boxscore",
+      "broadcasts",
+      "drives",
+      "format",
+      "gameInfo",
+      "header",
+      "leaders",
+      "meta",
+      "news",
+      "odds",
+      "pickcenter",
+      "scoringPlays",
+      "standings",
+      "videos",
+      "wallclockAvailable",
+      "winprobability"
+    ],
+    "gameInfo": {
+      "venue": {
+        "id": "3974",
+        "guid": "b66d33d7-3b2e-33d5-ac87-ba5e752596ca",
+        "fullName": "Vaught-Hemingway Stadium",
+        "address": {
+          "city": "Oxford",
+          "state": "MS",
+          "zipCode": "38655",
+          "country": "USA"
+        },
+        "grass": true,
+        "images": [
+          {
+            "href": "https://a.espncdn.com/i/venues/college-football/day/3974.jpg",
+            "width": 2000,
+            "height": 1125,
+            "alt": "",
+            "rel": [
+              "full",
+              "day"
+            ]
+          },
+          {
+            "href": "https://a.espncdn.com/i/venues/college-football/day/interior/3974.jpg",
+            "width": 2000,
+            "height": 1125,
+            "alt": "",
+            "rel": [
+              "full",
+              "day",
+              "interior"
+            ]
+          }
+        ]
+      },
+      "attendance": 68126
+    },
+    "header_competition": {
+      "id": "401628414",
+      "uid": "s:20~l:23~e:401628414~c:401628414",
+      "date": "2024-11-09T20:30Z",
+      "dateValid": true,
+      "neutralSite": false,
+      "conferenceCompetition": true,
+      "boxscoreAvailable": true,
+      "commentaryAvailable": false,
+      "liveAvailable": false,
+      "onWatchESPN": true,
+      "recent": false,
+      "wallclockAvailable": true,
+      "boxscoreSource": "full",
+      "playByPlaySource": "full",
+      "competitors": [
+        {
+          "id": "145",
+          "uid": "s:20~l:23~t:145",
+          "order": 0,
+          "homeAway": "home",
+          "winner": true,
+          "team": {
+            "id": "145",
+            "guid": "f6196074-c394-4821-7b0b-c4271d9467de",
+            "uid": "s:20~l:23~t:145",
+            "location": "Ole Miss",
+            "name": "Rebels",
+            "nickname": "Ole Miss",
+            "abbreviation": "MISS",
+            "displayName": "Ole Miss Rebels",
+            "color": "13294b",
+            "alternateColor": "cf142b",
+            "logos": [
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "default"
+                ],
+                "lastUpdated": "2025-12-19T23:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/145.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "dark"
+                ],
+                "lastUpdated": "2025-12-19T23:47Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/primary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/primary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/primary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/primary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/primary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/primary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/secondary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/secondary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/secondary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/secondary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/secondary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/f6196074-c394-4821-7b0b-c4271d9467de/logos/secondary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:37Z"
+              }
+            ],
+            "groups": {
+              "id": "8"
+            },
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/college-football/team/_/id/145/ole-miss-rebels",
+                "text": "Clubhouse"
+              }
+            ]
+          },
+          "score": "28",
+          "linescores": [
+            {
+              "displayValue": "10"
+            },
+            {
+              "displayValue": "6"
+            },
+            {
+              "displayValue": "6"
+            },
+            {
+              "displayValue": "6"
+            }
+          ],
+          "record": [
+            {
+              "type": "total",
+              "summary": "8-2",
+              "displayValue": "8-2"
+            },
+            {
+              "type": "home",
+              "summary": "5-1",
+              "displayValue": "5-1"
+            },
+            {
+              "type": "vsconf",
+              "summary": "4-2",
+              "displayValue": "4-2"
+            }
+          ],
+          "possession": false,
+          "rank": 16
+        },
+        {
+          "id": "61",
+          "uid": "s:20~l:23~t:61",
+          "order": 1,
+          "homeAway": "away",
+          "winner": false,
+          "team": {
+            "id": "61",
+            "guid": "4351fef8-fe69-53b1-ea57-72684b36ec35",
+            "uid": "s:20~l:23~t:61",
+            "location": "Georgia",
+            "name": "Bulldogs",
+            "nickname": "Georgia",
+            "abbreviation": "UGA",
+            "displayName": "Georgia Bulldogs",
+            "color": "ba0c2f",
+            "alternateColor": "2c2a29",
+            "logos": [
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "default"
+                ],
+                "lastUpdated": "2025-12-19T23:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/61.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "dark"
+                ],
+                "lastUpdated": "2025-12-19T23:47Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/primary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/primary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/primary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/primary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/primary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/primary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/secondary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/secondary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/secondary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/secondary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/secondary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/4351fef8-fe69-53b1-ea57-72684b36ec35/logos/secondary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:27Z"
+              }
+            ],
+            "groups": {
+              "id": "8"
+            },
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/college-football/team/_/id/61/georgia-bulldogs",
+                "text": "Clubhouse"
+              }
+            ]
+          },
+          "score": "10",
+          "linescores": [
+            {
+              "displayValue": "7"
+            },
+            {
+              "displayValue": "0"
+            },
+            {
+              "displayValue": "3"
+            },
+            {
+              "displayValue": "0"
+            }
+          ],
+          "record": [
+            {
+              "type": "total",
+              "summary": "7-2",
+              "displayValue": "7-2"
+            },
+            {
+              "type": "road",
+              "summary": "2-2",
+              "displayValue": "2-2"
+            },
+            {
+              "type": "vsconf",
+              "summary": "5-2",
+              "displayValue": "5-2"
+            }
+          ],
+          "possession": false,
+          "rank": 3
+        }
+      ],
+      "status": {
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "broadcasts": [
+        {
+          "type": {
+            "id": "1",
+            "shortName": "TV"
+          },
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "ABC"
+          },
+          "lang": "en",
+          "region": "us",
+          "isNational": true
+        },
+        {
+          "type": {
+            "id": "4",
+            "shortName": "Streaming"
+          },
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "ESPN+"
+          },
+          "lang": "en",
+          "region": "us",
+          "isNational": true
+        },
+        {
+          "type": {
+            "id": "5",
+            "shortName": "Radio"
+          },
+          "url": "https://cerebro.espn.com/cerebro/search/airing/a121092728",
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "ERADM"
+          },
+          "lang": "en",
+          "region": "us",
+          "isNational": true
+        }
+      ],
+      "groups": {
+        "id": "8",
+        "name": "Southeastern Conference",
+        "abbreviation": "sec",
+        "shortName": "SEC",
+        "midsizeName": "SEC"
+      },
+      "boxscoreMinutes": true
+    },
+    "weather": null
+  },
+  "401858202": {
+    "top_keys": [
+      "againstTheSpread",
+      "article",
+      "boxscore",
+      "broadcasts",
+      "drives",
+      "format",
+      "gameInfo",
+      "header",
+      "leaders",
+      "meta",
+      "news",
+      "odds",
+      "pickcenter",
+      "scoringPlays",
+      "standings",
+      "videos",
+      "wallclockAvailable",
+      "winprobability"
+    ],
+    "gameInfo": {
+      "venue": {
+        "id": "3923",
+        "guid": "f7127943-ec55-3505-9d4d-80bedee0c79a",
+        "fullName": "Scott Stadium",
+        "address": {
+          "city": "Charlottesville",
+          "state": "VA",
+          "zipCode": "22903",
+          "country": "USA"
+        },
+        "grass": false,
+        "images": [
+          {
+            "href": "https://a.espncdn.com/i/venues/college-football/day/3923.jpg",
+            "width": 2000,
+            "height": 1125,
+            "alt": "",
+            "rel": [
+              "full",
+              "day"
+            ]
+          },
+          {
+            "href": "https://a.espncdn.com/i/venues/college-football/day/interior/3923.jpg",
+            "width": 2000,
+            "height": 1125,
+            "alt": "",
+            "rel": [
+              "full",
+              "day",
+              "interior"
+            ]
+          }
+        ]
+      },
+      "attendance": 62779
+    },
+    "header_competition": {
+      "id": "401858202",
+      "uid": "s:20~l:23~e:401858202~c:401858202",
+      "date": "2026-08-29T19:30Z",
+      "dateValid": true,
+      "neutralSite": false,
+      "conferenceCompetition": true,
+      "boxscoreAvailable": true,
+      "commentaryAvailable": false,
+      "liveAvailable": false,
+      "onWatchESPN": true,
+      "recent": false,
+      "wallclockAvailable": true,
+      "boxscoreSource": "full",
+      "playByPlaySource": "full",
+      "competitors": [
+        {
+          "id": "258",
+          "uid": "s:20~l:23~t:258",
+          "order": 0,
+          "homeAway": "home",
+          "winner": true,
+          "team": {
+            "id": "258",
+            "guid": "b5c648b5-0b1f-ba55-a77e-8150a1869d4c",
+            "uid": "s:20~l:23~t:258",
+            "location": "Virginia",
+            "name": "Cavaliers",
+            "nickname": "Virginia",
+            "abbreviation": "UVA",
+            "displayName": "Virginia Cavaliers",
+            "color": "232d4b",
+            "alternateColor": "f84c1e",
+            "logos": [
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "default"
+                ],
+                "lastUpdated": "2025-12-19T22:33Z"
+              },
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/258.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "dark"
+                ],
+                "lastUpdated": "2025-12-19T22:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/primary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/primary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/primary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/primary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/primary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/primary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/secondary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/secondary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/secondary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/secondary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/secondary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/b5c648b5-0b1f-ba55-a77e-8150a1869d4c/logos/secondary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:48Z"
+              }
+            ],
+            "groups": {
+              "id": "1"
+            },
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/college-football/team/_/id/258/virginia-cavaliers",
+                "text": "Clubhouse"
+              }
+            ]
+          },
+          "score": "34",
+          "linescores": [
+            {
+              "displayValue": "10"
+            },
+            {
+              "displayValue": "7"
+            },
+            {
+              "displayValue": "7"
+            },
+            {
+              "displayValue": "10"
+            }
+          ],
+          "record": [
+            {
+              "type": "total",
+              "summary": "1-0",
+              "displayValue": "1-0"
+            },
+            {
+              "type": "home",
+              "summary": "1-0",
+              "displayValue": "1-0"
+            },
+            {
+              "type": "vsconf",
+              "summary": "1-0",
+              "displayValue": "1-0"
+            }
+          ],
+          "possession": false
+        },
+        {
+          "id": "152",
+          "uid": "s:20~l:23~t:152",
+          "order": 1,
+          "homeAway": "away",
+          "winner": false,
+          "team": {
+            "id": "152",
+            "guid": "1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed",
+            "uid": "s:20~l:23~t:152",
+            "location": "NC State",
+            "name": "Wolfpack",
+            "nickname": "NC State",
+            "abbreviation": "NCSU",
+            "displayName": "NC State Wolfpack",
+            "color": "cc0000",
+            "alternateColor": "ffffff",
+            "logos": [
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/152.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "default"
+                ],
+                "lastUpdated": "2025-12-19T22:33Z"
+              },
+              {
+                "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/152.png",
+                "width": 500,
+                "height": 500,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "dark"
+                ],
+                "lastUpdated": "2025-12-19T22:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/primary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/primary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/primary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/primary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/primary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/primary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "primary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/secondary_logo_on_white_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_white_color"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/secondary_logo_on_black_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_black_color"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/secondary_logo_on_primary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_primary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/secondary_logo_on_secondary_color.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_on_secondary_color"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/secondary_logo_black.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_black"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              },
+              {
+                "href": "https://a.espncdn.com/guid/1a66a197-258b-8ac5-56f9-6f4b6ec4d4ed/logos/secondary_logo_white.png",
+                "width": 4096,
+                "height": 4096,
+                "alt": "",
+                "rel": [
+                  "full",
+                  "secondary_logo_white"
+                ],
+                "lastUpdated": "2026-07-23T17:35Z"
+              }
+            ],
+            "groups": {
+              "id": "1"
+            },
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/college-football/team/_/id/152/nc-state-wolfpack",
+                "text": "Clubhouse"
+              }
+            ]
+          },
+          "score": "8",
+          "linescores": [
+            {
+              "displayValue": "0"
+            },
+            {
+              "displayValue": "0"
+            },
+            {
+              "displayValue": "8"
+            },
+            {
+              "displayValue": "0"
+            }
+          ],
+          "record": [
+            {
+              "type": "total",
+              "summary": "0-1",
+              "displayValue": "0-1"
+            },
+            {
+              "type": "road",
+              "summary": "0-1",
+              "displayValue": "0-1"
+            },
+            {
+              "type": "vsconf",
+              "summary": "0-1",
+              "displayValue": "0-1"
+            }
+          ],
+          "possession": false
+        }
+      ],
+      "status": {
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "broadcasts": [
+        {
+          "type": {
+            "id": "1",
+            "shortName": "TV"
+          },
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "ESPN"
+          },
+          "lang": "en",
+          "region": "us",
+          "isNational": true
+        }
+      ],
+      "groups": {
+        "id": "1",
+        "name": "Atlantic Coast Conference",
+        "abbreviation": "acc",
+        "shortName": "ACC",
+        "midsizeName": "ACC"
+      },
+      "boxscoreMinutes": true
+    },
+    "weather": null
+  }
+}
