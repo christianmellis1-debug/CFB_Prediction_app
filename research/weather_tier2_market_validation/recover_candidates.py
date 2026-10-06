@@ -6,7 +6,7 @@ import json, math, time
 import pandas as pd
 
 ROOT=Path(__file__).resolve().parents[2]
-OUT=Path(__file__).resolve().parent
+OUT=ROOT/'research/weather_ypc_validation'
 THUNDER={95,96,99}
 
 def get_json(base,params=None,tries=5,timeout=30):
