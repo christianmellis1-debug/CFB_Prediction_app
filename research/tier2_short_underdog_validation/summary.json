@@ -6,12 +6,12 @@
     "ml_win_rate": 0.6181818181818182,
     "ml_profit_10": 161.56,
     "ml_roi": 0.29374545454545453,
-    "ats_graded": 52,
-    "ats_w": 32,
-    "ats_l": 20,
+    "ats_graded": 55,
+    "ats_w": 34,
+    "ats_l": 21,
     "ats_p": 0,
-    "ats_win_rate_ex_push": 0.6153846153846154,
-    "missing_spread": 3
+    "ats_win_rate_ex_push": 0.6181818181818182,
+    "missing_spread": 0
   },
   "by_season": {
     "2024": {
@@ -49,12 +49,56 @@
       "ml_win_rate": 0.6666666666666666,
       "ml_profit_10": 10.52,
       "ml_roi": 0.3506666666666666,
-      "ats_graded": 0,
-      "ats_w": 0,
-      "ats_l": 0,
+      "ats_graded": 3,
+      "ats_w": 2,
+      "ats_l": 1,
       "ats_p": 0,
-      "ats_win_rate_ex_push": null,
-      "missing_spread": 3
+      "ats_win_rate_ex_push": 0.6666666666666666,
+      "missing_spread": 0
+    }
+  },
+  "turnover_comparison": {
+    "Advantage": {
+      "games": 55,
+      "ml_w": 34,
+      "ml_l": 21,
+      "ml_win_rate": 0.6181818181818182,
+      "ml_profit_10": 161.56,
+      "ml_roi": 0.29374545454545453,
+      "ats_graded": 55,
+      "ats_w": 34,
+      "ats_l": 21,
+      "ats_p": 0,
+      "ats_win_rate_ex_push": 0.6181818181818182,
+      "missing_spread": 0
+    },
+    "Disadvantage": {
+      "games": 80,
+      "ml_w": 32,
+      "ml_l": 48,
+      "ml_win_rate": 0.4,
+      "ml_profit_10": -116.44,
+      "ml_roi": -0.14554999999999998,
+      "ats_graded": 80,
+      "ats_w": 36,
+      "ats_l": 44,
+      "ats_p": 0,
+      "ats_win_rate_ex_push": 0.45,
+      "missing_spread": 0
+    },
+    "Tied": {
+      "games": 9,
+      "ml_w": 4,
+      "ml_l": 5,
+      "ml_win_rate": 0.4444444444444444,
+      "ml_profit_10": -2.0,
+      "ml_roi": -0.022222222222222223,
+      "ats_graded": 9,
+      "ats_w": 4,
+      "ats_l": 5,
+      "ats_p": 0,
+      "ats_win_rate_ex_push": 0.4444444444444444,
+      "missing_spread": 0
     }
   },
   "secondary_checks": {
@@ -66,12 +110,12 @@
         "ml_win_rate": 0.6585365853658537,
         "ml_profit_10": 159.04,
         "ml_roi": 0.3879024390243902,
-        "ats_graded": 38,
-        "ats_w": 25,
-        "ats_l": 13,
+        "ats_graded": 41,
+        "ats_w": 27,
+        "ats_l": 14,
         "ats_p": 0,
-        "ats_win_rate_ex_push": 0.6578947368421053,
-        "missing_spread": 3
+        "ats_win_rate_ex_push": 0.6585365853658537,
+        "missing_spread": 0
       },
       "by_season": {
         "2024": {
@@ -109,12 +153,12 @@
           "ml_win_rate": 0.6666666666666666,
           "ml_profit_10": 10.52,
           "ml_roi": 0.3506666666666666,
-          "ats_graded": 0,
-          "ats_w": 0,
-          "ats_l": 0,
+          "ats_graded": 3,
+          "ats_w": 2,
+          "ats_l": 1,
           "ats_p": 0,
-          "ats_win_rate_ex_push": null,
-          "missing_spread": 3
+          "ats_win_rate_ex_push": 0.6666666666666666,
+          "missing_spread": 0
         }
       }
     },
@@ -126,12 +170,12 @@
         "ml_win_rate": 0.71875,
         "ml_profit_10": 166.52,
         "ml_roi": 0.5203749999999999,
-        "ats_graded": 31,
-        "ats_w": 22,
+        "ats_graded": 32,
+        "ats_w": 23,
         "ats_l": 9,
         "ats_p": 0,
-        "ats_win_rate_ex_push": 0.7096774193548387,
-        "missing_spread": 1
+        "ats_win_rate_ex_push": 0.71875,
+        "missing_spread": 0
       },
       "by_season": {
         "2024": {
@@ -169,12 +213,12 @@
           "ml_win_rate": 1.0,
           "ml_profit_10": 11.0,
           "ml_roi": 1.1,
-          "ats_graded": 0,
-          "ats_w": 0,
+          "ats_graded": 1,
+          "ats_w": 1,
           "ats_l": 0,
           "ats_p": 0,
-          "ats_win_rate_ex_push": null,
-          "missing_spread": 1
+          "ats_win_rate_ex_push": 1.0,
+          "missing_spread": 0
         }
       }
     },
@@ -186,12 +230,12 @@
         "ml_win_rate": 0.8,
         "ml_profit_10": 137.02,
         "ml_roi": 0.6850999999999999,
-        "ats_graded": 19,
-        "ats_w": 15,
+        "ats_graded": 20,
+        "ats_w": 16,
         "ats_l": 4,
         "ats_p": 0,
-        "ats_win_rate_ex_push": 0.7894736842105263,
-        "missing_spread": 1
+        "ats_win_rate_ex_push": 0.8,
+        "missing_spread": 0
       },
       "by_season": {
         "2024": {
@@ -229,12 +273,12 @@
           "ml_win_rate": 1.0,
           "ml_profit_10": 11.0,
           "ml_roi": 1.1,
-          "ats_graded": 0,
-          "ats_w": 0,
+          "ats_graded": 1,
+          "ats_w": 1,
           "ats_l": 0,
           "ats_p": 0,
-          "ats_win_rate_ex_push": null,
-          "missing_spread": 1
+          "ats_win_rate_ex_push": 1.0,
+          "missing_spread": 0
         }
       }
     },
@@ -246,12 +290,12 @@
         "ml_win_rate": 0.6818181818181818,
         "ml_profit_10": 88.04,
         "ml_roi": 0.40018181818181814,
-        "ats_graded": 20,
-        "ats_w": 13,
+        "ats_graded": 22,
+        "ats_w": 15,
         "ats_l": 7,
         "ats_p": 0,
-        "ats_win_rate_ex_push": 0.65,
-        "missing_spread": 2
+        "ats_win_rate_ex_push": 0.6818181818181818,
+        "missing_spread": 0
       },
       "by_season": {
         "2024": {
@@ -289,12 +333,12 @@
           "ml_win_rate": 1.0,
           "ml_profit_10": 20.52,
           "ml_roi": 1.026,
-          "ats_graded": 0,
-          "ats_w": 0,
+          "ats_graded": 2,
+          "ats_w": 2,
           "ats_l": 0,
           "ats_p": 0,
-          "ats_win_rate_ex_push": null,
-          "missing_spread": 2
+          "ats_win_rate_ex_push": 1.0,
+          "missing_spread": 0
         }
       }
     },
@@ -306,12 +350,12 @@
         "ml_win_rate": 0.6451612903225806,
         "ml_profit_10": 106.54,
         "ml_roi": 0.3436774193548387,
-        "ats_graded": 30,
-        "ats_w": 19,
+        "ats_graded": 31,
+        "ats_w": 20,
         "ats_l": 11,
         "ats_p": 0,
-        "ats_win_rate_ex_push": 0.6333333333333333,
-        "missing_spread": 1
+        "ats_win_rate_ex_push": 0.6451612903225806,
+        "missing_spread": 0
       },
       "by_season": {
         "2024": {
@@ -349,12 +393,12 @@
           "ml_win_rate": 1.0,
           "ml_profit_10": 9.52,
           "ml_roi": 0.952,
-          "ats_graded": 0,
-          "ats_w": 0,
+          "ats_graded": 1,
+          "ats_w": 1,
           "ats_l": 0,
           "ats_p": 0,
-          "ats_win_rate_ex_push": null,
-          "missing_spread": 1
+          "ats_win_rate_ex_push": 1.0,
+          "missing_spread": 0
         }
       }
     },
@@ -366,12 +410,12 @@
         "ml_win_rate": 0.6875,
         "ml_profit_10": 65.04,
         "ml_roi": 0.4065,
-        "ats_graded": 15,
-        "ats_w": 10,
+        "ats_graded": 16,
+        "ats_w": 11,
         "ats_l": 5,
         "ats_p": 0,
-        "ats_win_rate_ex_push": 0.6666666666666666,
-        "missing_spread": 1
+        "ats_win_rate_ex_push": 0.6875,
+        "missing_spread": 0
       },
       "by_season": {
         "2024": {
@@ -409,12 +453,12 @@
           "ml_win_rate": 1.0,
           "ml_profit_10": 9.52,
           "ml_roi": 0.952,
-          "ats_graded": 0,
-          "ats_w": 0,
+          "ats_graded": 1,
+          "ats_w": 1,
           "ats_l": 0,
           "ats_p": 0,
-          "ats_win_rate_ex_push": null,
-          "missing_spread": 1
+          "ats_win_rate_ex_push": 1.0,
+          "missing_spread": 0
         }
       }
     }
