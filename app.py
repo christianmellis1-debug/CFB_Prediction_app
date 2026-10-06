@@ -1741,8 +1741,10 @@ with cards_tab:
                     missing_data_note = '<div class="risk-note">Updated pregame metrics unavailable: ' + escape(", ".join(absent)) + ' · prior-data fallback. FCS games are excluded from the scoring fallback; advanced summaries may also be delayed or missing.</div>'
             away_logo = team_logo_url(game.iloc[0]["away_id"]) if len(game) == 1 else ""
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
-            away_logo_html = f'<img class="team-logo" src="{logo_sources.get(away_logo, away_logo)}" alt="{escape(str(r['Away Team']), quote=True)} logo" width="34" height="34" />' if away_logo else ""
-            home_logo_html = f'<img class="team-logo" src="{logo_sources.get(home_logo, home_logo)}" alt="{escape(str(r['Home Team']), quote=True)} logo" width="34" height="34" />' if home_logo else ""
+            away_alt = escape(str(r["Away Team"]), quote=True)
+            home_alt = escape(str(r["Home Team"]), quote=True)
+            away_logo_html = f'<img class="team-logo" src="{logo_sources.get(away_logo, away_logo)}" alt="{away_alt} logo" width="34" height="34" />' if away_logo else ""
+            home_logo_html = f'<img class="team-logo" src="{logo_sources.get(home_logo, home_logo)}" alt="{home_alt} logo" width="34" height="34" />' if home_logo else ""
             home_badge, away_badge = "", ""
             if len(game) == 1:
                 for data_side in ("home", "away"):
