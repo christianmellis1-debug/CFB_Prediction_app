@@ -53,6 +53,7 @@ print('building pregame rushing profiles',flush=True)
 profiles={}
 for season in SEASONS:
     s=normalize_fbs_schedule(schedules[season]).copy()
+    s=s[s.season_type.astype(str).str.lower().eq('regular')].copy()
     for col in ('season','week','game_id','home_id','away_id'):
         s[col]=pd.to_numeric(s[col],errors='coerce')
     s=s.dropna(subset=['week','game_id','home_id','away_id'])
