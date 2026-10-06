@@ -1,0 +1,28 @@
+name: Week 6 weather Tier 2 live scan
+on:
+  push:
+    branches: [research/week6-weather-tier2-live-scan]
+    paths:
+      - research/week6_weather_tier2_live_scan/run.py
+      - .github/workflows/week6-weather-tier2-live-scan.yml
+permissions:
+  contents: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt fastapi
+      - run: python -u research/week6_weather_tier2_live_scan/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/week6_weather_tier2_live_scan
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Week 6 Weather Tier 2 live scan'
+            git push origin HEAD:research/week6-weather-tier2-live-scan
+          fi
