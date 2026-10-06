@@ -1,7 +1,7 @@
-"""Pregame weather context for Value Picks.
+"""Game-window weather context for matchup cards and Value Picks.
 
-Uses ESPN venue metadata plus Open-Meteo. Weather is descriptive input only;
-selection logic remains in matchup_advantages.select_waterfall.
+Uses ESPN venue metadata plus Open-Meteo. Weather is descriptive context; the
+Tier 2 selection rule remains in matchup_advantages.select_waterfall.
 """
 from __future__ import annotations
 
@@ -62,41 +62,56 @@ def _geocode(address):
     return float(lat), float(lon)
 
 
-def _hourly_weather(lat, lon, kickoff):
+def _weather_code_label(code):
+    try:
+        code = int(code)
+    except (TypeError, ValueError, OverflowError):
+        return "Conditions unavailable"
+    if code == 0:
+        return "Clear"
+    if code == 1:
+        return "Mainly clear"
+    if code == 2:
+        return "Partly cloudy"
+    if code == 3:
+        return "Overcast"
+    if code in {45, 48}:
+        return "Fog"
+    if code in {51, 53, 55}:
+        return "Drizzle"
+    if code in {56, 57}:
+        return "Freezing drizzle"
+    if code in {61, 63, 65}:
+        return "Rain"
+    if code in {66, 67}:
+        return "Freezing rain"
+    if code in {71, 73, 75, 77}:
+        return "Snow"
+    if code in {80, 81, 82}:
+        return "Rain showers"
+    if code in {85, 86}:
+        return "Snow showers"
+    if code in THUNDER_CODES:
+        return "Thunderstorms"
+    return "Variable conditions"
+
+
+def _series(hourly, key, length):
+    raw = hourly.get(key)
+    if not isinstance(raw, list) or len(raw) != length:
+        raw = [None] * length
+    return pd.to_numeric(pd.Series(raw), errors="coerce")
+
+
+def _summarize_window(frame, kickoff, source_type):
     kickoff = pd.to_datetime(kickoff, utc=True, errors="coerce")
-    if pd.isna(kickoff):
+    if pd.isna(kickoff) or frame.empty:
         return None
-    start_date = kickoff.date()
-    end_date = (kickoff + pd.Timedelta(hours=5)).date()
-    today = datetime.now(timezone.utc).date()
-    params = {
-        "latitude": lat,
-        "longitude": lon,
-        "start_date": start_date.isoformat(),
-        "end_date": end_date.isoformat(),
-        "timezone": "UTC",
-        "wind_speed_unit": "mph",
-        "hourly": "precipitation,snowfall,weather_code,wind_speed_10m,wind_gusts_10m",
-    }
-    if start_date < today:
-        base = "https://historical-forecast-api.open-meteo.com/v1/forecast"
-    else:
-        base = "https://api.open-meteo.com/v1/forecast"
-    payload = _json(base, params)
-    hourly = payload.get("hourly") or {}
-    times = pd.to_datetime(hourly.get("time", []), utc=True, errors="coerce")
-    frame = pd.DataFrame({
-        "time": times,
-        "precipitation": pd.to_numeric(pd.Series(hourly.get("precipitation", [])), errors="coerce"),
-        "snowfall": pd.to_numeric(pd.Series(hourly.get("snowfall", [])), errors="coerce"),
-        "weather_code": pd.to_numeric(pd.Series(hourly.get("weather_code", [])), errors="coerce"),
-        "wind_speed_10m": pd.to_numeric(pd.Series(hourly.get("wind_speed_10m", [])), errors="coerce"),
-        "wind_gusts_10m": pd.to_numeric(pd.Series(hourly.get("wind_gusts_10m", [])), errors="coerce"),
-    }).dropna(subset=["time"])
     start = kickoff.floor("h")
     window = frame[(frame.time >= start) & (frame.time <= start + pd.Timedelta(hours=4))]
     if window.empty:
         return None
+
     precip = float(window.precipitation.fillna(0).sum())
     snow = float(window.snowfall.fillna(0).sum())
     wind = float(window.wind_speed_10m.max()) if window.wind_speed_10m.notna().any() else math.nan
@@ -112,23 +127,76 @@ def _hourly_weather(lat, lon, kickoff):
         weather_type = "Wind only"
     else:
         weather_type = "Ordinary"
+
+    first = window.iloc[0]
+    temp = float(first.temperature_2m) if pd.notna(first.temperature_2m) else math.nan
+    feels = float(first.apparent_temperature) if pd.notna(first.apparent_temperature) else math.nan
+    kickoff_code = int(first.weather_code) if pd.notna(first.weather_code) else None
+    kickoff_wind = float(first.wind_speed_10m) if pd.notna(first.wind_speed_10m) else math.nan
     return {
         "status": "ok",
         "inclement": bool(wet or windy),
         "weather_type": weather_type,
+        "condition": _weather_code_label(kickoff_code),
+        "temperature_f": temp,
+        "feels_like_f": feels,
+        "kickoff_wind_mph": kickoff_wind,
         "precip_mm": precip,
         "snowfall": snow,
         "max_wind_mph": wind,
         "max_gust_mph": gust,
         "weather_codes": sorted(codes),
+        "source_type": source_type,
     }
 
 
-def build_weather_context(schedule, week, game_ids=None):
-    """Return game-id keyed weather context for selected candidate games.
+def _hourly_weather(lat, lon, kickoff):
+    kickoff = pd.to_datetime(kickoff, utc=True, errors="coerce")
+    if pd.isna(kickoff):
+        return None
+    start_date = kickoff.date()
+    end_date = (kickoff + pd.Timedelta(hours=5)).date()
+    today = datetime.now(timezone.utc).date()
+    params = {
+        "latitude": lat,
+        "longitude": lon,
+        "start_date": start_date.isoformat(),
+        "end_date": end_date.isoformat(),
+        "timezone": "UTC",
+        "temperature_unit": "fahrenheit",
+        "wind_speed_unit": "mph",
+        "hourly": "temperature_2m,apparent_temperature,precipitation,snowfall,weather_code,wind_speed_10m,wind_gusts_10m",
+    }
+    if start_date < today:
+        base = "https://historical-forecast-api.open-meteo.com/v1/forecast"
+        source_type = "Historical game weather"
+    else:
+        base = "https://api.open-meteo.com/v1/forecast"
+        source_type = "Forecast"
+    payload = _json(base, params)
+    hourly = payload.get("hourly") or {}
+    times = pd.to_datetime(hourly.get("time", []), utc=True, errors="coerce")
+    n = len(times)
+    frame = pd.DataFrame({
+        "time": times,
+        "temperature_2m": _series(hourly, "temperature_2m", n),
+        "apparent_temperature": _series(hourly, "apparent_temperature", n),
+        "precipitation": _series(hourly, "precipitation", n),
+        "snowfall": _series(hourly, "snowfall", n),
+        "weather_code": _series(hourly, "weather_code", n),
+        "wind_speed_10m": _series(hourly, "wind_speed_10m", n),
+        "wind_gusts_10m": _series(hourly, "wind_gusts_10m", n),
+    }).dropna(subset=["time"])
+    return _summarize_window(frame, kickoff, source_type)
 
-    Indoor, neutral, unresolved-venue, and unavailable-weather games fail closed.
-    game_ids can restrict network work to football/spread candidates only.
+
+def build_weather_context(schedule, week, game_ids=None):
+    """Return game-id keyed weather context for selected games.
+
+    Outdoor games receive game-window weather when venue/location/kickoff data
+    can be resolved. Indoor venues are identified explicitly. Neutral-site
+    games can still receive weather for display; Tier 2 rejects neutral sites
+    separately. game_ids can restrict network work to selected matchups.
     """
     if schedule is None or schedule.empty or "game_id" not in schedule:
         return {}
@@ -145,43 +213,57 @@ def build_weather_context(schedule, week, game_ids=None):
             gid = str(int(game["game_id"]))
         except (TypeError, ValueError, OverflowError):
             return None, None
-        if _truthy(game.get("neutral_site", False)):
-            return gid, {"status": "neutral", "inclement": False, "reason": "Neutral-site game."}
+        neutral = _truthy(game.get("neutral_site", False))
         try:
             venue_id = int(float(game.get("venue_id")))
         except (TypeError, ValueError, OverflowError):
-            return gid, {"status": "missing", "inclement": False, "reason": "Venue ID unavailable."}
+            return gid, {"status": "missing", "inclement": False, "neutral_site": neutral,
+                         "reason": "Venue ID unavailable."}
         try:
             venue = _venue(venue_id)
         except Exception:
-            return gid, {"status": "missing", "inclement": False, "reason": "Venue metadata unavailable."}
-        if venue.get("indoor") is True:
-            return gid, {"status": "indoor", "inclement": False, "reason": "Indoor venue."}
-        if venue.get("indoor") is not False:
-            return gid, {"status": "missing", "inclement": False, "reason": "Venue roof status unavailable."}
+            return gid, {"status": "missing", "inclement": False, "neutral_site": neutral,
+                         "reason": "Venue metadata unavailable."}
+        venue_name = str(venue.get("fullName") or game.get("venue") or "").strip()
         address = venue.get("address") or {}
+        location = ", ".join(x for x in (str(address.get("city") or "").strip(),
+                                          str(address.get("state") or "").strip()) if x)
+        if venue.get("indoor") is True:
+            return gid, {"status": "indoor", "inclement": False, "neutral_site": neutral,
+                         "venue_name": venue_name, "location": location,
+                         "reason": "Indoor venue."}
+        if venue.get("indoor") is not False:
+            return gid, {"status": "missing", "inclement": False, "neutral_site": neutral,
+                         "venue_name": venue_name, "location": location,
+                         "reason": "Venue roof status unavailable."}
         try:
             coords = _geocode(address)
         except Exception:
             coords = None
         if not coords:
-            return gid, {"status": "missing", "inclement": False, "reason": "Venue location unavailable."}
+            return gid, {"status": "missing", "inclement": False, "neutral_site": neutral,
+                         "venue_name": venue_name, "location": location,
+                         "reason": "Venue location unavailable."}
         kickoff = pd.to_datetime(game.get("start_date"), utc=True, errors="coerce")
         if pd.isna(kickoff):
-            return gid, {"status": "missing", "inclement": False, "reason": "Kickoff time unavailable."}
+            return gid, {"status": "missing", "inclement": False, "neutral_site": neutral,
+                         "venue_name": venue_name, "location": location,
+                         "reason": "Kickoff time unavailable."}
         try:
             weather = _hourly_weather(coords[0], coords[1], kickoff)
         except Exception:
             weather = None
         if not weather:
-            return gid, {"status": "missing", "inclement": False, "reason": "Weather unavailable."}
+            return gid, {"status": "missing", "inclement": False, "neutral_site": neutral,
+                         "venue_name": venue_name, "location": location,
+                         "reason": "Weather unavailable."}
+        weather.update(neutral_site=neutral, venue_name=venue_name, location=location)
         return gid, weather
 
     out = {}
     records = [row for _, row in games.iterrows()]
-    with ThreadPoolExecutor(max_workers=min(8, max(1, len(records)))) as pool:
+    with ThreadPoolExecutor(max_workers=min(12, max(1, len(records)))) as pool:
         for gid, weather in pool.map(one, records):
             if gid is not None:
                 out[gid] = weather
     return out
-
