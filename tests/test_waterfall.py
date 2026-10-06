@@ -229,7 +229,7 @@ class WaterfallTests(unittest.TestCase):
 
     def test_moneyline_annotation_and_scenario_do_not_change_model(self):
         s, b = self.history(final=True)
-        _, p, _, _ = self.fixture(2)
+        _, p, _, _ = self.fixture(3)
         p.update({'Game ID': 3, 'Status': 'Final', 'Actual Winner': 'Home',
                   'Home Win %': .25, 'Away Win %': .75})
         out = add_waterfall_value(pd.DataFrame([p]), s, b, 3)
@@ -322,7 +322,7 @@ class IntegrationTests(unittest.TestCase):
         exec(compile(ast.Module(body=[n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names],
                                type_ignores=[]), 'app.py', 'exec'), ns)
         s, b = WaterfallTests().history(final=True)
-        _, p, _, _ = WaterfallTests().fixture(2)
+        _, p, _, _ = WaterfallTests().fixture(3)
         p.update({'Game ID': 3, 'Week': 3, 'Home Team': 'Home', 'Away Team': 'Away',
                   'Status': 'Final', 'Actual Winner': 'Home', 'Home Win %': .25, 'Away Win %': .75})
         rows = waterfall_scenario_rows(add_waterfall_value(pd.DataFrame([p]), s, b, 3))
