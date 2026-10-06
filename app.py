@@ -29,8 +29,10 @@ import importlib
 import matchup_advantages
 # Streamlit may retain imported modules after a source-only deployment.
 importlib.reload(matchup_advantages)
-from matchup_advantages import build_advantages, advantage_html, assess, normalize_fbs_schedule
+from matchup_advantages import (build_advantages, advantage_html, assess, normalize_fbs_schedule,
+                                build_waterfall_profiles, weather_tier_candidate_ids)
 from shadow_tracking import show_shadow_tracking
+from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
 
 st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
@@ -177,6 +179,11 @@ def download_summary(year):
         frame = pd.read_csv(BytesIO(response.read()), low_memory=False)
         frame.attrs["fetched_at"] = datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")
         return frame
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def value_weather_context(schedule_frame, week, candidate_ids):
+    return build_weather_context(schedule_frame, week, candidate_ids)
 
 
 def read_summary(upload, year):
@@ -1549,7 +1556,27 @@ try:
 except Exception:
     waterfall_boxes = pd.DataFrame()
     st.warning("Value Picks unavailable: FBS box scores could not be loaded. Refresh feeds to retry.")
-pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week)
+weather_checks = {}
+weather_candidates = []
+if not waterfall_boxes.empty:
+    try:
+        weather_profiles = build_waterfall_profiles(schedule, waterfall_boxes, selected_week)
+        weather_candidates = weather_tier_candidate_ids(pred, schedule, weather_profiles)
+        if weather_candidates:
+            weather_checks = value_weather_context(schedule, selected_week, tuple(weather_candidates))
+    except Exception:
+        weather_checks = {}
+if weather_candidates:
+    missing_weather = sum(
+        weather_checks.get(str(int(gid)), {}).get("status") not in ("ok", "indoor", "neutral")
+        for gid in weather_candidates
+    )
+    if missing_weather:
+        st.warning(
+            f"Tier 2 weather could not be verified for {missing_weather} candidate game(s). "
+            "Those games are excluded from the Weather Defensive Edge tier."
+        )
+pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week, weather_checks=weather_checks)
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
 if st.session_state.get("moneyline_history_season") != season:
     line_history.clear()
@@ -1582,6 +1609,7 @@ with feed_details:
         download_market_odds.clear()
         download_archived_event.clear()
         download_event_moneylines.clear()
+        value_weather_context.clear()
         st.rerun()
     st.caption("Historical picks are recalculated from pregame-week statistics, not a saved record of picks issued before kickoff. Pending games and ties do not count toward accuracy.")
     st.caption("DraftKings moneylines and spreads via ESPN, with another sportsbook shown when DraftKings is unavailable · American odds · Unavailable means no matching line is published. Verify the price in DraftKings before placing a bet.")
@@ -1589,21 +1617,26 @@ with feed_details:
         st.caption(f"Odds retrieved {odds_snapshot['retrieved']}. Completed-game moneylines are archived prices; they are not available to bet now.")
     st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
 with value_tab:
-    st.markdown("### Value Picks · Three-stage waterfall")
-    st.caption("DraftKings only · current-season FBS-only metrics · selections can differ from the core model.")
+    st.markdown("### Value Picks · Five-stage waterfall")
+    st.caption("ATS tiers use the displayed sportsbook spread; moneyline tiers use DraftKings. Current-season FBS-only metrics · selections can differ from the core model.")
     value_picks = pred[pred["Value Selected"]].sort_values("Value Rank")
     st.caption(f"{len(value_picks)} selected · target 12–18. Odds retrieved {odds_snapshot['retrieved'] or 'unavailable'}.")
     if len(value_picks) < 12:
         st.info(f"{12-len(value_picks)} below target. No gates or odds limits were relaxed.")
     with st.expander("How Value Picks are selected", expanded=False):
-        st.write("Tier 1: exact 6/6 ATS Dominance — the home team owns all five statistical advantages plus home field. Every 6/6 qualifier with an available spread is eligible; the spread ranks it as Prime (−7 to −13.5), Standard (short favorite), Market Disagreement (underdog), or Heavy Favorite. If fewer than 12 selections, the existing moneyline rules fill toward 12 as Tiers 2–4.")
-        st.caption("The 6/6 qualifier is statistical and does not change when the spread moves; the latest available spread changes only the ATS number and ranking band. Historical cards are recalculated from archived data and are not immutable pregame records.")
+        st.write("Tier 1: exact 6/6 ATS Dominance — recommend the home team against the displayed spread. Tier 2: Weather Defensive Edge ATS — in verified inclement weather, recommend the non-neutral home team against the spread when it has lower pregame defensive YPC allowed, better turnover margin/game, and the spread is better than −14. If fewer than 12 selections, the existing moneyline rules fill toward 12 as Tiers 3–5.")
+        st.caption("Tier 1 qualification is statistical; Tier 2 also requires verified game-window weather and a spread better than −14. ATS selections are graded against the displayed spread. Historical cards are recalculated from archived data and are not immutable pregame records.")
     if not value_picks.empty:
         value_show = value_picks.copy()
         value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
+        value_show["Recommended Bet"] = np.where(
+            value_show["Value Market"].eq("Spread"),
+            value_show["Value Pick"].astype(str) + " " + value_show["Value Line"].astype(str) + " ATS",
+            value_show["Value Pick"].astype(str) + " ML " + value_show["Value Line"].astype(str),
+        )
         value_show["Model chance for selection"] = np.where(value_show["Value Side"].eq("Home"), value_show["Home Win %"], value_show["Away Win %"])
         value_show["Model chance for selection"] = value_show["Model chance for selection"].map(lambda v: f"{v:.1%}")
-        st.dataframe(value_show[["Value Rank", "Value Tier", "Value Band", "Value Pick", "Value Market", "Value Line", "Value Price", "Value Source", "Value Result", "Matchup", "Model chance for selection", "Value Reason", "Status"]], hide_index=True, use_container_width=True)
+        st.dataframe(value_show[["Value Rank", "Value Tier", "Recommended Bet", "Value Band", "Value Market", "Value Price", "Value Source", "Value Result", "Matchup", "Model chance for selection", "Value Reason", "Status"]], hide_index=True, use_container_width=True)
         graded_value = value_picks[value_picks["Value Result"].isin(["Correct", "Incorrect"])]
         if not graded_value.empty:
             wins = int(graded_value["Value Result"].eq("Correct").sum())
