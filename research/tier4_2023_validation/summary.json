@@ -1,0 +1,126 @@
+{
+  "definition": {
+    "season": 2023,
+    "model_confidence": "75% to under 80%",
+    "favorite_ml": "-600 through -280 inclusive",
+    "run_defense": "favorite defensive YPC allowed < underdog offensive YPC",
+    "turnovers": "favorite turnover margin/game >= underdog turnover margin/game",
+    "market": "favorite moneyline"
+  },
+  "coverage": {
+    "prefilter": 22,
+    "quotes": 22,
+    "fetch_errors": 0,
+    "qualifiers": 8
+  },
+  "result": {
+    "record": "6-2",
+    "wins": 6,
+    "losses": 2,
+    "win_rate": 0.75,
+    "ml_profit_10": -6.11,
+    "ml_roi": -0.07632243487506644,
+    "ats_record": "5-3-0",
+    "ats_win_rate_ex_push": 0.625,
+    "ats_profit_10": 16.32,
+    "ats_roi": 0.20400432900432902
+  },
+  "games": [
+    {
+      "week": 4,
+      "game_id": 401525845,
+      "away": "Oklahoma",
+      "home": "Cincinnati",
+      "predicted_team": "Oklahoma",
+      "confidence": 0.7884514246796782,
+      "favorite_ml": -450.0,
+      "favorite_spread": -13.5,
+      "win": true,
+      "ats_result": "W"
+    },
+    {
+      "week": 4,
+      "game_id": 401525506,
+      "away": "Boston College",
+      "home": "Louisville",
+      "predicted_team": "Louisville",
+      "confidence": 0.7972586133697489,
+      "favorite_ml": -550.0,
+      "favorite_spread": -15.5,
+      "win": true,
+      "ats_result": "W"
+    },
+    {
+      "week": 5,
+      "game_id": 401532589,
+      "away": "San Diego State",
+      "home": "Air Force",
+      "predicted_team": "Air Force",
+      "confidence": 0.7956733191802982,
+      "favorite_ml": -380.0,
+      "favorite_spread": -11.5,
+      "win": true,
+      "ats_result": "W"
+    },
+    {
+      "week": 7,
+      "game_id": 401520328,
+      "away": "Iowa",
+      "home": "Wisconsin",
+      "predicted_team": "Wisconsin",
+      "confidence": 0.758774411753716,
+      "favorite_ml": -350.0,
+      "favorite_spread": -8.5,
+      "win": false,
+      "ats_result": "L"
+    },
+    {
+      "week": 9,
+      "game_id": 401524041,
+      "away": "USC",
+      "home": "California",
+      "predicted_team": "USC",
+      "confidence": 0.7647494826764241,
+      "favorite_ml": -400.0,
+      "favorite_spread": -10.5,
+      "win": true,
+      "ats_result": "L"
+    },
+    {
+      "week": 11,
+      "game_id": 401531911,
+      "away": "Southern Miss",
+      "home": "Louisiana",
+      "predicted_team": "Louisiana",
+      "confidence": 0.7780929848860159,
+      "favorite_ml": -300.0,
+      "favorite_spread": -8.5,
+      "win": false,
+      "ats_result": "L"
+    },
+    {
+      "week": 11,
+      "game_id": 401520386,
+      "away": "Alabama",
+      "home": "Kentucky",
+      "predicted_team": "Alabama",
+      "confidence": 0.786989073487449,
+      "favorite_ml": -450.0,
+      "favorite_spread": -11.5,
+      "win": true,
+      "ats_result": "W"
+    },
+    {
+      "week": 12,
+      "game_id": 401531920,
+      "away": "Marshall",
+      "home": "South Alabama",
+      "predicted_team": "South Alabama",
+      "confidence": 0.7944910344205508,
+      "favorite_ml": -400.0,
+      "favorite_spread": -10.5,
+      "win": true,
+      "ats_result": "W"
+    }
+  ]
+}
