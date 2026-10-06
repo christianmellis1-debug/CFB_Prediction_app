@@ -1,0 +1,26 @@
+name: Inspect historical weather payload
+on:
+  push:
+    branches: [research/weather-ypc-validation]
+    paths:
+      - research/weather_ypc_validation/inspect.py
+      - .github/workflows/weather-payload-inspect.yml
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-ypc-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python research/weather_ypc_validation/inspect.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/weather_ypc_validation/sample_summary.json
+          git commit -m 'Capture historical weather payload sample' || exit 0
+          git push origin HEAD:research/weather-ypc-validation
