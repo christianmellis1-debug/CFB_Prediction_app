@@ -1,0 +1,29 @@
+name: Compare weather profile methods
+on:
+  push:
+    branches: [research/weather-hfa-turnover-validation]
+    paths:
+      - research/weather_ypc_validation/compare_profiles.py
+      - .github/workflows/weather-profile-check.yml
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-hfa-turnover-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python -u research/weather_ypc_validation/compare_profiles.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin research/weather-hfa-turnover-validation
+          git add research/weather_ypc_validation/profile_method_check.json
+          git commit -m 'Record weather profile method check' || exit 0
+          git push origin HEAD:research/weather-hfa-turnover-validation
