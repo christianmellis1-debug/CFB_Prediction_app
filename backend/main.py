@@ -14,7 +14,8 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
 from model_v1_5 import predict_week, add_waterfall_value
-from matchup_advantages import normalize_fbs_schedule
+from matchup_advantages import normalize_fbs_schedule, build_waterfall_profiles, weather_tier_candidate_ids
+from weather_context import build_weather_context
 
 ROOT = Path(__file__).resolve().parents[1]
 app = FastAPI(title="CFB Predictor API", version="1.0.0")
@@ -267,7 +268,16 @@ def predictions(season: int = Query(..., ge=2001, le=2100), week: int = Query(..
         except Exception:
             boxes = pd.DataFrame()
             value_error = "FBS box-score feed unavailable; no Value Picks generated."
-        predicted = add_waterfall_value(predicted, games, boxes, week)
+        weather_checks = {}
+        if not boxes.empty:
+            try:
+                profiles = build_waterfall_profiles(games, boxes, week)
+                candidate_ids = weather_tier_candidate_ids(predicted, games, profiles)
+                if candidate_ids:
+                    weather_checks = build_weather_context(games, week, candidate_ids)
+            except Exception:
+                weather_checks = {}
+        predicted = add_waterfall_value(predicted, games, boxes, week, weather_checks=weather_checks)
         return {"season": season, "week": week, "model": "V1.5", "retrieved": datetime.now(timezone.utc).isoformat(), "games": json_rows(predicted), "value_card": json_rows(predicted[predicted["Value Selected"]].sort_values("Value Rank")), "value_card_status": predicted.attrs["waterfall"], "value_error": value_error}
     except Exception as exc:
         raise HTTPException(502, f"Unable to generate predictions: {exc}") from exc
