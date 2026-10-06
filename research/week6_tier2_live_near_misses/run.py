@@ -52,3 +52,4 @@ for r in src:
 (ROOT/'research/week6_tier2_live_near_misses').mkdir(exist_ok=True)
 (ROOT/'research/week6_tier2_live_near_misses/live_near_misses.json').write_text(json.dumps(src,indent=2))
 print(json.dumps(src,indent=2))
+# rerun after shortlist sync
