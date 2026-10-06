@@ -25,7 +25,7 @@ for season in SEASONS:
     lookup=b[valid].set_index(['game_id','team_id'])
     totals={};history_ok={};fast={}
     maxweek=5 if season==2026 else int(s.week.max())
-    for week in range(1,maxweek+1):
+    for week in range(0,maxweek+1):
         for _,g in s[s.week.eq(week)].iterrows():
             rec={'status':'missing'};sp={}
             for side in ('home','away'):
@@ -43,7 +43,7 @@ for season in SEASONS:
                 t=totals.setdefault(tid,[0.,0.,0.,0.,0,0.,0.])
                 t[0]+=float(own.rushingYards);t[1]+=float(own.rushingAttempts);t[2]+=float(opp.rushingYards);t[3]+=float(opp.rushingAttempts);t[4]+=1;t[5]+=float(own.turnovers);t[6]+=float(opp.turnovers)
     diffs=[];counts={'exact_ok':0,'fast_ok':0,'status_mismatch':0,'value_mismatch':0,'compared':0}
-    for week in range(1,maxweek+1):
+    for week in range(0,maxweek+1):
         exact=build_waterfall_profiles(s0,boxes,week)
         for gid,e in exact.items():
             f=fast.get(gid,{'status':'missing'});counts['compared']+=1
