@@ -1,0 +1,29 @@
+name: Retry missing weather rows
+on:
+  push:
+    branches: [research/weather-hfa-turnover-validation]
+    paths:
+      - research/weather_ypc_validation/retry_missing_weather.py
+      - .github/workflows/weather-hfa-retry.yml
+permissions:
+  contents: write
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-hfa-turnover-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python -u research/weather_ypc_validation/retry_missing_weather.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin research/weather-hfa-turnover-validation
+          git add research/weather_ypc_validation/game_details_hfa_turnover.csv research/weather_ypc_validation/summary_hfa_turnover.json research/weather_ypc_validation/weather_errors_hfa_turnover_retry.csv
+          git commit -m 'Retry missing weather coverage for HFA turnover study' || exit 0
+          git push origin HEAD:research/weather-hfa-turnover-validation
