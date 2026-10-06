@@ -10,10 +10,14 @@ OUT=Path(__file__).resolve().parent
 OUT.mkdir(parents=True,exist_ok=True)
 
 from model_v1_5 import predict_week
+import matchup_advantages as ma
 from matchup_advantages import build_waterfall_profiles, normalize_fbs_schedule
 
 SEASONS=(2022,2023)
 HISTORICAL_POWER={'ACC','Big Ten','Big 12','SEC','Pac-12'}
+# Research-only era correction: Pac-12 was a power conference in 2022-23.
+ma.P4=set(HISTORICAL_POWER)
+ma.G6=set(ma.G6)-{'Pac-12'}
 
 def csv_url(url):
     with urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0 tier4-90pct-holdout'}),timeout=90) as r:
