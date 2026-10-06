@@ -1,7 +1,8 @@
 import unittest
 import math
 import pandas as pd
-from matchup_advantages import build_waterfall_profiles, select_waterfall, normalize_fbs_schedule
+from matchup_advantages import (build_waterfall_profiles, select_waterfall, normalize_fbs_schedule,
+                                weather_tier_candidate_ids)
 from model_v1_5 import add_waterfall_value, waterfall_scenario_rows
 
 
@@ -44,26 +45,63 @@ class WaterfallTests(unittest.TestCase):
             'away': dict(off_run=4, def_run=5, margin=0, games=2),
         }
         check = self.six_check(stage == 1)
-        if stage == 3:
+        if stage == 4:
             p.update({'DK Home ML': '-300', 'DK Away ML': '+220', 'Predicted Winner': 'Home'})
-        elif stage == 4:
+        elif stage == 5:
             p.update({'DK Home ML': '-250', 'DK Away ML': '+220', 'Predicted Winner': 'Home'})
-        elif stage == 2:
+        elif stage == 3:
             p.update({'Home Spread': 'Unavailable', 'Away Spread': 'Unavailable'})
         return g, p, rec, check
 
-    def select(self, g, p, r, check=None, **kw):
+    def select(self, g, p, r, check=None, weather=None, **kw):
         checks = {str(g['game_id']): check or self.six_check(False)}
+        weather_checks = {str(g['game_id']): weather} if weather else {}
         return select_waterfall(
             pd.DataFrame([p]), pd.DataFrame([g]), {str(g['game_id']): r},
-            advantage_checks=checks, **kw)
+            advantage_checks=checks, weather_checks=weather_checks, **kw)
 
-    def test_four_stages(self):
-        for stage in (1, 2, 3, 4):
+    def test_five_stages(self):
+        for stage in (1, 2, 3, 4, 5):
             g, p, r, check = self.fixture(stage)
-            card = self.select(g, p, r, check)
+            weather = {'status': 'ok', 'inclement': True, 'weather_type': 'Wet/snow only'} if stage == 2 else None
+            card = self.select(g, p, r, check, weather=weather)
             self.assertEqual(card[0]['Value Stage'], stage)
-        self.assertEqual(self.select(*self.fixture(1)[:3], self.fixture(1)[3])[0]['Value Market'], 'Spread')
+        g, p, r, check = self.fixture(1)
+        self.assertEqual(self.select(g, p, r, check)[0]['Value Market'], 'Spread')
+
+    def test_weather_tier_requires_locked_ats_gates(self):
+        g, p, r, check = self.fixture(2)
+        weather = {'status': 'ok', 'inclement': True, 'weather_type': 'Wind only'}
+        card = self.select(g, p, r, check, weather=weather)
+        self.assertEqual(card[0]['Value Stage'], 2)
+        self.assertEqual(card[0]['Value Market'], 'Spread')
+        self.assertEqual(card[0]['Value Pick'], 'Home')
+        self.assertEqual(card[0]['Value Line'], '-9.5')
+        self.assertEqual(card[0]['Value Band'], 'Wind only')
+
+        for mutate in ('ordinary', 'heavy', 'run_defense', 'turnover', 'neutral'):
+            g2, p2, r2, check2 = self.fixture(2)
+            w2 = dict(weather)
+            if mutate == 'ordinary':
+                w2['inclement'] = False
+            elif mutate == 'heavy':
+                p2['Home Spread'] = '-14'
+            elif mutate == 'run_defense':
+                r2['home']['def_run'] = r2['away']['def_run']
+            elif mutate == 'turnover':
+                r2['home']['margin'] = r2['away']['margin']
+            elif mutate == 'neutral':
+                g2['neutral_site'] = True
+            card2 = self.select(g2, p2, r2, check2, weather=w2)
+            self.assertFalse(card2 and card2[0]['Value Stage'] == 2, mutate)
+
+    def test_weather_candidate_ids_apply_non_weather_gates(self):
+        g, p, r, _ = self.fixture(2)
+        ids = weather_tier_candidate_ids(pd.DataFrame([p]), pd.DataFrame([g]), {'1': r})
+        self.assertEqual(ids, [1])
+        p['Home Spread'] = '-14'
+        self.assertEqual(weather_tier_candidate_ids(pd.DataFrame([p]), pd.DataFrame([g]), {'1': r}), [])
+
 
     def test_six_of_six_spread_bands_and_priority(self):
         spreads = [('-9.5', 'Prime 6/6'), ('-3.5', 'Standard 6/6'),
@@ -92,9 +130,9 @@ class WaterfallTests(unittest.TestCase):
 
     def test_existing_moneyline_boundaries_remain(self):
         specs = [
-            (2, [100, 170], [99, 171]),
-            (3, [-280, -600], [-279, -601]),
-            (4, [-205, -275], [-204, -276]),
+            (3, [100, 170], [99, 171]),
+            (4, [-280, -600], [-279, -601]),
+            (5, [-205, -275], [-204, -276]),
         ]
         for stage, good, bad in specs:
             for line in good + bad:
@@ -103,13 +141,13 @@ class WaterfallTests(unittest.TestCase):
                 self.assertEqual(bool(self.select(g, p, r, check)), line in good, (stage, line))
 
     def test_old_moneyline_ties_and_model_gate(self):
-        for stage in (2, 3, 4):
+        for stage in (3, 4, 5):
             g, p, r, check = self.fixture(stage)
             r['home']['margin'] = r['away']['margin']
-            self.assertEqual(bool(self.select(g, p, r, check)), stage == 3)
+            self.assertEqual(bool(self.select(g, p, r, check)), stage == 4)
         for confidence, winner, ok in [(.7, 'Home', True), (.699, 'Home', False),
                                        (.9, 'Away', False), (float('nan'), 'Home', False), (70, 'Home', False)]:
-            g, p, r, check = self.fixture(3)
+            g, p, r, check = self.fixture(4)
             p.update(Confidence=confidence, **{'Predicted Winner': winner})
             self.assertEqual(bool(self.select(g, p, r, check)), ok)
 
@@ -117,28 +155,34 @@ class WaterfallTests(unittest.TestCase):
         g, p, r, check = self.fixture(1)
         g['away_division'] = 'fcs'
         self.assertFalse(self.select(g, p, r, check))
-        g, p, r, check = self.fixture(2)
+        g, p, r, check = self.fixture(3)
         r['home']['margin'] = float('nan')
         self.assertFalse(self.select(g, p, r, check))
 
     def test_waterfall_volume_and_priority(self):
         cases = [
-            ((20, 20, 20, 20), (18, 0, 0, 0)),
-            ((13, 20, 20, 20), (13, 0, 0, 0)),
-            ((4, 20, 20, 20), (4, 8, 0, 0)),
-            ((4, 3, 20, 20), (4, 3, 5, 0)),
-            ((4, 3, 2, 20), (4, 3, 2, 3)),
+            ((20, 20, 20, 20, 20), (18, 0, 0, 0, 0)),
+            ((13, 20, 20, 20, 20), (13, 0, 0, 0, 0)),
+            ((4, 20, 20, 20, 20), (4, 8, 0, 0, 0)),
+            ((4, 3, 20, 20, 20), (4, 3, 5, 0, 0)),
+            ((4, 3, 2, 20, 20), (4, 3, 2, 3, 0)),
+            ((4, 3, 2, 1, 20), (4, 3, 2, 1, 2)),
         ]
         for sizes, expected in cases:
-            games, pred, profiles, checks = [], [], {}, {}
+            games, pred, profiles, checks, weather_ids = [], [], {}, {}, []
             gid = 0
             for stage, n in enumerate(sizes, 1):
                 for _ in range(n):
                     gid += 1
                     g, p, r, check = self.fixture(stage, gid)
                     games.append(g); pred.append(p); profiles[str(gid)] = r; checks[str(gid)] = check
-            card = select_waterfall(pd.DataFrame(pred[::-1]), pd.DataFrame(games), profiles, advantage_checks=checks)
-            self.assertEqual(tuple(sum(x['Value Stage'] == i for x in card) for i in (1, 2, 3, 4)), expected)
+                    if stage == 2:
+                        weather_ids.append(str(gid))
+            weather_checks = {gid: {'status': 'ok', 'inclement': True, 'weather_type': 'Wet/snow only'}
+                              for gid in weather_ids}
+            card = select_waterfall(pd.DataFrame(pred[::-1]), pd.DataFrame(games), profiles,
+                                    advantage_checks=checks, weather_checks=weather_checks)
+            self.assertEqual(tuple(sum(x['Value Stage'] == i for x in card) for i in (1, 2, 3, 4, 5)), expected)
             self.assertEqual(len({x['Game ID'] for x in card}), len(card))
 
     def history(self, final=False, home_points=30, away_points=20):
@@ -185,7 +229,7 @@ class WaterfallTests(unittest.TestCase):
 
     def test_moneyline_annotation_and_scenario_do_not_change_model(self):
         s, b = self.history(final=True)
-        _, p, _, _ = self.fixture(2)
+        _, p, _, _ = self.fixture(3)
         p.update({'Game ID': 3, 'Status': 'Final', 'Actual Winner': 'Home',
                   'Home Win %': .25, 'Away Win %': .75})
         out = add_waterfall_value(pd.DataFrame([p]), s, b, 3)
@@ -206,6 +250,21 @@ class WaterfallTests(unittest.TestCase):
                       'Home Spread': '-7', 'Away Spread': '+7'})
             out = add_waterfall_value(pd.DataFrame([p]), s, b, 3)
             self.assertEqual(out.iloc[0]['ValueMarket'] if 'ValueMarket' in out else out.iloc[0]['Value Market'], 'Spread')
+            self.assertEqual(out.iloc[0]['Value Result'], expected)
+
+    def test_weather_tier_ats_grading_and_push(self):
+        weather = {'3': {'status': 'ok', 'inclement': True, 'weather_type': 'Wet/snow only'}}
+        for home_points, expected in [(30, 'Incorrect'), (31, 'Push'), (35, 'Correct')]:
+            s, b = self.history(final=True, home_points=home_points, away_points=24)
+            b.loc[b['team_id'].eq(10), 'completionAttempts'] = '10-30'
+            b.loc[b['team_id'].eq(20), 'completionAttempts'] = '20-30'
+            _, p, _, _ = self.fixture(2)
+            p.update({'Game ID': 3, 'Status': 'Final', 'Actual Winner': 'Home',
+                      'Home Win %': .70, 'Away Win %': .30,
+                      'Home Spread': '-7', 'Away Spread': '+7'})
+            out = add_waterfall_value(pd.DataFrame([p]), s, b, 3, weather_checks=weather)
+            self.assertEqual(out.iloc[0]['Value Stage'], 2)
+            self.assertEqual(out.iloc[0]['Value Market'], 'Spread')
             self.assertEqual(out.iloc[0]['Value Result'], expected)
 
 
@@ -278,7 +337,7 @@ class IntegrationTests(unittest.TestCase):
         exec(compile(ast.Module(body=[n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names],
                                type_ignores=[]), 'app.py', 'exec'), ns)
         s, b = WaterfallTests().history(final=True)
-        _, p, _, _ = WaterfallTests().fixture(2)
+        _, p, _, _ = WaterfallTests().fixture(3)
         p.update({'Game ID': 3, 'Week': 3, 'Home Team': 'Home', 'Away Team': 'Away',
                   'Status': 'Final', 'Actual Winner': 'Home', 'Home Win %': .25, 'Away Win %': .75})
         rows = waterfall_scenario_rows(add_waterfall_value(pd.DataFrame([p]), s, b, 3))

@@ -45,7 +45,7 @@ class AdvantageTests(unittest.TestCase):
   self.assertIn('+2.00 per game',advantage_html(r,'home','Home'))
  def test_invalid_turnovers_not_risk(self):
   for value in (None,-1,1.5,3):
-   b=self.b.copy();b.loc[1,'turnovers']=value
+   b=self.b.copy();b['turnovers']=b['turnovers'].astype(object);b.loc[1,'turnovers']=value
    r=build_advantages(self.s,b,2)['2']
    self.assertEqual(r['status'],'missing');self.assertIsNone(assess(r,'home'))
   r=build_advantages(self.s,self.b.drop(columns=['turnovers']),2)['2']
