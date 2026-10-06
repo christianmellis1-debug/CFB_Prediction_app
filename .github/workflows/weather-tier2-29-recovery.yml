@@ -1,0 +1,31 @@
+name: Recover and grade weather Tier 2 sample
+on:
+  push:
+    branches: [research/weather-tier2-29-recovery]
+    paths:
+      - research/weather_tier2_market_validation/run.py
+      - .github/workflows/weather-tier2-29-recovery.yml
+permissions:
+  contents: write
+jobs:
+  recover-grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-tier2-29-recovery
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python -u research/weather_ypc_validation/run_fast2.py
+      - run: python -u research/weather_tier2_market_validation/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/weather_ypc_validation/game_details_hfa_turnover.csv research/weather_ypc_validation/summary_hfa_turnover.json research/weather_ypc_validation/weather_errors_hfa_turnover.csv research/weather_ypc_validation/README_HFA_TURNOVER.md research/weather_tier2_market_validation
+          if ! git diff --cached --quiet; then
+            git commit -m 'Recover and grade 29-game weather Tier 2 sample'
+            git push origin HEAD:research/weather-tier2-29-recovery
+          fi
