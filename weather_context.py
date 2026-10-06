@@ -5,9 +5,10 @@ selection logic remains in matchup_advantages.select_waterfall.
 """
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+from concurrent.futures import ThreadPoolExecutor
 import json
 import math
 
@@ -81,7 +82,6 @@ def _hourly_weather(lat, lon, kickoff):
         base = "https://historical-forecast-api.open-meteo.com/v1/forecast"
     else:
         base = "https://api.open-meteo.com/v1/forecast"
-        params["forecast_days"] = max(1, (end_date - today).days + 1)
     payload = _json(base, params)
     hourly = payload.get("hourly") or {}
     times = pd.to_datetime(hourly.get("time", []), utc=True, errors="coerce")
@@ -124,69 +124,64 @@ def _hourly_weather(lat, lon, kickoff):
     }
 
 
-def build_weather_context(schedule, week):
-    """Return game-id keyed weather context for the selected week.
+def build_weather_context(schedule, week, game_ids=None):
+    """Return game-id keyed weather context for selected candidate games.
 
     Indoor, neutral, unresolved-venue, and unavailable-weather games fail closed.
+    game_ids can restrict network work to football/spread candidates only.
     """
     if schedule is None or schedule.empty or "game_id" not in schedule:
         return {}
     games = schedule.copy()
     games["week"] = pd.to_numeric(games.get("week"), errors="coerce")
     games = games[games.week.eq(int(week))]
-    out = {}
-    venue_cache = {}
-    geo_cache = {}
-    weather_cache = {}
-    for _, game in games.iterrows():
+    wanted = {str(int(x)) for x in (game_ids or []) if str(x).strip()}
+    if wanted:
+        numeric_ids = pd.to_numeric(games["game_id"], errors="coerce")
+        games = games[numeric_ids.map(lambda x: str(int(x)) if pd.notna(x) else "").isin(wanted)]
+
+    def one(game):
         try:
             gid = str(int(game["game_id"]))
         except (TypeError, ValueError, OverflowError):
-            continue
-        neutral = _truthy(game.get("neutral_site", False))
-        if neutral:
-            out[gid] = {"status": "neutral", "inclement": False, "reason": "Neutral-site game."}
-            continue
+            return None, None
+        if _truthy(game.get("neutral_site", False)):
+            return gid, {"status": "neutral", "inclement": False, "reason": "Neutral-site game."}
         try:
             venue_id = int(float(game.get("venue_id")))
         except (TypeError, ValueError, OverflowError):
-            out[gid] = {"status": "missing", "inclement": False, "reason": "Venue ID unavailable."}
-            continue
+            return gid, {"status": "missing", "inclement": False, "reason": "Venue ID unavailable."}
         try:
-            venue = venue_cache.setdefault(venue_id, _venue(venue_id))
+            venue = _venue(venue_id)
         except Exception:
-            out[gid] = {"status": "missing", "inclement": False, "reason": "Venue metadata unavailable."}
-            continue
+            return gid, {"status": "missing", "inclement": False, "reason": "Venue metadata unavailable."}
         if venue.get("indoor") is True:
-            out[gid] = {"status": "indoor", "inclement": False, "reason": "Indoor venue."}
-            continue
+            return gid, {"status": "indoor", "inclement": False, "reason": "Indoor venue."}
         if venue.get("indoor") is not False:
-            out[gid] = {"status": "missing", "inclement": False, "reason": "Venue roof status unavailable."}
-            continue
+            return gid, {"status": "missing", "inclement": False, "reason": "Venue roof status unavailable."}
         address = venue.get("address") or {}
-        key = (str(address.get("city") or ""), str(address.get("state") or ""), str(address.get("country") or ""))
-        if key not in geo_cache:
-            try:
-                geo_cache[key] = _geocode(address)
-            except Exception:
-                geo_cache[key] = None
-        coords = geo_cache[key]
+        try:
+            coords = _geocode(address)
+        except Exception:
+            coords = None
         if not coords:
-            out[gid] = {"status": "missing", "inclement": False, "reason": "Venue location unavailable."}
-            continue
+            return gid, {"status": "missing", "inclement": False, "reason": "Venue location unavailable."}
         kickoff = pd.to_datetime(game.get("start_date"), utc=True, errors="coerce")
         if pd.isna(kickoff):
-            out[gid] = {"status": "missing", "inclement": False, "reason": "Kickoff time unavailable."}
-            continue
-        cache_key = (coords[0], coords[1], kickoff.isoformat())
-        if cache_key not in weather_cache:
-            try:
-                weather_cache[cache_key] = _hourly_weather(coords[0], coords[1], kickoff)
-            except Exception:
-                weather_cache[cache_key] = None
-        weather = weather_cache[cache_key]
+            return gid, {"status": "missing", "inclement": False, "reason": "Kickoff time unavailable."}
+        try:
+            weather = _hourly_weather(coords[0], coords[1], kickoff)
+        except Exception:
+            weather = None
         if not weather:
-            out[gid] = {"status": "missing", "inclement": False, "reason": "Weather unavailable."}
-            continue
-        out[gid] = weather
+            return gid, {"status": "missing", "inclement": False, "reason": "Weather unavailable."}
+        return gid, weather
+
+    out = {}
+    records = [row for _, row in games.iterrows()]
+    with ThreadPoolExecutor(max_workers=min(8, max(1, len(records)))) as pool:
+        for gid, weather in pool.map(one, records):
+            if gid is not None:
+                out[gid] = weather
     return out
+
