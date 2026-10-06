@@ -1,0 +1,18 @@
+name: Probe weather API
+on:
+  push:
+    branches: [research/weather-ypc-validation]
+    paths:
+      - research/weather_ypc_validation/probe_weather.py
+      - .github/workflows/probe-weather.yml
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-ypc-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python research/weather_ypc_validation/probe_weather.py
