@@ -1,0 +1,209 @@
+{
+  "frozen_rule": {
+    "matchup": "historical P4 vs P4 only; Notre Dame treated as P4; Pac-12 power in 2022-23",
+    "favorite_ml": "-280 through -450 inclusive",
+    "model_confidence": "70% to under 80%",
+    "run_defense": "favorite defensive YPC allowed < underdog offensive YPC",
+    "turnovers": "favorite turnover margin/game strictly greater than underdog",
+    "market": "favorite moneyline"
+  },
+  "coverage": {
+    "prefilter": 42,
+    "quotes": 41,
+    "fetch_errors": 1,
+    "qualifiers": 12
+  },
+  "overall": {
+    "n": 12,
+    "w": 9,
+    "l": 3,
+    "pct": 0.75,
+    "roi": -0.03316957627302455
+  },
+  "by_season": {
+    "2022": {
+      "n": 5,
+      "w": 4,
+      "l": 1,
+      "pct": 0.8,
+      "roi": 0.04111003938590145
+    },
+    "2023": {
+      "n": 7,
+      "w": 5,
+      "l": 2,
+      "pct": 0.7142857142857143,
+      "roi": -0.08622644460082883
+    }
+  },
+  "games": [
+    {
+      "season": 2022,
+      "week": 5,
+      "game_id": 401405101,
+      "away": "Purdue",
+      "home": "Minnesota",
+      "predicted_team": "Minnesota",
+      "confidence": 0.7419968919525461,
+      "favorite_ml": -375.0,
+      "favorite_spread": -9.5,
+      "turnover_edge": 1.3333333333333333,
+      "win": false,
+      "ats_result": "L"
+    },
+    {
+      "season": 2022,
+      "week": 5,
+      "game_id": 401403903,
+      "away": "LSU",
+      "home": "Auburn",
+      "predicted_team": "LSU",
+      "confidence": 0.7199619039678647,
+      "favorite_ml": -330.0,
+      "favorite_spread": -9.5,
+      "turnover_edge": 1.0,
+      "win": true,
+      "ats_result": "L"
+    },
+    {
+      "season": 2022,
+      "week": 7,
+      "game_id": 401411140,
+      "away": "Miami",
+      "home": "Virginia Tech",
+      "predicted_team": "Miami",
+      "confidence": 0.7163185818931593,
+      "favorite_ml": -325.0,
+      "favorite_spread": -9.5,
+      "turnover_edge": 0.55,
+      "win": true,
+      "ats_result": "L"
+    },
+    {
+      "season": 2022,
+      "week": 9,
+      "game_id": 401405124,
+      "away": "Illinois",
+      "home": "Nebraska",
+      "predicted_team": "Illinois",
+      "confidence": 0.719189601319144,
+      "favorite_ml": -290.0,
+      "favorite_spread": -7.5,
+      "turnover_edge": 0.8333333333333333,
+      "win": true,
+      "ats_result": "W"
+    },
+    {
+      "season": 2022,
+      "week": 12,
+      "game_id": 401405142,
+      "away": "Wisconsin",
+      "home": "Nebraska",
+      "predicted_team": "Wisconsin",
+      "confidence": 0.7851032614835028,
+      "favorite_ml": -400.0,
+      "favorite_spread": -10.5,
+      "turnover_edge": 0.8888888888888888,
+      "win": true,
+      "ats_result": "L"
+    },
+    {
+      "season": 2023,
+      "week": 2,
+      "game_id": 401523999,
+      "away": "Utah",
+      "home": "Baylor",
+      "predicted_team": "Utah",
+      "confidence": 0.7379929948114288,
+      "favorite_ml": -290.0,
+      "favorite_spread": -7.5,
+      "turnover_edge": 1.0,
+      "win": true,
+      "ats_result": "L"
+    },
+    {
+      "season": 2023,
+      "week": 4,
+      "game_id": 401525845,
+      "away": "Oklahoma",
+      "home": "Cincinnati",
+      "predicted_team": "Oklahoma",
+      "confidence": 0.7884514246796782,
+      "favorite_ml": -450.0,
+      "favorite_spread": -13.5,
+      "turnover_edge": 2.0,
+      "win": true,
+      "ats_result": "W"
+    },
+    {
+      "season": 2023,
+      "week": 7,
+      "game_id": 401520328,
+      "away": "Iowa",
+      "home": "Wisconsin",
+      "predicted_team": "Wisconsin",
+      "confidence": 0.758774411753716,
+      "favorite_ml": -350.0,
+      "favorite_spread": -8.5,
+      "turnover_edge": 0.5666666666666667,
+      "win": false,
+      "ats_result": "L"
+    },
+    {
+      "season": 2023,
+      "week": 9,
+      "game_id": 401524041,
+      "away": "USC",
+      "home": "California",
+      "predicted_team": "USC",
+      "confidence": 0.7647494826764241,
+      "favorite_ml": -400.0,
+      "favorite_spread": -10.5,
+      "turnover_edge": 0.04166666666666666,
+      "win": true,
+      "ats_result": "L"
+    },
+    {
+      "season": 2023,
+      "week": 10,
+      "game_id": 401520367,
+      "away": "Penn State",
+      "home": "Maryland",
+      "predicted_team": "Penn State",
+      "confidence": 0.7112933556874578,
+      "favorite_ml": -280.0,
+      "favorite_spread": -7.5,
+      "turnover_edge": 0.7142857142857143,
+      "win": true,
+      "ats_result": "W"
+    },
+    {
+      "season": 2023,
+      "week": 11,
+      "game_id": 401520386,
+      "away": "Alabama",
+      "home": "Kentucky",
+      "predicted_team": "Alabama",
+      "confidence": 0.786989073487449,
+      "favorite_ml": -450.0,
+      "favorite_spread": -11.5,
+      "turnover_edge": 0.08333333333333331,
+      "win": true,
+      "ats_result": "W"
+    },
+    {
+      "season": 2023,
+      "week": 14,
+      "game_id": 401539475,
+      "away": "Oregon",
+      "home": "Washington",
+      "predicted_team": "Oregon",
+      "confidence": 0.718072797794567,
+      "favorite_ml": -380.0,
+      "favorite_spread": -9.5,
+      "turnover_edge": 0.6439393939393939,
+      "win": false,
+      "ats_result": "L"
+    }
+  ]
+}
