@@ -73,7 +73,7 @@ for season in SEASONS:
     target_ids=set(target.loc[target.season.eq(season),'game_id'].astype(int))
     max_week=5 if season==2026 else int(pd.to_numeric(s.week,errors='coerce').max())
 
-    for week in range(1,max_week+1):
+    for week in range(0,max_week+1):
         # Score target games using only cumulative history from prior weeks.
         for _,g in s[s.week.eq(week) & s.game_id.isin(target_ids)].iterrows():
             gid=str(int(g.game_id)); rec={'status':'missing','reason':'Incomplete earlier-week FBS history.'}
