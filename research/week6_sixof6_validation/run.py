@@ -1,10 +1,12 @@
 from pathlib import Path
 from urllib.request import urlopen
 import json
+import sys
 import pandas as pd
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
 from matchup_advantages import build_advantages, assess, conference_group
 
-ROOT = Path(__file__).resolve().parents[2]
 OUT = Path(__file__).resolve().parent / "week6_sixof6.json"
 
 SCHEDULE_URL = "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2026.csv"
