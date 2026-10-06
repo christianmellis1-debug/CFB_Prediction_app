@@ -1,0 +1,30 @@
+name: Weather YPC fast validation
+on:
+  push:
+    branches: [research/weather-ypc-validation]
+    paths:
+      - research/weather_ypc_validation/run_fast2.py
+      - .github/workflows/weather-ypc-fast2.yml
+permissions:
+  contents: write
+jobs:
+  validate-fast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-ypc-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python -u research/weather_ypc_validation/run_fast2.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/weather_ypc_validation/summary_fast2.json research/weather_ypc_validation/game_details_fast2.csv research/weather_ypc_validation/weather_errors_fast2.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record fast weather YPC validation results'
+            git push origin HEAD:research/weather-ypc-validation
+          fi
