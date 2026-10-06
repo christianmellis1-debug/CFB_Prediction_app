@@ -19,6 +19,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -u research/tier4_90pct_validation/run.py
       - run: python -u research/tier4_90pct_validation/build_baseline_2022_2023.py
+      - run: python -u research/tier4_90pct_validation/validate_2021.py
       - run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
