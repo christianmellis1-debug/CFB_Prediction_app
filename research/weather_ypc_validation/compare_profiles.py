@@ -13,6 +13,7 @@ for season in SEASONS:
     s0=pd.read_csv(f'https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_{season}.csv',low_memory=False)
     boxes=pd.read_csv(f'https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_team_box/team_box_{season}.csv',low_memory=False)
     s=normalize_fbs_schedule(s0).copy()
+    s=s[s.season_type.astype(str).str.lower().eq('regular')].copy()
     for col in ('season','week','game_id','home_id','away_id'):s[col]=pd.to_numeric(s[col],errors='coerce')
     s=s.dropna(subset=['week','game_id','home_id','away_id'])
     completed=truthy(s.completed)
