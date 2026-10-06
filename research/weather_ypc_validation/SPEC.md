@@ -31,7 +31,7 @@ Use the same raw rushing profiles already implemented in matchup_advantages.buil
 ## Weather source and game window
 
 - ESPN venue metadata supplies venue address and indoor/outdoor status.
-- Open-Meteo Historical Weather supplies hourly precipitation, snowfall, wind speed, wind gusts and WMO weather code.
+- Open-Meteo Historical Forecast API supplies hourly precipitation, snowfall, wind speed, wind gusts and WMO weather code. It is used because Open-Meteo recommends it for the most accurate representation of recent past conditions.
 - Venue city/postal coordinates are resolved through Open-Meteo geocoding.
 - Weather window = the kickoff hour through four hours after kickoff.
 
