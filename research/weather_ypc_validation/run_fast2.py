@@ -68,7 +68,7 @@ for season in SEASONS:
     valid &= b.turnovers.eq(b.fumblesLost+b.interceptions)
     lookup=b[valid].set_index(['game_id','team_id'])
 
-    totals={}  # tid -> [own yards, own att, opp yards, opp att, games]
+    totals={}  # tid -> [own yards, own att, opp yards, opp att, games, own TO, opp TO]
     history_ok={}
     target_ids=set(target.loc[target.season.eq(season),'game_id'].astype(int))
     max_week=5 if season==2026 else int(pd.to_numeric(s.week,errors='coerce').max())
@@ -82,7 +82,8 @@ for season in SEASONS:
                 tid=int(g[side+'_id'])
                 t=totals.get(tid)
                 if history_ok.get(tid,True) and t and t[4]>0 and t[1]>0 and t[3]>0:
-                    side_profiles[side]={'off_run':t[0]/t[1],'def_run':t[2]/t[3],'games':t[4]}
+                    side_profiles[side]={'off_run':t[0]/t[1],'def_run':t[2]/t[3],'games':t[4],
+                                           'margin':(t[6]-t[5])/t[4]}
             if len(side_profiles)==2:
                 rec.update(status='ok',reason='',**side_profiles)
             profiles[gid]=rec
@@ -96,9 +97,10 @@ for season in SEASONS:
                 continue
             h,a=lookup.loc[keys[0]],lookup.loc[keys[1]]
             for tid,own,opp in [(hid,h,a),(aid,a,h)]:
-                t=totals.setdefault(tid,[0.,0.,0.,0.,0])
+                t=totals.setdefault(tid,[0.,0.,0.,0.,0,0.,0.])
                 t[0]+=float(own.rushingYards); t[1]+=float(own.rushingAttempts)
                 t[2]+=float(opp.rushingYards); t[3]+=float(opp.rushingAttempts); t[4]+=1
+                t[5]+=float(own.turnovers); t[6]+=float(opp.turnovers)
     print('profiles season',season,'done',flush=True)
 
 # Venue metadata.
@@ -197,7 +199,8 @@ for _,g in target.iterrows():
         winner=None
     row={'season':season,'week':int(g.week),'game_id':int(g.game_id),'away':g.away_team,'home':g.home_team,
          'venue':g.venue,'venue_id':vid,'indoor':vm.get('indoor'),'start_utc':g.start.isoformat(),
-         'home_points':g.home_points,'away_points':g.away_points,'winner_side':winner}
+         'home_points':g.home_points,'away_points':g.away_points,'winner_side':winner,
+         'neutral_site':str(g.get('neutral_site','')).lower() in ['true','t','1','1.0','yes','y']}
     wf=weather.get((season,vid,g.game_date_utc))
     if vm.get('indoor') is False and wf is not None and not wf.empty:
         st=g.start.floor('h'); en=st+pd.Timedelta(hours=4); w=wf[(wf.time>=st)&(wf.time<=en)]
@@ -223,20 +226,48 @@ for _,g in target.iterrows():
         off='home' if h['off_run']>a['off_run'] else 'away' if a['off_run']>h['off_run'] else None
         de='home' if h['def_run']<a['def_run'] else 'away' if a['def_run']<h['def_run'] else None
         both=off if off and off==de else None
-        row.update(home_off_ypc=h['off_run'],away_off_ypc=a['off_run'],home_def_ypc_allowed=h['def_run'],away_def_ypc_allowed=a['def_run'],
-                   off_pick=off,def_pick=de,both_pick=both,
-                   off_win=(off==winner) if off and winner else None,
-                   def_win=(de==winner) if de and winner else None,
-                   both_win=(both==winner) if both and winner else None)
+        to_pick='home' if h['margin']>a['margin'] else 'away' if a['margin']>h['margin'] else None
+        def_to=de if de and de==to_pick else None
+        both_to=both if both and both==to_pick else None
+        home_pick=None if row['neutral_site'] else 'home'
+        home_def='home' if home_pick and de=='home' else None
+        home_to='home' if home_pick and to_pick=='home' else None
+        home_both='home' if home_pick and both=='home' else None
+        home_def_to='home' if home_pick and def_to=='home' else None
+        home_both_to='home' if home_pick and both_to=='home' else None
+        row.update(
+            home_off_ypc=h['off_run'],away_off_ypc=a['off_run'],
+            home_def_ypc_allowed=h['def_run'],away_def_ypc_allowed=a['def_run'],
+            home_turnover_margin=h['margin'],away_turnover_margin=a['margin'],
+            off_pick=off,def_pick=de,both_pick=both,to_pick=to_pick,def_to_pick=def_to,both_to_pick=both_to,
+            home_pick=home_pick,home_def_pick=home_def,home_to_pick=home_to,home_both_pick=home_both,
+            home_def_to_pick=home_def_to,home_both_to_pick=home_both_to,
+            off_win=(off==winner) if off and winner else None,
+            def_win=(de==winner) if de and winner else None,
+            both_win=(both==winner) if both and winner else None,
+            to_win=(to_pick==winner) if to_pick and winner else None,
+            def_to_win=(def_to==winner) if def_to and winner else None,
+            both_to_win=(both_to==winner) if both_to and winner else None,
+            home_win=(home_pick==winner) if home_pick and winner else None,
+            home_def_win=(home_def==winner) if home_def and winner else None,
+            home_to_win=(home_to==winner) if home_to and winner else None,
+            home_both_win=(home_both==winner) if home_both and winner else None,
+            home_def_to_win=(home_def_to==winner) if home_def_to and winner else None,
+            home_both_to_win=(home_both_to==winner) if home_both_to and winner else None)
     else:
-        row.update(off_pick=None,def_pick=None,both_pick=None,off_win=None,def_win=None,both_win=None)
+        row.update(off_pick=None,def_pick=None,both_pick=None,to_pick=None,def_to_pick=None,both_to_pick=None,
+                   home_pick=None if row['neutral_site'] else 'home',home_def_pick=None,home_to_pick=None,home_both_pick=None,
+                   home_def_to_pick=None,home_both_to_pick=None,
+                   off_win=None,def_win=None,both_win=None,to_win=None,def_to_win=None,both_to_win=None,
+                   home_win=(winner=='home') if (not row['neutral_site'] and winner) else None,
+                   home_def_win=None,home_to_win=None,home_both_win=None,home_def_to_win=None,home_both_to_win=None)
     hg=conference_group(g.home_conference,g.home_team);ag=conference_group(g.away_conference,g.away_team)
     row['group']='P4/P4' if hg=='P4' and ag=='P4' else 'G6/G6' if hg=='G6' and ag=='G6' else 'Mixed/Other'
     rows.append(row)
 
 games=pd.DataFrame(rows)
-games.to_csv(OUT/'game_details_fast2.csv',index=False)
-pd.DataFrame(weather_errors).to_csv(OUT/'weather_errors_fast2.csv',index=False)
+games.to_csv(OUT/'game_details_hfa_turnover.csv',index=False)
+pd.DataFrame(weather_errors).to_csv(OUT/'weather_errors_hfa_turnover.csv',index=False)
 
 def wilson(w,n,z=1.96):
     if not n:return (None,None)
@@ -246,8 +277,9 @@ def stat(frame,sig):
     x=frame[frame[sig+'_pick'].notna() & frame[sig+'_win'].notna()]
     n=len(x);w=int(x[sig+'_win'].astype(bool).sum());lo,hi=wilson(w,n)
     return {'games':n,'wins':w,'losses':n-w,'win_rate':w/n if n else None,'wilson_low':lo,'wilson_high':hi}
+PRIMARY_SIGNALS=['off','def','both','home','to','def_to','both_to','home_def','home_to','home_both','home_def_to','home_both_to']
 def block(frame):
-    return {x:stat(frame,x) for x in ['off','def','both']}
+    return {x:stat(frame,x) for x in PRIMARY_SIGNALS}
 
 outdoor=games[(games.indoor==False)&games.weather_available.eq(True)]
 inc=outdoor[outdoor.inclement.eq(True)]
@@ -264,9 +296,32 @@ summary={
 for y,f in inc.groupby('season'):summary['by_season'][str(int(y))]=block(f)
 for k,f in inc.groupby('weather_type'):summary['by_weather_type'][str(k)]=block(f)
 for k,f in inc.groupby('group'):summary['by_group'][str(k)]=block(f)
-for sig in ['off','def','both']:
+for sig in PRIMARY_SIGNALS:
     a=summary['inclement'][sig]['win_rate'];b=summary['ordinary_control'][sig]['win_rate']
     summary['inclement'][sig]['vs_ordinary_pp']=None if a is None or b is None else (a-b)*100
 
-(OUT/'summary_fast2.json').write_text(json.dumps(summary,indent=2))
+(OUT/'summary_hfa_turnover.json').write_text(json.dumps(summary,indent=2))
+
+labels={
+ 'off':'Higher offensive YPC','def':'Lower defensive YPC allowed','both':'Both YPC advantages',
+ 'home':'Home field','to':'Better turnover margin/game','def_to':'Run defense + turnover edge',
+ 'both_to':'Both YPC + turnover edge','home_def':'Home + better run defense',
+ 'home_to':'Home + turnover edge','home_both':'Home + both YPC advantages',
+ 'home_def_to':'Home + run defense + turnover edge','home_both_to':'Home + both YPC + turnover edge'}
+def fmt(s):
+    return '—' if not s['games'] else f"{s['wins']}–{s['losses']} ({s['win_rate']:.1%})"
+lines=['# Weather + HFA + turnover validation','',
+       'Same locked inclement-weather definition as SPEC.md. Turnover metric is pregame turnover margin per current-season FBS game. Neutral-site games are excluded from home-field signals.','',
+       '| Signal | Inclement | Ordinary outdoor | Difference |','|---|---:|---:|---:|']
+for sig in PRIMARY_SIGNALS:
+    a=summary['inclement'][sig]; b=summary['ordinary_control'][sig]
+    d=a.get('vs_ordinary_pp')
+    lines.append(f"| {labels[sig]} | {fmt(a)} | {fmt(b)} | {'—' if d is None else f'{d:+.1f} pp'} |")
+lines += ['','## P4/P4 inclement weather','','| Signal | Record | Win rate |','|---|---:|---:|']
+p4=summary['by_group'].get('P4/P4',{})
+for sig in PRIMARY_SIGNALS:
+    if sig in p4:
+        q=p4[sig]
+        lines.append(f"| {labels[sig]} | {q['wins']}–{q['losses']} | {q['win_rate']:.1%} |")
+(OUT/'README_HFA_TURNOVER.md').write_text('\n'.join(lines)+'\n')
 print(json.dumps(summary,indent=2),flush=True)
