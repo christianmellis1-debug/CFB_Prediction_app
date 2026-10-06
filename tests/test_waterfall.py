@@ -169,15 +169,17 @@ class WaterfallTests(unittest.TestCase):
             ((4, 3, 2, 1, 20), (4, 3, 2, 1, 2)),
         ]
         for sizes, expected in cases:
-            games, pred, profiles, checks = [], [], {}, {}
+            games, pred, profiles, checks, weather_ids = [], [], {}, {}, []
             gid = 0
             for stage, n in enumerate(sizes, 1):
                 for _ in range(n):
                     gid += 1
                     g, p, r, check = self.fixture(stage, gid)
                     games.append(g); pred.append(p); profiles[str(gid)] = r; checks[str(gid)] = check
-            weather_checks = {str(g['game_id']): {'status': 'ok', 'inclement': True, 'weather_type': 'Wet/snow only'}
-                              for g in games if any(p['Game ID'] == g['game_id'] and p.get('Home Spread') == '-9.5' for p in pred)}
+                    if stage == 2:
+                        weather_ids.append(str(gid))
+            weather_checks = {gid: {'status': 'ok', 'inclement': True, 'weather_type': 'Wet/snow only'}
+                              for gid in weather_ids}
             card = select_waterfall(pd.DataFrame(pred[::-1]), pd.DataFrame(games), profiles,
                                     advantage_checks=checks, weather_checks=weather_checks)
             self.assertEqual(tuple(sum(x['Value Stage'] == i for x in card) for i in (1, 2, 3, 4, 5)), expected)
