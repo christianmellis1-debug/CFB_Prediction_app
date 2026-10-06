@@ -1,0 +1,26 @@
+name: Replay 2026 Tiers 1-3
+on:
+  push:
+    branches: [research/2026-tiers1-3-retrospective]
+    paths:
+      - research/tiers1_3_2026_replay/run.py
+      - .github/workflows/replay-2026-tiers1-3.yml
+permissions:
+  contents: write
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3
+      - run: python -u research/tiers1_3_2026_replay/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/tiers1_3_2026_replay
+          git commit -m 'Record 2026 Tier 1-3 retrospective replay' || exit 0
+          git push origin HEAD:research/2026-tiers1-3-retrospective
