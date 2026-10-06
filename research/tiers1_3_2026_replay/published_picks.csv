@@ -1,0 +1,18 @@
+tier,season,week,game_id,away,home,pick,market,line,price,provider,final,ats_margin,result,source_sample,suppressed_by_higher_tier
+1,2026,3,401856694,Kentucky,Texas A&M,Texas A&M,ATS,-16.5,-115.0,DraftKings,21-31,-26.5,L,exact 6/6,False
+1,2026,3,401856695,NC State,Vanderbilt,Vanderbilt,ATS,-3.0,-108.0,DraftKings,35-31,1.0,W,exact 6/6,False
+1,2026,3,401858225,Syracuse,Pittsburgh,Pittsburgh,ATS,-10.5,-112.0,DraftKings,27-13,3.5,W,exact 6/6,False
+1,2026,4,401856696,South Carolina,Alabama,Alabama,ATS,-12.5,-110.0,DraftKings,49-18,18.5,W,exact 6/6,False
+1,2026,4,401856699,Ole Miss,Florida,Florida,ATS,-4.0,-112.0,DraftKings,52-28,20.0,W,exact 6/6,False
+1,2026,4,401858465,Illinois,Ohio State,Ohio State,ATS,-25.5,-112.0,DraftKings,42-19,-2.5,L,exact 6/6,False
+1,2026,4,401860891,Rice,Fresno State,Fresno State,ATS,-12.5,-108.0,DraftKings,38-24,1.5,W,exact 6/6,False
+2,2026,4,401862779,Army,Temple,Temple,ATS,4.0,,research archive,17-21,,P,weather defensive edge,False
+1,2026,5,401856711,Arkansas,Texas A&M,Texas A&M,ATS,-13.5,-112.0,DraftKings,34-7,13.5,W,exact 6/6,False
+1,2026,5,401858475,Maryland,Nebraska,Nebraska,ATS,-15.5,-108.0,DraftKings,48-23,9.5,W,exact 6/6,False
+1,2026,5,401864514,UTEP,New Mexico,New Mexico,ATS,-23.5,-115.0,DraftKings,61-7,30.5,W,exact 6/6,False
+1,2026,5,401864515,Wyoming,North Dakota State,North Dakota State,ATS,-17.5,-110.0,DraftKings,28-0,10.5,W,exact 6/6,False
+1,2026,5,401866433,Eastern Michigan,Massachusetts,Massachusetts,ATS,-5.5,-110.0,DraftKings,14-38,-29.5,L,exact 6/6,False
+1,2026,5,401869932,Arkansas State,Louisiana,Louisiana,ATS,-4.5,-115.0,DraftKings,23-20,-1.5,L,exact 6/6,False
+1,2026,5,401869962,Marshall,James Madison,James Madison,ATS,-14.5,-112.0,DraftKings,45-17,13.5,W,exact 6/6,False
+2,2026,5,401856710,Auburn,Tennessee,Tennessee,ATS,-6.0,,research archive,24-14,,W,weather defensive edge,False
+3,2026,5,401856709,Kentucky,South Carolina,Kentucky,ML,110.0,110.0,DraftKings,35-34,,W,P4 turnover edge >= +1.0,False

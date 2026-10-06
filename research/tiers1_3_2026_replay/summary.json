@@ -1,0 +1,84 @@
+{
+  "overall": {
+    "picks": 17,
+    "wins": 12,
+    "losses": 4,
+    "pushes": 1,
+    "win_rate_ex_push": 0.75
+  },
+  "by_tier": {
+    "1": {
+      "picks": 14,
+      "wins": 10,
+      "losses": 4,
+      "pushes": 0,
+      "win_rate_ex_push": 0.7142857142857143
+    },
+    "2": {
+      "picks": 2,
+      "wins": 1,
+      "losses": 0,
+      "pushes": 1,
+      "win_rate_ex_push": 1.0
+    },
+    "3": {
+      "picks": 1,
+      "wins": 1,
+      "losses": 0,
+      "pushes": 0,
+      "win_rate_ex_push": 1.0
+    }
+  },
+  "by_week": {
+    "3": {
+      "picks": 3,
+      "wins": 2,
+      "losses": 1,
+      "pushes": 0,
+      "win_rate_ex_push": 0.6666666666666666
+    },
+    "4": {
+      "picks": 5,
+      "wins": 3,
+      "losses": 1,
+      "pushes": 1,
+      "win_rate_ex_push": 0.75
+    },
+    "5": {
+      "picks": 9,
+      "wins": 7,
+      "losses": 2,
+      "pushes": 0,
+      "win_rate_ex_push": 0.7777777777777778
+    }
+  },
+  "candidate_counts_before_priority": {
+    "1": 14,
+    "2": 4,
+    "3": 1
+  },
+  "suppressed_overlaps": [
+    {
+      "tier": 2,
+      "week": 3,
+      "game_id": 401858225,
+      "away": "Syracuse",
+      "home": "Pittsburgh",
+      "pick": "Pittsburgh",
+      "market": "ATS",
+      "line": -10.5,
+      "result": "W"
+    },
+    {
+      "tier": 2,
+      "week": 5,
+      "game_id": 401869932,
+      "away": "Arkansas State",
+      "home": "Louisiana",
+      "pick": "Louisiana",
+      "market": "ATS",
+      "line": -4.5,
+      "result": "L"
+    }
+  ]
+}
