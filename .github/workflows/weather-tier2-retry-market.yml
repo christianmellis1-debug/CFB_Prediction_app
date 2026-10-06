@@ -1,0 +1,30 @@
+name: Retry weather then grade Tier 2
+on:
+  push:
+    branches: [research/weather-tier2-market-validation]
+    paths:
+      - .github/workflows/weather-tier2-retry-market.yml
+permissions:
+  contents: write
+jobs:
+  retry-grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-tier2-market-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python -u research/weather_ypc_validation/retry_missing_weather.py
+      - run: python -u research/weather_tier2_market_validation/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/weather_ypc_validation/game_details_hfa_turnover.csv research/weather_ypc_validation/summary_hfa_turnover.json research/weather_ypc_validation/weather_errors_hfa_turnover_retry.csv research/weather_tier2_market_validation
+          if ! git diff --cached --quiet; then
+            git commit -m 'Retry missing weather and grade Tier 2 market sample'
+            git push origin HEAD:research/weather-tier2-market-validation
+          fi
