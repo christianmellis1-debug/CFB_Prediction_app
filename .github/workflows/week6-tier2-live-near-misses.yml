@@ -1,0 +1,25 @@
+name: Week 6 live Tier 2 near misses
+on:
+  push:
+    branches: [research/week6-tier2-live-near-misses]
+    paths:
+      - research/week6_tier2_live_near_misses/run.py
+      - .github/workflows/week6-tier2-live-near-misses.yml
+permissions:
+  contents: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -u research/week6_tier2_live_near_misses/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/week6_tier2_live_near_misses/live_near_misses.json
+          git commit -m 'Record live Week 6 Tier 2 near misses' || exit 0
+          git push origin HEAD:research/week6-tier2-live-near-misses
