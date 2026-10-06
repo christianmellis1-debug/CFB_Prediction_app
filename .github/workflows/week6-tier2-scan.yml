@@ -1,0 +1,30 @@
+name: Week 6 Tier 2 scan
+on:
+  push:
+    branches: [research/tier2-short-underdog-validation]
+    paths:
+      - research/tier2_short_underdog_validation/week6_scan.py
+      - .github/workflows/week6-tier2-scan.yml
+permissions:
+  contents: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/tier2-short-underdog-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python research/tier2_short_underdog_validation/week6_scan.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/tier2_short_underdog_validation/week6_scan.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Week 6 Tier 2 scan'
+            git push origin HEAD:research/tier2-short-underdog-validation
+          fi
