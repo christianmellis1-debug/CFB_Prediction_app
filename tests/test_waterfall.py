@@ -252,6 +252,21 @@ class WaterfallTests(unittest.TestCase):
             self.assertEqual(out.iloc[0]['ValueMarket'] if 'ValueMarket' in out else out.iloc[0]['Value Market'], 'Spread')
             self.assertEqual(out.iloc[0]['Value Result'], expected)
 
+    def test_weather_tier_ats_grading_and_push(self):
+        weather = {'3': {'status': 'ok', 'inclement': True, 'weather_type': 'Wet/snow only'}}
+        for home_points, expected in [(30, 'Incorrect'), (31, 'Push'), (35, 'Correct')]:
+            s, b = self.history(final=True, home_points=home_points, away_points=24)
+            b.loc[b['team_id'].eq(10), 'completionAttempts'] = '10-30'
+            b.loc[b['team_id'].eq(20), 'completionAttempts'] = '20-30'
+            _, p, _, _ = self.fixture(2)
+            p.update({'Game ID': 3, 'Status': 'Final', 'Actual Winner': 'Home',
+                      'Home Win %': .70, 'Away Win %': .30,
+                      'Home Spread': '-7', 'Away Spread': '+7'})
+            out = add_waterfall_value(pd.DataFrame([p]), s, b, 3, weather_checks=weather)
+            self.assertEqual(out.iloc[0]['Value Stage'], 2)
+            self.assertEqual(out.iloc[0]['Value Market'], 'Spread')
+            self.assertEqual(out.iloc[0]['Value Result'], expected)
+
 
 class IntegrationTests(unittest.TestCase):
     def api_functions(self):
