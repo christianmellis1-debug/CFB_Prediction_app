@@ -1,0 +1,35 @@
+name: Week 6 six-of-six validation
+
+on:
+  push:
+    branches:
+      - research/week6-sixof6-validation-2026-10-05
+    paths:
+      - '.github/workflows/week6-sixof6-validation.yml'
+      - 'research/week6_sixof6_validation/run.py'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/week6-sixof6-validation-2026-10-05
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python research/week6_sixof6_validation/run.py
+      - name: Save validation output
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/week6_sixof6_validation/week6_sixof6.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Week 6 six-of-six validation'
+            git push origin HEAD:research/week6-sixof6-validation-2026-10-05
+          fi
