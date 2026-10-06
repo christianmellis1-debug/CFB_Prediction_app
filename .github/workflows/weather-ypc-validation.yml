@@ -1,0 +1,31 @@
+name: Weather YPC validation
+on:
+  push:
+    branches: [research/weather-ypc-validation]
+    paths:
+      - research/weather_ypc_validation/run.py
+      - research/weather_ypc_validation/SPEC.md
+      - .github/workflows/weather-ypc-validation.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/weather-ypc-validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - run: python research/weather_ypc_validation/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/weather_ypc_validation/README.md research/weather_ypc_validation/summary.json research/weather_ypc_validation/game_details.csv research/weather_ypc_validation/weather_errors.csv research/weather_ypc_validation/venue_metadata.json research/weather_ypc_validation/geocodes.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record weather YPC validation results'
+            git push origin HEAD:research/weather-ypc-validation
+          fi
