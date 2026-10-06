@@ -1,0 +1,26 @@
+name: Tier 4 parlay anchor validation
+on:
+  push:
+    branches: [research/tier4-parlay-anchor-validation]
+    paths:
+      - research/tier4_parlay_anchor_validation/run.py
+      - .github/workflows/tier4-parlay-anchor-validation.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python -u research/tier4_parlay_anchor_validation/run.py
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/tier4_parlay_anchor_validation
+          git commit -m 'Record Tier 4 parlay anchor validation' || exit 0
+          git push origin HEAD:research/tier4-parlay-anchor-validation
