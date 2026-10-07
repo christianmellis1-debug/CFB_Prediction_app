@@ -306,10 +306,12 @@ def weather_tier_candidate_ids(predictions, schedule, profiles):
 
 def cross_tier_matches(predictions, schedule, profiles, advantage_checks=None, weather_checks=None,
                        tier5_checks=None):
-    """Evaluate all five official tiers independently for Game of the Week overlap.
+    """Evaluate Game of the Week overlap across Tiers 1, 2, 3, and 5.
 
-    A game qualifies only when at least two tiers recommend the same team. Opposing
-    tier signals are retained for audit but never create a Game of the Week label.
+    Tier 4 is intentionally excluded because its heavy-favorite prices offer too little
+    payout for this feature. A game qualifies only when at least two eligible tiers
+    recommend the same team. Opposing tier signals are retained for audit but never
+    create a Game of the Week label.
     """
     games = normalize_fbs_schedule(schedule).copy()
     if 'game_id' not in games:
@@ -356,7 +358,8 @@ def cross_tier_matches(predictions, schedule, profiles, advantage_checks=None, w
                 and np.isfinite(spread) and spread > -14):
             signals.append((2, game['home_team']))
 
-        # Tiers 3 and 4: independent DraftKings moneyline rules.
+        # Tier 3: independent DraftKings short-underdog rule.
+        # Tier 4 is deliberately excluded from Game of the Week overlap.
         try:
             hline, aline = float(row['DK Home ML']), float(row['DK Away ML'])
             valid_lines = all(np.isfinite(n) and abs(n) >= 100 and n.is_integer() for n in (hline, aline))
@@ -383,12 +386,6 @@ def cross_tier_matches(predictions, schedule, profiles, advantage_checks=None, w
                                 and fav_group == 'P4' and dog_group == 'P4'
                                 and turnover_edge >= 1.0 - 1e-10):
                             signals.append((3, game[dog + '_team']))
-
-                game_week = pd.to_numeric(game.get('week'), errors='coerce')
-                regular = str(game.get('season_type', '')).lower() == 'regular'
-                if (regular and np.isfinite(game_week) and game_week >= 4
-                        and -1000 <= lines[fav] <= -505):
-                    signals.append((4, game[fav + '_team']))
 
         # Tier 5: independent four-factor home straight-up signal.
         tier5 = tier5_checks.get(str(gid), {})
