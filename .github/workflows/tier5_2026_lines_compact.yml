@@ -1,0 +1,22 @@
+name: Tier5 2026 Lines Compact
+on:
+  push:
+    branches:
+      - research/tier5-2026-snapshot-20261007
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install pandas
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import pandas as pd, urllib.request
+          u="https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_matchup_line/cfb_matchup_line_2026.csv"
+          urllib.request.urlretrieve(u,"lines.csv")
+          d=pd.read_csv("lines.csv",low_memory=False)
+          ids=[401858231,401858458,401856703,401858479,401858475]
+          x=d[d.game_id.isin(ids)][["game_id","week","home_team","away_team","spread_open","spread"]]
+          print(x.sort_values(["week","game_id"]).to_csv(index=False))
+          PY
