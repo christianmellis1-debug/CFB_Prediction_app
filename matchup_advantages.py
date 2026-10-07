@@ -310,8 +310,9 @@ def cross_tier_matches(predictions, schedule, profiles, advantage_checks=None, w
 
     Tier 4 is intentionally excluded because its heavy-favorite prices offer too little
     payout for this feature. A game qualifies only when at least two eligible tiers
-    recommend the same team. Opposing tier signals are retained for audit but never
-    create a Game of the Week label.
+    recommend the same team and that consensus team's DraftKings moneyline is -300
+    or longer. Opposing tier signals are retained for audit but never create a Game
+    of the Week label.
     """
     games = normalize_fbs_schedule(schedule).copy()
     if 'game_id' not in games:
@@ -400,13 +401,35 @@ def cross_tier_matches(predictions, schedule, profiles, advantage_checks=None, w
             team, stages = ranked[0]
         else:
             team, stages = '', []
-        qualifies = len(stages) >= 2
+
+        # Game of the Week must still have meaningful betting upside. Require a
+        # usable DraftKings moneyline on the consensus team and reject prices
+        # shorter than -300 (for example -301, -500, or -1000).
+        consensus_line = np.nan
+        if team:
+            if str(team) == str(game.get('home_team')):
+                raw_line = row.get('DK Home ML')
+            elif str(team) == str(game.get('away_team')):
+                raw_line = row.get('DK Away ML')
+            else:
+                raw_line = None
+            try:
+                parsed_line = float(raw_line)
+                if np.isfinite(parsed_line) and abs(parsed_line) >= 100 and parsed_line.is_integer():
+                    consensus_line = parsed_line
+            except (TypeError, ValueError, OverflowError):
+                pass
+
+        payout_eligible = np.isfinite(consensus_line) and consensus_line >= -300
+        qualifies = len(stages) >= 2 and payout_eligible
         out[str(gid)] = {
             'qualifies': qualifies,
             'team': team if qualifies else '',
             'stages': stages if qualifies else [],
             'tiers': [WATERFALL_TIERS[s] for s in stages] if qualifies else [],
             'count': len(stages) if qualifies else 0,
+            'moneyline': int(consensus_line) if np.isfinite(consensus_line) else None,
+            'payout_eligible': bool(payout_eligible),
             'all_signals': [{'stage': stage, 'team': str(team_name)} for stage, team_name in signals],
         }
     return out
