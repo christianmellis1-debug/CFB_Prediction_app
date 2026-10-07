@@ -1412,12 +1412,6 @@ def christians_parlay(predictions, game_schedule, now_utc, stake=10.0):
     amount = Decimal(str(stake)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
     returned = (amount * Decimal(str(multiplier))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
 
-    # Estimate each leg using the probability that matches the bet type.
-    # Spread tiers use their validated ATS hit rates; moneyline tiers use the
-    # model's selected-team win probability when available.
-    spread_hit_rates = {1: 10 / 14, 2: 12 / 14}
-    fallback_hit_rates = {3: 23 / 32, 4: 39 / 39, 5: 42 / 53}
-    leg_probabilities = []
     legs = []
     for _, row in selected.iterrows():
         stage = int(row["_stage"])
@@ -1425,27 +1419,6 @@ def christians_parlay(predictions, game_schedule, now_utc, stake=10.0):
         line = str(row.get("Value Line", ""))
         pick = str(row.get("Value Pick", ""))
         bet = f"{pick} {line}" if market == "Spread" else f"{pick} ML {line}"
-
-        if market == "Spread":
-            leg_probability = spread_hit_rates.get(stage, np.nan)
-            probability_source = "Historical ATS rate"
-        else:
-            side = str(row.get("Value Side", "")).lower()
-            if side == "home" or pick == str(row.get("Home Team", "")):
-                leg_probability = pd.to_numeric(row.get("Home Win %"), errors="coerce")
-            elif side == "away" or pick == str(row.get("Away Team", "")):
-                leg_probability = pd.to_numeric(row.get("Away Win %"), errors="coerce")
-            else:
-                leg_probability = np.nan
-            if not np.isfinite(leg_probability):
-                leg_probability = fallback_hit_rates.get(stage, np.nan)
-                probability_source = "Historical tier rate"
-            else:
-                probability_source = "Model win probability"
-
-        if not np.isfinite(leg_probability) or not 0 <= leg_probability <= 1:
-            return None
-        leg_probabilities.append(float(leg_probability))
         legs.append({
             "game_id": int(row["Game ID"]),
             "tier": str(row.get("Value Tier", "")),
@@ -1455,11 +1428,8 @@ def christians_parlay(predictions, game_schedule, now_utc, stake=10.0):
             "price": str(row["_price"]),
             "away": str(row.get("Away Team", "")),
             "home": str(row.get("Home Team", "")),
-            "probability": float(leg_probability),
-            "probability_source": probability_source,
         })
 
-    parlay_probability = float(np.prod(leg_probabilities))
     return {
         "formula": formula,
         "legs": legs,
@@ -1467,7 +1437,6 @@ def christians_parlay(predictions, game_schedule, now_utc, stake=10.0):
         "return": float(returned),
         "profit": float(returned - amount),
         "loss": -float(amount),
-        "probability": parlay_probability,
         "sportsbook": "DraftKings",
     }
 
@@ -2797,15 +2766,13 @@ with parlay_tab:
                     + '</div>',
                     unsafe_allow_html=True,
                 )
-            cp1, cp2, cp3, cp4 = st.columns(4)
-            cp1.metric("Estimated win chance", f"{featured_parlay['probability']:.1%}")
-            cp2.metric("Stake", f"${featured_parlay['stake']:,.2f}")
-            cp3.metric("Return if all win", f"${featured_parlay['return']:,.2f}")
-            cp4.metric("Profit if all win", f"${featured_parlay['profit']:+,.2f}")
+            cp1, cp2, cp3 = st.columns(3)
+            cp1.metric("Stake", f"${featured_parlay['stake']:,.2f}")
+            cp2.metric("Return if all win", f"${featured_parlay['return']:,.2f}")
+            cp3.metric("Profit if all win", f"${featured_parlay['profit']:+,.2f}")
             st.caption(
                 f"If any leg loses: ${abs(featured_parlay['loss']):,.2f} lost. "
-                "Estimated win chance assumes independent legs; Tier 1/2 spread legs use validated ATS hit rates, "
-                "while moneyline legs use the selected team's model win probability when available. "
+                "Uses four distinct current Value Pick games and DraftKings prices. "
                 "Payout is an estimate; the sportsbook's live parlay quote can differ."
             )
     else:
