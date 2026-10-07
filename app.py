@@ -2739,88 +2739,87 @@ with parlay_tab:
     st.subheader(f"Parlay finder · Week {selected_week}")
     st.caption("No AI subscription or paid API. Searches model picks with future kickoffs and available moneylines. Finished games and games already started are excluded.")
     st.caption("Payouts are estimates from multiplying individual moneylines, not sportsbook parlay quotes. Joint win probabilities assume independent outcomes. Each combination uses one sportsbook and distinct teams.")
-    if st.toggle("Open parlay finder", key="parlay_enabled"):
-        parlay_stake = st.number_input("Total parlay stake ($)", min_value=0.0, max_value=100000.0, value=10.0, step=1.0)
+    parlay_stake = st.number_input("Total parlay stake ($)", min_value=0.0, max_value=100000.0, value=10.0, step=1.0)
 
-        featured_parlay = christians_parlay(
-            pred, games, pd.Timestamp.now(tz="UTC"), stake=parlay_stake
-        )
-        if featured_parlay:
-            with st.container(border=True, key=f"christians_parlay_{season}_{selected_week}"):
+    featured_parlay = christians_parlay(
+        pred, games, pd.Timestamp.now(tz="UTC"), stake=parlay_stake
+    )
+    if featured_parlay:
+        with st.container(border=True, key=f"christians_parlay_{season}_{selected_week}"):
+            st.markdown(
+                '<div class="christians-parlay-kicker">🏈 Featured weekly parlay</div>'
+                '<div class="christians-parlay-title">Christian’s Parlay</div>'
+                + f'<div class="christians-parlay-formula">{escape(featured_parlay["formula"])} · '
+                + f'{escape(featured_parlay["sportsbook"])}</div>',
+                unsafe_allow_html=True,
+            )
+            for leg in featured_parlay["legs"]:
                 st.markdown(
-                    '<div class="christians-parlay-kicker">🏈 Featured weekly parlay</div>'
-                    '<div class="christians-parlay-title">Christian’s Parlay</div>'
-                    + f'<div class="christians-parlay-formula">{escape(featured_parlay["formula"])} · '
-                    + f'{escape(featured_parlay["sportsbook"])}</div>',
+                    '<div class="christians-parlay-leg">'
+                    + f'<div class="christians-parlay-tier">Tier {leg["stage"]}</div>'
+                    + f'<strong>{escape(leg["bet"])}</strong><br>'
+                    + f'<span>{escape(leg["away"])} at {escape(leg["home"])} · '
+                    + f'price {escape(leg["price"])}</span>'
+                    + '</div>',
                     unsafe_allow_html=True,
                 )
-                for leg in featured_parlay["legs"]:
-                    st.markdown(
-                        '<div class="christians-parlay-leg">'
-                        + f'<div class="christians-parlay-tier">Tier {leg["stage"]}</div>'
-                        + f'<strong>{escape(leg["bet"])}</strong><br>'
-                        + f'<span>{escape(leg["away"])} at {escape(leg["home"])} · '
-                        + f'price {escape(leg["price"])}</span>'
-                        + '</div>',
-                        unsafe_allow_html=True,
-                    )
-                cp1, cp2, cp3 = st.columns(3)
-                cp1.metric("Stake", f"${featured_parlay['stake']:,.2f}")
-                cp2.metric("Return if all win", f"${featured_parlay['return']:,.2f}")
-                cp3.metric("Profit if all win", f"${featured_parlay['profit']:+,.2f}")
-                st.caption(
-                    f"If any leg loses: ${abs(featured_parlay['loss']):,.2f} lost. "
-                    "Uses four distinct current Value Pick games and DraftKings prices. "
-                    "Payout is an estimate; the sportsbook's live parlay quote can differ."
-                )
-        else:
-            st.info(
-                "Christian’s Parlay is unavailable this week because the current Value Picks "
-                "do not satisfy the 4-leg formula with four distinct future games and usable DraftKings prices."
+            cp1, cp2, cp3 = st.columns(3)
+            cp1.metric("Stake", f"${featured_parlay['stake']:,.2f}")
+            cp2.metric("Return if all win", f"${featured_parlay['return']:,.2f}")
+            cp3.metric("Profit if all win", f"${featured_parlay['profit']:+,.2f}")
+            st.caption(
+                f"If any leg loses: ${abs(featured_parlay['loss']):,.2f} lost. "
+                "Uses four distinct current Value Pick games and DraftKings prices. "
+                "Payout is an estimate; the sportsbook's live parlay quote can differ."
             )
+    else:
+        st.info(
+            "Christian’s Parlay is unavailable this week because the current Value Picks "
+            "do not satisfy the 4-leg formula with four distinct future games and usable DraftKings prices."
+        )
 
-        st.markdown("#### Build another parlay")
-        legs = st.selectbox("Number of legs", [2, 3, 4, 5], index=1)
-        goal = st.selectbox("Rank by", ["Highest win probability", "Highest payout", "Highest estimated value"])
-        min_conf = st.slider("Minimum model confidence per leg (%)", 50, 95, 60, 5)
-        data_rule = st.selectbox("Parlay team data", ["Any available data", "Published pregame summaries for both teams", "Exclude prior-data-only teams"])
-        pool = future_priced_picks(pred, games, pd.Timestamp.now(tz="UTC"))
-        pool = pool[pool["Confidence"] >= min_conf / 100]
-        if data_rule != "Any available data":
-            allowed = []
-            for _, pick in pool.iterrows():
-                published_both, estimated, prior_only = quality_by_match.get((pick["Home Team"], pick["Away Team"]), (False, False, True))
-                allowed.append(published_both if data_rule == "Published pregame summaries for both teams" else not prior_only)
-            pool = pool.loc[pd.Series(allowed, index=pool.index, dtype=bool)]
-        books = sorted(pool["ML Source"].unique().tolist())
-        book = st.selectbox("Sportsbook", ["Any single sportsbook"] + books)
-        if book != "Any single sportsbook":
-            pool = pool[pool["ML Source"].eq(book)]
-        pool = pool.copy()
-        pool["Decimal odds"] = pool["Bet Line"].map(lambda line: payout_outcomes(100, line)["Return if win"] / 100)
-        sort_column = {"Highest win probability": "Confidence", "Highest payout": "Decimal odds", "Highest estimated value": "Expected Value"}[goal]
-        total_candidates = len(pool)
-        pool = pool.sort_values(sort_column, ascending=False).head(24)
-        st.caption(f"Searching the top {len(pool)} of {total_candidates} eligible model picks by your ranking. All valid {legs}-leg combinations within this pool are compared; results are not a market-wide optimum.")
-        if len(pool) < legs:
-            st.info("Not enough eligible picks. Try another week, fewer legs, or broader filters.")
-        else:
-            results = rank_parlays(pool, legs, parlay_stake, goal)
-            if not results:
-                st.info("No combinations meet the one-sportsbook and distinct-team requirements.")
-            for number, result in enumerate(results, 1):
-                with st.container(border=True):
-                    st.markdown(f"**Option {number} · {result['legs'][0]['ML Source']}**")
-                    for leg in result["legs"]:
-                        st.write(f"{leg['Predicted Winner']} ({leg['Bet Line']}) · {leg['Away Team']} at {leg['Home Team']} · model confidence {leg['Confidence']:.1%}")
-                    p1, p2, p3 = st.columns(3)
-                    p1.metric("Estimated win chance", f"{result['probability']:.1%}")
-                    p2.metric("Return if all win", f"${result['return']:,.2f}")
-                    p3.metric("Profit if all win", f"${result['profit']:,.2f}")
-                    st.caption(f"If any leg loses: ${abs(result['loss']):,.2f} lost. Total returned includes the stake. Ties/voids can change the payout under sportsbook rules.")
-                    st.write(f"Ranked by {goal.lower()} within the displayed search pool. Model-estimated profit per $1 staked: {result['ev']:+.2f}.")
-                    if result["ev"] < 0:
-                        st.caption("The model estimates a negative expected return for this combination.")
+    st.markdown("#### Build another parlay")
+    legs = st.selectbox("Number of legs", [2, 3, 4, 5], index=1)
+    goal = st.selectbox("Rank by", ["Highest win probability", "Highest payout", "Highest estimated value"])
+    min_conf = st.slider("Minimum model confidence per leg (%)", 50, 95, 60, 5)
+    data_rule = st.selectbox("Parlay team data", ["Any available data", "Published pregame summaries for both teams", "Exclude prior-data-only teams"])
+    pool = future_priced_picks(pred, games, pd.Timestamp.now(tz="UTC"))
+    pool = pool[pool["Confidence"] >= min_conf / 100]
+    if data_rule != "Any available data":
+        allowed = []
+        for _, pick in pool.iterrows():
+            published_both, estimated, prior_only = quality_by_match.get((pick["Home Team"], pick["Away Team"]), (False, False, True))
+            allowed.append(published_both if data_rule == "Published pregame summaries for both teams" else not prior_only)
+        pool = pool.loc[pd.Series(allowed, index=pool.index, dtype=bool)]
+    books = sorted(pool["ML Source"].unique().tolist())
+    book = st.selectbox("Sportsbook", ["Any single sportsbook"] + books)
+    if book != "Any single sportsbook":
+        pool = pool[pool["ML Source"].eq(book)]
+    pool = pool.copy()
+    pool["Decimal odds"] = pool["Bet Line"].map(lambda line: payout_outcomes(100, line)["Return if win"] / 100)
+    sort_column = {"Highest win probability": "Confidence", "Highest payout": "Decimal odds", "Highest estimated value": "Expected Value"}[goal]
+    total_candidates = len(pool)
+    pool = pool.sort_values(sort_column, ascending=False).head(24)
+    st.caption(f"Searching the top {len(pool)} of {total_candidates} eligible model picks by your ranking. All valid {legs}-leg combinations within this pool are compared; results are not a market-wide optimum.")
+    if len(pool) < legs:
+        st.info("Not enough eligible picks. Try another week, fewer legs, or broader filters.")
+    else:
+        results = rank_parlays(pool, legs, parlay_stake, goal)
+        if not results:
+            st.info("No combinations meet the one-sportsbook and distinct-team requirements.")
+        for number, result in enumerate(results, 1):
+            with st.container(border=True):
+                st.markdown(f"**Option {number} · {result['legs'][0]['ML Source']}**")
+                for leg in result["legs"]:
+                    st.write(f"{leg['Predicted Winner']} ({leg['Bet Line']}) · {leg['Away Team']} at {leg['Home Team']} · model confidence {leg['Confidence']:.1%}")
+                p1, p2, p3 = st.columns(3)
+                p1.metric("Estimated win chance", f"{result['probability']:.1%}")
+                p2.metric("Return if all win", f"${result['return']:,.2f}")
+                p3.metric("Profit if all win", f"${result['profit']:,.2f}")
+                st.caption(f"If any leg loses: ${abs(result['loss']):,.2f} lost. Total returned includes the stake. Ties/voids can change the payout under sportsbook rules.")
+                st.write(f"Ranked by {goal.lower()} within the displayed search pool. Model-estimated profit per $1 staked: {result['ev']:+.2f}.")
+                if result["ev"] < 0:
+                    st.caption("The model estimates a negative expected return for this combination.")
 
 with tracker_tab:
     tour_at("tracker")
