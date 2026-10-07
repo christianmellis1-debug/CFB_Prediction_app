@@ -2094,7 +2094,7 @@ with cards_tab:
                 kind="stable",
             )
             st.markdown("#### 🏆 Games of the Week")
-            st.caption("Cross-tier consensus · two or more eligible tiers (1, 2, 3, or 5) independently point to the same team. Tier 4 is excluded from Game of the Week.")
+            st.caption("Cross-tier consensus · two or more eligible tiers (1, 2, 3, or 5) independently point to the same team. Tier 4 is excluded, and the consensus team's DraftKings moneyline must be -300 or longer.")
             render_pick_cards(gotw_rows, "gotw")
             if not other_rows.empty:
                 st.markdown("#### All other matchups")
