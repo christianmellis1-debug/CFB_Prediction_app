@@ -1391,6 +1391,12 @@ st.markdown("""
 [data-testid="stTabs"] [data-baseweb="tab-highlight"] {background:#4bb48b;height:2px;}
 [class*="st-key-matchup_card_"] {border-radius:18px;border:1px solid #80978b40;background:var(--secondary-background-color);padding:16px;}
 [class*="st-key-matchup_card_"] [data-testid="stExpander"] {font-size:12px;}
+[class*="st-key-gotw_card_"] {border-radius:18px;border:2px solid #b5ed73!important;background:var(--secondary-background-color);padding:16px;box-shadow:0 0 0 1px #b5ed7330,0 10px 28px #0000001f;}
+[class*="st-key-gotw_card_"] [data-testid="stExpander"] {font-size:12px;}
+.gotw-banner {margin:0 0 12px;padding:12px 14px;border:1px solid #b5ed7370;border-radius:12px;background:#b5ed7312;}
+.gotw-kicker {font-size:10px;letter-spacing:1.5px;font-weight:800;color:#74b93d;text-transform:uppercase;margin-bottom:3px;}
+.gotw-pick {font-size:16px;font-weight:800;line-height:1.35;}
+.gotw-tiers {font-size:11px;opacity:.72;margin-top:3px;}
 .card-top {margin-bottom:8px;font-size:11px;letter-spacing:.3px;}
 .kickoff {margin-bottom:10px;line-height:1.5;}
 .team-line {margin:8px 0;gap:10px;font-size:15px;}
@@ -2040,8 +2046,19 @@ with cards_tab:
             if is_risky:
                 risky_indices.append(card_idx)
             warning = ('<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;border-radius:10px;background:#e9a23b20"><span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9a23b;color:#171717;font-size:25px;font-weight:900">!</span><div><strong>RISKY PICK · MATCHUP WARNING</strong><br><span>' + str(scored["count"]) + '/5 advantages for ' + escape(str(r["Predicted Winner"])) + '</span></div></div>') if is_risky else ""
+            gotw_note = ""
+            if bool(r.get("Game of Week", False)):
+                gotw_team = escape(str(r.get("Game of Week Team", "")))
+                gotw_tiers = escape(str(r.get("Game of Week Tiers", "")))
+                gotw_note = (
+                    '<div class="gotw-banner">'
+                    '<div class="gotw-kicker">🏆 Game of the Week · Cross-tier consensus</div>'
+                    f'<div class="gotw-pick">{gotw_team}</div>'
+                    f'<div class="gotw-tiers">{gotw_tiers}</div>'
+                    '</div>'
+                )
             waterfall_note = ('<div class="result-box"><strong>' + escape(str(r['Value Tier'])) + '</strong><div>' + escape(str(r['Value Pick'])) + ' · ' + escape(str(r.get('Value Market', ''))) + ' ' + escape(str(r['Value Line'])) + ' · ' + escape(str(r.get('Value Source', 'Unavailable'))) + '</div></div>') if r.get('Value Selected', False) else ''
-            cards[card_idx] = f"""<article class="pick-card">{waterfall_note}{warning}
+            cards[card_idx] = f"""<article class="pick-card">{gotw_note}{waterfall_note}{warning}
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
 {weather_html}
@@ -2067,7 +2084,23 @@ with cards_tab:
                             st.caption(note)
                             for metric, value in metrics.items():
                                 st.write(f"**{metric}:** {value}")
-        render_pick_cards(filtered, "matchup")
+        gotw_mask = filtered.get("Game of Week", pd.Series(False, index=filtered.index)).fillna(False).astype(bool)
+        gotw_rows = filtered.loc[gotw_mask].copy()
+        other_rows = filtered.loc[~gotw_mask].copy()
+        if not gotw_rows.empty:
+            gotw_rows = gotw_rows.sort_values(
+                ["Game of Week Tier Count", "Confidence"],
+                ascending=[False, False],
+                kind="stable",
+            )
+            st.markdown("#### 🏆 Games of the Week")
+            st.caption("Cross-tier consensus · two or more official tiers independently point to the same team.")
+            render_pick_cards(gotw_rows, "gotw")
+            if not other_rows.empty:
+                st.markdown("#### All other matchups")
+                render_pick_cards(other_rows, "matchup")
+        else:
+            render_pick_cards(filtered, "matchup")
         with risky_tab:
             tour_at("risky")
             st.subheader(f"Risky picks · {len(risky_indices)}")
