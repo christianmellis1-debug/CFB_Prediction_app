@@ -46,7 +46,8 @@ class WaterfallTests(unittest.TestCase):
         }
         check = self.six_check(stage == 1)
         if stage == 4:
-            p.update({'DK Home ML': '-300', 'DK Away ML': '+220', 'Predicted Winner': 'Home'})
+            g.update(week=4, start_date='2026-09-26T12:00:00Z')
+            p.update({'DK Home ML': '-600', 'DK Away ML': '+425', 'Predicted Winner': 'Away'})
         elif stage == 5:
             p.update({'DK Home ML': '-250', 'DK Away ML': '+220', 'Predicted Winner': 'Home'})
         elif stage == 3:
@@ -143,7 +144,7 @@ class WaterfallTests(unittest.TestCase):
             self.assertFalse(self.select(g, p, r, check), favorite_line)
 
         specs = [
-            (4, [-280, -600], [-279, -601]),
+            (4, [-505, -600, -1000], [-504, -1001]),
         ]
         for stage, good, bad in specs:
             for line in good + bad:
@@ -176,16 +177,26 @@ class WaterfallTests(unittest.TestCase):
         g3['neutral_site'] = True
         self.assertTrue(self.select(g3, p, r, check))
 
-    def test_old_moneyline_ties_and_model_gate(self):
-        for stage in (3, 4):
-            g, p, r, check = self.fixture(stage)
-            r['home']['margin'] = r['away']['margin']
-            self.assertEqual(bool(self.select(g, p, r, check)), stage == 4)
-        for confidence, winner, ok in [(.7, 'Home', True), (.699, 'Home', False),
-                                       (.9, 'Away', False), (float('nan'), 'Home', False), (70, 'Home', False)]:
-            g, p, r, check = self.fixture(4)
-            p.update(Confidence=confidence, **{'Predicted Winner': winner})
-            self.assertEqual(bool(self.select(g, p, r, check)), ok)
+    def test_tier4_is_week4_plus_price_only_straight_up(self):
+        g, p, r, check = self.fixture(4)
+        # Model disagreement and missing profile data do not block Tier 4.
+        p.update({'Predicted Winner': 'Away', 'Confidence': .51})
+        r = {'status': 'missing'}
+        card = self.select(g, p, r, check)
+        self.assertEqual(card[0]['Value Stage'], 4)
+        self.assertEqual(card[0]['ValuePick'] if 'ValuePick' in card[0] else card[0]['Value Pick'], 'Home')
+        self.assertEqual(card[0]['Value Market'], 'Moneyline')
+        self.assertEqual(card[0]['Value Band'], 'Straight Up')
+
+        # Week 3 does not qualify even at an eligible price.
+        g2, p2, r2, check2 = self.fixture(4)
+        g2.update(week=3, start_date='2026-09-19T12:00:00Z')
+        self.assertFalse(self.select(g2, p2, {'status': 'missing'}, check2))
+
+        # FCS opponents are outside Tier 4.
+        g3, p3, r3, check3 = self.fixture(4)
+        g3['away_division'] = 'fcs'
+        self.assertFalse(self.select(g3, p3, {'status': 'missing'}, check3))
 
     def test_missing_fcs_and_bad_profiles_fail_closed(self):
         g, p, r, check = self.fixture(1)
