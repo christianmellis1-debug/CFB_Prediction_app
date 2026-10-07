@@ -1628,6 +1628,13 @@ st.markdown("""
 .gotw-kicker {font-size:10px;letter-spacing:1.5px;font-weight:800;color:#74b93d;text-transform:uppercase;margin-bottom:3px;}
 .gotw-pick {font-size:16px;font-weight:800;line-height:1.35;}
 .gotw-tiers {font-size:11px;opacity:.72;margin-top:3px;}
+[class*="st-key-christians_parlay_"] {border:2px solid #b5ed73!important;border-radius:20px;background:linear-gradient(135deg,#b5ed7312,#164f430d);box-shadow:0 0 0 1px #b5ed7330,0 12px 32px #00000020;padding:18px;}
+.christians-parlay-kicker {font-size:11px;letter-spacing:1.8px;font-weight:800;text-transform:uppercase;color:#74b93d;margin-bottom:4px;}
+.christians-parlay-title {font-size:24px;font-weight:850;letter-spacing:-.6px;margin:0 0 4px;}
+.christians-parlay-formula {font-size:12px;opacity:.75;margin-bottom:14px;}
+.christians-parlay-leg {padding:9px 0;border-top:1px solid #80978b30;font-size:14px;line-height:1.45;}
+.christians-parlay-leg:first-of-type {border-top:0;}
+.christians-parlay-tier {font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;opacity:.68;}
 .card-top {margin-bottom:8px;font-size:11px;letter-spacing:.3px;}
 .kickoff {margin-bottom:10px;line-height:1.5;}
 .team-line {margin:8px 0;gap:10px;font-size:15px;}
@@ -2733,8 +2740,47 @@ with parlay_tab:
     st.caption("No AI subscription or paid API. Searches model picks with future kickoffs and available moneylines. Finished games and games already started are excluded.")
     st.caption("Payouts are estimates from multiplying individual moneylines, not sportsbook parlay quotes. Joint win probabilities assume independent outcomes. Each combination uses one sportsbook and distinct teams.")
     if st.toggle("Open parlay finder", key="parlay_enabled"):
-        legs = st.selectbox("Number of legs", [2, 3, 4, 5], index=1)
         parlay_stake = st.number_input("Total parlay stake ($)", min_value=0.0, max_value=100000.0, value=10.0, step=1.0)
+
+        featured_parlay = christians_parlay(
+            pred, games, pd.Timestamp.now(tz="UTC"), stake=parlay_stake
+        )
+        if featured_parlay:
+            with st.container(border=True, key=f"christians_parlay_{season}_{selected_week}"):
+                st.markdown(
+                    '<div class="christians-parlay-kicker">🏈 Featured weekly parlay</div>'
+                    '<div class="christians-parlay-title">Christian’s Parlay</div>'
+                    + f'<div class="christians-parlay-formula">{escape(featured_parlay["formula"])} · '
+                    + f'{escape(featured_parlay["sportsbook"])}</div>',
+                    unsafe_allow_html=True,
+                )
+                for leg in featured_parlay["legs"]:
+                    st.markdown(
+                        '<div class="christians-parlay-leg">'
+                        + f'<div class="christians-parlay-tier">Tier {leg["stage"]}</div>'
+                        + f'<strong>{escape(leg["bet"])}</strong><br>'
+                        + f'<span>{escape(leg["away"])} at {escape(leg["home"])} · '
+                        + f'price {escape(leg["price"])}</span>'
+                        + '</div>',
+                        unsafe_allow_html=True,
+                    )
+                cp1, cp2, cp3 = st.columns(3)
+                cp1.metric("Stake", f"${featured_parlay['stake']:,.2f}")
+                cp2.metric("Return if all win", f"${featured_parlay['return']:,.2f}")
+                cp3.metric("Profit if all win", f"${featured_parlay['profit']:+,.2f}")
+                st.caption(
+                    f"If any leg loses: ${abs(featured_parlay['loss']):,.2f} lost. "
+                    "Uses four distinct current Value Pick games and DraftKings prices. "
+                    "Payout is an estimate; the sportsbook's live parlay quote can differ."
+                )
+        else:
+            st.info(
+                "Christian’s Parlay is unavailable this week because the current Value Picks "
+                "do not satisfy the 4-leg formula with four distinct future games and usable DraftKings prices."
+            )
+
+        st.markdown("#### Build another parlay")
+        legs = st.selectbox("Number of legs", [2, 3, 4, 5], index=1)
         goal = st.selectbox("Rank by", ["Highest win probability", "Highest payout", "Highest estimated value"])
         min_conf = st.slider("Minimum model confidence per leg (%)", 50, 95, 60, 5)
         data_rule = st.selectbox("Parlay team data", ["Any available data", "Published pregame summaries for both teams", "Exclude prior-data-only teams"])
