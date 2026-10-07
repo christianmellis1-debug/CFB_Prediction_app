@@ -1670,7 +1670,7 @@ try:
     waterfall_boxes = download_advantage_boxes(season)
 except Exception:
     waterfall_boxes = pd.DataFrame()
-    st.warning("Value Picks unavailable: FBS box scores could not be loaded. Refresh feeds to retry.")
+    st.warning("Tiers 1–4 are unavailable because FBS box scores could not be loaded. Tier 5 can still use the published weekly team-summary snapshot.")
 weather_checks = {}
 weather_candidates = []
 try:
@@ -1697,7 +1697,7 @@ if weather_candidates:
             f"Tier 2 weather could not be verified for {missing_weather} candidate game(s). "
             "Those games are excluded from the Weather Defensive Edge tier."
         )
-pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week, weather_checks=weather_checks)
+pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week, weather_checks=weather_checks, published_summary=published_current)
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
 if st.session_state.get("moneyline_history_season") != season:
     line_history.clear()
@@ -2159,7 +2159,7 @@ with scenario_tab:
             with stake_columns[0]:
                 opportunity_stake = st.number_input("Opportunity stake ($)", min_value=0.0, value=10.0, step=.5, format="%.2f")
             stakes = {tier: opportunity_stake for tier in ["High", "Moderate", "Lean", "Toss-up"]}
-            st.caption("Uses the waterfall selections and their DraftKings moneylines, even when the selected team differs from the core model. Equal stake per selection.")
+            st.caption("Uses the waterfall selections and their available market prices, even when the selected team differs from the core model. Equal stake per selection.")
         st.caption("See potential profit if pending picks win, plus actual results for settled bets. Total returned includes your original stake.")
         with st.expander("How this scenario is calculated"):
             st.write("Historical simulation using recalculated pregame-week predictions and archived prices, not a record of bets placed before kickoff. Missing moneylines are excluded; pending games are not settled. No parlays or reinvestment. Ties refund the stake; profit is rounded to cents per bet.")
@@ -2184,7 +2184,7 @@ with scenario_tab:
                                 st.warning(f"Week {scenario_week} odds could not be loaded; those bets are excluded.")
                         week_predictions = add_betting_value(attach_odds(week_predictions, scenario_games, quotes))
                         if scenario_mode == "Best betting opportunities":
-                            week_predictions = add_waterfall_value(week_predictions, schedule, waterfall_boxes, scenario_week)
+                            week_predictions = add_waterfall_value(week_predictions, schedule, waterfall_boxes, scenario_week, published_summary=published_current)
                             week_predictions = waterfall_scenario_rows(week_predictions)
                         if not week_predictions.empty:
                             scenario_frames.append(simulate_stakes(week_predictions, stakes))
