@@ -1074,6 +1074,18 @@ def matchup_insights_html(pick, game, published, schedule, week, derived_ids):
     return panel(body)
 
 
+def weather_condition_icon(condition):
+    """Match the provider's condition labels; unknown conditions stay neutral."""
+    icons = {
+        "Clear": "☀️", "Mainly clear": "🌤️", "Partly cloudy": "⛅",
+        "Overcast": "☁️", "Fog": "🌫️", "Drizzle": "🌦️",
+        "Freezing drizzle": "🧊", "Rain": "🌧️", "Freezing rain": "🧊",
+        "Snow": "🌨️", "Rain showers": "🌧️", "Snow showers": "🌨️",
+        "Thunderstorms": "⛈️",
+    }
+    return icons.get(condition, "🌡️")
+
+
 def weather_card_html(weather):
     """Compact game-window forecast panel for matchup cards."""
     weather = weather or {}
@@ -1083,14 +1095,14 @@ def weather_card_html(weather):
         return (
             '<div class="result-box" style="margin-top:10px">'
             '<div class="pick-label">Game weather</div>'
-            f'<strong>{escape(venue)}</strong><div>Indoor venue · outdoor weather is not expected to affect play.</div></div>'
+            f'<strong><span aria-hidden="true">🏟️</span> {escape(venue)}</strong><div>Indoor venue · outdoor weather is not expected to affect play.</div></div>'
         )
     if status != "ok":
         reason = str(weather.get("reason") or "Forecast unavailable.")
         return (
             '<div class="result-box" style="margin-top:10px">'
             '<div class="pick-label">Game weather</div>'
-            f'<div>{escape(reason)}</div></div>'
+            f'<div><span aria-hidden="true">❔</span> {escape(reason)}</div></div>'
         )
 
     def finite(value):
@@ -1126,10 +1138,16 @@ def weather_card_html(weather):
     headline = "⚠ Inclement-weather threshold met" if weather.get("inclement") is True else source
     border = "#e9a23b" if weather.get("inclement") is True else "#58ae87"
     loc = f" · {escape(location)}" if location else ""
+    icon = weather_condition_icon(condition)
+    windy = (wind is not None and wind >= 20) or (gust is not None and gust >= 30)
+    wind_badge = (
+        ' <span style="white-space:nowrap"><span aria-hidden="true">💨</span> Windy</span>'
+        if windy else ""
+    )
     return (
         f'<div class="result-box" style="margin-top:10px;border-left:4px solid {border}">'
         f'<div class="pick-label">{escape(headline)}</div>'
-        f'<strong>{escape(condition)}</strong>{loc}'
+        f'<strong><span aria-hidden="true" style="font-size:1.5em;vertical-align:middle">{icon}</span> {escape(condition)}</strong>{wind_badge}{loc}'
         f'<div>{" · ".join(escape(x) for x in details)}</div>'
         '<div class="venue-label" style="margin-top:6px">Game window: kickoff through approximately four hours after kickoff. '
         'Inclement threshold: ≥1.0 mm precipitation, any snow, sustained wind ≥20 mph, gusts ≥30 mph, or thunderstorms.</div></div>'
