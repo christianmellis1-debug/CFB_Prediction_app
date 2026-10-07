@@ -1,0 +1,72 @@
+name: Tier4 Upcoming Qualifiers
+on:
+  push:
+    branches:
+      - research/tier5-2026-snapshot-20261007
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - run: python -m pip install pandas
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json, math, urllib.request
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          import pandas as pd
+          s=pd.read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2026.csv",low_memory=False)
+          dates=pd.to_datetime(s.start_date,utc=True,errors="coerce")
+          s=s[
+            s.season_type.astype(str).str.lower().eq("regular") &
+            s.home_division.astype(str).str.lower().eq("fbs") &
+            s.away_division.astype(str).str.lower().eq("fbs") &
+            (~s.completed.fillna(False).astype(bool)) &
+            (dates>=pd.Timestamp("2026-10-08T00:00:00Z")) &
+            (dates<pd.Timestamp("2026-10-12T00:00:00Z"))
+          ].copy()
+          def ml(v):
+              if isinstance(v,dict):v=v.get("american",v.get("alternateDisplayValue"))
+              if v is None:return None
+              try:
+                  x=float(str(v).replace("+","").replace("−","-").strip())
+                  return int(x) if math.isfinite(x) and x.is_integer() else None
+              except:return None
+          def imp(x): return 100/(x+100) if x>0 else -x/(-x+100)
+          def fetch(row):
+              gid=str(int(row.game_id))
+              try:
+                  req=urllib.request.Request("https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="+gid,headers={"User-Agent":"Mozilla/5.0"})
+                  with urllib.request.urlopen(req,timeout=20) as resp:p=json.load(resp)
+              except:return None
+              comp=(p.get("header",{}).get("competitions") or [{}])[0]
+              for odds in (p.get("pickcenter",[]) or comp.get("odds",[]) or []):
+                  name=str((odds.get("provider") or {}).get("name",""))
+                  if name.lower().replace(" ","")!="draftkings":continue
+                  vals={}
+                  m=odds.get("moneyline",{})
+                  for side in ("home","away"):
+                      v=((m.get(side) or {}).get("close") or {}).get("odds")
+                      if v is None:v=(odds.get(side+"TeamOdds") or {}).get("moneyLine")
+                      vals[side]=ml(v)
+                  if vals["home"] is None or vals["away"] is None:continue
+                  fav="home" if imp(vals["home"])>imp(vals["away"]) else "away"
+                  return dict(week=int(row.week),home_team=row.home_team,away_team=row.away_team,
+                              start_date=row.start_date,favorite=row.home_team if fav=="home" else row.away_team,
+                              favorite_ml=vals[fav],dog_ml=vals["away" if fav=="home" else "home"])
+              return None
+          rows=[]
+          with ThreadPoolExecutor(max_workers=12) as ex:
+              futs=[ex.submit(fetch,r) for _,r in s.iterrows()]
+              for f in as_completed(futs):
+                  x=f.result()
+                  if x: rows.append(x)
+          d=pd.DataFrame(rows)
+          if d.empty:
+              print("NO_ODDS")
+          else:
+              q=d[d.favorite_ml<=-505].sort_values(["start_date","favorite_ml"])
+              print("QUALIFIERS")
+              print(q.to_string(index=False))
+              print("\nNEAR_MISSES")
+              print(d[(d.favorite_ml<-400)&(d.favorite_ml>-505)].sort_values("favorite_ml").to_string(index=False))
+          PY
