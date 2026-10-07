@@ -78,7 +78,7 @@ TOUR_STEPS = [
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
     ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores. Confidence is an estimate, not a guarantee."),
     ("risky", "Risky picks", "Review matchup warnings", "This tab lists every predicted winner with two or fewer of the five matchup advantages for the selected week. The exclamation warning also appears on its game card. Missing data is shown separately, and this flag does not change the prediction."),
-    ("compare", "Compare picks", "Compare the slate", "This compact table lets you compare picks without scrolling through individual cards. It follows your matchup filters."),
+    ("export", None, "Export your picks", "Use Export picks above the navigation to download all picks for this week or only the picks matching your Game cards filters. Open the CSV in Excel to compare matchups."),
     ("results", "Model results", "Check model performance", "Compare wins, losses, and accuracy by confidence level for the selected week or season to date. Only final, decisive games count toward accuracy; matchup filters do not affect this view."),
     ("scenario", "What-if bets", "Try a betting scenario", "Choose picks and stakes below to see potential profit if they win and the amount lost if they lose. Missing moneylines are excluded. A scenario does not place or record bets."),
     ("parlay", "Parlay finder", "Build a parlay", "The finder is open below. Choose 2–5 legs, your stake, minimum confidence, and ranking: win probability, payout, or estimated value. It uses future games with available lines from one sportsbook. Payouts are estimates, and joint win chances assume independent outcomes. If there are too few eligible games, try another week or broader filters."),
@@ -1504,12 +1504,11 @@ st.markdown("""
 .st-key-main_app_tabs [role="tab"][data-key="1"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAzIDIgMjFoMjBMMTIgM1oiLz48cGF0aCBkPSJNMTIgOXY1bTAgM3YxIi8+PC9zdmc+"); }
 .st-key-main_app_tabs [role="tab"][data-key="0"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIxNCIgeT0iMyIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIzIiB5PSIxNCIgd2lkdGg9IjciIGhlaWdodD0iNyIgcng9IjIiLz48cmVjdCB4PSIxNCIgeT0iMTQiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIHJ4PSIyIi8+PC9zdmc+"); }
 .st-key-main_app_tabs [role="tab"][data-key="2"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTEyIDMgMi44IDUuNyA2LjIuOS00LjUgNC40IDEuMSA2LjItNS42LTMtNS42IDMgMS4xLTYuMkwzIDkuNmw2LjItLjlaIi8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="3"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgN2gxNm0tNC00IDQgNC00IDRNMjAgMTdING00LTQtNCA0IDQgNCIvPjwvc3ZnPg=="); }
-.st-key-main_app_tabs [role="tab"][data-key="4"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgM3YxOGgxN005IDE2di01bTUgNVY3bTUgOVY0Ii8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="5"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iNCIgeT0iMyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxwYXRoIGQ9Ik04IDdoOE04IDEyaDJtNCAwaDJtLTggNWgybTQgMGgyIi8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="6"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iNiIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjE5IiByPSIyIi8+PHBhdGggZD0iTTYgN3Y0bDYgNiA2LTZWNyIvPjwvc3ZnPg=="); }
-.st-key-main_app_tabs [role="tab"][data-key="7"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTYgM2gxMnYxOGwtMy0yLTMgMi0zLTItMyAyWk05IDdoNm0tNiA0aDZtLTYgNGgzIi8+PC9zdmc+"); }
-.st-key-main_app_tabs [role="tab"][data-key="8"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOSIvPjxwYXRoIGQ9Ik0xMiAxMXY2bTAtMTB2MSIvPjwvc3ZnPg=="); }
+.st-key-main_app_tabs [role="tab"][data-key="3"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgM3YxOGgxN005IDE2di01bTUgNVY3bTUgOVY0Ii8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="4"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iNCIgeT0iMyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxwYXRoIGQ9Ik04IDdoOE04IDEyaDJtNCAwaDJtLTggNWgybTQgMGgyIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="5"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iNiIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjE5IiByPSIyIi8+PHBhdGggZD0iTTYgN3Y0bDYgNiA2LTZWNyIvPjwvc3ZnPg=="); }
+.st-key-main_app_tabs [role="tab"][data-key="6"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTYgM2gxMnYxOGwtMy0yLTMgMi0zLTItMyAyWk05IDdoNm0tNiA0aDZtLTYgNGgzIi8+PC9zdmc+"); }
+.st-key-main_app_tabs [role="tab"][data-key="7"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOSIvPjxwYXRoIGQ9Ik0xMiAxMXY2bTAtMTB2MSIvPjwvc3ZnPg=="); }
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
 <h1>CFB Predictor<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
@@ -1588,7 +1587,10 @@ with week_col:
     selected_week = st.selectbox("Week", weeks, index=weeks.index(default_week), format_func=lambda w: f"Week {w}")
 games = schedule[schedule["week"] == selected_week]
 dashboard_summary = st.empty()
-cards_tab, risky_tab, value_tab, table_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Risky picks", "Value shortlist", "Compare picks", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
+export_controls = st.container()
+if st.session_state.get("main_app_tabs") == "Compare picks":
+    st.session_state["main_app_tabs"] = "Game cards"
+cards_tab, risky_tab, value_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Risky picks", "Value shortlist", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
 with about_tab:
     feed_details = st.expander("Feed health & data notes", expanded=False)
 
@@ -1848,6 +1850,24 @@ with cards_tab:
     st.caption("Published stats means a pregame summary exists; individual metrics may still be missing.")
     st.caption(f"Showing {len(filtered)} of {len(pred)} predictions · {season} regular season · FBS vs. FBS")
     
+with export_controls:
+    tour_at("export")
+    with st.popover("Export picks", icon=":material/download:"):
+        st.caption(f"{season} · Week {selected_week} · CSV for Excel")
+        st.download_button(
+            f"All picks for this week ({len(pred)})",
+            pred.drop(columns=["Line Movement HTML"], errors="ignore").to_csv(index=False).encode("utf-8-sig"),
+            file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}_all_picks.csv",
+            mime="text/csv", disabled=pred.empty, key="export_all_picks", on_click="ignore",
+        )
+        st.download_button(
+            f"Currently filtered picks ({len(filtered)})",
+            filtered.drop(columns=["Line Movement HTML"], errors="ignore").to_csv(index=False).encode("utf-8-sig"),
+            file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}_filtered_picks.csv",
+            mime="text/csv", disabled=filtered.empty, key="export_filtered_picks", on_click="ignore",
+        )
+        st.caption("Filtered picks follow the search and filters in Game cards.")
+
 with cards_tab:
     tour_at("cards")
     with st.expander("Understanding line-movement flags", expanded=False):
@@ -2002,13 +2022,6 @@ with cards_tab:
             else:
                 st.info("No assessed picks meet the risk threshold this week.")
             st.caption("Games with missing metrics are not rated as risky. No warning does not mean a safe bet. Picks and model confidence are unchanged.")
-with table_tab:
-    tour_at("compare")
-    show = filtered[["Away Team", "Home Team", "Predicted Winner", "Confidence", "Confidence Label", "Away Win %", "Home Win %", "DK Away ML", "DK Home ML", "DK Away Spread", "DK Home Spread", "Away ML", "Home ML", "ML Source", "Away Spread", "Home Spread", "Spread Source", "Odds Type", "Status", "Live Detail", "Live Score", "Actual Winner", "Final Score", "Pick Result", "Venue Risk"]].copy()
-    for col in ["Confidence", "Away Win %", "Home Win %"]:
-        show[col] = show[col].map(lambda value: f"{value:.1%}")
-    st.dataframe(show, hide_index=True, use_container_width=True)
-
 with performance_tab:
     show_shadow_tracking(st, season, selected_week)
     tour_at("results")
@@ -2295,7 +2308,6 @@ with about_tab:
         st.caption("The adjustment improved historical probability scores but did not improve winner accuracy in every season. It does not establish better betting returns. The realigned 2026 Group of Six is a prospective application; historical scenarios are recalculated using the current model.")
         st.caption(f"Loaded {season}: {len(current):,} team-week rows; {season - 1}: {len(prior):,} rows. Source: SportsDataverse / cfbfastR.")
 
-st.download_button("Download these picks · CSV", filtered.drop(columns=["Line Movement HTML"], errors="ignore").to_csv(index=False).encode(), file_name=f"cfb_{season}_{MODEL_VERSION}_week_{selected_week}.csv", mime="text/csv", disabled=filtered.empty)
 st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
