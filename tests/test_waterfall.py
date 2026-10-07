@@ -2,7 +2,7 @@ import unittest
 import math
 import pandas as pd
 from matchup_advantages import (build_waterfall_profiles, build_tier5_four_factor, select_waterfall,
-                                normalize_fbs_schedule, weather_tier_candidate_ids)
+                                normalize_fbs_schedule, weather_tier_candidate_ids, cross_tier_matches)
 from model_v1_5 import add_waterfall_value, waterfall_scenario_rows
 
 
@@ -205,6 +205,37 @@ class WaterfallTests(unittest.TestCase):
         g, p, r, check = self.fixture(3)
         r['home']['margin'] = float('nan')
         self.assertFalse(self.select(g, p, r, check))
+
+    def test_cross_tier_game_of_week_requires_same_team_consensus(self):
+        g, p, r, check = self.fixture(4)
+        p.update({
+            'DK Home ML': '-600', 'DK Away ML': '+425',
+            'Home Spread': '-9.5', 'Away Spread': '+9.5',
+        })
+        exact = self.six_check(True)
+        tier5 = {'1': {'status': 'ok', 'qualifies': True, 'through_week': 3}}
+        overlap = cross_tier_matches(
+            pd.DataFrame([p]), pd.DataFrame([g]), {'1': r},
+            advantage_checks={'1': exact}, tier5_checks=tier5,
+        )['1']
+        self.assertTrue(overlap['qualifies'])
+        self.assertEqual(overlap['team'], 'Home')
+        self.assertEqual(overlap['stages'], [1, 4, 5])
+        self.assertEqual(overlap['count'], 3)
+
+        # Two tiers pointing at opposite teams are not a Game of the Week.
+        g2, p2, r2, _ = self.fixture(3, gid=2)
+        g2['week'] = 4
+        p2.update({'DK Home ML': '-140', 'DK Away ML': '+120',
+                   'Home Spread': 'Unavailable', 'Away Spread': 'Unavailable'})
+        r2['away']['margin'] = 2.0
+        r2['home']['margin'] = 0.0
+        conflict = cross_tier_matches(
+            pd.DataFrame([p2]), pd.DataFrame([g2]), {'2': r2},
+            advantage_checks={'2': self.six_check(False)},
+            tier5_checks={'2': {'status': 'ok', 'qualifies': True, 'through_week': 3}},
+        )['2']
+        self.assertFalse(conflict['qualifies'])
 
     def test_waterfall_volume_guidance_does_not_hide_qualifiers(self):
         cases = [
