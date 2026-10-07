@@ -1750,8 +1750,31 @@ with value_tab:
     if len(value_picks) < 12:
         st.info(f"{12-len(value_picks)} below target. No gates or odds limits were relaxed.")
     with st.expander("How Value Picks are selected", expanded=False):
-        st.write("Tier 1: Complete Game — recommend the home team against the displayed spread. Tier 2: Storm Front — in verified inclement weather, recommend the non-neutral home team against the spread when it has lower pregame defensive YPC allowed, better turnover margin/game, and the spread is better than −14. If fewer than 12 selections, the existing moneyline rules fill toward 12 as Tiers 3–5.")
-        st.caption("Tier 1 qualification is statistical; Tier 2 also requires verified game-window weather and a spread better than −14. ATS selections are graded against the displayed spread. Historical cards are recalculated from archived data and are not immutable pregame records.")
+        tier_guide = [
+            ("1", "Complete Game", "The home team leads in all five matchup measures: rushing, passing, run defense, pass defense, and turnover margin. Home field completes the six advantages."),
+            ("2", "Storm Front", "Bad weather favors a home team with stronger run defense and a better turnover margin. Teams favored by 14 points or more are excluded."),
+            ("3", "Takeaway Trouble", "A Power Four underdog has a turnover-margin advantage of at least one per game. The opposing favorite must be priced from −110 to −150."),
+            ("4", "The Foundation", "A favorite priced from −280 to −600 has at least 70% model confidence, a favorable run-defense matchup, and a turnover margin no worse than its opponent."),
+            ("5", "Home Turf Hammer", "In a Power Four matchup, the home team leads in red-zone offense, red-zone defense, explosive offense, and limiting explosive plays. Uses the prior week’s published stats."),
+        ]
+        st.markdown("""
+<style>
+.cfb-tier-guide {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px;margin:4px 0 14px;}
+.cfb-tier-guide-card {border:1px solid #58ae8745;border-radius:14px;padding:16px;background:#58ae8709;}
+.cfb-tier-guide-heading {display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.cfb-tier-guide-number {display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;height:28px;border-radius:8px;background:#58ae8725;color:#74bfa0;font-size:14px;font-weight:700;}
+.cfb-tier-guide-title {font-size:17px;font-weight:700;line-height:1.3;}
+.cfb-tier-guide-copy {font-size:14px;line-height:1.6;opacity:.85;margin:0;}
+</style>
+""" + '<div class="cfb-tier-guide">' + "".join(
+            f'<div class="cfb-tier-guide-card"><div class="cfb-tier-guide-heading">'
+            f'<span class="cfb-tier-guide-number">{number}</span>'
+            f'<span class="cfb-tier-guide-title">{escape(title)}</span></div>'
+            f'<p class="cfb-tier-guide-copy">{escape(description)}</p></div>'
+            for number, title, description in tier_guide
+        ) + '</div>', unsafe_allow_html=True)
+        st.caption("Tier numbers show selection order, not win probability. See Recommended Bet for the play.")
+        st.caption("Historical selections are recalculated from archived data; they are not saved pregame picks.")
     if not value_picks.empty:
         value_show = value_picks.copy()
         value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
