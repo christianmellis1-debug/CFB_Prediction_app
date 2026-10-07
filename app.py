@@ -1695,7 +1695,7 @@ if weather_candidates:
     if missing_weather:
         st.warning(
             f"Tier 2 weather could not be verified for {missing_weather} candidate game(s). "
-            "Those games are excluded from the Weather Defensive Edge tier."
+            "Those games are excluded from the Storm Front tier."
         )
 pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week, weather_checks=weather_checks, published_summary=published_current)
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
@@ -1750,7 +1750,7 @@ with value_tab:
     if len(value_picks) < 12:
         st.info(f"{12-len(value_picks)} below target. No gates or odds limits were relaxed.")
     with st.expander("How Value Picks are selected", expanded=False):
-        st.write("Tier 1: exact 6/6 ATS Dominance — recommend the home team against the displayed spread. Tier 2: Weather Defensive Edge ATS — in verified inclement weather, recommend the non-neutral home team against the spread when it has lower pregame defensive YPC allowed, better turnover margin/game, and the spread is better than −14. If fewer than 12 selections, the existing moneyline rules fill toward 12 as Tiers 3–5.")
+        st.write("Tier 1: Complete Game — recommend the home team against the displayed spread. Tier 2: Storm Front — in verified inclement weather, recommend the non-neutral home team against the spread when it has lower pregame defensive YPC allowed, better turnover margin/game, and the spread is better than −14. If fewer than 12 selections, the existing moneyline rules fill toward 12 as Tiers 3–5.")
         st.caption("Tier 1 qualification is statistical; Tier 2 also requires verified game-window weather and a spread better than −14. ATS selections are graded against the displayed spread. Historical cards are recalculated from archived data and are not immutable pregame records.")
     if not value_picks.empty:
         value_show = value_picks.copy()
