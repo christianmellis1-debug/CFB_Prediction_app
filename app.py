@@ -2086,24 +2086,27 @@ with cards_tab:
                 if score != "—":
                     outcome += '<div class="result-score">' + escape(score) + '</div>'
                 outcome += '</div>' 
-            explanation_html = ""
-            if r["Confidence"] < .80:
-                explanation = r.get("Pick Explanation", "")
-                if not isinstance(explanation, str) or not explanation:
-                    explanation = "Detailed model reasoning is loading; refresh after the app restarts."
-                caveats = []
-                if len(game) == 1:
-                    for side_name in ("home", "away"):
-                        tid = int(game.iloc[0][side_name + "_id"])
-                        name = str(game.iloc[0][side_name + "_team"])
-                        if tid in derived_team_ids:
-                            caveats.append(name + " uses provisional scoring-based metrics")
-                        elif tid not in set(eligible["team_id"]):
-                            caveats.append(name + " has no eligible current-season metrics")
-                note = "Ratings blend prior-season information with available pregame data."
-                if caveats:
-                    note += " Limited data: " + "; ".join(caveats) + "."
-                explanation_html = '<details class="card-details"><summary>Why this pick</summary><p>' + escape(explanation) + '</p><p>' + escape(note) + ' This explains the pregame model, not live scores or betting value. It does not analyze specific run/pass matchups or injuries.</p></details>'
+            explanation = r.get("Pick Explanation", "")
+            if not isinstance(explanation, str) or not explanation.strip():
+                explanation = (
+                    f"The model picks {r['Predicted Winner']} with a {r['Confidence']:.0%} estimated chance to win. "
+                    "A breakdown of the contributing factors is currently unavailable."
+                )
+            caveats = []
+            if len(game) == 1:
+                for side_name in ("home", "away"):
+                    tid = int(game.iloc[0][side_name + "_id"])
+                    name = str(game.iloc[0][side_name + "_team"])
+                    if tid in derived_team_ids:
+                        caveats.append(name + " uses provisional scoring-based metrics")
+                    elif tid not in set(eligible["team_id"]):
+                        caveats.append(name + " has no eligible current-season metrics")
+            if caveats:
+                explanation += " Data note: " + "; ".join(caveats) + "."
+            explanation_html = (
+                '<div class="pick-summary"><strong>Why we picked them</strong><p>'
+                + escape(explanation) + '</p></div>'
+            )
             matchup_html = matchup_insights_html(r, game, published_current, schedule, selected_week, derived_team_ids)
             red_zone_html = rz_cards.get(card_idx, "")
             if red_zone_html:
@@ -2128,8 +2131,8 @@ with cards_tab:
                 )
             waterfall_note = ('<div class="result-box"><strong>' + escape(str(r['Value Tier'])) + '</strong><div>' + escape(str(r['Value Pick'])) + ' · ' + escape(str(r.get('Value Market', ''))) + ' ' + escape(str(r['Value Line'])) + ' · ' + escape(str(r.get('Value Source', 'Unavailable'))) + '</div></div>') if r.get('Value Selected', False) else ''
             card_details[card_idx] = (
-                warning + advantage_note + str(r.get("Line Movement HTML", ""))
-                + explanation_html + matchup_html
+                explanation_html + warning + advantage_note
+                + str(r.get("Line Movement HTML", "")) + matchup_html
                 + f'<div class="card-details"><strong>Prediction details</strong>'
                 + f'<p>Model {escape(str(r["Model Version"]))} · {escape(venue)}. '
                 + 'Confidence is an estimate, not a guaranteed result.</p>'
