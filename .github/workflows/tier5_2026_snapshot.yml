@@ -1,0 +1,136 @@
+name: Tier5 2026 Snapshot
+on:
+  push:
+    branches:
+      - research/tier5-2026-snapshot-20261007
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download 2026 data and evaluate frozen Tier 5 rule
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          import urllib.request
+          from pathlib import Path
+
+          out = Path("tier5_2026_output")
+          out.mkdir(exist_ok=True)
+
+          summaries_url = "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_team_summaries_weekly/cfb_team_summaries_weekly_2026.csv"
+          schedule_url = "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2026.csv"
+
+          urllib.request.urlretrieve(summaries_url, out / "cfb_team_summaries_weekly_2026.csv")
+          urllib.request.urlretrieve(schedule_url, out / "cfb_schedules_2026.csv")
+
+          s = pd.read_csv(out / "cfb_team_summaries_weekly_2026.csv", low_memory=False)
+          g = pd.read_csv(out / "cfb_schedules_2026.csv", low_memory=False)
+
+          P4 = {"ACC","Big Ten","Big 12","SEC"}
+
+          # Completed, non-neutral, regular-season P4-vs-P4 FBS games only.
+          g = g[
+              (g["season_type"].astype(str).str.lower() == "regular") &
+              (g["home_division"].astype(str).str.lower() == "fbs") &
+              (g["away_division"].astype(str).str.lower() == "fbs") &
+              (g["home_conference"].isin(P4)) &
+              (g["away_conference"].isin(P4)) &
+              (~g["neutral_site"].fillna(False).astype(bool)) &
+              (g["completed"].fillna(False).astype(bool)) &
+              g["home_points"].notna() &
+              g["away_points"].notna()
+          ].copy()
+
+          need = [
+              "team_id","through_week",
+              "red_zone_success_off","red_zone_success_def",
+              "explosive_off","explosive_def"
+          ]
+          missing = [c for c in need if c not in s.columns]
+          if missing:
+              raise SystemExit("Missing summary columns: " + ", ".join(missing))
+
+          for c in need:
+              s[c] = pd.to_numeric(s[c], errors="coerce")
+          s = s.dropna(subset=["team_id","through_week"]).copy()
+          s["team_id"] = s["team_id"].astype(int)
+          s["through_week"] = s["through_week"].astype(int)
+
+          rows = []
+          for _, game in g.sort_values(["week","start_date"]).iterrows():
+              w = int(game["week"])
+              if w <= 1:
+                  continue
+              snap = w - 1
+              hid, aid = int(game["home_id"]), int(game["away_id"])
+              h = s[(s["team_id"] == hid) & (s["through_week"] == snap)]
+              a = s[(s["team_id"] == aid) & (s["through_week"] == snap)]
+              if len(h) != 1 or len(a) != 1:
+                  continue
+              h = h.iloc[0]; a = a.iloc[0]
+              vals = [
+                  h["red_zone_success_off"], a["red_zone_success_off"],
+                  h["red_zone_success_def"], a["red_zone_success_def"],
+                  h["explosive_off"], a["explosive_off"],
+                  h["explosive_def"], a["explosive_def"],
+              ]
+              if pd.isna(vals).any():
+                  continue
+
+              qualifies = (
+                  h["red_zone_success_off"] > a["red_zone_success_off"] and
+                  h["red_zone_success_def"] < a["red_zone_success_def"] and
+                  h["explosive_off"] > a["explosive_off"] and
+                  h["explosive_def"] < a["explosive_def"]
+              )
+              if not qualifies:
+                  continue
+
+              win = float(game["home_points"]) > float(game["away_points"])
+              rows.append({
+                  "game_id": int(game["game_id"]),
+                  "week": w,
+                  "snapshot_through_week": snap,
+                  "home_team": game["home_team"],
+                  "away_team": game["away_team"],
+                  "home_points": game["home_points"],
+                  "away_points": game["away_points"],
+                  "result": "W" if win else "L",
+                  "home_rz_off": h["red_zone_success_off"],
+                  "away_rz_off": a["red_zone_success_off"],
+                  "home_rz_def": h["red_zone_success_def"],
+                  "away_rz_def": a["red_zone_success_def"],
+                  "home_explosive_off": h["explosive_off"],
+                  "away_explosive_off": a["explosive_off"],
+                  "home_explosive_def": h["explosive_def"],
+                  "away_explosive_def": a["explosive_def"],
+              })
+
+          q = pd.DataFrame(rows)
+          q.to_csv(out / "tier5_2026_qualifiers.csv", index=False)
+
+          wins = int((q["result"] == "W").sum()) if not q.empty else 0
+          losses = int((q["result"] == "L").sum()) if not q.empty else 0
+          total = wins + losses
+          acc = wins / total if total else float("nan")
+
+          with open(out / "summary.txt","w") as f:
+              f.write(f"qualifiers={total}\n")
+              f.write(f"wins={wins}\n")
+              f.write(f"losses={losses}\n")
+              f.write(f"accuracy={acc:.6f}\n" if total else "accuracy=NA\n")
+              if not q.empty:
+                  f.write("\n" + q[["week","home_team","away_team","home_points","away_points","result"]].to_string(index=False) + "\n")
+          print(open(out / "summary.txt").read())
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tier5-2026-snapshot
+          path: tier5_2026_output/
+          retention-days: 7
