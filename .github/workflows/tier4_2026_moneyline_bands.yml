@@ -1,0 +1,90 @@
+name: Tier4 2026 Moneyline Bands
+on:
+  push:
+    branches:
+      - research/tier5-2026-snapshot-20261007
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install pandas
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json, math, urllib.request
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          import pandas as pd
+          s=pd.read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2026.csv",low_memory=False)
+          s=s[
+            s.season_type.astype(str).str.lower().eq("regular") &
+            s.home_division.astype(str).str.lower().eq("fbs") &
+            s.away_division.astype(str).str.lower().eq("fbs") &
+            s.completed.fillna(False).astype(bool) &
+            s.home_points.notna() & s.away_points.notna()
+          ].copy()
+          s=s[pd.to_datetime(s.start_date,utc=True,errors="coerce") <= pd.Timestamp("2026-10-07T23:59:59Z")]
+          s=s.dropna(subset=["game_id"])
+          def parse_ml(v):
+              if isinstance(v,dict): v=v.get("american",v.get("alternateDisplayValue"))
+              if v is None:return None
+              try:
+                  x=float(str(v).replace("+","").replace("−","-").strip())
+                  return int(x) if math.isfinite(x) and x.is_integer() else None
+              except:return None
+          def imp(x): return 100/(x+100) if x>0 else -x/(-x+100)
+          def fetch(row):
+              gid=str(int(row.game_id))
+              try:
+                  req=urllib.request.Request("https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="+gid,headers={"User-Agent":"Mozilla/5.0"})
+                  with urllib.request.urlopen(req,timeout=20) as resp: p=json.load(resp)
+              except Exception as e:return {"game_id":gid,"error":"fetch"}
+              comp=(p.get("header",{}).get("competitions") or [{}])[0]
+              odds_list=p.get("pickcenter",[]) or comp.get("odds",[]) or []
+              for odds in odds_list:
+                  name=str((odds.get("provider") or {}).get("name",""))
+                  if name.lower().replace(" ","")!="draftkings": continue
+                  ml=odds.get("moneyline",{})
+                  vals={}
+                  for side in ("home","away"):
+                      v=((ml.get(side) or {}).get("close") or {}).get("odds")
+                      if v is None: v=(odds.get(side+"TeamOdds") or {}).get("moneyLine")
+                      vals[side]=parse_ml(v)
+                  if vals["home"] is None or vals["away"] is None: continue
+                  ph,pa=imp(vals["home"]),imp(vals["away"])
+                  fav="home" if ph>pa else "away"
+                  fav_ml=vals[fav]
+                  winner="home" if float(row.home_points)>float(row.away_points) else "away"
+                  return dict(game_id=gid,week=int(row.week),favorite=row.home_team if fav=="home" else row.away_team,
+                              fav_ml=fav_ml,won=fav==winner,home_favorite=fav=="home",
+                              home_conf=row.home_conference,away_conf=row.away_conference)
+              return {"game_id":gid,"error":"no_dk"}
+          rows=[]
+          with ThreadPoolExecutor(max_workers=12) as ex:
+              futs=[ex.submit(fetch,r) for _,r in s.iterrows()]
+              for f in as_completed(futs): rows.append(f.result())
+          d=pd.DataFrame(rows)
+          good=d[pd.to_numeric(d.get("fav_ml"),errors="coerce").notna()].copy()
+          good["fav_ml"]=pd.to_numeric(good.fav_ml)
+          good=good[good.fav_ml<=-110].copy()
+          def band(ml):
+              x=abs(int(ml))
+              if 110<=x<=200:return "-110 to -200"
+              lo=((x-205)//100)*100+205
+              hi=lo+95
+              return f"-{lo} to -{hi}" if x<1005 else "-1005 or shorter"
+          good["band"]=good.fav_ml.map(band)
+          good["lo"]=good.band.str.extract(r'-(\d+)')[0].astype(int)
+          for label,frame in [("ALL",good),("HOME",good[good.home_favorite])]:
+              print("\n"+label)
+              for b,x in frame.sort_values("lo").groupby("band",sort=False):
+                  w=int(x.won.sum()); l=len(x)-w
+                  print(f"{b}: {w}-{l} ({w/len(x):.1%}) n={len(x)}")
+          p4={"ACC","Big Ten","Big 12","SEC"}
+          p4home=good[good.home_favorite & good.home_conf.isin(p4) & good.away_conf.isin(p4)]
+          print("\nP4_HOME")
+          for b,x in p4home.sort_values("lo").groupby("band",sort=False):
+              w=int(x.won.sum()); l=len(x)-w
+              print(f"{b}: {w}-{l} ({w/len(x):.1%}) n={len(x)}")
+          print("\nCOVERAGE",len(good),"/",len(s))
+          PY
