@@ -1,8 +1,8 @@
 import unittest
 import math
 import pandas as pd
-from matchup_advantages import (build_waterfall_profiles, select_waterfall, normalize_fbs_schedule,
-                                weather_tier_candidate_ids)
+from matchup_advantages import (build_waterfall_profiles, build_tier5_four_factor, select_waterfall,
+                                normalize_fbs_schedule, weather_tier_candidate_ids)
 from model_v1_5 import add_waterfall_value, waterfall_scenario_rows
 
 
@@ -53,18 +53,21 @@ class WaterfallTests(unittest.TestCase):
             p.update({'Home Spread': 'Unavailable', 'Away Spread': 'Unavailable'})
         return g, p, rec, check
 
-    def select(self, g, p, r, check=None, weather=None, **kw):
+    def select(self, g, p, r, check=None, weather=None, tier5=None, **kw):
         checks = {str(g['game_id']): check or self.six_check(False)}
         weather_checks = {str(g['game_id']): weather} if weather else {}
+        tier5_checks = {str(g['game_id']): tier5} if tier5 else {}
         return select_waterfall(
             pd.DataFrame([p]), pd.DataFrame([g]), {str(g['game_id']): r},
-            advantage_checks=checks, weather_checks=weather_checks, **kw)
+            advantage_checks=checks, weather_checks=weather_checks,
+            tier5_checks=tier5_checks, **kw)
 
     def test_five_stages(self):
         for stage in (1, 2, 3, 4, 5):
             g, p, r, check = self.fixture(stage)
             weather = {'status': 'ok', 'inclement': True, 'weather_type': 'Wet/snow only'} if stage == 2 else None
-            card = self.select(g, p, r, check, weather=weather)
+            tier5 = {'status': 'ok', 'qualifies': True, 'through_week': 2} if stage == 5 else None
+            card = self.select(g, p, r, check, weather=weather, tier5=tier5)
             self.assertEqual(card[0]['Value Stage'], stage)
         g, p, r, check = self.fixture(1)
         self.assertEqual(self.select(g, p, r, check)[0]['Value Market'], 'Spread')
@@ -141,7 +144,6 @@ class WaterfallTests(unittest.TestCase):
 
         specs = [
             (4, [-280, -600], [-279, -601]),
-            (5, [-205, -275], [-204, -276]),
         ]
         for stage, good, bad in specs:
             for line in good + bad:
@@ -175,7 +177,7 @@ class WaterfallTests(unittest.TestCase):
         self.assertTrue(self.select(g3, p, r, check))
 
     def test_old_moneyline_ties_and_model_gate(self):
-        for stage in (3, 4, 5):
+        for stage in (3, 4):
             g, p, r, check = self.fixture(stage)
             r['home']['margin'] = r['away']['margin']
             self.assertEqual(bool(self.select(g, p, r, check)), stage == 4)
@@ -214,8 +216,13 @@ class WaterfallTests(unittest.TestCase):
                         weather_ids.append(str(gid))
             weather_checks = {gid: {'status': 'ok', 'inclement': True, 'weather_type': 'Wet/snow only'}
                               for gid in weather_ids}
+            tier5_checks = {}
+            offset = sum(sizes[:4])
+            for game in games[offset:offset + sizes[4]]:
+                tier5_checks[str(game['game_id'])] = {'status': 'ok', 'qualifies': True, 'through_week': 2}
             card = select_waterfall(pd.DataFrame(pred[::-1]), pd.DataFrame(games), profiles,
-                                    advantage_checks=checks, weather_checks=weather_checks)
+                                    advantage_checks=checks, weather_checks=weather_checks,
+                                    tier5_checks=tier5_checks)
             self.assertEqual(tuple(sum(x['Value Stage'] == i for x in card) for i in (1, 2, 3, 4, 5)), expected)
             self.assertEqual(len({x['Game ID'] for x in card}), len(card))
 
@@ -260,6 +267,39 @@ class WaterfallTests(unittest.TestCase):
         self.assertEqual(len(normalize_fbs_schedule(pd.DataFrame([g]))), 1)
         g.update(season=2025, home_division='fbs')
         self.assertTrue(normalize_fbs_schedule(pd.DataFrame([g])).empty)
+
+    def test_official_tier5_uses_exact_prior_week_snapshot_and_strict_p4(self):
+        g, _, _, _ = self.fixture(5)
+        summaries = pd.DataFrame([
+            dict(team_id=10, through_week=2, red_zone_success_off=.60, red_zone_success_def=.30,
+                 explosive_off=.15, explosive_def=.07),
+            dict(team_id=20, through_week=2, red_zone_success_off=.50, red_zone_success_def=.40,
+                 explosive_off=.10, explosive_def=.09),
+            # Better-looking current-week values must never be used for a Week 3 pick.
+            dict(team_id=10, through_week=3, red_zone_success_off=.10, red_zone_success_def=.90,
+                 explosive_off=.01, explosive_def=.30),
+            dict(team_id=20, through_week=3, red_zone_success_off=.90, red_zone_success_def=.10,
+                 explosive_off=.30, explosive_def=.01),
+        ])
+        check = build_tier5_four_factor(pd.DataFrame([g]), summaries, 3)['1']
+        self.assertTrue(check['qualifies'])
+        self.assertEqual(check['through_week'], 2)
+
+        nd = dict(g, home_team='Notre Dame', home_conference='FBS Independents')
+        self.assertFalse(build_tier5_four_factor(pd.DataFrame([nd]), summaries, 3)['1']['qualifies'])
+
+        neutral = dict(g, neutral_site=True)
+        self.assertFalse(build_tier5_four_factor(pd.DataFrame([neutral]), summaries, 3)['1']['qualifies'])
+
+    def test_tier5_is_straight_up_and_does_not_require_market_line(self):
+        g, p, r, check = self.fixture(5)
+        p.update({'DK Home ML': 'Unavailable', 'DK Away ML': 'Unavailable'})
+        tier5 = {'status': 'ok', 'qualifies': True, 'through_week': 2}
+        card = self.select(g, p, r, check, tier5=tier5)
+        self.assertEqual(card[0]['Value Stage'], 5)
+        self.assertEqual(card[0]['Value Pick'], 'Home')
+        self.assertEqual(card[0]['Value Market'], 'Moneyline')
+        self.assertEqual(card[0]['Value Band'], 'Straight Up')
 
     def test_moneyline_annotation_and_scenario_do_not_change_model(self):
         s, b = self.history(final=True)

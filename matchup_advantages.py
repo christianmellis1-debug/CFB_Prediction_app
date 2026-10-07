@@ -168,12 +168,83 @@ def build_waterfall_profiles(schedule, boxes, week):
     return out
 
 
+
+def build_tier5_four_factor(schedule, summaries, week):
+    """Official Tier 5: strict P4 home team owns all four prior-week factors."""
+    out = {}
+    week = int(week)
+    s = normalize_fbs_schedule(schedule).copy()
+    required_game = {'game_id', 'week', 'season_type', 'home_id', 'away_id',
+                     'home_team', 'away_team', 'home_conference', 'away_conference',
+                     'neutral_site'}
+    required_stats = {'team_id', 'through_week', 'red_zone_success_off',
+                      'red_zone_success_def', 'explosive_off', 'explosive_def'}
+    if not required_game.issubset(s) or not required_stats.issubset(summaries) or week <= 1:
+        return out
+
+    for col in ('game_id', 'week', 'home_id', 'away_id'):
+        s[col] = pd.to_numeric(s[col], errors='coerce')
+    targets = s[s.week.eq(week)].dropna(subset=['game_id', 'home_id', 'away_id'])
+
+    stats = summaries[list(required_stats)].copy()
+    for col in required_stats:
+        stats[col] = pd.to_numeric(stats[col], errors='coerce')
+    stats = stats[stats.through_week.eq(week - 1)].dropna(subset=['team_id'])
+    duplicate_ids = set(stats.loc[stats.team_id.duplicated(keep=False), 'team_id'].astype(int))
+    stats = stats[~stats.team_id.duplicated(keep=False)].set_index('team_id')
+
+    for _, game in targets.iterrows():
+        gid = str(int(game.game_id))
+        record = {'status': 'outside', 'qualifies': False}
+        out[gid] = record
+
+        neutral_raw = str(game.get('neutral_site', '')).lower()
+        if neutral_raw not in ('false', 'f', '0', '0.0', 'no', 'n'):
+            record['reason'] = 'Tier 5 requires a non-neutral home game.'
+            continue
+        if str(game.get('season_type', '')).lower() != 'regular':
+            record['reason'] = 'Tier 5 applies to regular-season games only.'
+            continue
+        # This rule was validated with the four power conferences only.
+        if game.get('home_conference') not in P4 or game.get('away_conference') not in P4:
+            record['reason'] = 'Tier 5 requires ACC, Big Ten, Big 12, or SEC on both sides.'
+            continue
+
+        hid, aid = int(game.home_id), int(game.away_id)
+        if hid in duplicate_ids or aid in duplicate_ids or hid not in stats.index or aid not in stats.index:
+            record.update(status='missing', reason=f'Exact through-week {week - 1} summary unavailable.')
+            continue
+        home, away = stats.loc[hid], stats.loc[aid]
+        cols = ('red_zone_success_off', 'red_zone_success_def', 'explosive_off', 'explosive_def')
+        if not all(np.isfinite(home[col]) and np.isfinite(away[col]) for col in cols):
+            record.update(status='missing', reason='One or more Tier 5 metrics are unavailable.')
+            continue
+
+        edges = {
+            'red_zone_offense': bool(home.red_zone_success_off > away.red_zone_success_off),
+            'red_zone_defense': bool(home.red_zone_success_def < away.red_zone_success_def),
+            'explosive_offense': bool(home.explosive_off > away.explosive_off),
+            'explosive_defense': bool(home.explosive_def < away.explosive_def),
+        }
+        record.update(
+            status='ok',
+            qualifies=all(edges.values()),
+            reason='Home team is better in all four prior-week Tier 5 metrics.' if all(edges.values())
+                   else 'Home team does not own all four Tier 5 edges.',
+            through_week=week - 1,
+            edges=edges,
+            home={col: float(home[col]) for col in cols},
+            away={col: float(away[col]) for col in cols},
+        )
+    return out
+
+
 WATERFALL_TIERS = {
     1: 'Tier 1: 6/6 ATS Dominance',
     2: 'Tier 2: Weather Defensive Edge ATS',
     3: 'Tier 3: P4 Turnover Underdog ML',
     4: 'Tier 4: Moneyline Parlay Anchor',
-    5: 'Tier 5: Moderate Favorite Clear',
+    5: 'Tier 5: Four-Factor Home Dominance',
 }
 
 
@@ -233,7 +304,7 @@ def weather_tier_candidate_ids(predictions, schedule, profiles):
 
 
 def select_waterfall(predictions, schedule, profiles, advantage_checks=None, weather_checks=None,
-                     minimum=12, maximum=18):
+                     tier5_checks=None, minimum=12, maximum=18):
     """Weekly sequential card with ATS tiers first.
 
     Tier 1 is exact 6/6 ATS dominance.
@@ -243,7 +314,9 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
     Tier 3 is the P4 short-underdog turnover rule:
     P4 vs P4, market favorite -110 through -150, and underdog pregame
     turnover margin/game at least +1.0 better than the favorite.
-    Tiers 4 and 5 preserve the prior moneyline rules.
+    Tier 4 preserves the prior parlay-anchor rule. Tier 5 is the official
+    straight-up four-factor home-dominance rule using the exact prior-week
+    published team-summary snapshot.
     """
     if not 1 <= minimum <= maximum <= 18:
         raise ValueError('Require 1 <= minimum <= maximum <= 18')
@@ -256,6 +329,7 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
     candidates = {1: [], 2: [], 3: [], 4: [], 5: []}
     advantage_checks = advantage_checks or {}
     weather_checks = weather_checks or {}
+    tier5_checks = tier5_checks or {}
     seen = set()
 
     for _, row in predictions.iterrows():
@@ -328,50 +402,70 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
             })
             continue
 
-        # Existing moneyline waterfall remains intact below the two ATS tiers.
+        # Tiers 3-4 use market/profile gates. Tier 5 does not require a price:
+        # it is a straight-up signal from the exact prior-week published snapshot.
+        tier5 = tier5_checks.get(str(gid), {})
+        stage, side, reason = None, None, ''
+        lines = {}
         try:
             hline, aline = float(row['DK Home ML']), float(row['DK Away ML'])
+            valid_lines = all(np.isfinite(n) and abs(n) >= 100 and n.is_integer() for n in (hline, aline))
         except (KeyError, TypeError, ValueError, OverflowError):
-            continue
-        if not all(np.isfinite(n) and abs(n) >= 100 and n.is_integer() for n in (hline, aline)):
-            continue
-        if hline < 0 < aline:
-            fav, dog = 'home', 'away'
-        elif aline < 0 < hline:
-            fav, dog = 'away', 'home'
-        else:
-            continue
-        if rec.get('status') != 'ok':
-            continue
-        f, d = rec[fav], rec[dog]
-        if not all(np.isfinite(p.get(k, np.nan)) for p in (f, d) for k in ('off_run', 'def_run', 'margin')):
-            continue
-        lines = {'home': hline, 'away': aline}
-        stage, side, reason = None, None, ''
-        fav_group = conference_group(game.get(fav + '_conference'), game.get(fav + '_team'))
-        dog_group = conference_group(game.get(dog + '_conference'), game.get(dog + '_team'))
-        turnover_edge = d['margin'] - f['margin']
-        if (-150 <= lines[fav] <= -110
-                and fav_group == 'P4' and dog_group == 'P4'
-                and turnover_edge >= 1.0 - 1e-10):
-            stage, side = 3, dog
+            valid_lines = False
+
+        if valid_lines:
+            if hline < 0 < aline:
+                fav, dog = 'home', 'away'
+            elif aline < 0 < hline:
+                fav, dog = 'away', 'home'
+            else:
+                fav = dog = None
+            if fav is not None and rec.get('status') == 'ok':
+                f, d = rec[fav], rec[dog]
+                if all(np.isfinite(p.get(k, np.nan)) for p in (f, d) for k in ('off_run', 'def_run', 'margin')):
+                    lines = {'home': hline, 'away': aline}
+                    fav_group = conference_group(game.get(fav + '_conference'), game.get(fav + '_team'))
+                    dog_group = conference_group(game.get(dog + '_conference'), game.get(dog + '_team'))
+                    turnover_edge = d['margin'] - f['margin']
+                    if (-150 <= lines[fav] <= -110
+                            and fav_group == 'P4' and dog_group == 'P4'
+                            and turnover_edge >= 1.0 - 1e-10):
+                        stage, side = 3, dog
+                        reason = (
+                            f'P4 vs P4 short underdog: favorite priced {int(lines[fav]):+d}; '
+                            f'underdog turnover margin/game edge {turnover_edge:+.2f}. '
+                            'Recommended bet is the underdog moneyline.'
+                        )
+                    try:
+                        confidence = float(row.get('Confidence', np.nan))
+                    except (ValueError, TypeError):
+                        confidence = np.nan
+                    if stage is None and -600 <= lines[fav] <= -280 and row.get('Predicted Winner') == game[fav + '_team'] and .70 <= confidence <= 1 and f['def_run'] < d['off_run'] and f['margin'] >= d['margin']:
+                        stage, side = 4, fav
+                        reason = 'Core model agrees at 70%+; defensive YPC allowed below opposing offensive YPC; turnover margin/game at least equal.'
+
+        if stage is None and tier5.get('status') == 'ok' and tier5.get('qualifies') is True:
+            stage, side = 5, 'home'
             reason = (
-                f'P4 vs P4 short underdog: favorite priced {int(lines[fav]):+d}; '
-                f'underdog turnover margin/game edge {turnover_edge:+.2f}. '
-                'Recommended bet is the underdog moneyline.'
+                f'Official Tier 5 SU rule: non-neutral P4 home team is better in prior-week '
+                f'red-zone offense, red-zone defense, explosive offense, and explosive defense '
+                f'(snapshot through Week {tier5.get("through_week")}).'
             )
-        try:
-            confidence = float(row.get('Confidence', np.nan))
-        except (ValueError, TypeError):
-            confidence = np.nan
-        if stage is None and -600 <= lines[fav] <= -280 and row.get('Predicted Winner') == game[fav + '_team'] and .70 <= confidence <= 1 and f['def_run'] < d['off_run'] and f['margin'] >= d['margin']:
-            stage, side = 4, fav
-            reason = 'Core model agrees at 70%+; defensive YPC allowed below opposing offensive YPC; turnover margin/game at least equal.'
-        if stage is None and -275 <= lines[fav] <= -205 and f['off_run'] > d['def_run'] and f['def_run'] < d['off_run'] and f['margin'] > d['margin']:
-            stage, side = 5, fav
-            reason = 'Offensive YPC above opposing defensive YPC allowed; defensive YPC allowed below opposing offensive YPC; better turnover margin/game.'
+
         if stage:
-            line_text = f'{int(lines[side]):+d}'
+            if stage == 5:
+                raw_line = row.get('DK Home ML', 'Unavailable')
+                try:
+                    number = float(raw_line)
+                    line_text = f'{int(number):+d}' if np.isfinite(number) and number.is_integer() else str(raw_line)
+                except (TypeError, ValueError, OverflowError):
+                    line_text = 'Unavailable'
+                price = line_text
+                source = 'DraftKings' if line_text != 'Unavailable' else 'Published weekly metrics'
+            else:
+                line_text = f'{int(lines[side]):+d}'
+                price = line_text
+                source = 'DraftKings'
             candidates[stage].append({
                 'Game ID': gid,
                 'Value Tier': WATERFALL_TIERS[stage],
@@ -379,10 +473,10 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
                 'Value Pick': game[side + '_team'],
                 'Value Side': side.title(),
                 'Value Line': line_text,
-                'Value Price': line_text,
+                'Value Price': price,
                 'Value Market': 'Moneyline',
-                'Value Source': 'DraftKings',
-                'Value Band': '',
+                'Value Source': source,
+                'Value Band': 'Straight Up' if stage == 5 else '',
                 'Value Reason': reason,
                 '_sort': (str(game.get('start_date', '')), gid),
             })

@@ -299,14 +299,17 @@ def predict_week(current_summary, prior_summary, schedule, target_week, include_
 
 
 
-def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None):
+def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None, published_summary=None):
     """Annotate predictions with the waterfall without replacing the core model winner."""
-    from matchup_advantages import build_advantages, build_waterfall_profiles, select_waterfall
+    from matchup_advantages import (build_advantages, build_waterfall_profiles,
+                                    build_tier5_four_factor, select_waterfall)
 
     result = predictions.copy()
     profiles = build_waterfall_profiles(schedule, boxes, week)
     advantage_checks = build_advantages(schedule, boxes, week)
-    card = select_waterfall(result, schedule, profiles, advantage_checks=advantage_checks, weather_checks=weather_checks)
+    tier5_checks = build_tier5_four_factor(schedule, published_summary, week) if published_summary is not None else {}
+    card = select_waterfall(result, schedule, profiles, advantage_checks=advantage_checks,
+                            weather_checks=weather_checks, tier5_checks=tier5_checks)
     defaults = {
         'Value Selected': False, 'Value Tier': '', 'Value Stage': 0,
         'Value Pick': '', 'Value Side': '', 'Value Line': 'Unavailable',
@@ -370,7 +373,7 @@ def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None)
     result.attrs['waterfall'] = {
         'count': len(card), 'minimum': 12, 'maximum': 18,
         'shortfall': max(0, 12-len(card)),
-        'method': 'waterfall-v3-6of6-weather-ats', 'retrospective': True,
+        'method': 'waterfall-v4-official-tier5-four-factor-su', 'retrospective': True,
     }
     return result
 
