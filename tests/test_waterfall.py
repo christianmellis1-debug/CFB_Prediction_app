@@ -206,14 +206,14 @@ class WaterfallTests(unittest.TestCase):
         r['home']['margin'] = float('nan')
         self.assertFalse(self.select(g, p, r, check))
 
-    def test_waterfall_volume_and_priority(self):
+    def test_waterfall_volume_guidance_does_not_hide_qualifiers(self):
         cases = [
-            ((20, 20, 20, 20, 20), (18, 0, 0, 0, 0)),
-            ((13, 20, 20, 20, 20), (13, 0, 0, 0, 0)),
-            ((4, 20, 20, 20, 20), (4, 8, 0, 0, 0)),
-            ((4, 3, 20, 20, 20), (4, 3, 5, 0, 0)),
-            ((4, 3, 2, 20, 20), (4, 3, 2, 3, 0)),
-            ((4, 3, 2, 1, 20), (4, 3, 2, 1, 2)),
+            ((20, 20, 20, 20, 20), (20, 20, 20, 20, 20)),
+            ((13, 20, 20, 20, 20), (13, 20, 20, 20, 20)),
+            ((4, 20, 20, 20, 20), (4, 20, 20, 20, 20)),
+            ((4, 3, 20, 20, 20), (4, 3, 20, 20, 20)),
+            ((4, 3, 2, 20, 20), (4, 3, 2, 20, 20)),
+            ((4, 3, 2, 1, 20), (4, 3, 2, 1, 20)),
         ]
         for sizes, expected in cases:
             games, pred, profiles, checks, weather_ids = [], [], {}, {}, []
