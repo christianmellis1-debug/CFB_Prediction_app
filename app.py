@@ -37,6 +37,40 @@ from live_scores import parse_live_scores, overlay_live_scores
 
 st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
+# Theme Streamlit 1.64's running indicator before loading any matchup data.
+# Keep its native visibility, accessible label, and adjacent Stop control.
+st.markdown("""
+<style>
+[data-testid="stStatusWidgetRunningIcon"] {
+    position: relative;
+}
+[data-testid="stStatusWidgetRunningIcon"] > svg,
+[data-testid="stStatusWidgetRunningIcon"] > img {
+    visibility: hidden;
+}
+[data-testid="stStatusWidgetRunningIcon"]::after {
+    content: "🏈";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.65rem;
+    line-height: 1;
+    pointer-events: none;
+    animation: cfb-loading-football 1.2s ease-in-out infinite;
+}
+@keyframes cfb-loading-football {
+    0%, 100% { transform: translateY(0) rotate(-25deg); }
+    50% { transform: translateY(-3px) rotate(25deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    [data-testid="stStatusWidgetRunningIcon"]::after { animation: none; }
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 
 
 TOUR_STEPS = [
