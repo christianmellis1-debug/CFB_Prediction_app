@@ -148,6 +148,8 @@ jobs:
           add("Spread <= -17",d.fav_spread<=-17)
           add("Spread <= -21",d.fav_spread<=-21)
           add("Not P4-vs-P4",~((d.fav_group=="P4")&(d.dog_group=="P4")))
+          add("Week 4+",d.week>=4)
+          add("Week 3+",d.week>=3)
           print("\nSIMPLE FILTERS")
           for t in sorted(tests,key=lambda z:(-z[4],-z[1])):
               print(f"{t[0]}: {t[2]}-{t[3]} ({t[4]:.1%}) n={t[1]}")
