@@ -303,6 +303,117 @@ def weather_tier_candidate_ids(predictions, schedule, profiles):
     return ids
 
 
+
+def cross_tier_matches(predictions, schedule, profiles, advantage_checks=None, weather_checks=None,
+                       tier5_checks=None):
+    """Evaluate all five official tiers independently for Game of the Week overlap.
+
+    A game qualifies only when at least two tiers recommend the same team. Opposing
+    tier signals are retained for audit but never create a Game of the Week label.
+    """
+    games = normalize_fbs_schedule(schedule).copy()
+    if 'game_id' not in games:
+        return {}
+    games['_id'] = pd.to_numeric(games.game_id, errors='coerce')
+    games = games.dropna(subset=['_id'])
+    games = games[~games._id.duplicated(keep=False)].set_index('_id')
+    advantage_checks = advantage_checks or {}
+    weather_checks = weather_checks or {}
+    tier5_checks = tier5_checks or {}
+    out = {}
+    seen = set()
+
+    for _, row in predictions.iterrows():
+        try:
+            gid = int(row['Game ID'])
+        except (KeyError, TypeError, ValueError, OverflowError):
+            continue
+        if gid in seen or gid not in games.index:
+            continue
+        seen.add(gid)
+        game = games.loc[gid]
+        neutral_raw = str(game.get('neutral_site', '')).lower()
+        if neutral_raw not in ('true', 't', '1', '1.0', 'yes', 'y', 'false', 'f', '0', '0.0', 'no', 'n'):
+            continue
+        neutral = neutral_raw in ('true', 't', '1', '1.0', 'yes', 'y')
+        signals = []
+
+        # Tier 1: exact 6/6 home-team ATS signal.
+        check = advantage_checks.get(str(gid), {})
+        home_check = assess(check, 'home') if check.get('status') == 'ok' else None
+        spread = _spread_number(row.get('Home Spread'))
+        if not neutral and home_check and home_check['count'] == 5 and np.isfinite(spread):
+            signals.append((1, game['home_team']))
+
+        rec = profiles.get(str(gid), {})
+
+        # Tier 2: weather defensive-edge home ATS signal.
+        weather = weather_checks.get(str(gid), {})
+        if (not neutral and rec.get('status') == 'ok'
+                and weather.get('status') == 'ok' and weather.get('inclement') is True
+                and rec['home']['def_run'] < rec['away']['def_run']
+                and rec['home']['margin'] > rec['away']['margin']
+                and np.isfinite(spread) and spread > -14):
+            signals.append((2, game['home_team']))
+
+        # Tiers 3 and 4: independent DraftKings moneyline rules.
+        try:
+            hline, aline = float(row['DK Home ML']), float(row['DK Away ML'])
+            valid_lines = all(np.isfinite(n) and abs(n) >= 100 and n.is_integer() for n in (hline, aline))
+        except (KeyError, TypeError, ValueError, OverflowError):
+            valid_lines = False
+
+        if valid_lines:
+            if hline < 0 < aline:
+                fav, dog = 'home', 'away'
+            elif aline < 0 < hline:
+                fav, dog = 'away', 'home'
+            else:
+                fav = dog = None
+            if fav is not None:
+                lines = {'home': hline, 'away': aline}
+
+                if rec.get('status') == 'ok':
+                    f, d = rec[fav], rec[dog]
+                    if all(np.isfinite(p.get(k, np.nan)) for p in (f, d) for k in ('off_run', 'def_run', 'margin')):
+                        fav_group = conference_group(game.get(fav + '_conference'), game.get(fav + '_team'))
+                        dog_group = conference_group(game.get(dog + '_conference'), game.get(dog + '_team'))
+                        turnover_edge = d['margin'] - f['margin']
+                        if (-150 <= lines[fav] <= -110
+                                and fav_group == 'P4' and dog_group == 'P4'
+                                and turnover_edge >= 1.0 - 1e-10):
+                            signals.append((3, game[dog + '_team']))
+
+                game_week = pd.to_numeric(game.get('week'), errors='coerce')
+                regular = str(game.get('season_type', '')).lower() == 'regular'
+                if (regular and np.isfinite(game_week) and game_week >= 4
+                        and -1000 <= lines[fav] <= -505):
+                    signals.append((4, game[fav + '_team']))
+
+        # Tier 5: independent four-factor home straight-up signal.
+        tier5 = tier5_checks.get(str(gid), {})
+        if tier5.get('status') == 'ok' and tier5.get('qualifies') is True:
+            signals.append((5, game['home_team']))
+
+        by_team = {}
+        for stage, team in signals:
+            by_team.setdefault(str(team), []).append(stage)
+        ranked = sorted(by_team.items(), key=lambda item: (-len(item[1]), min(item[1]), item[0]))
+        if ranked:
+            team, stages = ranked[0]
+        else:
+            team, stages = '', []
+        qualifies = len(stages) >= 2
+        out[str(gid)] = {
+            'qualifies': qualifies,
+            'team': team if qualifies else '',
+            'stages': stages if qualifies else [],
+            'tiers': [WATERFALL_TIERS[s] for s in stages] if qualifies else [],
+            'count': len(stages) if qualifies else 0,
+            'all_signals': [{'stage': stage, 'team': str(team_name)} for stage, team_name in signals],
+        }
+    return out
+
 def select_waterfall(predictions, schedule, profiles, advantage_checks=None, weather_checks=None,
                      tier5_checks=None, minimum=12, maximum=18):
     """Weekly sequential card with ATS tiers first.
