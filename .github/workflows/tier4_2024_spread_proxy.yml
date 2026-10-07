@@ -1,0 +1,26 @@
+name: Tier4 2024 Spread Proxy
+on:
+  push:
+    branches:
+      - research/tier5-2026-snapshot-20261007
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - run: python -m pip install pandas
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import pandas as pd, numpy as np
+          d=pd.read_csv("https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_matchup_line/cfb_matchup_line_2024.csv",low_memory=False)
+          d=d[(d.season_type.astype(str).str.lower()=="regular") & d.home_points.notna() & d.away_points.notna()]
+          d["spread"]=pd.to_numeric(d.spread,errors="coerce")
+          d=d[d.spread.notna()]
+          # home spread negative => home favorite; positive => away favorite
+          d["fav_side"]=np.where(d.spread<0,"home","away")
+          d["fav_spread"]=-d.spread.abs()
+          d["fav_win"]=np.where(d.fav_side=="home",d.home_points>d.away_points,d.away_points>d.home_points)
+          for threshold in (14,17,21):
+              x=d[(d.week>=4)&(d.fav_spread<=-threshold)]
+              print(f"WEEK4_SPREAD_{threshold}+: {int(x.fav_win.sum())}-{int((~x.fav_win).sum())} ({x.fav_win.mean():.1%}) n={len(x)}")
+          PY
