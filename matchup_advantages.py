@@ -240,11 +240,11 @@ def build_tier5_four_factor(schedule, summaries, week):
 
 
 WATERFALL_TIERS = {
-    1: 'Tier 1: 6/6 ATS Dominance',
-    2: 'Tier 2: Weather Defensive Edge ATS',
-    3: 'Tier 3: P4 Turnover Underdog ML',
-    4: 'Tier 4: Moneyline Parlay Anchor',
-    5: 'Tier 5: Four-Factor Home Dominance',
+    1: 'Tier 1: Complete Game',
+    2: 'Tier 2: Storm Front',
+    3: 'Tier 3: Takeaway Trouble',
+    4: 'Tier 4: The Foundation',
+    5: 'Tier 5: Home Turf Hammer',
 }
 
 
