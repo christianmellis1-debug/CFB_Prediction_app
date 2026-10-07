@@ -1,1 +1,0 @@
-Validate official Tier 5 implementation.
