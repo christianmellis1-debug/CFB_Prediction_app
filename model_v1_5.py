@@ -188,11 +188,11 @@ def _completed_history(schedule, target_week):
 def pick_narrative(winner, opponent, confidence, contributions):
     """Describe signed model contributions, not causal or matchup-specific claims."""
     labels = {
-        "offense": "the stronger blended offensive rating",
-        "defense": "the stronger blended defensive rating",
-        "schedule": "the stronger schedule-strength rating",
-        "venue": "the model's home/road results adjustment",
-        "conference": "the model's historical conference-strength adjustment",
+        "offense": "an edge on offense",
+        "defense": "an edge on defense",
+        "schedule": "the difficulty of each team's schedule",
+        "venue": "past results at home and on the road",
+        "conference": "how teams from these conferences have performed historically",
     }
     support = sorted(((k, v) for k, v in contributions.items() if v > 1e-8),
                      key=lambda item: item[1], reverse=True)
@@ -204,7 +204,7 @@ def pick_narrative(winner, opponent, confidence, contributions):
     else:
         text = f"The model has no meaningful separation between {winner} and {opponent}; this is effectively a coin flip."
     if against:
-        text += f" The main counterweight is {labels[against[0][0]]}, which favors {opponent}."
+        text += f" The biggest factor working against this pick is {labels[against[0][0]]}, which favors {opponent}."
     if confidence < 0.60 and support:
         text += " The overall edge is small, so this remains a toss-up."
     text += f" The model estimates {winner} has a {confidence:.0%} chance to win."
