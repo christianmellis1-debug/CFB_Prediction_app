@@ -373,7 +373,7 @@ def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None,
     result.attrs['waterfall'] = {
         'count': len(card), 'minimum': 12, 'maximum': 18,
         'shortfall': max(0, 12-len(card)),
-        'method': 'waterfall-v4-official-tier5-four-factor-su', 'retrospective': True,
+        'method': 'waterfall-v5-official-tier4-heavy-favorite-su-tier5-four-factor-su', 'retrospective': True,
     }
     return result
 
