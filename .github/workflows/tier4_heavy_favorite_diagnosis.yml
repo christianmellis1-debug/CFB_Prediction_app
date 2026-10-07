@@ -1,0 +1,169 @@
+name: Tier4 Heavy Favorite Diagnosis
+on:
+  push:
+    branches:
+      - research/tier5-2026-snapshot-20261007
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install pandas
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json, math, urllib.request
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          import pandas as pd, numpy as np
+
+          sched=pd.read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2026.csv",low_memory=False)
+          feat=pd.read_csv("https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_matchup_line/cfb_matchup_line_2026.csv",low_memory=False)
+          sums=pd.read_csv("https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_team_summaries_weekly/cfb_team_summaries_weekly_2026.csv",low_memory=False)
+
+          s=sched[
+            sched.season_type.astype(str).str.lower().eq("regular") &
+            sched.home_division.astype(str).str.lower().eq("fbs") &
+            sched.away_division.astype(str).str.lower().eq("fbs") &
+            sched.completed.fillna(False).astype(bool) &
+            sched.home_points.notna() & sched.away_points.notna()
+          ].copy()
+          s=s[pd.to_datetime(s.start_date,utc=True,errors="coerce") <= pd.Timestamp("2026-10-07T23:59:59Z")]
+          s=s.dropna(subset=["game_id"]).copy()
+          s["game_id"]=s.game_id.astype(int)
+
+          def ml(v):
+              if isinstance(v,dict): v=v.get("american",v.get("alternateDisplayValue"))
+              if v is None:return None
+              try:
+                  x=float(str(v).replace("+","").replace("−","-").strip())
+                  return int(x) if math.isfinite(x) and x.is_integer() else None
+              except:return None
+          def imp(x): return 100/(x+100) if x>0 else -x/(-x+100)
+
+          def fetch(row):
+              gid=str(int(row.game_id))
+              try:
+                  req=urllib.request.Request("https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="+gid,headers={"User-Agent":"Mozilla/5.0"})
+                  with urllib.request.urlopen(req,timeout=20) as resp: p=json.load(resp)
+              except:return None
+              comp=(p.get("header",{}).get("competitions") or [{}])[0]
+              for odds in (p.get("pickcenter",[]) or comp.get("odds",[]) or []):
+                  name=str((odds.get("provider") or {}).get("name",""))
+                  if name.lower().replace(" ","")!="draftkings": continue
+                  vals={}
+                  m=odds.get("moneyline",{})
+                  for side in ("home","away"):
+                      v=((m.get(side) or {}).get("close") or {}).get("odds")
+                      if v is None:v=(odds.get(side+"TeamOdds") or {}).get("moneyLine")
+                      vals[side]=ml(v)
+                  if vals["home"] is None or vals["away"] is None: continue
+                  fav="home" if imp(vals["home"])>imp(vals["away"]) else "away"
+                  winner="home" if float(row.home_points)>float(row.away_points) else "away"
+                  return dict(game_id=int(gid),fav_side=fav,fav_ml=vals[fav],won=fav==winner,
+                              favorite=row.home_team if fav=="home" else row.away_team,
+                              underdog=row.away_team if fav=="home" else row.home_team,
+                              week=int(row.week),neutral=bool(row.neutral_site),
+                              home_conf=row.home_conference,away_conf=row.away_conference,
+                              home_id=int(row.home_id),away_id=int(row.away_id),
+                              home_points=float(row.home_points),away_points=float(row.away_points))
+              return None
+
+          rows=[]
+          with ThreadPoolExecutor(max_workers=12) as ex:
+              futs=[ex.submit(fetch,r) for _,r in s.iterrows()]
+              for f in as_completed(futs):
+                  x=f.result()
+                  if x: rows.append(x)
+          d=pd.DataFrame(rows)
+          d=d[d.fav_ml<=-505].copy()
+
+          # Join matchup-line pregame features.
+          fcols=["game_id","spread","spread_open","home_pregame_elo","away_pregame_elo",
+                 "home_team_talent_weighted","away_team_talent_weighted","home_talent","away_talent"]
+          ff=feat[[c for c in fcols if c in feat.columns]].drop_duplicates("game_id")
+          d=d.merge(ff,on="game_id",how="left")
+
+          # Prior-week four metrics for both teams.
+          for c in ["team_id","through_week","red_zone_success_off","red_zone_success_def","explosive_off","explosive_def"]:
+              sums[c]=pd.to_numeric(sums[c],errors="coerce")
+          snaps=sums.dropna(subset=["team_id","through_week"]).copy()
+          def snap(tid,w):
+              x=snaps[(snaps.team_id==tid)&(snaps.through_week==w-1)]
+              return x.iloc[0] if len(x)==1 else None
+
+          extras=[]
+          for _,r in d.iterrows():
+              h=snap(r.home_id,r.week); a=snap(r.away_id,r.week)
+              rec={}
+              if h is not None and a is not None:
+                  for c in ["red_zone_success_off","red_zone_success_def","explosive_off","explosive_def"]:
+                      rec["home_"+c]=h[c];rec["away_"+c]=a[c]
+                  favp=h if r.fav_side=="home" else a
+                  dogp=a if r.fav_side=="home" else h
+                  rec["fav_rz_off_edge"]=favp.red_zone_success_off-dogp.red_zone_success_off
+                  rec["fav_rz_def_edge"]=dogp.red_zone_success_def-favp.red_zone_success_def
+                  rec["fav_x_off_edge"]=favp.explosive_off-dogp.explosive_off
+                  rec["fav_x_def_edge"]=dogp.explosive_def-favp.explosive_def
+                  rec["fav_four_count"]=sum(v>0 for v in [rec["fav_rz_off_edge"],rec["fav_rz_def_edge"],rec["fav_x_off_edge"],rec["fav_x_def_edge"]])
+              extras.append(rec)
+          d=pd.concat([d.reset_index(drop=True),pd.DataFrame(extras)],axis=1)
+
+          # Favorite-relative structural features.
+          d["fav_home"]=d.fav_side.eq("home")
+          d["fav_elo_edge"]=np.where(d.fav_home,d.home_pregame_elo-d.away_pregame_elo,d.away_pregame_elo-d.home_pregame_elo)
+          talent_col="home_team_talent_weighted" if "home_team_talent_weighted" in d else "home_talent"
+          away_talent_col="away_team_talent_weighted" if "away_team_talent_weighted" in d else "away_talent"
+          d["fav_talent_edge"]=np.where(d.fav_home,d[talent_col]-d[away_talent_col],d[away_talent_col]-d[talent_col])
+          d["fav_spread"]=np.where(d.fav_home,d.spread,-d.spread)
+          p4={"ACC","Big Ten","Big 12","SEC"}
+          g6={"American Athletic","Conference USA","Mid-American","Mountain West","Sun Belt","Pac-12"}
+          fav_conf=np.where(d.fav_home,d.home_conf,d.away_conf)
+          dog_conf=np.where(d.fav_home,d.away_conf,d.home_conf)
+          d["fav_group"]=np.where(pd.Series(fav_conf).isin(p4),"P4",np.where(pd.Series(fav_conf).isin(g6),"G6","Other"))
+          d["dog_group"]=np.where(pd.Series(dog_conf).isin(p4),"P4",np.where(pd.Series(dog_conf).isin(g6),"G6","Other"))
+
+          losses=d[~d.won].sort_values(["week","fav_ml"])
+          print("OVERALL",int(d.won.sum()),"-",int((~d.won).sum()),f"({d.won.mean():.1%}) n={len(d)}")
+          print("\nLOSSES")
+          cols=["week","favorite","underdog","fav_ml","fav_side","neutral","fav_spread","fav_elo_edge","fav_talent_edge","fav_group","dog_group","fav_four_count","home_points","away_points"]
+          print(losses[cols].to_string(index=False))
+
+          # Simple one-variable exclusion tests, only keep samples >=20.
+          tests=[]
+          def add(name,mask):
+              x=d[mask]
+              if len(x)>=20:
+                  tests.append((name,len(x),int(x.won.sum()),int((~x.won).sum()),x.won.mean()))
+          add("Home favorites only",d.fav_home)
+          add("Non-neutral only",~d.neutral)
+          add("Favorite Elo edge >= 100",d.fav_elo_edge>=100)
+          add("Favorite Elo edge >= 150",d.fav_elo_edge>=150)
+          add("Favorite Elo edge >= 200",d.fav_elo_edge>=200)
+          add("Favorite talent edge > 0",d.fav_talent_edge>0)
+          add("Favorite talent edge >= 100",d.fav_talent_edge>=100)
+          add("Favorite owns >=2 of four metrics",d.fav_four_count>=2)
+          add("Favorite owns >=3 of four metrics",d.fav_four_count>=3)
+          add("Favorite owns all four metrics",d.fav_four_count>=4)
+          add("Spread <= -14",d.fav_spread<=-14)
+          add("Spread <= -17",d.fav_spread<=-17)
+          add("Spread <= -21",d.fav_spread<=-21)
+          add("Not P4-vs-P4",~((d.fav_group=="P4")&(d.dog_group=="P4")))
+          print("\nSIMPLE FILTERS")
+          for t in sorted(tests,key=lambda z:(-z[4],-z[1])):
+              print(f"{t[0]}: {t[2]}-{t[3]} ({t[4]:.1%}) n={t[1]}")
+
+          # Useful pairwise filters.
+          combos=[]
+          def combo(name,mask):
+              x=d[mask]
+              if len(x)>=20: combos.append((name,len(x),int(x.won.sum()),int((~x.won).sum()),x.won.mean()))
+          combo("Home + Elo>=100",d.fav_home&(d.fav_elo_edge>=100))
+          combo("Home + spread<=-14",d.fav_home&(d.fav_spread<=-14))
+          combo("Elo>=100 + spread<=-14",(d.fav_elo_edge>=100)&(d.fav_spread<=-14))
+          combo("Elo>=150 + spread<=-14",(d.fav_elo_edge>=150)&(d.fav_spread<=-14))
+          combo("Four-count>=2 + spread<=-14",(d.fav_four_count>=2)&(d.fav_spread<=-14))
+          combo("Home + four-count>=2",d.fav_home&(d.fav_four_count>=2))
+          print("\nCOMBOS")
+          for t in sorted(combos,key=lambda z:(-z[4],-z[1])):
+              print(f"{t[0]}: {t[2]}-{t[3]} ({t[4]:.1%}) n={t[1]}")
+          PY
