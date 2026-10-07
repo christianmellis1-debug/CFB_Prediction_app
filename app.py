@@ -1756,11 +1756,36 @@ with value_tab:
         st.info(f"{12-len(value_picks)} below target. No gates or odds limits were relaxed.")
     with st.expander("How Value Picks are selected", expanded=False):
         tier_guide = [
-            ("1", "Complete Game", "The home team leads in all five matchup measures: rushing, passing, run defense, pass defense, and turnover margin. Home field completes the six advantages."),
-            ("2", "Storm Front", "Bad weather favors a home team with stronger run defense and a better turnover margin. Teams favored by 14 points or more are excluded."),
-            ("3", "Takeaway Trouble", "A Power Four underdog has a turnover-margin advantage of at least one per game. The opposing favorite must be priced from −110 to −150."),
-            ("4", "The Foundation", "A favorite priced from −280 to −600 has at least 70% model confidence, a favorable run-defense matchup, and a turnover margin no worse than its opponent."),
-            ("5", "Home Turf Hammer", "In a Power Four matchup, the home team leads in red-zone offense, red-zone defense, explosive offense, and limiting explosive plays. Uses the prior week’s published stats."),
+            (
+                "1",
+                "Complete Game",
+                "The home team leads in all five matchup measures: rushing, passing, run defense, pass defense, and turnover margin. Home field completes the six advantages.",
+                [("2026", "10–4 ATS")],
+            ),
+            (
+                "2",
+                "Storm Front",
+                "Bad weather favors a home team with stronger run defense and a better turnover margin. Teams favored by 14 points or more are excluded.",
+                [("2024–26", "12–2–1 ATS")],
+            ),
+            (
+                "3",
+                "Takeaway Trouble",
+                "A Power Four underdog has a turnover-margin advantage of at least one per game. The opposing favorite must be priced from −110 to −150.",
+                [("2024", "15–5"), ("2025", "7–4"), ("2026", "1–0")],
+            ),
+            (
+                "4",
+                "The Foundation",
+                "Week 4 or later, a regular-season FBS favorite priced from −505 through −1000 qualifies as a straight-up pick. No model-confidence or matchup-stat gate is required.",
+                [("2025", "5–0"), ("2026", "34–0")],
+            ),
+            (
+                "5",
+                "Home Turf Hammer",
+                "In a Power Four matchup, the home team leads in red-zone offense, red-zone defense, explosive offense, and limiting explosive plays. Uses the prior week’s published stats.",
+                [("2024", "20–6"), ("2025", "17–5"), ("2026", "5–0")],
+            ),
         ]
         st.markdown("""
 <style>
@@ -1770,13 +1795,24 @@ with value_tab:
 .cfb-tier-guide-number {display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;height:28px;border-radius:8px;background:#58ae8725;color:#74bfa0;font-size:14px;font-weight:700;}
 .cfb-tier-guide-title {font-size:17px;font-weight:700;line-height:1.3;}
 .cfb-tier-guide-copy {font-size:14px;line-height:1.6;opacity:.85;margin:0;}
+.cfb-tier-guide-record-label {font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;opacity:.65;margin:14px 0 7px;}
+.cfb-tier-guide-records {display:flex;flex-wrap:wrap;gap:7px;}
+.cfb-tier-guide-record {display:inline-flex;gap:6px;align-items:center;border:1px solid #58ae8755;border-radius:999px;padding:5px 9px;background:#58ae8712;font-size:12px;line-height:1.2;}
+.cfb-tier-guide-record strong {font-size:12px;}
 </style>
 """ + '<div class="cfb-tier-guide">' + "".join(
             f'<div class="cfb-tier-guide-card"><div class="cfb-tier-guide-heading">'
             f'<span class="cfb-tier-guide-number">{number}</span>'
             f'<span class="cfb-tier-guide-title">{escape(title)}</span></div>'
-            f'<p class="cfb-tier-guide-copy">{escape(description)}</p></div>'
-            for number, title, description in tier_guide
+            f'<p class="cfb-tier-guide-copy">{escape(description)}</p>'
+            f'<div class="cfb-tier-guide-record-label">Historical record</div>'
+            f'<div class="cfb-tier-guide-records">'
+            + "".join(
+                f'<span class="cfb-tier-guide-record"><span>{escape(year)}</span><strong>{escape(record)}</strong></span>'
+                for year, record in records
+            )
+            + '</div></div>'
+            for number, title, description, records in tier_guide
         ) + '</div>', unsafe_allow_html=True)
         st.caption("Tier numbers show selection order, not win probability. See Recommended Bet for the play.")
         st.caption("Historical selections are recalculated from archived data; they are not saved pregame picks.")
