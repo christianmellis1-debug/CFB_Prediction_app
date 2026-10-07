@@ -1149,8 +1149,7 @@ def weather_card_html(weather):
         f'<div class="pick-label">{escape(headline)}</div>'
         f'<strong><span aria-hidden="true" style="font-size:1.5em;vertical-align:middle">{icon}</span> {escape(condition)}</strong>{wind_badge}{loc}'
         f'<div>{" · ".join(escape(x) for x in details)}</div>'
-        '<div class="venue-label" style="margin-top:6px">Game window: kickoff through approximately four hours after kickoff. '
-        'Inclement threshold: ≥1.0 mm precipitation, any snow, sustained wind ≥20 mph, gusts ≥30 mph, or thunderstorms.</div></div>'
+        '</div>'
     )
 
 
