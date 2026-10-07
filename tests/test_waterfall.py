@@ -220,8 +220,15 @@ class WaterfallTests(unittest.TestCase):
         )['1']
         self.assertTrue(overlap['qualifies'])
         self.assertEqual(overlap['team'], 'Home')
-        self.assertEqual(overlap['stages'], [1, 4, 5])
-        self.assertEqual(overlap['count'], 3)
+        self.assertEqual(overlap['stages'], [1, 5])
+        self.assertEqual(overlap['count'], 2)
+
+        # Tier 4 never contributes to Game of the Week overlap.
+        no_tier5 = cross_tier_matches(
+            pd.DataFrame([p]), pd.DataFrame([g]), {'1': r},
+            advantage_checks={'1': exact},
+        )['1']
+        self.assertFalse(no_tier5['qualifies'])
 
         # Two tiers pointing at opposite teams are not a Game of the Week.
         g2, p2, r2, _ = self.fixture(3, gid=2)
