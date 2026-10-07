@@ -1762,7 +1762,7 @@ with value_tab:
         )
         value_show["Model chance for selection"] = np.where(value_show["Value Side"].eq("Home"), value_show["Home Win %"], value_show["Away Win %"])
         value_show["Model chance for selection"] = value_show["Model chance for selection"].map(lambda v: f"{v:.1%}")
-        st.dataframe(value_show[["Value Rank", "Value Tier", "Recommended Bet", "Value Price", "Value Source", "Value Result", "Matchup", "Model chance for selection", "Status"]], hide_index=True, use_container_width=True)
+        st.dataframe(value_show[["Value Rank", "Value Tier", "Recommended Bet", "Value Result", "Value Price", "Value Source", "Matchup", "Model chance for selection", "Status"]], hide_index=True, use_container_width=True, column_config={"Value Result": st.column_config.TextColumn("Results", pinned=True)})
         graded_value = value_picks[value_picks["Value Result"].isin(["Correct", "Incorrect"])]
         if not graded_value.empty:
             wins = int(graded_value["Value Result"].eq("Correct").sum())
