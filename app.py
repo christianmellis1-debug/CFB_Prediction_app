@@ -1119,6 +1119,29 @@ def matchup_insights_html(pick, game, published, schedule, week, derived_ids):
     return panel(body)
 
 
+def betting_odds_html(row):
+    """Use team names and a single empty-state label for missing moneylines."""
+    away = escape(str(row["Away Team"]))
+    home = escape(str(row["Home Team"]))
+    away_ml = format_moneyline(row.get("Away ML"))
+    home_ml = format_moneyline(row.get("Home ML"))
+    if away_ml == "Unavailable" and home_ml == "Unavailable":
+        moneyline = '<div class="pick-label">Moneyline · Unavailable</div>'
+    else:
+        moneyline = (
+            f'<div class="pick-label">Moneyline · {escape(str(row["ML Source"]))}</div>'
+            f'<div class="odds-prices"><span>{away} <strong>{away_ml}</strong></span>'
+            f'<span>{home} <strong>{home_ml}</strong></span></div>'
+        )
+    return (
+        '<div class="odds-box">' + moneyline
+        + f'<div class="pick-label" style="margin-top:10px">Spread · {escape(str(row["Spread Source"]))}</div>'
+        + f'<div class="odds-prices"><span>{away} <strong>{escape(str(row["Away Spread"]))}</strong></span>'
+        + f'<span>{home} <strong>{escape(str(row["Home Spread"]))}</strong></span></div>'
+        + f'<div class="venue-label" style="margin-top:8px">{escape(str(row["Odds Type"]))}</div></div>'
+    )
+
+
 def weather_condition_icon(condition):
     """Match the provider's condition labels; unknown conditions stay neutral."""
     icons = {
@@ -2019,7 +2042,7 @@ with cards_tab:
             venue = "Neutral site" if r["Neutral Site"] else "Away at home"
             outcome_class = "badge" if r["Pick Result"] == "Correct" else "badge incorrect" if r["Pick Result"] == "Incorrect" else "badge close"
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
-            moneylines = f'<div class="odds-box"><div class="pick-label">Moneyline · {escape(str(r["ML Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away ML"]))}</strong></span><span>Home <strong>{escape(str(r["Home ML"]))}</strong></span></div><div class="pick-label" style="margin-top:10px">Spread · {escape(str(r["Spread Source"]))}</div><div class="odds-prices"><span>Away <strong>{escape(str(r["Away Spread"]))}</strong></span><span>Home <strong>{escape(str(r["Home Spread"]))}</strong></span></div><div class="venue-label" style="margin-top:8px">{escape(str(r["Odds Type"]))}</div></div>'
+            moneylines = betting_odds_html(r)
             game = games[(games["home_team"] == r["Home Team"]) & (games["away_team"] == r["Away Team"])]
             game_weather = {}
             if len(game) == 1 and pd.notna(game.iloc[0].get("game_id")):
