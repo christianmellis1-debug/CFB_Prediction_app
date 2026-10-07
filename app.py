@@ -1315,6 +1315,129 @@ def future_priced_picks(predictions, game_schedule, now_utc):
     return result.loc[pd.Series(mask, index=result.index, dtype=bool)]
 
 
+def christians_parlay(predictions, game_schedule, now_utc, stake=10.0):
+    """Build Christian's featured four-leg Value Pick parlay for the selected week.
+
+    Primary: 2 Tier 4 + 1 Tier 1 + 1 Tier 2/3/5.
+    Fallback: 2 Tier 4 + 2 Tier 1.
+    Only future, distinct games with DraftKings prices are eligible.
+    """
+    if predictions is None or predictions.empty or "Value Selected" not in predictions:
+        return None
+
+    pool = predictions[
+        predictions["Value Selected"].fillna(False).astype(bool)
+        & pd.to_numeric(predictions.get("Week"), errors="coerce").ge(3)
+    ].copy()
+    if pool.empty:
+        return None
+
+    starts = {}
+    if "game_id" in game_schedule:
+        for _, game in game_schedule.iterrows():
+            try:
+                gid = int(game["game_id"])
+            except (TypeError, ValueError, OverflowError):
+                continue
+            starts[gid] = pd.to_datetime(game.get("start_date"), errors="coerce", utc=True)
+
+    keep = []
+    prices = []
+    decimals = []
+    for _, row in pool.iterrows():
+        try:
+            gid = int(row["Game ID"])
+        except (KeyError, TypeError, ValueError, OverflowError):
+            keep.append(False); prices.append("Unavailable"); decimals.append(np.nan)
+            continue
+        kickoff = starts.get(gid)
+        price = format_moneyline(row.get("Value Price"))
+        source = str(row.get("Value Source", "")).lower().replace(" ", "")
+        eligible = (
+            pd.notna(kickoff)
+            and kickoff > now_utc
+            and str(row.get("Status", "")) not in {"Final", "In progress"}
+            and price != "Unavailable"
+            and "draftkings" in source
+        )
+        keep.append(bool(eligible))
+        prices.append(price)
+        if eligible:
+            payout = payout_outcomes(100, price)
+            decimals.append(payout["Return if win"] / 100 if payout else np.nan)
+        else:
+            decimals.append(np.nan)
+
+    pool["_eligible"] = keep
+    pool["_price"] = prices
+    pool["_decimal"] = decimals
+    pool = pool[pool["_eligible"]].copy()
+    if pool.empty:
+        return None
+
+    pool["_stage"] = pd.to_numeric(pool["Value Stage"], errors="coerce")
+    pool["_rank"] = pd.to_numeric(pool.get("Value Rank"), errors="coerce").fillna(9999)
+
+    # Tier 4 is highly reliable but low-return, so use the two eligible prices
+    # with the best payout (closest to the -505 edge of the validated band).
+    tier4 = pool[pool["_stage"].eq(4)].sort_values(
+        ["_decimal", "_rank"], ascending=[False, True], kind="stable"
+    )
+    # Tier 1 already has its own preferred waterfall ordering/bands.
+    tier1 = pool[pool["_stage"].eq(1)].sort_values(
+        ["_rank", "_decimal"], ascending=[True, False], kind="stable"
+    )
+    # For the fourth leg, use the highest available payout from another tier.
+    other = pool[pool["_stage"].isin([2, 3, 5])].sort_values(
+        ["_decimal", "_rank"], ascending=[False, True], kind="stable"
+    )
+
+    selected = None
+    formula = None
+    if len(tier4) >= 2 and len(tier1) >= 1 and len(other) >= 1:
+        selected = pd.concat([tier4.head(2), tier1.head(1), other.head(1)])
+        formula = "2 Tier 4 + 1 Tier 1 + 1 other tier"
+    elif len(tier4) >= 2 and len(tier1) >= 2:
+        selected = pd.concat([tier4.head(2), tier1.head(2)])
+        formula = "Fallback · 2 Tier 4 + 2 Tier 1"
+
+    if selected is None or len(selected) != 4:
+        return None
+    if selected["Game ID"].nunique() != 4:
+        return None
+
+    multiplier = float(np.prod(pd.to_numeric(selected["_decimal"], errors="coerce")))
+    if not np.isfinite(multiplier):
+        return None
+    amount = Decimal(str(stake)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    returned = (amount * Decimal(str(multiplier))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    legs = []
+    for _, row in selected.iterrows():
+        market = str(row.get("Value Market", ""))
+        line = str(row.get("Value Line", ""))
+        pick = str(row.get("Value Pick", ""))
+        bet = f"{pick} {line}" if market == "Spread" else f"{pick} ML {line}"
+        legs.append({
+            "game_id": int(row["Game ID"]),
+            "tier": str(row.get("Value Tier", "")),
+            "stage": int(row["_stage"]),
+            "pick": pick,
+            "bet": bet,
+            "price": str(row["_price"]),
+            "away": str(row.get("Away Team", "")),
+            "home": str(row.get("Home Team", "")),
+        })
+    return {
+        "formula": formula,
+        "legs": legs,
+        "stake": float(amount),
+        "return": float(returned),
+        "profit": float(returned - amount),
+        "loss": -float(amount),
+        "sportsbook": "DraftKings",
+    }
+
+
 def rank_parlays(pool, legs, stake, goal, limit=5):
     """Exact top combinations within a bounded pool; one sportsbook, distinct teams."""
     def candidates():
