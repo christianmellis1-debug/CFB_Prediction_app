@@ -302,7 +302,7 @@ def predict_week(current_summary, prior_summary, schedule, target_week, include_
 def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None, published_summary=None):
     """Annotate predictions with the waterfall without replacing the core model winner."""
     from matchup_advantages import (build_advantages, build_waterfall_profiles,
-                                    build_tier5_four_factor, select_waterfall)
+                                    build_tier5_four_factor, select_waterfall, cross_tier_matches)
 
     result = predictions.copy()
     profiles = build_waterfall_profiles(schedule, boxes, week)
@@ -310,7 +310,13 @@ def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None,
     tier5_checks = build_tier5_four_factor(schedule, published_summary, week) if published_summary is not None else {}
     card = select_waterfall(result, schedule, profiles, advantage_checks=advantage_checks,
                             weather_checks=weather_checks, tier5_checks=tier5_checks)
+    cross_tiers = cross_tier_matches(
+        result, schedule, profiles, advantage_checks=advantage_checks,
+        weather_checks=weather_checks, tier5_checks=tier5_checks,
+    )
     defaults = {
+        'Game of Week': False, 'Game of Week Team': '', 'Game of Week Tier Count': 0,
+        'Game of Week Tiers': '',
         'Value Selected': False, 'Value Tier': '', 'Value Stage': 0,
         'Value Pick': '', 'Value Side': '', 'Value Line': 'Unavailable',
         'Value Price': 'Unavailable', 'Value Market': '', 'Value Source': '',
@@ -321,6 +327,21 @@ def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None,
         result[key] = default
 
     ids = pd.to_numeric(result.get('Game ID', pd.Series(index=result.index, dtype=float)), errors='coerce')
+    for gid, overlap in cross_tiers.items():
+        if not overlap.get('qualifies'):
+            continue
+        try:
+            game_id = int(gid)
+        except (TypeError, ValueError):
+            continue
+        mask = ids.eq(game_id)
+        result.loc[mask, 'Game of Week'] = True
+        result.loc[mask, 'Game of Week Team'] = overlap.get('team', '')
+        result.loc[mask, 'Game of Week Tier Count'] = int(overlap.get('count', 0))
+        result.loc[mask, 'Game of Week Tiers'] = ', '.join(
+            f"Tier {stage}" for stage in overlap.get('stages', [])
+        )
+
     for pick in card:
         mask = ids.eq(pick['Game ID'])
         for key, value in pick.items():
