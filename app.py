@@ -1743,10 +1743,15 @@ with feed_details:
     st.caption("Weather via Open-Meteo using ESPN venue metadata. Forecasts are cached for 15 minutes and can change as kickoff approaches.")
     st.caption("Confidence is the model’s estimated chance that its pick wins. Even high-confidence picks can lose.")
 with value_tab:
-    st.markdown("### Value Picks · Five-stage waterfall")
-    st.caption("ATS tiers use the displayed sportsbook spread; moneyline tiers use DraftKings. Current-season FBS-only metrics · selections can differ from the core model.")
+    st.markdown(
+        """
+        <h3 style="margin:0 0 12px 0; white-space:nowrap;">
+            Value Picks · Five-stage waterfall
+        </h3>
+        """,
+        unsafe_allow_html=True,
+    )
     value_picks = pred[pred["Value Selected"]].sort_values("Value Rank")
-    st.caption(f"{len(value_picks)} selected · target 12–18. Odds retrieved {odds_snapshot['retrieved'] or 'unavailable'}.")
     if len(value_picks) < 12:
         st.info(f"{12-len(value_picks)} below target. No gates or odds limits were relaxed.")
     with st.expander("How Value Picks are selected", expanded=False):
