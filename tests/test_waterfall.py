@@ -209,7 +209,7 @@ class WaterfallTests(unittest.TestCase):
     def test_cross_tier_game_of_week_requires_same_team_consensus(self):
         g, p, r, check = self.fixture(4)
         p.update({
-            'DK Home ML': '-600', 'DK Away ML': '+425',
+            'DK Home ML': '-300', 'DK Away ML': '+240',
             'Home Spread': '-9.5', 'Away Spread': '+9.5',
         })
         exact = self.six_check(True)
@@ -222,6 +222,16 @@ class WaterfallTests(unittest.TestCase):
         self.assertEqual(overlap['team'], 'Home')
         self.assertEqual(overlap['stages'], [1, 5])
         self.assertEqual(overlap['count'], 2)
+        self.assertEqual(overlap['moneyline'], -300)
+
+        # Anything shorter than -300 is excluded despite cross-tier consensus.
+        too_short = dict(p, **{'DK Home ML': '-301'})
+        blocked = cross_tier_matches(
+            pd.DataFrame([too_short]), pd.DataFrame([g]), {'1': r},
+            advantage_checks={'1': exact}, tier5_checks=tier5,
+        )['1']
+        self.assertFalse(blocked['qualifies'])
+        self.assertFalse(blocked['payout_eligible'])
 
         # Tier 4 never contributes to Game of the Week overlap.
         no_tier5 = cross_tier_matches(
