@@ -1985,6 +1985,7 @@ with cards_tab:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
     if not pred.empty:
         cards = {}
+        card_details = {}
         risky_indices = []
         try:
             advantage_checks = build_advantages(schedule, download_advantage_boxes(season), selected_week)
@@ -2103,7 +2104,15 @@ with cards_tab:
                     '</div>'
                 )
             waterfall_note = ('<div class="result-box"><strong>' + escape(str(r['Value Tier'])) + '</strong><div>' + escape(str(r['Value Pick'])) + ' · ' + escape(str(r.get('Value Market', ''))) + ' ' + escape(str(r['Value Line'])) + ' · ' + escape(str(r.get('Value Source', 'Unavailable'))) + '</div></div>') if r.get('Value Selected', False) else ''
-            cards[card_idx] = f"""<article class="pick-card">{gotw_note}{waterfall_note}{warning}
+            card_details[card_idx] = (
+                warning + advantage_note + str(r.get("Line Movement HTML", ""))
+                + explanation_html + matchup_html
+                + f'<div class="card-details"><strong>Prediction details</strong>'
+                + f'<p>Model {escape(str(r["Model Version"]))} · {escape(venue)}. '
+                + 'Confidence is an estimate, not a guaranteed result.</p>'
+                + risk + missing_data_note + '</div>'
+            )
+            cards[card_idx] = f"""<article class="pick-card">{gotw_note}
 <div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="kickoff">{escape(kickoff)}</div>
 {weather_html}
@@ -2111,7 +2120,7 @@ with cards_tab:
 <div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{advantage_note}{outcome}{moneylines}{r.get("Line Movement HTML", "")}{explanation_html}{matchup_html}<details class="card-details"><summary>Prediction details</summary><p>Model {escape(str(r['Model Version']))} · {escape(venue)}. Confidence is an estimate, not a guaranteed result.</p>{risk}{missing_data_note}</details></article>"""
+<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{waterfall_note}{outcome}</article>"""
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
                 if card_index % 2 == 0:
@@ -2121,7 +2130,9 @@ with cards_tab:
                 matchup = games[(games["home_team"] == pick["Home Team"]) & (games["away_team"] == pick["Away Team"])]
                 with card_columns[card_index % 2], st.container(border=True, key=f"{prefix}_card_{season}_{selected_week}_{card_index}"):
                     st.markdown(card, unsafe_allow_html=True)
-                    with st.expander("Team statistics & data quality"):
+                    with st.expander("Details", expanded=False):
+                        st.markdown(card_details[row_id], unsafe_allow_html=True)
+                        st.markdown("**Team statistics & data quality**")
                         for side in ("away", "home"):
                             tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
                             label, note, metrics = team_data_details(tid, published_current, derived_team_data, selected_week)
