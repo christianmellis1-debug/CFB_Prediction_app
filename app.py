@@ -1902,6 +1902,17 @@ with value_tab:
             st.caption(f"Recalculated selections: {wins}–{len(graded_value)-wins} ({wins/len(graded_value):.1%}). Core-model results are reported separately.")
     else:
         st.info("No games qualify with verified FBS histories and available market prices.")
+def sort_picks_by_game_time(picks, schedule):
+    """Earliest kickoff first; unknown times last, without changing export columns."""
+    starts = schedule[["game_id", "start_date"]].copy()
+    starts["game_id"] = pd.to_numeric(starts["game_id"], errors="coerce")
+    starts = starts.dropna(subset=["game_id"]).drop_duplicates("game_id")
+    kickoff_by_id = pd.to_datetime(starts.set_index("game_id")["start_date"], utc=True, errors="coerce")
+    ordered = picks.copy()
+    ordered["_kickoff_sort"] = pd.to_numeric(ordered["Game ID"], errors="coerce").map(kickoff_by_id)
+    return ordered.sort_values("_kickoff_sort", kind="stable", na_position="last").drop(columns="_kickoff_sort")
+
+
 def reset_pick_filters():
     defaults = {"pick_query": "", "pick_level": "All confidence levels",
                 "pick_order": "Highest confidence", "pick_status": "All games",
@@ -1921,7 +1932,7 @@ with cards_tab:
     with confidence_col:
         level = st.selectbox("Confidence", ["All confidence levels", "High · 80%+", "Moderate · 70–80%", "Lean · 60–70%", "Toss-up · under 60%"], key="pick_level")
     with sort_col:
-        order = st.selectbox("Sort by", ["Highest confidence", "Closest matchups", "Home team A–Z"], key="pick_order")
+        order = st.selectbox("Sort by", ["Highest confidence", "Closest matchups", "Game time", "Home team A–Z"], key="pick_order")
     with st.expander("Favorite teams & saved filters", expanded=False):
         team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
         favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
@@ -1940,6 +1951,8 @@ with cards_tab:
         filtered = filtered[(filtered["Confidence"] >= low) & (filtered["Confidence"] < high)]
     if order == "Closest matchups":
         filtered = filtered.sort_values("Confidence")
+    elif order == "Game time":
+        filtered = sort_picks_by_game_time(filtered, games)
     elif order == "Home team A–Z":
         filtered = filtered.sort_values("Home Team")
     status_filter = st.radio("Game results", ["All games", "In progress", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True, key="pick_status")
@@ -2170,11 +2183,12 @@ with cards_tab:
         gotw_rows = filtered.loc[gotw_mask].copy()
         other_rows = filtered.loc[~gotw_mask].copy()
         if not gotw_rows.empty:
-            gotw_rows = gotw_rows.sort_values(
-                ["Game of Week Tier Count", "Confidence"],
-                ascending=[False, False],
-                kind="stable",
-            )
+            if order != "Game time":
+                gotw_rows = gotw_rows.sort_values(
+                    ["Game of Week Tier Count", "Confidence"],
+                    ascending=[False, False],
+                    kind="stable",
+                )
             st.markdown("#### 🏆 Games of the Week")
             st.caption("Cross-tier consensus · two or more eligible tiers (1, 2, 3, or 5) independently point to the same team. Tier 4 is excluded, and the consensus team's DraftKings moneyline must be -300 or longer.")
             render_pick_cards(gotw_rows, "gotw")
