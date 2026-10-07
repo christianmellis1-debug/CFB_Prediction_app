@@ -44,7 +44,6 @@ jobs:
               comp=(p.get("header",{}).get("competitions") or [{}])[0]
               for odds in (p.get("pickcenter",[]) or comp.get("odds",[]) or []):
                   name=str((odds.get("provider") or {}).get("name",""))
-                  if name.lower().replace(" ","")!="draftkings":continue
                   vals={}
                   m=odds.get("moneyline",{})
                   for side in ("home","away"):
@@ -54,7 +53,7 @@ jobs:
                   if vals["home"] is None or vals["away"] is None:continue
                   fav="home" if imp(vals["home"])>imp(vals["away"]) else "away"
                   winner="home" if float(row.home_points)>float(row.away_points) else "away"
-                  return dict(game_id=int(gid),week=int(row.week),
+                  return dict(game_id=int(gid),week=int(row.week),provider=name,
                               favorite=row.home_team if fav=="home" else row.away_team,
                               underdog=row.away_team if fav=="home" else row.home_team,
                               fav_ml=vals[fav],fav_side=fav,won=fav==winner,
@@ -68,6 +67,8 @@ jobs:
                   x=f.result()
                   if x:rows.append(x)
           d=pd.DataFrame(rows)
+          print("PROVIDERS")
+          print(d.provider.value_counts().to_string() if "provider" in d else "none")
           d=d[d.fav_ml<=-505].copy()
 
           for label,mask in [
