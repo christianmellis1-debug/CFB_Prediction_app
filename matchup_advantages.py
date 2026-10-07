@@ -314,9 +314,11 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
     Tier 3 is the P4 short-underdog turnover rule:
     P4 vs P4, market favorite -110 through -150, and underdog pregame
     turnover margin/game at least +1.0 better than the favorite.
-    Tier 4 preserves the prior parlay-anchor rule. Tier 5 is the official
-    straight-up four-factor home-dominance rule using the exact prior-week
-    published team-summary snapshot.
+    Tier 4 is the official heavy-favorite straight-up rule:
+    Week 4 or later, regular-season FBS vs FBS, DraftKings favorite priced
+    from -505 through -1000 inclusive. Tier 5 is the official straight-up
+    four-factor home-dominance rule using the exact prior-week published
+    team-summary snapshot.
     """
     if not 1 <= minimum <= maximum <= 18:
         raise ValueError('Require 1 <= minimum <= maximum <= 18')
@@ -420,29 +422,37 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
                 fav, dog = 'away', 'home'
             else:
                 fav = dog = None
-            if fav is not None and rec.get('status') == 'ok':
-                f, d = rec[fav], rec[dog]
-                if all(np.isfinite(p.get(k, np.nan)) for p in (f, d) for k in ('off_run', 'def_run', 'margin')):
-                    lines = {'home': hline, 'away': aline}
-                    fav_group = conference_group(game.get(fav + '_conference'), game.get(fav + '_team'))
-                    dog_group = conference_group(game.get(dog + '_conference'), game.get(dog + '_team'))
-                    turnover_edge = d['margin'] - f['margin']
-                    if (-150 <= lines[fav] <= -110
-                            and fav_group == 'P4' and dog_group == 'P4'
-                            and turnover_edge >= 1.0 - 1e-10):
-                        stage, side = 3, dog
-                        reason = (
-                            f'P4 vs P4 short underdog: favorite priced {int(lines[fav]):+d}; '
-                            f'underdog turnover margin/game edge {turnover_edge:+.2f}. '
-                            'Recommended bet is the underdog moneyline.'
-                        )
-                    try:
-                        confidence = float(row.get('Confidence', np.nan))
-                    except (ValueError, TypeError):
-                        confidence = np.nan
-                    if stage is None and -600 <= lines[fav] <= -280 and row.get('Predicted Winner') == game[fav + '_team'] and .70 <= confidence <= 1 and f['def_run'] < d['off_run'] and f['margin'] >= d['margin']:
-                        stage, side = 4, fav
-                        reason = 'Core model agrees at 70%+; defensive YPC allowed below opposing offensive YPC; turnover margin/game at least equal.'
+            if fav is not None:
+                lines = {'home': hline, 'away': aline}
+
+                # Tier 3 still requires its validated pregame profile gate.
+                if rec.get('status') == 'ok':
+                    f, d = rec[fav], rec[dog]
+                    if all(np.isfinite(p.get(k, np.nan)) for p in (f, d) for k in ('off_run', 'def_run', 'margin')):
+                        fav_group = conference_group(game.get(fav + '_conference'), game.get(fav + '_team'))
+                        dog_group = conference_group(game.get(dog + '_conference'), game.get(dog + '_team'))
+                        turnover_edge = d['margin'] - f['margin']
+                        if (-150 <= lines[fav] <= -110
+                                and fav_group == 'P4' and dog_group == 'P4'
+                                and turnover_edge >= 1.0 - 1e-10):
+                            stage, side = 3, dog
+                            reason = (
+                                f'P4 vs P4 short underdog: favorite priced {int(lines[fav]):+d}; '
+                                f'underdog turnover margin/game edge {turnover_edge:+.2f}. '
+                                'Recommended bet is the underdog moneyline.'
+                            )
+
+                # Official Tier 4: no model/profile requirement. The market-price
+                # band and Week 4+ cutoff are the complete straight-up rule.
+                game_week = pd.to_numeric(game.get('week'), errors='coerce')
+                regular = str(game.get('season_type', '')).lower() == 'regular'
+                if (stage is None and regular and np.isfinite(game_week) and game_week >= 4
+                        and -1000 <= lines[fav] <= -505):
+                    stage, side = 4, fav
+                    reason = (
+                        f'Official Tier 4 SU rule: Week {int(game_week)} FBS vs FBS favorite '
+                        f'priced {int(lines[fav]):+d}, inside the validated -505 through -1000 range.'
+                    )
 
         if stage is None and tier5.get('status') == 'ok' and tier5.get('qualifies') is True:
             stage, side = 5, 'home'
@@ -476,7 +486,7 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
                 'Value Price': price,
                 'Value Market': 'Moneyline',
                 'Value Source': source,
-                'Value Band': 'Straight Up' if stage == 5 else '',
+                'Value Band': 'Straight Up' if stage in (4, 5) else '',
                 'Value Reason': reason,
                 '_sort': (str(game.get('start_date', '')), gid),
             })
