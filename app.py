@@ -1119,6 +1119,46 @@ def matchup_insights_html(pick, game, published, schedule, week, derived_ids):
     return panel(body)
 
 
+def matchup_strengths_html(record, side, winner, opponent):
+    """Highlight verified pregame strengths, separate from model contributions."""
+    if record.get("status") != "ok":
+        return ""
+    other_side = "away" if side == "home" else "home"
+    own, other = record.get(side, []), record.get(other_side, [])
+    if len(own) < 5 or len(other) < 5:
+        return ""
+    points = []
+    for index in (2, 3, 4):
+        try:
+            a, b = float(own[index]), float(other[index])
+        except (TypeError, ValueError):
+            continue
+        if not (math.isfinite(a) and math.isfinite(b)):
+            continue
+        # Compare at the displayed precision so a rounded tie is not an edge.
+        precision = 2 if index in (2, 4) else 3
+        if index in (2, 3) and round(a, precision) >= round(b, precision):
+            continue
+        if index == 4 and round(a, precision) <= round(b, precision):
+            continue
+        if index == 2:
+            label = "Stopping the run"
+            detail = f"{winner} has allowed {a:.2f} yards per carry, compared with {b:.2f} for {opponent}."
+        elif index == 3:
+            label = "Limiting completions"
+            detail = f"Opponents have completed {a:.1%} of passes against {winner}, compared with {b:.1%} against {opponent}."
+        else:
+            label = "Turnover battle"
+            detail = f"{winner} has a {a:+.2f} turnover margin per game versus {b:+.2f} for {opponent} (takeaways minus giveaways)."
+        points.append(f'<p><strong>{label}:</strong> {escape(detail)}</p>')
+    if not points:
+        return ""
+    return (
+        '<div class="matchup-strengths">' + "".join(points[:2])
+        + '<p class="venue-label">Based on earlier FBS games this season; opponents faced may differ.</p></div>'
+    )
+
+
 def betting_odds_html(row):
     """Use team names and a single empty-state label for missing moneylines."""
     away = escape(str(row["Away Team"]))
@@ -2125,6 +2165,11 @@ with cards_tab:
             if red_zone_html:
                 matchup_html = matchup_html.replace("</details>", red_zone_html + "</details>")
             check = advantage_checks.get(str(int(game.iloc[0]['game_id'])), {"status":"missing", "reason":advantage_error}) if len(game) == 1 else {"status":"missing", "reason":"Game could not be matched."}
+            summary_side = "home" if r["Predicted Side"] == "Home" else "away"
+            summary_opponent = r["Away Team"] if summary_side == "home" else r["Home Team"]
+            explanation_html += matchup_strengths_html(
+                check, summary_side, str(r["Predicted Winner"]), str(summary_opponent)
+            )
             advantage_note = advantage_html(check, "home" if r["Predicted Side"] == "Home" else "away", r["Predicted Winner"])
             scored = assess(check, "home" if r["Predicted Side"] == "Home" else "away")
             is_risky = scored is not None and scored["flag"]
