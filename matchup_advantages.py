@@ -307,6 +307,9 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
                      tier5_checks=None, minimum=12, maximum=18):
     """Weekly sequential card with ATS tiers first.
 
+    The minimum/maximum values describe preferred weekly volume only.
+    They never suppress a game that satisfies an official tier rule.
+
     Tier 1 is exact 6/6 ATS dominance.
     Tier 2 is the frozen weather defensive-edge ATS rule:
     outdoor inclement weather, non-neutral home team, lower pregame defensive
@@ -320,8 +323,8 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
     four-factor home-dominance rule using the exact prior-week published
     team-summary snapshot.
     """
-    if not 1 <= minimum <= maximum <= 18:
-        raise ValueError('Require 1 <= minimum <= maximum <= 18')
+    if not 1 <= minimum <= maximum:
+        raise ValueError('Require 1 <= minimum <= maximum')
     games = normalize_fbs_schedule(schedule).copy()
     if 'game_id' not in games:
         return []
@@ -491,12 +494,12 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
                 '_sort': (str(game.get('start_date', '')), gid),
             })
 
+    # Surface every official qualifier. The 12-18 range is a planning target,
+    # not a selection gate or hard weekly cap.
     card = []
     for stage in (1, 2, 3, 4, 5):
-        if len(card) >= maximum or (stage > 1 and len(card) >= minimum):
-            break
-        limit = maximum if stage == 1 else minimum
-        for item in sorted(candidates[stage], key=lambda candidate: candidate['_sort'])[:limit-len(card)]:
+        for item in sorted(candidates[stage], key=lambda candidate: candidate['_sort']):
+            item = item.copy()
             item.pop('_sort')
             item['Value Rank'] = len(card) + 1
             card.append(item)
