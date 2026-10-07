@@ -487,6 +487,60 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(int(overall['Losses']), 1)
         self.assertEqual(int(overall['Pushes']), 1)
 
+    def test_christians_parlay_uses_locked_tier_formula(self):
+        import ast
+        from pathlib import Path
+        from decimal import Decimal, ROUND_HALF_UP
+
+        tree = ast.parse(Path('app.py').read_text())
+        names = {'christians_parlay', 'format_moneyline', 'payout_outcomes'}
+        ns = dict(pd=pd, np=__import__('numpy'), Decimal=Decimal, ROUND_HALF_UP=ROUND_HALF_UP)
+        exec(compile(ast.Module(
+            body=[n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names],
+            type_ignores=[]
+        ), 'app.py', 'exec'), ns)
+
+        now = pd.Timestamp('2026-10-01T00:00:00Z')
+        games = pd.DataFrame([
+            {'game_id': 1, 'start_date': '2026-10-10T12:00:00Z'},
+            {'game_id': 2, 'start_date': '2026-10-10T13:00:00Z'},
+            {'game_id': 3, 'start_date': '2026-10-10T14:00:00Z'},
+            {'game_id': 4, 'start_date': '2026-10-10T15:00:00Z'},
+            {'game_id': 5, 'start_date': '2026-10-10T16:00:00Z'},
+        ])
+        rows = [
+            {'Game ID': 1, 'Week': 6, 'Value Selected': True, 'Value Stage': 4, 'Value Rank': 1,
+             'Value Tier': 'Tier 4', 'Value Pick': 'A', 'Value Market': 'Moneyline',
+             'Value Line': '-550', 'Value Price': '-550', 'Value Source': 'DraftKings',
+             'Away Team': 'X', 'Home Team': 'A', 'Status': 'Awaiting final'},
+            {'Game ID': 2, 'Week': 6, 'Value Selected': True, 'Value Stage': 4, 'Value Rank': 2,
+             'Value Tier': 'Tier 4', 'Value Pick': 'B', 'Value Market': 'Moneyline',
+             'Value Line': '-600', 'Value Price': '-600', 'Value Source': 'DraftKings',
+             'Away Team': 'Y', 'Home Team': 'B', 'Status': 'Awaiting final'},
+            {'Game ID': 3, 'Week': 6, 'Value Selected': True, 'Value Stage': 1, 'Value Rank': 3,
+             'Value Tier': 'Tier 1', 'Value Pick': 'C', 'Value Market': 'Spread',
+             'Value Line': '-7.5', 'Value Price': '-110', 'Value Source': 'Draft Kings',
+             'Away Team': 'Z', 'Home Team': 'C', 'Status': 'Awaiting final'},
+            {'Game ID': 4, 'Week': 6, 'Value Selected': True, 'Value Stage': 5, 'Value Rank': 4,
+             'Value Tier': 'Tier 5', 'Value Pick': 'D', 'Value Market': 'Moneyline',
+             'Value Line': '+120', 'Value Price': '+120', 'Value Source': 'DraftKings',
+             'Away Team': 'W', 'Home Team': 'D', 'Status': 'Awaiting final'},
+            {'Game ID': 5, 'Week': 6, 'Value Selected': True, 'Value Stage': 1, 'Value Rank': 5,
+             'Value Tier': 'Tier 1', 'Value Pick': 'E', 'Value Market': 'Spread',
+             'Value Line': '-3.5', 'Value Price': '-108', 'Value Source': 'DraftKings',
+             'Away Team': 'V', 'Home Team': 'E', 'Status': 'Awaiting final'},
+        ]
+        featured = ns['christians_parlay'](pd.DataFrame(rows), games, now, stake=10)
+        self.assertIsNotNone(featured)
+        self.assertEqual(featured['formula'], '2 Tier 4 + 1 Tier 1 + 1 other tier')
+        self.assertEqual([leg['stage'] for leg in featured['legs']], [4, 4, 1, 5])
+
+        # Removing the other-tier leg invokes the locked fallback.
+        fallback = ns['christians_parlay'](pd.DataFrame([r for r in rows if r['Game ID'] != 4]), games, now, stake=10)
+        self.assertIsNotNone(fallback)
+        self.assertEqual(fallback['formula'], 'Fallback · 2 Tier 4 + 2 Tier 1')
+        self.assertEqual([leg['stage'] for leg in fallback['legs']], [4, 4, 1, 1])
+
     def test_scenario_profit_uses_selected_price_and_grade(self):
         import ast
         import numpy as np
