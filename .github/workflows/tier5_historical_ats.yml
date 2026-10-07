@@ -1,0 +1,127 @@
+name: Tier5 Historical ATS
+on:
+  push:
+    branches:
+      - research/tier5-2026-snapshot-20261007
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install pandas
+      - name: Evaluate 2024-2025 Tier 5 ATS
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pandas as pd, urllib.request
+          from pathlib import Path
+
+          out=Path("tier5_hist_ats")
+          out.mkdir(exist_ok=True)
+          P4={"ACC","Big Ten","Big 12","SEC"}
+          all_rows=[]
+
+          for year in (2024,2025):
+              su_url=f"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_team_summaries_weekly/cfb_team_summaries_weekly_{year}.csv"
+              sch_url=f"https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_{year}.csv"
+              line_url=f"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_matchup_line/cfb_matchup_line_{year}.csv"
+
+              urllib.request.urlretrieve(su_url,out/f"summaries_{year}.csv")
+              urllib.request.urlretrieve(sch_url,out/f"schedules_{year}.csv")
+              urllib.request.urlretrieve(line_url,out/f"lines_{year}.csv")
+
+              s=pd.read_csv(out/f"summaries_{year}.csv",low_memory=False)
+              g=pd.read_csv(out/f"schedules_{year}.csv",low_memory=False)
+              l=pd.read_csv(out/f"lines_{year}.csv",low_memory=False)
+
+              need=["team_id","through_week","red_zone_success_off","red_zone_success_def","explosive_off","explosive_def"]
+              for c in need:
+                  s[c]=pd.to_numeric(s[c],errors="coerce")
+              s=s.dropna(subset=["team_id","through_week"]).copy()
+              s["team_id"]=s["team_id"].astype(int)
+              s["through_week"]=s["through_week"].astype(int)
+
+              g=g[
+                  (g["season_type"].astype(str).str.lower()=="regular") &
+                  (g["home_division"].astype(str).str.lower()=="fbs") &
+                  (g["away_division"].astype(str).str.lower()=="fbs") &
+                  (g["home_conference"].isin(P4)) &
+                  (g["away_conference"].isin(P4)) &
+                  (~g["neutral_site"].fillna(False).astype(bool)) &
+                  (g["completed"].fillna(False).astype(bool)) &
+                  g["home_points"].notna() & g["away_points"].notna()
+              ].copy()
+
+              l["game_id"]=pd.to_numeric(l["game_id"],errors="coerce")
+              l["spread"]=pd.to_numeric(l["spread"],errors="coerce")
+              l["spread_open"]=pd.to_numeric(l["spread_open"],errors="coerce")
+              line_lookup=l.dropna(subset=["game_id"]).drop_duplicates("game_id").set_index("game_id")
+
+              for _,game in g.sort_values(["week","start_date"]).iterrows():
+                  w=int(game["week"])
+                  if w<=1:
+                      continue
+                  snap=w-1
+                  hid,aid=int(game["home_id"]),int(game["away_id"])
+                  h=s[(s.team_id==hid)&(s.through_week==snap)]
+                  a=s[(s.team_id==aid)&(s.through_week==snap)]
+                  if len(h)!=1 or len(a)!=1:
+                      continue
+                  h=h.iloc[0]; a=a.iloc[0]
+                  vals=[h.red_zone_success_off,a.red_zone_success_off,h.red_zone_success_def,a.red_zone_success_def,h.explosive_off,a.explosive_off,h.explosive_def,a.explosive_def]
+                  if pd.isna(vals).any():
+                      continue
+                  qualifies=(
+                      h.red_zone_success_off>a.red_zone_success_off and
+                      h.red_zone_success_def<a.red_zone_success_def and
+                      h.explosive_off>a.explosive_off and
+                      h.explosive_def<a.explosive_def
+                  )
+                  if not qualifies:
+                      continue
+
+                  gid=int(game["game_id"])
+                  spread=float("nan"); spread_open=float("nan")
+                  if gid in line_lookup.index:
+                      spread=line_lookup.loc[gid,"spread"]
+                      spread_open=line_lookup.loc[gid,"spread_open"]
+                      if isinstance(spread,pd.Series): spread=spread.iloc[0]
+                      if isinstance(spread_open,pd.Series): spread_open=spread_open.iloc[0]
+
+                  hp=float(game["home_points"]); ap=float(game["away_points"])
+                  su="W" if hp>ap else "L"
+                  ats="NA"
+                  if pd.notna(spread):
+                      adj=(hp-ap)+float(spread)
+                      ats="W" if adj>0 else "L" if adj<0 else "P"
+
+                  all_rows.append({
+                      "season":year,"week":w,"game_id":gid,
+                      "home_team":game["home_team"],"away_team":game["away_team"],
+                      "home_points":hp,"away_points":ap,
+                      "spread_open":spread_open,"spread_close":spread,
+                      "su":su,"ats":ats,
+                  })
+
+          q=pd.DataFrame(all_rows)
+          q.to_csv(out/"tier5_2024_2025_ats.csv",index=False)
+
+          print("YEAR SUMMARY")
+          for year in (2024,2025):
+              x=q[q.season==year]
+              su_w=(x.su=="W").sum(); su_l=(x.su=="L").sum()
+              ats_x=x[x.ats!="NA"]
+              aw=(ats_x.ats=="W").sum(); al=(ats_x.ats=="L").sum(); ap=(ats_x.ats=="P").sum()
+              print(f"{year}: qualifiers={len(x)} SU={su_w}-{su_l} ATS={aw}-{al}-{ap} lined={len(ats_x)}")
+          ats_x=q[q.ats!="NA"]
+          print(f"COMBINED: qualifiers={len(q)} SU={(q.su=='W').sum()}-{(q.su=='L').sum()} ATS={(ats_x.ats=='W').sum()}-{(ats_x.ats=='L').sum()}-{(ats_x.ats=='P').sum()} lined={len(ats_x)}")
+          print("\nDETAIL")
+          print(q[["season","week","home_team","away_team","spread_close","home_points","away_points","su","ats"]].to_string(index=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tier5-historical-ats
+          path: tier5_hist_ats/
+          retention-days: 7
