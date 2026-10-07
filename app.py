@@ -195,6 +195,51 @@ def confidence_performance(frame):
     return pd.DataFrame(rows)
 
 
+def value_pick_performance(frame):
+    """Summarize official Value Picks from Week 3 onward."""
+    columns = [
+        "Tier", "Picks", "Graded", "Wins", "Losses", "Pushes",
+        "Win rate", "Awaiting final", "Not graded",
+    ]
+    if frame is None or frame.empty or "Value Selected" not in frame:
+        return pd.DataFrame(columns=columns)
+    work = frame.copy()
+    weeks = pd.to_numeric(work.get("Week"), errors="coerce")
+    work = work[weeks.ge(3) & work["Value Selected"].fillna(False).astype(bool)]
+    if work.empty:
+        return pd.DataFrame(columns=columns)
+
+    rows = []
+    groups = [("All value picks", work)]
+    if "Value Stage" in work:
+        stages = pd.to_numeric(work["Value Stage"], errors="coerce")
+        for stage in (1, 2, 3, 4, 5):
+            group = work[stages.eq(stage)]
+            if group.empty:
+                continue
+            tier_name = str(group["Value Tier"].iloc[0]) if "Value Tier" in group else f"Tier {stage}"
+            groups.append((tier_name, group))
+
+    for label, group in groups:
+        result = group.get("Value Result", pd.Series("Pending", index=group.index)).astype(str)
+        wins = int(result.eq("Correct").sum())
+        losses = int(result.eq("Incorrect").sum())
+        pushes = int(result.eq("Push").sum())
+        graded = wins + losses + pushes
+        rows.append({
+            "Tier": label,
+            "Picks": len(group),
+            "Graded": graded,
+            "Wins": wins,
+            "Losses": losses,
+            "Pushes": pushes,
+            "Win rate": wins / (wins + losses) if wins + losses else None,
+            "Awaiting final": int(result.eq("Pending").sum()),
+            "Not graded": int(result.eq("Not graded").sum()),
+        })
+    return pd.DataFrame(rows, columns=columns)
+
+
 @st.cache_data(ttl=300)
 def download_schedule(season):
     url = f"https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_{season}.csv"
