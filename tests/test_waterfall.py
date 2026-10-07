@@ -459,6 +459,34 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(quote['home_spread_odds'], '-110')
         self.assertEqual(quote['home_spread_open'], '-8.5')
 
+    def test_value_pick_performance_excludes_weeks_one_and_two(self):
+        import ast
+        from pathlib import Path
+        tree = ast.parse(Path('app.py').read_text())
+        wanted = {'value_pick_performance'}
+        ns = {'pd': pd}
+        body = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in wanted]
+        exec(compile(ast.Module(body=body, type_ignores=[]), 'app.py', 'exec'), ns)
+
+        frame = pd.DataFrame([
+            {'Week': 1, 'Value Selected': True, 'Value Stage': 1, 'Value Tier': 'Tier 1',
+             'Value Result': 'Correct'},
+            {'Week': 2, 'Value Selected': True, 'Value Stage': 2, 'Value Tier': 'Tier 2',
+             'Value Result': 'Correct'},
+            {'Week': 3, 'Value Selected': True, 'Value Stage': 3, 'Value Tier': 'Tier 3',
+             'Value Result': 'Correct'},
+            {'Week': 4, 'Value Selected': True, 'Value Stage': 4, 'Value Tier': 'Tier 4',
+             'Value Result': 'Incorrect'},
+            {'Week': 5, 'Value Selected': True, 'Value Stage': 5, 'Value Tier': 'Tier 5',
+             'Value Result': 'Push'},
+        ])
+        out = ns['value_pick_performance'](frame)
+        overall = out.iloc[0]
+        self.assertEqual(int(overall['Picks']), 3)
+        self.assertEqual(int(overall['Wins']), 1)
+        self.assertEqual(int(overall['Losses']), 1)
+        self.assertEqual(int(overall['Pushes']), 1)
+
     def test_scenario_profit_uses_selected_price_and_grade(self):
         import ast
         import numpy as np
