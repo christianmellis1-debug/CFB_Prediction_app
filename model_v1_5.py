@@ -187,8 +187,6 @@ def _completed_history(schedule, target_week):
 
 def pick_narrative(winner, opponent, confidence, contributions):
     """Describe signed model contributions, not causal or matchup-specific claims."""
-    if confidence >= 0.80:
-        return ""
     labels = {
         "offense": "the stronger blended offensive rating",
         "defense": "the stronger blended defensive rating",
@@ -209,6 +207,7 @@ def pick_narrative(winner, opponent, confidence, contributions):
         text += f" The main counterweight is {labels[against[0][0]]}, which favors {opponent}."
     if confidence < 0.60 and support:
         text += " The overall edge is small, so this remains a toss-up."
+    text += f" The model estimates {winner} has a {confidence:.0%} chance to win."
     return text
 
 def predict_week(current_summary, prior_summary, schedule, target_week, include_completed=False):
