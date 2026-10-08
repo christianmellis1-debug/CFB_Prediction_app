@@ -1,6 +1,6 @@
 {
-  "name": "CFB Predictor",
-  "short_name": "CFB Picks",
+  "name": "Saturday Forecast",
+  "short_name": "Saturday Forecast",
   "description": "College football predictions, confidence, results, and betting value.",
   "start_url": "/",
   "scope": "/",
