@@ -12,6 +12,11 @@ class AdvantageTests(unittest.TestCase):
   self.assertIn('Matchup risk',advantage_html(r,'away','<Away>'))
   self.assertNotIn('Matchup risk',advantage_html(r,'home','Home'))
   self.assertIn('&lt;Away&gt;',advantage_html(r,'away','<Away>'))
+ def test_tiered_pick_can_suppress_risk_banner(self):
+  r=build_advantages(self.s,self.b,2)['2']
+  self.assertTrue(assess(r,'away')['flag'])
+  self.assertIn('Matchup risk',advantage_html(r,'away','Away'))
+  self.assertNotIn('Matchup risk',advantage_html(r,'away','Away',suppress_risk=True))
  def test_missing_is_not_zero(self):
   r=build_advantages(self.s,self.b.iloc[:1],2)['2']
   self.assertIsNone(assess(r,'home'));self.assertNotIn('Matchup risk',advantage_html(r,'home','Home'))
