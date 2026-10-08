@@ -243,7 +243,7 @@ WATERFALL_TIERS = {
     1: 'Tier 1: Complete Game',
     2: 'Tier 2: Storm Front',
     3: 'Tier 3: Takeaway Trouble',
-    4: 'Tier 4: The Foundation',
+    4: 'Tier 4: Parlay Bridge',
     5: 'Tier 5: Home Turf Hammer',
 }
 
