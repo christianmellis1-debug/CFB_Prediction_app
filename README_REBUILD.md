@@ -1,4 +1,4 @@
-# CFB Predictor rebuild
+# Saturday Forecast rebuild
 
 The new app lives alongside the existing Streamlit app so the migration can be tested safely.
 
