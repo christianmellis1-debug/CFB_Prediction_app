@@ -1725,8 +1725,10 @@ st.markdown("""
  .hero {padding:16px 18px;}
  .hero h1 {font-size:32px;}
  .week-dashboard {padding:16px;}
- .dashboard-metrics {grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 10px;}
- .dashboard-metrics strong {font-size:25px;}
+ .dashboard-metrics {grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 8px;}
+ .dashboard-metrics>div {padding-left:8px;}
+ .dashboard-metrics strong {font-size:21px;}
+ .dashboard-metrics span {font-size:9px;}
  .week-heading {margin-bottom:16px;}
  .team-identity {font-size:15px;}
  .pick-result .pick-winner {font-size:17px;}
