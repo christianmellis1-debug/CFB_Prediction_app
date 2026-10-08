@@ -77,13 +77,13 @@ def assess(record, side):
     count=outcomes.count('Advantage')
     return dict(count=count,flag=count<=2,outcomes=outcomes)
 
-def advantage_html(record, side, picked_team):
+def advantage_html(record, side, picked_team, suppress_risk=False):
     status=record.get('status')
     if status!='ok':
         label='Not assessed' if status=='outside' else 'Not enough data'
         return '<details class="card-details"><summary>Advantage check · '+label+'</summary><p>'+escape(record.get('reason','Pregame box scores unavailable.'))+'</p></details>'
     scored=assess(record,side);count=scored['count'];team=escape(str(picked_team))
-    banner=(f'<div style="margin-top:10px;padding:10px 12px;border-left:4px solid #e9a23b;border-radius:6px;background:#e9a23b18"><strong>⚠ Matchup risk · {count}/5 advantages</strong><br><span>{team} has limited support from these five metrics.</span></div>' if scored['flag'] else '')
+    banner=(f'<div style="margin-top:10px;padding:10px 12px;border-left:4px solid #e9a23b;border-radius:6px;background:#e9a23b18"><strong>⚠ Matchup risk · {count}/5 advantages</strong><br><span>{team} has limited support from these five metrics.</span></div>' if scored['flag'] and not suppress_risk else '')
     other='away' if side=='home' else 'home';items=[]
     for i,label in enumerate(LABELS):
         fmt=(lambda x:f'{x:+.2f} per game') if i==4 else (lambda x:f'{x:.1%}') if i in (1,3) else (lambda x:f'{x:.2f} YPC')
