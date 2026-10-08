@@ -35,7 +35,7 @@ from shadow_tracking import show_shadow_tracking
 from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
 
-st.set_page_config(page_title="College Football Predictor", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Saturday Forecast", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
 # Theme Streamlit 1.64's running indicator before loading any matchup data.
 # Keep its native visibility, accessible label, and adjacent Stop control.
@@ -1757,7 +1757,7 @@ st.markdown("""
 .st-key-main_app_tabs [role="tab"][data-key="7"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOSIvPjxwYXRoIGQ9Ik0xMiAxMXY2bTAtMTB2MSIvPjwvc3ZnPg=="); }
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
-<h1>CFB Predictor<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
+<h1>Saturday Forecast<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
 """, unsafe_allow_html=True)
 
 show_app_tour()
@@ -2844,7 +2844,7 @@ with about_tab:
         st.caption("The adjustment improved historical probability scores but did not improve winner accuracy in every season. It does not establish better betting returns. The realigned 2026 Group of Six is a prospective application; historical scenarios are recalculated using the current model.")
         st.caption(f"Loaded {season}: {len(current):,} team-week rows; {season - 1}: {len(prior):,} rows. Source: SportsDataverse / cfbfastR.")
 
-st.caption(f"College Football Predictor · {MODEL_VERSION} · Estimates, not guarantees.")
+st.caption(f"Saturday Forecast · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
 
