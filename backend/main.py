@@ -18,7 +18,7 @@ from matchup_advantages import normalize_fbs_schedule, build_waterfall_profiles,
 from weather_context import build_weather_context
 
 ROOT = Path(__file__).resolve().parents[1]
-app = FastAPI(title="CFB Predictor API", version="1.0.0")
+app = FastAPI(title="Saturday Forecast API", version="1.0.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 
@@ -227,7 +227,7 @@ def attach_market_context(predicted: pd.DataFrame, games: pd.DataFrame) -> pd.Da
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "service": "cfb-predictor-api", "model": "V1.5"}
+    return {"status": "ok", "service": "saturday-forecast-api", "model": "V1.5"}
 
 
 @app.get("/api/weeks")
