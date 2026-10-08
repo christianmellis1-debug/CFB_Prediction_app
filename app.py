@@ -2049,7 +2049,7 @@ with value_tab:
             ),
             (
                 "4",
-                "The Foundation",
+                "Parlay Bridge",
                 "Week 4 or later, a regular-season FBS favorite priced from −505 through −1000 qualifies as a straight-up pick. No model-confidence or matchup-stat gate is required.",
                 "39–0",
             ),
