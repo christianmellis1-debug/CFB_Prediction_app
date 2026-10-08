@@ -77,7 +77,7 @@ TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
     ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores. Confidence is an estimate, not a guarantee."),
-    ("risky", "Risky picks", "Review matchup warnings", "This tab lists every predicted winner with two or fewer of the five matchup advantages for the selected week. The exclamation warning also appears on its game card. Missing data is shown separately, and this flag does not change the prediction."),
+    ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners with two or fewer of the five matchup advantages for the selected week. Official Tier 1–5 games are excluded so a game cannot be both a Value Pick and a Risky Pick. Missing data is shown separately."),
     ("export", None, "Export your picks", "Use Export picks above the navigation to download all picks for this week or only the picks matching your Game cards filters. Open the CSV in Excel to compare matchups."),
     ("results", "Model results", "Check model performance", "Compare model wins, losses, and accuracy by confidence, plus Value Pick records overall and by tier. Value Pick tracking starts in Week 3; Weeks 1 and 2 are excluded from the tier record."),
     ("scenario", "What-if bets", "Try a betting scenario", "Choose picks and stakes below to see potential profit if they win and the amount lost if they lose. Missing moneylines are excluded. A scenario does not place or record bets."),
@@ -193,6 +193,11 @@ def confidence_performance(frame):
             "Not graded": int((group["Status"].eq("Final") & ~group["Pick Result"].isin(["Correct", "Incorrect"])).sum()),
         })
     return pd.DataFrame(rows)
+
+
+def should_flag_risky(scored, value_selected):
+    """Risk warnings apply only when the game is not already an official tier pick."""
+    return bool(scored is not None and scored.get("flag") and not bool(value_selected))
 
 
 def value_pick_performance(frame):
@@ -2303,9 +2308,15 @@ with cards_tab:
             explanation_html += matchup_strengths_html(
                 check, summary_side, str(r["Predicted Winner"]), str(summary_opponent)
             )
-            advantage_note = advantage_html(check, "home" if r["Predicted Side"] == "Home" else "away", r["Predicted Winner"])
+            is_tiered = bool(r.get("Value Selected", False))
+            advantage_note = advantage_html(
+                check,
+                "home" if r["Predicted Side"] == "Home" else "away",
+                r["Predicted Winner"],
+                suppress_risk=is_tiered,
+            )
             scored = assess(check, "home" if r["Predicted Side"] == "Home" else "away")
-            is_risky = scored is not None and scored["flag"]
+            is_risky = should_flag_risky(scored, is_tiered)
             if is_risky:
                 risky_indices.append(card_idx)
             warning = ('<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;border-radius:10px;background:#e9a23b20"><span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9a23b;color:#171717;font-size:25px;font-weight:900">!</span><div><strong>RISKY PICK · MATCHUP WARNING</strong><br><span>' + str(scored["count"]) + '/5 advantages for ' + escape(str(r["Predicted Winner"])) + '</span></div></div>') if is_risky else ""
@@ -2379,14 +2390,14 @@ with cards_tab:
             tour_at("risky")
             st.subheader(f"Risky picks · {len(risky_indices)}")
             st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
-            st.write("A warning means the predicted winner has 0, 1 or 2 of the five matchup advantages. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
+            st.write("A warning means a non-tiered predicted winner has 0, 1 or 2 of the five matchup advantages. Any official Tier 1–5 Value Pick is excluded from Risky Picks so the labels never contradict each other. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
             if not advantage_checks:
                 st.info(advantage_error)
             elif risky_indices:
                 render_pick_cards(pred.loc[risky_indices], "risky")
             else:
                 st.info("No assessed picks meet the risk threshold this week.")
-            st.caption("Games with missing metrics are not rated as risky. No warning does not mean a safe bet. Picks and model confidence are unchanged.")
+            st.caption("Tiered games and games with missing metrics are not rated as risky. No warning does not mean a safe bet. Picks and model confidence are unchanged.")
 with performance_tab:
     show_shadow_tracking(st, season, selected_week)
     tour_at("results")
