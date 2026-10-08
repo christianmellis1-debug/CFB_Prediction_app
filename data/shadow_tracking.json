@@ -1,6 +1,6 @@
 {
   "experiment": "v15-market-blend-2026-09-28",
-  "last_run": "2026-10-08T00:13:22.799813+00:00",
+  "last_run": "2026-10-08T09:00:44.956671+00:00",
   "results": {
     "401856705": {
       "away_score": 14.0,
@@ -332,6 +332,18 @@
       "home_score": 14.0,
       "outcome": "win"
     },
+    "401871051": {
+      "away_score": 27.0,
+      "checked_at": "2026-10-08T09:00:44.835474+00:00",
+      "home_score": 26.0,
+      "outcome": "win"
+    },
+    "401871066": {
+      "away_score": 3.0,
+      "checked_at": "2026-10-08T09:00:44.948784+00:00",
+      "home_score": 22.0,
+      "outcome": "win"
+    },
     "401871089": {
       "away_score": 35.0,
       "checked_at": "2026-10-04T08:28:24.985221+00:00",
@@ -347,6 +359,7 @@
   },
   "run_summary": {
     "eligible_schedule_games": 6,
+    "new_results": 2,
     "skipped: No same-book two-sided moneyline": 6
   },
   "snapshots": {
