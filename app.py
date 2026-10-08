@@ -1706,7 +1706,7 @@ st.markdown("""
 .section-kicker {font-size:10px;letter-spacing:1.8px;opacity:.75;font-weight:700;}
 .week-heading h2 {font-size:26px;letter-spacing:-1px;margin:2px 0 0;padding:0;}
 .week-state {font-size:11px;padding:7px 10px;border:1px solid #80978b50;border-radius:30px;white-space:nowrap;}
-.dashboard-metrics {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+.dashboard-metrics {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
 .dashboard-metrics>div {border-left:3px solid #58ae87;padding-left:12px;}
 .dashboard-metrics strong {font-size:26px;font-variant-numeric:tabular-nums;letter-spacing:-.7px;display:block;}
 .dashboard-metrics span {font-size:11px;opacity:.8;display:block;margin-top:3px;}
@@ -1980,8 +1980,17 @@ close_count = int((pred["Confidence"] < .6).sum())
 graded = pred[pred["Pick Result"].isin(["Correct", "Incorrect"])]
 correct_count = int(graded["Pick Result"].eq("Correct").sum())
 accuracy = f"{correct_count / len(graded):.1%}" if len(graded) else "—"
+value_graded = pred[pred["Value Selected"] & pred["Value Result"].isin(["Correct", "Incorrect", "Push"])]
+value_wins = int(value_graded["Value Result"].eq("Correct").sum())
+value_losses = int(value_graded["Value Result"].eq("Incorrect").sum())
+value_pushes = int(value_graded["Value Result"].eq("Push").sum())
+value_decisive = value_wins + value_losses
+value_record = f"{value_wins}–{value_losses}" if len(value_graded) else "—"
+if value_pushes:
+    value_record += f"–{value_pushes}P"
+value_accuracy = f"{value_wins / value_decisive:.1%}" if value_decisive else "—"
 week_state = "All games final" if awaiting_count == 0 else f"{awaiting_count} awaiting final"
-dashboard_summary.markdown(f"""<section class="week-dashboard"><div class="week-heading"><div><span class="section-kicker">{season} SEASON</span><h2>Week {selected_week}</h2></div><span class="week-state">{week_state}</span></div><div class="dashboard-metrics"><div><strong>{len(pred)}</strong><span>Matchups</span></div><div><strong>{correct_count}–{len(graded)-correct_count}</strong><span>Pick record</span></div><div><strong>{accuracy}</strong><span>Graded accuracy</span></div><div><strong>{value_count}</strong><span>Model value picks</span></div></div></section>""", unsafe_allow_html=True)
+dashboard_summary.markdown(f"""<section class="week-dashboard"><div class="week-heading"><div><span class="section-kicker">{season} SEASON</span><h2>Week {selected_week}</h2></div><span class="week-state">{week_state}</span></div><div class="dashboard-metrics"><div><strong>{len(pred)}</strong><span>Matchups</span></div><div><strong>{correct_count}–{len(graded)-correct_count}</strong><span>Pick record</span></div><div><strong>{accuracy}</strong><span>Graded accuracy</span></div><div><strong>{value_count}</strong><span>Model value picks</span></div><div><strong>{value_record}</strong><span>Value Pick record</span></div><div><strong>{value_accuracy}</strong><span>Value Pick accuracy</span></div></div></section>""", unsafe_allow_html=True)
 with feed_details:
     schedule_time = original_schedule.attrs.get("fetched_at", "Uploaded CSV" if schedule_file is not None else "Unknown")
     stats_time = published_current.attrs.get("fetched_at", "Uploaded CSV" if current_file is not None else "Unknown")
