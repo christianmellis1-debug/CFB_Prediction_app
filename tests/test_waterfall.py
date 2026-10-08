@@ -467,10 +467,13 @@ class IntegrationTests(unittest.TestCase):
         ns = {}
         exec(compile(ast.Module(body=body, type_ignores=[]), 'app.py', 'exec'), ns)
         scored = {'flag': True, 'count': 1}
-        self.assertTrue(ns['should_flag_risky'](scored, False))
-        self.assertFalse(ns['should_flag_risky'](scored, True))
-        self.assertFalse(ns['should_flag_risky']({'flag': False, 'count': 4}, False))
-        self.assertFalse(ns['should_flag_risky'](None, False))
+        self.assertTrue(ns['should_flag_risky'](scored, False, .79))
+        self.assertFalse(ns['should_flag_risky'](scored, True, .79))
+        self.assertFalse(ns['should_flag_risky'](scored, False, .80))
+        self.assertFalse(ns['should_flag_risky'](scored, False, .90))
+        self.assertFalse(ns['should_flag_risky']({'flag': False, 'count': 4}, False, .70))
+        self.assertFalse(ns['should_flag_risky'](None, False, .70))
+        self.assertFalse(ns['should_flag_risky'](scored, False, None))
 
     def test_value_pick_performance_excludes_weeks_one_and_two(self):
         import ast
