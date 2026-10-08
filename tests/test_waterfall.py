@@ -459,6 +459,19 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(quote['home_spread_odds'], '-110')
         self.assertEqual(quote['home_spread_open'], '-8.5')
 
+    def test_tiered_games_are_never_risky(self):
+        import ast
+        from pathlib import Path
+        tree = ast.parse(Path('app.py').read_text())
+        body = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'should_flag_risky']
+        ns = {}
+        exec(compile(ast.Module(body=body, type_ignores=[]), 'app.py', 'exec'), ns)
+        scored = {'flag': True, 'count': 1}
+        self.assertTrue(ns['should_flag_risky'](scored, False))
+        self.assertFalse(ns['should_flag_risky'](scored, True))
+        self.assertFalse(ns['should_flag_risky']({'flag': False, 'count': 4}, False))
+        self.assertFalse(ns['should_flag_risky'](None, False))
+
     def test_value_pick_performance_excludes_weeks_one_and_two(self):
         import ast
         from pathlib import Path
