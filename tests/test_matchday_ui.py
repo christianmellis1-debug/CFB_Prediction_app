@@ -30,15 +30,16 @@ class MatchdayUITests(unittest.TestCase):
         return pd.DataFrame([
             {"Game ID": 1, "Home Team": "Bears", "Away Team": "Wolves",
              "Predicted Winner": "Bears", "Confidence": .95, "Status": "Final",
-             "Game of Week": False, "Game of Week Tier Count": 0, "Value Selected": False},
+             "Game of Week": False, "Game of Week Tier Count": 0, "Value Selected": False,
+             "Value Rank": 0},
             {"Game ID": 2, "Home Team": "Tigers", "Away Team": "Eagles",
              "Predicted Winner": "Tigers", "Confidence": .78, "Status": "Scheduled",
              "Game of Week": True, "Game of Week Tier Count": 2, "Value Selected": True,
-             "Value Tier": "Tier 1: Complete Game"},
+             "Value Tier": "Tier 1: Complete Game", "Value Rank": 1},
             {"Game ID": 3, "Home Team": "Panthers", "Away Team": "Hawks",
              "Predicted Winner": "Panthers", "Confidence": .84, "Status": "In progress",
              "Game of Week": True, "Game of Week Tier Count": 3, "Value Selected": True,
-             "Value Tier": "Tier 4: Parlay Bridge"},
+             "Value Tier": "Tier 4: Parlay Bridge", "Value Rank": 2},
         ])
 
     def schedule(self):
@@ -53,12 +54,36 @@ class MatchdayUITests(unittest.TestCase):
         self.assertTrue(official)
         self.assertEqual(selected["Game ID"], 3)
 
-    def test_no_official_game_of_week_means_no_spotlight(self):
+    def test_no_official_game_of_week_uses_top_value_pick(self):
         frame = self.picks().copy()
         frame["Game of Week"] = False
-        self.assertEqual(self.helpers["select_matchday_spotlight"](frame), (None, False))
-        # A completed slate still cannot promote a random high-confidence favorite.
+        selected, consensus = self.helpers["select_matchday_spotlight"](frame)
+        self.assertFalse(consensus)
+        self.assertEqual(selected["Game ID"], 2)
+        self.assertEqual(selected["Value Rank"], 1)
+        # Finished games still use the Value Shortlist ranking, not model chance.
         frame["Status"] = "Final"
+        selected, consensus = self.helpers["select_matchday_spotlight"](frame)
+        self.assertFalse(consensus)
+        self.assertEqual(selected["Game ID"], 2)
+
+    def test_fallback_follows_official_rank_not_probability_or_row_order(self):
+        frame = self.picks().copy()
+        frame["Game of Week"] = False
+        frame.loc[0, "Confidence"] = .999
+        frame = frame.iloc[[2, 0, 1]].copy()
+        selected, consensus = self.helpers["select_matchday_spotlight"](frame)
+        self.assertFalse(consensus)
+        self.assertEqual(selected["Value Rank"], 1)
+        self.assertEqual(selected["Game ID"], 2)
+
+    def test_no_official_or_value_pick_means_no_spotlight(self):
+        frame = self.picks().copy()
+        frame["Game of Week"] = False
+        frame["Value Selected"] = False
+        self.assertEqual(self.helpers["select_matchday_spotlight"](frame), (None, False))
+        frame["Value Selected"] = True
+        frame["Value Rank"] = 0
         self.assertEqual(self.helpers["select_matchday_spotlight"](frame), (None, False))
 
     def test_a_high_confidence_favorite_never_displaces_official_gotw(self):
@@ -68,9 +93,19 @@ class MatchdayUITests(unittest.TestCase):
         self.assertTrue(official)
         self.assertEqual(selected["Game ID"], 3)
 
-    def test_missing_official_flag_is_not_treated_as_a_qualifier(self):
+    def test_missing_official_flag_still_allows_ranked_value_fallback(self):
         frame = self.picks().drop(columns=["Game of Week"])
-        self.assertEqual(self.helpers["select_matchday_spotlight"](frame), (None, False))
+        selected, consensus = self.helpers["select_matchday_spotlight"](frame)
+        self.assertFalse(consensus)
+        self.assertEqual(selected["Value Rank"], 1)
+
+    def test_official_game_of_week_beats_better_value_rank(self):
+        frame = self.picks().copy()
+        frame.loc[2, "Value Rank"] = 1
+        frame.loc[1, "Value Rank"] = 2
+        selected, consensus = self.helpers["select_matchday_spotlight"](frame)
+        self.assertTrue(consensus)
+        self.assertEqual(selected["Game ID"], 3)
 
     def test_empty_filters_produce_no_spotlight_or_timeline(self):
         empty = self.picks().iloc[:0]
