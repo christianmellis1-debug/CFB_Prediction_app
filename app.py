@@ -35,6 +35,7 @@ from matchup_advantages import (build_advantages, advantage_html, assess, normal
 from shadow_tracking import show_shadow_tracking
 from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
+from matchday_live import live_board_rows, live_board_html
 from hashlib import sha256
 from performance_cache import cache_calculation, clear_calculations
 
@@ -2070,6 +2071,52 @@ st.markdown("""
  .kickoff-game-main strong {font-size:12px;}
  .kickoff-game-details {font-size:10px;}
 }
+
+/* Phase 4: lightweight, responsive live-first scoreboard. */
+.st-key-live_mode_toolbar {display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:4px 0;}
+.st-key-live_mode_toolbar p {font-size:12px;line-height:1.5;}
+.st-key-live_mode_toolbar button {min-height:42px;}
+.live-mode-metrics {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 15px;}
+.live-mode-metrics>div {
+  display:flex;align-items:baseline;justify-content:space-between;gap:9px;
+  border:1px solid #80978b40;border-radius:12px;padding:11px 14px;background:var(--secondary-background-color);
+}
+.live-mode-metrics strong {font-size:clamp(20px,3vw,29px);line-height:1.2;font-variant-numeric:tabular-nums;}
+.live-mode-metrics span {font-size:12px;opacity:.8;}
+.live-board {display:grid;gap:20px;margin:10px 0 18px;}
+.live-board-section-heading {display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 10px;}
+.live-board-section-heading h4 {font-size:16px;margin:0;}
+.live-board-section-heading span {font-size:12px;opacity:.75;}
+.live-board-group.live .live-board-section-heading h4 {color:#e8997f;}
+.live-board-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.live-board-game {
+  border:1px solid #80978b3b;border-radius:13px;background:var(--secondary-background-color);
+  padding:13px 15px;min-width:0;overflow-wrap:anywhere;
+}
+.live-board-group.live .live-board-game {border-left:4px solid #df8c72;}
+.live-board-group.upcoming .live-board-game {border-left:4px solid #69a5c1;}
+.live-board-group.final .live-board-game {border-left:4px solid #8394a5;}
+.live-board-game-meta {display:flex;justify-content:space-between;align-items:center;gap:9px;font-size:11px;opacity:.82;}
+.live-board-game-state {text-align:right;}
+.live-board-group.live .live-board-game-state {font-weight:850;color:#e8997f;opacity:1;}
+.live-board-matchup {font-size:clamp(14px,2vw,18px);font-weight:800;line-height:1.32;margin:12px 0 6px;}
+.live-board-matchup span {font-size:12px;font-weight:400;opacity:.7;}
+.live-board-score {font-weight:850;font-size:clamp(14px,2.2vw,20px);margin:9px 0;font-variant-numeric:tabular-nums;}
+.live-board-no-score {font-size:12px;margin:9px 0;opacity:.65;}
+.live-board-pick {font-size:12px;line-height:1.45;opacity:.9;margin-top:9px;}
+.live-board-pick span {white-space:normal;}
+.live-board-tags {display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.live-board-tags:empty {display:none;}
+.live-board-tier,.live-board-outcome {
+  font-size:10px;font-weight:700;padding:3px 7px;border:1px solid #80978b66;border-radius:999px;
+}
+@media(max-width:700px) {
+  .live-board-grid {grid-template-columns:1fr;gap:8px;}
+  .live-mode-metrics {gap:6px;}
+  .live-mode-metrics>div {padding:9px 8px;flex-direction:column;align-items:flex-start;gap:2px;}
+  .live-mode-metrics span {font-size:10px;}
+  .live-board-game {padding:11px 12px;}
+}
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
 <h1>Saturday Forecast<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
@@ -2557,7 +2604,32 @@ def reset_pick_filters():
 with cards_tab:
     tour_at("filters")
     st.subheader("Matchup center")
-    st.caption("Search your team or browse the slate. Open a card’s details for the full analysis.")
+    live_mode = st.toggle(
+        "Saturday Live Mode",
+        value=False,
+        key="saturday_live_mode",
+        help="Focus on live, upcoming, and final scores. Turn off to return to full prediction cards and advanced matchup details.",
+    )
+    if live_mode:
+        with st.container(key="live_mode_toolbar"):
+            st.caption("Game-day scoreboard · live games first · existing pregame predictions are never recalculated during play.")
+            if st.button(
+                "Refresh scores now",
+                icon=":material/refresh:",
+                key="refresh_live_scores_only",
+                disabled=not bool(date_range),
+                help="Refresh live score feeds without clearing predictions, odds, or historical model caches.",
+            ):
+                download_live_scores.clear()
+                download_live_event.clear()
+                st.rerun()
+        if live_snapshot.get("retrieved"):
+            st.caption("Score feed last checked: " + str(live_snapshot["retrieved"])
+                       + " · live scores normally refresh about every minute while the page is open.")
+        else:
+            st.caption("Live score feed is unavailable or has not been retrieved; statuses may be stale.")
+    else:
+        st.caption("Search your team or browse the slate. Open a card’s details for the full analysis.")
     search_col, confidence_col, sort_col = st.columns([2, 1, 1])
     with search_col:
         query = st.text_input("Find a team", placeholder="Search LSU, Texas, Ohio State…", key="pick_query")
@@ -2664,11 +2736,33 @@ with export_controls:
 
 with cards_tab:
     tour_at("cards")
-    with st.expander("Understanding line-movement flags", expanded=False):
-        st.caption("↔ Moneyline moved compares the same sportsbook’s opening and latest prices. Expand the flag for details. Session changes are tracked while this app session is active; no net change does not mean the line never moved. Fetch times are not the sportsbook’s change times. Shortened = higher implied chance and lower payout; lengthened = the reverse.")
+    if not live_mode:
+        with st.expander("Understanding line-movement flags", expanded=False):
+            st.caption("↔ Moneyline moved compares the same sportsbook’s opening and latest prices. Expand the flag for details. Session changes are tracked while this app session is active; no net change does not mean the line never moved. Fetch times are not the sportsbook’s change times. Shortened = higher implied chance and lower payout; lengthened = the reverse.")
     if filtered.empty:
         st.info("No matchups match these filters. Clear your search or choose another confidence level.")
-    if not pred.empty:
+    if live_mode and not filtered.empty:
+        live_rows = live_board_rows(filtered, games)
+        live_count = sum(item["section"] == "Live" for item in live_rows)
+        upcoming_count = sum(item["section"] == "Upcoming" for item in live_rows)
+        final_count = sum(item["section"] == "Final" for item in live_rows)
+        st.markdown(
+            '<div class="live-mode-metrics">'
+            f'<div><strong>{live_count}</strong><span>Live</span></div>'
+            f'<div><strong>{upcoming_count}</strong><span>Upcoming</span></div>'
+            f'<div><strong>{final_count}</strong><span>Final</span></div>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        if not live_count:
+            st.info("No games are currently reported live in this filtered slate. Upcoming and final matchups remain below.")
+        st.markdown(live_board_html(live_rows), unsafe_allow_html=True)
+        st.caption("Scores are reported by the feed, not predicted. Model chances shown are pregame estimates and do not update during play.")
+    # The full card render is computationally expensive (advanced matchups,
+    # red-zone checks, and logos). Skip it in Live Mode on Game cards. Still
+    # build original cards when the dedicated Risky picks tab is selected.
+    show_full_cards = not live_mode or st.session_state.get("main_app_tabs") == "Risky picks"
+    if not pred.empty and show_full_cards:
         cards = {}
         card_details = {}
         risky_indices = []
