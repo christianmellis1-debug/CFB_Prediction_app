@@ -1,0 +1,24 @@
+name: Reconstruct 2026 W3-W5 Value ROI
+
+on:
+  push:
+    paths:
+      - research/value_roi_2026_weeks3_5/run.py
+      - .github/workflows/value-roi-reconstruction.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Reconstruct picks and print auditable ROI
+        run: python research/value_roi_2026_weeks3_5/run.py
