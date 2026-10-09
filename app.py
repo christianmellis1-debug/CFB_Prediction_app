@@ -2486,30 +2486,30 @@ def sort_picks_by_game_time(picks, schedule):
 
 
 def select_matchday_spotlight(picks):
-    """Prefer established cross-tier Games of the Week; otherwise spotlight a model matchup.
+    """Choose only a verified official cross-tier Game of the Week.
 
-    The fallback is editorial presentation only, not a new tier, bet, or official pick.
+    The model's highest-confidence game is not automatically a Game of the Week.
+    Return no feature when the existing official rules produce no eligible game.
     """
-    if picks is None or picks.empty:
+    if picks is None or picks.empty or "Game of Week" not in picks:
         return None, False
-    gotw = picks.get("Game of Week", pd.Series(False, index=picks.index))
-    marked = picks.loc[gotw.fillna(False).astype(bool)].copy()
-    official = not marked.empty
-    pool = marked if official else picks.loc[~picks["Status"].eq("Final")].copy()
+    official_mask = picks["Game of Week"].fillna(False).eq(True)
+    pool = picks.loc[official_mask].copy()
     if pool.empty:
-        pool = picks.copy()
-    pool["_spotlight_conf"] = pd.to_numeric(pool["Confidence"], errors="coerce").fillna(-1.0)
-    if official:
-        pool["_spotlight_tiers"] = pd.to_numeric(
-            pool.get("Game of Week Tier Count", pd.Series(0, index=pool.index)),
-            errors="coerce",
-        ).fillna(0)
-        pool = pool.sort_values(["_spotlight_tiers", "_spotlight_conf"],
-                                ascending=[False, False], kind="stable")
-    else:
-        pool = pool.sort_values("_spotlight_conf", ascending=False, kind="stable")
-    return pool.iloc[0], official
-
+        return None, False
+    pool["_spotlight_tiers"] = pd.to_numeric(
+        pool.get("Game of Week Tier Count", pd.Series(0, index=pool.index)),
+        errors="coerce",
+    ).fillna(0)
+    pool["_spotlight_conf"] = pd.to_numeric(
+        pool.get("Confidence", pd.Series(index=pool.index, dtype=float)),
+        errors="coerce",
+    ).fillna(-1.0)
+    pool = pool.sort_values(
+        ["_spotlight_tiers", "_spotlight_conf"],
+        ascending=[False, False], kind="stable",
+    )
+    return pool.iloc[0], True
 
 def matchday_timeline_rows(picks, game_schedule, saturday_only=True):
     """Local Central Time kickoff rows based solely on the already-loaded filtered slate."""
@@ -2778,10 +2778,9 @@ with cards_tab:
         }))
         logo_sources = embedded_team_logos(logo_urls)
 
-        # Phase 3: one featured matchup from the currently displayed slate.
-        # The existing Game of the Week criteria remain authoritative; the
-        # fallback is a visual spotlight, not another betting recommendation.
-        featured, is_consensus = select_matchday_spotlight(filtered)
+        # Spotlight uses the official Game of the Week from the full slate,
+        # independent of the Game Cards search or status filters.
+        featured, is_consensus = select_matchday_spotlight(pred)
         if featured is not None:
             match = games[
                 (games["home_team"] == featured["Home Team"])
@@ -2805,24 +2804,35 @@ with cards_tab:
                             + escape(logo_sources.get(team_logo, team_logo), quote=True)
                             + '" alt="' + team_alt + ' logo" width="44" height="44" />'
                         )
-            spotlight_title = "Game of the Week" if is_consensus else "Matchup spotlight"
-            spotlight_label = (
-                "Cross-tier consensus · official Game of the Week"
-                if is_consensus else
-                "Highest available model win chance · editorial feature"
+            spotlight_title = "Game of the Week"
+            spotlight_label = "Official cross-tier consensus · independent of Game Cards filters"
+            consensus_team = str(featured.get("Game of Week Team", "")).strip()
+            agreeing_tiers = str(featured.get("Game of Week Tiers", "")).strip()
+            consensus_side = (
+                "home" if consensus_team == str(featured["Home Team"]) else
+                "away" if consensus_team == str(featured["Away Team"]) else ""
+            )
+            consensus_odds = (
+                format_moneyline(featured.get("DK Home ML")) if consensus_side == "home" else
+                format_moneyline(featured.get("DK Away ML")) if consensus_side == "away" else
+                "Unavailable"
             )
             featured_chance = pd.to_numeric(featured.get("Confidence"), errors="coerce")
             featured_chance_text = f"{float(featured_chance):.1%}" if pd.notna(featured_chance) else "—"
-            feature_odds = str(featured.get("Bet Line", "Unavailable"))
-            if not feature_odds or feature_odds.lower() == "nan":
-                feature_odds = "Unavailable"
-            description = featured.get("Pick Explanation", "")
-            description = description.strip() if isinstance(description, str) else ""
-            if not description:
-                description = "The full matchup breakdown is available in the game card below."
-            if len(description) > 290:
-                description = description[:287].rsplit(" ", 1)[0] + "…"
-            spotlight_class = " spotlight-consensus" if is_consensus else ""
+            model_winner = str(featured.get("Predicted Winner", ""))
+            model_context = (
+                "Separate core-model forecast: " + model_winner + " ("
+                + featured_chance_text + " estimated chance)."
+                if model_winner and pd.notna(featured_chance) else
+                "Core-model forecast unavailable."
+            )
+            description = (
+                "This matchup earned the official Game of the Week designation because "
+                + (agreeing_tiers or "multiple eligible tiers")
+                + " independently support " + consensus_team
+                + " and the DraftKings price meets the established limit."
+            )
+            spotlight_class = " spotlight-consensus"
             spotlight_html = (
                 '<section class="spotlight-card' + spotlight_class + '">'
                 '<div class="spotlight-eyebrow">' + escape(spotlight_title) + '</div>'
@@ -2832,15 +2842,18 @@ with cards_tab:
                 '<div class="spotlight-meta">' + escape(feature_kickoff)
                 + ' · ' + escape(str(featured["Status"])) + '</div>'
                 '<div class="spotlight-summary">'
-                '<span>Model pick<strong>' + escape(str(featured["Predicted Winner"])) + '</strong></span>'
-                '<span>Win chance<strong>' + featured_chance_text + '</strong></span>'
-                '<span>Pick moneyline<strong>' + escape(feature_odds) + '</strong></span>'
+                '<span>Consensus pick<strong>' + escape(consensus_team) + '</strong></span>'
+                '<span>DraftKings ML<strong>' + escape(consensus_odds) + '</strong></span>'
+                '<span>Agreeing tiers<strong>' + escape(agreeing_tiers) + '</strong></span>'
                 '</div><p class="spotlight-context">' + escape(spotlight_label)
                 + '. ' + escape(description) + '</p>'
-                '<p class="spotlight-context">Model probability is not a guarantee.</p>'
+                '<p class="spotlight-context">' + escape(model_context)
+                + ' Model probability is not a guarantee.</p>'
                 '</section>'
             )
             st.markdown(spotlight_html, unsafe_allow_html=True)
+        else:
+            st.caption("No official Game of the Week qualifies for this slate. The matchup spotlight is not shown.")
 
         # The timeline uses existing filtered predictions and schedule times.
         # Other weekday games remain accessible through All days.
