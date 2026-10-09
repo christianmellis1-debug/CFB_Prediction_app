@@ -1,0 +1,37 @@
+name: UI and game-day validation
+on:
+  push:
+    branches:
+      - validation/ui-mobile-performance-20261009
+    paths:
+      - 'validation/**'
+      - '.github/workflows/ui-validation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression-and-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install app and browser dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Run comprehensive existing regressions
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Run real Chromium UI smoke (phone and desktop)
+        run: python validation/test_live_ui.py
+      - name: Preserve screenshots, server log and validation report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saturday-forecast-ui-validation
+          path: validation/ui-results/
+          retention-days: 7
