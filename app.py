@@ -2683,6 +2683,95 @@ with cards_tab:
             for team_id in games[column] if (url := team_logo_url(team_id))
         }))
         logo_sources = embedded_team_logos(logo_urls)
+
+        # Phase 3: one featured matchup from the currently displayed slate.
+        # The existing Game of the Week criteria remain authoritative; the
+        # fallback is a visual spotlight, not another betting recommendation.
+        featured, is_consensus = select_matchday_spotlight(filtered)
+        if featured is not None:
+            match = games[
+                (games["home_team"] == featured["Home Team"])
+                & (games["away_team"] == featured["Away Team"])
+            ]
+            feature_kickoff = "Kickoff time TBD"
+            feature_logo_html = ""
+            if len(match) == 1:
+                match_row = match.iloc[0]
+                start = pd.to_datetime(match_row.get("start_date"), errors="coerce", utc=True)
+                if pd.notna(start):
+                    feature_kickoff = start.tz_convert("America/Chicago").strftime(
+                        "%a, %b %d · %I:%M %p CT"
+                    )
+                for team_side in ("away", "home"):
+                    team_logo = team_logo_url(match_row[team_side + "_id"])
+                    if team_logo:
+                        team_alt = escape(str(featured[team_side.title() + " Team"]), quote=True)
+                        feature_logo_html += (
+                            '<img class="spotlight-logo" src="'
+                            + escape(logo_sources.get(team_logo, team_logo), quote=True)
+                            + '" alt="' + team_alt + ' logo" width="44" height="44" />'
+                        )
+            spotlight_title = "Game of the Week" if is_consensus else "Matchup spotlight"
+            spotlight_label = (
+                "Cross-tier consensus · official Game of the Week"
+                if is_consensus else
+                "Highest available model win chance · editorial feature"
+            )
+            featured_chance = pd.to_numeric(featured.get("Confidence"), errors="coerce")
+            featured_chance_text = f"{float(featured_chance):.1%}" if pd.notna(featured_chance) else "—"
+            feature_odds = str(featured.get("Bet Line", "Unavailable"))
+            if not feature_odds or feature_odds.lower() == "nan":
+                feature_odds = "Unavailable"
+            description = featured.get("Pick Explanation", "")
+            description = description.strip() if isinstance(description, str) else ""
+            if not description:
+                description = "The full matchup breakdown is available in the game card below."
+            if len(description) > 290:
+                description = description[:287].rsplit(" ", 1)[0] + "…"
+            spotlight_class = " spotlight-consensus" if is_consensus else ""
+            spotlight_html = (
+                '<section class="spotlight-card' + spotlight_class + '">'
+                '<div class="spotlight-eyebrow">' + escape(spotlight_title) + '</div>'
+                '<div class="spotlight-teamline">' + feature_logo_html
+                + '<div class="spotlight-title">' + escape(str(featured["Away Team"]))
+                + ' at ' + escape(str(featured["Home Team"])) + '</div></div>'
+                '<div class="spotlight-meta">' + escape(feature_kickoff)
+                + ' · ' + escape(str(featured["Status"])) + '</div>'
+                '<div class="spotlight-summary">'
+                '<span>Model pick<strong>' + escape(str(featured["Predicted Winner"])) + '</strong></span>'
+                '<span>Win chance<strong>' + featured_chance_text + '</strong></span>'
+                '<span>Pick moneyline<strong>' + escape(feature_odds) + '</strong></span>'
+                '</div><p class="spotlight-context">' + escape(spotlight_label)
+                + '. ' + escape(description) + '</p>'
+                '<p class="spotlight-context">Model probability is not a guarantee.</p>'
+                '</section>'
+            )
+            st.markdown(spotlight_html, unsafe_allow_html=True)
+
+        # The timeline uses existing filtered predictions and schedule times.
+        # Other weekday games remain accessible through All days.
+        st.markdown("#### 🕒 Saturday kickoff timeline")
+        with st.container(key="matchday_timeline_controls"):
+            timeline_mode = st.segmented_control(
+                "Kickoff days", ["Saturday", "All days"], default="Saturday",
+                key="kickoff_day_view",
+            ) or "Saturday"
+        timeline = matchday_timeline_rows(filtered, games, saturday_only=timeline_mode == "Saturday")
+        if not timeline:
+            st.caption(
+                "No matching Saturday games with confirmed kickoff times. Choose All days to see other matchups and TBD games."
+                if timeline_mode == "Saturday" else "No games match the current filters."
+            )
+        else:
+            st.caption(
+                f"{len(timeline)} game(s) · Central Time · sorted by kickoff · "
+                "reflects your Game cards filters"
+            )
+            st.markdown(matchday_timeline_html(timeline[:6]), unsafe_allow_html=True)
+            if len(timeline) > 6:
+                with st.expander(f"Show {len(timeline) - 6} more games", expanded=False):
+                    st.markdown(matchday_timeline_html(timeline[6:]), unsafe_allow_html=True)
+        st.divider()
         rz_index = {}
         if pred["Confidence"].lt(.80).any():
             try:
