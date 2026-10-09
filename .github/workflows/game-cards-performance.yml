@@ -25,7 +25,13 @@ jobs:
           python -m compileall -q app.py model_v1_5.py matchup_advantages.py validation/performance_probe.py
           python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Test full Game Cards completion and capture timings
+        env:
+          CFB_UI_PROFILE: "1"
         run: python validation/performance_probe.py
+      - name: Print measured application stages
+        if: always()
+        run: |
+          grep 'CFB_UI_PROFILE' validation/performance-results/server.log | tail -n 70 || true
       - name: Save diagnostics
         if: always()
         uses: actions/upload-artifact@v4
