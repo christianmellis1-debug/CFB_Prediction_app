@@ -1,0 +1,35 @@
+name: Game Cards performance validation
+on:
+  push:
+    branches: [perf/lazy-red-zone-game-cards-20261009]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression-and-performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies and headless browser
+        run: |
+          pip install -r requirements.txt
+          pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Compile and run every regression
+        run: |
+          python -m compileall -q app.py model_v1_5.py matchup_advantages.py validation/performance_probe.py
+          python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Test full Game Cards completion and capture timings
+        run: python validation/performance_probe.py
+      - name: Save diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-cards-performance
+          path: validation/performance-results/
+          retention-days: 7
