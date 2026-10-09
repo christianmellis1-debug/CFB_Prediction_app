@@ -1892,6 +1892,66 @@ st.markdown("""
 .st-key-main_app_tabs [role="tab"][data-key="5"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iNiIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjUiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjE5IiByPSIyIi8+PHBhdGggZD0iTTYgN3Y0bDYgNiA2LTZWNyIvPjwvc3ZnPg=="); }
 .st-key-main_app_tabs [role="tab"][data-key="6"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTYgM2gxMnYxOGwtMy0yLTMgMi0zLTItMyAyWk05IDdoNm0tNiA0aDZtLTYgNGgzIi8+PC9zdmc+"); }
 .st-key-main_app_tabs [role="tab"][data-key="7"] { --nav-icon:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOSIvPjxwYXRoIGQ9Ik0xMiAxMXY2bTAtMTB2MSIvPjwvc3ZnPg=="); }
+
+/* Phase 1: sticky game-state shortcuts and responsive matchup cards. */
+.st-key-matchup_status_bar {
+  position:sticky;top:3.1rem;z-index:12;
+  padding:8px 12px;margin:6px 0 12px;
+  background:var(--background-color);
+  border:1px solid #80978b48;border-radius:14px;
+  box-shadow:0 8px 20px #00000016;
+}
+.st-key-matchup_status_bar [data-testid="stSegmentedControl"] {width:100%;}
+.st-key-matchup_status_bar [role="radiogroup"] {display:flex;flex-wrap:nowrap;width:100%;}
+.st-key-matchup_status_bar [role="radiogroup"]>* {min-width:0;flex:1;text-align:center;}
+.st-key-matchup_status_bar button {min-height:42px;font-size:13px;}
+[class*="st-key-matchup_card_"],[class*="st-key-gotw_card_"],[class*="st-key-risky_card_"] {
+  overflow-wrap:anywhere;min-width:0;
+}
+.card-top .kickoff {margin:0;font-size:12px;line-height:1.4;font-weight:700;opacity:.88;}
+.matchup-meta {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;font-size:11px;opacity:.73;margin-bottom:12px;
+}
+.team-line {
+  display:flex;align-items:center;gap:12px;margin:0;
+  padding:10px 9px;border-radius:11px;border-bottom:1px solid #80978b25;
+}
+.team-line.predicted-team {background:#58ae8714;box-shadow:inset 3px 0 #58ae87;}
+.team-line strong {font-size:17px;font-variant-numeric:tabular-nums;}
+.team-name {min-width:0;flex:1;}
+.team-identity {display:flex;align-items:center;gap:11px;min-width:0;font-size:16px;line-height:1.35;}
+.team-identity>span {min-width:0;overflow-wrap:anywhere;}
+.team-logo {
+  display:block;width:44px!important;height:44px!important;min-width:44px;
+  max-width:44px;flex:0 0 44px;object-fit:contain;
+  padding:4px;border-radius:10px;background:#f8fafc;box-sizing:border-box;
+}
+.pick-indicator {
+  display:inline-block;vertical-align:middle;margin-left:7px;padding:3px 6px;
+  font-size:10px;font-weight:750;color:#14734d;background:#dff7e9;
+  border-radius:999px;white-space:nowrap;
+}
+.pick-result {margin-top:13px;padding:13px 14px;gap:4px 12px;}
+.pick-result .pick-winner {margin:0 0 4px;line-height:1.28;}
+.pick-result .conf-row {align-self:center;}
+.odds-box {margin-top:10px;}
+.odds-prices {flex-wrap:wrap;gap:5px 12px;}
+.odds-prices span {min-width:0;overflow-wrap:anywhere;}
+@media(max-width:700px) {
+  .st-key-matchup_status_bar {top:3rem;margin:4px -2px 10px;padding:6px 7px;border-radius:11px;}
+  .st-key-matchup_status_bar button {min-height:44px;font-size:12px;padding:8px 5px;}
+  [class*="st-key-matchup_card_"],[class*="st-key-gotw_card_"],[class*="st-key-risky_card_"] {
+    padding:12px!important;border-radius:14px!important;
+  }
+  .team-line {padding:9px 6px;gap:9px;}
+  .team-identity {font-size:15px;gap:9px;}
+  .team-logo {width:40px!important;height:40px!important;min-width:40px;max-width:40px;flex-basis:40px;}
+  .team-line strong {font-size:15px;}
+  .pick-result {padding:12px;}
+  .pick-result .conf-row strong {font-size:20px;}
+  .odds-prices {font-size:12px;}
+}
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
 <h1>Saturday Forecast<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
@@ -2253,7 +2313,7 @@ def reset_pick_filters():
     defaults = {"pick_query": "", "pick_level": "All confidence levels",
                 "pick_order": "Highest confidence", "pick_status": "All games",
                 "pick_odds": "All odds", "pick_quality": "All data",
-                "pick_favorites_only": False}
+                "pick_outcome": "All results", "pick_favorites_only": False}
     for key, value in defaults.items():
         st.session_state[key] = value
 
@@ -2269,6 +2329,18 @@ with cards_tab:
         level = st.selectbox("Confidence", ["All confidence levels", "High · 80%+", "Moderate · 70–80%", "Lean · 60–70%", "Toss-up · under 60%"], key="pick_level")
     with sort_col:
         order = st.selectbox("Sort by", ["Highest confidence", "Closest matchups", "Game time", "Home team A–Z"], key="pick_order")
+    # Migrate old status choices without losing previously selected results.
+    legacy_status = st.session_state.get("pick_status")
+    if legacy_status in ("Correct picks", "Incorrect picks", "Awaiting final"):
+        st.session_state["pick_outcome"] = legacy_status
+        st.session_state["pick_status"] = "All games"
+    elif legacy_status == "In progress":
+        st.session_state["pick_status"] = "Live"
+    with st.container(key="matchup_status_bar"):
+        status_filter = st.segmented_control(
+            "Game status", ["All games", "Upcoming", "Live", "Final"],
+            default="All games", key="pick_status", label_visibility="collapsed",
+        ) or "All games"
     with st.expander("Favorite teams & saved filters", expanded=False):
         team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
         favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
@@ -2291,22 +2363,27 @@ with cards_tab:
         filtered = sort_picks_by_game_time(filtered, games)
     elif order == "Home team A–Z":
         filtered = filtered.sort_values("Home Team")
-    status_filter = st.radio("Game results", ["All games", "In progress", "Final", "Awaiting final", "Correct picks", "Incorrect picks"], horizontal=True, key="pick_status")
-    if status_filter == "In progress":
+    if status_filter == "Upcoming":
+        filtered = filtered[~filtered["Status"].isin(["In progress", "Final"])]
+    elif status_filter == "Live":
         filtered = filtered[filtered["Status"].eq("In progress")]
     elif status_filter == "Final":
         filtered = filtered[filtered["Status"].eq("Final")]
-    elif status_filter == "Awaiting final":
-        filtered = filtered[~filtered["Status"].eq("Final")]
-    elif status_filter in ["Correct picks", "Incorrect picks"]:
-        filtered = filtered[filtered["Pick Result"].eq(status_filter.split()[0])]
-    
-    with st.expander("More filters · odds & team data", expanded=False):
+
+    with st.expander("More filters · results, odds & team data", expanded=False):
+        outcome_filter = st.selectbox(
+            "Pick results", ["All results", "Awaiting final", "Correct picks", "Incorrect picks"],
+            key="pick_outcome",
+        )
         odds_col, data_col = st.columns(2)
         with odds_col:
             odds_filter = st.selectbox("Moneylines", ["All odds", "Pick has moneyline", "Pick missing moneyline"], key="pick_odds")
         with data_col:
             quality_filter = st.selectbox("Team data", ["All data", "Both teams have published stats", "Includes score estimates", "Includes prior data only"], key="pick_quality")
+    if outcome_filter == "Awaiting final":
+        filtered = filtered[~filtered["Status"].eq("Final")]
+    elif outcome_filter in ("Correct picks", "Incorrect picks"):
+        filtered = filtered[filtered["Pick Result"].eq(outcome_filter.split()[0])]
     if st.session_state.get("pick_favorites_only"):
         filtered = filtered[filtered["Home Team"].isin(favorites) | filtered["Away Team"].isin(favorites)]
         if not favorites:
@@ -2500,15 +2577,18 @@ with cards_tab:
                 + 'Confidence is an estimate, not a guaranteed result.</p>'
                 + risk + missing_data_note + '</div>'
             )
+            away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
+            home_team_class = "team-line predicted-team" if r["Predicted Side"] == "Home" else "team-line"
+            away_pick_tag = '<span class="pick-indicator">✓ Pick</span>' if r["Predicted Side"] == "Away" else ""
+            home_pick_tag = '<span class="pick-indicator">✓ Pick</span>' if r["Predicted Side"] == "Home" else ""
             cards[card_idx] = f"""<article class="pick-card">{gotw_note}
-<div class="card-top"><span>{venue}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
-<div class="kickoff">{escape(kickoff)}</div>
-{weather_html}
-<div class="team-line"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}{escape(str(r['Away Team']))}</span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
-<div class="team-line"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}{escape(str(r['Home Team']))}</span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
+<div class="card-top"><span class="kickoff">{escape(kickoff)}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
+<div class="matchup-meta"><span>{escape(venue)}</span><span>{escape(str(r['Status']))}</span></div>
+<div class="{away_team_class}"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}<span>{escape(str(r['Away Team']))}{away_pick_tag}</span></span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
+<div class="{home_team_class}"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}<span>{escape(str(r['Home Team']))}{home_pick_tag}</span></span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{waterfall_note}{outcome}</article>"""
+<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
                 if card_index % 2 == 0:

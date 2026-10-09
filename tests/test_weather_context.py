@@ -57,9 +57,11 @@ class WeatherCardTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         tree = ast.parse(Path("app.py").read_text())
-        func = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "weather_card_html")
+        # The card uses the app's weather-icon helper; load both functions.
+        funcs = [n for n in tree.body if isinstance(n, ast.FunctionDef)
+                 and n.name in ("weather_card_html", "weather_condition_icon")]
         ns = {"escape": escape, "math": math}
-        exec(compile(ast.Module(body=[func], type_ignores=[]), "app.py", "exec"), ns)
+        exec(compile(ast.Module(body=funcs, type_ignores=[]), "app.py", "exec"), ns)
         cls.render = staticmethod(ns["weather_card_html"])
 
     def test_inclement_card_is_explicit(self):
