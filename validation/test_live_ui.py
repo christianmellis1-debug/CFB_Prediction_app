@@ -107,6 +107,12 @@ def run():
                 RESULTS["measurements"]["failed_page_text"]=page.locator("body").inner_text(timeout=10000)[-2400:]
                 return
             try:
+                page.get_by_text("Saturday Live Mode", exact=True).first.click(timeout=20000)
+                page.get_by_text("Refresh scores now").wait_for(timeout=40000)
+                check("Live Mode opens from visible toggle",True)
+            except Exception as exc:
+                check("Live Mode opens from visible toggle",False,str(exc)[:250])
+            try:
                 page.locator(".prediction-disclaimer").wait_for(timeout=55000)
                 footer_ready=True
             except Exception:
@@ -150,9 +156,7 @@ def run():
             page.get_by_role("tab",name="Game cards").click(timeout=20000)
             check("Live Mode toggle is present",page.get_by_text("Saturday Live Mode").count()>0)
             # Verify that Live Mode can be toggled, score-only refresh exists, no errors.
-            toggle=page.locator('[class*="st-key-saturday_live_mode"] input[type="checkbox"]').first
             try:
-                toggle.check(timeout=30000)
                 page.get_by_text("Refresh scores now").wait_for(timeout=30000)
                 check("Live Mode toolbar opens",True)
                 check("No exceptions in Live Mode",
