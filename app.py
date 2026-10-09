@@ -2060,6 +2060,9 @@ st.markdown("""
 .timeline-status {font-size:10px;font-weight:800;padding:3px 7px;border:1px solid #80978b55;border-radius:999px;white-space:nowrap;}
 .timeline-status.live {color:#f09a79;border-color:#df9976;}
 .timeline-status.final {color:#8b9cae;}
+.timeline-status.correct {color:#51bc8b;border-color:#51bc8b88;background:#51bc8b12;}
+.timeline-status.incorrect {color:#ef8d87;border-color:#ef8d8788;background:#ef8d8712;}
+.timeline-final-score {font-variant-numeric:tabular-nums;}
 .timeline-tier {font-size:10px;opacity:.9;border:1px solid #80978b66;border-radius:999px;padding:3px 7px;}
 @media(max-width:650px) {
  .spotlight-card {padding:14px 13px;margin-bottom:13px;}
@@ -2562,6 +2565,10 @@ def matchday_timeline_rows(picks, game_schedule, saturday_only=True):
             "winner": str(pick.get("Predicted Winner", "")),
             "chance": float(confidence) if pd.notna(confidence) else None,
             "status": str(pick.get("Status", "Scheduled")),
+            # Reuse the model-winner grading from attach_results, NOT the
+            # market-specific Value Result (which could be a spread bet).
+            "result": str(pick.get("Pick Result", "Pending")),
+            "final_score": str(pick.get("Final Score", "")),
             "tier": str(pick.get("Value Tier", "")) if bool(pick.get("Value Selected", False)) else "",
         })
     timeline.sort(key=lambda item: (
@@ -2588,8 +2595,18 @@ def matchday_timeline_html(entries):
                 + escape(current_window) + '</h4><div class="kickoff-window-games">'
             )
         status = item["status"]
-        status_class = "live" if status == "In progress" else "final" if status == "Final" else "pending"
-        status_label = "LIVE" if status == "In progress" else status
+        result = item.get("result")
+        if status == "Final" and result in ("Correct", "Incorrect"):
+            status_class = "correct" if result == "Correct" else "incorrect"
+            status_label = "✓ Correct" if result == "Correct" else "✕ Incorrect"
+        else:
+            status_class = "live" if status == "In progress" else "final" if status == "Final" else "pending"
+            status_label = "LIVE" if status == "In progress" else status
+        score = item.get("final_score", "")
+        final_score = (
+            '<span class="timeline-final-score">Final: ' + escape(score) + '</span>'
+            if status == "Final" and score not in ("", "—", "nan", "None") else ""
+        )
         chance = f'{item["chance"]:.1%}' if item["chance"] is not None else "—"
         tier_badge = (
             '<span class="timeline-tier">' + escape(item["tier"]) + '</span>'
@@ -2604,7 +2621,7 @@ def matchday_timeline_html(entries):
             '<div class="kickoff-game-details"><span>Pick: <strong>'
             + escape(item["winner"]) + '</strong></span>'
             '<span>Model chance: <strong>' + chance + '</strong></span>'
-            + tier_badge + '</div></div>'
+            + final_score + tier_badge + '</div></div>'
         )
     html.append('</div></section></div>')
     return "".join(html)
