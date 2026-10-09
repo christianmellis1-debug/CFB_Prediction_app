@@ -30,14 +30,17 @@ class MatchdayUITests(unittest.TestCase):
         return pd.DataFrame([
             {"Game ID": 1, "Home Team": "Bears", "Away Team": "Wolves",
              "Predicted Winner": "Bears", "Confidence": .95, "Status": "Final",
+             "Pick Result": "Correct", "Final Score": "Wolves 14 – Bears 21",
              "Game of Week": False, "Game of Week Tier Count": 0, "Value Selected": False,
              "Value Rank": 0},
             {"Game ID": 2, "Home Team": "Tigers", "Away Team": "Eagles",
              "Predicted Winner": "Tigers", "Confidence": .78, "Status": "Scheduled",
+             "Pick Result": "Pending", "Final Score": "—",
              "Game of Week": True, "Game of Week Tier Count": 2, "Value Selected": True,
              "Value Tier": "Tier 1: Complete Game", "Value Rank": 1},
             {"Game ID": 3, "Home Team": "Panthers", "Away Team": "Hawks",
              "Predicted Winner": "Panthers", "Confidence": .84, "Status": "In progress",
+             "Pick Result": "Pending", "Final Score": "—",
              "Game of Week": True, "Game of Week Tier Count": 3, "Value Selected": True,
              "Value Tier": "Tier 4: Parlay Bridge", "Value Rank": 2},
         ])
@@ -127,6 +130,57 @@ class MatchdayUITests(unittest.TestCase):
         rows = self.helpers["matchday_timeline_rows"](frame, self.schedule(), False)
         self.assertEqual([row["winner"] for row in rows], ["Bears", "Tigers", "Panthers", "Lions"])
         self.assertEqual(rows[-1]["window"], "Kickoff time TBD")
+
+    def test_completed_winner_displays_correct_badge_and_final_score(self):
+        rows = self.helpers["matchday_timeline_rows"](self.picks(), self.schedule(), False)
+        self.assertEqual(rows[0]["result"], "Correct")
+        self.assertEqual(rows[0]["final_score"], "Wolves 14 – Bears 21")
+        html = self.helpers["matchday_timeline_html"](rows)
+        self.assertIn('timeline-status correct', html)
+        self.assertIn('✓ Correct', html)
+        self.assertIn('Final: Wolves 14 – Bears 21', html)
+        # Completed winner badge replaces the less informative Final label.
+        self.assertNotIn('timeline-status final', html)
+
+    def test_incorrect_winner_displays_incorrect_badge(self):
+        frame = self.picks().copy()
+        frame.loc[0, "Pick Result"] = "Incorrect"
+        rows = self.helpers["matchday_timeline_rows"](frame, self.schedule(), False)
+        html = self.helpers["matchday_timeline_html"](rows)
+        self.assertIn('timeline-status incorrect', html)
+        self.assertIn('✕ Incorrect', html)
+
+    def test_never_grade_live_or_score_pending_matches(self):
+        frame = self.picks().copy()
+        frame.loc[0, "Status"] = "Final · score pending"
+        frame.loc[0, "Pick Result"] = "Correct"
+        frame.loc[1, "Status"] = "In progress"
+        frame.loc[1, "Pick Result"] = "Incorrect"
+        frame.loc[1, "Final Score"] = "—"
+        rows = self.helpers["matchday_timeline_rows"](frame, self.schedule(), False)
+        html = self.helpers["matchday_timeline_html"](rows)
+        self.assertNotIn('timeline-status correct', html)
+        self.assertNotIn('timeline-status incorrect', html)
+        self.assertNotIn('✓ Correct', html)
+        self.assertNotIn('✕ Incorrect', html)
+        self.assertIn('Final · score pending', html)
+        self.assertIn('LIVE', html)
+
+    def test_final_without_grade_keeps_final_status(self):
+        frame = self.picks().drop(columns=["Pick Result", "Final Score"])
+        rows = self.helpers["matchday_timeline_rows"](frame, self.schedule(), False)
+        html = self.helpers["matchday_timeline_html"](rows)
+        self.assertIn('timeline-status final', html)
+        self.assertNotIn('✓ Correct', html)
+        self.assertNotIn('✕ Incorrect', html)
+
+    def test_final_score_escapes_untrusted_text(self):
+        frame = self.picks().copy()
+        frame.loc[0, "Final Score"] = '<img src=x onerror=alert(1)>'
+        rows = self.helpers["matchday_timeline_rows"](frame, self.schedule(), False)
+        html = self.helpers["matchday_timeline_html"](rows)
+        self.assertNotIn('<img', html)
+        self.assertIn('&lt;img src=x onerror=alert(1)&gt;', html)
 
     def test_html_escapes_user_display_data_and_shows_labels(self):
         rows = self.helpers["matchday_timeline_rows"](self.picks(), self.schedule())
