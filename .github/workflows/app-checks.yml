@@ -1,0 +1,24 @@
+name: App checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install app dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile Python source
+        run: |
+          python -m compileall -q app.py model_v1_5.py matchup_advantages.py
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
