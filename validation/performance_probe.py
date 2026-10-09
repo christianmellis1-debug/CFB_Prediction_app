@@ -34,7 +34,7 @@ def browser_run():
         page.locator(".prediction-disclaimer").wait_for(timeout=120000)
         REPORT["timing_seconds"]["full_game_cards_page"]=round(time.perf_counter()-start,2)
         REPORT["checks"]["single_footer"]=page.locator(".prediction-disclaimer").count()==1
-        REPORT["checks"]["red_zone_load_buttons_exist"]=page.get_by_role("button",name="Load red-zone touchdown comparison").count()>0
+        REPORT["checks"]["red_zone_load_buttons_exist"]=page.locator('button:has-text("Load red-zone touchdown comparison")').count()>0
         REPORT["checks"]["normal_mode_rendered"]=page.get_by_text("Saturday Live Mode").count()>0
         REPORT["checks"]["no_browser_exceptions"]=page.locator('[data-testid="stException"]').count()==0
         page.screenshot(path=str(OUT/"normal-game-cards-mobile.png"),timeout=30000)
