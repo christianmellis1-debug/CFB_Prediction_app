@@ -90,7 +90,7 @@ st.markdown("""
 TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
-    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores. "),
+    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores."),
     ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners below 80% model confidence with two or fewer of the five matchup advantages for the selected week. Official Tier 1–5 games and High/Very High confidence picks are excluded so the labels do not contradict each other. Missing data is shown separately."),
     ("export", None, "Export your picks", "Use Export picks above the navigation to download all picks for this week or only the picks matching your Game cards filters. Open the CSV in Excel to compare matchups."),
     ("results", "Model results", "Check model performance", "Compare model wins, losses, and accuracy by confidence, plus Value Pick records overall and by tier. Value Pick tracking starts in Week 3; Weeks 1 and 2 are excluded from the tier record."),
@@ -3069,8 +3069,7 @@ with cards_tab:
                 explanation_html + warning + advantage_note
                 + str(r.get("Line Movement HTML", "")) + matchup_html
                 + f'<div class="card-details"><strong>Prediction details</strong>'
-                + f'<p>Model {escape(str(r["Model Version"]))} · {escape(venue)}. '
-                + '</p>'
+                + f'<p>Model {escape(str(r["Model Version"]))} · {escape(venue)}.</p>'
                 + risk + missing_data_note + '</div>'
             )
             away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
