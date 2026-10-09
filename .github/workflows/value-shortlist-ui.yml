@@ -1,0 +1,27 @@
+name: Value Shortlist UI smoke tests
+
+on:
+  push:
+    paths:
+      - app.py
+      - value_shortlist_ui.py
+      - tests/test_value_shortlist_ui.py
+      - .github/workflows/value-shortlist-ui.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile app and presentation code
+        run: python -m py_compile app.py value_shortlist_ui.py
+      - name: Check card content and HTML safety
+        run: python -m unittest discover -s tests -p 'test_value_shortlist_ui.py' -v
