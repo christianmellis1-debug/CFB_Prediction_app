@@ -34,6 +34,18 @@ from matchup_advantages import (build_advantages, advantage_html, assess, normal
 from shadow_tracking import show_shadow_tracking
 from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
+from hashlib import sha256
+from performance_cache import cache_calculation, clear_calculations
+
+# Include dependency source in cache keys so rule edits cannot reuse old results.
+_CALCULATION_REVISION = sha256(b"".join(
+    (Path(__file__).parent / name).read_bytes()
+    for name in ("app.py", "model_v1_5.py", "matchup_advantages.py", "performance_cache.py")
+)).hexdigest()
+_cached_calculation = cache_calculation(_CALCULATION_REVISION)
+add_waterfall_value = _cached_calculation(add_waterfall_value)
+build_advantages = _cached_calculation(build_advantages)
+build_waterfall_profiles = _cached_calculation(build_waterfall_profiles)
 
 st.set_page_config(page_title="Saturday Forecast", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
@@ -301,6 +313,7 @@ def read_summary(upload, year):
     return frame
 
 
+@_cached_calculation
 def augment_missing_summaries(current, prior, schedule, target_week):
     """Create transparent provisional rows when the weekly feed omits a team.
 
@@ -347,6 +360,7 @@ def augment_missing_summaries(current, prior, schedule, target_week):
         derived[tid] = {"games": len(team_games), "through_week": int(base["through_week"])}
     return result, derived
 
+@_cached_calculation
 def predict_all_games(current, prior, schedule, week):
     # Preserve prior-week results for venue history; include every target-week game.
     model_schedule = schedule.copy()
@@ -1456,6 +1470,7 @@ def christians_parlay(predictions, game_schedule, now_utc, stake=10.0):
     }
 
 
+@_cached_calculation
 def rank_parlays(pool, legs, stake, goal, limit=5):
     """Exact top combinations within a bounded pool; one sportsbook, distinct teams."""
     def candidates():
@@ -1792,6 +1807,7 @@ with st.sidebar:
         download_live_scores.clear()
         download_live_event.clear()
         download_schedule.clear()
+        clear_calculations()
         download_summary.clear()
         download_advantage_boxes.clear()
         download_market_odds.clear()
@@ -1999,6 +2015,7 @@ with feed_details:
     st.caption(f"Last fetched · Scores: {schedule_time} · Odds: {odds_snapshot['retrieved'] or 'Unavailable'} · Team stats: {stats_time}")
     st.caption("Fetch times show when the app retrieved the feeds, not when the provider updated them. Live scores refresh about every minute while open; schedule and odds every 5 minutes; team stats hourly.")
     if st.button("Refresh all feeds now"):
+        clear_calculations()
         download_summary.clear()
         download_advantage_boxes.clear()
         download_live_scores.clear()
@@ -2881,6 +2898,7 @@ with about_tab:
 st.caption(f"Saturday Forecast · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
+
 
 
 
