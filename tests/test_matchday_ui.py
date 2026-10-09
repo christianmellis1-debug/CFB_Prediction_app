@@ -53,17 +53,24 @@ class MatchdayUITests(unittest.TestCase):
         self.assertTrue(official)
         self.assertEqual(selected["Game ID"], 3)
 
-    def test_fallback_is_editorial_and_prefers_unfinished(self):
+    def test_no_official_game_of_week_means_no_spotlight(self):
         frame = self.picks().copy()
         frame["Game of Week"] = False
-        selected, official = self.helpers["select_matchday_spotlight"](frame)
-        self.assertFalse(official)
-        self.assertEqual(selected["Game ID"], 3)
-        # A complete slate still produces a view, not an invented game.
+        self.assertEqual(self.helpers["select_matchday_spotlight"](frame), (None, False))
+        # A completed slate still cannot promote a random high-confidence favorite.
         frame["Status"] = "Final"
+        self.assertEqual(self.helpers["select_matchday_spotlight"](frame), (None, False))
+
+    def test_a_high_confidence_favorite_never_displaces_official_gotw(self):
+        frame = self.picks().copy()
+        frame.loc[0, "Confidence"] = .989
         selected, official = self.helpers["select_matchday_spotlight"](frame)
-        self.assertFalse(official)
-        self.assertEqual(selected["Game ID"], 1)
+        self.assertTrue(official)
+        self.assertEqual(selected["Game ID"], 3)
+
+    def test_missing_official_flag_is_not_treated_as_a_qualifier(self):
+        frame = self.picks().drop(columns=["Game of Week"])
+        self.assertEqual(self.helpers["select_matchday_spotlight"](frame), (None, False))
 
     def test_empty_filters_produce_no_spotlight_or_timeline(self):
         empty = self.picks().iloc[:0]
