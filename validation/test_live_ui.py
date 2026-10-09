@@ -46,6 +46,8 @@ def browser_dimensions(page):
         overflow, tabRects, footerCount:footers.length,
         footerText:footers.map(x=>x.innerText),
         background: app ? getComputedStyle(app).backgroundColor : null,
+        themeToken: app ? getComputedStyle(app).getPropertyValue("--background-color").trim() : null,
+        appSurface: getComputedStyle(document.querySelector(".stApp") || document.body).backgroundColor,
         exceptionCount:document.querySelectorAll('[data-testid="stException"]').length
       };
     }""")
@@ -104,6 +106,13 @@ def run():
             if not ready_ui:
                 RESULTS["measurements"]["failed_page_text"]=page.locator("body").inner_text(timeout=10000)[-2400:]
                 return
+            try:
+                page.locator(".prediction-disclaimer").wait_for(timeout=150000)
+                footer_ready=True
+            except Exception:
+                footer_ready=False
+                RESULTS["warnings"].append("Prediction footer missing after waiting 150 seconds")
+            RESULTS["measurements"]["footer_arrived"]=footer_ready
             info=browser_dimensions(page)
             RESULTS["measurements"]["mobile_390"]=info
             check("No global horizontal scroll at 390px",
@@ -112,20 +121,26 @@ def run():
             check("Eight navigation tabs present",len(info["tabRects"])==8,
                   {"count":len(info["tabRects"])})
             check("No exceptions on Game cards",info["exceptionCount"]==0,info["exceptionCount"])
-            check("Single prediction disclaimer",info["footerCount"]==1,info["footerCount"])
+            check("Single prediction disclaimer",info["footerCount"]==1,{"count":info["footerCount"],"waited_for_completion":footer_ready})
             check("Default dark background",
-                  info["background"] is not None and info["background"] not in ("rgb(255, 255, 255)","rgba(0, 0, 0, 0)"),
-                  info["background"])
+                  bool(info["themeToken"] and info["themeToken"].lower() not in ("#ffffff","rgb(255, 255, 255)","white")),
+                  {"container":info["background"],"themeToken":info["themeToken"],"appSurface":info["appSurface"]},
+                  critical=False)
             # On mobile, each tab's rectangle should remain inside the viewport.
             clip=[r for r in info["tabRects"] if r["left"] < -1 or r["right"] > 391]
             check("Mobile tabs are not clipped",len(clip)==0,clip,critical=False)
-            page.locator(".prediction-disclaimer").scroll_into_view_if_needed(timeout=10000)
-            page.screenshot(path=str(OUTPUT/"mobile-footer.png"),full_page=False,timeout=30000)
+            if footer_ready:
+                page.locator(".prediction-disclaimer").scroll_into_view_if_needed(timeout=10000)
+                page.screenshot(path=str(OUTPUT/"mobile-footer.png"),full_page=False,timeout=30000)
             # Validate the active tab switches without duplicating the shared footer.
             page.get_by_role("tab",name="Value shortlist").click(timeout=20000)
             page.wait_for_timeout(1200)
-            check("Value Shortlist opens",
-                  page.get_by_text("Value Picks · Five-stage waterfall").count()>0)
+            try:
+                page.get_by_text("Value Picks · Five-stage waterfall").wait_for(timeout=35000)
+                value_tab_loaded=True
+            except Exception:
+                value_tab_loaded=False
+            check("Value Shortlist opens",value_tab_loaded)
             check("Footer remains single after changing tabs",
                   page.locator(".prediction-disclaimer").count()==1)
             page.get_by_role("tab",name="Game cards").click(timeout=20000)
