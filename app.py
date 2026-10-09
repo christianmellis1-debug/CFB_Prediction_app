@@ -2826,12 +2826,12 @@ with cards_tab:
                 if model_winner and pd.notna(featured_chance) else
                 "Core-model forecast unavailable."
             )
-            description = featured.get("Pick Explanation", "")
-            description = description.strip() if isinstance(description, str) else ""
-            if not description:
-                description = "The full matchup breakdown is available in the game card below."
-            if len(description) > 290:
-                description = description[:287].rsplit(" ", 1)[0] + "…"
+            description = (
+                "This matchup earned the official Game of the Week designation because "
+                + (agreeing_tiers or "multiple eligible tiers")
+                + " independently support " + consensus_team
+                + " and the DraftKings price meets the established limit."
+            )
             spotlight_class = " spotlight-consensus"
             spotlight_html = (
                 '<section class="spotlight-card' + spotlight_class + '">'
