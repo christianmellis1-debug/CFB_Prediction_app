@@ -1952,6 +1952,62 @@ st.markdown("""
   .pick-result .conf-row strong {font-size:20px;}
   .odds-prices {font-size:12px;}
 }
+
+/* Phase 2 visual layer: preserved model and tiers, clearer performance identity. */
+.week-dashboard .dashboard-group {margin-top:12px;}
+.week-dashboard .dashboard-group+.dashboard-group {border-top:1px solid #80978b35;padding-top:12px;}
+.week-dashboard .dashboard-group-heading {font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;opacity:.75;margin-bottom:8px;}
+.week-dashboard .dashboard-metrics {gap:9px;}
+.week-dashboard .dashboard-metrics>div {padding:11px 13px;border:1px solid #80978b40;border-left:3px solid #58ae87;border-radius:11px;background:var(--background-color);min-width:0;}
+.week-dashboard .value-metrics .dashboard-metrics>div {border-left-color:#83adcc;}
+.week-dashboard .dashboard-metrics strong {font-size:clamp(18px,2.3vw,27px);line-height:1.25;}
+.week-dashboard .dashboard-metrics span {font-size:11px;line-height:1.4;margin-top:4px;}
+.pick-result.confidence-very-high {--confidence-accent:#219e7a;--confidence-tint:#219e7a17;}
+.pick-result.confidence-high {--confidence-accent:#2ca88d;--confidence-tint:#2ca88d14;}
+.pick-result.confidence-moderate {--confidence-accent:#468ec4;--confidence-tint:#468ec415;}
+.pick-result.confidence-lean {--confidence-accent:#c39234;--confidence-tint:#c3923415;}
+.pick-result.confidence-tossup {--confidence-accent:#8394a5;--confidence-tint:#8394a514;}
+.pick-result[class*="confidence-"] {background:var(--confidence-tint);border-left-color:var(--confidence-accent);}
+.pick-result[class*="confidence-"] .conf-fill {background:var(--confidence-accent);}
+.pick-result .conf-track {grid-column:1/-1;height:8px;overflow:hidden;}
+.pick-result .conf-row {display:flex;flex-direction:column;align-items:flex-end;justify-content:center;}
+.pick-result .conf-row>span {display:block;font-size:10px;opacity:.78;}
+.pick-result .confidence-explainer {grid-column:1/-1;font-size:10px;opacity:.74;margin-top:2px;}
+.tier-stage-1 {--tier-accent:#409abe;--tier-tint:#409abe13;}
+.tier-stage-2 {--tier-accent:#7ba7bf;--tier-tint:#7ba7bf15;}
+.tier-stage-3 {--tier-accent:#be8d4e;--tier-tint:#be8d4e15;}
+.tier-stage-4 {--tier-accent:#8d79c3;--tier-tint:#8d79c315;}
+.tier-stage-5 {--tier-accent:#63a47b;--tier-tint:#63a47b15;}
+.cfb-tier-guide .cfb-tier-guide-card {border-left:4px solid var(--tier-accent);background:var(--tier-tint);}
+.cfb-tier-guide .cfb-tier-guide-number {color:var(--tier-accent);background:var(--tier-tint);border:1px solid var(--tier-accent);}
+.value-pick-callout {padding:11px 12px;margin-top:11px;border:1px solid #80978b35;border-left:4px solid var(--tier-accent);border-radius:11px;background:var(--tier-tint);font-size:12px;line-height:1.5;}
+.value-pick-heading {display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px;}
+.tier-pill {font-size:11px;font-weight:800;padding:4px 8px;border:1px solid var(--tier-accent);border-radius:999px;color:var(--text-color);}
+.value-pick-market {overflow-wrap:anywhere;}
+.tier-count-strip {display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 13px;}
+.tier-count {display:flex;align-items:center;gap:8px;min-height:36px;padding:7px 10px;border-radius:10px;border:1px solid #80978b35;border-left:3px solid var(--tier-accent);background:var(--tier-tint);font-size:11px;}
+.tier-count-id {font-weight:850;color:var(--tier-accent);}
+.tier-count-name {font-weight:600;}
+.tier-count strong {font-size:14px;font-variant-numeric:tabular-nums;}
+.tier-performance-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px;margin:12px 0 17px;}
+.tier-performance-card {padding:13px 14px;border:1px solid #80978b40;border-top:3px solid var(--tier-accent);border-radius:12px;background:var(--tier-tint);min-width:0;}
+.tier-performance-top {display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.tier-rate {font-weight:800;font-variant-numeric:tabular-nums;font-size:16px;}
+.tier-performance-name {display:block;font-size:13px;margin:7px 0;}
+.tier-record {font-size:22px;font-weight:800;letter-spacing:-.5px;font-variant-numeric:tabular-nums;}
+.tier-pending {font-size:11px;opacity:.75;margin-top:5px;}
+@media(max-width:700px) {
+  .week-dashboard .dashboard-group-heading {font-size:9px;}
+  .week-dashboard .dashboard-metrics {gap:6px;}
+  .week-dashboard .dashboard-metrics>div {padding:9px 7px;border-radius:9px;}
+  .week-dashboard .dashboard-metrics strong {font-size:clamp(15px,4.3vw,22px);overflow-wrap:anywhere;}
+  .week-dashboard .dashboard-metrics span {font-size:9px;line-height:1.3;}
+  .tier-count-strip {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+  .tier-count {gap:6px;padding:6px 8px;}
+  .tier-count-name {flex:1;}
+  .tier-performance-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;}
+  .tier-performance-card {padding:10px;}
+}
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
 <h1>Saturday Forecast<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
@@ -2188,7 +2244,7 @@ if value_pushes:
     value_record += f"–{value_pushes}P"
 value_accuracy = f"{value_wins / value_decisive:.1%}" if value_decisive else "—"
 week_state = "All games final" if awaiting_count == 0 else f"{awaiting_count} awaiting final"
-dashboard_summary.markdown(f"""<section class="week-dashboard"><div class="week-heading"><div><span class="section-kicker">{season} SEASON</span><h2>Week {selected_week}</h2></div><span class="week-state">{week_state}</span></div><div class="dashboard-metrics"><div><strong>{len(pred)}</strong><span>Matchups</span></div><div><strong>{correct_count}–{len(graded)-correct_count}</strong><span>Pick record</span></div><div><strong>{accuracy}</strong><span>Graded accuracy</span></div><div><strong>{value_count}</strong><span>Model value picks</span></div><div><strong>{value_record}</strong><span>Value Pick record</span></div><div><strong>{value_accuracy}</strong><span>Value Pick accuracy</span></div></div></section>""", unsafe_allow_html=True)
+dashboard_summary.markdown(f"""<section class="week-dashboard"><div class="week-heading"><div><span class="section-kicker">{season} SEASON · MATCHUP PERFORMANCE</span><h2>Week {selected_week}</h2></div><span class="week-state">{week_state}</span></div><div class="dashboard-group"><div class="dashboard-group-heading">Core model · winner predictions</div><div class="dashboard-metrics"><div><strong>{len(pred)}</strong><span>Matchups</span></div><div><strong>{correct_count}–{len(graded)-correct_count}</strong><span>Pick record</span></div><div><strong>{accuracy}</strong><span>Graded accuracy</span></div></div></div><div class="dashboard-group value-metrics"><div class="dashboard-group-heading">Official Value Picks · market-specific results</div><div class="dashboard-metrics"><div><strong>{value_count}</strong><span>Selected picks</span></div><div><strong>{value_record}</strong><span>Value Pick record</span></div><div><strong>{value_accuracy}</strong><span>Decisive win rate</span></div></div></div></section>""", unsafe_allow_html=True)
 with feed_details:
     schedule_time = original_schedule.attrs.get("fetched_at", "Uploaded CSV" if schedule_file is not None else "Unknown")
     stats_time = published_current.attrs.get("fetched_at", "Uploaded CSV" if current_file is not None else "Unknown")
@@ -2271,7 +2327,7 @@ with value_tab:
 .cfb-tier-guide-record strong {font-size:12px;}
 </style>
 """ + '<div class="cfb-tier-guide">' + "".join(
-            f'<div class="cfb-tier-guide-card"><div class="cfb-tier-guide-heading">'
+            f'<div class="cfb-tier-guide-card tier-stage-{number}"><div class="cfb-tier-guide-heading">'
             f'<span class="cfb-tier-guide-number">{number}</span>'
             f'<span class="cfb-tier-guide-title">{escape(title)}</span></div>'
             f'<p class="cfb-tier-guide-copy">{escape(description)}</p>'
@@ -2281,7 +2337,7 @@ with value_tab:
             f'</div></div>'
             for number, title, description, record in tier_guide
         ) + '</div>', unsafe_allow_html=True)
-        st.caption("Tier numbers show selection order, not win probability. See Recommended Bet for the play.")
+        st.caption("Tier colors identify selection rules, not certainty or relative win probability. See Recommended Bet for the market.")
         st.caption("Historical selections are recalculated from archived data; they are not saved pregame picks.")
     if not value_picks.empty:
         value_show = value_picks.copy()
@@ -2568,7 +2624,19 @@ with cards_tab:
                     f'<div class="gotw-tiers">{gotw_tiers}</div>'
                     '</div>'
                 )
-            waterfall_note = ('<div class="result-box"><strong>' + escape(str(r['Value Tier'])) + '</strong><div>' + escape(str(r['Value Pick'])) + ' · ' + escape(str(r.get('Value Market', ''))) + ' ' + escape(str(r['Value Line'])) + ' · ' + escape(str(r.get('Value Source', 'Unavailable'))) + '</div></div>') if r.get('Value Selected', False) else ''
+            stage_num = pd.to_numeric(r.get("Value Stage"), errors="coerce")
+            stage_class = (f"tier-stage-{int(stage_num)}"
+                           if pd.notna(stage_num) and 1 <= int(stage_num) <= 5 else "")
+            waterfall_note = (
+                '<div class="value-pick-callout ' + stage_class + '">'
+                '<div class="value-pick-heading"><span class="tier-pill">'
+                + escape(str(r["Value Tier"])) + '</span>'
+                '<span class="pick-label">Official Value Pick</span></div>'
+                '<div class="value-pick-market"><strong>' + escape(str(r["Value Pick"])) + '</strong> · '
+                + escape(str(r.get("Value Market", ""))) + ' '
+                + escape(str(r["Value Line"])) + ' · '
+                + escape(str(r.get("Value Source", "Unavailable"))) + '</div></div>'
+            ) if r.get("Value Selected", False) else ""
             card_details[card_idx] = (
                 explanation_html + warning + advantage_note
                 + str(r.get("Line Movement HTML", "")) + matchup_html
@@ -2581,14 +2649,19 @@ with cards_tab:
             home_team_class = "team-line predicted-team" if r["Predicted Side"] == "Home" else "team-line"
             away_pick_tag = '<span class="pick-indicator">✓ Pick</span>' if r["Predicted Side"] == "Away" else ""
             home_pick_tag = '<span class="pick-indicator">✓ Pick</span>' if r["Predicted Side"] == "Home" else ""
+            confidence_num = float(r["Confidence"])
+            confidence_band = ("very-high" if confidence_num >= .9 else
+                               "high" if confidence_num >= .8 else
+                               "moderate" if confidence_num >= .7 else
+                               "lean" if confidence_num >= .6 else "tossup")
             cards[card_idx] = f"""<article class="pick-card">{gotw_note}
 <div class="card-top"><span class="kickoff">{escape(kickoff)}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="matchup-meta"><span>{escape(venue)}</span><span>{escape(str(r['Status']))}</span></div>
 <div class="{away_team_class}"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}<span>{escape(str(r['Away Team']))}{away_pick_tag}</span></span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
 <div class="{home_team_class}"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}<span>{escape(str(r['Home Team']))}{home_pick_tag}</span></span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
-<div class="pick-result"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
-<div class="conf-row"><span>Win confidence</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
+<div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
+<div class="conf-row"><span>Model win chance</span><strong>{r['Confidence']:.1%}</strong></div>
+<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div><div class="confidence-explainer">Model estimate · not a guarantee</div></div>{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
                 if card_index % 2 == 0:
