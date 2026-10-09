@@ -90,7 +90,7 @@ st.markdown("""
 TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
-    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores. Confidence is an estimate, not a guarantee."),
+    ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores. "),
     ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners below 80% model confidence with two or fewer of the five matchup advantages for the selected week. Official Tier 1–5 games and High/Very High confidence picks are excluded so the labels do not contradict each other. Missing data is shown separately."),
     ("export", None, "Export your picks", "Use Export picks above the navigation to download all picks for this week or only the picks matching your Game cards filters. Open the CSV in Excel to compare matchups."),
     ("results", "Model results", "Check model performance", "Compare model wins, losses, and accuracy by confidence, plus Value Pick records overall and by tier. Value Pick tracking starts in Week 3; Weeks 1 and 2 are excluded from the tier record."),
@@ -1694,6 +1694,8 @@ def watch_results(season, original, date_range, original_odds, event_ids=(), ori
 st.markdown("""
 <style>
 .block-container {max-width:1280px;padding-top:4rem;padding-bottom:3rem;}
+.prediction-disclaimer {border-top:1px solid #80978b40;margin-top:28px;padding:18px 12px 8px;text-align:center;color:var(--text-color);opacity:.8;font-size:12px;line-height:1.65;}
+.prediction-disclaimer strong {font-weight:700;}
 .hero {background:linear-gradient(115deg,#102c26,#163e35 65%,#265b46);color:#fff;border-radius:24px;padding:32px 36px;margin-bottom:24px;position:relative;overflow:hidden;}
 .hero:after {content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff18;border-radius:50%;right:-60px;top:-100px;box-shadow:0 0 0 45px #ffffff06,0 0 0 90px #ffffff04;pointer-events:none;}
 .eyebrow {font-size:12px;letter-spacing:2px;font-weight:700;color:#bde7ca;text-transform:uppercase;}
@@ -1973,7 +1975,6 @@ st.markdown("""
 .pick-result .conf-track {grid-column:1/-1;height:8px;overflow:hidden;}
 .pick-result .conf-row {display:flex;flex-direction:column;align-items:flex-end;justify-content:center;}
 .pick-result .conf-row>span {display:block;font-size:10px;opacity:.78;}
-.pick-result .confidence-explainer {grid-column:1/-1;font-size:10px;opacity:.74;margin-top:2px;}
 .tier-stage-1 {--tier-accent:#409abe;--tier-tint:#409abe13;}
 .tier-stage-2 {--tier-accent:#7ba7bf;--tier-tint:#7ba7bf15;}
 .tier-stage-3 {--tier-accent:#be8d4e;--tier-tint:#be8d4e15;}
@@ -2899,7 +2900,7 @@ with cards_tab:
                 '</div><p class="spotlight-context">' + escape(spotlight_label)
                 + '. ' + escape(description) + '</p>'
                 '<p class="spotlight-context">' + escape(model_context)
-                + ' Model probability is not a guarantee.</p>'
+                + '</p>'
                 '</section>'
             )
             st.markdown(spotlight_html, unsafe_allow_html=True)
@@ -3069,7 +3070,7 @@ with cards_tab:
                 + str(r.get("Line Movement HTML", "")) + matchup_html
                 + f'<div class="card-details"><strong>Prediction details</strong>'
                 + f'<p>Model {escape(str(r["Model Version"]))} · {escape(venue)}. '
-                + 'Confidence is an estimate, not a guaranteed result.</p>'
+                + '</p>'
                 + risk + missing_data_note + '</div>'
             )
             away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
@@ -3088,7 +3089,7 @@ with cards_tab:
 <div class="{home_team_class}"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}<span>{escape(str(r['Home Team']))}{home_pick_tag}</span></span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 <div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Model win chance</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div><div class="confidence-explainer">Model estimate · not a guarantee</div></div>{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
+<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
                 if card_index % 2 == 0:
@@ -3137,7 +3138,7 @@ with cards_tab:
                 render_pick_cards(pred.loc[risky_indices], "risky")
             else:
                 st.info("No non-tiered picks below 80% confidence meet the risk threshold this week.")
-            st.caption("Tiered games, High/Very High confidence picks (80%+), and games with missing metrics are not rated as risky. No warning does not mean a safe bet. Picks and model confidence are unchanged.")
+            st.caption("Tiered games, High/Very High confidence picks (80%+), and games with missing metrics are not rated as risky. Picks and model confidence are unchanged.")
 if performance_tab.open:
     with performance_tab:
         show_shadow_tracking(st, season, selected_week)
@@ -3659,7 +3660,7 @@ with about_tab:
     st.markdown("### Read your picks")
     st.write("DraftKings moneylines come from ESPN’s published odds feed, with other published sportsbooks used as a labeled fallback when needed. +150 means $100 would profit $150; −150 means risking $150 to profit $100. These prices are separate from the model’s win probabilities and do not change its picks.")
     st.write("Lines can move or be suspended. DraftKings is preferred, with labeled sportsbook fallbacks when available. Opening lines are not substituted for current prices. Completed-game moneylines come from archived game summaries and are labeled archived.")
-    st.write("Each card shows both teams’ win probabilities and the predicted winner. A 70% confidence means an estimated 7 wins out of 10 similar matchups—not a guaranteed result.")
+    st.write("Each card shows both teams’ win probabilities and the predicted winner. A 70% confidence means an estimated 7 wins out of 10 similar matchups.")
     st.markdown("**Confidence guide** · Very high: 90%+ · High: 80–90% · Moderate: 70–80% · Lean: 60–70% · Toss-up: below 60%.")
     st.write("Away-team picks may carry a venue-risk note. Use that as additional context when comparing games.")
     with st.expander("Model and data details"):
@@ -3669,13 +3670,14 @@ with about_tab:
         st.caption("The adjustment improved historical probability scores but did not improve winner accuracy in every season. It does not establish better betting returns. The realigned 2026 Group of Six is a prospective application; historical scenarios are recalculated using the current model.")
         st.caption(f"Loaded {season}: {len(current):,} team-week rows; {season - 1}: {len(prior):,} rows. Source: SportsDataverse / cfbfastR.")
 
-st.caption(f"Saturday Forecast · {MODEL_VERSION} · Estimates, not guarantees.")
-
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"], original_odds_health={"stale": odds_snapshot.get("stale", False), "stale_events": odds_snapshot.get("stale_events", {})})
 
-
-
-
-
-
-
+# Shared footer, displayed once below the active tab's content.
+st.markdown(
+    f'<footer class="prediction-disclaimer" role="note">'
+    f'<strong>Saturday Forecast · {escape(str(MODEL_VERSION))} · Prediction disclaimer</strong><br>'
+    'Predictions, win probabilities, value picks, and projected betting returns are estimates, not guarantees. '
+    'Actual game results and sportsbook payouts may differ. For informational purposes only; bet responsibly.'
+    '</footer>',
+    unsafe_allow_html=True,
+)
