@@ -2008,6 +2008,21 @@ st.markdown("""
   .tier-performance-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;}
   .tier-performance-card {padding:10px;}
 }
+
+/* Phase 2 graded-record visualization uses only values already on the results tab. */
+.accuracy-band-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:9px;margin:12px 0 14px;}
+.accuracy-band {--band-accent:#8394a5;border:1px solid #80978b35;border-radius:12px;padding:12px 13px;background:var(--secondary-background-color);min-width:0;}
+.accuracy-band.confidence-very-high {--band-accent:#219e7a;}
+.accuracy-band.confidence-high {--band-accent:#2ca88d;}
+.accuracy-band.confidence-moderate {--band-accent:#468ec4;}
+.accuracy-band.confidence-lean {--band-accent:#c39234;}
+.accuracy-band-heading {display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;}
+.accuracy-band-heading strong {font-size:12px;overflow-wrap:anywhere;}
+.accuracy-band-heading span {font-variant-numeric:tabular-nums;font-weight:750;}
+.accuracy-track {height:7px;border-radius:999px;background:#80978b35;overflow:hidden;margin:11px 0 7px;}
+.accuracy-fill {display:block;height:100%;background:var(--band-accent);border-radius:999px;}
+.accuracy-band-record {font-size:11px;opacity:.75;font-variant-numeric:tabular-nums;}
+@media(max-width:700px) {.accuracy-band-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;}.accuracy-band {padding:10px;}}
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
 <h1>Saturday Forecast<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
@@ -2278,6 +2293,16 @@ with value_tab:
         unsafe_allow_html=True,
     )
     value_picks = pred[pred["Value Selected"]].sort_values("Value Rank")
+    tier_names = ("Complete Game", "Storm Front", "Takeaway Trouble", "Parlay Bridge", "Home Turf Hammer")
+    tier_counts = pd.to_numeric(value_picks["Value Stage"], errors="coerce").value_counts()
+    tier_chips = []
+    for stage, tier_name in enumerate(tier_names, 1):
+        tier_chips.append(
+            f'<div class="tier-count tier-stage-{stage}"><span class="tier-count-id">T{stage}</span>'
+            f'<span class="tier-count-name">{escape(tier_name)}</span>'
+            f'<strong>{int(tier_counts.get(stage, 0))}</strong></div>'
+        )
+    st.markdown('<div class="tier-count-strip">' + "".join(tier_chips) + '</div>', unsafe_allow_html=True)
     if len(value_picks) < 12:
         st.info(f"{12-len(value_picks)} below target. No gates or odds limits were relaxed.")
     with st.expander("How Value Picks are selected", expanded=False):
@@ -2822,6 +2847,48 @@ if performance_tab.open:
             r1.metric("Graded picks", total_graded)
             r2.metric("Wins – losses", f"{total_wins} – {total_graded - total_wins}")
             r3.metric("Winner accuracy", f"{total_wins / total_graded:.1%}" if total_graded else "—")
+
+            # Visualize the same five confidence groups as the existing table.
+            confidence_cards = []
+            band_styles = ("very-high", "high", "moderate", "lean", "tossup")
+            for band_index, (_, band) in enumerate(performance_summary.iterrows()):
+                band_name = escape(str(band["Confidence level"]))
+                band_graded = int(band["Graded"])
+                band_wins, band_losses = int(band["Wins"]), int(band["Losses"])
+                band_rate = band["Accuracy"]
+                valid_band = band_graded > 0 and pd.notna(band_rate)
+                band_pct = f"{float(band_rate):.1%}" if valid_band else "—"
+                bar_width = max(0.0, min(100.0, float(band_rate) * 100)) if valid_band else 0.0
+                confidence_cards.append(
+                    f'<div class="accuracy-band confidence-{band_styles[band_index]}">'
+                    f'<div class="accuracy-band-heading"><strong>{band_name}</strong><span>{band_pct}</span></div>'
+                    f'<div class="accuracy-track" role="img" aria-label="{band_name}: {band_wins} wins, {band_losses} losses">'
+                    f'<span class="accuracy-fill" style="width:{bar_width:.1f}%"></span></div>'
+                    f'<div class="accuracy-band-record">{band_wins}–{band_losses} · {band_graded} graded</div></div>'
+                )
+            st.markdown('<div class="accuracy-band-grid">' + "".join(confidence_cards) + '</div>',
+                        unsafe_allow_html=True)
+            if performance_scope == "Season to date" and "Week" in performance_detail:
+                trend_games = performance_detail[
+                    performance_detail["Status"].eq("Final")
+                    & performance_detail["Pick Result"].isin(["Correct", "Incorrect"])
+                ].copy()
+                if not trend_games.empty:
+                    trend_games["Week"] = pd.to_numeric(trend_games["Week"], errors="coerce")
+                    trend_games["Confidence"] = pd.to_numeric(trend_games["Confidence"], errors="coerce")
+                    trend_games = trend_games.dropna(subset=["Week"])
+                    if not trend_games.empty:
+                        weekly = trend_games.groupby("Week", as_index=False).agg(
+                            Wins=("Pick Result", lambda outcomes: int(outcomes.eq("Correct").sum())),
+                            Graded=("Pick Result", "size"),
+                            Average_confidence=("Confidence", "mean"),
+                        ).sort_values("Week")
+                        if len(weekly) > 1:
+                            weekly["Winner accuracy"] = weekly["Wins"] / weekly["Graded"]
+                            weekly["Average model chance"] = weekly["Average_confidence"]
+                            with st.expander("Weekly accuracy trend", expanded=False):
+                                st.line_chart(weekly.set_index("Week")[["Winner accuracy", "Average model chance"]], height=260)
+                                st.caption("Only graded winner picks appear. Average model chance is not a betting return.")
             display_summary = performance_summary.copy()
             for column in ["Accuracy", "Average model confidence"]:
                 display_summary[column] = display_summary[column].map(lambda v: f"{v:.1%}" if pd.notna(v) else "—")
@@ -2869,6 +2936,33 @@ if performance_tab.open:
                 v2.metric("Value Pick record", record_text)
                 v3.metric("Value Pick win rate", f"{overall_wins / decisive:.1%}" if decisive else "—")
 
+
+                # Graded tier scorecards reuse the result summary; pushes do not count in the win-rate denominator.
+                tier_record_cards = []
+                tier_names = ("Complete Game", "Storm Front", "Takeaway Trouble",
+                              "Parlay Bridge", "Home Turf Hammer")
+                for _, tier_row in value_summary.iloc[1:].iterrows():
+                    tier_label = str(tier_row["Tier"])
+                    tier_stage = next((n for n in range(1, 6) if f"Tier {n}" in tier_label), None)
+                    if tier_stage is None:
+                        continue
+                    tier_wins, tier_losses, tier_pushes = (int(tier_row[k]) for k in ("Wins", "Losses", "Pushes"))
+                    tier_rate = tier_row["Win rate"]
+                    tier_pct = f"{float(tier_rate):.1%}" if tier_wins + tier_losses and pd.notna(tier_rate) else "—"
+                    tier_record = f"{tier_wins}–{tier_losses}" + (f"–{tier_pushes}P" if tier_pushes else "")
+                    pending = int(tier_row["Awaiting final"])
+                    pending_note = f"{tier_wins+tier_losses} decisive" + (f" · {pending} pending" if pending else "")
+                    tier_record_cards.append(
+                        f'<div class="tier-performance-card tier-stage-{tier_stage}">'
+                        f'<div class="tier-performance-top"><span class="tier-count-id">T{tier_stage}</span>'
+                        f'<span class="tier-rate">{tier_pct}</span></div>'
+                        f'<strong class="tier-performance-name">{escape(tier_names[tier_stage - 1])}</strong>'
+                        f'<div class="tier-record">{escape(tier_record)}</div>'
+                        f'<div class="tier-pending">{escape(pending_note)}</div></div>'
+                    )
+                if tier_record_cards:
+                    st.markdown('<div class="tier-performance-grid">' + "".join(tier_record_cards) + '</div>',
+                                unsafe_allow_html=True)
                 display_value = value_summary.copy()
                 display_value["Win rate"] = display_value["Win rate"].map(
                     lambda v: f"{v:.1%}" if pd.notna(v) else "—"
