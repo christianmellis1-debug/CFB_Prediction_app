@@ -15,6 +15,7 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 from io import BytesIO
 import base64
+from copy import deepcopy
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -506,15 +507,28 @@ def parse_archived_summary(payload, event_id):
     return parse_draftkings({"events": [{"id": str(event_id), "competitions": competitions}]}).get(str(event_id), {})
 
 
-@st.cache_data(ttl=86400, show_spinner=False)
-def download_archived_event(event_id, movement_schema=1):
+@st.cache_data(ttl=60, max_entries=128, show_spinner=False)
+def download_event_payload(event_id):
+    """Share the same ESPN response between score, current-price and archive readers."""
     if not str(event_id).isdigit():
         return {}
     url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=" + str(event_id)
     with urlopen(url, timeout=15) as response:
-        return parse_archived_summary(json.load(response), event_id)
+        payload = json.load(response)
+    if str(payload.get("header", {}).get("id")) != str(event_id):
+        raise ValueError("Game summary identity mismatch")
+    # Avoid caching large play-by-play/box-score sections that these readers never use.
+    return {"header": payload["header"], "pickcenter": payload.get("pickcenter", [])}
 
 
+@st.cache_data(ttl=86400, show_spinner=False)
+def download_archived_event(event_id, movement_schema=1):
+    if not str(event_id).isdigit():
+        return {}
+    return parse_archived_summary(download_event_payload(event_id), event_id)
+
+
+@st.cache_data(ttl=60, max_entries=32, show_spinner=False)
 def fetch_scoreboard(date_range):
     """Retry rejected date ranges as daily requests, retaining event IDs."""
     def fetch_day(dates):
@@ -547,9 +561,7 @@ def download_live_event(event_id):
     """Read an omitted game's official status; never infer final from kickoff."""
     if not str(event_id).isdigit():
         return {}
-    url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=" + str(event_id)
-    with urlopen(url, timeout=15) as response:
-        payload = json.load(response)
+    payload = download_event_payload(event_id)
     header = payload.get("header", {})
     if str(header.get("id")) != str(event_id):
         raise ValueError("Game summary identity mismatch")
@@ -587,9 +599,7 @@ def download_event_moneylines(event_id, movement_schema=1):
     """Read current per-game markets, including games omitted by the scoreboard."""
     if not str(event_id).isdigit():
         return {}
-    url = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=" + str(event_id)
-    with urlopen(url, timeout=15) as response:
-        payload = json.load(response)
+    payload = download_event_payload(event_id)
     header = payload.get("header", {})
     if str(header.get("id")) != str(event_id):
         raise ValueError("Odds event ID does not match the requested game")
@@ -606,7 +616,7 @@ def schedule_event_ids(games):
 
 
 @st.cache_data(ttl=300, show_spinner=False)
-def download_market_odds(date_range, event_ids=()):
+def download_market_core(date_range, event_ids=()):
     payload = fetch_scoreboard(date_range)
     quotes = parse_draftkings(payload)
     archive_path = Path(__file__).parent / "data" / "archived_moneylines_2026.json"
@@ -637,14 +647,14 @@ def download_market_odds(date_range, event_ids=()):
             for event_id, archived in pool.map(get_archive, missing):
                 if archived:
                     quotes[event_id] = archived
-    # Probe every scheduled game with missing/partial DK prices, even when it
-    # was omitted by the weekly scoreboard. Per-event lookups expire in 5 minutes.
+    # Reconcile essential current prices first. Opening-only lookups run after cards.
+    # Omitted games and missing current spreads/moneylines retain full coverage.
     expected = set(event_ids) | {str(e.get("id")) for e in payload.get("events", [])}
     targets = []
     for event_id in expected:
         dk = next((q for name, q in quotes.get(event_id, {}).items()
                    if name.lower().replace(" ", "") == "draftkings"), {})
-        if any(dk.get(k, "Unavailable") == "Unavailable" for k in ("home", "away", "home_open", "away_open", "home_spread", "away_spread")):
+        if any(dk.get(k, "Unavailable") == "Unavailable" for k in ("home", "away", "home_spread", "away_spread")):
             targets.append(event_id)
     lookup_errors = []
     def get_current(event_id):
@@ -669,7 +679,96 @@ def download_market_odds(date_range, event_ids=()):
                         if previous.get(side, "Unavailable") == "Unavailable":
                             previous[side] = quote.get(side, "Unavailable")
     return {"quotes": quotes, "lookup_errors": lookup_errors,
+            "generation": datetime.now(timezone.utc).isoformat(),
             "retrieved": datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")}
+
+
+@st.cache_data(ttl=300, max_entries=32, show_spinner=False)
+def enrich_market_history(snapshot, event_ids=()):
+    """Keep all opening-line/provider enrichment, but run it after first card rendering."""
+    result = deepcopy(snapshot)
+    quotes = result["quotes"]
+    targets = []
+    for event_id in set(event_ids) | set(quotes):
+        # Failed essential requests already tried this event; avoid a second timeout.
+        if event_id in result.get("lookup_errors", []):
+            continue
+        dk = next((q for name, q in quotes.get(event_id, {}).items()
+                   if name.lower().replace(" ", "") == "draftkings"), {})
+        if any(dk.get(k, "Unavailable") == "Unavailable" for k in ("home_open", "away_open")):
+            targets.append(event_id)
+    def fetch_history(event_id):
+        try:
+            return event_id, download_event_moneylines(event_id), False
+        except Exception:
+            return event_id, {}, True
+    result["history_errors"] = []
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        for event_id, extra, failed in pool.map(fetch_history, targets):
+            if failed:
+                result["history_errors"].append(event_id)
+            providers = quotes.setdefault(event_id, {})
+            for name, quote in extra.items():
+                previous = providers.get(name)
+                if previous is None:
+                    providers[name] = quote
+                elif (previous.get("home_id"), previous.get("away_id")) == (quote.get("home_id"), quote.get("away_id")):
+                    for field in ("home", "away", "home_open", "away_open",
+                                  "home_spread", "away_spread", "home_spread_odds", "away_spread_odds",
+                                  "home_spread_open", "away_spread_open",
+                                  "home_spread_open_odds", "away_spread_open_odds"):
+                        if previous.get(field, "Unavailable") == "Unavailable":
+                            previous[field] = quote.get(field, "Unavailable")
+    result["history_loaded"] = True
+    return result
+
+
+def download_market_odds(date_range, event_ids=()):
+    # Historical results/scenarios continue to request the complete snapshot.
+    return enrich_market_history(download_market_core(date_range, event_ids), event_ids)
+
+
+def clear_market_odds():
+    download_market_core.clear()
+    enrich_market_history.clear()
+    fetch_scoreboard.clear()
+    download_event_payload.clear()
+
+
+download_market_odds.clear = clear_market_odds
+
+
+def market_odds_for_display(date_range, event_ids=(), include_history=False):
+    """Session-scoped fallback; never resurrect a successfully withdrawn market."""
+    key = (date_range, tuple(event_ids))
+    saved = st.session_state.setdefault("last_market_snapshots", {})
+    previous = saved.get(key)
+    try:
+        fresh = download_market_core(date_range, event_ids)
+    except Exception:
+        if previous is None:
+            raise
+        fallback = deepcopy(previous)
+        fallback["stale"] = True
+        return fallback
+    if include_history:
+        fresh = enrich_market_history(fresh, event_ids)
+    elif previous and previous.get("generation") == fresh.get("generation") and previous.get("history_loaded"):
+        fresh = deepcopy(previous)
+    fresh = deepcopy(fresh)
+    fresh["stale"] = False
+    # Keep old quotes only for failed event lookups with no fresh prices at all.
+    stale_events = {}
+    for event_id in fresh.get("lookup_errors", []):
+        if not fresh["quotes"].get(event_id) and previous and previous["quotes"].get(event_id):
+            fresh["quotes"][event_id] = deepcopy(previous["quotes"][event_id])
+            stale_events[event_id] = previous.get("stale_events", {}).get(event_id, previous["retrieved"])
+    fresh["stale_events"] = stale_events or fresh.get("stale_events", {})
+    saved[key] = deepcopy(fresh)
+    # Bound per-session history without mixing seasons or selected game sets.
+    while len(saved) > 12:
+        del saved[next(iter(saved))]
+    return fresh
 
 
 def attach_odds(predictions, games, quotes):
@@ -1562,7 +1661,7 @@ def summarize_scenario(detail, group):
 
 
 @st.fragment(run_every="30s")
-def watch_results(season, original, date_range, original_odds, event_ids=(), original_live=None):
+def watch_results(season, original, date_range, original_odds, event_ids=(), original_live=None, original_odds_health=None):
     if date_range:
         try:
             snapshot = download_live_scores(date_range, event_ids)
@@ -1579,7 +1678,13 @@ def watch_results(season, original, date_range, original_odds, event_ids=(), ori
             st.caption("Results refresh is temporarily unavailable. Showing the last loaded data.")
     if date_range:
         try:
-            if download_market_odds(date_range, event_ids)["quotes"] != original_odds:
+            snapshot = market_odds_for_display(date_range, event_ids, include_history=True)
+            if snapshot.get("stale"):
+                st.warning("Odds refresh failed. Last successful prices: " + str(snapshot["retrieved"]) + "; prices may be stale.")
+            if snapshot.get("history_errors"):
+                st.caption("Some opening-line details could not be refreshed; current prices remain available.")
+            health = {"stale": snapshot.get("stale", False), "stale_events": snapshot.get("stale_events", {})}
+            if snapshot["quotes"] != original_odds or (original_odds_health is not None and health != original_odds_health):
                 st.rerun()
         except Exception:
             st.caption("Odds refresh is temporarily unavailable. Previously displayed lines may be stale.")
@@ -1950,9 +2055,16 @@ if live_snapshot["retrieved"]:
 
 if date_range:
     try:
-        odds_snapshot = download_market_odds(date_range, schedule_event_ids(games))
+        odds_snapshot = market_odds_for_display(date_range, schedule_event_ids(games))
     except Exception:
         st.info("DraftKings odds are temporarily unavailable. Predictions and results are still available.")
+if odds_snapshot.get("stale"):
+    st.warning("Odds refresh failed. Showing last successful prices from " + str(odds_snapshot["retrieved"]) + "; these may be stale.")
+elif odds_snapshot.get("stale_events"):
+    st.warning("Some odds lookups failed. Saved prices may be stale: " + "; ".join(
+        next((str(g["away_team"]) + " at " + str(g["home_team"]) for _, g in games.iterrows()
+              if pd.notna(g.get("game_id")) and str(int(g["game_id"])) == event_id), "Game " + event_id)
+        + " (" + str(when) + ")" for event_id, when in odds_snapshot["stale_events"].items()))
 pred = add_betting_value(attach_odds(pred, games, odds_snapshot["quotes"]))
 try:
     waterfall_boxes = download_advantage_boxes(season)
@@ -2910,7 +3022,8 @@ with about_tab:
 
 st.caption(f"Saturday Forecast · {MODEL_VERSION} · Estimates, not guarantees.")
 
-watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
+watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"], original_odds_health={"stale": odds_snapshot.get("stale", False), "stale_events": odds_snapshot.get("stale_events", {})})
+
 
 
 
