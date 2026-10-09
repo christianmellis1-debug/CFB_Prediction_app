@@ -108,7 +108,7 @@ def run():
                 return
             try:
                 page.get_by_text("Saturday Live Mode", exact=True).first.click(timeout=20000)
-                page.get_by_text("Refresh scores now").first.wait_for(timeout=40000)
+                page.get_by_text("Refresh scores now").last.wait_for(timeout=40000)
                 check("Live Mode opens from visible toggle",True)
             except Exception as exc:
                 check("Live Mode opens from visible toggle",False,str(exc)[:250])
@@ -157,7 +157,7 @@ def run():
             check("Live Mode toggle is present",page.get_by_text("Saturday Live Mode").count()>0)
             # Verify that Live Mode can be toggled, score-only refresh exists, no errors.
             try:
-                page.get_by_text("Refresh scores now").first.wait_for(timeout=30000)
+                page.get_by_text("Refresh scores now").last.wait_for(timeout=30000)
                 check("Live Mode toolbar opens",True)
                 check("No exceptions in Live Mode",
                       page.locator('[data-testid="stException"]').count()==0)
