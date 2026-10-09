@@ -37,6 +37,7 @@ from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
 from matchday_live import live_board_rows, live_board_html
 from value_shortlist_ui import render_value_shortlist_cards
+from value_roi import value_roi_detail, roi_summary
 from hashlib import sha256
 from performance_cache import cache_calculation, clear_calculations
 
@@ -3505,6 +3506,103 @@ if performance_tab.open:
                     mime="text/csv",
                     key="value_results_download",
                 )
+
+                st.divider()
+                st.subheader("Value Shortlist · ROI tracker")
+                st.caption(
+                    "Hypothetical flat bets on official Value Shortlist selections only. "
+                    "Tier 1–2 use their recommended spread (ATS); Tier 3–5 use the "
+                    "recommended moneyline. Prices and selections are retrospectively "
+                    "reconstructed, not verified bets or locked pregame quotes."
+                )
+                roi_controls, roi_scope_col = st.columns([1, 2])
+                with roi_controls:
+                    roi_stake = st.number_input(
+                        "Stake per selection ($)", min_value=0.01, max_value=100000.0,
+                        value=100.0, step=25.0, format="%.2f", key="value_roi_stake",
+                    )
+                with roi_scope_col:
+                    roi_period = st.radio(
+                        "ROI time range", ["Weeks 3–5", "All available weeks"],
+                        horizontal=True, key="value_roi_period",
+                    )
+                if performance_scope != "Season to date":
+                    st.info(
+                        "Showing only the selected week. Choose 'Season to date' "
+                        "in Results period above to calculate Weeks 3–5 together."
+                    )
+                roi_weeks = (3, 4, 5) if roi_period == "Weeks 3–5" else None
+                roi_details = value_roi_detail(value_detail, stake=roi_stake, weeks=roi_weeks)
+                roi_all = roi_summary(roi_details)
+                if roi_all.empty:
+                    st.info("No official Value Shortlist selections are available in this period.")
+                else:
+                    roi_total = roi_all.iloc[0]
+                    net_profit = float(roi_total["Net Profit"])
+                    roi_ratio = roi_total["ROI"]
+                    roi_pct = f"{roi_ratio:.1%}" if pd.notna(roi_ratio) else "—"
+                    roi_metrics = st.columns(4)
+                    roi_metrics[0].metric("Total wagered", f'${roi_total["Wagered"]:,.2f}')
+                    roi_metrics[1].metric("Net profit", f'${net_profit:+,.2f}')
+                    roi_metrics[2].metric("ROI", roi_pct)
+                    roi_metrics[3].metric("Graded bets", f'{roi_total["Settled"]}/{roi_total["Selections"]}')
+                    st.caption(
+                        f'{int(roi_total["Wins"])} wins · {int(roi_total["Losses"])} losses · '
+                        f'{int(roi_total["Pushes"])} pushes · '
+                        f'{int(roi_total["Missing / ungraded"])} excluded or awaiting grading.'
+                    )
+                    st.caption(
+                        "ROI = net profit ÷ total settled stakes. A push refunds the entire stake "
+                        "and earns $0. Winning profit is rounded to cents per bet. "
+                        "Missing odds, ungraded results and unfinished games never count as losses."
+                    )
+                    if roi_period == "Weeks 3–5" and performance_scope == "Season to date":
+                        available = set(pd.to_numeric(value_detail.get("Week"), errors="coerce").dropna().astype(int))
+                        absent = sorted({3, 4, 5} - available)
+                        if absent:
+                            st.warning(
+                                "No reconstructed Value Pick results were available for Week(s) "
+                                + ", ".join(map(str, absent))
+                                + "; the displayed total is incomplete."
+                            )
+                    if roi_period == "Weeks 3–5":
+                        reconstruction_failures = sorted(set(value_performance_errors) & {"3", "4", "5"}, key=int)
+                    else:
+                        reconstruction_failures = sorted(set(value_performance_errors), key=int)
+                    if reconstruction_failures:
+                        st.warning(
+                            "ROI excludes week(s) with unsuccessful historical reconstruction: "
+                            + ", ".join(reconstruction_failures)
+                        )
+
+                    roi_weekly = roi_summary(roi_details, "Week")
+                    st.markdown("#### Weekly profit & ROI")
+                    if not roi_weekly.empty:
+                        roi_weekly_display = roi_weekly.copy()
+                        roi_weekly_display["ROI"] = roi_weekly_display["ROI"].map(
+                            lambda n: f"{n:.1%}" if pd.notna(n) else "—"
+                        )
+                        st.dataframe(roi_weekly_display, hide_index=True, use_container_width=True)
+                        st.bar_chart(roi_weekly.set_index("Week")[["Net Profit"]], x_label="Week", y_label="Net profit ($)")
+                    else:
+                        st.info("No weeks with selected picks are available for the chosen period.")
+
+                    st.markdown("#### Profitability by Value Pick tier")
+                    roi_tiers = roi_summary(roi_details, "Tier")
+                    if not roi_tiers.empty:
+                        roi_tier_display = roi_tiers.copy()
+                        roi_tier_display["ROI"] = roi_tier_display["ROI"].map(
+                            lambda n: f"{n:.1%}" if pd.notna(n) else "—"
+                        )
+                        st.dataframe(roi_tier_display, hide_index=True, use_container_width=True)
+                    with st.expander("See individual ROI calculations", expanded=False):
+                        st.dataframe(roi_details, hide_index=True, use_container_width=True)
+                        st.download_button(
+                            "Download ROI calculations · CSV",
+                            roi_details.to_csv(index=False).encode("utf-8-sig"),
+                            file_name=f"cfb_{season}_value_shortlist_roi.csv",
+                            mime="text/csv", key="value_roi_download",
+                        )
             else:
                 st.info("No Value Picks from Week 3 onward are available for this period.")
         else:
