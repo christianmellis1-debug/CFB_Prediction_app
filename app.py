@@ -36,6 +36,7 @@ from shadow_tracking import show_shadow_tracking
 from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
 from matchday_live import live_board_rows, live_board_html
+from value_shortlist_ui import render_value_shortlist_cards
 from hashlib import sha256
 from performance_cache import cache_calculation, clear_calculations
 
@@ -2011,6 +2012,35 @@ st.markdown("""
   .tier-performance-card {padding:10px;}
 }
 
+/* Phase 5B: scannable two-column official Value Shortlist cards. */
+.value-quick-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:12px 0 16px;}
+.value-quick-card {border:1px solid #80978b45;border-left:4px solid var(--tier-accent,#58ae87);border-radius:13px;background:var(--secondary-background-color);padding:14px 15px;min-width:0;overflow-wrap:anywhere;}
+.value-quick-card.tier-stage-4 {border-color:#8d79c380;border-left-width:5px;background:linear-gradient(112deg,#8d79c318,var(--secondary-background-color) 60%);}
+.value-quick-top {display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:10px;font-size:11px;}
+.value-quick-rank {font-weight:850;font-variant-numeric:tabular-nums;opacity:.8;}
+.value-quick-tier {font-size:10px;font-weight:800;border:1px solid var(--tier-accent,#80978b);border-radius:999px;padding:3px 8px;background:var(--tier-tint,transparent);}
+.value-quick-status {margin-left:auto;font-size:10px;font-weight:800;border:1px solid #80978b60;border-radius:999px;padding:3px 8px;white-space:nowrap;}
+.value-quick-status.won {color:#54bc8c;border-color:#54bc8c70;background:#54bc8c13;}
+.value-quick-status.lost {color:#ed8d87;border-color:#ed8d8770;background:#ed8d8713;}
+.value-quick-status.push,.value-quick-status.ungraded {color:#b5a578;border-color:#b5a57875;}
+.value-quick-status.live {color:#ec9a77;border-color:#ec9a7780;}
+.value-quick-matchup {font-size:12px;opacity:.82;line-height:1.35;margin-bottom:12px;}
+.value-quick-matchup span {opacity:.6;}
+.value-quick-bet-caption {font-size:10px;text-transform:uppercase;letter-spacing:1.1px;opacity:.7;font-weight:750;}
+.value-quick-bet {font-size:clamp(16px,2vw,21px);font-weight:850;line-height:1.25;margin:3px 0 12px;overflow-wrap:anywhere;}
+.value-quick-markets {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding-top:9px;border-top:1px solid #80978b35;}
+.value-quick-markets>span {min-width:0;}
+.value-quick-markets small {display:block;font-size:10px;opacity:.66;}
+.value-quick-markets strong {display:block;font-size:12px;font-variant-numeric:tabular-nums;margin-top:2px;overflow-wrap:anywhere;}
+.value-quick-source {font-size:10px;opacity:.72;margin-top:7px;}
+.value-quick-reason {font-size:12px;line-height:1.45;margin:10px 0 0;padding-top:9px;border-top:1px solid #80978b25;opacity:.9;}
+.value-quick-score {font-size:11px;opacity:.8;margin-top:8px;font-variant-numeric:tabular-nums;}
+@media(max-width:760px) {
+ .value-quick-grid {grid-template-columns:1fr;gap:8px;}
+ .value-quick-card {padding:12px 13px;}
+ .value-quick-bet {font-size:18px;}
+}
+
 /* Phase 5A: tightly grouped, responsive 2 x 3 weekly snapshot. */
 .week-snapshot {margin:2px 0 13px;padding:14px 17px;}
 .week-snapshot .week-heading {margin-bottom:9px;}
@@ -2499,14 +2529,27 @@ with value_tab:
         st.caption("Tier colors identify selection rules, not certainty or relative win probability. See Recommended Bet for the market.")
         st.caption("Historical selections are recalculated from archived data; they are not saved pregame picks.")
     if not value_picks.empty:
-        value_show = value_picks.copy()
-        value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
-        value_show["Recommended Bet"] = np.where(
-            value_show["Value Market"].eq("Spread"),
-            value_show["Value Pick"].astype(str) + " " + value_show["Value Line"].astype(str) + " ATS",
-            value_show["Value Pick"].astype(str) + " ML " + value_show["Value Line"].astype(str),
+        # Same official selections/order as the full table. Cards are display-only.
+        st.markdown("#### Quick view · Official Value Shortlist")
+        st.markdown(
+            render_value_shortlist_cards(value_picks.to_dict("records")),
+            unsafe_allow_html=True,
         )
-        st.dataframe(value_show[["Value Rank", "Value Tier", "Recommended Bet", "Value Result", "Value Price", "Value Source", "Matchup", "Status"]], hide_index=True, use_container_width=True, column_config={"Value Result": st.column_config.TextColumn("Results", pinned=True)})
+        st.caption("The recommended bet may differ from the core model's predicted winner. ATS picks are graded against the spread; moneyline picks are graded straight up.")
+        with st.expander(f"Full Value Shortlist table · {len(value_picks)} picks", expanded=False):
+            value_show = value_picks.copy()
+            value_show["Matchup"] = value_show["Away Team"] + " at " + value_show["Home Team"]
+            value_show["Recommended Bet"] = np.where(
+                value_show["Value Market"].eq("Spread"),
+                value_show["Value Pick"].astype(str) + " " + value_show["Value Line"].astype(str) + " ATS",
+                value_show["Value Pick"].astype(str) + " ML " + value_show["Value Line"].astype(str),
+            )
+            st.dataframe(
+                value_show[["Value Rank", "Value Tier", "Recommended Bet", "Value Result", "Value Price", "Value Source", "Matchup", "Status"]],
+                hide_index=True,
+                use_container_width=True,
+                column_config={"Value Result": st.column_config.TextColumn("Results", pinned=True)},
+            )
         graded_value = value_picks[value_picks["Value Result"].isin(["Correct", "Incorrect"])]
         if not graded_value.empty:
             wins = int(graded_value["Value Result"].eq("Correct").sum())
