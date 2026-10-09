@@ -37,7 +37,6 @@ from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
 from matchday_live import live_board_rows, live_board_html
 from value_shortlist_ui import render_value_shortlist_cards
-from value_roi import value_roi_detail, roi_summary
 from hashlib import sha256
 from performance_cache import cache_calculation, clear_calculations
 
@@ -3507,6 +3506,7 @@ if performance_tab.open:
                     key="value_results_download",
                 )
 
+                from value_roi import value_roi_detail, roi_summary
                 st.divider()
                 st.subheader("Value Shortlist · ROI tracker")
                 st.caption(
