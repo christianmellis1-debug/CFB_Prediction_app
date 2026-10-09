@@ -29,7 +29,7 @@ class TestValueQuickView(unittest.TestCase):
         html = render_value_shortlist_cards([sample()])
         self.assertIn("Home Team -6.5 ATS", html)
         self.assertIn("Point spread", html)
-        self.assertIn("−110" if False else "-110", html)
+        self.assertIn("-110", html)
         self.assertIn("Won", html)
         self.assertIn("Final: Visitors 14", html)
         self.assertIn("leads in rushing, passing, run defense", html)
