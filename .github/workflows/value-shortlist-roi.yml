@@ -1,0 +1,30 @@
+name: Research 2026 Value Shortlist ROI
+on:
+  push:
+    branches:
+      - analysis/value-shortlist-roi-weeks-3-5
+    paths:
+      - '.github/workflows/value-shortlist-roi.yml'
+      - 'research/value_shortlist_roi_2026/report.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy==2.2.6 pandas==2.2.3 scipy==1.15.3
+      - run: python -m py_compile research/value_shortlist_roi_2026/report.py
+      - run: python research/value_shortlist_roi_2026/report.py
+      - name: Save research results on feature branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/value_shortlist_roi_2026/results.json
+          git diff --cached --quiet || git commit -m 'Record 2026 Weeks 3-5 Value Shortlist ROI results'
+          git push origin HEAD:analysis/value-shortlist-roi-weeks-3-5
