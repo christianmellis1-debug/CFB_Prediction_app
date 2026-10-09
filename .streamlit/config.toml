@@ -1,0 +1,4 @@
+# Use Streamlit's native dark palette as the default for Saturday Forecast.
+# Users can still choose a different appearance from their Streamlit menu.
+[theme]
+base = "dark"
