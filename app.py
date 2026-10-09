@@ -2931,21 +2931,8 @@ with cards_tab:
                 with st.expander(f"Show {len(timeline) - 6} more games", expanded=False):
                     st.markdown(matchday_timeline_html(timeline[6:]), unsafe_allow_html=True)
         st.divider()
-        rz_index = {}
-        if pred["Confidence"].lt(.80).any():
-            try:
-                rz_index = red_zone_team_index(season)
-            except (OSError, ValueError):
-                pass
-        rz_cards = {}
-        if rz_index:
-            def load_rz_card(item):
-                idx, pick = item
-                match = games[(games["home_team"] == pick["Home Team"]) & (games["away_team"] == pick["Away Team"])]
-                return idx, red_zone_matchup_html(pick, match, schedule, season, selected_week, rz_index)
-            with st.spinner("Checking red-zone matchup data..."):
-                with ThreadPoolExecutor(max_workers=2) as pool:
-                    rz_cards = dict(pool.map(load_rz_card, list(pred[pred["Confidence"].lt(.80)].iterrows())))
+        # Red-zone requests can be slow and are only needed in an optional
+        # card detail. Fetch them on demand below instead of blocking all cards.
         for card_idx, r in pred.iterrows():
             badge_class = "badge close" if r["Confidence"] < .7 else "badge"
             risk = '<div class="risk-note">Away-team pick · ' + escape(str(r["Venue Risk"])) + ' venue risk</div>' if r["Venue Risk"] != "Normal" else ""
@@ -3018,9 +3005,6 @@ with cards_tab:
                 + escape(explanation) + '</p></div>'
             )
             matchup_html = matchup_insights_html(r, game, published_current, schedule, selected_week, derived_team_ids)
-            red_zone_html = rz_cards.get(card_idx, "")
-            if red_zone_html:
-                matchup_html = matchup_html.replace("</details>", red_zone_html + "</details>")
             check = advantage_checks.get(str(int(game.iloc[0]['game_id'])), {"status":"missing", "reason":advantage_error}) if len(game) == 1 else {"status":"missing", "reason":"Game could not be matched."}
             summary_side = "home" if r["Predicted Side"] == "Home" else "away"
             summary_opponent = r["Away Team"] if summary_side == "home" else r["Home Team"]
@@ -3100,6 +3084,33 @@ with cards_tab:
                     st.markdown(card, unsafe_allow_html=True)
                     with st.expander("Details", expanded=False):
                         st.markdown(card_details[row_id], unsafe_allow_html=True)
+                        # Explicitly requested analysis: keep the same original
+                        # red_zone_matchup_html computations and free cached feed,
+                        # but don't fetch all teams' logs on initial page load.
+                        if float(pick["Confidence"]) < .80 and len(matchup) == 1:
+                            detail_id = int(pick["Game ID"])
+                            rz_key = f"red_zone_detail_{season}_{selected_week}_{detail_id}"
+                            if st.button(
+                                "Load red-zone touchdown comparison",
+                                key=f"load_red_zone_{prefix}_{season}_{selected_week}_{detail_id}",
+                                help="Fetch verified prior-game red-zone touchdown rates for this matchup only.",
+                            ):
+                                with st.spinner("Loading red-zone comparison..."):
+                                    try:
+                                        index = red_zone_team_index(season)
+                                        rz_html = red_zone_matchup_html(
+                                            pick, matchup, schedule, season, selected_week, index,
+                                        )
+                                    except (OSError, ValueError):
+                                        rz_html = ""
+                                st.session_state[rz_key] = rz_html or (
+                                    "Red-zone touchdown comparison unavailable for this matchup."
+                                )
+                            if rz_key in st.session_state:
+                                st.markdown(
+                                    st.session_state[rz_key],
+                                    unsafe_allow_html=True,
+                                )
                         st.markdown("**Team statistics & data quality**")
                         for side in ("away", "home"):
                             tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
