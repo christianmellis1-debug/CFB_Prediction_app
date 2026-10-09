@@ -3137,18 +3137,19 @@ with cards_tab:
                 render_pick_cards(other_rows, "matchup")
         else:
             render_pick_cards(filtered, "matchup")
-        with risky_tab:
-            tour_at("risky")
-            st.subheader(f"Risky picks · {len(risky_indices)}")
-            st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
-            st.write("A warning means a non-tiered pick below 80% model confidence has 0, 1 or 2 of the five matchup advantages. Official Tier 1–5 Value Picks and High/Very High confidence picks (80%+) are excluded so the labels never contradict each other. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
-            if not advantage_checks:
-                st.info(advantage_error)
-            elif risky_indices:
-                render_pick_cards(pred.loc[risky_indices], "risky")
-            else:
-                st.info("No non-tiered picks below 80% confidence meet the risk threshold this week.")
-            st.caption("Tiered games, High/Very High confidence picks (80%+), and games with missing metrics are not rated as risky. Picks and model confidence are unchanged.")
+        if risky_tab.open:
+            with risky_tab:
+                tour_at("risky")
+                st.subheader(f"Risky picks · {len(risky_indices)}")
+                st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
+                st.write("A warning means a non-tiered pick below 80% model confidence has 0, 1 or 2 of the five matchup advantages. Official Tier 1–5 Value Picks and High/Very High confidence picks (80%+) are excluded so the labels never contradict each other. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
+                if not advantage_checks:
+                    st.info(advantage_error)
+                elif risky_indices:
+                    render_pick_cards(pred.loc[risky_indices], "risky")
+                else:
+                    st.info("No non-tiered picks below 80% confidence meet the risk threshold this week.")
+                st.caption("Tiered games, High/Very High confidence picks (80%+), and games with missing metrics are not rated as risky. Picks and model confidence are unchanged.")
 if performance_tab.open:
     with performance_tab:
         show_shadow_tracking(st, season, selected_week)
