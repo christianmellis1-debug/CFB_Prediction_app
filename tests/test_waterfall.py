@@ -464,7 +464,7 @@ class IntegrationTests(unittest.TestCase):
         from pathlib import Path
         tree = ast.parse(Path('app.py').read_text())
         body = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'should_flag_risky']
-        ns = {}
+        ns = {'np': __import__('numpy')}
         exec(compile(ast.Module(body=body, type_ignores=[]), 'app.py', 'exec'), ns)
         scored = {'flag': True, 'count': 1}
         self.assertTrue(ns['should_flag_risky'](scored, False, .79))
@@ -510,7 +510,7 @@ class IntegrationTests(unittest.TestCase):
 
         tree = ast.parse(Path('app.py').read_text())
         names = {'christians_parlay', 'format_moneyline', 'payout_outcomes'}
-        ns = dict(pd=pd, np=__import__('numpy'), Decimal=Decimal, ROUND_HALF_UP=ROUND_HALF_UP)
+        ns = dict(pd=pd, np=__import__('numpy'), math=math, Decimal=Decimal, ROUND_HALF_UP=ROUND_HALF_UP)
         exec(compile(ast.Module(
             body=[n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names],
             type_ignores=[]
