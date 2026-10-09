@@ -1,0 +1,776 @@
+{
+  "season": 2026,
+  "week": 6,
+  "asof_utc": "2026-10-09T14:27:33.350228+00:00",
+  "method": "Current 2026 week 6 pregame Value Shortlist reconstructed from production selection rules and ESPN prices. Upcoming FBS games only. Hypothetical all-win returns, not probability-weighted expected ROI. Flat stakes on straight picks in tiers 1,2,3,5; each nonoverlapping same-week triple from tier 4 gets one parlay; unused tier4 games not bet.",
+  "future_games": 51,
+  "all_week_games": 58,
+  "quote_events": 51,
+  "price_errors": {},
+  "weather_candidate_ids": [
+    401866439,
+    401858256,
+    401858258,
+    401864519,
+    401856716,
+    401856826,
+    401860922,
+    401862797,
+    401860901,
+    401866440,
+    401856718
+  ],
+  "weather_unavailable": [],
+  "value_picks": [
+    {
+      "week": 6,
+      "game_id": 401866439,
+      "matchup": "Kent State at Western Michigan",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Western Michigan",
+      "line": "-13.5",
+      "american_odds": "-120",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T19:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401862797,
+      "matchup": "Rice at East Carolina",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "East Carolina",
+      "line": "-10",
+      "american_odds": "-108",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T20:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401858258,
+      "matchup": "Syracuse at Virginia",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Virginia",
+      "line": "-10",
+      "american_odds": "-108",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T23:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401860922,
+      "matchup": "Washington State at Utah State",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Utah State",
+      "line": "-5.5",
+      "american_odds": "-108",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T01:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401858256,
+      "matchup": "North Carolina at Pittsburgh",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Pittsburgh",
+      "line": "-3.5",
+      "american_odds": "-112",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T16:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401866440,
+      "matchup": "Miami (OH) at Massachusetts",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Massachusetts",
+      "line": "+2.5",
+      "american_odds": "-112",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T18:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401860901,
+      "matchup": "Boise State at Fresno State",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Fresno State",
+      "line": "+6.5",
+      "american_odds": "-102",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-11T02:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401858257,
+      "matchup": "Stanford at Notre Dame",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Notre Dame",
+      "line": "-38.5",
+      "american_odds": "-115",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T19:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401858483,
+      "matchup": "Maryland at Ohio State",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Ohio State",
+      "line": "-32.5",
+      "american_odds": "-110",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T20:15:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401856718,
+      "matchup": "Ole Miss at Vanderbilt",
+      "tier": "Tier 2: Storm Front",
+      "stage": 2,
+      "market": "Spread",
+      "selection": "Vanderbilt",
+      "line": "+9.5",
+      "american_odds": "-112",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T19:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401856713,
+      "matchup": "Tennessee at Arkansas",
+      "tier": "Tier 4: Parlay Bridge",
+      "stage": 4,
+      "market": "Moneyline",
+      "selection": "Tennessee",
+      "line": "-550",
+      "american_odds": "-550",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T20:15:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401860902,
+      "matchup": "San Diego State at Oregon State",
+      "tier": "Tier 4: Parlay Bridge",
+      "stage": 4,
+      "market": "Moneyline",
+      "selection": "Oregon State",
+      "line": "-750",
+      "american_odds": "-750",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T22:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401862798,
+      "matchup": "UAB at Memphis",
+      "tier": "Tier 4: Parlay Bridge",
+      "stage": 4,
+      "market": "Moneyline",
+      "selection": "Memphis",
+      "line": "-600",
+      "american_odds": "-600",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T23:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401856827,
+      "matchup": "Kansas at Utah",
+      "tier": "Tier 4: Parlay Bridge",
+      "stage": 4,
+      "market": "Moneyline",
+      "selection": "Utah",
+      "line": "-750",
+      "american_odds": "-750",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-11T02:15:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401856823,
+      "matchup": "Arizona at West Virginia",
+      "tier": "Tier 5: Home Turf Hammer",
+      "stage": 5,
+      "market": "Moneyline",
+      "selection": "West Virginia",
+      "line": "+130",
+      "american_odds": "+130",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T16:00:00.000Z",
+      "is_priced": true
+    }
+  ],
+  "individual_tickets": [
+    {
+      "week": 6,
+      "game_id": 401866439,
+      "matchup": "Kent State at Western Michigan",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Western Michigan",
+      "line": "-13.5",
+      "american_odds": "-120",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T19:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401862797,
+      "matchup": "Rice at East Carolina",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "East Carolina",
+      "line": "-10",
+      "american_odds": "-108",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T20:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401858258,
+      "matchup": "Syracuse at Virginia",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Virginia",
+      "line": "-10",
+      "american_odds": "-108",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T23:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401860922,
+      "matchup": "Washington State at Utah State",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Utah State",
+      "line": "-5.5",
+      "american_odds": "-108",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T01:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401858256,
+      "matchup": "North Carolina at Pittsburgh",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Pittsburgh",
+      "line": "-3.5",
+      "american_odds": "-112",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T16:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401866440,
+      "matchup": "Miami (OH) at Massachusetts",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Massachusetts",
+      "line": "+2.5",
+      "american_odds": "-112",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T18:00:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401860901,
+      "matchup": "Boise State at Fresno State",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Fresno State",
+      "line": "+6.5",
+      "american_odds": "-102",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-11T02:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401858257,
+      "matchup": "Stanford at Notre Dame",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Notre Dame",
+      "line": "-38.5",
+      "american_odds": "-115",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T19:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401858483,
+      "matchup": "Maryland at Ohio State",
+      "tier": "Tier 1: Complete Game",
+      "stage": 1,
+      "market": "Spread",
+      "selection": "Ohio State",
+      "line": "-32.5",
+      "american_odds": "-110",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T20:15:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401856718,
+      "matchup": "Ole Miss at Vanderbilt",
+      "tier": "Tier 2: Storm Front",
+      "stage": 2,
+      "market": "Spread",
+      "selection": "Vanderbilt",
+      "line": "+9.5",
+      "american_odds": "-112",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T19:30:00.000Z",
+      "is_priced": true
+    },
+    {
+      "week": 6,
+      "game_id": 401856823,
+      "matchup": "Arizona at West Virginia",
+      "tier": "Tier 5: Home Turf Hammer",
+      "stage": 5,
+      "market": "Moneyline",
+      "selection": "West Virginia",
+      "line": "+130",
+      "american_odds": "+130",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-10T16:00:00.000Z",
+      "is_priced": true
+    }
+  ],
+  "parlays": [
+    {
+      "legs": [
+        {
+          "week": 6,
+          "game_id": 401856713,
+          "matchup": "Tennessee at Arkansas",
+          "tier": "Tier 4: Parlay Bridge",
+          "stage": 4,
+          "market": "Moneyline",
+          "selection": "Tennessee",
+          "line": "-550",
+          "american_odds": "-550",
+          "sportsbook": "DraftKings",
+          "status": "Awaiting final",
+          "kickoff": "2026-10-10T20:15:00.000Z",
+          "is_priced": true
+        },
+        {
+          "week": 6,
+          "game_id": 401860902,
+          "matchup": "San Diego State at Oregon State",
+          "tier": "Tier 4: Parlay Bridge",
+          "stage": 4,
+          "market": "Moneyline",
+          "selection": "Oregon State",
+          "line": "-750",
+          "american_odds": "-750",
+          "sportsbook": "DraftKings",
+          "status": "Awaiting final",
+          "kickoff": "2026-10-10T22:00:00.000Z",
+          "is_priced": true
+        },
+        {
+          "week": 6,
+          "game_id": 401862798,
+          "matchup": "UAB at Memphis",
+          "tier": "Tier 4: Parlay Bridge",
+          "stage": 4,
+          "market": "Moneyline",
+          "selection": "Memphis",
+          "line": "-600",
+          "american_odds": "-600",
+          "sportsbook": "DraftKings",
+          "status": "Awaiting final",
+          "kickoff": "2026-10-10T23:00:00.000Z",
+          "is_priced": true
+        }
+      ],
+      "decimal_odds": 1.5626262626262626,
+      "american_odds_approx": -177.74
+    }
+  ],
+  "unpaired_tier4": [
+    {
+      "week": 6,
+      "game_id": 401856827,
+      "matchup": "Kansas at Utah",
+      "tier": "Tier 4: Parlay Bridge",
+      "stage": 4,
+      "market": "Moneyline",
+      "selection": "Utah",
+      "line": "-750",
+      "american_odds": "-750",
+      "sportsbook": "DraftKings",
+      "status": "Awaiting final",
+      "kickoff": "2026-10-11T02:15:00.000Z",
+      "is_priced": true
+    }
+  ],
+  "unpriced": [],
+  "stake_scenarios": {
+    "10": {
+      "tickets": 12,
+      "straight_tickets": 11,
+      "three_leg_parlays": 1,
+      "total_at_risk": 120.0,
+      "profit_if_all_win": 109.12,
+      "total_return_if_all_win": 229.12,
+      "all_win_roi_percent": 90.93,
+      "lose_all_net": -120.0,
+      "ticket_payouts": [
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Western Michigan",
+          "risk": 10,
+          "profit_if_win": 8.33
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "East Carolina",
+          "risk": 10,
+          "profit_if_win": 9.26
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Virginia",
+          "risk": 10,
+          "profit_if_win": 9.26
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Utah State",
+          "risk": 10,
+          "profit_if_win": 9.26
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Pittsburgh",
+          "risk": 10,
+          "profit_if_win": 8.93
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Massachusetts",
+          "risk": 10,
+          "profit_if_win": 8.93
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Fresno State",
+          "risk": 10,
+          "profit_if_win": 9.8
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Notre Dame",
+          "risk": 10,
+          "profit_if_win": 8.7
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Ohio State",
+          "risk": 10,
+          "profit_if_win": 9.09
+        },
+        {
+          "type": "single",
+          "stage": 2,
+          "selection": "Vanderbilt",
+          "risk": 10,
+          "profit_if_win": 8.93
+        },
+        {
+          "type": "single",
+          "stage": 5,
+          "selection": "West Virginia",
+          "risk": 10,
+          "profit_if_win": 13.0
+        },
+        {
+          "type": "3-leg-parlay",
+          "selection": "Tennessee + Oregon State + Memphis",
+          "risk": 10,
+          "profit_if_win": 5.63
+        }
+      ]
+    },
+    "20": {
+      "tickets": 12,
+      "straight_tickets": 11,
+      "three_leg_parlays": 1,
+      "total_at_risk": 240.0,
+      "profit_if_all_win": 218.24,
+      "total_return_if_all_win": 458.24,
+      "all_win_roi_percent": 90.93,
+      "lose_all_net": -240.0,
+      "ticket_payouts": [
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Western Michigan",
+          "risk": 20,
+          "profit_if_win": 16.67
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "East Carolina",
+          "risk": 20,
+          "profit_if_win": 18.52
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Virginia",
+          "risk": 20,
+          "profit_if_win": 18.52
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Utah State",
+          "risk": 20,
+          "profit_if_win": 18.52
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Pittsburgh",
+          "risk": 20,
+          "profit_if_win": 17.86
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Massachusetts",
+          "risk": 20,
+          "profit_if_win": 17.86
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Fresno State",
+          "risk": 20,
+          "profit_if_win": 19.61
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Notre Dame",
+          "risk": 20,
+          "profit_if_win": 17.39
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Ohio State",
+          "risk": 20,
+          "profit_if_win": 18.18
+        },
+        {
+          "type": "single",
+          "stage": 2,
+          "selection": "Vanderbilt",
+          "risk": 20,
+          "profit_if_win": 17.86
+        },
+        {
+          "type": "single",
+          "stage": 5,
+          "selection": "West Virginia",
+          "risk": 20,
+          "profit_if_win": 26.0
+        },
+        {
+          "type": "3-leg-parlay",
+          "selection": "Tennessee + Oregon State + Memphis",
+          "risk": 20,
+          "profit_if_win": 11.25
+        }
+      ]
+    },
+    "100": {
+      "tickets": 12,
+      "straight_tickets": 11,
+      "three_leg_parlays": 1,
+      "total_at_risk": 1200.0,
+      "profit_if_all_win": 1091.14,
+      "total_return_if_all_win": 2291.14,
+      "all_win_roi_percent": 90.93,
+      "lose_all_net": -1200.0,
+      "ticket_payouts": [
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Western Michigan",
+          "risk": 100,
+          "profit_if_win": 83.33
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "East Carolina",
+          "risk": 100,
+          "profit_if_win": 92.59
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Virginia",
+          "risk": 100,
+          "profit_if_win": 92.59
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Utah State",
+          "risk": 100,
+          "profit_if_win": 92.59
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Pittsburgh",
+          "risk": 100,
+          "profit_if_win": 89.29
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Massachusetts",
+          "risk": 100,
+          "profit_if_win": 89.29
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Fresno State",
+          "risk": 100,
+          "profit_if_win": 98.04
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Notre Dame",
+          "risk": 100,
+          "profit_if_win": 86.96
+        },
+        {
+          "type": "single",
+          "stage": 1,
+          "selection": "Ohio State",
+          "risk": 100,
+          "profit_if_win": 90.91
+        },
+        {
+          "type": "single",
+          "stage": 2,
+          "selection": "Vanderbilt",
+          "risk": 100,
+          "profit_if_win": 89.29
+        },
+        {
+          "type": "single",
+          "stage": 5,
+          "selection": "West Virginia",
+          "risk": 100,
+          "profit_if_win": 130.0
+        },
+        {
+          "type": "3-leg-parlay",
+          "selection": "Tennessee + Oregon State + Memphis",
+          "risk": 100,
+          "profit_if_win": 56.26
+        }
+      ]
+    }
+  }
+}
