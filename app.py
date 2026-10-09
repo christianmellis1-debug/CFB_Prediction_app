@@ -4,12 +4,6 @@ from html import escape
 from html.parser import HTMLParser
 import re
 import json
-import os
-import time
-_UI_PROFILE_T0 = time.perf_counter()
-def _ui_profile(stage):
-    if os.environ.get("CFB_UI_PROFILE") == "1":
-        print("CFB_UI_PROFILE", stage, f"{time.perf_counter()-_UI_PROFILE_T0:.2f}s", flush=True)
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 import math
@@ -2132,7 +2126,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 show_app_tour()
-_ui_profile("tour_shown")
 
 now = datetime.now(timezone.utc)
 year = now.year if now.month >= 7 else now.year - 1
@@ -2193,7 +2186,6 @@ if schedule.empty:
     st.warning(f"No regular-season FBS matchups available for {season}.")
     st.stop()
 
-_ui_profile("schedule_loaded")
 weeks = sorted(schedule["week"].astype(int).unique().tolist())
 default_week = weeks[-1]
 if "start_date" in schedule:
@@ -2267,7 +2259,6 @@ except Exception as e:
 if pred.empty:
     st.info("No predictions are available for this week. Try another week above.")
     st.stop()
-_ui_profile("base_predictions_ready")
 
 date_range = None
 odds_snapshot = {"quotes": {}, "retrieved": None}
@@ -2335,7 +2326,6 @@ if weather_candidates:
             "Those games are excluded from the Storm Front tier."
         )
 pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week, weather_checks=weather_checks, published_summary=published_current)
-_ui_profile("weather_and_value_picks_ready")
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
 if st.session_state.get("moneyline_history_season") != season:
     line_history.clear()
@@ -2791,7 +2781,6 @@ with cards_tab:
     # build original cards when the dedicated Risky picks tab is selected.
     show_full_cards = not live_mode or st.session_state.get("main_app_tabs") == "Risky picks"
     if not pred.empty and show_full_cards:
-        _ui_profile("full_cards_start")
         cards = {}
         card_details = {}
         risky_indices = []
@@ -2806,7 +2795,6 @@ with cards_tab:
             for team_id in games[column] if (url := team_logo_url(team_id))
         }))
         logo_sources = embedded_team_logos(logo_urls)
-        _ui_profile("logos_ready")
 
         # Spotlight uses the official Game of the Week from the full slate,
         # independent of the Game Cards search or status filters.
@@ -2945,7 +2933,6 @@ with cards_tab:
         st.divider()
         # Red-zone requests can be slow and are only needed in an optional
         # card detail. Fetch them on demand below instead of blocking all cards.
-        _ui_profile("card_html_begin")
         for card_idx, r in pred.iterrows():
             badge_class = "badge close" if r["Confidence"] < .7 else "badge"
             risk = '<div class="risk-note">Away-team pick · ' + escape(str(r["Venue Risk"])) + ' venue risk</div>' if r["Venue Risk"] != "Normal" else ""
@@ -3086,7 +3073,6 @@ with cards_tab:
 <div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Model win chance</span><strong>{r['Confidence']:.1%}</strong></div>
 <div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
-        _ui_profile("card_html_complete")
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
                 if card_index % 2 == 0:
@@ -3151,7 +3137,6 @@ with cards_tab:
                 render_pick_cards(other_rows, "matchup")
         else:
             render_pick_cards(filtered, "matchup")
-        _ui_profile("visible_cards_rendered")
         if risky_tab.open:
             with risky_tab:
                 tour_at("risky")
@@ -3696,9 +3681,7 @@ with about_tab:
         st.caption("The adjustment improved historical probability scores but did not improve winner accuracy in every season. It does not establish better betting returns. The realigned 2026 Group of Six is a prospective application; historical scenarios are recalculated using the current model.")
         st.caption(f"Loaded {season}: {len(current):,} team-week rows; {season - 1}: {len(prior):,} rows. Source: SportsDataverse / cfbfastR.")
 
-_ui_profile("before_watch_results")
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"], original_odds_health={"stale": odds_snapshot.get("stale", False), "stale_events": odds_snapshot.get("stale_events", {})})
-_ui_profile("after_watch_results")
 
 # Shared footer, displayed once below the active tab's content.
 st.markdown(
