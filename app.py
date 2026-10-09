@@ -2011,6 +2011,24 @@ st.markdown("""
   .tier-performance-card {padding:10px;}
 }
 
+/* Phase 5A: tightly grouped, responsive 2 x 3 weekly snapshot. */
+.week-snapshot {margin:2px 0 13px;padding:14px 17px;}
+.week-snapshot .week-heading {margin-bottom:9px;}
+.week-snapshot .week-heading h2 {font-size:clamp(19px,2.7vw,24px);}
+.week-snapshot .dashboard-group {margin-top:7px;}
+.week-snapshot .dashboard-group+.dashboard-group {padding-top:9px;margin-top:9px;}
+.week-snapshot .dashboard-metrics>div {padding:8px 11px;}
+.week-snapshot .dashboard-metrics strong {font-size:clamp(17px,2.4vw,24px);}
+.week-snapshot .snapshot-footnote {font-size:10px;opacity:.65;margin-top:10px;line-height:1.4;}
+@media(max-width:650px) {
+ .week-snapshot {padding:11px 10px;}
+ .week-snapshot .week-heading {align-items:flex-start;flex-wrap:wrap;gap:5px;}
+ .week-snapshot .week-heading h2 {font-size:20px;}
+ .week-snapshot .week-state {padding:4px 7px;font-size:10px;}
+ .week-snapshot .dashboard-metrics>div {padding:8px 6px;}
+ .week-snapshot .dashboard-metrics strong {font-size:17px;}
+}
+
 /* Phase 2 graded-record visualization uses only values already on the results tab. */
 .accuracy-band-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:9px;margin:12px 0 14px;}
 .accuracy-band {--band-accent:#8394a5;border:1px solid #80978b35;border-radius:12px;padding:12px 13px;background:var(--secondary-background-color);min-width:0;}
@@ -2048,32 +2066,33 @@ st.markdown("""
 .spotlight-summary span {font-size:12px;}
 .spotlight-summary strong {display:block;margin-top:4px;font-size:clamp(14px,2vw,20px);font-variant-numeric:tabular-nums;overflow-wrap:anywhere;}
 .spotlight-context {font-size:12px;line-height:1.55;opacity:.86;margin:11px 0 0;overflow-wrap:anywhere;}
-.matchday-timeline {margin:12px 0 18px;display:grid;gap:10px;}
-.kickoff-window {display:grid;grid-template-columns:minmax(115px,155px) minmax(0,1fr);gap:12px;align-items:start;}
-.kickoff-window-time {font-size:12px;line-height:1.5;margin:0;padding:10px 10px 10px 13px;border-left:3px solid #6eae93;background:#58ae8712;border-radius:0 9px 9px 0;}
-.kickoff-window-games {display:grid;gap:6px;min-width:0;}
-.kickoff-game {border:1px solid #80978b38;border-radius:10px;padding:10px 12px;background:var(--secondary-background-color);min-width:0;}
-.kickoff-game-main {display:flex;justify-content:space-between;align-items:center;gap:10px;}
-.kickoff-game-main strong {font-size:13px;line-height:1.4;overflow-wrap:anywhere;min-width:0;}
+/* Phase 5A: compact grouped kickoff rows. */
+.matchday-timeline {margin:7px 0 11px;display:grid;gap:6px;}
+.kickoff-window {display:grid;grid-template-columns:minmax(104px,132px) minmax(0,1fr);gap:8px;align-items:start;}
+.kickoff-window-time {font-size:11px;line-height:1.4;margin:0;padding:7px 8px 7px 10px;border-left:3px solid #6eae93;background:#58ae8712;border-radius:0 8px 8px 0;}
+.kickoff-window-games {display:grid;gap:4px;min-width:0;}
+.kickoff-game {border:1px solid #80978b38;border-radius:8px;padding:7px 10px;background:var(--secondary-background-color);min-width:0;}
+.kickoff-game-main {display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.kickoff-game-main strong {font-size:12px;line-height:1.3;overflow-wrap:anywhere;min-width:0;}
 .kickoff-at {font-weight:400;opacity:.6;}
-.kickoff-game-details {display:flex;flex-wrap:wrap;align-items:center;gap:5px 14px;margin-top:6px;font-size:11px;opacity:.9;}
-.timeline-status {font-size:10px;font-weight:800;padding:3px 7px;border:1px solid #80978b55;border-radius:999px;white-space:nowrap;}
+.kickoff-game-details {display:flex;flex-wrap:wrap;align-items:center;gap:3px 10px;margin-top:3px;font-size:10px;line-height:1.35;opacity:.9;}
+.timeline-status {font-size:9px;font-weight:800;padding:2px 6px;border:1px solid #80978b55;border-radius:999px;white-space:nowrap;flex-shrink:0;}
 .timeline-status.live {color:#f09a79;border-color:#df9976;}
 .timeline-status.final {color:#8b9cae;}
 .timeline-status.correct {color:#51bc8b;border-color:#51bc8b88;background:#51bc8b12;}
 .timeline-status.incorrect {color:#ef8d87;border-color:#ef8d8788;background:#ef8d8712;}
 .timeline-final-score {font-variant-numeric:tabular-nums;}
-.timeline-tier {font-size:10px;opacity:.9;border:1px solid #80978b66;border-radius:999px;padding:3px 7px;}
+.timeline-tier {font-size:9px;opacity:.9;border:1px solid #80978b66;border-radius:999px;padding:2px 6px;}
 @media(max-width:650px) {
  .spotlight-card {padding:14px 13px;margin-bottom:13px;}
  .spotlight-title {font-size:18px;}
  .spotlight-logo {width:36px;height:36px;}
  .spotlight-summary {gap:9px 16px;}
  .spotlight-summary span {flex:1 1 95px;}
- .kickoff-window {grid-template-columns:1fr;gap:5px;}
- .kickoff-window-time {padding:7px 10px;font-size:12px;}
- .kickoff-game {padding:9px 10px;}
- .kickoff-game-main {gap:8px;}
+ .kickoff-window {grid-template-columns:1fr;gap:3px;}
+ .kickoff-window-time {padding:5px 8px;font-size:11px;}
+ .kickoff-game {padding:6px 8px;}
+ .kickoff-game-main {gap:6px;}
  .kickoff-game-main strong {font-size:12px;}
  .kickoff-game-details {font-size:10px;}
 }
@@ -2201,7 +2220,6 @@ if "start_date" in schedule:
 with week_col:
     selected_week = st.selectbox("Week", weeks, index=weeks.index(default_week), format_func=lambda w: f"Week {w}")
 games = schedule[schedule["week"] == selected_week]
-dashboard_summary = st.empty()
 export_controls = st.container()
 if st.session_state.get("main_app_tabs") == "Compare picks":
     st.session_state["main_app_tabs"] = "Game cards"
@@ -2359,7 +2377,23 @@ if value_pushes:
     value_record += f"–{value_pushes}P"
 value_accuracy = f"{value_wins / value_decisive:.1%}" if value_decisive else "—"
 week_state = "All games final" if awaiting_count == 0 else f"{awaiting_count} awaiting final"
-dashboard_summary.markdown(f"""<section class="week-dashboard"><div class="week-heading"><div><span class="section-kicker">{season} SEASON · MATCHUP PERFORMANCE</span><h2>Week {selected_week}</h2></div><span class="week-state">{week_state}</span></div><div class="dashboard-group"><div class="dashboard-group-heading">Core model · winner predictions</div><div class="dashboard-metrics"><div><strong>{len(pred)}</strong><span>Matchups</span></div><div><strong>{correct_count}–{len(graded)-correct_count}</strong><span>Pick record</span></div><div><strong>{accuracy}</strong><span>Graded accuracy</span></div></div></div><div class="dashboard-group value-metrics"><div class="dashboard-group-heading">Official Value Picks · market-specific results</div><div class="dashboard-metrics"><div><strong>{value_count}</strong><span>Selected picks</span></div><div><strong>{value_record}</strong><span>Value Pick record</span></div><div><strong>{value_accuracy}</strong><span>Decisive win rate</span></div></div></div></section>""", unsafe_allow_html=True)
+completed_count = int(pred["Status"].eq("Final").sum())
+value_remaining = int((pred["Value Selected"] & pred["Status"].ne("Final")).sum())
+# Based on the entire selected week, independent of the Game Cards filters.
+weekly_snapshot_html = f"""<section class="week-dashboard week-snapshot" aria-label="Week {selected_week} performance snapshot">
+<div class="week-heading"><div><span class="section-kicker">{season} SEASON · WEEKLY PERFORMANCE</span><h2>Week {selected_week} snapshot</h2></div><span class="week-state">{week_state}</span></div>
+<div class="dashboard-group"><div class="dashboard-group-heading">Core model · predicted winners</div><div class="dashboard-metrics">
+<div><strong>{completed_count}/{len(pred)}</strong><span>Games completed</span></div>
+<div><strong>{correct_count}–{len(graded)-correct_count}</strong><span>Model record</span></div>
+<div><strong>{accuracy}</strong><span>Model win %</span></div>
+</div></div>
+<div class="dashboard-group value-metrics"><div class="dashboard-group-heading">Official Value Shortlist · recommended-bet results</div><div class="dashboard-metrics">
+<div><strong>{value_record}</strong><span>Value Pick record</span></div>
+<div><strong>{value_accuracy}</strong><span>Value Pick win %</span></div>
+<div><strong>{value_remaining}</strong><span>Value picks remaining</span></div>
+</div></div>
+<div class="snapshot-footnote">Entire selected week · unfiltered · Value Pick pushes excluded from win percentage</div>
+</section>"""
 with feed_details:
     schedule_time = original_schedule.attrs.get("fetched_at", "Uploaded CSV" if schedule_file is not None else "Unknown")
     stats_time = published_current.attrs.get("fetched_at", "Uploaded CSV" if current_file is not None else "Unknown")
@@ -2599,9 +2633,12 @@ def matchday_timeline_html(entries):
         if status == "Final" and result in ("Correct", "Incorrect"):
             status_class = "correct" if result == "Correct" else "incorrect"
             status_label = "✓ Correct" if result == "Correct" else "✕ Incorrect"
+        elif status == "In progress":
+            status_class, status_label = "live", "LIVE"
+        elif status.startswith("Final"):
+            status_class, status_label = "final", "Final" if status == "Final" else "Final pending"
         else:
-            status_class = "live" if status == "In progress" else "final" if status == "Final" else "pending"
-            status_label = "LIVE" if status == "In progress" else status
+            status_class, status_label = "pending", "Scheduled"
         score = item.get("final_score", "")
         final_score = (
             '<span class="timeline-final-score">Final: ' + escape(score) + '</span>'
@@ -2638,6 +2675,7 @@ def reset_pick_filters():
 
 with cards_tab:
     tour_at("filters")
+    st.markdown(weekly_snapshot_html, unsafe_allow_html=True)
     st.subheader("Matchup center")
     live_mode = st.toggle(
         "Saturday Live Mode",
@@ -2943,10 +2981,10 @@ with cards_tab:
                 f"{len(timeline)} game(s) · Central Time · sorted by kickoff · "
                 "reflects your Game cards filters"
             )
-            st.markdown(matchday_timeline_html(timeline[:6]), unsafe_allow_html=True)
-            if len(timeline) > 6:
-                with st.expander(f"Show {len(timeline) - 6} more games", expanded=False):
-                    st.markdown(matchday_timeline_html(timeline[6:]), unsafe_allow_html=True)
+            st.markdown(matchday_timeline_html(timeline[:8]), unsafe_allow_html=True)
+            if len(timeline) > 8:
+                with st.expander(f"Show {len(timeline) - 8} more games", expanded=False):
+                    st.markdown(matchday_timeline_html(timeline[8:]), unsafe_allow_html=True)
         st.divider()
         # Red-zone requests can be slow and are only needed in an optional
         # card detail. Fetch them on demand below instead of blocking all cards.
