@@ -2023,6 +2023,53 @@ st.markdown("""
 .accuracy-fill {display:block;height:100%;background:var(--band-accent);border-radius:999px;}
 .accuracy-band-record {font-size:11px;opacity:.75;font-variant-numeric:tabular-nums;}
 @media(max-width:700px) {.accuracy-band-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;}.accuracy-band {padding:10px;}}
+
+/* Phase 3: matchup spotlight and local-time kickoff timeline. */
+.matchday-heading {display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 7px;}
+.matchday-heading h3 {font-size:18px;letter-spacing:-.4px;margin:0;}
+.spotlight-card {
+  border:1px solid #58ae8775;border-left:5px solid #8fd6aa;
+  border-radius:17px;padding:18px 20px;
+  background:linear-gradient(120deg,#3c996d22,var(--secondary-background-color));
+  margin:8px 0 18px;min-width:0;
+}
+.spotlight-card.spotlight-consensus {border-left-color:#b5ed73;}
+.spotlight-eyebrow {font-weight:800;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#77bb9b;}
+.spotlight-card.spotlight-consensus .spotlight-eyebrow {color:#a5ca72;}
+.spotlight-title {font-size:clamp(18px,3vw,25px);font-weight:850;letter-spacing:-.5px;margin:7px 0 8px;line-height:1.25;overflow-wrap:anywhere;}
+.spotlight-teamline {display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.spotlight-logo {width:44px;height:44px;object-fit:contain;border-radius:9px;padding:4px;background:#f8fafc;box-sizing:border-box;}
+.spotlight-meta {font-size:12px;opacity:.82;margin-bottom:12px;}
+.spotlight-summary {display:flex;flex-wrap:wrap;gap:10px 20px;padding:11px 0;border-top:1px solid #80978b36;border-bottom:1px solid #80978b36;}
+.spotlight-summary span {font-size:12px;}
+.spotlight-summary strong {display:block;margin-top:4px;font-size:clamp(14px,2vw,20px);font-variant-numeric:tabular-nums;overflow-wrap:anywhere;}
+.spotlight-context {font-size:12px;line-height:1.55;opacity:.86;margin:11px 0 0;overflow-wrap:anywhere;}
+.matchday-timeline {margin:12px 0 18px;display:grid;gap:10px;}
+.kickoff-window {display:grid;grid-template-columns:minmax(115px,155px) minmax(0,1fr);gap:12px;align-items:start;}
+.kickoff-window-time {font-size:12px;line-height:1.5;margin:0;padding:10px 10px 10px 13px;border-left:3px solid #6eae93;background:#58ae8712;border-radius:0 9px 9px 0;}
+.kickoff-window-games {display:grid;gap:6px;min-width:0;}
+.kickoff-game {border:1px solid #80978b38;border-radius:10px;padding:10px 12px;background:var(--secondary-background-color);min-width:0;}
+.kickoff-game-main {display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.kickoff-game-main strong {font-size:13px;line-height:1.4;overflow-wrap:anywhere;min-width:0;}
+.kickoff-at {font-weight:400;opacity:.6;}
+.kickoff-game-details {display:flex;flex-wrap:wrap;align-items:center;gap:5px 14px;margin-top:6px;font-size:11px;opacity:.9;}
+.timeline-status {font-size:10px;font-weight:800;padding:3px 7px;border:1px solid #80978b55;border-radius:999px;white-space:nowrap;}
+.timeline-status.live {color:#f09a79;border-color:#df9976;}
+.timeline-status.final {color:#8b9cae;}
+.timeline-tier {font-size:10px;opacity:.9;border:1px solid #80978b66;border-radius:999px;padding:3px 7px;}
+@media(max-width:650px) {
+ .spotlight-card {padding:14px 13px;margin-bottom:13px;}
+ .spotlight-title {font-size:18px;}
+ .spotlight-logo {width:36px;height:36px;}
+ .spotlight-summary {gap:9px 16px;}
+ .spotlight-summary span {flex:1 1 95px;}
+ .kickoff-window {grid-template-columns:1fr;gap:5px;}
+ .kickoff-window-time {padding:7px 10px;font-size:12px;}
+ .kickoff-game {padding:9px 10px;}
+ .kickoff-game-main {gap:8px;}
+ .kickoff-game-main strong {font-size:12px;}
+ .kickoff-game-details {font-size:10px;}
+}
 </style>
 <div class="hero"><div class="hero-brand"><div class="hero-mark">🏈</div><div><div class="eyebrow">COLLEGE FOOTBALL · MATCHDAY HQ</div>
 <h1>Saturday Forecast<span class="brand-dot">.</span></h1><p>Your slate. Your picks. Your game plan.</p></div></div></div>
@@ -2388,6 +2435,114 @@ def sort_picks_by_game_time(picks, schedule):
     ordered = picks.copy()
     ordered["_kickoff_sort"] = pd.to_numeric(ordered["Game ID"], errors="coerce").map(kickoff_by_id)
     return ordered.sort_values("_kickoff_sort", kind="stable", na_position="last").drop(columns="_kickoff_sort")
+
+
+
+def select_matchday_spotlight(picks):
+    """Prefer established cross-tier Games of the Week; otherwise spotlight a model matchup.
+
+    The fallback is editorial presentation only, not a new tier, bet, or official pick.
+    """
+    if picks is None or picks.empty:
+        return None, False
+    gotw = picks.get("Game of Week", pd.Series(False, index=picks.index))
+    marked = picks.loc[gotw.fillna(False).astype(bool)].copy()
+    official = not marked.empty
+    pool = marked if official else picks.loc[~picks["Status"].eq("Final")].copy()
+    if pool.empty:
+        pool = picks.copy()
+    pool["_spotlight_conf"] = pd.to_numeric(pool["Confidence"], errors="coerce").fillna(-1.0)
+    if official:
+        pool["_spotlight_tiers"] = pd.to_numeric(
+            pool.get("Game of Week Tier Count", pd.Series(0, index=pool.index)),
+            errors="coerce",
+        ).fillna(0)
+        pool = pool.sort_values(["_spotlight_tiers", "_spotlight_conf"],
+                                ascending=[False, False], kind="stable")
+    else:
+        pool = pool.sort_values("_spotlight_conf", ascending=False, kind="stable")
+    return pool.iloc[0], official
+
+
+def matchday_timeline_rows(picks, game_schedule, saturday_only=True):
+    """Local Central Time kickoff rows based solely on the already-loaded filtered slate."""
+    if picks is None or picks.empty:
+        return []
+    schedule_by_id = {}
+    for _, game in game_schedule.iterrows():
+        game_id = pd.to_numeric(game.get("game_id"), errors="coerce")
+        if pd.notna(game_id):
+            schedule_by_id[int(game_id)] = game.get("start_date")
+    timeline = []
+    for _, pick in picks.iterrows():
+        game_id = pd.to_numeric(pick.get("Game ID"), errors="coerce")
+        kickoff = pd.NaT
+        if pd.notna(game_id):
+            kickoff = pd.to_datetime(schedule_by_id.get(int(game_id)), errors="coerce", utc=True)
+        if pd.notna(kickoff):
+            kickoff = kickoff.tz_convert("America/Chicago")
+        if saturday_only and (pd.isna(kickoff) or kickoff.weekday() != 5):
+            continue
+        window = (
+            kickoff.strftime("%a, %b %d") + " · "
+            + kickoff.strftime("%I:%M %p").lstrip("0") + " CT"
+            if pd.notna(kickoff) else "Kickoff time TBD"
+        )
+        confidence = pd.to_numeric(pick.get("Confidence"), errors="coerce")
+        timeline.append({
+            "kickoff": kickoff if pd.notna(kickoff) else None,
+            "window": window,
+            "away": str(pick.get("Away Team", "")),
+            "home": str(pick.get("Home Team", "")),
+            "winner": str(pick.get("Predicted Winner", "")),
+            "chance": float(confidence) if pd.notna(confidence) else None,
+            "status": str(pick.get("Status", "Scheduled")),
+            "tier": str(pick.get("Value Tier", "")) if bool(pick.get("Value Selected", False)) else "",
+        })
+    timeline.sort(key=lambda item: (
+        item["kickoff"] is None,
+        item["kickoff"].timestamp() if item["kickoff"] is not None else float("inf"),
+        item["away"], item["home"],
+    ))
+    return timeline
+
+
+def matchday_timeline_html(entries):
+    """Render compact, grouped, screen-reader-friendly kickoff windows."""
+    if not entries:
+        return ""
+    html = ['<div class="matchday-timeline">']
+    current_window = None
+    for item in entries:
+        if item["window"] != current_window:
+            if current_window is not None:
+                html.append('</div></section>')
+            current_window = item["window"]
+            html.append(
+                '<section class="kickoff-window"><h4 class="kickoff-window-time">'
+                + escape(current_window) + '</h4><div class="kickoff-window-games">'
+            )
+        status = item["status"]
+        status_class = "live" if status == "In progress" else "final" if status == "Final" else "pending"
+        status_label = "LIVE" if status == "In progress" else status
+        chance = f'{item["chance"]:.1%}' if item["chance"] is not None else "—"
+        tier_badge = (
+            '<span class="timeline-tier">' + escape(item["tier"]) + '</span>'
+            if item["tier"] else ""
+        )
+        html.append(
+            '<div class="kickoff-game">'
+            '<div class="kickoff-game-main"><strong>'
+            + escape(item["away"]) + ' <span class="kickoff-at">at</span> '
+            + escape(item["home"]) + '</strong><span class="timeline-status ' + status_class + '">'
+            + escape(status_label) + '</span></div>'
+            '<div class="kickoff-game-details"><span>Pick: <strong>'
+            + escape(item["winner"]) + '</strong></span>'
+            '<span>Model chance: <strong>' + chance + '</strong></span>'
+            + tier_badge + '</div></div>'
+        )
+    html.append('</div></section></div>')
+    return "".join(html)
 
 
 def reset_pick_filters():
