@@ -2679,7 +2679,7 @@ def matchday_timeline_html(entries):
         elif status == "In progress":
             status_class, status_label = "live", "LIVE"
         elif status.startswith("Final"):
-            status_class, status_label = "final", "Final" if status == "Final" else "Final pending"
+            status_class, status_label = "final", status
         else:
             status_class, status_label = "pending", "Scheduled"
         score = item.get("final_score", "")
