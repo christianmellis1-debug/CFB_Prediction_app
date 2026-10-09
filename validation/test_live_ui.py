@@ -107,12 +107,16 @@ def run():
                 RESULTS["measurements"]["failed_page_text"]=page.locator("body").inner_text(timeout=10000)[-2400:]
                 return
             try:
-                page.locator(".prediction-disclaimer").wait_for(timeout=150000)
+                page.locator(".prediction-disclaimer").wait_for(timeout=55000)
                 footer_ready=True
             except Exception:
                 footer_ready=False
-                RESULTS["warnings"].append("Prediction footer missing after waiting 150 seconds")
+                RESULTS["warnings"].append("Prediction footer missing after waiting 55 seconds")
             RESULTS["measurements"]["footer_arrived"]=footer_ready
+            RESULTS["measurements"]["body_footer_text_found"]=page.evaluate("() => document.body.innerText.includes('Prediction disclaimer')")
+            if not footer_ready:
+                RESULTS["measurements"]["body_tail"]=page.locator("body").inner_text()[-3600:]
+                RESULTS["measurements"]["footer_html_mentions"]=page.evaluate("() => (document.documentElement.outerHTML.match(/prediction.disclaimer/gi)||[]).length")
             info=browser_dimensions(page)
             RESULTS["measurements"]["mobile_390"]=info
             check("No global horizontal scroll at 390px",
@@ -123,7 +127,7 @@ def run():
             check("No exceptions on Game cards",info["exceptionCount"]==0,info["exceptionCount"])
             check("Single prediction disclaimer",info["footerCount"]==1,{"count":info["footerCount"],"waited_for_completion":footer_ready})
             check("Default dark background",
-                  bool(info["themeToken"] and info["themeToken"].lower() not in ("#ffffff","rgb(255, 255, 255)","white")),
+                  (info["appSurface"] not in (None,"rgb(255, 255, 255)","rgba(0, 0, 0, 0)")),
                   {"container":info["background"],"themeToken":info["themeToken"],"appSurface":info["appSurface"]},
                   critical=False)
             # On mobile, each tab's rectangle should remain inside the viewport.
@@ -146,7 +150,7 @@ def run():
             page.get_by_role("tab",name="Game cards").click(timeout=20000)
             check("Live Mode toggle is present",page.get_by_text("Saturday Live Mode").count()>0)
             # Verify that Live Mode can be toggled, score-only refresh exists, no errors.
-            toggle=page.get_by_label("Saturday Live Mode")
+            toggle=page.locator('[class*="st-key-saturday_live_mode"] input[type="checkbox"]').first
             try:
                 toggle.check(timeout=30000)
                 page.get_by_text("Refresh scores now").wait_for(timeout=30000)
