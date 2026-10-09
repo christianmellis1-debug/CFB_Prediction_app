@@ -1869,6 +1869,14 @@ dashboard_summary = st.empty()
 export_controls = st.container()
 if st.session_state.get("main_app_tabs") == "Compare picks":
     st.session_state["main_app_tabs"] = "Game cards"
+# Keep controls when their tab is hidden and Streamlit cleans up its widgets.
+for _tab_control in (
+    "model_results_period", "shadow_all_weeks", "parlay_stake", "parlay_legs",
+    "parlay_goal", "parlay_min_conf", "parlay_data_rule", "parlay_book",
+):
+    if _tab_control in st.session_state:
+        st.session_state[_tab_control] = st.session_state[_tab_control]
+
 cards_tab, risky_tab, value_tab, performance_tab, scenario_tab, parlay_tab, tracker_tab, about_tab = st.tabs(["Game cards", "Risky picks", "Value shortlist", "Model results", "What-if bets", "Parlay finder", "My bets", "How it works"], key="main_app_tabs", on_change="rerun")
 with about_tab:
     feed_details = st.expander("Feed health & data notes", expanded=False)
@@ -2438,197 +2446,198 @@ with cards_tab:
             else:
                 st.info("No non-tiered picks below 80% confidence meet the risk threshold this week.")
             st.caption("Tiered games, High/Very High confidence picks (80%+), and games with missing metrics are not rated as risky. No warning does not mean a safe bet. Picks and model confidence are unchanged.")
-with performance_tab:
-    show_shadow_tracking(st, season, selected_week)
-    tour_at("results")
-    st.subheader("Model results by confidence")
-    st.caption("All model picks in the chosen period, independent of matchup filters, moneyline availability, or your personal bets. Accuracy measures picking the winner, not betting profit.")
-    performance_scope = st.radio("Results period", ["Selected week", "Season to date"], horizontal=True, key="model_results_period")
-    performance_frames = []
-    value_performance_frames = []
-    performance_errors = []
-    value_performance_errors = []
-    results_schedule = overlay_live_scores(schedule, live_snapshot["games"])
+if performance_tab.open:
+    with performance_tab:
+        show_shadow_tracking(st, season, selected_week)
+        tour_at("results")
+        st.subheader("Model results by confidence")
+        st.caption("All model picks in the chosen period, independent of matchup filters, moneyline availability, or your personal bets. Accuracy measures picking the winner, not betting profit.")
+        performance_scope = st.radio("Results period", ["Selected week", "Season to date"], horizontal=True, key="model_results_period")
+        performance_frames = []
+        value_performance_frames = []
+        performance_errors = []
+        value_performance_errors = []
+        results_schedule = overlay_live_scores(schedule, live_snapshot["games"])
 
-    if performance_scope == "Selected week":
-        performance_frames = [pred]
-        if selected_week >= 3:
-            value_performance_frames = [pred]
-    else:
-        completed_mask = results_schedule.get("completed", pd.Series(False, index=results_schedule.index)).astype(str).str.lower().isin(["true", "t", "1", "1.0", "yes", "y"])
-        result_weeks = sorted(results_schedule.loc[completed_mask, "week"].astype(int).unique().tolist())
-        st.caption("Season to date includes weeks with at least one completed game; any unfinished games in those weeks remain ungraded.")
-        with st.spinner("Calculating model and Value Pick results from pregame-week statistics..."):
-            for result_week in result_weeks:
-                try:
-                    if result_week == selected_week:
-                        week_result = pred
-                    else:
-                        result_current, _ = augment_missing_summaries(published_current, prior, results_schedule, result_week)
-                        week_result = predict_all_games(result_current, prior, results_schedule, result_week)
-                        if not week_result.empty:
-                            result_games = results_schedule[results_schedule["week"] == result_week]
-                            week_result = attach_results(week_result, result_games)
-                    if week_result.empty:
-                        performance_errors.append(str(result_week))
-                        continue
-                    performance_frames.append(week_result)
-
-                    # Value Pick history intentionally starts in Week 3. Weeks 1-2
-                    # do not have enough current-season information for the tier structure.
-                    if result_week < 3:
-                        continue
-                    if result_week == selected_week:
-                        value_performance_frames.append(week_result)
-                        continue
-
-                    result_games = results_schedule[results_schedule["week"] == result_week]
-                    result_dates = pd.to_datetime(
-                        result_games.get("start_date", pd.Series(dtype=str)),
-                        errors="coerce", utc=True,
-                    ).dropna()
-                    if result_dates.empty:
-                        value_performance_errors.append(str(result_week))
-                        continue
-                    result_period = (
-                        result_dates.min().strftime("%Y%m%d")
-                        + "-"
-                        + result_dates.max().strftime("%Y%m%d")
-                    )
+        if performance_scope == "Selected week":
+            performance_frames = [pred]
+            if selected_week >= 3:
+                value_performance_frames = [pred]
+        else:
+            completed_mask = results_schedule.get("completed", pd.Series(False, index=results_schedule.index)).astype(str).str.lower().isin(["true", "t", "1", "1.0", "yes", "y"])
+            result_weeks = sorted(results_schedule.loc[completed_mask, "week"].astype(int).unique().tolist())
+            st.caption("Season to date includes weeks with at least one completed game; any unfinished games in those weeks remain ungraded.")
+            with st.spinner("Calculating model and Value Pick results from pregame-week statistics..."):
+                for result_week in result_weeks:
                     try:
-                        result_quotes = download_market_odds(
-                            result_period, schedule_event_ids(result_games)
-                        )["quotes"]
-                    except Exception:
-                        value_performance_errors.append(str(result_week))
-                        continue
+                        if result_week == selected_week:
+                            week_result = pred
+                        else:
+                            result_current, _ = augment_missing_summaries(published_current, prior, results_schedule, result_week)
+                            week_result = predict_all_games(result_current, prior, results_schedule, result_week)
+                            if not week_result.empty:
+                                result_games = results_schedule[results_schedule["week"] == result_week]
+                                week_result = attach_results(week_result, result_games)
+                        if week_result.empty:
+                            performance_errors.append(str(result_week))
+                            continue
+                        performance_frames.append(week_result)
 
-                    week_value = add_betting_value(
-                        attach_odds(week_result, result_games, result_quotes)
-                    )
-                    historical_weather = {}
-                    try:
-                        historical_profiles = build_waterfall_profiles(
-                            results_schedule, waterfall_boxes, result_week
+                        # Value Pick history intentionally starts in Week 3. Weeks 1-2
+                        # do not have enough current-season information for the tier structure.
+                        if result_week < 3:
+                            continue
+                        if result_week == selected_week:
+                            value_performance_frames.append(week_result)
+                            continue
+
+                        result_games = results_schedule[results_schedule["week"] == result_week]
+                        result_dates = pd.to_datetime(
+                            result_games.get("start_date", pd.Series(dtype=str)),
+                            errors="coerce", utc=True,
+                        ).dropna()
+                        if result_dates.empty:
+                            value_performance_errors.append(str(result_week))
+                            continue
+                        result_period = (
+                            result_dates.min().strftime("%Y%m%d")
+                            + "-"
+                            + result_dates.max().strftime("%Y%m%d")
                         )
-                        historical_weather_ids = weather_tier_candidate_ids(
-                            week_value, results_schedule, historical_profiles
+                        try:
+                            result_quotes = download_market_odds(
+                                result_period, schedule_event_ids(result_games)
+                            )["quotes"]
+                        except Exception:
+                            value_performance_errors.append(str(result_week))
+                            continue
+
+                        week_value = add_betting_value(
+                            attach_odds(week_result, result_games, result_quotes)
                         )
-                        if historical_weather_ids:
-                            historical_weather = value_weather_context(
-                                results_schedule, result_week, tuple(historical_weather_ids)
-                            )
-                    except Exception:
                         historical_weather = {}
+                        try:
+                            historical_profiles = build_waterfall_profiles(
+                                results_schedule, waterfall_boxes, result_week
+                            )
+                            historical_weather_ids = weather_tier_candidate_ids(
+                                week_value, results_schedule, historical_profiles
+                            )
+                            if historical_weather_ids:
+                                historical_weather = value_weather_context(
+                                    results_schedule, result_week, tuple(historical_weather_ids)
+                                )
+                        except Exception:
+                            historical_weather = {}
 
-                    week_value = add_waterfall_value(
-                        week_value,
-                        results_schedule,
-                        waterfall_boxes,
-                        result_week,
-                        weather_checks=historical_weather,
-                        published_summary=published_current,
-                    )
-                    value_performance_frames.append(week_value)
-                except Exception:
-                    performance_errors.append(str(result_week))
-                    if result_week >= 3:
-                        value_performance_errors.append(str(result_week))
+                        week_value = add_waterfall_value(
+                            week_value,
+                            results_schedule,
+                            waterfall_boxes,
+                            result_week,
+                            weather_checks=historical_weather,
+                            published_summary=published_current,
+                        )
+                        value_performance_frames.append(week_value)
+                    except Exception:
+                        performance_errors.append(str(result_week))
+                        if result_week >= 3:
+                            value_performance_errors.append(str(result_week))
 
-    st.caption(f"Historical reconstruction with model {MODEL_VERSION}, using snapshots from before each game week. These are recalculated picks, not an immutable record of predictions saved before kickoff. Revised source data or model updates can change historical results.")
-    if performance_errors:
-        st.warning("Partial model results: predictions could not be calculated for week(s) " + ", ".join(sorted(set(performance_errors), key=int)) + ". Those weeks are excluded.")
+        st.caption(f"Historical reconstruction with model {MODEL_VERSION}, using snapshots from before each game week. These are recalculated picks, not an immutable record of predictions saved before kickoff. Revised source data or model updates can change historical results.")
+        if performance_errors:
+            st.warning("Partial model results: predictions could not be calculated for week(s) " + ", ".join(sorted(set(performance_errors), key=int)) + ". Those weeks are excluded.")
 
-    if performance_frames:
-        performance_detail = pd.concat(performance_frames, ignore_index=True)
-        performance_summary = confidence_performance(performance_detail)
-        total_graded = int(performance_summary["Graded"].sum())
-        total_wins = int(performance_summary["Wins"].sum())
-        r1, r2, r3 = st.columns(3)
-        r1.metric("Graded picks", total_graded)
-        r2.metric("Wins – losses", f"{total_wins} – {total_graded - total_wins}")
-        r3.metric("Winner accuracy", f"{total_wins / total_graded:.1%}" if total_graded else "—")
-        display_summary = performance_summary.copy()
-        for column in ["Accuracy", "Average model confidence"]:
-            display_summary[column] = display_summary[column].map(lambda v: f"{v:.1%}" if pd.notna(v) else "—")
-        st.dataframe(display_summary, hide_index=True, use_container_width=True)
-        st.caption("Average model confidence uses the same graded picks as accuracy. Very high is shown separately from High. Pending games, missing final scores, and ties do not count as wins or losses. Small samples can swing sharply.")
-        if not total_graded:
-            st.info("No final, decisive games to grade in this period yet.")
-        with st.expander("See individual model results"):
-            detail_columns = [c for c in ["Week", "Away Team", "Home Team", "Predicted Winner", "Confidence", "Status", "Actual Winner", "Pick Result", "Final Score"] if c in performance_detail]
-            st.dataframe(performance_detail[detail_columns], hide_index=True, use_container_width=True)
-        st.download_button(
-            "Download confidence results · CSV",
-            performance_summary.to_csv(index=False).encode(),
-            file_name=f"cfb_{season}_{selected_week if performance_scope == 'Selected week' else 'season'}_confidence_results.csv",
-            mime="text/csv",
-            key="confidence_results_download",
-        )
-    else:
-        st.info("No completed-game predictions are available for this period yet.")
-
-    st.divider()
-    st.subheader("Value Pick results")
-    st.caption("Value Pick records use the current official tier rules and begin with Week 3. Weeks 1 and 2 are excluded because there was not enough current-season data for the tier structure.")
-    if value_performance_errors:
-        st.warning(
-            "Partial Value Pick history: market/tier reconstruction could not be completed for week(s) "
-            + ", ".join(sorted(set(value_performance_errors), key=int))
-            + ". Those weeks are excluded from the Value Pick record."
-        )
-
-    if value_performance_frames:
-        value_detail = pd.concat(value_performance_frames, ignore_index=True)
-        value_summary = value_pick_performance(value_detail)
-        if not value_summary.empty:
-            overall = value_summary.iloc[0]
-            overall_wins = int(overall["Wins"])
-            overall_losses = int(overall["Losses"])
-            overall_pushes = int(overall["Pushes"])
-            decisive = overall_wins + overall_losses
-            v1, v2, v3 = st.columns(3)
-            v1.metric("Graded value picks", int(overall["Graded"]))
-            record_text = f"{overall_wins} – {overall_losses}"
-            if overall_pushes:
-                record_text += f" – {overall_pushes} push" + ("es" if overall_pushes != 1 else "")
-            v2.metric("Value Pick record", record_text)
-            v3.metric("Value Pick win rate", f"{overall_wins / decisive:.1%}" if decisive else "—")
-
-            display_value = value_summary.copy()
-            display_value["Win rate"] = display_value["Win rate"].map(
-                lambda v: f"{v:.1%}" if pd.notna(v) else "—"
-            )
-            st.dataframe(display_value, hide_index=True, use_container_width=True)
-            st.caption("Win rate excludes pushes and not-graded selections from the denominator. Tier 1 and Tier 2 are graded ATS; Tiers 3–5 are graded straight up.")
-
-            with st.expander("See individual Value Pick results"):
-                value_rows = value_detail[
-                    pd.to_numeric(value_detail.get("Week"), errors="coerce").ge(3)
-                    & value_detail.get("Value Selected", pd.Series(False, index=value_detail.index)).fillna(False).astype(bool)
-                ].copy()
-                value_columns = [
-                    c for c in [
-                        "Week", "Away Team", "Home Team", "Value Tier", "Value Pick",
-                        "Value Market", "Value Line", "Value Result", "Final Score",
-                    ] if c in value_rows
-                ]
-                st.dataframe(value_rows[value_columns], hide_index=True, use_container_width=True)
-
+        if performance_frames:
+            performance_detail = pd.concat(performance_frames, ignore_index=True)
+            performance_summary = confidence_performance(performance_detail)
+            total_graded = int(performance_summary["Graded"].sum())
+            total_wins = int(performance_summary["Wins"].sum())
+            r1, r2, r3 = st.columns(3)
+            r1.metric("Graded picks", total_graded)
+            r2.metric("Wins – losses", f"{total_wins} – {total_graded - total_wins}")
+            r3.metric("Winner accuracy", f"{total_wins / total_graded:.1%}" if total_graded else "—")
+            display_summary = performance_summary.copy()
+            for column in ["Accuracy", "Average model confidence"]:
+                display_summary[column] = display_summary[column].map(lambda v: f"{v:.1%}" if pd.notna(v) else "—")
+            st.dataframe(display_summary, hide_index=True, use_container_width=True)
+            st.caption("Average model confidence uses the same graded picks as accuracy. Very high is shown separately from High. Pending games, missing final scores, and ties do not count as wins or losses. Small samples can swing sharply.")
+            if not total_graded:
+                st.info("No final, decisive games to grade in this period yet.")
+            with st.expander("See individual model results"):
+                detail_columns = [c for c in ["Week", "Away Team", "Home Team", "Predicted Winner", "Confidence", "Status", "Actual Winner", "Pick Result", "Final Score"] if c in performance_detail]
+                st.dataframe(performance_detail[detail_columns], hide_index=True, use_container_width=True)
             st.download_button(
-                "Download Value Pick results · CSV",
-                value_detail[
-                    pd.to_numeric(value_detail.get("Week"), errors="coerce").ge(3)
-                    & value_detail.get("Value Selected", pd.Series(False, index=value_detail.index)).fillna(False).astype(bool)
-                ].to_csv(index=False).encode(),
-                file_name=f"cfb_{season}_{selected_week if performance_scope == 'Selected week' else 'season'}_value_pick_results.csv",
+                "Download confidence results · CSV",
+                performance_summary.to_csv(index=False).encode(),
+                file_name=f"cfb_{season}_{selected_week if performance_scope == 'Selected week' else 'season'}_confidence_results.csv",
                 mime="text/csv",
-                key="value_results_download",
+                key="confidence_results_download",
             )
         else:
-            st.info("No Value Picks from Week 3 onward are available for this period.")
-    else:
-        st.info("No Value Pick history is available for this period. Value Pick tracking begins in Week 3.")
+            st.info("No completed-game predictions are available for this period yet.")
+
+        st.divider()
+        st.subheader("Value Pick results")
+        st.caption("Value Pick records use the current official tier rules and begin with Week 3. Weeks 1 and 2 are excluded because there was not enough current-season data for the tier structure.")
+        if value_performance_errors:
+            st.warning(
+                "Partial Value Pick history: market/tier reconstruction could not be completed for week(s) "
+                + ", ".join(sorted(set(value_performance_errors), key=int))
+                + ". Those weeks are excluded from the Value Pick record."
+            )
+
+        if value_performance_frames:
+            value_detail = pd.concat(value_performance_frames, ignore_index=True)
+            value_summary = value_pick_performance(value_detail)
+            if not value_summary.empty:
+                overall = value_summary.iloc[0]
+                overall_wins = int(overall["Wins"])
+                overall_losses = int(overall["Losses"])
+                overall_pushes = int(overall["Pushes"])
+                decisive = overall_wins + overall_losses
+                v1, v2, v3 = st.columns(3)
+                v1.metric("Graded value picks", int(overall["Graded"]))
+                record_text = f"{overall_wins} – {overall_losses}"
+                if overall_pushes:
+                    record_text += f" – {overall_pushes} push" + ("es" if overall_pushes != 1 else "")
+                v2.metric("Value Pick record", record_text)
+                v3.metric("Value Pick win rate", f"{overall_wins / decisive:.1%}" if decisive else "—")
+
+                display_value = value_summary.copy()
+                display_value["Win rate"] = display_value["Win rate"].map(
+                    lambda v: f"{v:.1%}" if pd.notna(v) else "—"
+                )
+                st.dataframe(display_value, hide_index=True, use_container_width=True)
+                st.caption("Win rate excludes pushes and not-graded selections from the denominator. Tier 1 and Tier 2 are graded ATS; Tiers 3–5 are graded straight up.")
+
+                with st.expander("See individual Value Pick results"):
+                    value_rows = value_detail[
+                        pd.to_numeric(value_detail.get("Week"), errors="coerce").ge(3)
+                        & value_detail.get("Value Selected", pd.Series(False, index=value_detail.index)).fillna(False).astype(bool)
+                    ].copy()
+                    value_columns = [
+                        c for c in [
+                            "Week", "Away Team", "Home Team", "Value Tier", "Value Pick",
+                            "Value Market", "Value Line", "Value Result", "Final Score",
+                        ] if c in value_rows
+                    ]
+                    st.dataframe(value_rows[value_columns], hide_index=True, use_container_width=True)
+
+                st.download_button(
+                    "Download Value Pick results · CSV",
+                    value_detail[
+                        pd.to_numeric(value_detail.get("Week"), errors="coerce").ge(3)
+                        & value_detail.get("Value Selected", pd.Series(False, index=value_detail.index)).fillna(False).astype(bool)
+                    ].to_csv(index=False).encode(),
+                    file_name=f"cfb_{season}_{selected_week if performance_scope == 'Selected week' else 'season'}_value_pick_results.csv",
+                    mime="text/csv",
+                    key="value_results_download",
+                )
+            else:
+                st.info("No Value Picks from Week 3 onward are available for this period.")
+        else:
+            st.info("No Value Pick history is available for this period. Value Pick tracking begins in Week 3.")
 
 
 with scenario_tab:
@@ -2788,92 +2797,96 @@ with scenario_tab:
         else:
             st.info("Choose at least one week to calculate a scenario.")
 
-with parlay_tab:
-    tour_at("parlay")
-    st.subheader(f"Parlay finder · Week {selected_week}")
-    st.caption("No AI subscription or paid API. Searches model picks with future kickoffs and available moneylines. Finished games and games already started are excluded.")
-    st.caption("Payouts are estimates from multiplying individual moneylines, not sportsbook parlay quotes. Joint win probabilities assume independent outcomes. Each combination uses one sportsbook and distinct teams.")
-    parlay_stake = st.number_input("Total parlay stake ($)", min_value=0.0, max_value=100000.0, value=10.0, step=1.0)
+if parlay_tab.open:
+    with parlay_tab:
+        tour_at("parlay")
+        st.subheader(f"Parlay finder · Week {selected_week}")
+        st.caption("No AI subscription or paid API. Searches model picks with future kickoffs and available moneylines. Finished games and games already started are excluded.")
+        st.caption("Payouts are estimates from multiplying individual moneylines, not sportsbook parlay quotes. Joint win probabilities assume independent outcomes. Each combination uses one sportsbook and distinct teams.")
+        parlay_stake = st.number_input("Total parlay stake ($)", min_value=0.0, max_value=100000.0, value=10.0, step=1.0, key="parlay_stake")
 
-    featured_parlay = christians_parlay(
-        pred, games, pd.Timestamp.now(tz="UTC"), stake=parlay_stake
-    )
-    if featured_parlay:
-        with st.container(border=True, key=f"christians_parlay_{season}_{selected_week}"):
-            st.markdown(
-                '<div class="christians-parlay-kicker">🏈 Featured weekly parlay</div>'
-                '<div class="christians-parlay-title">Christian’s Parlay</div>'
-                + f'<div class="christians-parlay-formula">{escape(featured_parlay["formula"])} · '
-                + f'{escape(featured_parlay["sportsbook"])}</div>',
-                unsafe_allow_html=True,
-            )
-            for leg in featured_parlay["legs"]:
+        featured_parlay = christians_parlay(
+            pred, games, pd.Timestamp.now(tz="UTC"), stake=parlay_stake
+        )
+        if featured_parlay:
+            with st.container(border=True, key=f"christians_parlay_{season}_{selected_week}"):
                 st.markdown(
-                    '<div class="christians-parlay-leg">'
-                    + f'<div class="christians-parlay-tier">Tier {leg["stage"]}</div>'
-                    + f'<strong>{escape(leg["bet"])}</strong><br>'
-                    + f'<span>{escape(leg["away"])} at {escape(leg["home"])} · '
-                    + f'price {escape(leg["price"])}</span>'
-                    + '</div>',
+                    '<div class="christians-parlay-kicker">🏈 Featured weekly parlay</div>'
+                    '<div class="christians-parlay-title">Christian’s Parlay</div>'
+                    + f'<div class="christians-parlay-formula">{escape(featured_parlay["formula"])} · '
+                    + f'{escape(featured_parlay["sportsbook"])}</div>',
                     unsafe_allow_html=True,
                 )
-            cp1, cp2, cp3 = st.columns(3)
-            cp1.metric("Stake", f"${featured_parlay['stake']:,.2f}")
-            cp2.metric("Return if all win", f"${featured_parlay['return']:,.2f}")
-            cp3.metric("Profit if all win", f"${featured_parlay['profit']:+,.2f}")
-            st.caption(
-                f"If any leg loses: ${abs(featured_parlay['loss']):,.2f} lost. "
-                "Uses four distinct current Value Pick games and DraftKings prices. "
-                "Payout is an estimate; the sportsbook's live parlay quote can differ."
+                for leg in featured_parlay["legs"]:
+                    st.markdown(
+                        '<div class="christians-parlay-leg">'
+                        + f'<div class="christians-parlay-tier">Tier {leg["stage"]}</div>'
+                        + f'<strong>{escape(leg["bet"])}</strong><br>'
+                        + f'<span>{escape(leg["away"])} at {escape(leg["home"])} · '
+                        + f'price {escape(leg["price"])}</span>'
+                        + '</div>',
+                        unsafe_allow_html=True,
+                    )
+                cp1, cp2, cp3 = st.columns(3)
+                cp1.metric("Stake", f"${featured_parlay['stake']:,.2f}")
+                cp2.metric("Return if all win", f"${featured_parlay['return']:,.2f}")
+                cp3.metric("Profit if all win", f"${featured_parlay['profit']:+,.2f}")
+                st.caption(
+                    f"If any leg loses: ${abs(featured_parlay['loss']):,.2f} lost. "
+                    "Uses four distinct current Value Pick games and DraftKings prices. "
+                    "Payout is an estimate; the sportsbook's live parlay quote can differ."
+                )
+        else:
+            st.info(
+                "Christian’s Parlay is unavailable this week because the current Value Picks "
+                "do not satisfy the 4-leg formula with four distinct future games and usable DraftKings prices."
             )
-    else:
-        st.info(
-            "Christian’s Parlay is unavailable this week because the current Value Picks "
-            "do not satisfy the 4-leg formula with four distinct future games and usable DraftKings prices."
-        )
 
-    st.markdown("#### Build another parlay")
-    legs = st.selectbox("Number of legs", [2, 3, 4, 5], index=1)
-    goal = st.selectbox("Rank by", ["Highest win probability", "Highest payout", "Highest estimated value"])
-    min_conf = st.slider("Minimum model confidence per leg (%)", 50, 95, 60, 5)
-    data_rule = st.selectbox("Parlay team data", ["Any available data", "Published pregame summaries for both teams", "Exclude prior-data-only teams"])
-    pool = future_priced_picks(pred, games, pd.Timestamp.now(tz="UTC"))
-    pool = pool[pool["Confidence"] >= min_conf / 100]
-    if data_rule != "Any available data":
-        allowed = []
-        for _, pick in pool.iterrows():
-            published_both, estimated, prior_only = quality_by_match.get((pick["Home Team"], pick["Away Team"]), (False, False, True))
-            allowed.append(published_both if data_rule == "Published pregame summaries for both teams" else not prior_only)
-        pool = pool.loc[pd.Series(allowed, index=pool.index, dtype=bool)]
-    books = sorted(pool["ML Source"].unique().tolist())
-    book = st.selectbox("Sportsbook", ["Any single sportsbook"] + books)
-    if book != "Any single sportsbook":
-        pool = pool[pool["ML Source"].eq(book)]
-    pool = pool.copy()
-    pool["Decimal odds"] = pool["Bet Line"].map(lambda line: payout_outcomes(100, line)["Return if win"] / 100)
-    sort_column = {"Highest win probability": "Confidence", "Highest payout": "Decimal odds", "Highest estimated value": "Expected Value"}[goal]
-    total_candidates = len(pool)
-    pool = pool.sort_values(sort_column, ascending=False).head(24)
-    st.caption(f"Searching the top {len(pool)} of {total_candidates} eligible model picks by your ranking. All valid {legs}-leg combinations within this pool are compared; results are not a market-wide optimum.")
-    if len(pool) < legs:
-        st.info("Not enough eligible picks. Try another week, fewer legs, or broader filters.")
-    else:
-        results = rank_parlays(pool, legs, parlay_stake, goal)
-        if not results:
-            st.info("No combinations meet the one-sportsbook and distinct-team requirements.")
-        for number, result in enumerate(results, 1):
-            with st.container(border=True):
-                st.markdown(f"**Option {number} · {result['legs'][0]['ML Source']}**")
-                for leg in result["legs"]:
-                    st.write(f"{leg['Predicted Winner']} ({leg['Bet Line']}) · {leg['Away Team']} at {leg['Home Team']} · model confidence {leg['Confidence']:.1%}")
-                p1, p2, p3 = st.columns(3)
-                p1.metric("Estimated win chance", f"{result['probability']:.1%}")
-                p2.metric("Return if all win", f"${result['return']:,.2f}")
-                p3.metric("Profit if all win", f"${result['profit']:,.2f}")
-                st.caption(f"If any leg loses: ${abs(result['loss']):,.2f} lost. Total returned includes the stake. Ties/voids can change the payout under sportsbook rules.")
-                st.write(f"Ranked by {goal.lower()} within the displayed search pool. Model-estimated profit per $1 staked: {result['ev']:+.2f}.")
-                if result["ev"] < 0:
-                    st.caption("The model estimates a negative expected return for this combination.")
+        st.markdown("#### Build another parlay")
+        legs = st.selectbox("Number of legs", [2, 3, 4, 5], index=1, key="parlay_legs")
+        goal = st.selectbox("Rank by", ["Highest win probability", "Highest payout", "Highest estimated value"], key="parlay_goal")
+        min_conf = st.slider("Minimum model confidence per leg (%)", 50, 95, 60, 5, key="parlay_min_conf")
+        data_rule = st.selectbox("Parlay team data", ["Any available data", "Published pregame summaries for both teams", "Exclude prior-data-only teams"], key="parlay_data_rule")
+        pool = future_priced_picks(pred, games, pd.Timestamp.now(tz="UTC"))
+        pool = pool[pool["Confidence"] >= min_conf / 100]
+        if data_rule != "Any available data":
+            allowed = []
+            for _, pick in pool.iterrows():
+                published_both, estimated, prior_only = quality_by_match.get((pick["Home Team"], pick["Away Team"]), (False, False, True))
+                allowed.append(published_both if data_rule == "Published pregame summaries for both teams" else not prior_only)
+            pool = pool.loc[pd.Series(allowed, index=pool.index, dtype=bool)]
+        books = sorted(pool["ML Source"].unique().tolist())
+        book_options = ["Any single sportsbook"] + books
+        if st.session_state.get("parlay_book", book_options[0]) not in book_options:
+            st.session_state["parlay_book"] = book_options[0]
+        book = st.selectbox("Sportsbook", book_options, key="parlay_book")
+        if book != "Any single sportsbook":
+            pool = pool[pool["ML Source"].eq(book)]
+        pool = pool.copy()
+        pool["Decimal odds"] = pool["Bet Line"].map(lambda line: payout_outcomes(100, line)["Return if win"] / 100)
+        sort_column = {"Highest win probability": "Confidence", "Highest payout": "Decimal odds", "Highest estimated value": "Expected Value"}[goal]
+        total_candidates = len(pool)
+        pool = pool.sort_values(sort_column, ascending=False).head(24)
+        st.caption(f"Searching the top {len(pool)} of {total_candidates} eligible model picks by your ranking. All valid {legs}-leg combinations within this pool are compared; results are not a market-wide optimum.")
+        if len(pool) < legs:
+            st.info("Not enough eligible picks. Try another week, fewer legs, or broader filters.")
+        else:
+            results = rank_parlays(pool, legs, parlay_stake, goal)
+            if not results:
+                st.info("No combinations meet the one-sportsbook and distinct-team requirements.")
+            for number, result in enumerate(results, 1):
+                with st.container(border=True):
+                    st.markdown(f"**Option {number} · {result['legs'][0]['ML Source']}**")
+                    for leg in result["legs"]:
+                        st.write(f"{leg['Predicted Winner']} ({leg['Bet Line']}) · {leg['Away Team']} at {leg['Home Team']} · model confidence {leg['Confidence']:.1%}")
+                    p1, p2, p3 = st.columns(3)
+                    p1.metric("Estimated win chance", f"{result['probability']:.1%}")
+                    p2.metric("Return if all win", f"${result['return']:,.2f}")
+                    p3.metric("Profit if all win", f"${result['profit']:,.2f}")
+                    st.caption(f"If any leg loses: ${abs(result['loss']):,.2f} lost. Total returned includes the stake. Ties/voids can change the payout under sportsbook rules.")
+                    st.write(f"Ranked by {goal.lower()} within the displayed search pool. Model-estimated profit per $1 staked: {result['ev']:+.2f}.")
+                    if result["ev"] < 0:
+                        st.caption("The model estimates a negative expected return for this combination.")
 
 with tracker_tab:
     tour_at("tracker")
@@ -2898,6 +2911,7 @@ with about_tab:
 st.caption(f"Saturday Forecast · {MODEL_VERSION} · Estimates, not guarantees.")
 
 watch_results(season, original_schedule if mode == "Automatic download" else None, date_range, odds_snapshot["quotes"], schedule_event_ids(games), live_snapshot["games"])
+
 
 
 
