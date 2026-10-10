@@ -35,7 +35,7 @@ from matchup_advantages import (build_advantages, advantage_html, assess, normal
 from shadow_tracking import show_shadow_tracking
 from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
-from matchday_live import live_board_rows, live_board_html
+from matchday_live import live_board_rows, live_board_html, game_card_final_score_html
 from value_shortlist_ui import render_value_shortlist_cards
 from hashlib import sha256
 from performance_cache import cache_calculation, clear_calculations
@@ -392,11 +392,13 @@ def attach_results(predictions, games):
     outcomes.loc[valid & (outcomes.home_points < outcomes.away_points), "Actual Winner"] = outcomes["away_team"]
     outcomes.loc[valid & (outcomes.home_points == outcomes.away_points), "Actual Winner"] = "Tie"
     outcomes["Final Score"] = "—"
+    outcomes["Final Home Points"] = pd.to_numeric(outcomes["home_points"], errors="coerce").where(valid)
+    outcomes["Final Away Points"] = pd.to_numeric(outcomes["away_points"], errors="coerce").where(valid)
     for i in outcomes.index[valid]:
         outcomes.loc[i, "Final Score"] = f"{outcomes.loc[i, 'away_team']} {outcomes.loc[i, 'away_points']:g} – {outcomes.loc[i, 'home_team']} {outcomes.loc[i, 'home_points']:g}"
     outcomes = outcomes.rename(columns={"game_id": "Game ID", "home_team": "Home Team", "away_team": "Away Team"})
     keys = ["Game ID"] if "Game ID" in outcomes and predictions["Game ID"].notna().all() else ["Home Team", "Away Team"]
-    result = predictions.merge(outcomes[keys + ["Status", "Actual Winner", "Final Score", "Live State", "Live Detail", "Live Score"]], on=keys, how="left", validate="one_to_one")
+    result = predictions.merge(outcomes[keys + ["Status", "Actual Winner", "Final Score", "Final Home Points", "Final Away Points", "Live State", "Live Detail", "Live Score"]], on=keys, how="left", validate="one_to_one")
     result["Pick Result"] = "Pending"
     scored = result["Status"].eq("Final") & result["Actual Winner"].ne("Tie")
     result.loc[scored, "Pick Result"] = "Incorrect"
@@ -581,7 +583,19 @@ def download_live_scores(date_range, event_ids=()):
         if not event_ids:
             raise
         scores = {}
-    missing = [str(event_id) for event_id in event_ids if str(event_id) not in scores]
+    # ESPN's scoreboard can contain a finished event with its scores missing.
+    # Recover those from the per-game summary, not just wholly omitted events.
+    missing = [
+        str(event_id) for event_id in event_ids
+        if str(event_id) not in scores
+        or (
+            scores[str(event_id)].get("completed")
+            and (
+                scores[str(event_id)].get("home_score") is None
+                or scores[str(event_id)].get("away_score") is None
+            )
+        )
+    ]
     def fetch_missing(event_id):
         try:
             return event_id, download_live_event(event_id)
@@ -1713,6 +1727,13 @@ st.markdown("""
 .badge.incorrect {background:#fbe1df;color:#8b2925;}
 .result-box {margin-top:16px;padding-top:14px;border-top:1px solid #80978b40;font-size:13px;}
 .result-score {font-size:13px;margin:8px 0;overflow-wrap:anywhere;}
+/* Verified results appear directly below the teams when a game is final. */
+.card-final-score {margin:10px 0;padding:13px 15px;border:1px solid #80978b55;border-left:4px solid #6eb99b;border-radius:9px;background:var(--secondary-background-color);font-variant-numeric:tabular-nums;}
+.card-final-label {display:block;font-size:11px;font-weight:800;letter-spacing:1.2px;opacity:.85;margin-bottom:5px;}
+.card-final-teams {display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:clamp(14px,2vw,18px);font-weight:650;}
+.card-final-teams strong {font-size:clamp(20px,3vw,25px);font-weight:850;margin-left:4px;}
+.card-final-divider {opacity:.55;}
+.card-final-score.score-pending {border-left-color:#8394a5;font-size:13px;font-weight:650;}
 .badge.close {background:#fff0d1;color:#704900;}
 .team-line {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:15px;}
 .team-name {overflow-wrap:anywhere;}
@@ -2788,11 +2809,11 @@ with cards_tab:
     elif order == "Home team A–Z":
         filtered = filtered.sort_values("Home Team")
     if status_filter == "Upcoming":
-        filtered = filtered[~filtered["Status"].isin(["In progress", "Final"])]
+        filtered = filtered[~filtered["Status"].astype(str).str.startswith("Final") & filtered["Status"].ne("In progress")]
     elif status_filter == "Live":
         filtered = filtered[filtered["Status"].eq("In progress")]
     elif status_filter == "Final":
-        filtered = filtered[filtered["Status"].eq("Final")]
+        filtered = filtered[filtered["Status"].astype(str).str.startswith("Final")]
 
     with st.expander("More filters · results, odds & team data", expanded=False):
         outcome_filter = st.selectbox(
@@ -2805,7 +2826,7 @@ with cards_tab:
         with data_col:
             quality_filter = st.selectbox("Team data", ["All data", "Both teams have published stats", "Includes score estimates", "Includes prior data only"], key="pick_quality")
     if outcome_filter == "Awaiting final":
-        filtered = filtered[~filtered["Status"].eq("Final")]
+        filtered = filtered[~filtered["Status"].astype(str).str.startswith("Final")]
     elif outcome_filter in ("Correct picks", "Incorrect picks"):
         filtered = filtered[filtered["Pick Result"].eq(outcome_filter.split()[0])]
     if st.session_state.get("pick_favorites_only"):
@@ -3036,6 +3057,7 @@ with cards_tab:
             risk = '<div class="risk-note">Away-team pick · ' + escape(str(r["Venue Risk"])) + ' venue risk</div>' if r["Venue Risk"] != "Normal" else ""
             venue = "Neutral site" if r["Neutral Site"] else "Away at home"
             outcome_class = "badge" if r["Pick Result"] == "Correct" else "badge incorrect" if r["Pick Result"] == "Incorrect" else "badge close"
+            final_score_html = game_card_final_score_html(r)
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
             moneylines = betting_odds_html(r)
             game = games[(games["home_team"] == r["Home Team"]) & (games["away_team"] == r["Away Team"])]
@@ -3168,6 +3190,7 @@ with cards_tab:
 <div class="matchup-meta"><span>{escape(venue)}</span><span>{escape(str(r['Status']))}</span></div>
 <div class="{away_team_class}"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}<span>{escape(str(r['Away Team']))}{away_pick_tag}</span></span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
 <div class="{home_team_class}"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}<span>{escape(str(r['Home Team']))}{home_pick_tag}</span></span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
+{final_score_html}
 <div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Model win chance</span><strong>{r['Confidence']:.1%}</strong></div>
 <div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
