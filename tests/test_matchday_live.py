@@ -86,6 +86,44 @@ class SaturdayLiveModeTests(unittest.TestCase):
         self.assertEqual(result[-1]["score"], "")
         self.assertNotIn("Correct pick", live_board_html(result))
 
+    def test_full_card_shows_verified_final_points(self):
+        from matchday_live import game_card_final_score_html
+        row = self.sample_predictions().iloc[0].copy()
+        row["Final Away Points"] = 10
+        row["Final Home Points"] = 21
+        html = game_card_final_score_html(row)
+        self.assertIn("FINAL SCORE", html)
+        self.assertIn("Owls <strong>10</strong>", html)
+        self.assertIn("Bears <strong>21</strong>", html)
+
+    def test_full_card_score_pending_is_not_invented(self):
+        from matchday_live import game_card_final_score_html
+        row = self.sample_predictions().iloc[0].copy()
+        row["Status"] = "Final · score pending"
+        row["Final Score"] = "—"
+        self.assertIn("awaiting verified score", game_card_final_score_html(row))
+        self.assertNotIn("10</strong>", game_card_final_score_html(row))
+
+    def test_full_card_uses_verified_score_from_legacy_rows(self):
+        from matchday_live import game_card_final_score_html
+        row = self.sample_predictions().iloc[0]
+        self.assertIn("Owls 10 – Bears 21", game_card_final_score_html(row))
+
+    def test_full_card_never_displays_final_score_for_live_games(self):
+        from matchday_live import game_card_final_score_html
+        row = self.sample_predictions().iloc[1]
+        self.assertEqual(game_card_final_score_html(row), "")
+
+    def test_full_card_escapes_result_team_names(self):
+        from matchday_live import game_card_final_score_html
+        row = self.sample_predictions().iloc[0].copy()
+        row["Away Team"] = "<script>alert(1)</script>"
+        row["Final Away Points"] = 10
+        row["Final Home Points"] = 21
+        html = game_card_final_score_html(row)
+        self.assertNotIn("<script>", html)
+        self.assertIn("&lt;script&gt;", html)
+
     def test_known_sections_are_stable(self):
         self.assertEqual(LIVE_SECTIONS, ("Live", "Upcoming", "Final"))
 
