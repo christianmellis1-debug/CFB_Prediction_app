@@ -10,6 +10,44 @@ import pandas as pd
 LIVE_SECTIONS = ("Live", "Upcoming", "Final")
 
 
+def game_card_final_score_html(pick):
+    """Display verified final points prominently on a full matchup card.
+
+    Scores come from attach_results (schedule/ESPN outcomes), never the model.
+    If a final is reported before its points arrive, clearly say so.
+    """
+    status = str(pick.get("Status", ""))
+    if not status.startswith("Final"):
+        return ""
+    if status != "Final":
+        return '<div class="card-final-score score-pending">Final · awaiting verified score</div>'
+
+    away_points = pd.to_numeric(pick.get("Final Away Points"), errors="coerce")
+    home_points = pd.to_numeric(pick.get("Final Home Points"), errors="coerce")
+    if pd.notna(away_points) and pd.notna(home_points):
+        away_team = escape(str(pick.get("Away Team", "")))
+        home_team = escape(str(pick.get("Home Team", "")))
+        return (
+            '<div class="card-final-score" role="group" aria-label="Verified final score">'
+            '<span class="card-final-label">FINAL SCORE</span>'
+            '<div class="card-final-teams">'
+            '<span>' + away_team + ' <strong>' + str(int(away_points)) + '</strong></span>'
+            '<span class="card-final-divider">–</span>'
+            '<span>' + home_team + ' <strong>' + str(int(home_points)) + '</strong></span>'
+            '</div></div>'
+        )
+
+    # Compatibility with previously loaded game results lacking numeric columns.
+    saved = str(pick.get("Final Score", "—")).strip()
+    if saved and saved.lower() not in ("—", "nan", "none"):
+        return (
+            '<div class="card-final-score" role="group" aria-label="Verified final score">'
+            '<span class="card-final-label">FINAL SCORE</span>'
+            '<div class="card-final-teams">' + escape(saved) + '</div></div>'
+        )
+    return '<div class="card-final-score score-pending">Final · score unavailable</div>'
+
+
 def live_board_rows(predictions, schedule):
     """Return existing matchup outcomes grouped live first, then upcoming, then final."""
     if predictions is None or predictions.empty:
