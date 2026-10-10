@@ -1,6 +1,6 @@
 {
   "experiment": "v15-market-blend-2026-09-28",
-  "last_run": "2026-10-10T08:31:44.677947+00:00",
+  "last_run": "2026-10-10T18:38:16.910731+00:00",
   "results": {
     "401856705": {
       "away_score": 14.0,
@@ -412,12 +412,10 @@
     }
   },
   "run_summary": {
-    "eligible_schedule_games": 54,
-    "new_results": 5,
-    "new_snapshots": 3,
+    "eligible_schedule_games": 52,
     "skipped: Kickoff time not confirmed": 5,
-    "skipped: No same-book two-sided moneyline": 9,
-    "skipped: Outside pregame capture window": 37
+    "skipped: No same-book two-sided moneyline": 24,
+    "skipped: Outside pregame capture window": 23
   },
   "snapshots": {
     "401856705": {
