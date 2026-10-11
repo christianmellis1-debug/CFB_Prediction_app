@@ -1,6 +1,6 @@
 {
   "experiment": "v15-market-blend-2026-09-28",
-  "last_run": "2026-10-11T18:56:51.074802+00:00",
+  "last_run": "2026-10-11T23:41:11.970726+00:00",
   "results": {
     "401856705": {
       "away_score": 14.0,
@@ -676,8 +676,7 @@
     }
   },
   "run_summary": {
-    "eligible_schedule_games": 41,
-    "new_snapshots": 41
+    "eligible_schedule_games": 0
   },
   "snapshots": {
     "401856705": {
