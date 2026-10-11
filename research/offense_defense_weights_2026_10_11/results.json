@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-11T15:21:47.161253+00:00",
+  "created_at": "2026-10-11T15:24:35.794551+00:00",
   "status": "RESEARCH ONLY - production model and value picks unchanged",
   "method": "Reconstruct exact V1.5 baseline; change only predeclared z-scored 4-factor mix in offense and defense; prior-season efficiency changed proportionally, pregame cutoff strictly earlier-week.",
   "games_by_season": {
