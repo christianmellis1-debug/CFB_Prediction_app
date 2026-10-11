@@ -37,7 +37,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_waterfall.py'
       - name: Reconstruct Week 6 tier results on research branch only
         if: github.ref == 'refs/heads/audit/immutable-value-archive-2026-10-11' || github.event_name == 'workflow_dispatch'
-        run: python research/week6_value_tier_audit.py
+        run: PYTHONPATH=. python research/week6_value_tier_audit.py
       - name: Capture and settle immutable official Value Shortlist decisions
         run: python capture_value.py
       - name: Commit research and newly settled results
