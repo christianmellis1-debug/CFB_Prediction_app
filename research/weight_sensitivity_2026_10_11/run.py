@@ -141,6 +141,9 @@ def evaluate(frame, w, season_adjust=0):
         ("weeks_1_2", frame.week.le(2)),
         ("weeks_3_plus", frame.week.ge(3)),
         ("weeks_5_plus", frame.week.ge(5)),
+        ("week_5", frame.week.eq(5)),
+        ("week_6", frame.week.eq(6)),
+        ("weeks_3_to_6", frame.week.between(3,6)),
         ("p4_g6_cross", frame.conference.abs().gt(0.01)),
         ("same_group_or_unknown", frame.conference.abs().lt(0.01)),
     ]:
