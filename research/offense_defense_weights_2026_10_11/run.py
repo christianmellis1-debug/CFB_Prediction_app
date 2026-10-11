@@ -103,7 +103,6 @@ def component_rows(year, frame):
     current, prior = read_summary(None, year), read_summary(None, year - 1)
     games = games_for(year)
     cur_scores, cur_weeks = standardize_components(current)
-    prior_scores, prior_weeks = standardize_components(prior)
     games_by_id = {str(int(g.game_id)): g for _, g in games.iterrows()
                    if pd.notna(g.get("game_id"))}
     prior_blocked = set()
@@ -113,6 +112,11 @@ def component_rows(year, frame):
                 if str(g[side+"_team"]).strip().casefold() in (
                         "sacramento state", "sac state", "sacramento state hornets"):
                     prior_blocked.add(int(g[side+"_id"]))
+
+    # Match production: entrants are removed before prior-year standardization.
+    if prior_blocked:
+        prior = prior[~pd.to_numeric(prior.team_id, errors="coerce").isin(prior_blocked)].copy()
+    prior_scores, prior_weeks = standardize_components(prior)
 
     fields = ("off_current", "def_current", "off_prior", "def_prior")
     out = {f: [] for f in fields}
