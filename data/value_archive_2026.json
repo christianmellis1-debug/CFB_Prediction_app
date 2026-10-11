@@ -1,9 +1,15 @@
 {
-  "schema": 1,
-  "season": 2026,
-  "snapshots": {},
   "results": {},
   "run_status": {
-    "note": "Archive begins when scheduled collector first captures a verified pregame event; earlier seasons and weeks are not backfilled."
-  }
+    "checked_at": "2026-10-11T14:20:19.713076+00:00",
+    "eligible_in_window": 0,
+    "missing_events": [],
+    "new_results": 0,
+    "new_snapshots": 0,
+    "selected_total": 0,
+    "skipped": {}
+  },
+  "schema": 1,
+  "season": 2026,
+  "snapshots": {}
 }
