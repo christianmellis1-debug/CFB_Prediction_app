@@ -1,6 +1,6 @@
 {
   "method": "Research-only exact production-feature reconstruction; 2024 candidate selection, report 2025/2026 as diagnostic validation.",
-  "generated_at": "2026-10-11T14:46:46.493827+00:00",
+  "generated_at": "2026-10-11T14:48:21.620751+00:00",
   "model_version": "V1.5",
   "feature_parity_checks": {
     "2024_week2": {
@@ -95,6 +95,39 @@
           "high_confidence_wins": 140,
           "high_confidence_accuracy": 0.838323
         },
+        "week_5": {
+          "games": 52,
+          "wins": 39,
+          "accuracy": 0.75,
+          "brier": 0.1794606,
+          "log_loss": 0.5338384,
+          "mean_confidence": 0.733823,
+          "high_confidence_games": 19,
+          "high_confidence_wins": 16,
+          "high_confidence_accuracy": 0.842105
+        },
+        "week_6": {
+          "games": 49,
+          "wins": 30,
+          "accuracy": 0.612245,
+          "brier": 0.2188144,
+          "log_loss": 0.6361197,
+          "mean_confidence": 0.73795,
+          "high_confidence_games": 20,
+          "high_confidence_wins": 15,
+          "high_confidence_accuracy": 0.75
+        },
+        "weeks_3_to_6": {
+          "games": 207,
+          "wins": 148,
+          "accuracy": 0.714976,
+          "brier": 0.1771518,
+          "log_loss": 0.5235321,
+          "mean_confidence": 0.748701,
+          "high_confidence_games": 89,
+          "high_confidence_wins": 77,
+          "high_confidence_accuracy": 0.865169
+        },
         "p4_g6_cross": {
           "games": 86,
           "wins": 80,
@@ -163,6 +196,39 @@
           "high_confidence_wins": 134,
           "high_confidence_accuracy": 0.893333
         },
+        "week_5": {
+          "games": 51,
+          "wins": 34,
+          "accuracy": 0.666667,
+          "brier": 0.1955041,
+          "log_loss": 0.5651928,
+          "mean_confidence": 0.685457,
+          "high_confidence_games": 8,
+          "high_confidence_wins": 8,
+          "high_confidence_accuracy": 1.0
+        },
+        "week_6": {
+          "games": 50,
+          "wins": 36,
+          "accuracy": 0.72,
+          "brier": 0.1923466,
+          "log_loss": 0.5700043,
+          "mean_confidence": 0.726325,
+          "high_confidence_games": 17,
+          "high_confidence_wins": 14,
+          "high_confidence_accuracy": 0.823529
+        },
+        "weeks_3_to_6": {
+          "games": 198,
+          "wins": 137,
+          "accuracy": 0.691919,
+          "brier": 0.194246,
+          "log_loss": 0.5642589,
+          "mean_confidence": 0.726613,
+          "high_confidence_games": 62,
+          "high_confidence_wins": 55,
+          "high_confidence_accuracy": 0.887097
+        },
         "p4_g6_cross": {
           "games": 89,
           "wins": 79,
@@ -230,6 +296,39 @@
           "high_confidence_games": 28,
           "high_confidence_wins": 23,
           "high_confidence_accuracy": 0.821429
+        },
+        "week_5": {
+          "games": 56,
+          "wins": 41,
+          "accuracy": 0.732143,
+          "brier": 0.1866566,
+          "log_loss": 0.550324,
+          "mean_confidence": 0.722262,
+          "high_confidence_games": 17,
+          "high_confidence_wins": 14,
+          "high_confidence_accuracy": 0.823529
+        },
+        "week_6": {
+          "games": 58,
+          "wins": 37,
+          "accuracy": 0.637931,
+          "brier": 0.2213214,
+          "log_loss": 0.6343748,
+          "mean_confidence": 0.700212,
+          "high_confidence_games": 11,
+          "high_confidence_wins": 9,
+          "high_confidence_accuracy": 0.818182
+        },
+        "weeks_3_to_6": {
+          "games": 229,
+          "wins": 165,
+          "accuracy": 0.720524,
+          "brier": 0.180734,
+          "log_loss": 0.5329033,
+          "mean_confidence": 0.732982,
+          "high_confidence_games": 78,
+          "high_confidence_wins": 69,
+          "high_confidence_accuracy": 0.884615
         },
         "p4_g6_cross": {
           "games": 75,
@@ -311,6 +410,39 @@
           "high_confidence_wins": 148,
           "high_confidence_accuracy": 0.845714
         },
+        "week_5": {
+          "games": 52,
+          "wins": 39,
+          "accuracy": 0.75,
+          "brier": 0.1762034,
+          "log_loss": 0.5253892,
+          "mean_confidence": 0.729395,
+          "high_confidence_games": 19,
+          "high_confidence_wins": 17,
+          "high_confidence_accuracy": 0.894737
+        },
+        "week_6": {
+          "games": 49,
+          "wins": 31,
+          "accuracy": 0.632653,
+          "brier": 0.2101702,
+          "log_loss": 0.6114974,
+          "mean_confidence": 0.740402,
+          "high_confidence_games": 21,
+          "high_confidence_wins": 16,
+          "high_confidence_accuracy": 0.761905
+        },
+        "weeks_3_to_6": {
+          "games": 207,
+          "wins": 148,
+          "accuracy": 0.714976,
+          "brier": 0.1759933,
+          "log_loss": 0.5198045,
+          "mean_confidence": 0.747844,
+          "high_confidence_games": 85,
+          "high_confidence_wins": 74,
+          "high_confidence_accuracy": 0.870588
+        },
         "p4_g6_cross": {
           "games": 86,
           "wins": 80,
@@ -379,6 +511,39 @@
           "high_confidence_wins": 136,
           "high_confidence_accuracy": 0.883117
         },
+        "week_5": {
+          "games": 51,
+          "wins": 34,
+          "accuracy": 0.666667,
+          "brier": 0.2012486,
+          "log_loss": 0.5786959,
+          "mean_confidence": 0.683799,
+          "high_confidence_games": 8,
+          "high_confidence_wins": 8,
+          "high_confidence_accuracy": 1.0
+        },
+        "week_6": {
+          "games": 50,
+          "wins": 36,
+          "accuracy": 0.72,
+          "brier": 0.1933127,
+          "log_loss": 0.5680355,
+          "mean_confidence": 0.723866,
+          "high_confidence_games": 17,
+          "high_confidence_wins": 14,
+          "high_confidence_accuracy": 0.823529
+        },
+        "weeks_3_to_6": {
+          "games": 198,
+          "wins": 137,
+          "accuracy": 0.691919,
+          "brier": 0.1948206,
+          "log_loss": 0.5661613,
+          "mean_confidence": 0.72076,
+          "high_confidence_games": 63,
+          "high_confidence_wins": 55,
+          "high_confidence_accuracy": 0.873016
+        },
         "p4_g6_cross": {
           "games": 89,
           "wins": 78,
@@ -446,6 +611,39 @@
           "high_confidence_games": 30,
           "high_confidence_wins": 23,
           "high_confidence_accuracy": 0.766667
+        },
+        "week_5": {
+          "games": 56,
+          "wins": 43,
+          "accuracy": 0.767857,
+          "brier": 0.1886537,
+          "log_loss": 0.5585371,
+          "mean_confidence": 0.718339,
+          "high_confidence_games": 19,
+          "high_confidence_wins": 14,
+          "high_confidence_accuracy": 0.736842
+        },
+        "week_6": {
+          "games": 58,
+          "wins": 37,
+          "accuracy": 0.637931,
+          "brier": 0.2270218,
+          "log_loss": 0.6503912,
+          "mean_confidence": 0.700785,
+          "high_confidence_games": 11,
+          "high_confidence_wins": 9,
+          "high_confidence_accuracy": 0.818182
+        },
+        "weeks_3_to_6": {
+          "games": 229,
+          "wins": 167,
+          "accuracy": 0.729258,
+          "brier": 0.184276,
+          "log_loss": 0.5436331,
+          "mean_confidence": 0.728549,
+          "high_confidence_games": 73,
+          "high_confidence_wins": 62,
+          "high_confidence_accuracy": 0.849315
         },
         "p4_g6_cross": {
           "games": 75,
@@ -988,6 +1186,39 @@
             "high_confidence_wins": 148,
             "high_confidence_accuracy": 0.845714
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1762034,
+            "log_loss": 0.5253892,
+            "mean_confidence": 0.729395,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.894737
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 31,
+            "accuracy": 0.632653,
+            "brier": 0.2101702,
+            "log_loss": 0.6114974,
+            "mean_confidence": 0.740402,
+            "high_confidence_games": 21,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.761905
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 148,
+            "accuracy": 0.714976,
+            "brier": 0.1759933,
+            "log_loss": 0.5198045,
+            "mean_confidence": 0.747844,
+            "high_confidence_games": 85,
+            "high_confidence_wins": 74,
+            "high_confidence_accuracy": 0.870588
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -1056,6 +1287,39 @@
             "high_confidence_wins": 136,
             "high_confidence_accuracy": 0.883117
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.2012486,
+            "log_loss": 0.5786959,
+            "mean_confidence": 0.683799,
+            "high_confidence_games": 8,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 36,
+            "accuracy": 0.72,
+            "brier": 0.1933127,
+            "log_loss": 0.5680355,
+            "mean_confidence": 0.723866,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.823529
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 137,
+            "accuracy": 0.691919,
+            "brier": 0.1948206,
+            "log_loss": 0.5661613,
+            "mean_confidence": 0.72076,
+            "high_confidence_games": 63,
+            "high_confidence_wins": 55,
+            "high_confidence_accuracy": 0.873016
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 78,
@@ -1123,6 +1387,39 @@
             "high_confidence_games": 30,
             "high_confidence_wins": 23,
             "high_confidence_accuracy": 0.766667
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 43,
+            "accuracy": 0.767857,
+            "brier": 0.1886537,
+            "log_loss": 0.5585371,
+            "mean_confidence": 0.718339,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.736842
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2270218,
+            "log_loss": 0.6503912,
+            "mean_confidence": 0.700785,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 167,
+            "accuracy": 0.729258,
+            "brier": 0.184276,
+            "log_loss": 0.5436331,
+            "mean_confidence": 0.728549,
+            "high_confidence_games": 73,
+            "high_confidence_wins": 62,
+            "high_confidence_accuracy": 0.849315
           },
           "p4_g6_cross": {
             "games": 75,
@@ -1664,6 +1961,39 @@
             "high_confidence_wins": 137,
             "high_confidence_accuracy": 0.85625
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1767131,
+            "log_loss": 0.5285454,
+            "mean_confidence": 0.725568,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.882353
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2170132,
+            "log_loss": 0.6242531,
+            "mean_confidence": 0.732431,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.75
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 147,
+            "accuracy": 0.710145,
+            "brier": 0.1768069,
+            "log_loss": 0.5217756,
+            "mean_confidence": 0.739991,
+            "high_confidence_games": 77,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.896104
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -1732,6 +2062,39 @@
             "high_confidence_wins": 133,
             "high_confidence_accuracy": 0.892617
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.1972896,
+            "log_loss": 0.5677108,
+            "mean_confidence": 0.675793,
+            "high_confidence_games": 8,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 37,
+            "accuracy": 0.74,
+            "brier": 0.1881528,
+            "log_loss": 0.5566724,
+            "mean_confidence": 0.722682,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.933333
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 139,
+            "accuracy": 0.70202,
+            "brier": 0.193638,
+            "log_loss": 0.5611148,
+            "mean_confidence": 0.718492,
+            "high_confidence_games": 60,
+            "high_confidence_wins": 55,
+            "high_confidence_accuracy": 0.916667
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 77,
@@ -1799,6 +2162,39 @@
             "high_confidence_games": 26,
             "high_confidence_wins": 22,
             "high_confidence_accuracy": 0.846154
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 43,
+            "accuracy": 0.767857,
+            "brier": 0.184723,
+            "log_loss": 0.5469902,
+            "mean_confidence": 0.714238,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.875
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2229862,
+            "log_loss": 0.6384165,
+            "mean_confidence": 0.701608,
+            "high_confidence_games": 10,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 0.8
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 168,
+            "accuracy": 0.733624,
+            "brier": 0.1800173,
+            "log_loss": 0.5326194,
+            "mean_confidence": 0.72499,
+            "high_confidence_games": 69,
+            "high_confidence_wins": 61,
+            "high_confidence_accuracy": 0.884058
           },
           "p4_g6_cross": {
             "games": 75,
@@ -1882,6 +2278,39 @@
             "high_confidence_wins": 144,
             "high_confidence_accuracy": 0.847059
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1782508,
+            "log_loss": 0.5328137,
+            "mean_confidence": 0.735763,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.85
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 32,
+            "accuracy": 0.653061,
+            "brier": 0.2177092,
+            "log_loss": 0.6357313,
+            "mean_confidence": 0.743048,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.772727
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 150,
+            "accuracy": 0.724638,
+            "brier": 0.1768283,
+            "log_loss": 0.5247921,
+            "mean_confidence": 0.750928,
+            "high_confidence_games": 90,
+            "high_confidence_wins": 78,
+            "high_confidence_accuracy": 0.866667
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -1950,6 +2379,39 @@
             "high_confidence_wins": 139,
             "high_confidence_accuracy": 0.88535
           },
+          "week_5": {
+            "games": 51,
+            "wins": 33,
+            "accuracy": 0.647059,
+            "brier": 0.2012405,
+            "log_loss": 0.5765924,
+            "mean_confidence": 0.689096,
+            "high_confidence_games": 10,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 35,
+            "accuracy": 0.7,
+            "brier": 0.1930631,
+            "log_loss": 0.5706126,
+            "mean_confidence": 0.731689,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 135,
+            "accuracy": 0.681818,
+            "brier": 0.1965924,
+            "log_loss": 0.5688401,
+            "mean_confidence": 0.730329,
+            "high_confidence_games": 69,
+            "high_confidence_wins": 60,
+            "high_confidence_accuracy": 0.869565
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -2017,6 +2479,39 @@
             "high_confidence_games": 31,
             "high_confidence_wins": 26,
             "high_confidence_accuracy": 0.83871
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1843263,
+            "log_loss": 0.5451983,
+            "mean_confidence": 0.725634,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.217195,
+            "log_loss": 0.6254736,
+            "mean_confidence": 0.700059,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 163,
+            "accuracy": 0.71179,
+            "brier": 0.1782532,
+            "log_loss": 0.5273312,
+            "mean_confidence": 0.734624,
+            "high_confidence_games": 77,
+            "high_confidence_wins": 68,
+            "high_confidence_accuracy": 0.883117
           },
           "p4_g6_cross": {
             "games": 75,
@@ -2100,6 +2595,39 @@
             "high_confidence_wins": 140,
             "high_confidence_accuracy": 0.838323
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1794606,
+            "log_loss": 0.5338384,
+            "mean_confidence": 0.733823,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2188144,
+            "log_loss": 0.6361197,
+            "mean_confidence": 0.73795,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.75
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 148,
+            "accuracy": 0.714976,
+            "brier": 0.1771518,
+            "log_loss": 0.5235321,
+            "mean_confidence": 0.748701,
+            "high_confidence_games": 89,
+            "high_confidence_wins": 77,
+            "high_confidence_accuracy": 0.865169
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -2168,6 +2696,39 @@
             "high_confidence_wins": 134,
             "high_confidence_accuracy": 0.893333
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.1955041,
+            "log_loss": 0.5651928,
+            "mean_confidence": 0.685457,
+            "high_confidence_games": 8,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 36,
+            "accuracy": 0.72,
+            "brier": 0.1923466,
+            "log_loss": 0.5700043,
+            "mean_confidence": 0.726325,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.823529
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 137,
+            "accuracy": 0.691919,
+            "brier": 0.194246,
+            "log_loss": 0.5642589,
+            "mean_confidence": 0.726613,
+            "high_confidence_games": 62,
+            "high_confidence_wins": 55,
+            "high_confidence_accuracy": 0.887097
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -2235,6 +2796,39 @@
             "high_confidence_games": 28,
             "high_confidence_wins": 23,
             "high_confidence_accuracy": 0.821429
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1866566,
+            "log_loss": 0.550324,
+            "mean_confidence": 0.722262,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.823529
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2213214,
+            "log_loss": 0.6343748,
+            "mean_confidence": 0.700212,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 165,
+            "accuracy": 0.720524,
+            "brier": 0.180734,
+            "log_loss": 0.5329033,
+            "mean_confidence": 0.732982,
+            "high_confidence_games": 78,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.884615
           },
           "p4_g6_cross": {
             "games": 75,
@@ -2316,6 +2910,39 @@
             "high_confidence_wins": 151,
             "high_confidence_accuracy": 0.843575
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1777935,
+            "log_loss": 0.5338603,
+            "mean_confidence": 0.73806,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.818182
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 32,
+            "accuracy": 0.653061,
+            "brier": 0.2170372,
+            "log_loss": 0.6374375,
+            "mean_confidence": 0.749908,
+            "high_confidence_games": 21,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.761905
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 151,
+            "accuracy": 0.729469,
+            "brier": 0.177103,
+            "log_loss": 0.5278222,
+            "mean_confidence": 0.753345,
+            "high_confidence_games": 90,
+            "high_confidence_wins": 77,
+            "high_confidence_accuracy": 0.855556
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -2384,6 +3011,39 @@
             "high_confidence_wins": 144,
             "high_confidence_accuracy": 0.878049
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.2080383,
+            "log_loss": 0.5908038,
+            "mean_confidence": 0.693187,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 35,
+            "accuracy": 0.7,
+            "brier": 0.1948394,
+            "log_loss": 0.573792,
+            "mean_confidence": 0.736434,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 135,
+            "accuracy": 0.681818,
+            "brier": 0.1998204,
+            "log_loss": 0.5757016,
+            "mean_confidence": 0.734462,
+            "high_confidence_games": 72,
+            "high_confidence_wins": 61,
+            "high_confidence_accuracy": 0.847222
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 78,
@@ -2451,6 +3111,39 @@
             "high_confidence_games": 28,
             "high_confidence_wins": 24,
             "high_confidence_accuracy": 0.857143
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1831244,
+            "log_loss": 0.543409,
+            "mean_confidence": 0.73389,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.882353
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 39,
+            "accuracy": 0.672414,
+            "brier": 0.2138837,
+            "log_loss": 0.6190161,
+            "mean_confidence": 0.700218,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 167,
+            "accuracy": 0.729258,
+            "brier": 0.1765638,
+            "log_loss": 0.5238752,
+            "mean_confidence": 0.737716,
+            "high_confidence_games": 76,
+            "high_confidence_wins": 68,
+            "high_confidence_accuracy": 0.894737
           },
           "p4_g6_cross": {
             "games": 75,
@@ -2534,6 +3227,39 @@
             "high_confidence_wins": 154,
             "high_confidence_accuracy": 0.850829
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1778962,
+            "log_loss": 0.5304893,
+            "mean_confidence": 0.741443,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.85
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2231789,
+            "log_loss": 0.6497294,
+            "mean_confidence": 0.74788,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.772727
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 148,
+            "accuracy": 0.714976,
+            "brier": 0.1779192,
+            "log_loss": 0.525881,
+            "mean_confidence": 0.75602,
+            "high_confidence_games": 91,
+            "high_confidence_wins": 80,
+            "high_confidence_accuracy": 0.879121
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -2602,6 +3328,39 @@
             "high_confidence_wins": 147,
             "high_confidence_accuracy": 0.890909
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.1984145,
+            "log_loss": 0.5700541,
+            "mean_confidence": 0.694349,
+            "high_confidence_games": 9,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 36,
+            "accuracy": 0.72,
+            "brier": 0.1903913,
+            "log_loss": 0.5680715,
+            "mean_confidence": 0.736027,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 137,
+            "accuracy": 0.691919,
+            "brier": 0.1951278,
+            "log_loss": 0.5666666,
+            "mean_confidence": 0.735428,
+            "high_confidence_games": 68,
+            "high_confidence_wins": 59,
+            "high_confidence_accuracy": 0.867647
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -2669,6 +3428,39 @@
             "high_confidence_games": 31,
             "high_confidence_wins": 25,
             "high_confidence_accuracy": 0.806452
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 40,
+            "accuracy": 0.714286,
+            "brier": 0.1842986,
+            "log_loss": 0.5441641,
+            "mean_confidence": 0.730332,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.8
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2213793,
+            "log_loss": 0.6336718,
+            "mean_confidence": 0.705928,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 163,
+            "accuracy": 0.71179,
+            "brier": 0.1802764,
+            "log_loss": 0.5313264,
+            "mean_confidence": 0.741242,
+            "high_confidence_games": 82,
+            "high_confidence_wins": 72,
+            "high_confidence_accuracy": 0.878049
           },
           "p4_g6_cross": {
             "games": 75,
@@ -2752,6 +3544,39 @@
             "high_confidence_wins": 122,
             "high_confidence_accuracy": 0.859155
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.1830469,
+            "log_loss": 0.543481,
+            "mean_confidence": 0.718436,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.882353
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 32,
+            "accuracy": 0.653061,
+            "brier": 0.2103765,
+            "log_loss": 0.6142474,
+            "mean_confidence": 0.720939,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.733333
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 150,
+            "accuracy": 0.724638,
+            "brier": 0.1765693,
+            "log_loss": 0.5238008,
+            "mean_confidence": 0.734592,
+            "high_confidence_games": 79,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.873418
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 79,
@@ -2820,6 +3645,39 @@
             "high_confidence_wins": 117,
             "high_confidence_accuracy": 0.906977
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.1969432,
+            "log_loss": 0.5701573,
+            "mean_confidence": 0.669839,
+            "high_confidence_games": 8,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 34,
+            "accuracy": 0.68,
+            "brier": 0.1987595,
+            "log_loss": 0.5797697,
+            "mean_confidence": 0.712705,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.857143
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 137,
+            "accuracy": 0.691919,
+            "brier": 0.196085,
+            "log_loss": 0.5677886,
+            "mean_confidence": 0.71197,
+            "high_confidence_games": 57,
+            "high_confidence_wins": 51,
+            "high_confidence_accuracy": 0.894737
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 78,
@@ -2887,6 +3745,39 @@
             "high_confidence_games": 26,
             "high_confidence_wins": 21,
             "high_confidence_accuracy": 0.807692
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 42,
+            "accuracy": 0.75,
+            "brier": 0.1906255,
+            "log_loss": 0.5610243,
+            "mean_confidence": 0.707462,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.857143
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2186032,
+            "log_loss": 0.6310391,
+            "mean_confidence": 0.690265,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.75
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 167,
+            "accuracy": 0.729258,
+            "brier": 0.1805365,
+            "log_loss": 0.5340853,
+            "mean_confidence": 0.717885,
+            "high_confidence_games": 68,
+            "high_confidence_wins": 60,
+            "high_confidence_accuracy": 0.882353
           },
           "p4_g6_cross": {
             "games": 75,
@@ -2970,6 +3861,39 @@
             "high_confidence_wins": 133,
             "high_confidence_accuracy": 0.858065
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1753589,
+            "log_loss": 0.5270366,
+            "mean_confidence": 0.718865,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.875
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2158253,
+            "log_loss": 0.6159021,
+            "mean_confidence": 0.725144,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.785714
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 147,
+            "accuracy": 0.710145,
+            "brier": 0.177684,
+            "log_loss": 0.5235761,
+            "mean_confidence": 0.731643,
+            "high_confidence_games": 71,
+            "high_confidence_wins": 64,
+            "high_confidence_accuracy": 0.901408
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 79,
@@ -3038,6 +3962,39 @@
             "high_confidence_wins": 135,
             "high_confidence_accuracy": 0.882353
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.2008967,
+            "log_loss": 0.5751316,
+            "mean_confidence": 0.665295,
+            "high_confidence_games": 8,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 38,
+            "accuracy": 0.76,
+            "brier": 0.1854904,
+            "log_loss": 0.5479693,
+            "mean_confidence": 0.718317,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.933333
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 139,
+            "accuracy": 0.70202,
+            "brier": 0.1945889,
+            "log_loss": 0.5621837,
+            "mean_confidence": 0.711157,
+            "high_confidence_games": 58,
+            "high_confidence_wins": 53,
+            "high_confidence_accuracy": 0.913793
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 77,
@@ -3105,6 +4062,39 @@
             "high_confidence_games": 29,
             "high_confidence_wins": 25,
             "high_confidence_accuracy": 0.862069
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 42,
+            "accuracy": 0.75,
+            "brier": 0.1849445,
+            "log_loss": 0.5489157,
+            "mean_confidence": 0.706021,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.941176
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2261218,
+            "log_loss": 0.6462166,
+            "mean_confidence": 0.703973,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.75
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 167,
+            "accuracy": 0.729258,
+            "brier": 0.1813518,
+            "log_loss": 0.5370219,
+            "mean_confidence": 0.718957,
+            "high_confidence_games": 69,
+            "high_confidence_wins": 62,
+            "high_confidence_accuracy": 0.898551
           },
           "p4_g6_cross": {
             "games": 75,
@@ -3188,6 +4178,39 @@
             "high_confidence_wins": 145,
             "high_confidence_accuracy": 0.847953
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.180551,
+            "log_loss": 0.5370516,
+            "mean_confidence": 0.738697,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 31,
+            "accuracy": 0.632653,
+            "brier": 0.2194017,
+            "log_loss": 0.6430093,
+            "mean_confidence": 0.742629,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.772727
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 148,
+            "accuracy": 0.714976,
+            "brier": 0.1774925,
+            "log_loss": 0.5260966,
+            "mean_confidence": 0.753809,
+            "high_confidence_games": 92,
+            "high_confidence_wins": 79,
+            "high_confidence_accuracy": 0.858696
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -3256,6 +4279,39 @@
             "high_confidence_wins": 141,
             "high_confidence_accuracy": 0.892405
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.197866,
+            "log_loss": 0.5710561,
+            "mean_confidence": 0.691435,
+            "high_confidence_games": 9,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 35,
+            "accuracy": 0.7,
+            "brier": 0.1952611,
+            "log_loss": 0.5784717,
+            "mean_confidence": 0.731268,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 136,
+            "accuracy": 0.686869,
+            "brier": 0.19609,
+            "log_loss": 0.5693051,
+            "mean_confidence": 0.732238,
+            "high_confidence_games": 68,
+            "high_confidence_wins": 58,
+            "high_confidence_accuracy": 0.852941
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -3323,6 +4379,39 @@
             "high_confidence_games": 33,
             "high_confidence_wins": 27,
             "high_confidence_accuracy": 0.818182
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 40,
+            "accuracy": 0.714286,
+            "brier": 0.1871068,
+            "log_loss": 0.5509206,
+            "mean_confidence": 0.727337,
+            "high_confidence_games": 21,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.809524
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2189239,
+            "log_loss": 0.6290686,
+            "mean_confidence": 0.700676,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 162,
+            "accuracy": 0.707424,
+            "brier": 0.1804704,
+            "log_loss": 0.5316648,
+            "mean_confidence": 0.738255,
+            "high_confidence_games": 83,
+            "high_confidence_wins": 73,
+            "high_confidence_accuracy": 0.879518
           },
           "p4_g6_cross": {
             "games": 75,
@@ -3406,6 +4495,39 @@
             "high_confidence_wins": 132,
             "high_confidence_accuracy": 0.830189
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.1825413,
+            "log_loss": 0.5415444,
+            "mean_confidence": 0.730865,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 32,
+            "accuracy": 0.653061,
+            "brier": 0.2154452,
+            "log_loss": 0.6307389,
+            "mean_confidence": 0.731787,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 13,
+            "high_confidence_accuracy": 0.722222
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 149,
+            "accuracy": 0.719807,
+            "brier": 0.1770046,
+            "log_loss": 0.5245643,
+            "mean_confidence": 0.7461,
+            "high_confidence_games": 88,
+            "high_confidence_wins": 75,
+            "high_confidence_accuracy": 0.852273
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -3474,6 +4596,39 @@
             "high_confidence_wins": 133,
             "high_confidence_accuracy": 0.904762
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.195343,
+            "log_loss": 0.5670074,
+            "mean_confidence": 0.682625,
+            "high_confidence_games": 9,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 35,
+            "accuracy": 0.7,
+            "brier": 0.1977625,
+            "log_loss": 0.5816731,
+            "mean_confidence": 0.72233,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 13,
+            "high_confidence_accuracy": 0.8125
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 137,
+            "accuracy": 0.691919,
+            "brier": 0.195617,
+            "log_loss": 0.5678924,
+            "mean_confidence": 0.72396,
+            "high_confidence_games": 61,
+            "high_confidence_wins": 54,
+            "high_confidence_accuracy": 0.885246
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -3541,6 +4696,39 @@
             "high_confidence_games": 29,
             "high_confidence_wins": 23,
             "high_confidence_accuracy": 0.793103
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1899091,
+            "log_loss": 0.5580507,
+            "mean_confidence": 0.718246,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.777778
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 38,
+            "accuracy": 0.655172,
+            "brier": 0.2193402,
+            "log_loss": 0.6311099,
+            "mean_confidence": 0.695318,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 166,
+            "accuracy": 0.724891,
+            "brier": 0.1812606,
+            "log_loss": 0.5341148,
+            "mean_confidence": 0.730153,
+            "high_confidence_games": 79,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.873418
           },
           "p4_g6_cross": {
             "games": 75,
@@ -3624,6 +4812,39 @@
             "high_confidence_wins": 158,
             "high_confidence_accuracy": 0.858696
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1795068,
+            "log_loss": 0.5324895,
+            "mean_confidence": 0.739262,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.85
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2243434,
+            "log_loss": 0.6510701,
+            "mean_confidence": 0.744739,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.789474
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 149,
+            "accuracy": 0.719807,
+            "brier": 0.1785648,
+            "log_loss": 0.5256077,
+            "mean_confidence": 0.754166,
+            "high_confidence_games": 89,
+            "high_confidence_wins": 78,
+            "high_confidence_accuracy": 0.876404
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -3692,6 +4913,39 @@
             "high_confidence_wins": 150,
             "high_confidence_accuracy": 0.887574
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.1933604,
+            "log_loss": 0.5600463,
+            "mean_confidence": 0.690578,
+            "high_confidence_games": 8,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 38,
+            "accuracy": 0.76,
+            "brier": 0.1902745,
+            "log_loss": 0.5689127,
+            "mean_confidence": 0.733821,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.8
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 137,
+            "accuracy": 0.691919,
+            "brier": 0.1932725,
+            "log_loss": 0.5633003,
+            "mean_confidence": 0.733287,
+            "high_confidence_games": 65,
+            "high_confidence_wins": 57,
+            "high_confidence_accuracy": 0.876923
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -3759,6 +5013,39 @@
             "high_confidence_games": 30,
             "high_confidence_wins": 25,
             "high_confidence_accuracy": 0.833333
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1871555,
+            "log_loss": 0.5511473,
+            "mean_confidence": 0.730183,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2257748,
+            "log_loss": 0.6434072,
+            "mean_confidence": 0.707243,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 165,
+            "accuracy": 0.720524,
+            "brier": 0.183115,
+            "log_loss": 0.5379647,
+            "mean_confidence": 0.740556,
+            "high_confidence_games": 83,
+            "high_confidence_wins": 74,
+            "high_confidence_accuracy": 0.891566
           },
           "p4_g6_cross": {
             "games": 75,
@@ -3842,6 +5129,39 @@
             "high_confidence_wins": 146,
             "high_confidence_accuracy": 0.843931
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.1820666,
+            "log_loss": 0.5391045,
+            "mean_confidence": 0.736731,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2205665,
+            "log_loss": 0.6441435,
+            "mean_confidence": 0.738386,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.789474
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 148,
+            "accuracy": 0.714976,
+            "brier": 0.1780637,
+            "log_loss": 0.5256567,
+            "mean_confidence": 0.751646,
+            "high_confidence_games": 88,
+            "high_confidence_wins": 77,
+            "high_confidence_accuracy": 0.875
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -3910,6 +5230,39 @@
             "high_confidence_wins": 136,
             "high_confidence_accuracy": 0.906667
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.1927929,
+            "log_loss": 0.5610094,
+            "mean_confidence": 0.687656,
+            "high_confidence_games": 7,
+            "high_confidence_wins": 7,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 37,
+            "accuracy": 0.74,
+            "brier": 0.194927,
+            "log_loss": 0.5788245,
+            "mean_confidence": 0.726919,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.777778
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 138,
+            "accuracy": 0.69697,
+            "brier": 0.19428,
+            "log_loss": 0.5659044,
+            "mean_confidence": 0.729807,
+            "high_confidence_games": 62,
+            "high_confidence_wins": 54,
+            "high_confidence_accuracy": 0.870968
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -3977,6 +5330,39 @@
             "high_confidence_games": 31,
             "high_confidence_wins": 26,
             "high_confidence_accuracy": 0.83871
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1898186,
+            "log_loss": 0.5576135,
+            "mean_confidence": 0.72675,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2233719,
+            "log_loss": 0.6390846,
+            "mean_confidence": 0.700374,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 163,
+            "accuracy": 0.71179,
+            "brier": 0.1832924,
+            "log_loss": 0.5383115,
+            "mean_confidence": 0.737534,
+            "high_confidence_games": 81,
+            "high_confidence_wins": 72,
+            "high_confidence_accuracy": 0.888889
           },
           "p4_g6_cross": {
             "games": 75,
@@ -4060,6 +5446,39 @@
             "high_confidence_wins": 156,
             "high_confidence_accuracy": 0.83871
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.1804744,
+            "log_loss": 0.535492,
+            "mean_confidence": 0.743989,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.85
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 29,
+            "accuracy": 0.591837,
+            "brier": 0.2248016,
+            "log_loss": 0.657828,
+            "mean_confidence": 0.748764,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.772727
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 147,
+            "accuracy": 0.710145,
+            "brier": 0.1788456,
+            "log_loss": 0.5280933,
+            "mean_confidence": 0.758889,
+            "high_confidence_games": 94,
+            "high_confidence_wins": 82,
+            "high_confidence_accuracy": 0.87234
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -4128,6 +5547,39 @@
             "high_confidence_wins": 151,
             "high_confidence_accuracy": 0.877907
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.1955809,
+            "log_loss": 0.5656254,
+            "mean_confidence": 0.696576,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.909091
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 37,
+            "accuracy": 0.74,
+            "brier": 0.1928322,
+            "log_loss": 0.5769273,
+            "mean_confidence": 0.737823,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.8
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 138,
+            "accuracy": 0.69697,
+            "brier": 0.1949765,
+            "log_loss": 0.5681499,
+            "mean_confidence": 0.73857,
+            "high_confidence_games": 71,
+            "high_confidence_wins": 60,
+            "high_confidence_accuracy": 0.84507
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -4195,6 +5647,39 @@
             "high_confidence_games": 35,
             "high_confidence_wins": 29,
             "high_confidence_accuracy": 0.828571
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1872955,
+            "log_loss": 0.551071,
+            "mean_confidence": 0.734517,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.818182
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2232813,
+            "log_loss": 0.6378705,
+            "mean_confidence": 0.706122,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.846154
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 166,
+            "accuracy": 0.724891,
+            "brier": 0.1827735,
+            "log_loss": 0.5366518,
+            "mean_confidence": 0.74522,
+            "high_confidence_games": 90,
+            "high_confidence_wins": 80,
+            "high_confidence_accuracy": 0.888889
           },
           "p4_g6_cross": {
             "games": 75,
@@ -4278,6 +5763,39 @@
             "high_confidence_wins": 166,
             "high_confidence_accuracy": 0.83
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1782878,
+            "log_loss": 0.5299424,
+            "mean_confidence": 0.746315,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.818182
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 29,
+            "accuracy": 0.591837,
+            "brier": 0.2288743,
+            "log_loss": 0.6659761,
+            "mean_confidence": 0.754115,
+            "high_confidence_games": 21,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.761905
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 148,
+            "accuracy": 0.714976,
+            "brier": 0.1795701,
+            "log_loss": 0.5287937,
+            "mean_confidence": 0.761005,
+            "high_confidence_games": 93,
+            "high_confidence_wins": 81,
+            "high_confidence_accuracy": 0.870968
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -4346,6 +5864,39 @@
             "high_confidence_wins": 158,
             "high_confidence_accuracy": 0.88764
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.1964972,
+            "log_loss": 0.5654395,
+            "mean_confidence": 0.699187,
+            "high_confidence_games": 10,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 38,
+            "accuracy": 0.76,
+            "brier": 0.1886896,
+            "log_loss": 0.5682094,
+            "mean_confidence": 0.744299,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.818182
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 137,
+            "accuracy": 0.691919,
+            "brier": 0.1943439,
+            "log_loss": 0.5664912,
+            "mean_confidence": 0.741834,
+            "high_confidence_games": 74,
+            "high_confidence_wins": 63,
+            "high_confidence_accuracy": 0.851351
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -4413,6 +5964,39 @@
             "high_confidence_games": 34,
             "high_confidence_wins": 28,
             "high_confidence_accuracy": 0.823529
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.185018,
+            "log_loss": 0.545507,
+            "mean_confidence": 0.737523,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.818182
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2261299,
+            "log_loss": 0.6434953,
+            "mean_confidence": 0.712651,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 162,
+            "accuracy": 0.707424,
+            "brier": 0.1829,
+            "log_loss": 0.5371342,
+            "mean_confidence": 0.748281,
+            "high_confidence_games": 89,
+            "high_confidence_wins": 78,
+            "high_confidence_accuracy": 0.876404
           },
           "p4_g6_cross": {
             "games": 75,
@@ -4496,6 +6080,39 @@
             "high_confidence_wins": 124,
             "high_confidence_accuracy": 0.821192
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.1862342,
+            "log_loss": 0.5509952,
+            "mean_confidence": 0.727527,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 32,
+            "accuracy": 0.653061,
+            "brier": 0.2128212,
+            "log_loss": 0.6272444,
+            "mean_confidence": 0.725908,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 13,
+            "high_confidence_accuracy": 0.722222
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 148,
+            "accuracy": 0.714976,
+            "brier": 0.1773428,
+            "log_loss": 0.5269058,
+            "mean_confidence": 0.743377,
+            "high_confidence_games": 87,
+            "high_confidence_wins": 74,
+            "high_confidence_accuracy": 0.850575
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 79,
@@ -4564,6 +6181,39 @@
             "high_confidence_wins": 121,
             "high_confidence_accuracy": 0.876812
           },
+          "week_5": {
+            "games": 51,
+            "wins": 36,
+            "accuracy": 0.705882,
+            "brier": 0.1957416,
+            "log_loss": 0.570347,
+            "mean_confidence": 0.681188,
+            "high_confidence_games": 10,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 0.8
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 34,
+            "accuracy": 0.68,
+            "brier": 0.20415,
+            "log_loss": 0.5955605,
+            "mean_confidence": 0.718987,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 13,
+            "high_confidence_accuracy": 0.8125
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 137,
+            "accuracy": 0.691919,
+            "brier": 0.197632,
+            "log_loss": 0.5731349,
+            "mean_confidence": 0.721809,
+            "high_confidence_games": 61,
+            "high_confidence_wins": 52,
+            "high_confidence_accuracy": 0.852459
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -4631,6 +6281,39 @@
             "high_confidence_games": 31,
             "high_confidence_wins": 25,
             "high_confidence_accuracy": 0.806452
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1940815,
+            "log_loss": 0.5678013,
+            "mean_confidence": 0.715281,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 40,
+            "accuracy": 0.689655,
+            "brier": 0.2181863,
+            "log_loss": 0.629798,
+            "mean_confidence": 0.692382,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.769231
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 168,
+            "accuracy": 0.733624,
+            "brier": 0.1824545,
+            "log_loss": 0.5368582,
+            "mean_confidence": 0.728211,
+            "high_confidence_games": 80,
+            "high_confidence_wins": 70,
+            "high_confidence_accuracy": 0.875
           },
           "p4_g6_cross": {
             "games": 75,
@@ -4714,6 +6397,39 @@
             "high_confidence_wins": 145,
             "high_confidence_accuracy": 0.857988
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1813942,
+            "log_loss": 0.5369761,
+            "mean_confidence": 0.731553,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.85
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2204243,
+            "log_loss": 0.6387574,
+            "mean_confidence": 0.734114,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.789474
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 149,
+            "accuracy": 0.719807,
+            "brier": 0.1780679,
+            "log_loss": 0.5240723,
+            "mean_confidence": 0.746735,
+            "high_confidence_games": 88,
+            "high_confidence_wins": 78,
+            "high_confidence_accuracy": 0.886364
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -4782,6 +6498,39 @@
             "high_confidence_wins": 138,
             "high_confidence_accuracy": 0.901961
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.1910568,
+            "log_loss": 0.5566538,
+            "mean_confidence": 0.682018,
+            "high_confidence_games": 7,
+            "high_confidence_wins": 7,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 35,
+            "accuracy": 0.7,
+            "brier": 0.1927101,
+            "log_loss": 0.5719924,
+            "mean_confidence": 0.724186,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 136,
+            "accuracy": 0.686869,
+            "brier": 0.1928651,
+            "log_loss": 0.5619904,
+            "mean_confidence": 0.724733,
+            "high_confidence_games": 62,
+            "high_confidence_wins": 55,
+            "high_confidence_accuracy": 0.887097
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -4849,6 +6598,39 @@
             "high_confidence_games": 30,
             "high_confidence_wins": 24,
             "high_confidence_accuracy": 0.8
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.190175,
+            "log_loss": 0.5588792,
+            "mean_confidence": 0.721892,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2262022,
+            "log_loss": 0.6457286,
+            "mean_confidence": 0.701627,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.75
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 164,
+            "accuracy": 0.716157,
+            "brier": 0.1840043,
+            "log_loss": 0.540614,
+            "mean_confidence": 0.732633,
+            "high_confidence_games": 81,
+            "high_confidence_wins": 71,
+            "high_confidence_accuracy": 0.876543
           },
           "p4_g6_cross": {
             "games": 75,
@@ -4932,6 +6714,39 @@
             "high_confidence_wins": 142,
             "high_confidence_accuracy": 0.825581
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.1831609,
+            "log_loss": 0.542626,
+            "mean_confidence": 0.741753,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2211659,
+            "log_loss": 0.6512781,
+            "mean_confidence": 0.742617,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.75
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 147,
+            "accuracy": 0.710145,
+            "brier": 0.1784776,
+            "log_loss": 0.5285605,
+            "mean_confidence": 0.756521,
+            "high_confidence_games": 90,
+            "high_confidence_wins": 77,
+            "high_confidence_accuracy": 0.855556
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -5000,6 +6815,39 @@
             "high_confidence_wins": 142,
             "high_confidence_accuracy": 0.8875
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.1951461,
+            "log_loss": 0.5672718,
+            "mean_confidence": 0.694246,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 34,
+            "accuracy": 0.68,
+            "brier": 0.1978891,
+            "log_loss": 0.5877064,
+            "mean_confidence": 0.732303,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 136,
+            "accuracy": 0.686869,
+            "brier": 0.1961903,
+            "log_loss": 0.5713177,
+            "mean_confidence": 0.735562,
+            "high_confidence_games": 67,
+            "high_confidence_wins": 57,
+            "high_confidence_accuracy": 0.850746
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -5067,6 +6915,39 @@
             "high_confidence_games": 35,
             "high_confidence_wins": 28,
             "high_confidence_accuracy": 0.8
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 40,
+            "accuracy": 0.714286,
+            "brier": 0.1904038,
+            "log_loss": 0.5585408,
+            "mean_confidence": 0.731226,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.772727
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2211501,
+            "log_loss": 0.6341012,
+            "mean_confidence": 0.701327,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.846154
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 163,
+            "accuracy": 0.71179,
+            "brier": 0.1832492,
+            "log_loss": 0.5376151,
+            "mean_confidence": 0.742641,
+            "high_confidence_games": 87,
+            "high_confidence_wins": 76,
+            "high_confidence_accuracy": 0.873563
           },
           "p4_g6_cross": {
             "games": 75,
@@ -5150,6 +7031,39 @@
             "high_confidence_wins": 145,
             "high_confidence_accuracy": 0.843023
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.1840288,
+            "log_loss": 0.5458125,
+            "mean_confidence": 0.738647,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.85
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2286371,
+            "log_loss": 0.6639696,
+            "mean_confidence": 0.735457,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.75
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 151,
+            "accuracy": 0.729469,
+            "brier": 0.1797444,
+            "log_loss": 0.5310488,
+            "mean_confidence": 0.749929,
+            "high_confidence_games": 90,
+            "high_confidence_wins": 78,
+            "high_confidence_accuracy": 0.866667
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -5218,6 +7132,39 @@
             "high_confidence_wins": 136,
             "high_confidence_accuracy": 0.888889
           },
+          "week_5": {
+            "games": 51,
+            "wins": 34,
+            "accuracy": 0.666667,
+            "brier": 0.1923351,
+            "log_loss": 0.5584115,
+            "mean_confidence": 0.687608,
+            "high_confidence_games": 9,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 0.888889
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 36,
+            "accuracy": 0.72,
+            "brier": 0.1927292,
+            "log_loss": 0.575787,
+            "mean_confidence": 0.732551,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.789474
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 136,
+            "accuracy": 0.686869,
+            "brier": 0.1952931,
+            "log_loss": 0.5674,
+            "mean_confidence": 0.735144,
+            "high_confidence_games": 68,
+            "high_confidence_wins": 57,
+            "high_confidence_accuracy": 0.838235
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 78,
@@ -5285,6 +7232,39 @@
             "high_confidence_games": 31,
             "high_confidence_wins": 27,
             "high_confidence_accuracy": 0.870968
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 40,
+            "accuracy": 0.714286,
+            "brier": 0.1854238,
+            "log_loss": 0.5453917,
+            "mean_confidence": 0.725742,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.894737
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2180753,
+            "log_loss": 0.6237838,
+            "mean_confidence": 0.704727,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 164,
+            "accuracy": 0.716157,
+            "brier": 0.1788608,
+            "log_loss": 0.5262771,
+            "mean_confidence": 0.739244,
+            "high_confidence_games": 83,
+            "high_confidence_wins": 75,
+            "high_confidence_accuracy": 0.903614
           },
           "p4_g6_cross": {
             "games": 75,
@@ -5368,6 +7348,39 @@
             "high_confidence_wins": 158,
             "high_confidence_accuracy": 0.84492
           },
+          "week_5": {
+            "games": 52,
+            "wins": 39,
+            "accuracy": 0.75,
+            "brier": 0.1780883,
+            "log_loss": 0.5369175,
+            "mean_confidence": 0.742835,
+            "high_confidence_games": 21,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.857143
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 32,
+            "accuracy": 0.653061,
+            "brier": 0.216741,
+            "log_loss": 0.6410854,
+            "mean_confidence": 0.756198,
+            "high_confidence_games": 21,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.809524
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 152,
+            "accuracy": 0.7343,
+            "brier": 0.1779722,
+            "log_loss": 0.5325853,
+            "mean_confidence": 0.756197,
+            "high_confidence_games": 92,
+            "high_confidence_wins": 79,
+            "high_confidence_accuracy": 0.858696
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -5436,6 +7449,39 @@
             "high_confidence_wins": 148,
             "high_confidence_accuracy": 0.865497
           },
+          "week_5": {
+            "games": 51,
+            "wins": 32,
+            "accuracy": 0.627451,
+            "brier": 0.2156242,
+            "log_loss": 0.6077314,
+            "mean_confidence": 0.699046,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.923077
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 34,
+            "accuracy": 0.68,
+            "brier": 0.1976204,
+            "log_loss": 0.5794918,
+            "mean_confidence": 0.741746,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 16,
+            "high_confidence_accuracy": 0.842105
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 131,
+            "accuracy": 0.661616,
+            "brier": 0.2038108,
+            "log_loss": 0.5847841,
+            "mean_confidence": 0.739873,
+            "high_confidence_games": 75,
+            "high_confidence_wins": 63,
+            "high_confidence_accuracy": 0.84
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 78,
@@ -5503,6 +7549,39 @@
             "high_confidence_games": 28,
             "high_confidence_wins": 24,
             "high_confidence_accuracy": 0.857143
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1829492,
+            "log_loss": 0.544824,
+            "mean_confidence": 0.742299,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.875
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 38,
+            "accuracy": 0.655172,
+            "brier": 0.211421,
+            "log_loss": 0.6149621,
+            "mean_confidence": 0.702254,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 166,
+            "accuracy": 0.724891,
+            "brier": 0.1756464,
+            "log_loss": 0.5224936,
+            "mean_confidence": 0.741159,
+            "high_confidence_games": 78,
+            "high_confidence_wins": 70,
+            "high_confidence_accuracy": 0.897436
           },
           "p4_g6_cross": {
             "games": 75,
@@ -5586,6 +7665,39 @@
             "high_confidence_wins": 147,
             "high_confidence_accuracy": 0.835227
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.185246,
+            "log_loss": 0.5482298,
+            "mean_confidence": 0.745333,
+            "high_confidence_games": 20,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.85
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2225427,
+            "log_loss": 0.6600264,
+            "mean_confidence": 0.745538,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.772727
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 147,
+            "accuracy": 0.710145,
+            "brier": 0.1794424,
+            "log_loss": 0.5322119,
+            "mean_confidence": 0.760192,
+            "high_confidence_games": 94,
+            "high_confidence_wins": 81,
+            "high_confidence_accuracy": 0.861702
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -5654,6 +7766,39 @@
             "high_confidence_wins": 142,
             "high_confidence_accuracy": 0.871166
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.1953869,
+            "log_loss": 0.5699232,
+            "mean_confidence": 0.699306,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.75
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 34,
+            "accuracy": 0.68,
+            "brier": 0.201104,
+            "log_loss": 0.5981062,
+            "mean_confidence": 0.737756,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 135,
+            "accuracy": 0.681818,
+            "brier": 0.1975849,
+            "log_loss": 0.5762131,
+            "mean_confidence": 0.740586,
+            "high_confidence_games": 70,
+            "high_confidence_wins": 57,
+            "high_confidence_accuracy": 0.814286
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -5721,6 +7866,39 @@
             "high_confidence_games": 36,
             "high_confidence_wins": 30,
             "high_confidence_accuracy": 0.833333
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 42,
+            "accuracy": 0.75,
+            "brier": 0.1928382,
+            "log_loss": 0.5643559,
+            "mean_confidence": 0.736214,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.818182
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2216163,
+            "log_loss": 0.635361,
+            "mean_confidence": 0.702065,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.857143
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 165,
+            "accuracy": 0.720524,
+            "brier": 0.1850828,
+            "log_loss": 0.5415368,
+            "mean_confidence": 0.747439,
+            "high_confidence_games": 91,
+            "high_confidence_wins": 81,
+            "high_confidence_accuracy": 0.89011
           },
           "p4_g6_cross": {
             "games": 75,
@@ -5804,6 +7982,39 @@
             "high_confidence_wins": 148,
             "high_confidence_accuracy": 0.860465
           },
+          "week_5": {
+            "games": 52,
+            "wins": 37,
+            "accuracy": 0.711538,
+            "brier": 0.1840035,
+            "log_loss": 0.5422492,
+            "mean_confidence": 0.732819,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 17,
+            "high_confidence_accuracy": 0.894737
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2226212,
+            "log_loss": 0.6437922,
+            "mean_confidence": 0.729287,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.777778
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 147,
+            "accuracy": 0.710145,
+            "brier": 0.1795659,
+            "log_loss": 0.5264344,
+            "mean_confidence": 0.745985,
+            "high_confidence_games": 86,
+            "high_confidence_wins": 77,
+            "high_confidence_accuracy": 0.895349
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -5872,6 +8083,39 @@
             "high_confidence_wins": 143,
             "high_confidence_accuracy": 0.888199
           },
+          "week_5": {
+            "games": 51,
+            "wins": 33,
+            "accuracy": 0.647059,
+            "brier": 0.1880476,
+            "log_loss": 0.5509729,
+            "mean_confidence": 0.682013,
+            "high_confidence_games": 8,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 36,
+            "accuracy": 0.72,
+            "brier": 0.1941143,
+            "log_loss": 0.5765686,
+            "mean_confidence": 0.725194,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.823529
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 134,
+            "accuracy": 0.676768,
+            "brier": 0.1924826,
+            "log_loss": 0.5620372,
+            "mean_confidence": 0.724518,
+            "high_confidence_games": 61,
+            "high_confidence_wins": 54,
+            "high_confidence_accuracy": 0.885246
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -5939,6 +8183,39 @@
             "high_confidence_games": 33,
             "high_confidence_wins": 26,
             "high_confidence_accuracy": 0.787879
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1949013,
+            "log_loss": 0.5709114,
+            "mean_confidence": 0.722652,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.789474
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2317508,
+            "log_loss": 0.6595121,
+            "mean_confidence": 0.705671,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.785714
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 164,
+            "accuracy": 0.716157,
+            "brier": 0.1880403,
+            "log_loss": 0.5504642,
+            "mean_confidence": 0.733747,
+            "high_confidence_games": 83,
+            "high_confidence_wins": 72,
+            "high_confidence_accuracy": 0.86747
           },
           "p4_g6_cross": {
             "games": 75,
@@ -6022,6 +8299,39 @@
             "high_confidence_wins": 153,
             "high_confidence_accuracy": 0.818182
           },
+          "week_5": {
+            "games": 52,
+            "wins": 38,
+            "accuracy": 0.730769,
+            "brier": 0.1874352,
+            "log_loss": 0.5545854,
+            "mean_confidence": 0.74856,
+            "high_confidence_games": 22,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.818182
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 31,
+            "accuracy": 0.632653,
+            "brier": 0.2240547,
+            "log_loss": 0.6695211,
+            "mean_confidence": 0.748702,
+            "high_confidence_games": 23,
+            "high_confidence_wins": 18,
+            "high_confidence_accuracy": 0.782609
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 149,
+            "accuracy": 0.719807,
+            "brier": 0.1805789,
+            "log_loss": 0.5365747,
+            "mean_confidence": 0.763704,
+            "high_confidence_games": 97,
+            "high_confidence_wins": 83,
+            "high_confidence_accuracy": 0.85567
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -6090,6 +8400,39 @@
             "high_confidence_wins": 144,
             "high_confidence_accuracy": 0.872727
           },
+          "week_5": {
+            "games": 51,
+            "wins": 36,
+            "accuracy": 0.705882,
+            "brier": 0.1958572,
+            "log_loss": 0.5735864,
+            "mean_confidence": 0.704941,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.75
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 33,
+            "accuracy": 0.66,
+            "brier": 0.2045776,
+            "log_loss": 0.6094872,
+            "mean_confidence": 0.743969,
+            "high_confidence_games": 19,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.789474
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 135,
+            "accuracy": 0.681818,
+            "brier": 0.1992186,
+            "log_loss": 0.581963,
+            "mean_confidence": 0.745783,
+            "high_confidence_games": 72,
+            "high_confidence_wins": 58,
+            "high_confidence_accuracy": 0.805556
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 79,
@@ -6157,6 +8500,39 @@
             "high_confidence_games": 38,
             "high_confidence_wins": 31,
             "high_confidence_accuracy": 0.815789
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 41,
+            "accuracy": 0.732143,
+            "brier": 0.1955821,
+            "log_loss": 0.5712416,
+            "mean_confidence": 0.741853,
+            "high_confidence_games": 24,
+            "high_confidence_wins": 19,
+            "high_confidence_accuracy": 0.791667
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 39,
+            "accuracy": 0.672414,
+            "brier": 0.2224372,
+            "log_loss": 0.6375342,
+            "mean_confidence": 0.703714,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.857143
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 166,
+            "accuracy": 0.724891,
+            "brier": 0.1872439,
+            "log_loss": 0.5464476,
+            "mean_confidence": 0.752649,
+            "high_confidence_games": 96,
+            "high_confidence_wins": 84,
+            "high_confidence_accuracy": 0.875
           },
           "p4_g6_cross": {
             "games": 75,
@@ -6240,6 +8616,39 @@
             "high_confidence_wins": 142,
             "high_confidence_accuracy": 0.820809
           },
+          "week_5": {
+            "games": 52,
+            "wins": 37,
+            "accuracy": 0.711538,
+            "brier": 0.1872339,
+            "log_loss": 0.5496616,
+            "mean_confidence": 0.733556,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.882353
+          },
+          "week_6": {
+            "games": 49,
+            "wins": 30,
+            "accuracy": 0.612245,
+            "brier": 0.2254851,
+            "log_loss": 0.6513534,
+            "mean_confidence": 0.723499,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.777778
+          },
+          "weeks_3_to_6": {
+            "games": 207,
+            "wins": 147,
+            "accuracy": 0.710145,
+            "brier": 0.1816301,
+            "log_loss": 0.5306298,
+            "mean_confidence": 0.74506,
+            "high_confidence_games": 84,
+            "high_confidence_wins": 75,
+            "high_confidence_accuracy": 0.892857
+          },
           "p4_g6_cross": {
             "games": 86,
             "wins": 80,
@@ -6308,6 +8717,39 @@
             "high_confidence_wins": 145,
             "high_confidence_accuracy": 0.873494
           },
+          "week_5": {
+            "games": 51,
+            "wins": 35,
+            "accuracy": 0.686275,
+            "brier": 0.186529,
+            "log_loss": 0.5480992,
+            "mean_confidence": 0.683971,
+            "high_confidence_games": 10,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 1.0
+          },
+          "week_6": {
+            "games": 50,
+            "wins": 35,
+            "accuracy": 0.7,
+            "brier": 0.196445,
+            "log_loss": 0.5836858,
+            "mean_confidence": 0.730737,
+            "high_confidence_games": 18,
+            "high_confidence_wins": 15,
+            "high_confidence_accuracy": 0.833333
+          },
+          "weeks_3_to_6": {
+            "games": 198,
+            "wins": 135,
+            "accuracy": 0.681818,
+            "brier": 0.1930762,
+            "log_loss": 0.5643719,
+            "mean_confidence": 0.725823,
+            "high_confidence_games": 62,
+            "high_confidence_wins": 55,
+            "high_confidence_accuracy": 0.887097
+          },
           "p4_g6_cross": {
             "games": 89,
             "wins": 78,
@@ -6375,6 +8817,39 @@
             "high_confidence_games": 32,
             "high_confidence_wins": 25,
             "high_confidence_accuracy": 0.78125
+          },
+          "week_5": {
+            "games": 56,
+            "wins": 40,
+            "accuracy": 0.714286,
+            "brier": 0.2008202,
+            "log_loss": 0.5864179,
+            "mean_confidence": 0.725155,
+            "high_confidence_games": 17,
+            "high_confidence_wins": 14,
+            "high_confidence_accuracy": 0.823529
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2378597,
+            "log_loss": 0.6756736,
+            "mean_confidence": 0.710843,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.733333
+          },
+          "weeks_3_to_6": {
+            "games": 229,
+            "wins": 163,
+            "accuracy": 0.71179,
+            "brier": 0.1927977,
+            "log_loss": 0.5624325,
+            "mean_confidence": 0.736023,
+            "high_confidence_games": 82,
+            "high_confidence_wins": 71,
+            "high_confidence_accuracy": 0.865854
           },
           "p4_g6_cross": {
             "games": 75,
