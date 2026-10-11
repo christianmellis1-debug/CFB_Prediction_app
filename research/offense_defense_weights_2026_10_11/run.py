@@ -117,6 +117,16 @@ def component_rows(year, frame):
     if prior_blocked:
         prior = prior[~pd.to_numeric(prior.team_id, errors="coerce").isin(prior_blocked)].copy()
     prior_scores, prior_weeks = standardize_components(prior)
+    # Independent check of prior efficiency features against the production
+    # routine, including 2026 entrant filtering and missing-stat fallbacks.
+    production_prior, production_weeks = model.build_weekly_scores(prior)
+    for tid in prior_weeks:
+        ours = get_z_snapshot(prior_scores, prior_weeks, tid)
+        truth = model._latest_snapshot(production_prior, production_weeks, tid, 999)
+        for pos in (0, 1):
+            diff = abs(float(ours[pos] @ np.asarray(BASE)) - float(truth[pos]))
+            if diff > 1e-10:
+                raise AssertionError(f"{year}: prior-score parity mismatch for {tid}: {diff}")
 
     fields = ("off_current", "def_current", "off_prior", "def_prior")
     out = {f: [] for f in fields}
