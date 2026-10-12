@@ -1,0 +1,46 @@
+name: Test home field with handwritten offense defense
+
+on:
+  push:
+    branches:
+      - research/handwritten-home-field-2026-10-12
+    paths:
+      - 'research/handwritten_offense_defense_2026_10_12/**'
+      - 'tests/test_handwritten_home_field.py'
+      - '.github/workflows/handwritten-home-field.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+concurrency:
+  group: cfb-handwritten-home-field
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install model libraries
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Verify handwritten rating and home/away tests
+        run: |
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_offense_defense.py'
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_unit_advantages.py'
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_home_field.py' -v
+      - name: Compare both-stat advantages at home and venue-weight sensitivity
+        run: PYTHONPATH=. python research/handwritten_offense_defense_2026_10_12/home_field.py
+      - name: Save research-only results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/handwritten_offense_defense_2026_10_12/home_field_results.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record home field advantages and handwritten V1.5 venue sensitivity'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
