@@ -1,0 +1,45 @@
+name: Research run-first offense defense weights
+
+on:
+  push:
+    branches:
+      - research/run-offense-defense-redesign-2026-10-12
+    paths:
+      - 'research/run_offense_defense_2026_10_12/**'
+      - 'tests/test_rush_weight_research.py'
+      - '.github/workflows/run-first-weights.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+concurrency:
+  group: cfb-run-first-weight-research
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install fixed model dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Validate rushing and baseline assumptions
+        run: |
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_rush_weight_research.py' -v
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_prospective_weights.py'
+      - name: Backtest independent rushing offense and run defense weights
+        run: PYTHONPATH=. python research/run_offense_defense_2026_10_12/run.py
+      - name: Commit isolated research only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/run_offense_defense_2026_10_12/results.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save distinct run-first offense and defense testing'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
