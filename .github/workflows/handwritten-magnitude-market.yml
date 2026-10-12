@@ -1,0 +1,47 @@
+name: Research handwritten advantage size and market controls
+
+on:
+  push:
+    branches:
+      - research/handwritten-magnitude-market-2026-10-12
+    paths:
+      - 'research/handwritten_offense_defense_2026_10_12/magnitude_market.py'
+      - 'tests/test_handwritten_magnitude_market.py'
+      - '.github/workflows/handwritten-magnitude-market.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cfb-handwritten-magnitude-market
+  cancel-in-progress: false
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install fixed numerical dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Test magnitude bins and matched favorite controls
+        run: |
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_magnitude_market.py' -v
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_home_field.py'
+      - name: Compare magnitude and season-spread-matched home favorites
+        run: PYTHONPATH=. python research/handwritten_offense_defense_2026_10_12/magnitude_market.py
+      - name: Commit research-only results and detailed 2026 games
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/handwritten_offense_defense_2026_10_12/magnitude_market_results.json
+          git add research/handwritten_offense_defense_2026_10_12/magnitude_market_games_2026.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Archive 2022-2026 handwritten offense defense magnitude and market comparisons'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
