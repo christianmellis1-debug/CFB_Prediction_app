@@ -90,6 +90,38 @@ def magnitude_groups(data):
     return result
 
 
+
+def separate_unit_magnitudes(data,cut=.50):
+    """Independent offense/defense rating gap bins, no outcome-informed cut."""
+    mask=(~data.neutral_site)&(data.proposed_offense_edge>EPS)&(data.proposed_defense_edge>EPS)
+    selected=data.loc[mask].copy()
+    result={
+        "comparison_population":len(selected),
+        "threshold":cut,
+        "offense_gap_bins":{},
+        "defense_gap_bins":{},
+        "two_by_two":{}
+    }
+    for key,field in (("offense_gap_bins","proposed_offense_edge"),
+                      ("defense_gap_bins","proposed_defense_edge")):
+        for lo,hi in MAGNITUDE_BINS:
+            name=magnitude_bucket(lo)
+            cond=selected[field].ge(lo)&(
+                selected[field].lt(hi) if hi is not None else True
+            )
+            result[key][name]=stats(selected,cond)
+        assert sum(row["games"] for row in result[key].values())==len(selected)
+    off=selected.proposed_offense_edge.ge(cut)
+    defense=selected.proposed_defense_edge.ge(cut)
+    result["two_by_two"]={
+        "both_below_threshold":stats(selected,~off&~defense),
+        "only_offense_at_least_threshold":stats(selected,off&~defense),
+        "only_defense_at_least_threshold":stats(selected,~off&defense),
+        "both_at_least_threshold":stats(selected,off&defense),
+    }
+    assert sum(x["games"] for x in result["two_by_two"].values())==len(selected)
+    return result
+
 def market_favorites_comparison(data):
     """Compare same-year spread classes and apply selected case mix to controls.
 
@@ -210,9 +242,11 @@ def main():
         "total_verified_spread_games":int(joined.has_verified_spread.sum()),
         "definition":"Only nonneutral HOME team with both positive blended rating gaps. Magnitude is min(offense gap,defense gap), not combined offense+defense or market spread.",
         "all_seasons":magnitude_groups(joined),
+        "all_seasons_independent_units":separate_unit_magnitudes(joined),
         "yearly":{},
         "2026_weeks_4_to_6":{
             "magnitude":magnitude_groups(subset(joined,2026,[4,5,6])),
+            "independent_units":separate_unit_magnitudes(subset(joined,2026,[4,5,6])),
             "market":market_favorites_comparison(subset(joined,2026,[4,5,6]))
         },
         "market":{
@@ -237,6 +271,7 @@ def main():
         s=subset(joined,year)
         result["yearly"][str(year)]={
             "magnitude":magnitude_groups(s),
+            "independent_units":separate_unit_magnitudes(s),
             "priced_games":int(s.has_verified_spread.sum()),
             "pregame_eligible":len(s),
         }
