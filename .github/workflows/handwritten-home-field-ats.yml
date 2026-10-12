@@ -1,0 +1,47 @@
+name: ATS historical handwritten home advantage research
+
+on:
+  push:
+    branches:
+      - research/handwritten-home-field-ats-2026-10-12
+    paths:
+      - 'research/handwritten_offense_defense_2026_10_12/**'
+      - 'tests/test_handwritten_home_field_ats.py'
+      - '.github/workflows/handwritten-home-field-ats.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cfb-handwritten-ats-research
+  cancel-in-progress: false
+
+jobs:
+  ats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install model dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Verify historical ATS rules and matchup controls
+        run: |
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_home_field_ats.py' -v
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_home_field.py'
+      - name: Join original eligible games to historical ESPN spreads and grade ATS
+        run: PYTHONPATH=. python research/handwritten_offense_defense_2026_10_12/home_field_ats.py
+      - name: Save analysis with valid-source coverage and detailed grades
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/handwritten_offense_defense_2026_10_12/home_field_ats_results.json
+          git add research/handwritten_offense_defense_2026_10_12/home_field_ats_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save source-validated 2022-2026 handwritten home both-advantage ATS study'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
