@@ -48,6 +48,8 @@ def _explanation(row, stage, team):
         return f"{team} qualifies as a heavy moneyline favorite. This tier is based on the odds range, not a required statistical edge."
     if stage == 5:
         return f"{team} has better red-zone offense and defense, plus stronger explosive-play measures on both sides."
+    if stage == 6:
+        return f"{team} has the stronger pregame offense and defense with an eligible DraftKings home-favorite moneyline (above −500)."
     return _clean(row.get("Value Reason"), "See the tier guide for the selection rules.")
 
 
@@ -80,7 +82,7 @@ def render_value_shortlist_cards(rows):
     html = ['<div class="value-quick-grid" aria-label="Official Value Shortlist quick-view cards">']
     for row in rows:
         stage = _positive_int(row.get("Value Stage"))
-        stage = stage if stage in (1, 2, 3, 4, 5) else 0
+        stage = stage if stage in (1, 2, 3, 4, 5, 6) else 0
         rank = _positive_int(row.get("Value Rank"))
         rank_label = str(rank) if rank is not None else "—"
         tier = _clean(row.get("Value Tier"), f"Tier {stage}" if stage else "Value Pick")
