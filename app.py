@@ -33,6 +33,7 @@ importlib.reload(matchup_advantages)
 from matchup_advantages import (build_advantages, advantage_html, assess, normalize_fbs_schedule,
                                 build_waterfall_profiles, weather_tier_candidate_ids)
 from shadow_tracking import show_shadow_tracking
+from prospective_weights_archive import show_comparison as show_weight_challenger_comparison
 from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
 from matchday_live import live_board_rows, live_board_html, game_card_final_score_html
@@ -3273,6 +3274,7 @@ with cards_tab:
                 st.caption("Tiered games, High/Very High confidence picks (80%+), and games with missing metrics are not rated as risky. Picks and model confidence are unchanged.")
 if performance_tab.open:
     with performance_tab:
+        show_weight_challenger_comparison(st, season, selected_week)
         show_shadow_tracking(st, season, selected_week)
         tour_at("results")
         st.subheader("Model results by confidence")
