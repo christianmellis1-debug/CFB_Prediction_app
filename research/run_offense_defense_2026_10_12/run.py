@@ -166,7 +166,7 @@ def variants_for_week(current,prior,schedule,lookup,week):
         & schedule.home_points.notna() & schedule.away_points.notna()
     ]
     rush,quality=rush_zscores(history,lookup)
-    quality["week"]=week
+    quality["week"]=int(week)
     if not rush:
         return [],quality
     scores,weeks=component_vectors(current)
@@ -317,7 +317,7 @@ def main():
         ]
     }
     OUT.parent.mkdir(parents=True,exist_ok=True)
-    OUT.write_text(json.dumps(output,indent=2,allow_nan=False)+"\n")
+    OUT.write_text(json.dumps(output,indent=2,allow_nan=False,default=lambda x: x.item() if isinstance(x,np.generic) else str(x))+"\n")
     def display(row):
         return {
             "name":row["name"],
