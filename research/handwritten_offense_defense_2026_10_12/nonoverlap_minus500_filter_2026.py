@@ -28,6 +28,8 @@ def main():
     for r in selected:
         r["week"]=int(r["week"])
         if r["week"]==3:
+            r["dk_home_close"]=None
+            r["dk_away_close"]=None
             j,error=get(r["game_id"])
             if error:
                 r["error"]=error
