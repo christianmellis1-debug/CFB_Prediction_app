@@ -1,0 +1,1044 @@
+{
+  "generated_at": "2026-10-12T16:17:52.839391+00:00",
+  "hypothesis": "User-written 40/25/15/10/10 offense+defense; home versus away double-advantage ATS 2022-2026 W6",
+  "spread_dataset": "sportsdataverse ESPN CFB betting releases espn_cfb_betting betting_{season}.csv",
+  "valid_odds_sources": [
+    "core_odds_api",
+    "summary_pickcenter"
+  ],
+  "qualifications": "Only game_spread_available true, finite home_team_spread, known source, exact ESPN game ID + season + week. Exclude source=default/injected. Require finished regulation game score from same schedule and valid team IDs where provided.",
+  "seasons": {
+    "2022": {
+      "coverage": {
+        "same_games_with_any_outcome": 630,
+        "valid_spreads_matching_same_season_week_game": 1,
+        "unpriced_eligible_games": 629,
+        "line_coverage": 0.00159,
+        "source": {
+          "all_rows": 904,
+          "target_year_unique_id_rows": 904,
+          "spread_available": 898,
+          "source_counts": {
+            "summary_pickcenter": 779,
+            "core_odds_api": 119,
+            "default": 6
+          },
+          "valid_source_and_spread_rows": 119,
+          "missing_or_invalid_source_rows": 785
+        }
+      },
+      "ats": {
+        "matched_games": 1,
+        "spread_sources": {
+          "core_odds_api": 1
+        },
+        "home_team_all_nonneutral": {
+          "qualified": 1,
+          "wins": 1,
+          "losses": 0,
+          "pushes": 0,
+          "decisions": 1,
+          "ats_win_pct": 1.0
+        },
+        "home_team_both_edges": {
+          "qualified": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "decisions": 0,
+          "ats_win_pct": null
+        },
+        "away_team_both_edges": {
+          "qualified": 1,
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "decisions": 1,
+          "ats_win_pct": 0.0
+        },
+        "both_edges_neutral": {
+          "qualified": 0,
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "decisions": 0,
+          "ats_win_pct": null
+        },
+        "both_edges_any": {
+          "qualified": 1,
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "decisions": 1,
+          "ats_win_pct": 0.0
+        },
+        "both_edges_vs_original_v15": {
+          "v15_on_same_both_games": {
+            "qualified": 1,
+            "wins": 0,
+            "losses": 1,
+            "pushes": 0,
+            "decisions": 1,
+            "ats_win_pct": 0.0
+          },
+          "handwritten_both_on_same_both_games": {
+            "qualified": 1,
+            "wins": 0,
+            "losses": 1,
+            "pushes": 0,
+            "decisions": 1,
+            "ats_win_pct": 0.0
+          },
+          "agree_with_v15": {
+            "qualified": 1,
+            "wins": 0,
+            "losses": 1,
+            "pushes": 0,
+            "decisions": 1,
+            "ats_win_pct": 0.0
+          },
+          "conflict_with_v15_original": {
+            "qualified": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "decisions": 0,
+            "ats_win_pct": null
+          },
+          "conflict_with_v15_follow_both": {
+            "qualified": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "decisions": 0,
+            "ats_win_pct": null
+          },
+          "home_both_conflict_v15": {
+            "qualified": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "decisions": 0,
+            "ats_win_pct": null
+          },
+          "away_both_conflict_v15": {
+            "qualified": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "decisions": 0,
+            "ats_win_pct": null
+          }
+        },
+        "split_edges": {
+          "original_v15": {
+            "qualified": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "decisions": 0,
+            "ats_win_pct": null
+          },
+          "higher_offense": {
+            "qualified": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "decisions": 0,
+            "ats_win_pct": null
+          },
+          "higher_defense": {
+            "qualified": 0,
+            "wins": 0,
+            "losses": 0,
+            "pushes": 0,
+            "decisions": 0,
+            "ats_win_pct": null
+          }
+        },
+        "v15_all_graded": {
+          "qualified": 1,
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "decisions": 1,
+          "ats_win_pct": 0.0
+        },
+        "handwritten_full_model_all_graded": {
+          "qualified": 1,
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "decisions": 1,
+          "ats_win_pct": 0.0
+        },
+        "hypothetical_both_override_v15_all": {
+          "qualified": 1,
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "decisions": 1,
+          "ats_win_pct": 0.0
+        }
+      }
+    },
+    "2023": {
+      "coverage": {
+        "same_games_with_any_outcome": 646,
+        "valid_spreads_matching_same_season_week_game": 646,
+        "unpriced_eligible_games": 0,
+        "line_coverage": 1.0,
+        "source": {
+          "all_rows": 911,
+          "target_year_unique_id_rows": 911,
+          "spread_available": 911,
+          "source_counts": {
+            "core_odds_api": 882,
+            "summary_pickcenter": 29
+          },
+          "valid_source_and_spread_rows": 882,
+          "missing_or_invalid_source_rows": 29
+        }
+      },
+      "ats": {
+        "matched_games": 646,
+        "spread_sources": {
+          "core_odds_api": 646
+        },
+        "home_team_all_nonneutral": {
+          "qualified": 631,
+          "wins": 301,
+          "losses": 330,
+          "pushes": 0,
+          "decisions": 631,
+          "ats_win_pct": 0.477021
+        },
+        "home_team_both_edges": {
+          "qualified": 198,
+          "wins": 95,
+          "losses": 103,
+          "pushes": 0,
+          "decisions": 198,
+          "ats_win_pct": 0.479798
+        },
+        "away_team_both_edges": {
+          "qualified": 182,
+          "wins": 102,
+          "losses": 80,
+          "pushes": 0,
+          "decisions": 182,
+          "ats_win_pct": 0.56044
+        },
+        "both_edges_neutral": {
+          "qualified": 10,
+          "wins": 5,
+          "losses": 5,
+          "pushes": 0,
+          "decisions": 10,
+          "ats_win_pct": 0.5
+        },
+        "both_edges_any": {
+          "qualified": 390,
+          "wins": 202,
+          "losses": 188,
+          "pushes": 0,
+          "decisions": 390,
+          "ats_win_pct": 0.517949
+        },
+        "both_edges_vs_original_v15": {
+          "v15_on_same_both_games": {
+            "qualified": 390,
+            "wins": 201,
+            "losses": 189,
+            "pushes": 0,
+            "decisions": 390,
+            "ats_win_pct": 0.515385
+          },
+          "handwritten_both_on_same_both_games": {
+            "qualified": 390,
+            "wins": 202,
+            "losses": 188,
+            "pushes": 0,
+            "decisions": 390,
+            "ats_win_pct": 0.517949
+          },
+          "agree_with_v15": {
+            "qualified": 377,
+            "wins": 195,
+            "losses": 182,
+            "pushes": 0,
+            "decisions": 377,
+            "ats_win_pct": 0.517241
+          },
+          "conflict_with_v15_original": {
+            "qualified": 13,
+            "wins": 6,
+            "losses": 7,
+            "pushes": 0,
+            "decisions": 13,
+            "ats_win_pct": 0.461538
+          },
+          "conflict_with_v15_follow_both": {
+            "qualified": 13,
+            "wins": 7,
+            "losses": 6,
+            "pushes": 0,
+            "decisions": 13,
+            "ats_win_pct": 0.538462
+          },
+          "home_both_conflict_v15": {
+            "qualified": 4,
+            "wins": 3,
+            "losses": 1,
+            "pushes": 0,
+            "decisions": 4,
+            "ats_win_pct": 0.75
+          },
+          "away_both_conflict_v15": {
+            "qualified": 7,
+            "wins": 4,
+            "losses": 3,
+            "pushes": 0,
+            "decisions": 7,
+            "ats_win_pct": 0.571429
+          }
+        },
+        "split_edges": {
+          "original_v15": {
+            "qualified": 256,
+            "wins": 131,
+            "losses": 125,
+            "pushes": 0,
+            "decisions": 256,
+            "ats_win_pct": 0.511719
+          },
+          "higher_offense": {
+            "qualified": 256,
+            "wins": 137,
+            "losses": 119,
+            "pushes": 0,
+            "decisions": 256,
+            "ats_win_pct": 0.535156
+          },
+          "higher_defense": {
+            "qualified": 256,
+            "wins": 119,
+            "losses": 137,
+            "pushes": 0,
+            "decisions": 256,
+            "ats_win_pct": 0.464844
+          }
+        },
+        "v15_all_graded": {
+          "qualified": 646,
+          "wins": 332,
+          "losses": 314,
+          "pushes": 0,
+          "decisions": 646,
+          "ats_win_pct": 0.513932
+        },
+        "handwritten_full_model_all_graded": {
+          "qualified": 646,
+          "wins": 330,
+          "losses": 316,
+          "pushes": 0,
+          "decisions": 646,
+          "ats_win_pct": 0.510836
+        },
+        "hypothetical_both_override_v15_all": {
+          "qualified": 646,
+          "wins": 333,
+          "losses": 313,
+          "pushes": 0,
+          "decisions": 646,
+          "ats_win_pct": 0.51548
+        }
+      }
+    },
+    "2024": {
+      "coverage": {
+        "same_games_with_any_outcome": 659,
+        "valid_spreads_matching_same_season_week_game": 657,
+        "unpriced_eligible_games": 2,
+        "line_coverage": 0.99697,
+        "source": {
+          "all_rows": 966,
+          "target_year_unique_id_rows": 966,
+          "spread_available": 956,
+          "source_counts": {
+            "core_odds_api": 956,
+            "default": 10
+          },
+          "valid_source_and_spread_rows": 956,
+          "missing_or_invalid_source_rows": 10
+        }
+      },
+      "ats": {
+        "matched_games": 657,
+        "spread_sources": {
+          "core_odds_api": 657
+        },
+        "home_team_all_nonneutral": {
+          "qualified": 630,
+          "wins": 318,
+          "losses": 312,
+          "pushes": 0,
+          "decisions": 630,
+          "ats_win_pct": 0.504762
+        },
+        "home_team_both_edges": {
+          "qualified": 219,
+          "wins": 110,
+          "losses": 109,
+          "pushes": 0,
+          "decisions": 219,
+          "ats_win_pct": 0.502283
+        },
+        "away_team_both_edges": {
+          "qualified": 173,
+          "wins": 81,
+          "losses": 92,
+          "pushes": 0,
+          "decisions": 173,
+          "ats_win_pct": 0.468208
+        },
+        "both_edges_neutral": {
+          "qualified": 10,
+          "wins": 5,
+          "losses": 5,
+          "pushes": 0,
+          "decisions": 10,
+          "ats_win_pct": 0.5
+        },
+        "both_edges_any": {
+          "qualified": 402,
+          "wins": 196,
+          "losses": 206,
+          "pushes": 0,
+          "decisions": 402,
+          "ats_win_pct": 0.487562
+        },
+        "both_edges_vs_original_v15": {
+          "v15_on_same_both_games": {
+            "qualified": 402,
+            "wins": 203,
+            "losses": 199,
+            "pushes": 0,
+            "decisions": 402,
+            "ats_win_pct": 0.504975
+          },
+          "handwritten_both_on_same_both_games": {
+            "qualified": 402,
+            "wins": 196,
+            "losses": 206,
+            "pushes": 0,
+            "decisions": 402,
+            "ats_win_pct": 0.487562
+          },
+          "agree_with_v15": {
+            "qualified": 385,
+            "wins": 191,
+            "losses": 194,
+            "pushes": 0,
+            "decisions": 385,
+            "ats_win_pct": 0.496104
+          },
+          "conflict_with_v15_original": {
+            "qualified": 17,
+            "wins": 12,
+            "losses": 5,
+            "pushes": 0,
+            "decisions": 17,
+            "ats_win_pct": 0.705882
+          },
+          "conflict_with_v15_follow_both": {
+            "qualified": 17,
+            "wins": 5,
+            "losses": 12,
+            "pushes": 0,
+            "decisions": 17,
+            "ats_win_pct": 0.294118
+          },
+          "home_both_conflict_v15": {
+            "qualified": 6,
+            "wins": 0,
+            "losses": 6,
+            "pushes": 0,
+            "decisions": 6,
+            "ats_win_pct": 0.0
+          },
+          "away_both_conflict_v15": {
+            "qualified": 11,
+            "wins": 5,
+            "losses": 6,
+            "pushes": 0,
+            "decisions": 11,
+            "ats_win_pct": 0.454545
+          }
+        },
+        "split_edges": {
+          "original_v15": {
+            "qualified": 255,
+            "wins": 138,
+            "losses": 117,
+            "pushes": 0,
+            "decisions": 255,
+            "ats_win_pct": 0.541176
+          },
+          "higher_offense": {
+            "qualified": 255,
+            "wins": 120,
+            "losses": 135,
+            "pushes": 0,
+            "decisions": 255,
+            "ats_win_pct": 0.470588
+          },
+          "higher_defense": {
+            "qualified": 255,
+            "wins": 135,
+            "losses": 120,
+            "pushes": 0,
+            "decisions": 255,
+            "ats_win_pct": 0.529412
+          }
+        },
+        "v15_all_graded": {
+          "qualified": 657,
+          "wins": 341,
+          "losses": 316,
+          "pushes": 0,
+          "decisions": 657,
+          "ats_win_pct": 0.519026
+        },
+        "handwritten_full_model_all_graded": {
+          "qualified": 657,
+          "wins": 321,
+          "losses": 336,
+          "pushes": 0,
+          "decisions": 657,
+          "ats_win_pct": 0.488584
+        },
+        "hypothetical_both_override_v15_all": {
+          "qualified": 657,
+          "wins": 334,
+          "losses": 323,
+          "pushes": 0,
+          "decisions": 657,
+          "ats_win_pct": 0.508371
+        }
+      }
+    },
+    "2025": {
+      "coverage": {
+        "same_games_with_any_outcome": 663,
+        "valid_spreads_matching_same_season_week_game": 663,
+        "unpriced_eligible_games": 0,
+        "line_coverage": 1.0,
+        "source": {
+          "all_rows": 958,
+          "target_year_unique_id_rows": 958,
+          "spread_available": 946,
+          "source_counts": {
+            "core_odds_api": 946,
+            "default": 12
+          },
+          "valid_source_and_spread_rows": 946,
+          "missing_or_invalid_source_rows": 12
+        }
+      },
+      "ats": {
+        "matched_games": 663,
+        "spread_sources": {
+          "core_odds_api": 663
+        },
+        "home_team_all_nonneutral": {
+          "qualified": 647,
+          "wins": 331,
+          "losses": 316,
+          "pushes": 0,
+          "decisions": 647,
+          "ats_win_pct": 0.511592
+        },
+        "home_team_both_edges": {
+          "qualified": 185,
+          "wins": 92,
+          "losses": 93,
+          "pushes": 0,
+          "decisions": 185,
+          "ats_win_pct": 0.497297
+        },
+        "away_team_both_edges": {
+          "qualified": 181,
+          "wins": 88,
+          "losses": 93,
+          "pushes": 0,
+          "decisions": 181,
+          "ats_win_pct": 0.486188
+        },
+        "both_edges_neutral": {
+          "qualified": 9,
+          "wins": 3,
+          "losses": 6,
+          "pushes": 0,
+          "decisions": 9,
+          "ats_win_pct": 0.333333
+        },
+        "both_edges_any": {
+          "qualified": 375,
+          "wins": 183,
+          "losses": 192,
+          "pushes": 0,
+          "decisions": 375,
+          "ats_win_pct": 0.488
+        },
+        "both_edges_vs_original_v15": {
+          "v15_on_same_both_games": {
+            "qualified": 375,
+            "wins": 181,
+            "losses": 194,
+            "pushes": 0,
+            "decisions": 375,
+            "ats_win_pct": 0.482667
+          },
+          "handwritten_both_on_same_both_games": {
+            "qualified": 375,
+            "wins": 183,
+            "losses": 192,
+            "pushes": 0,
+            "decisions": 375,
+            "ats_win_pct": 0.488
+          },
+          "agree_with_v15": {
+            "qualified": 355,
+            "wins": 172,
+            "losses": 183,
+            "pushes": 0,
+            "decisions": 355,
+            "ats_win_pct": 0.484507
+          },
+          "conflict_with_v15_original": {
+            "qualified": 20,
+            "wins": 9,
+            "losses": 11,
+            "pushes": 0,
+            "decisions": 20,
+            "ats_win_pct": 0.45
+          },
+          "conflict_with_v15_follow_both": {
+            "qualified": 20,
+            "wins": 11,
+            "losses": 9,
+            "pushes": 0,
+            "decisions": 20,
+            "ats_win_pct": 0.55
+          },
+          "home_both_conflict_v15": {
+            "qualified": 7,
+            "wins": 5,
+            "losses": 2,
+            "pushes": 0,
+            "decisions": 7,
+            "ats_win_pct": 0.714286
+          },
+          "away_both_conflict_v15": {
+            "qualified": 13,
+            "wins": 6,
+            "losses": 7,
+            "pushes": 0,
+            "decisions": 13,
+            "ats_win_pct": 0.461538
+          }
+        },
+        "split_edges": {
+          "original_v15": {
+            "qualified": 288,
+            "wins": 158,
+            "losses": 130,
+            "pushes": 0,
+            "decisions": 288,
+            "ats_win_pct": 0.548611
+          },
+          "higher_offense": {
+            "qualified": 288,
+            "wins": 136,
+            "losses": 152,
+            "pushes": 0,
+            "decisions": 288,
+            "ats_win_pct": 0.472222
+          },
+          "higher_defense": {
+            "qualified": 288,
+            "wins": 152,
+            "losses": 136,
+            "pushes": 0,
+            "decisions": 288,
+            "ats_win_pct": 0.527778
+          }
+        },
+        "v15_all_graded": {
+          "qualified": 663,
+          "wins": 339,
+          "losses": 324,
+          "pushes": 0,
+          "decisions": 663,
+          "ats_win_pct": 0.511312
+        },
+        "handwritten_full_model_all_graded": {
+          "qualified": 663,
+          "wins": 335,
+          "losses": 328,
+          "pushes": 0,
+          "decisions": 663,
+          "ats_win_pct": 0.505279
+        },
+        "hypothetical_both_override_v15_all": {
+          "qualified": 663,
+          "wins": 341,
+          "losses": 322,
+          "pushes": 0,
+          "decisions": 663,
+          "ats_win_pct": 0.514329
+        }
+      }
+    },
+    "2026": {
+      "coverage": {
+        "same_games_with_any_outcome": 228,
+        "valid_spreads_matching_same_season_week_game": 228,
+        "unpriced_eligible_games": 0,
+        "line_coverage": 1.0,
+        "source": {
+          "all_rows": 448,
+          "target_year_unique_id_rows": 448,
+          "spread_available": 448,
+          "source_counts": {
+            "core_odds_api": 448
+          },
+          "valid_source_and_spread_rows": 448,
+          "missing_or_invalid_source_rows": 0
+        }
+      },
+      "ats": {
+        "matched_games": 228,
+        "spread_sources": {
+          "core_odds_api": 228
+        },
+        "home_team_all_nonneutral": {
+          "qualified": 225,
+          "wins": 117,
+          "losses": 105,
+          "pushes": 3,
+          "decisions": 222,
+          "ats_win_pct": 0.527027
+        },
+        "home_team_both_edges": {
+          "qualified": 82,
+          "wins": 41,
+          "losses": 40,
+          "pushes": 1,
+          "decisions": 81,
+          "ats_win_pct": 0.506173
+        },
+        "away_team_both_edges": {
+          "qualified": 70,
+          "wins": 35,
+          "losses": 34,
+          "pushes": 1,
+          "decisions": 69,
+          "ats_win_pct": 0.507246
+        },
+        "both_edges_neutral": {
+          "qualified": 2,
+          "wins": 1,
+          "losses": 1,
+          "pushes": 0,
+          "decisions": 2,
+          "ats_win_pct": 0.5
+        },
+        "both_edges_any": {
+          "qualified": 154,
+          "wins": 77,
+          "losses": 75,
+          "pushes": 2,
+          "decisions": 152,
+          "ats_win_pct": 0.506579
+        },
+        "both_edges_vs_original_v15": {
+          "v15_on_same_both_games": {
+            "qualified": 154,
+            "wins": 78,
+            "losses": 74,
+            "pushes": 2,
+            "decisions": 152,
+            "ats_win_pct": 0.513158
+          },
+          "handwritten_both_on_same_both_games": {
+            "qualified": 154,
+            "wins": 77,
+            "losses": 75,
+            "pushes": 2,
+            "decisions": 152,
+            "ats_win_pct": 0.506579
+          },
+          "agree_with_v15": {
+            "qualified": 151,
+            "wins": 76,
+            "losses": 73,
+            "pushes": 2,
+            "decisions": 149,
+            "ats_win_pct": 0.510067
+          },
+          "conflict_with_v15_original": {
+            "qualified": 3,
+            "wins": 2,
+            "losses": 1,
+            "pushes": 0,
+            "decisions": 3,
+            "ats_win_pct": 0.666667
+          },
+          "conflict_with_v15_follow_both": {
+            "qualified": 3,
+            "wins": 1,
+            "losses": 2,
+            "pushes": 0,
+            "decisions": 3,
+            "ats_win_pct": 0.333333
+          },
+          "home_both_conflict_v15": {
+            "qualified": 1,
+            "wins": 1,
+            "losses": 0,
+            "pushes": 0,
+            "decisions": 1,
+            "ats_win_pct": 1.0
+          },
+          "away_both_conflict_v15": {
+            "qualified": 2,
+            "wins": 0,
+            "losses": 2,
+            "pushes": 0,
+            "decisions": 2,
+            "ats_win_pct": 0.0
+          }
+        },
+        "split_edges": {
+          "original_v15": {
+            "qualified": 74,
+            "wins": 33,
+            "losses": 40,
+            "pushes": 1,
+            "decisions": 73,
+            "ats_win_pct": 0.452055
+          },
+          "higher_offense": {
+            "qualified": 74,
+            "wins": 38,
+            "losses": 35,
+            "pushes": 1,
+            "decisions": 73,
+            "ats_win_pct": 0.520548
+          },
+          "higher_defense": {
+            "qualified": 74,
+            "wins": 35,
+            "losses": 38,
+            "pushes": 1,
+            "decisions": 73,
+            "ats_win_pct": 0.479452
+          }
+        },
+        "v15_all_graded": {
+          "qualified": 228,
+          "wins": 111,
+          "losses": 114,
+          "pushes": 3,
+          "decisions": 225,
+          "ats_win_pct": 0.493333
+        },
+        "handwritten_full_model_all_graded": {
+          "qualified": 228,
+          "wins": 113,
+          "losses": 112,
+          "pushes": 3,
+          "decisions": 225,
+          "ats_win_pct": 0.502222
+        },
+        "hypothetical_both_override_v15_all": {
+          "qualified": 228,
+          "wins": 110,
+          "losses": 115,
+          "pushes": 3,
+          "decisions": 225,
+          "ats_win_pct": 0.488889
+        }
+      }
+    }
+  },
+  "combined": {
+    "matched_games": 2195,
+    "spread_sources": {
+      "core_odds_api": 2195
+    },
+    "home_team_all_nonneutral": {
+      "qualified": 2134,
+      "wins": 1068,
+      "losses": 1063,
+      "pushes": 3,
+      "decisions": 2131,
+      "ats_win_pct": 0.501173
+    },
+    "home_team_both_edges": {
+      "qualified": 684,
+      "wins": 338,
+      "losses": 345,
+      "pushes": 1,
+      "decisions": 683,
+      "ats_win_pct": 0.494876
+    },
+    "away_team_both_edges": {
+      "qualified": 607,
+      "wins": 306,
+      "losses": 300,
+      "pushes": 1,
+      "decisions": 606,
+      "ats_win_pct": 0.50495
+    },
+    "both_edges_neutral": {
+      "qualified": 31,
+      "wins": 14,
+      "losses": 17,
+      "pushes": 0,
+      "decisions": 31,
+      "ats_win_pct": 0.451613
+    },
+    "both_edges_any": {
+      "qualified": 1322,
+      "wins": 658,
+      "losses": 662,
+      "pushes": 2,
+      "decisions": 1320,
+      "ats_win_pct": 0.498485
+    },
+    "both_edges_vs_original_v15": {
+      "v15_on_same_both_games": {
+        "qualified": 1322,
+        "wins": 663,
+        "losses": 657,
+        "pushes": 2,
+        "decisions": 1320,
+        "ats_win_pct": 0.502273
+      },
+      "handwritten_both_on_same_both_games": {
+        "qualified": 1322,
+        "wins": 658,
+        "losses": 662,
+        "pushes": 2,
+        "decisions": 1320,
+        "ats_win_pct": 0.498485
+      },
+      "agree_with_v15": {
+        "qualified": 1269,
+        "wins": 634,
+        "losses": 633,
+        "pushes": 2,
+        "decisions": 1267,
+        "ats_win_pct": 0.500395
+      },
+      "conflict_with_v15_original": {
+        "qualified": 53,
+        "wins": 29,
+        "losses": 24,
+        "pushes": 0,
+        "decisions": 53,
+        "ats_win_pct": 0.54717
+      },
+      "conflict_with_v15_follow_both": {
+        "qualified": 53,
+        "wins": 24,
+        "losses": 29,
+        "pushes": 0,
+        "decisions": 53,
+        "ats_win_pct": 0.45283
+      },
+      "home_both_conflict_v15": {
+        "qualified": 18,
+        "wins": 9,
+        "losses": 9,
+        "pushes": 0,
+        "decisions": 18,
+        "ats_win_pct": 0.5
+      },
+      "away_both_conflict_v15": {
+        "qualified": 33,
+        "wins": 15,
+        "losses": 18,
+        "pushes": 0,
+        "decisions": 33,
+        "ats_win_pct": 0.454545
+      }
+    },
+    "split_edges": {
+      "original_v15": {
+        "qualified": 873,
+        "wins": 460,
+        "losses": 412,
+        "pushes": 1,
+        "decisions": 872,
+        "ats_win_pct": 0.527523
+      },
+      "higher_offense": {
+        "qualified": 873,
+        "wins": 431,
+        "losses": 441,
+        "pushes": 1,
+        "decisions": 872,
+        "ats_win_pct": 0.494266
+      },
+      "higher_defense": {
+        "qualified": 873,
+        "wins": 441,
+        "losses": 431,
+        "pushes": 1,
+        "decisions": 872,
+        "ats_win_pct": 0.505734
+      }
+    },
+    "v15_all_graded": {
+      "qualified": 2195,
+      "wins": 1123,
+      "losses": 1069,
+      "pushes": 3,
+      "decisions": 2192,
+      "ats_win_pct": 0.512318
+    },
+    "handwritten_full_model_all_graded": {
+      "qualified": 2195,
+      "wins": 1099,
+      "losses": 1093,
+      "pushes": 3,
+      "decisions": 2192,
+      "ats_win_pct": 0.501369
+    },
+    "hypothetical_both_override_v15_all": {
+      "qualified": 2195,
+      "wins": 1118,
+      "losses": 1074,
+      "pushes": 3,
+      "decisions": 2192,
+      "ats_win_pct": 0.510036
+    }
+  },
+  "total_original_cohort": 2826,
+  "total_matched_spreads": 2195,
+  "missing_spreads": 631,
+  "limitations": [
+    "Historical released odds may be late-captured, mutable or reconstructed; this is NOT a frozen verified pregame odds snapshot.",
+    "Source selection is ESPN summary/core provider, NOT necessarily DraftKings. No provider-specific claim.",
+    "Spread-specific positive win rate does not imply positive ROI; wager price/juice unavailable.",
+    "ATS push = team final score margin plus corresponding spread exactly zero; exclude push from ATS win percentage.",
+    "The same games appear in the historical 2022-2026 offense/defense/home win study; weeks 1-2 and games with incomplete pregame box stats are omitted.",
+    "Conditional home both advantages have a different game selection and favorite/spread distribution from away both; do NOT infer a causal venue effect.",
+    "Retrospective research only; all input seasons previously examined. To validate future performance use prospective pregame-locked lines and model outputs.",
+    "No live app, model weights, value tiers or four-model prospectively frozen archive changed."
+  ]
+}
