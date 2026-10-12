@@ -34,6 +34,21 @@ jobs:
           PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_home_field.py'
       - name: Compare magnitude and season-spread-matched home favorites
         run: PYTHONPATH=. python research/handwritten_offense_defense_2026_10_12/magnitude_market.py
+      - name: Preserve prior research timestamp when result is otherwise identical
+        run: |
+          python - <<'PY'
+          import json, pathlib, subprocess
+          path=pathlib.Path("research/handwritten_offense_defense_2026_10_12/magnitude_market_results.json")
+          old=subprocess.run(["git","show","HEAD:"+path.as_posix()],
+                             text=True,capture_output=True)
+          if old.returncode==0:
+              before,after=json.loads(old.stdout),json.loads(path.read_text())
+              before.pop("generated_at",None)
+              after.pop("generated_at",None)
+              if before==after:
+                  path.write_text(old.stdout)
+                  print("Only generated_at differed; no research data changes")
+          PY
       - name: Commit research-only results and detailed 2026 games
         run: |
           git config user.name 'github-actions[bot]'
@@ -42,6 +57,12 @@ jobs:
           git add research/handwritten_offense_defense_2026_10_12/magnitude_market_games_2026.csv
           if ! git diff --cached --quiet; then
             git commit -m 'Archive 2022-2026 handwritten offense defense magnitude and market comparisons'
-            # This is a generated results artifact: prefer the latest completed\n            # research output rather than failing on a timestamp-only conflict.\n            git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
-            git push origin "HEAD:$GITHUB_REF_NAME"
+            for attempt in 1 2 3; do
+              git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
+              if git push origin "HEAD:$GITHUB_REF_NAME"; then
+                exit 0
+              fi
+              echo "Remote branch changed during save; retrying"
+            done
+            exit 1
           fi
