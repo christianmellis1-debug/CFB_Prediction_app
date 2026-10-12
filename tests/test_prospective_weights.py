@@ -89,11 +89,34 @@ class ProspectiveWeightTest(unittest.TestCase):
         ledger["results"][snap["event_id"]] = tied
         self.assertEqual(sum(comparison(ledger)["Graded"]), 0)
 
-    def test_no_retroactive_game_data_in_baseline(self):
-        # All four alternatives must use only the baseline home-win log odds
-        # plus strictly earlier-week features. Missing future week data is
-        # deliberately not used by the predictor.
-        pass
+    def test_no_current_or_future_week_leakage(self):
+        import model_v1_5 as model
+        cols = [v[0] for v in model.COMPONENT_SPEC.values()]
+        def row(season, team, week, offset):
+            values = {col: float(offset + j/10) for j, col in enumerate(cols)}
+            return dict(season=season, team_id=team, through_week=week, **values)
+        previous = pd.DataFrame([
+            row(2025, 333, 14, 1), row(2025, 61, 14, 3)
+        ])
+        current = pd.DataFrame([
+            row(2026, 333, 6, 1), row(2026, 61, 6, 3)
+        ])
+        future = pd.concat([current, pd.DataFrame([
+            row(2026, 333, 7, 100), row(2026, 61, 7, -50),
+        ])], ignore_index=True)
+        game = pd.DataFrame([dict(GAME, home_division="fbs",
+            away_division="fbs", season_type="regular",
+            home_conference="ACC", away_conference="SEC")])
+        prediction = pd.DataFrame([{"Game ID": GAME["game_id"],
+                                    "Home Win %": 0.65}])
+        expected = pregame_predictions(current, previous, game, 7,
+                                       baseline_frame=prediction)
+        observed = pregame_predictions(future, previous, game, 7,
+                                       baseline_frame=prediction)
+        for key in CHALLENGERS:
+            self.assertAlmostEqual(expected["401856712"][key],
+                                   observed["401856712"][key], places=12)
+        self.assertAlmostEqual(observed["401856712"]["V1.5 current"], .65)
 
 
 if __name__ == "__main__":
