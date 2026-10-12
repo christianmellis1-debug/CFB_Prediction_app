@@ -8,6 +8,9 @@ on:
       - 'matchup_advantages.py'
       - 'model_v1_5.py'
       - 'app.py'
+      - 'capture_value.py'
+      - 'backend/main.py'
+      - 'value_shortlist_ui.py'
       - 'tests/test_home_field_advantage_tier6.py'
       - 'tests/test_tier6_historical_parity.py'
       - 'tests/fixtures/home_field_advantage_tier6_2026.csv'
@@ -27,10 +30,12 @@ jobs:
       - name: Install pinned dependencies
         run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
       - name: Check core scripts parse
-        run: python -m py_compile app.py model_v1_5.py matchup_advantages.py home_field_advantage_tier6.py
+        run: python -m py_compile app.py model_v1_5.py matchup_advantages.py home_field_advantage_tier6.py capture_value.py backend/main.py value_shortlist_ui.py
       - name: Run original five-tier regressions and Tier 6 boundaries
         run: |
           PYTHONPATH=. python -m unittest discover -s tests -p 'test_waterfall.py' -v
           PYTHONPATH=. python -m unittest discover -s tests -p 'test_home_field_advantage_tier6.py' -v
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_value_shortlist_ui.py' -v
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_value_archive.py' -v
       - name: Replay 2026 W3-6 strict historical edge parity
         run: PYTHONPATH=. python -m unittest discover -s tests -p 'test_tier6_historical_parity.py' -v
