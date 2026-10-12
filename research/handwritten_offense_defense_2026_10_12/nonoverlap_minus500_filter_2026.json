@@ -1,0 +1,499 @@
+{
+  "retrieved_at": "2026-10-12T18:53:01.089989+00:00",
+  "source": "ESPN 2026 event summary retrospective Draft Kings closing moneylines, game-id verified",
+  "filter": "Start 39 2026 W3-6 custom Test A selections not confirmed Tier4 closing-band. Exclude every valid DK home favorite with closing moneyline <= -500, keep favorites from -100 through -499, leave unavailable unclassified.",
+  "original_no_tier4": {
+    "games": 39,
+    "wins": 31,
+    "losses": 8,
+    "win_pct": 0.794872
+  },
+  "included_after_cut": {
+    "games": 23,
+    "wins": 17,
+    "losses": 6,
+    "win_pct": 0.73913
+  },
+  "excluded_short_price": {
+    "games": 14,
+    "wins": 12,
+    "losses": 2,
+    "win_pct": 0.857143
+  },
+  "unverified_price": {
+    "games": 2,
+    "wins": 2,
+    "losses": 0,
+    "win_pct": 1.0
+  },
+  "included_per_week": {
+    "3": {
+      "games": 6,
+      "wins": 6,
+      "losses": 0,
+      "win_pct": 1.0
+    },
+    "4": {
+      "games": 2,
+      "wins": 1,
+      "losses": 1,
+      "win_pct": 0.5
+    },
+    "5": {
+      "games": 6,
+      "wins": 4,
+      "losses": 2,
+      "win_pct": 0.666667
+    },
+    "6": {
+      "games": 9,
+      "wins": 6,
+      "losses": 3,
+      "win_pct": 0.666667
+    }
+  },
+  "excluded_per_week": {
+    "3": {
+      "games": 6,
+      "wins": 5,
+      "losses": 1,
+      "win_pct": 0.833333
+    },
+    "4": {
+      "games": 4,
+      "wins": 4,
+      "losses": 0,
+      "win_pct": 1.0
+    },
+    "5": {
+      "games": 2,
+      "wins": 2,
+      "losses": 0,
+      "win_pct": 1.0
+    },
+    "6": {
+      "games": 2,
+      "wins": 1,
+      "losses": 1,
+      "win_pct": 0.5
+    }
+  },
+  "unverified_per_week": {
+    "3": {
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_pct": null
+    },
+    "4": {
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_pct": null
+    },
+    "5": {
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_pct": null
+    },
+    "6": {
+      "games": 2,
+      "wins": 2,
+      "losses": 0,
+      "win_pct": 1.0
+    }
+  },
+  "included_games": [
+    {
+      "week": 3,
+      "game_id": "401856695",
+      "home": "Vanderbilt",
+      "away": "NC State",
+      "home_group": "P4",
+      "spread": "-3.0",
+      "magnitude": "0.899656556182693",
+      "dk_home_close": -155,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401858225",
+      "home": "Pittsburgh",
+      "away": "Syracuse",
+      "home_group": "P4",
+      "spread": "-10.5",
+      "magnitude": "0.8010018240504622",
+      "dk_home_close": -425,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401858229",
+      "home": "Clemson",
+      "away": "North Carolina",
+      "home_group": "P4",
+      "spread": "-3.0",
+      "magnitude": "0.35246157749796486",
+      "dk_home_close": -148,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401858231",
+      "home": "Duke",
+      "away": "Stanford",
+      "home_group": "P4",
+      "spread": "-9.5",
+      "magnitude": "0.7553467131808622",
+      "dk_home_close": -375,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401862774",
+      "home": "Toledo",
+      "away": "Temple",
+      "home_group": "G6",
+      "spread": "-4.5",
+      "magnitude": "0.4363782074967117",
+      "dk_home_close": -198,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401869940",
+      "home": "Delaware",
+      "away": "Coastal Carolina",
+      "home_group": "G6",
+      "spread": "-4.5",
+      "magnitude": "0.11068929778951964",
+      "dk_home_close": -205,
+      "result": "W"
+    },
+    {
+      "week": 4,
+      "game_id": "401856813",
+      "home": "Baylor",
+      "away": "Colorado",
+      "home_group": "P4",
+      "spread": "-8.5",
+      "magnitude": "0.2616265701688829",
+      "dk_home_close": -345,
+      "result": "W"
+    },
+    {
+      "week": 4,
+      "game_id": "401858466",
+      "home": "Penn State",
+      "away": "Wisconsin",
+      "home_group": "P4",
+      "spread": "-9.5",
+      "magnitude": "0.9001154394476432",
+      "dk_home_close": -380,
+      "result": "L"
+    },
+    {
+      "week": 5,
+      "game_id": "401856822",
+      "home": "Iowa State",
+      "away": "West Virginia",
+      "home_group": "P4",
+      "spread": "-3.0",
+      "magnitude": "0.10728588160414282",
+      "dk_home_close": -155,
+      "result": "W"
+    },
+    {
+      "week": 5,
+      "game_id": "401858479",
+      "home": "Wisconsin",
+      "away": "Michigan State",
+      "home_group": "P4",
+      "spread": "-8.5",
+      "magnitude": "0.3136389567297953",
+      "dk_home_close": -355,
+      "result": "W"
+    },
+    {
+      "week": 5,
+      "game_id": "401866430",
+      "home": "Central Michigan",
+      "away": "Akron",
+      "home_group": "G6",
+      "spread": "-6.5",
+      "magnitude": "0.817118038833957",
+      "dk_home_close": -278,
+      "result": "W"
+    },
+    {
+      "week": 5,
+      "game_id": "401866433",
+      "home": "Massachusetts",
+      "away": "Eastern Michigan",
+      "home_group": "G6",
+      "spread": "-5.5",
+      "magnitude": "0.46274723676624674",
+      "dk_home_close": -218,
+      "result": "L"
+    },
+    {
+      "week": 5,
+      "game_id": "401866477",
+      "home": "Miami (OH)",
+      "away": "Bowling Green",
+      "home_group": "G6",
+      "spread": "-10.5",
+      "magnitude": "0.2750551655596862",
+      "dk_home_close": -470,
+      "result": "L"
+    },
+    {
+      "week": 5,
+      "game_id": "401869932",
+      "home": "Louisiana",
+      "away": "Arkansas State",
+      "home_group": "G6",
+      "spread": "-4.5",
+      "magnitude": "0.54989947510507",
+      "dk_home_close": -205,
+      "result": "W"
+    },
+    {
+      "week": 6,
+      "game_id": "401856716",
+      "home": "Missouri",
+      "away": "Texas A&M",
+      "home_group": "P4",
+      "spread": "-4.5",
+      "magnitude": "0.36107659269808",
+      "dk_home_close": -205,
+      "result": "W"
+    },
+    {
+      "week": 6,
+      "game_id": "401856825",
+      "home": "Kansas State",
+      "away": "Houston",
+      "home_group": "P4",
+      "spread": "-2.5",
+      "magnitude": "0.16457602717615533",
+      "dk_home_close": -142,
+      "result": "L"
+    },
+    {
+      "week": 6,
+      "game_id": "401856826",
+      "home": "BYU",
+      "away": "Iowa State",
+      "home_group": "P4",
+      "spread": "-11.5",
+      "magnitude": "0.42562979463320283",
+      "dk_home_close": -470,
+      "result": "W"
+    },
+    {
+      "week": 6,
+      "game_id": "401858254",
+      "home": "Louisville",
+      "away": "Florida State",
+      "home_group": "P4",
+      "spread": "-4.0",
+      "magnitude": "0.2548165442317949",
+      "dk_home_close": -192,
+      "result": "W"
+    },
+    {
+      "week": 6,
+      "game_id": "401858484",
+      "home": "Oregon",
+      "away": "UCLA",
+      "home_group": "P4",
+      "spread": "-10.0",
+      "magnitude": "0.11248555288854345",
+      "dk_home_close": -410,
+      "result": "L"
+    },
+    {
+      "week": 6,
+      "game_id": "401860922",
+      "home": "Utah State",
+      "away": "Washington State",
+      "home_group": "G6",
+      "spread": "-4.0",
+      "magnitude": "0.05107802246384385",
+      "dk_home_close": -185,
+      "result": "W"
+    },
+    {
+      "week": 6,
+      "game_id": "401862799",
+      "home": "Navy",
+      "away": "Tulsa",
+      "home_group": "G6",
+      "spread": "-3.0",
+      "magnitude": "0.16759492368006723",
+      "dk_home_close": -155,
+      "result": "W"
+    },
+    {
+      "week": 6,
+      "game_id": "401864519",
+      "home": "San Jos\u00e9 State",
+      "away": "Wyoming",
+      "home_group": "G6",
+      "spread": "-4.5",
+      "magnitude": "0.2066134842277329",
+      "dk_home_close": -192,
+      "result": "L"
+    },
+    {
+      "week": 6,
+      "game_id": "401871090",
+      "home": "Troy",
+      "away": "Southern Miss",
+      "home_group": "G6",
+      "spread": "-9.5",
+      "magnitude": "0.12221617884492339",
+      "dk_home_close": -410,
+      "result": "W"
+    }
+  ],
+  "excluded_games": [
+    {
+      "week": 3,
+      "game_id": "401856685",
+      "home": "Alabama",
+      "away": "Florida State",
+      "dk_home_close": -1350,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401856694",
+      "home": "Texas A&M",
+      "away": "Kentucky",
+      "dk_home_close": -850,
+      "result": "L"
+    },
+    {
+      "week": 3,
+      "game_id": "401858453",
+      "home": "Notre Dame",
+      "away": "Michigan State",
+      "dk_home_close": -3600,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401858458",
+      "home": "UCLA",
+      "away": "Purdue",
+      "dk_home_close": -575,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401864574",
+      "home": "App State",
+      "away": "Charlotte",
+      "dk_home_close": -1000,
+      "result": "W"
+    },
+    {
+      "week": 3,
+      "game_id": "401866422",
+      "home": "Liberty",
+      "away": "Ball State",
+      "dk_home_close": -650,
+      "result": "W"
+    },
+    {
+      "week": 4,
+      "game_id": "401858461",
+      "home": "Indiana",
+      "away": "Northwestern",
+      "dk_home_close": -1650,
+      "result": "W"
+    },
+    {
+      "week": 4,
+      "game_id": "401858465",
+      "home": "Ohio State",
+      "away": "Illinois",
+      "dk_home_close": -4000,
+      "result": "W"
+    },
+    {
+      "week": 4,
+      "game_id": "401860891",
+      "home": "Fresno State",
+      "away": "Rice",
+      "dk_home_close": -500,
+      "result": "W"
+    },
+    {
+      "week": 4,
+      "game_id": "401862784",
+      "home": "Tulane",
+      "away": "Southern Miss",
+      "dk_home_close": -1050,
+      "result": "W"
+    },
+    {
+      "week": 5,
+      "game_id": "401858246",
+      "home": "SMU",
+      "away": "Boston College",
+      "dk_home_close": -1650,
+      "result": "W"
+    },
+    {
+      "week": 5,
+      "game_id": "401864514",
+      "home": "New Mexico",
+      "away": "UTEP",
+      "dk_home_close": -3200,
+      "result": "W"
+    },
+    {
+      "week": 6,
+      "game_id": "401862796",
+      "home": "North Texas",
+      "away": "Charlotte",
+      "dk_home_close": -4500,
+      "result": "W"
+    },
+    {
+      "week": 6,
+      "game_id": "401866437",
+      "home": "Toledo",
+      "away": "Buffalo",
+      "dk_home_close": -1100,
+      "result": "L"
+    }
+  ],
+  "unverified_games": [
+    {
+      "week": 6,
+      "game_id": "401858257",
+      "home": "Notre Dame",
+      "away": "Stanford",
+      "error": "Missing valid Draft Kings closing moneyline"
+    },
+    {
+      "week": 6,
+      "game_id": "401858483",
+      "home": "Ohio State",
+      "away": "Maryland",
+      "error": "Missing valid Draft Kings closing moneyline"
+    }
+  ],
+  "limitations": [
+    "Odds may be revised; closing prices in the retrospective ESPN API not verified as immutable pregame screenshots.",
+    "No ROI, spread coverage, or independence claim.",
+    "Because Tier4 only starts W4, W3 price check is solely the user-requested new -500 exclusion.",
+    "Missing prices are not presumed to be qualifying under the cap.",
+    "No production file changes."
+  ]
+}
