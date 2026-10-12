@@ -1,0 +1,2335 @@
+{
+  "date": "2026-10-12T16:03:47.731446+00:00",
+  "status": "retrospective research only, no change to production",
+  "hypothesis": "User's handwritten 40/25/15/10/10 offense and defense ratings plus independent home field assessment",
+  "existing_venue_weight": 0.2,
+  "method": "Same 2826 earlier-week eligible FBS games as original handwritten model audit. Reconstruct exact production venue signal on the same season/week; compare descriptive home/away/neutral cases, then change only venue coefficient or fixed extra home bonus in LOG ODDS of handwritten model.",
+  "by_year": {
+    "2022": {
+      "conditions": {
+        "all_games": 630,
+        "non_neutral_games": 615,
+        "neutral_site_games": 15,
+        "all_non_neutral_home_team": {
+          "games": 615,
+          "wins": 358,
+          "losses": 257,
+          "win_rate": 0.582114
+        },
+        "both_advantages_home_non_neutral": {
+          "games": 191,
+          "wins": 146,
+          "losses": 45,
+          "win_rate": 0.764398
+        },
+        "both_advantages_away_non_neutral": {
+          "games": 160,
+          "wins": 98,
+          "losses": 62,
+          "win_rate": 0.6125
+        },
+        "both_advantages_neutral": {
+          "games": 7,
+          "wins": 6,
+          "losses": 1,
+          "win_rate": 0.857143
+        },
+        "both_advantages_any_location": {
+          "games": 358,
+          "wins": 250,
+          "losses": 108,
+          "win_rate": 0.698324
+        },
+        "home_offense_edge_non_neutral": {
+          "games": 320,
+          "wins": 227,
+          "losses": 93,
+          "win_rate": 0.709375
+        },
+        "home_defense_edge_non_neutral": {
+          "games": 326,
+          "wins": 215,
+          "losses": 111,
+          "win_rate": 0.659509
+        },
+        "no_home_offense_or_defense_edge_non_neutral": {
+          "games": 160,
+          "wins": 62,
+          "losses": 98,
+          "win_rate": 0.3875
+        },
+        "split_advantages_non_neutral_home_team": {
+          "games": 264,
+          "wins": 150,
+          "losses": 114,
+          "win_rate": 0.568182
+        },
+        "split_advantages_neutral": {
+          "games": 8,
+          "wins": 3,
+          "losses": 5,
+          "win_rate": 0.375
+        },
+        "v15_when_home_has_both": {
+          "games": 191,
+          "wins": 148,
+          "losses": 43,
+          "win_rate": 0.774869
+        },
+        "v15_when_away_has_both": {
+          "games": 160,
+          "wins": 102,
+          "losses": 58,
+          "win_rate": 0.6375
+        },
+        "both_home_and_v15_agree": {
+          "games": 187,
+          "wins": 145,
+          "losses": 42,
+          "win_rate": 0.775401
+        },
+        "both_home_but_v15_picks_away": {
+          "v15": {
+            "games": 4,
+            "wins": 3,
+            "losses": 1,
+            "win_rate": 0.75
+          },
+          "handwritten_home": {
+            "games": 4,
+            "wins": 1,
+            "losses": 3,
+            "win_rate": 0.25
+          }
+        },
+        "both_away_but_v15_picks_home": {
+          "v15": {
+            "games": 12,
+            "wins": 8,
+            "losses": 4,
+            "win_rate": 0.666667
+          },
+          "handwritten_away": {
+            "games": 12,
+            "wins": 4,
+            "losses": 8,
+            "win_rate": 0.333333
+          }
+        }
+      },
+      "model_tests": {
+        "existing_v15": {
+          "games": 630,
+          "wins": 431,
+          "losses": 199,
+          "accuracy": 0.684127,
+          "brier": 0.2049454,
+          "log_loss": 0.5977843
+        },
+        "handwritten_existing_venue": {
+          "games": 630,
+          "wins": 414,
+          "losses": 216,
+          "accuracy": 0.657143,
+          "brier": 0.2100987,
+          "log_loss": 0.6103266
+        },
+        "venue_coefficient_00pct": {
+          "all": {
+            "games": 630,
+            "wins": 412,
+            "losses": 218,
+            "accuracy": 0.653968,
+            "brier": 0.2108592,
+            "log_loss": 0.6112852
+          },
+          "non_neutral": {
+            "games": 615,
+            "wins": 401,
+            "losses": 214,
+            "accuracy": 0.652033,
+            "brier": 0.212373,
+            "log_loss": 0.614773
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 11,
+            "losses": 4,
+            "accuracy": 0.733333,
+            "brier": 0.148794,
+            "log_loss": 0.4682867
+          }
+        },
+        "venue_coefficient_10pct": {
+          "all": {
+            "games": 630,
+            "wins": 412,
+            "losses": 218,
+            "accuracy": 0.653968,
+            "brier": 0.209794,
+            "log_loss": 0.6089475
+          },
+          "non_neutral": {
+            "games": 615,
+            "wins": 401,
+            "losses": 214,
+            "accuracy": 0.652033,
+            "brier": 0.2112818,
+            "log_loss": 0.6123782
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 11,
+            "losses": 4,
+            "accuracy": 0.733333,
+            "brier": 0.148794,
+            "log_loss": 0.4682867
+          }
+        },
+        "venue_coefficient_20pct": {
+          "all": {
+            "games": 630,
+            "wins": 414,
+            "losses": 216,
+            "accuracy": 0.657143,
+            "brier": 0.2100987,
+            "log_loss": 0.6103266
+          },
+          "non_neutral": {
+            "games": 615,
+            "wins": 403,
+            "losses": 212,
+            "accuracy": 0.655285,
+            "brier": 0.2115939,
+            "log_loss": 0.613791
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 11,
+            "losses": 4,
+            "accuracy": 0.733333,
+            "brier": 0.148794,
+            "log_loss": 0.4682867
+          }
+        },
+        "venue_coefficient_30pct": {
+          "all": {
+            "games": 630,
+            "wins": 410,
+            "losses": 220,
+            "accuracy": 0.650794,
+            "brier": 0.2114643,
+            "log_loss": 0.6150435
+          },
+          "non_neutral": {
+            "games": 615,
+            "wins": 399,
+            "losses": 216,
+            "accuracy": 0.64878,
+            "brier": 0.2129929,
+            "log_loss": 0.6186229
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 11,
+            "losses": 4,
+            "accuracy": 0.733333,
+            "brier": 0.148794,
+            "log_loss": 0.4682867
+          }
+        },
+        "venue_coefficient_40pct": {
+          "all": {
+            "games": 630,
+            "wins": 412,
+            "losses": 218,
+            "accuracy": 0.653968,
+            "brier": 0.2136216,
+            "log_loss": 0.6227394
+          },
+          "non_neutral": {
+            "games": 615,
+            "wins": 401,
+            "losses": 214,
+            "accuracy": 0.652033,
+            "brier": 0.2152027,
+            "log_loss": 0.6265066
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 11,
+            "losses": 4,
+            "accuracy": 0.733333,
+            "brier": 0.148794,
+            "log_loss": 0.4682867
+          }
+        },
+        "extra_home_logodds_0.10": {
+          "all": {
+            "games": 630,
+            "wins": 412,
+            "losses": 218,
+            "accuracy": 0.653968,
+            "brier": 0.2090711,
+            "log_loss": 0.6083389
+          },
+          "non_neutral": {
+            "games": 615,
+            "wins": 401,
+            "losses": 214,
+            "accuracy": 0.652033,
+            "brier": 0.2105413,
+            "log_loss": 0.6117548
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 11,
+            "losses": 4,
+            "accuracy": 0.733333,
+            "brier": 0.148794,
+            "log_loss": 0.4682867
+          }
+        },
+        "extra_home_logodds_0.20": {
+          "all": {
+            "games": 630,
+            "wins": 414,
+            "losses": 216,
+            "accuracy": 0.657143,
+            "brier": 0.2086881,
+            "log_loss": 0.6081249
+          },
+          "non_neutral": {
+            "games": 615,
+            "wins": 403,
+            "losses": 212,
+            "accuracy": 0.655285,
+            "brier": 0.2101489,
+            "log_loss": 0.6115356
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 11,
+            "losses": 4,
+            "accuracy": 0.733333,
+            "brier": 0.148794,
+            "log_loss": 0.4682867
+          }
+        },
+        "extra_home_logodds_0.35": {
+          "all": {
+            "games": 630,
+            "wins": 424,
+            "losses": 206,
+            "accuracy": 0.673016,
+            "brier": 0.2092941,
+            "log_loss": 0.611091
+          },
+          "non_neutral": {
+            "games": 615,
+            "wins": 413,
+            "losses": 202,
+            "accuracy": 0.671545,
+            "brier": 0.2107697,
+            "log_loss": 0.614574
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 11,
+            "losses": 4,
+            "accuracy": 0.733333,
+            "brier": 0.148794,
+            "log_loss": 0.4682867
+          }
+        }
+      }
+    },
+    "2023": {
+      "conditions": {
+        "all_games": 646,
+        "non_neutral_games": 631,
+        "neutral_site_games": 15,
+        "all_non_neutral_home_team": {
+          "games": 631,
+          "wins": 358,
+          "losses": 273,
+          "win_rate": 0.567353
+        },
+        "both_advantages_home_non_neutral": {
+          "games": 198,
+          "wins": 165,
+          "losses": 33,
+          "win_rate": 0.833333
+        },
+        "both_advantages_away_non_neutral": {
+          "games": 182,
+          "wins": 139,
+          "losses": 43,
+          "win_rate": 0.763736
+        },
+        "both_advantages_neutral": {
+          "games": 10,
+          "wins": 5,
+          "losses": 5,
+          "win_rate": 0.5
+        },
+        "both_advantages_any_location": {
+          "games": 390,
+          "wins": 309,
+          "losses": 81,
+          "win_rate": 0.792308
+        },
+        "home_offense_edge_non_neutral": {
+          "games": 314,
+          "wins": 242,
+          "losses": 72,
+          "win_rate": 0.770701
+        },
+        "home_defense_edge_non_neutral": {
+          "games": 333,
+          "wins": 238,
+          "losses": 95,
+          "win_rate": 0.714715
+        },
+        "no_home_offense_or_defense_edge_non_neutral": {
+          "games": 182,
+          "wins": 43,
+          "losses": 139,
+          "win_rate": 0.236264
+        },
+        "split_advantages_non_neutral_home_team": {
+          "games": 251,
+          "wins": 150,
+          "losses": 101,
+          "win_rate": 0.59761
+        },
+        "split_advantages_neutral": {
+          "games": 5,
+          "wins": 1,
+          "losses": 4,
+          "win_rate": 0.2
+        },
+        "v15_when_home_has_both": {
+          "games": 198,
+          "wins": 161,
+          "losses": 37,
+          "win_rate": 0.813131
+        },
+        "v15_when_away_has_both": {
+          "games": 182,
+          "wins": 138,
+          "losses": 44,
+          "win_rate": 0.758242
+        },
+        "both_home_and_v15_agree": {
+          "games": 194,
+          "wins": 161,
+          "losses": 33,
+          "win_rate": 0.829897
+        },
+        "both_home_but_v15_picks_away": {
+          "v15": {
+            "games": 4,
+            "wins": 0,
+            "losses": 4,
+            "win_rate": 0.0
+          },
+          "handwritten_home": {
+            "games": 4,
+            "wins": 4,
+            "losses": 0,
+            "win_rate": 1.0
+          }
+        },
+        "both_away_but_v15_picks_home": {
+          "v15": {
+            "games": 7,
+            "wins": 3,
+            "losses": 4,
+            "win_rate": 0.428571
+          },
+          "handwritten_away": {
+            "games": 7,
+            "wins": 4,
+            "losses": 3,
+            "win_rate": 0.571429
+          }
+        }
+      },
+      "model_tests": {
+        "existing_v15": {
+          "games": 646,
+          "wins": 474,
+          "losses": 172,
+          "accuracy": 0.733746,
+          "brier": 0.1835419,
+          "log_loss": 0.543217
+        },
+        "handwritten_existing_venue": {
+          "games": 646,
+          "wins": 478,
+          "losses": 168,
+          "accuracy": 0.739938,
+          "brier": 0.182212,
+          "log_loss": 0.5439
+        },
+        "venue_coefficient_00pct": {
+          "all": {
+            "games": 646,
+            "wins": 481,
+            "losses": 165,
+            "accuracy": 0.744582,
+            "brier": 0.1851243,
+            "log_loss": 0.5511033
+          },
+          "non_neutral": {
+            "games": 631,
+            "wins": 472,
+            "losses": 159,
+            "accuracy": 0.748019,
+            "brier": 0.1831701,
+            "log_loss": 0.5459188
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "accuracy": 0.6,
+            "brier": 0.2673305,
+            "log_loss": 0.7691985
+          }
+        },
+        "venue_coefficient_10pct": {
+          "all": {
+            "games": 646,
+            "wins": 484,
+            "losses": 162,
+            "accuracy": 0.749226,
+            "brier": 0.1830155,
+            "log_loss": 0.5459199
+          },
+          "non_neutral": {
+            "games": 631,
+            "wins": 475,
+            "losses": 156,
+            "accuracy": 0.752773,
+            "brier": 0.1810112,
+            "log_loss": 0.5406122
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "accuracy": 0.6,
+            "brier": 0.2673305,
+            "log_loss": 0.7691985
+          }
+        },
+        "venue_coefficient_20pct": {
+          "all": {
+            "games": 646,
+            "wins": 478,
+            "losses": 168,
+            "accuracy": 0.739938,
+            "brier": 0.182212,
+            "log_loss": 0.5439
+          },
+          "non_neutral": {
+            "games": 631,
+            "wins": 469,
+            "losses": 162,
+            "accuracy": 0.743265,
+            "brier": 0.1801886,
+            "log_loss": 0.5385442
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "accuracy": 0.6,
+            "brier": 0.2673305,
+            "log_loss": 0.7691985
+          }
+        },
+        "venue_coefficient_30pct": {
+          "all": {
+            "games": 646,
+            "wins": 474,
+            "losses": 172,
+            "accuracy": 0.733746,
+            "brier": 0.1824663,
+            "log_loss": 0.5447417
+          },
+          "non_neutral": {
+            "games": 631,
+            "wins": 465,
+            "losses": 166,
+            "accuracy": 0.736926,
+            "brier": 0.1804489,
+            "log_loss": 0.5394059
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "accuracy": 0.6,
+            "brier": 0.2673305,
+            "log_loss": 0.7691985
+          }
+        },
+        "venue_coefficient_40pct": {
+          "all": {
+            "games": 646,
+            "wins": 470,
+            "losses": 176,
+            "accuracy": 0.727554,
+            "brier": 0.1835527,
+            "log_loss": 0.548155
+          },
+          "non_neutral": {
+            "games": 631,
+            "wins": 461,
+            "losses": 170,
+            "accuracy": 0.730586,
+            "brier": 0.1815612,
+            "log_loss": 0.5429004
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "accuracy": 0.6,
+            "brier": 0.2673305,
+            "log_loss": 0.7691985
+          }
+        },
+        "extra_home_logodds_0.10": {
+          "all": {
+            "games": 646,
+            "wins": 471,
+            "losses": 175,
+            "accuracy": 0.729102,
+            "brier": 0.1815382,
+            "log_loss": 0.5421658
+          },
+          "non_neutral": {
+            "games": 631,
+            "wins": 462,
+            "losses": 169,
+            "accuracy": 0.732171,
+            "brier": 0.1794988,
+            "log_loss": 0.5367688
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "accuracy": 0.6,
+            "brier": 0.2673305,
+            "log_loss": 0.7691985
+          }
+        },
+        "extra_home_logodds_0.20": {
+          "all": {
+            "games": 646,
+            "wins": 476,
+            "losses": 170,
+            "accuracy": 0.736842,
+            "brier": 0.1816136,
+            "log_loss": 0.5422104
+          },
+          "non_neutral": {
+            "games": 631,
+            "wins": 467,
+            "losses": 164,
+            "accuracy": 0.740095,
+            "brier": 0.179576,
+            "log_loss": 0.5368145
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "accuracy": 0.6,
+            "brier": 0.2673305,
+            "log_loss": 0.7691985
+          }
+        },
+        "extra_home_logodds_0.35": {
+          "all": {
+            "games": 646,
+            "wins": 474,
+            "losses": 172,
+            "accuracy": 0.733746,
+            "brier": 0.1831004,
+            "log_loss": 0.5455808
+          },
+          "non_neutral": {
+            "games": 631,
+            "wins": 465,
+            "losses": 166,
+            "accuracy": 0.736926,
+            "brier": 0.1810981,
+            "log_loss": 0.540265
+          },
+          "neutral": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "accuracy": 0.6,
+            "brier": 0.2673305,
+            "log_loss": 0.7691985
+          }
+        }
+      }
+    },
+    "2024": {
+      "conditions": {
+        "all_games": 659,
+        "non_neutral_games": 632,
+        "neutral_site_games": 27,
+        "all_non_neutral_home_team": {
+          "games": 632,
+          "wins": 376,
+          "losses": 256,
+          "win_rate": 0.594937
+        },
+        "both_advantages_home_non_neutral": {
+          "games": 219,
+          "wins": 184,
+          "losses": 35,
+          "win_rate": 0.840183
+        },
+        "both_advantages_away_non_neutral": {
+          "games": 174,
+          "wins": 110,
+          "losses": 64,
+          "win_rate": 0.632184
+        },
+        "both_advantages_neutral": {
+          "games": 10,
+          "wins": 9,
+          "losses": 1,
+          "win_rate": 0.9
+        },
+        "both_advantages_any_location": {
+          "games": 403,
+          "wins": 303,
+          "losses": 100,
+          "win_rate": 0.751861
+        },
+        "home_offense_edge_non_neutral": {
+          "games": 338,
+          "wins": 251,
+          "losses": 87,
+          "win_rate": 0.742604
+        },
+        "home_defense_edge_non_neutral": {
+          "games": 339,
+          "wins": 245,
+          "losses": 94,
+          "win_rate": 0.722714
+        },
+        "no_home_offense_or_defense_edge_non_neutral": {
+          "games": 174,
+          "wins": 64,
+          "losses": 110,
+          "win_rate": 0.367816
+        },
+        "split_advantages_non_neutral_home_team": {
+          "games": 239,
+          "wins": 128,
+          "losses": 111,
+          "win_rate": 0.535565
+        },
+        "split_advantages_neutral": {
+          "games": 17,
+          "wins": 7,
+          "losses": 10,
+          "win_rate": 0.411765
+        },
+        "v15_when_home_has_both": {
+          "games": 219,
+          "wins": 190,
+          "losses": 29,
+          "win_rate": 0.86758
+        },
+        "v15_when_away_has_both": {
+          "games": 174,
+          "wins": 108,
+          "losses": 66,
+          "win_rate": 0.62069
+        },
+        "both_home_and_v15_agree": {
+          "games": 213,
+          "wins": 184,
+          "losses": 29,
+          "win_rate": 0.86385
+        },
+        "both_home_but_v15_picks_away": {
+          "v15": {
+            "games": 6,
+            "wins": 6,
+            "losses": 0,
+            "win_rate": 1.0
+          },
+          "handwritten_home": {
+            "games": 6,
+            "wins": 0,
+            "losses": 6,
+            "win_rate": 0.0
+          }
+        },
+        "both_away_but_v15_picks_home": {
+          "v15": {
+            "games": 12,
+            "wins": 5,
+            "losses": 7,
+            "win_rate": 0.416667
+          },
+          "handwritten_away": {
+            "games": 12,
+            "wins": 7,
+            "losses": 5,
+            "win_rate": 0.583333
+          }
+        }
+      },
+      "model_tests": {
+        "existing_v15": {
+          "games": 659,
+          "wins": 470,
+          "losses": 189,
+          "accuracy": 0.713202,
+          "brier": 0.1889224,
+          "log_loss": 0.5564237
+        },
+        "handwritten_existing_venue": {
+          "games": 659,
+          "wins": 456,
+          "losses": 203,
+          "accuracy": 0.691958,
+          "brier": 0.1927706,
+          "log_loss": 0.5644442
+        },
+        "venue_coefficient_00pct": {
+          "all": {
+            "games": 659,
+            "wins": 454,
+            "losses": 205,
+            "accuracy": 0.688923,
+            "brier": 0.1950354,
+            "log_loss": 0.5700666
+          },
+          "non_neutral": {
+            "games": 632,
+            "wins": 438,
+            "losses": 194,
+            "accuracy": 0.693038,
+            "brier": 0.1941299,
+            "log_loss": 0.5676902
+          },
+          "neutral": {
+            "games": 27,
+            "wins": 16,
+            "losses": 11,
+            "accuracy": 0.592593,
+            "brier": 0.2162304,
+            "log_loss": 0.6256921
+          }
+        },
+        "venue_coefficient_10pct": {
+          "all": {
+            "games": 659,
+            "wins": 452,
+            "losses": 207,
+            "accuracy": 0.685888,
+            "brier": 0.1931987,
+            "log_loss": 0.5653893
+          },
+          "non_neutral": {
+            "games": 632,
+            "wins": 436,
+            "losses": 196,
+            "accuracy": 0.689873,
+            "brier": 0.1922147,
+            "log_loss": 0.562813
+          },
+          "neutral": {
+            "games": 27,
+            "wins": 16,
+            "losses": 11,
+            "accuracy": 0.592593,
+            "brier": 0.2162304,
+            "log_loss": 0.6256921
+          }
+        },
+        "venue_coefficient_20pct": {
+          "all": {
+            "games": 659,
+            "wins": 456,
+            "losses": 203,
+            "accuracy": 0.691958,
+            "brier": 0.1927706,
+            "log_loss": 0.5644442
+          },
+          "non_neutral": {
+            "games": 632,
+            "wins": 440,
+            "losses": 192,
+            "accuracy": 0.696203,
+            "brier": 0.1917684,
+            "log_loss": 0.5618276
+          },
+          "neutral": {
+            "games": 27,
+            "wins": 16,
+            "losses": 11,
+            "accuracy": 0.592593,
+            "brier": 0.2162304,
+            "log_loss": 0.6256921
+          }
+        },
+        "venue_coefficient_30pct": {
+          "all": {
+            "games": 659,
+            "wins": 458,
+            "losses": 201,
+            "accuracy": 0.694992,
+            "brier": 0.1934557,
+            "log_loss": 0.5668249
+          },
+          "non_neutral": {
+            "games": 632,
+            "wins": 442,
+            "losses": 190,
+            "accuracy": 0.699367,
+            "brier": 0.1924827,
+            "log_loss": 0.56431
+          },
+          "neutral": {
+            "games": 27,
+            "wins": 16,
+            "losses": 11,
+            "accuracy": 0.592593,
+            "brier": 0.2162304,
+            "log_loss": 0.6256921
+          }
+        },
+        "venue_coefficient_40pct": {
+          "all": {
+            "games": 659,
+            "wins": 457,
+            "losses": 202,
+            "accuracy": 0.693475,
+            "brier": 0.1949908,
+            "log_loss": 0.5721488
+          },
+          "non_neutral": {
+            "games": 632,
+            "wins": 441,
+            "losses": 191,
+            "accuracy": 0.697785,
+            "brier": 0.1940834,
+            "log_loss": 0.5698613
+          },
+          "neutral": {
+            "games": 27,
+            "wins": 16,
+            "losses": 11,
+            "accuracy": 0.592593,
+            "brier": 0.2162304,
+            "log_loss": 0.6256921
+          }
+        },
+        "extra_home_logodds_0.10": {
+          "all": {
+            "games": 659,
+            "wins": 457,
+            "losses": 202,
+            "accuracy": 0.693475,
+            "brier": 0.1917605,
+            "log_loss": 0.561173
+          },
+          "non_neutral": {
+            "games": 632,
+            "wins": 441,
+            "losses": 191,
+            "accuracy": 0.697785,
+            "brier": 0.1907151,
+            "log_loss": 0.5584167
+          },
+          "neutral": {
+            "games": 27,
+            "wins": 16,
+            "losses": 11,
+            "accuracy": 0.592593,
+            "brier": 0.2162304,
+            "log_loss": 0.6256921
+          }
+        },
+        "extra_home_logodds_0.20": {
+          "all": {
+            "games": 659,
+            "wins": 458,
+            "losses": 201,
+            "accuracy": 0.694992,
+            "brier": 0.1914024,
+            "log_loss": 0.5596095
+          },
+          "non_neutral": {
+            "games": 632,
+            "wins": 442,
+            "losses": 190,
+            "accuracy": 0.699367,
+            "brier": 0.1903417,
+            "log_loss": 0.5567864
+          },
+          "neutral": {
+            "games": 27,
+            "wins": 16,
+            "losses": 11,
+            "accuracy": 0.592593,
+            "brier": 0.2162304,
+            "log_loss": 0.6256921
+          }
+        },
+        "extra_home_logodds_0.35": {
+          "all": {
+            "games": 659,
+            "wins": 457,
+            "losses": 202,
+            "accuracy": 0.693475,
+            "brier": 0.1920568,
+            "log_loss": 0.5604323
+          },
+          "non_neutral": {
+            "games": 632,
+            "wins": 441,
+            "losses": 191,
+            "accuracy": 0.697785,
+            "brier": 0.1910241,
+            "log_loss": 0.5576443
+          },
+          "neutral": {
+            "games": 27,
+            "wins": 16,
+            "losses": 11,
+            "accuracy": 0.592593,
+            "brier": 0.2162304,
+            "log_loss": 0.6256921
+          }
+        }
+      }
+    },
+    "2025": {
+      "conditions": {
+        "all_games": 663,
+        "non_neutral_games": 647,
+        "neutral_site_games": 16,
+        "all_non_neutral_home_team": {
+          "games": 647,
+          "wins": 374,
+          "losses": 273,
+          "win_rate": 0.578053
+        },
+        "both_advantages_home_non_neutral": {
+          "games": 185,
+          "wins": 150,
+          "losses": 35,
+          "win_rate": 0.810811
+        },
+        "both_advantages_away_non_neutral": {
+          "games": 181,
+          "wins": 127,
+          "losses": 54,
+          "win_rate": 0.701657
+        },
+        "both_advantages_neutral": {
+          "games": 9,
+          "wins": 7,
+          "losses": 2,
+          "win_rate": 0.777778
+        },
+        "both_advantages_any_location": {
+          "games": 375,
+          "wins": 284,
+          "losses": 91,
+          "win_rate": 0.757333
+        },
+        "home_offense_edge_non_neutral": {
+          "games": 322,
+          "wins": 229,
+          "losses": 93,
+          "win_rate": 0.71118
+        },
+        "home_defense_edge_non_neutral": {
+          "games": 329,
+          "wins": 241,
+          "losses": 88,
+          "win_rate": 0.732523
+        },
+        "no_home_offense_or_defense_edge_non_neutral": {
+          "games": 181,
+          "wins": 54,
+          "losses": 127,
+          "win_rate": 0.298343
+        },
+        "split_advantages_non_neutral_home_team": {
+          "games": 281,
+          "wins": 170,
+          "losses": 111,
+          "win_rate": 0.604982
+        },
+        "split_advantages_neutral": {
+          "games": 7,
+          "wins": 4,
+          "losses": 3,
+          "win_rate": 0.571429
+        },
+        "v15_when_home_has_both": {
+          "games": 185,
+          "wins": 147,
+          "losses": 38,
+          "win_rate": 0.794595
+        },
+        "v15_when_away_has_both": {
+          "games": 181,
+          "wins": 126,
+          "losses": 55,
+          "win_rate": 0.696133
+        },
+        "both_home_and_v15_agree": {
+          "games": 178,
+          "wins": 145,
+          "losses": 33,
+          "win_rate": 0.814607
+        },
+        "both_home_but_v15_picks_away": {
+          "v15": {
+            "games": 7,
+            "wins": 2,
+            "losses": 5,
+            "win_rate": 0.285714
+          },
+          "handwritten_home": {
+            "games": 7,
+            "wins": 5,
+            "losses": 2,
+            "win_rate": 0.714286
+          }
+        },
+        "both_away_but_v15_picks_home": {
+          "v15": {
+            "games": 13,
+            "wins": 6,
+            "losses": 7,
+            "win_rate": 0.461538
+          },
+          "handwritten_away": {
+            "games": 13,
+            "wins": 7,
+            "losses": 6,
+            "win_rate": 0.538462
+          }
+        }
+      },
+      "model_tests": {
+        "existing_v15": {
+          "games": 663,
+          "wins": 474,
+          "losses": 189,
+          "accuracy": 0.714932,
+          "brier": 0.1857701,
+          "log_loss": 0.5462162
+        },
+        "handwritten_existing_venue": {
+          "games": 663,
+          "wins": 470,
+          "losses": 193,
+          "accuracy": 0.708899,
+          "brier": 0.1866672,
+          "log_loss": 0.5484686
+        },
+        "venue_coefficient_00pct": {
+          "all": {
+            "games": 663,
+            "wins": 459,
+            "losses": 204,
+            "accuracy": 0.692308,
+            "brier": 0.1928639,
+            "log_loss": 0.5639957
+          },
+          "non_neutral": {
+            "games": 647,
+            "wins": 447,
+            "losses": 200,
+            "accuracy": 0.690881,
+            "brier": 0.1931121,
+            "log_loss": 0.5644713
+          },
+          "neutral": {
+            "games": 16,
+            "wins": 12,
+            "losses": 4,
+            "accuracy": 0.75,
+            "brier": 0.1828262,
+            "log_loss": 0.5447634
+          }
+        },
+        "venue_coefficient_10pct": {
+          "all": {
+            "games": 663,
+            "wins": 466,
+            "losses": 197,
+            "accuracy": 0.702866,
+            "brier": 0.188845,
+            "log_loss": 0.5540987
+          },
+          "non_neutral": {
+            "games": 647,
+            "wins": 454,
+            "losses": 193,
+            "accuracy": 0.7017,
+            "brier": 0.1889939,
+            "log_loss": 0.5543296
+          },
+          "neutral": {
+            "games": 16,
+            "wins": 12,
+            "losses": 4,
+            "accuracy": 0.75,
+            "brier": 0.1828262,
+            "log_loss": 0.5447634
+          }
+        },
+        "venue_coefficient_20pct": {
+          "all": {
+            "games": 663,
+            "wins": 470,
+            "losses": 193,
+            "accuracy": 0.708899,
+            "brier": 0.1866672,
+            "log_loss": 0.5484686
+          },
+          "non_neutral": {
+            "games": 647,
+            "wins": 458,
+            "losses": 189,
+            "accuracy": 0.707883,
+            "brier": 0.1867622,
+            "log_loss": 0.5485602
+          },
+          "neutral": {
+            "games": 16,
+            "wins": 12,
+            "losses": 4,
+            "accuracy": 0.75,
+            "brier": 0.1828262,
+            "log_loss": 0.5447634
+          }
+        },
+        "venue_coefficient_30pct": {
+          "all": {
+            "games": 663,
+            "wins": 477,
+            "losses": 186,
+            "accuracy": 0.719457,
+            "brier": 0.1859928,
+            "log_loss": 0.5466765
+          },
+          "non_neutral": {
+            "games": 647,
+            "wins": 465,
+            "losses": 182,
+            "accuracy": 0.718702,
+            "brier": 0.1860711,
+            "log_loss": 0.5467238
+          },
+          "neutral": {
+            "games": 16,
+            "wins": 12,
+            "losses": 4,
+            "accuracy": 0.75,
+            "brier": 0.1828262,
+            "log_loss": 0.5447634
+          }
+        },
+        "venue_coefficient_40pct": {
+          "all": {
+            "games": 663,
+            "wins": 478,
+            "losses": 185,
+            "accuracy": 0.720965,
+            "brier": 0.186503,
+            "log_loss": 0.5483092
+          },
+          "non_neutral": {
+            "games": 647,
+            "wins": 466,
+            "losses": 181,
+            "accuracy": 0.720247,
+            "brier": 0.186594,
+            "log_loss": 0.5483968
+          },
+          "neutral": {
+            "games": 16,
+            "wins": 12,
+            "losses": 4,
+            "accuracy": 0.75,
+            "brier": 0.1828262,
+            "log_loss": 0.5447634
+          }
+        },
+        "extra_home_logodds_0.10": {
+          "all": {
+            "games": 663,
+            "wins": 472,
+            "losses": 191,
+            "accuracy": 0.711916,
+            "brier": 0.1855573,
+            "log_loss": 0.5457496
+          },
+          "non_neutral": {
+            "games": 647,
+            "wins": 460,
+            "losses": 187,
+            "accuracy": 0.710974,
+            "brier": 0.1856249,
+            "log_loss": 0.545774
+          },
+          "neutral": {
+            "games": 16,
+            "wins": 12,
+            "losses": 4,
+            "accuracy": 0.75,
+            "brier": 0.1828262,
+            "log_loss": 0.5447634
+          }
+        },
+        "extra_home_logodds_0.20": {
+          "all": {
+            "games": 663,
+            "wins": 476,
+            "losses": 187,
+            "accuracy": 0.717949,
+            "brier": 0.1851815,
+            "log_loss": 0.5448262
+          },
+          "non_neutral": {
+            "games": 647,
+            "wins": 464,
+            "losses": 183,
+            "accuracy": 0.717156,
+            "brier": 0.1852398,
+            "log_loss": 0.5448278
+          },
+          "neutral": {
+            "games": 16,
+            "wins": 12,
+            "losses": 4,
+            "accuracy": 0.75,
+            "brier": 0.1828262,
+            "log_loss": 0.5447634
+          }
+        },
+        "extra_home_logodds_0.35": {
+          "all": {
+            "games": 663,
+            "wins": 479,
+            "losses": 184,
+            "accuracy": 0.722474,
+            "brier": 0.1859721,
+            "log_loss": 0.5467775
+          },
+          "non_neutral": {
+            "games": 647,
+            "wins": 467,
+            "losses": 180,
+            "accuracy": 0.721793,
+            "brier": 0.1860499,
+            "log_loss": 0.5468273
+          },
+          "neutral": {
+            "games": 16,
+            "wins": 12,
+            "losses": 4,
+            "accuracy": 0.75,
+            "brier": 0.1828262,
+            "log_loss": 0.5447634
+          }
+        }
+      }
+    },
+    "2026": {
+      "conditions": {
+        "all_games": 228,
+        "non_neutral_games": 225,
+        "neutral_site_games": 3,
+        "all_non_neutral_home_team": {
+          "games": 225,
+          "wins": 131,
+          "losses": 94,
+          "win_rate": 0.582222
+        },
+        "both_advantages_home_non_neutral": {
+          "games": 82,
+          "wins": 67,
+          "losses": 15,
+          "win_rate": 0.817073
+        },
+        "both_advantages_away_non_neutral": {
+          "games": 70,
+          "wins": 51,
+          "losses": 19,
+          "win_rate": 0.728571
+        },
+        "both_advantages_neutral": {
+          "games": 2,
+          "wins": 1,
+          "losses": 1,
+          "win_rate": 0.5
+        },
+        "both_advantages_any_location": {
+          "games": 154,
+          "wins": 119,
+          "losses": 35,
+          "win_rate": 0.772727
+        },
+        "home_offense_edge_non_neutral": {
+          "games": 123,
+          "wins": 95,
+          "losses": 28,
+          "win_rate": 0.772358
+        },
+        "home_defense_edge_non_neutral": {
+          "games": 114,
+          "wins": 84,
+          "losses": 30,
+          "win_rate": 0.736842
+        },
+        "no_home_offense_or_defense_edge_non_neutral": {
+          "games": 70,
+          "wins": 19,
+          "losses": 51,
+          "win_rate": 0.271429
+        },
+        "split_advantages_non_neutral_home_team": {
+          "games": 73,
+          "wins": 45,
+          "losses": 28,
+          "win_rate": 0.616438
+        },
+        "split_advantages_neutral": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_rate": 1.0
+        },
+        "v15_when_home_has_both": {
+          "games": 82,
+          "wins": 66,
+          "losses": 16,
+          "win_rate": 0.804878
+        },
+        "v15_when_away_has_both": {
+          "games": 70,
+          "wins": 53,
+          "losses": 17,
+          "win_rate": 0.757143
+        },
+        "both_home_and_v15_agree": {
+          "games": 81,
+          "wins": 66,
+          "losses": 15,
+          "win_rate": 0.814815
+        },
+        "both_home_but_v15_picks_away": {
+          "v15": {
+            "games": 1,
+            "wins": 0,
+            "losses": 1,
+            "win_rate": 0.0
+          },
+          "handwritten_home": {
+            "games": 1,
+            "wins": 1,
+            "losses": 0,
+            "win_rate": 1.0
+          }
+        },
+        "both_away_but_v15_picks_home": {
+          "v15": {
+            "games": 2,
+            "wins": 2,
+            "losses": 0,
+            "win_rate": 1.0
+          },
+          "handwritten_away": {
+            "games": 2,
+            "wins": 0,
+            "losses": 2,
+            "win_rate": 0.0
+          }
+        }
+      },
+      "model_tests": {
+        "existing_v15": {
+          "games": 228,
+          "wins": 164,
+          "losses": 64,
+          "accuracy": 0.719298,
+          "brier": 0.1808088,
+          "log_loss": 0.5329666
+        },
+        "handwritten_existing_venue": {
+          "games": 228,
+          "wins": 164,
+          "losses": 64,
+          "accuracy": 0.719298,
+          "brier": 0.180122,
+          "log_loss": 0.5294584
+        },
+        "venue_coefficient_00pct": {
+          "all": {
+            "games": 228,
+            "wins": 161,
+            "losses": 67,
+            "accuracy": 0.70614,
+            "brier": 0.1821964,
+            "log_loss": 0.5324294
+          },
+          "non_neutral": {
+            "games": 225,
+            "wins": 160,
+            "losses": 65,
+            "accuracy": 0.711111,
+            "brier": 0.1799363,
+            "log_loss": 0.5271153
+          },
+          "neutral": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333,
+            "brier": 0.3517064,
+            "log_loss": 0.9309855
+          }
+        },
+        "venue_coefficient_10pct": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "losses": 63,
+            "accuracy": 0.723684,
+            "brier": 0.1805766,
+            "log_loss": 0.5294039
+          },
+          "non_neutral": {
+            "games": 225,
+            "wins": 164,
+            "losses": 61,
+            "accuracy": 0.728889,
+            "brier": 0.1782949,
+            "log_loss": 0.5240495
+          },
+          "neutral": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333,
+            "brier": 0.3517064,
+            "log_loss": 0.9309855
+          }
+        },
+        "venue_coefficient_20pct": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "losses": 64,
+            "accuracy": 0.719298,
+            "brier": 0.180122,
+            "log_loss": 0.5294584
+          },
+          "non_neutral": {
+            "games": 225,
+            "wins": 163,
+            "losses": 62,
+            "accuracy": 0.724444,
+            "brier": 0.1778342,
+            "log_loss": 0.5241047
+          },
+          "neutral": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333,
+            "brier": 0.3517064,
+            "log_loss": 0.9309855
+          }
+        },
+        "venue_coefficient_30pct": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "losses": 64,
+            "accuracy": 0.719298,
+            "brier": 0.1806772,
+            "log_loss": 0.5323651
+          },
+          "non_neutral": {
+            "games": 225,
+            "wins": 163,
+            "losses": 62,
+            "accuracy": 0.724444,
+            "brier": 0.1783968,
+            "log_loss": 0.5270501
+          },
+          "neutral": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333,
+            "brier": 0.3517064,
+            "log_loss": 0.9309855
+          }
+        },
+        "venue_coefficient_40pct": {
+          "all": {
+            "games": 228,
+            "wins": 163,
+            "losses": 65,
+            "accuracy": 0.714912,
+            "brier": 0.1820861,
+            "log_loss": 0.537897
+          },
+          "non_neutral": {
+            "games": 225,
+            "wins": 162,
+            "losses": 63,
+            "accuracy": 0.72,
+            "brier": 0.1798245,
+            "log_loss": 0.5326558
+          },
+          "neutral": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333,
+            "brier": 0.3517064,
+            "log_loss": 0.9309855
+          }
+        },
+        "extra_home_logodds_0.10": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "losses": 63,
+            "accuracy": 0.723684,
+            "brier": 0.1794324,
+            "log_loss": 0.5284761
+          },
+          "non_neutral": {
+            "games": 225,
+            "wins": 164,
+            "losses": 61,
+            "accuracy": 0.728889,
+            "brier": 0.1771354,
+            "log_loss": 0.5231093
+          },
+          "neutral": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333,
+            "brier": 0.3517064,
+            "log_loss": 0.9309855
+          }
+        },
+        "extra_home_logodds_0.20": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "losses": 64,
+            "accuracy": 0.719298,
+            "brier": 0.179426,
+            "log_loss": 0.5292089
+          },
+          "non_neutral": {
+            "games": 225,
+            "wins": 163,
+            "losses": 62,
+            "accuracy": 0.724444,
+            "brier": 0.1771289,
+            "log_loss": 0.5238518
+          },
+          "neutral": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333,
+            "brier": 0.3517064,
+            "log_loss": 0.9309855
+          }
+        },
+        "extra_home_logodds_0.35": {
+          "all": {
+            "games": 228,
+            "wins": 160,
+            "losses": 68,
+            "accuracy": 0.701754,
+            "brier": 0.1806783,
+            "log_loss": 0.5334932
+          },
+          "non_neutral": {
+            "games": 225,
+            "wins": 159,
+            "losses": 66,
+            "accuracy": 0.706667,
+            "brier": 0.1783979,
+            "log_loss": 0.5281933
+          },
+          "neutral": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333,
+            "brier": 0.3517064,
+            "log_loss": 0.9309855
+          }
+        }
+      }
+    }
+  },
+  "combined": {
+    "conditions": {
+      "all_games": 2826,
+      "non_neutral_games": 2750,
+      "neutral_site_games": 76,
+      "all_non_neutral_home_team": {
+        "games": 2750,
+        "wins": 1597,
+        "losses": 1153,
+        "win_rate": 0.580727
+      },
+      "both_advantages_home_non_neutral": {
+        "games": 875,
+        "wins": 712,
+        "losses": 163,
+        "win_rate": 0.813714
+      },
+      "both_advantages_away_non_neutral": {
+        "games": 767,
+        "wins": 525,
+        "losses": 242,
+        "win_rate": 0.684485
+      },
+      "both_advantages_neutral": {
+        "games": 38,
+        "wins": 28,
+        "losses": 10,
+        "win_rate": 0.736842
+      },
+      "both_advantages_any_location": {
+        "games": 1680,
+        "wins": 1265,
+        "losses": 415,
+        "win_rate": 0.752976
+      },
+      "home_offense_edge_non_neutral": {
+        "games": 1417,
+        "wins": 1044,
+        "losses": 373,
+        "win_rate": 0.736768
+      },
+      "home_defense_edge_non_neutral": {
+        "games": 1441,
+        "wins": 1023,
+        "losses": 418,
+        "win_rate": 0.709924
+      },
+      "no_home_offense_or_defense_edge_non_neutral": {
+        "games": 767,
+        "wins": 242,
+        "losses": 525,
+        "win_rate": 0.315515
+      },
+      "split_advantages_non_neutral_home_team": {
+        "games": 1108,
+        "wins": 643,
+        "losses": 465,
+        "win_rate": 0.580325
+      },
+      "split_advantages_neutral": {
+        "games": 38,
+        "wins": 16,
+        "losses": 22,
+        "win_rate": 0.421053
+      },
+      "v15_when_home_has_both": {
+        "games": 875,
+        "wins": 712,
+        "losses": 163,
+        "win_rate": 0.813714
+      },
+      "v15_when_away_has_both": {
+        "games": 767,
+        "wins": 527,
+        "losses": 240,
+        "win_rate": 0.687093
+      },
+      "both_home_and_v15_agree": {
+        "games": 853,
+        "wins": 701,
+        "losses": 152,
+        "win_rate": 0.821805
+      },
+      "both_home_but_v15_picks_away": {
+        "v15": {
+          "games": 22,
+          "wins": 11,
+          "losses": 11,
+          "win_rate": 0.5
+        },
+        "handwritten_home": {
+          "games": 22,
+          "wins": 11,
+          "losses": 11,
+          "win_rate": 0.5
+        }
+      },
+      "both_away_but_v15_picks_home": {
+        "v15": {
+          "games": 46,
+          "wins": 24,
+          "losses": 22,
+          "win_rate": 0.521739
+        },
+        "handwritten_away": {
+          "games": 46,
+          "wins": 22,
+          "losses": 24,
+          "win_rate": 0.478261
+        }
+      }
+    },
+    "model_tests": {
+      "existing_v15": {
+        "games": 2826,
+        "wins": 2013,
+        "losses": 813,
+        "accuracy": 0.712314,
+        "brier": 0.1898703,
+        "log_loss": 0.558338
+      },
+      "handwritten_existing_venue": {
+        "games": 2826,
+        "wins": 1982,
+        "losses": 844,
+        "accuracy": 0.701345,
+        "brier": 0.1917676,
+        "log_loss": 0.5634059
+      },
+      "venue_coefficient_00pct": {
+        "all": {
+          "games": 2826,
+          "wins": 1967,
+          "losses": 859,
+          "accuracy": 0.696037,
+          "brier": 0.1947521,
+          "log_loss": 0.5704598
+        },
+        "non_neutral": {
+          "games": 2750,
+          "wins": 1918,
+          "losses": 832,
+          "accuracy": 0.697455,
+          "brier": 0.1942942,
+          "log_loss": 0.569147
+        },
+        "neutral": {
+          "games": 76,
+          "wins": 49,
+          "losses": 27,
+          "accuracy": 0.644737,
+          "brier": 0.2113214,
+          "log_loss": 0.6179623
+        }
+      },
+      "venue_coefficient_10pct": {
+        "all": {
+          "games": 2826,
+          "wins": 1979,
+          "losses": 847,
+          "accuracy": 0.700283,
+          "brier": 0.1925307,
+          "log_loss": 0.565097
+        },
+        "non_neutral": {
+          "games": 2750,
+          "wins": 1930,
+          "losses": 820,
+          "accuracy": 0.701818,
+          "brier": 0.1920114,
+          "log_loss": 0.563636
+        },
+        "neutral": {
+          "games": 76,
+          "wins": 49,
+          "losses": 27,
+          "accuracy": 0.644737,
+          "brier": 0.2113214,
+          "log_loss": 0.6179623
+        }
+      },
+      "venue_coefficient_20pct": {
+        "all": {
+          "games": 2826,
+          "wins": 1982,
+          "losses": 844,
+          "accuracy": 0.701345,
+          "brier": 0.1917676,
+          "log_loss": 0.5634059
+        },
+        "non_neutral": {
+          "games": 2750,
+          "wins": 1933,
+          "losses": 817,
+          "accuracy": 0.702909,
+          "brier": 0.1912272,
+          "log_loss": 0.5618982
+        },
+        "neutral": {
+          "games": 76,
+          "wins": 49,
+          "losses": 27,
+          "accuracy": 0.644737,
+          "brier": 0.2113214,
+          "log_loss": 0.6179623
+        }
+      },
+      "venue_coefficient_30pct": {
+        "all": {
+          "games": 2826,
+          "wins": 1983,
+          "losses": 843,
+          "accuracy": 0.701699,
+          "brier": 0.1921764,
+          "log_loss": 0.5650191
+        },
+        "non_neutral": {
+          "games": 2750,
+          "wins": 1934,
+          "losses": 816,
+          "accuracy": 0.703273,
+          "brier": 0.1916473,
+          "log_loss": 0.5635559
+        },
+        "neutral": {
+          "games": 76,
+          "wins": 49,
+          "losses": 27,
+          "accuracy": 0.644737,
+          "brier": 0.2113214,
+          "log_loss": 0.6179623
+        }
+      },
+      "venue_coefficient_40pct": {
+        "all": {
+          "games": 2826,
+          "wins": 1980,
+          "losses": 846,
+          "accuracy": 0.700637,
+          "brier": 0.1934971,
+          "log_loss": 0.5695858
+        },
+        "non_neutral": {
+          "games": 2750,
+          "wins": 1931,
+          "losses": 819,
+          "accuracy": 0.702182,
+          "brier": 0.1930045,
+          "log_loss": 0.5682489
+        },
+        "neutral": {
+          "games": 76,
+          "wins": 49,
+          "losses": 27,
+          "accuracy": 0.644737,
+          "brier": 0.2113214,
+          "log_loss": 0.6179623
+        }
+      },
+      "extra_home_logodds_0.10": {
+        "all": {
+          "games": 2826,
+          "wins": 1977,
+          "losses": 849,
+          "accuracy": 0.699575,
+          "brier": 0.1908329,
+          "log_loss": 0.5610864
+        },
+        "non_neutral": {
+          "games": 2750,
+          "wins": 1928,
+          "losses": 822,
+          "accuracy": 0.701091,
+          "brier": 0.1902667,
+          "log_loss": 0.5595145
+        },
+        "neutral": {
+          "games": 76,
+          "wins": 49,
+          "losses": 27,
+          "accuracy": 0.644737,
+          "brier": 0.2113214,
+          "log_loss": 0.6179623
+        }
+      },
+      "extra_home_logodds_0.20": {
+        "all": {
+          "games": 2826,
+          "wins": 1988,
+          "losses": 838,
+          "accuracy": 0.703468,
+          "brier": 0.1905925,
+          "log_loss": 0.5605268
+        },
+        "non_neutral": {
+          "games": 2750,
+          "wins": 1939,
+          "losses": 811,
+          "accuracy": 0.705091,
+          "brier": 0.1900197,
+          "log_loss": 0.5589395
+        },
+        "neutral": {
+          "games": 76,
+          "wins": 49,
+          "losses": 27,
+          "accuracy": 0.644737,
+          "brier": 0.2113214,
+          "log_loss": 0.6179623
+        }
+      },
+      "extra_home_logodds_0.35": {
+        "all": {
+          "games": 2826,
+          "wins": 1994,
+          "losses": 832,
+          "accuracy": 0.705591,
+          "brier": 0.1915066,
+          "log_loss": 0.5629538
+        },
+        "non_neutral": {
+          "games": 2750,
+          "wins": 1945,
+          "losses": 805,
+          "accuracy": 0.707273,
+          "brier": 0.190959,
+          "log_loss": 0.5614335
+        },
+        "neutral": {
+          "games": 76,
+          "wins": 49,
+          "losses": 27,
+          "accuracy": 0.644737,
+          "brier": 0.2113214,
+          "log_loss": 0.6179623
+        }
+      }
+    },
+    "candidate_ranked_by_2024_brier": [
+      {
+        "name": "extra_home_logodds_0.20",
+        "2024": {
+          "games": 659,
+          "wins": 458,
+          "losses": 201,
+          "accuracy": 0.694992,
+          "brier": 0.1914024,
+          "log_loss": 0.5596095
+        },
+        "2025": {
+          "games": 663,
+          "wins": 476,
+          "losses": 187,
+          "accuracy": 0.717949,
+          "brier": 0.1851815,
+          "log_loss": 0.5448262
+        },
+        "2026": {
+          "games": 228,
+          "wins": 164,
+          "losses": 64,
+          "accuracy": 0.719298,
+          "brier": 0.179426,
+          "log_loss": 0.5292089
+        },
+        "combined": {
+          "games": 2826,
+          "wins": 1988,
+          "losses": 838,
+          "accuracy": 0.703468,
+          "brier": 0.1905925,
+          "log_loss": 0.5605268
+        }
+      },
+      {
+        "name": "extra_home_logodds_0.10",
+        "2024": {
+          "games": 659,
+          "wins": 457,
+          "losses": 202,
+          "accuracy": 0.693475,
+          "brier": 0.1917605,
+          "log_loss": 0.561173
+        },
+        "2025": {
+          "games": 663,
+          "wins": 472,
+          "losses": 191,
+          "accuracy": 0.711916,
+          "brier": 0.1855573,
+          "log_loss": 0.5457496
+        },
+        "2026": {
+          "games": 228,
+          "wins": 165,
+          "losses": 63,
+          "accuracy": 0.723684,
+          "brier": 0.1794324,
+          "log_loss": 0.5284761
+        },
+        "combined": {
+          "games": 2826,
+          "wins": 1977,
+          "losses": 849,
+          "accuracy": 0.699575,
+          "brier": 0.1908329,
+          "log_loss": 0.5610864
+        }
+      },
+      {
+        "name": "extra_home_logodds_0.35",
+        "2024": {
+          "games": 659,
+          "wins": 457,
+          "losses": 202,
+          "accuracy": 0.693475,
+          "brier": 0.1920568,
+          "log_loss": 0.5604323
+        },
+        "2025": {
+          "games": 663,
+          "wins": 479,
+          "losses": 184,
+          "accuracy": 0.722474,
+          "brier": 0.1859721,
+          "log_loss": 0.5467775
+        },
+        "2026": {
+          "games": 228,
+          "wins": 160,
+          "losses": 68,
+          "accuracy": 0.701754,
+          "brier": 0.1806783,
+          "log_loss": 0.5334932
+        },
+        "combined": {
+          "games": 2826,
+          "wins": 1994,
+          "losses": 832,
+          "accuracy": 0.705591,
+          "brier": 0.1915066,
+          "log_loss": 0.5629538
+        }
+      },
+      {
+        "name": "venue_coefficient_20pct",
+        "2024": {
+          "games": 659,
+          "wins": 456,
+          "losses": 203,
+          "accuracy": 0.691958,
+          "brier": 0.1927706,
+          "log_loss": 0.5644442
+        },
+        "2025": {
+          "games": 663,
+          "wins": 470,
+          "losses": 193,
+          "accuracy": 0.708899,
+          "brier": 0.1866672,
+          "log_loss": 0.5484686
+        },
+        "2026": {
+          "games": 228,
+          "wins": 164,
+          "losses": 64,
+          "accuracy": 0.719298,
+          "brier": 0.180122,
+          "log_loss": 0.5294584
+        },
+        "combined": {
+          "games": 2826,
+          "wins": 1982,
+          "losses": 844,
+          "accuracy": 0.701345,
+          "brier": 0.1917676,
+          "log_loss": 0.5634059
+        }
+      },
+      {
+        "name": "venue_coefficient_10pct",
+        "2024": {
+          "games": 659,
+          "wins": 452,
+          "losses": 207,
+          "accuracy": 0.685888,
+          "brier": 0.1931987,
+          "log_loss": 0.5653893
+        },
+        "2025": {
+          "games": 663,
+          "wins": 466,
+          "losses": 197,
+          "accuracy": 0.702866,
+          "brier": 0.188845,
+          "log_loss": 0.5540987
+        },
+        "2026": {
+          "games": 228,
+          "wins": 165,
+          "losses": 63,
+          "accuracy": 0.723684,
+          "brier": 0.1805766,
+          "log_loss": 0.5294039
+        },
+        "combined": {
+          "games": 2826,
+          "wins": 1979,
+          "losses": 847,
+          "accuracy": 0.700283,
+          "brier": 0.1925307,
+          "log_loss": 0.565097
+        }
+      },
+      {
+        "name": "venue_coefficient_30pct",
+        "2024": {
+          "games": 659,
+          "wins": 458,
+          "losses": 201,
+          "accuracy": 0.694992,
+          "brier": 0.1934557,
+          "log_loss": 0.5668249
+        },
+        "2025": {
+          "games": 663,
+          "wins": 477,
+          "losses": 186,
+          "accuracy": 0.719457,
+          "brier": 0.1859928,
+          "log_loss": 0.5466765
+        },
+        "2026": {
+          "games": 228,
+          "wins": 164,
+          "losses": 64,
+          "accuracy": 0.719298,
+          "brier": 0.1806772,
+          "log_loss": 0.5323651
+        },
+        "combined": {
+          "games": 2826,
+          "wins": 1983,
+          "losses": 843,
+          "accuracy": 0.701699,
+          "brier": 0.1921764,
+          "log_loss": 0.5650191
+        }
+      },
+      {
+        "name": "venue_coefficient_40pct",
+        "2024": {
+          "games": 659,
+          "wins": 457,
+          "losses": 202,
+          "accuracy": 0.693475,
+          "brier": 0.1949908,
+          "log_loss": 0.5721488
+        },
+        "2025": {
+          "games": 663,
+          "wins": 478,
+          "losses": 185,
+          "accuracy": 0.720965,
+          "brier": 0.186503,
+          "log_loss": 0.5483092
+        },
+        "2026": {
+          "games": 228,
+          "wins": 163,
+          "losses": 65,
+          "accuracy": 0.714912,
+          "brier": 0.1820861,
+          "log_loss": 0.537897
+        },
+        "combined": {
+          "games": 2826,
+          "wins": 1980,
+          "losses": 846,
+          "accuracy": 0.700637,
+          "brier": 0.1934971,
+          "log_loss": 0.5695858
+        }
+      },
+      {
+        "name": "venue_coefficient_00pct",
+        "2024": {
+          "games": 659,
+          "wins": 454,
+          "losses": 205,
+          "accuracy": 0.688923,
+          "brier": 0.1950354,
+          "log_loss": 0.5700666
+        },
+        "2025": {
+          "games": 663,
+          "wins": 459,
+          "losses": 204,
+          "accuracy": 0.692308,
+          "brier": 0.1928639,
+          "log_loss": 0.5639957
+        },
+        "2026": {
+          "games": 228,
+          "wins": 161,
+          "losses": 67,
+          "accuracy": 0.70614,
+          "brier": 0.1821964,
+          "log_loss": 0.5324294
+        },
+        "combined": {
+          "games": 2826,
+          "wins": 1967,
+          "losses": 859,
+          "accuracy": 0.696037,
+          "brier": 0.1947521,
+          "log_loss": 0.5704598
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Current V1.5 and handwritten model already include a 20% historical home/road performance component; this test is the effect of modifying that coefficient, not adding previously absent home advantage.",
+    "Varying venue coefficients without renormalizing offense/defense/SOS is intentional to isolate the effect. The coefficients need not sum to 1 in these research variants.",
+    "A constant extra home log-odds boost tests a separate home-status hypothesis; it is not equivalent to giving the production historical home/road statistic more weight.",
+    "Neutral-site games receive no home-field adjustment; home and away assignments at neutral venues are not treated as home advantage.",
+    "All figures are retrospective simulations, not prospective frozen actual predictions; data may have been revised since games.",
+    "These historical seasons were already examined; a selected model is likely optimistic. Future locked forward tests are essential before production changes.",
+    "Straight-up win rates, Brier and log loss only; no ATS or market price ROI conclusions.",
+    "Conditional win rates reflect team strength and opponent quality as well as home venue; they do not independently prove a causal home-field advantage."
+  ]
+}
