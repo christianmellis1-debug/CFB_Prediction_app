@@ -245,6 +245,7 @@ WATERFALL_TIERS = {
     3: 'Tier 3: Takeaway Trouble',
     4: 'Tier 4: Parlay Bridge',
     5: 'Tier 5: Home Turf Hammer',
+    6: 'Tier 6: Home Field Advantage',
 }
 
 
@@ -435,7 +436,7 @@ def cross_tier_matches(predictions, schedule, profiles, advantage_checks=None, w
     return out
 
 def select_waterfall(predictions, schedule, profiles, advantage_checks=None, weather_checks=None,
-                     tier5_checks=None, minimum=12, maximum=18):
+                     tier5_checks=None, tier6_checks=None, minimum=12, maximum=18):
     """Weekly sequential card with ATS tiers first.
 
     The minimum/maximum values describe preferred weekly volume only.
@@ -453,6 +454,9 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
     from -505 through -1000 inclusive. Tier 5 is the official straight-up
     four-factor home-dominance rule using the exact prior-week published
     team-summary snapshot.
+    Tier 6 Home Field Advantage: home favorite with genuine DraftKings moneyline
+    from -499 to -100, both positive pregame custom offense and defense edges,
+    P4/P4 or G6/G6; exclude P4 minimum edge 0.50 to below 0.75.
     """
     if not 1 <= minimum <= maximum:
         raise ValueError('Require 1 <= minimum <= maximum')
@@ -462,10 +466,11 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
     games['_id'] = pd.to_numeric(games.game_id, errors='coerce')
     games = games.dropna(subset=['_id'])
     games = games[~games._id.duplicated(keep=False)].set_index('_id')
-    candidates = {1: [], 2: [], 3: [], 4: [], 5: []}
+    candidates = {1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
     advantage_checks = advantage_checks or {}
     weather_checks = weather_checks or {}
     tier5_checks = tier5_checks or {}
+    tier6_checks = tier6_checks or {}
     seen = set()
 
     for _, row in predictions.iterrows():
@@ -596,6 +601,22 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
                 f'(snapshot through Week {tier5.get("through_week")}).'
             )
 
+        # Tier 6 is a downstream, straight-up home-favorite selection only.
+        # Reuse the valid two-sided DraftKings quote parsed above; do not
+        # infer a favorite from a spread or approximate missing lines.
+        tier6 = tier6_checks.get(str(gid), {})
+        if (stage is None and not neutral and fav == 'home' if valid_lines else False):
+            if (tier6.get('status') == 'ok' and tier6.get('qualifies') is True
+                    and -500 < lines['home'] < 0):
+                stage, side = 6, 'home'
+                reason = (
+                    f'Home Field Advantage: stronger pregame offense '
+                    f'({tier6["off_edge"]:+.2f}) and defense '
+                    f'({tier6["def_edge"]:+.2f}); '
+                    f'DraftKings home moneyline {int(lines["home"]):+d}, '
+                    f'no P4 magnitude 0.50–0.74.'
+                )
+
         if stage:
             if stage == 5:
                 raw_line = row.get('DK Home ML', 'Unavailable')
@@ -620,7 +641,7 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
                 'Value Price': price,
                 'Value Market': 'Moneyline',
                 'Value Source': source,
-                'Value Band': 'Straight Up' if stage in (4, 5) else '',
+                'Value Band': 'Straight Up' if stage in (4, 5, 6) else '',
                 'Value Reason': reason,
                 '_sort': (str(game.get('start_date', '')), gid),
             })
@@ -628,7 +649,7 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
     # Surface every official qualifier. The 12-18 range is a planning target,
     # not a selection gate or hard weekly cap.
     card = []
-    for stage in (1, 2, 3, 4, 5):
+    for stage in (1, 2, 3, 4, 5, 6):
         for item in sorted(candidates[stage], key=lambda candidate: candidate['_sort']):
             item = item.copy()
             item.pop('_sort')
