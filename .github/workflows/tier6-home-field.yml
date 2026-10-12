@@ -1,0 +1,35 @@
+name: Validate Tier 6 Home Field Advantage
+on:
+  push:
+    branches:
+      - feature/tier-6-double-edge-2026-10-12
+    paths:
+      - 'home_field_advantage_tier6.py'
+      - 'matchup_advantages.py'
+      - 'model_v1_5.py'
+      - 'app.py'
+      - 'value_shortlist_ui.py'
+      - 'tests/test_tier6_home_field_advantage.py'
+      - '.github/workflows/tier6-home-field.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install model and app dependencies
+        run: pip install -r requirements.txt
+      - name: Compile changed modules
+        run: python -m py_compile home_field_advantage_tier6.py matchup_advantages.py model_v1_5.py app.py value_shortlist_ui.py
+      - name: Validate the new tier
+        run: python -m unittest discover -s tests -p 'test_tier6_home_field_advantage.py' -v
+      - name: Regression test all five original tiers and waterfall behavior
+        run: python -m unittest discover -s tests -p 'test_waterfall.py' -v
+      - name: Validate value shortlist display
+        run: python -m unittest discover -s tests -p 'test_value_shortlist_ui.py' -v

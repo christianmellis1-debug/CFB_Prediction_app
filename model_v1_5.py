@@ -298,7 +298,7 @@ def predict_week(current_summary, prior_summary, schedule, target_week, include_
 
 
 
-def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None, published_summary=None):
+def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None, published_summary=None, prior_summary=None):
     """Annotate predictions with the waterfall without replacing the core model winner."""
     from matchup_advantages import (build_advantages, build_waterfall_profiles,
                                     build_tier5_four_factor, select_waterfall, cross_tier_matches)
@@ -307,8 +307,14 @@ def add_waterfall_value(predictions, schedule, boxes, week, weather_checks=None,
     profiles = build_waterfall_profiles(schedule, boxes, week)
     advantage_checks = build_advantages(schedule, boxes, week)
     tier5_checks = build_tier5_four_factor(schedule, published_summary, week) if published_summary is not None else {}
+    # Tier 6 uses independent pregame offense+defense ratings, not core V1.5
+    # predicted winners or probabilities. Keep original five tiers untouched.
+    from home_field_advantage_tier6 import build_tier6_checks
+    tier6_checks = (build_tier6_checks(schedule, boxes, published_summary, prior_summary, week)
+                    if published_summary is not None and prior_summary is not None else {})
     card = select_waterfall(result, schedule, profiles, advantage_checks=advantage_checks,
-                            weather_checks=weather_checks, tier5_checks=tier5_checks)
+                            weather_checks=weather_checks, tier5_checks=tier5_checks,
+                            tier6_checks=tier6_checks)
     cross_tiers = cross_tier_matches(
         result, schedule, profiles, advantage_checks=advantage_checks,
         weather_checks=weather_checks, tier5_checks=tier5_checks,
