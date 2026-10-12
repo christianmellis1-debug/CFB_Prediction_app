@@ -202,6 +202,8 @@ def variants_for_week(current,prior,schedule,lookup,week):
             "home_win":int(float(g.home_points)>float(g.away_points)),
             "base_p":by_id[gid],
             "current_weight":season_weight,
+            "rush_off_edge":float(rush[home][0]-rush[away][0]),
+            "rush_def_edge":float(rush[home][1]-rush[away][1]),
         }
         # Change CURRENT-season offensive or defensive internal ratings only.
         # Preserve the prior-season/Elo prior and all other V1.5 terms.
@@ -262,6 +264,35 @@ def metrics(frame,p):
     }
 
 
+def rush_signals(frame):
+    """Descriptive winner records when a team has the better rushing profile.
+
+    This is NOT a controlled causal estimate or a standalone strategy; strength
+    of opponent and bookmaker expectation could explain apparent advantage.
+    """
+    y=frame.home_win.to_numpy(dtype=int)
+    o=frame.rush_off_edge.to_numpy(dtype=float)
+    d=frame.rush_def_edge.to_numpy(dtype=float)
+    def count(mask,edge):
+        prediction=edge[mask]>0
+        actual=y[mask]==1
+        wins=int(np.sum(prediction==actual))
+        n=int(mask.sum())
+        return {"games":n,"wins":wins,
+                "win_pct":round(wins/n,6) if n else None}
+    common=np.isfinite(o)&np.isfinite(d)
+    offmask=common&(np.abs(o)>1e-10)
+    defmask=common&(np.abs(d)>1e-10)
+    agree=offmask&defmask&(np.sign(o)==np.sign(d))
+    disagree=offmask&defmask&(np.sign(o)!=np.sign(d))
+    return {
+        "better_rushing_offense":count(offmask,o),
+        "better_run_defense":count(defmask,d),
+        "same_team_has_both_rushing_edges":count(agree,o),
+        "rushing_edges_disagree_games":int(disagree.sum())
+    }
+
+
 def main():
     frames={}
     coverage={}
@@ -301,6 +332,7 @@ def main():
         "design":"Independent rushing offense/run defense standardized across all teams with valid earlier-week FBS games. Other input components are production-standardized. Prior blend retained unchanged. Zero out EITHER EPA or success rate in test families.",
         "years":{y:len(f) for y,f in frames.items()},
         "coverage":coverage,
+        "rush_signal_records":{year:rush_signals(frame) for year,frame in frames.items()},
         "baseline":baseline,
         "selected_by_2024_brier":chosen,
         "all_results":all_results,
