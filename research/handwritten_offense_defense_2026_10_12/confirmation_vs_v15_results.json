@@ -1,0 +1,3300 @@
+{
+  "test": "Does the exact handwritten both-advantage signal improve original V1.5 on identical games?",
+  "generated_at": "2026-10-12T15:52:11.620642+00:00",
+  "years": {
+    "2022": {
+      "proposed": {
+        "cohort_games": 630,
+        "baseline_all": {
+          "games": 630,
+          "wins": 431,
+          "losses": 199,
+          "accuracy": 0.684127
+        },
+        "rule_flip_all": {
+          "games": 630,
+          "wins": 425,
+          "losses": 205,
+          "accuracy": 0.674603
+        },
+        "new_wins_over_baseline": 5,
+        "new_losses_over_baseline": 11,
+        "net_winners_changed": -6,
+        "both_available": {
+          "games": 358,
+          "wins": 250,
+          "losses": 108,
+          "accuracy": 0.698324
+        },
+        "both_v15_agree": {
+          "games": 342,
+          "wins": 245,
+          "losses": 97,
+          "accuracy": 0.716374
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 16,
+            "wins": 11,
+            "losses": 5,
+            "accuracy": 0.6875
+          },
+          "handwritten_both": {
+            "games": 16,
+            "wins": 5,
+            "losses": 11,
+            "accuracy": 0.3125
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 272,
+            "wins": 175,
+            "losses": 97,
+            "accuracy": 0.643382
+          },
+          "higher_offense": {
+            "games": 272,
+            "wins": 148,
+            "losses": 124,
+            "accuracy": 0.544118
+          },
+          "higher_defense": {
+            "games": 272,
+            "wins": 124,
+            "losses": 148,
+            "accuracy": 0.455882
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 614,
+          "avoided_games": 16,
+          "retained_v15": {
+            "games": 614,
+            "wins": 420,
+            "losses": 194,
+            "accuracy": 0.684039
+          },
+          "avoided_v15": {
+            "games": 16,
+            "wins": 11,
+            "losses": 5,
+            "accuracy": 0.6875
+          },
+          "avoided_handwritten": {
+            "games": 16,
+            "wins": 5,
+            "losses": 11,
+            "accuracy": 0.3125
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 342,
+          "wins": 245,
+          "losses": 97,
+          "accuracy": 0.716374
+        },
+        "no_both_advantage_games": 272,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 10,
+                "wins": 7,
+                "losses": 3,
+                "accuracy": 0.7
+              },
+              "handwritten_both": {
+                "games": 10,
+                "wins": 3,
+                "losses": 7,
+                "accuracy": 0.3
+              }
+            },
+            "all_games_v15": {
+              "games": 154,
+              "wins": 84,
+              "losses": 70,
+              "accuracy": 0.545455
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 6,
+                "wins": 4,
+                "losses": 2,
+                "accuracy": 0.666667
+              },
+              "handwritten_both": {
+                "games": 6,
+                "wins": 2,
+                "losses": 4,
+                "accuracy": 0.333333
+              }
+            },
+            "all_games_v15": {
+              "games": 147,
+              "wins": 89,
+              "losses": 58,
+              "accuracy": 0.605442
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 135,
+              "wins": 99,
+              "losses": 36,
+              "accuracy": 0.733333
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 194,
+              "wins": 159,
+              "losses": 35,
+              "accuracy": 0.819588
+            }
+          }
+        }
+      },
+      "original_units": {
+        "cohort_games": 630,
+        "baseline_all": {
+          "games": 630,
+          "wins": 431,
+          "losses": 199,
+          "accuracy": 0.684127
+        },
+        "rule_flip_all": {
+          "games": 630,
+          "wins": 423,
+          "losses": 207,
+          "accuracy": 0.671429
+        },
+        "new_wins_over_baseline": 0,
+        "new_losses_over_baseline": 8,
+        "net_winners_changed": -8,
+        "both_available": {
+          "games": 322,
+          "wins": 232,
+          "losses": 90,
+          "accuracy": 0.720497
+        },
+        "both_v15_agree": {
+          "games": 314,
+          "wins": 232,
+          "losses": 82,
+          "accuracy": 0.738854
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 8,
+            "wins": 8,
+            "losses": 0,
+            "accuracy": 1.0
+          },
+          "handwritten_both": {
+            "games": 8,
+            "wins": 0,
+            "losses": 8,
+            "accuracy": 0.0
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 308,
+            "wins": 191,
+            "losses": 117,
+            "accuracy": 0.62013
+          },
+          "higher_offense": {
+            "games": 308,
+            "wins": 171,
+            "losses": 137,
+            "accuracy": 0.555195
+          },
+          "higher_defense": {
+            "games": 308,
+            "wins": 137,
+            "losses": 171,
+            "accuracy": 0.444805
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 622,
+          "avoided_games": 8,
+          "retained_v15": {
+            "games": 622,
+            "wins": 423,
+            "losses": 199,
+            "accuracy": 0.680064
+          },
+          "avoided_v15": {
+            "games": 8,
+            "wins": 8,
+            "losses": 0,
+            "accuracy": 1.0
+          },
+          "avoided_handwritten": {
+            "games": 8,
+            "wins": 0,
+            "losses": 8,
+            "accuracy": 0.0
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 314,
+          "wins": 232,
+          "losses": 82,
+          "accuracy": 0.738854
+        },
+        "no_both_advantage_games": 308,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 7,
+                "wins": 7,
+                "losses": 0,
+                "accuracy": 1.0
+              },
+              "handwritten_both": {
+                "games": 7,
+                "wins": 0,
+                "losses": 7,
+                "accuracy": 0.0
+              }
+            },
+            "all_games_v15": {
+              "games": 154,
+              "wins": 84,
+              "losses": 70,
+              "accuracy": 0.545455
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 1,
+                "wins": 1,
+                "losses": 0,
+                "accuracy": 1.0
+              },
+              "handwritten_both": {
+                "games": 1,
+                "wins": 0,
+                "losses": 1,
+                "accuracy": 0.0
+              }
+            },
+            "all_games_v15": {
+              "games": 147,
+              "wins": 89,
+              "losses": 58,
+              "accuracy": 0.605442
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 135,
+              "wins": 99,
+              "losses": 36,
+              "accuracy": 0.733333
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 194,
+              "wins": 159,
+              "losses": 35,
+              "accuracy": 0.819588
+            }
+          }
+        }
+      },
+      "v15_conflicting_examples": [
+        {
+          "season": 2022,
+          "week": 13,
+          "game": "Louisville at Kentucky",
+          "v15_pick": "Kentucky",
+          "v15_confidence": 0.679,
+          "both_advantage_pick": "Louisville",
+          "actual_winner": "Kentucky",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 3,
+          "game": "SMU at Maryland",
+          "v15_pick": "Maryland",
+          "v15_confidence": 0.671,
+          "both_advantage_pick": "SMU",
+          "actual_winner": "Maryland",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 9,
+          "game": "Middle Tennessee at UTEP",
+          "v15_pick": "UTEP",
+          "v15_confidence": 0.667,
+          "both_advantage_pick": "Middle Tennessee",
+          "actual_winner": "Middle Tennessee",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2022,
+          "week": 11,
+          "game": "Miami at Georgia Tech",
+          "v15_pick": "Miami",
+          "v15_confidence": 0.661,
+          "both_advantage_pick": "Georgia Tech",
+          "actual_winner": "Miami",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 11,
+          "game": "Kansas State at Baylor",
+          "v15_pick": "Baylor",
+          "v15_confidence": 0.643,
+          "both_advantage_pick": "Kansas State",
+          "actual_winner": "Kansas State",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2022,
+          "week": 12,
+          "game": "Houston at East Carolina",
+          "v15_pick": "Houston",
+          "v15_confidence": 0.613,
+          "both_advantage_pick": "East Carolina",
+          "actual_winner": "Houston",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 8,
+          "game": "Rice at Louisiana Tech",
+          "v15_pick": "Louisiana Tech",
+          "v15_confidence": 0.59,
+          "both_advantage_pick": "Rice",
+          "actual_winner": "Rice",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2022,
+          "week": 10,
+          "game": "App State at Coastal Carolina",
+          "v15_pick": "Coastal Carolina",
+          "v15_confidence": 0.575,
+          "both_advantage_pick": "App State",
+          "actual_winner": "Coastal Carolina",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 4,
+          "game": "Minnesota at Michigan State",
+          "v15_pick": "Michigan State",
+          "v15_confidence": 0.572,
+          "both_advantage_pick": "Minnesota",
+          "actual_winner": "Minnesota",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2022,
+          "week": 8,
+          "game": "Northern Illinois at Ohio",
+          "v15_pick": "Ohio",
+          "v15_confidence": 0.554,
+          "both_advantage_pick": "Northern Illinois",
+          "actual_winner": "Ohio",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 8,
+          "game": "Utah State at Wyoming",
+          "v15_pick": "Wyoming",
+          "v15_confidence": 0.531,
+          "both_advantage_pick": "Utah State",
+          "actual_winner": "Wyoming",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 8,
+          "game": "Virginia at Georgia Tech",
+          "v15_pick": "Virginia",
+          "v15_confidence": 0.526,
+          "both_advantage_pick": "Georgia Tech",
+          "actual_winner": "Virginia",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 13,
+          "game": "Ball State at Miami (OH)",
+          "v15_pick": "Ball State",
+          "v15_confidence": 0.521,
+          "both_advantage_pick": "Miami (OH)",
+          "actual_winner": "Miami (OH)",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2022,
+          "week": 5,
+          "game": "Central Michigan at Toledo",
+          "v15_pick": "Toledo",
+          "v15_confidence": 0.514,
+          "both_advantage_pick": "Central Michigan",
+          "actual_winner": "Toledo",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 5,
+          "game": "Miami (OH) at Buffalo",
+          "v15_pick": "Buffalo",
+          "v15_confidence": 0.505,
+          "both_advantage_pick": "Miami (OH)",
+          "actual_winner": "Buffalo",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2022,
+          "week": 12,
+          "game": "Western Kentucky at Auburn",
+          "v15_pick": "Auburn",
+          "v15_confidence": 0.502,
+          "both_advantage_pick": "Western Kentucky",
+          "actual_winner": "Auburn",
+          "v15_won": true,
+          "handwritten_won": false
+        }
+      ]
+    },
+    "2023": {
+      "proposed": {
+        "cohort_games": 646,
+        "baseline_all": {
+          "games": 646,
+          "wins": 474,
+          "losses": 172,
+          "accuracy": 0.733746
+        },
+        "rule_flip_all": {
+          "games": 646,
+          "wins": 477,
+          "losses": 169,
+          "accuracy": 0.73839
+        },
+        "new_wins_over_baseline": 8,
+        "new_losses_over_baseline": 5,
+        "net_winners_changed": 3,
+        "both_available": {
+          "games": 390,
+          "wins": 309,
+          "losses": 81,
+          "accuracy": 0.792308
+        },
+        "both_v15_agree": {
+          "games": 377,
+          "wins": 301,
+          "losses": 76,
+          "accuracy": 0.798408
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 13,
+            "wins": 5,
+            "losses": 8,
+            "accuracy": 0.384615
+          },
+          "handwritten_both": {
+            "games": 13,
+            "wins": 8,
+            "losses": 5,
+            "accuracy": 0.615385
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 256,
+            "wins": 168,
+            "losses": 88,
+            "accuracy": 0.65625
+          },
+          "higher_offense": {
+            "games": 256,
+            "wins": 142,
+            "losses": 114,
+            "accuracy": 0.554688
+          },
+          "higher_defense": {
+            "games": 256,
+            "wins": 114,
+            "losses": 142,
+            "accuracy": 0.445312
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 633,
+          "avoided_games": 13,
+          "retained_v15": {
+            "games": 633,
+            "wins": 469,
+            "losses": 164,
+            "accuracy": 0.740916
+          },
+          "avoided_v15": {
+            "games": 13,
+            "wins": 5,
+            "losses": 8,
+            "accuracy": 0.384615
+          },
+          "avoided_handwritten": {
+            "games": 13,
+            "wins": 8,
+            "losses": 5,
+            "accuracy": 0.615385
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 377,
+          "wins": 301,
+          "losses": 76,
+          "accuracy": 0.798408
+        },
+        "no_both_advantage_games": 256,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 12,
+                "wins": 4,
+                "losses": 8,
+                "accuracy": 0.333333
+              },
+              "handwritten_both": {
+                "games": 12,
+                "wins": 8,
+                "losses": 4,
+                "accuracy": 0.666667
+              }
+            },
+            "all_games_v15": {
+              "games": 173,
+              "wins": 102,
+              "losses": 71,
+              "accuracy": 0.589595
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 1,
+                "wins": 1,
+                "losses": 0,
+                "accuracy": 1.0
+              },
+              "handwritten_both": {
+                "games": 1,
+                "wins": 0,
+                "losses": 1,
+                "accuracy": 0.0
+              }
+            },
+            "all_games_v15": {
+              "games": 141,
+              "wins": 101,
+              "losses": 40,
+              "accuracy": 0.716312
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 128,
+              "wins": 92,
+              "losses": 36,
+              "accuracy": 0.71875
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 204,
+              "wins": 179,
+              "losses": 25,
+              "accuracy": 0.877451
+            }
+          }
+        }
+      },
+      "original_units": {
+        "cohort_games": 646,
+        "baseline_all": {
+          "games": 646,
+          "wins": 474,
+          "losses": 172,
+          "accuracy": 0.733746
+        },
+        "rule_flip_all": {
+          "games": 646,
+          "wins": 469,
+          "losses": 177,
+          "accuracy": 0.726006
+        },
+        "new_wins_over_baseline": 2,
+        "new_losses_over_baseline": 7,
+        "net_winners_changed": -5,
+        "both_available": {
+          "games": 356,
+          "wins": 279,
+          "losses": 77,
+          "accuracy": 0.783708
+        },
+        "both_v15_agree": {
+          "games": 347,
+          "wins": 277,
+          "losses": 70,
+          "accuracy": 0.798271
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 9,
+            "wins": 7,
+            "losses": 2,
+            "accuracy": 0.777778
+          },
+          "handwritten_both": {
+            "games": 9,
+            "wins": 2,
+            "losses": 7,
+            "accuracy": 0.222222
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 290,
+            "wins": 190,
+            "losses": 100,
+            "accuracy": 0.655172
+          },
+          "higher_offense": {
+            "games": 290,
+            "wins": 163,
+            "losses": 127,
+            "accuracy": 0.562069
+          },
+          "higher_defense": {
+            "games": 290,
+            "wins": 127,
+            "losses": 163,
+            "accuracy": 0.437931
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 637,
+          "avoided_games": 9,
+          "retained_v15": {
+            "games": 637,
+            "wins": 467,
+            "losses": 170,
+            "accuracy": 0.733124
+          },
+          "avoided_v15": {
+            "games": 9,
+            "wins": 7,
+            "losses": 2,
+            "accuracy": 0.777778
+          },
+          "avoided_handwritten": {
+            "games": 9,
+            "wins": 2,
+            "losses": 7,
+            "accuracy": 0.222222
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 347,
+          "wins": 277,
+          "losses": 70,
+          "accuracy": 0.798271
+        },
+        "no_both_advantage_games": 290,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 7,
+                "wins": 5,
+                "losses": 2,
+                "accuracy": 0.714286
+              },
+              "handwritten_both": {
+                "games": 7,
+                "wins": 2,
+                "losses": 5,
+                "accuracy": 0.285714
+              }
+            },
+            "all_games_v15": {
+              "games": 173,
+              "wins": 102,
+              "losses": 71,
+              "accuracy": 0.589595
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 2,
+                "wins": 2,
+                "losses": 0,
+                "accuracy": 1.0
+              },
+              "handwritten_both": {
+                "games": 2,
+                "wins": 0,
+                "losses": 2,
+                "accuracy": 0.0
+              }
+            },
+            "all_games_v15": {
+              "games": 141,
+              "wins": 101,
+              "losses": 40,
+              "accuracy": 0.716312
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 128,
+              "wins": 92,
+              "losses": 36,
+              "accuracy": 0.71875
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 204,
+              "wins": 179,
+              "losses": 25,
+              "accuracy": 0.877451
+            }
+          }
+        }
+      },
+      "v15_conflicting_examples": [
+        {
+          "season": 2023,
+          "week": 4,
+          "game": "Memphis at Missouri",
+          "v15_pick": "Missouri",
+          "v15_confidence": 0.699,
+          "both_advantage_pick": "Memphis",
+          "actual_winner": "Missouri",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2023,
+          "week": 11,
+          "game": "Florida International at Middle Tennessee",
+          "v15_pick": "Florida International",
+          "v15_confidence": 0.599,
+          "both_advantage_pick": "Middle Tennessee",
+          "actual_winner": "Middle Tennessee",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2023,
+          "week": 12,
+          "game": "Cincinnati at West Virginia",
+          "v15_pick": "West Virginia",
+          "v15_confidence": 0.598,
+          "both_advantage_pick": "Cincinnati",
+          "actual_winner": "West Virginia",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2023,
+          "week": 6,
+          "game": "Colorado State at Utah State",
+          "v15_pick": "Colorado State",
+          "v15_confidence": 0.583,
+          "both_advantage_pick": "Utah State",
+          "actual_winner": "Utah State",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2023,
+          "week": 10,
+          "game": "TCU at Texas Tech",
+          "v15_pick": "Texas Tech",
+          "v15_confidence": 0.558,
+          "both_advantage_pick": "TCU",
+          "actual_winner": "Texas Tech",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2023,
+          "week": 15,
+          "game": "Navy at Army",
+          "v15_pick": "Army",
+          "v15_confidence": 0.551,
+          "both_advantage_pick": "Navy",
+          "actual_winner": "Army",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2023,
+          "week": 5,
+          "game": "Clemson at Syracuse",
+          "v15_pick": "Syracuse",
+          "v15_confidence": 0.537,
+          "both_advantage_pick": "Clemson",
+          "actual_winner": "Clemson",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2023,
+          "week": 6,
+          "game": "Boston College at Army",
+          "v15_pick": "Army",
+          "v15_confidence": 0.534,
+          "both_advantage_pick": "Boston College",
+          "actual_winner": "Boston College",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2023,
+          "week": 11,
+          "game": "Ohio at Buffalo",
+          "v15_pick": "Buffalo",
+          "v15_confidence": 0.522,
+          "both_advantage_pick": "Ohio",
+          "actual_winner": "Ohio",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2023,
+          "week": 6,
+          "game": "Texas State at Louisiana",
+          "v15_pick": "Texas State",
+          "v15_confidence": 0.513,
+          "both_advantage_pick": "Louisiana",
+          "actual_winner": "Louisiana",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2023,
+          "week": 12,
+          "game": "Kentucky at South Carolina",
+          "v15_pick": "South Carolina",
+          "v15_confidence": 0.509,
+          "both_advantage_pick": "Kentucky",
+          "actual_winner": "South Carolina",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2023,
+          "week": 5,
+          "game": "Michigan State at Iowa",
+          "v15_pick": "Michigan State",
+          "v15_confidence": 0.507,
+          "both_advantage_pick": "Iowa",
+          "actual_winner": "Iowa",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2023,
+          "week": 9,
+          "game": "Florida Atlantic at Charlotte",
+          "v15_pick": "Charlotte",
+          "v15_confidence": 0.505,
+          "both_advantage_pick": "Florida Atlantic",
+          "actual_winner": "Florida Atlantic",
+          "v15_won": false,
+          "handwritten_won": true
+        }
+      ]
+    },
+    "2024": {
+      "proposed": {
+        "cohort_games": 659,
+        "baseline_all": {
+          "games": 659,
+          "wins": 470,
+          "losses": 189,
+          "accuracy": 0.713202
+        },
+        "rule_flip_all": {
+          "games": 659,
+          "wins": 466,
+          "losses": 193,
+          "accuracy": 0.707132
+        },
+        "new_wins_over_baseline": 7,
+        "new_losses_over_baseline": 11,
+        "net_winners_changed": -4,
+        "both_available": {
+          "games": 403,
+          "wins": 303,
+          "losses": 100,
+          "accuracy": 0.751861
+        },
+        "both_v15_agree": {
+          "games": 385,
+          "wins": 296,
+          "losses": 89,
+          "accuracy": 0.768831
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 18,
+            "wins": 11,
+            "losses": 7,
+            "accuracy": 0.611111
+          },
+          "handwritten_both": {
+            "games": 18,
+            "wins": 7,
+            "losses": 11,
+            "accuracy": 0.388889
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 256,
+            "wins": 163,
+            "losses": 93,
+            "accuracy": 0.636719
+          },
+          "higher_offense": {
+            "games": 256,
+            "wins": 138,
+            "losses": 118,
+            "accuracy": 0.539062
+          },
+          "higher_defense": {
+            "games": 256,
+            "wins": 118,
+            "losses": 138,
+            "accuracy": 0.460938
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 641,
+          "avoided_games": 18,
+          "retained_v15": {
+            "games": 641,
+            "wins": 459,
+            "losses": 182,
+            "accuracy": 0.716069
+          },
+          "avoided_v15": {
+            "games": 18,
+            "wins": 11,
+            "losses": 7,
+            "accuracy": 0.611111
+          },
+          "avoided_handwritten": {
+            "games": 18,
+            "wins": 7,
+            "losses": 11,
+            "accuracy": 0.388889
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 385,
+          "wins": 296,
+          "losses": 89,
+          "accuracy": 0.768831
+        },
+        "no_both_advantage_games": 256,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 13,
+                "wins": 7,
+                "losses": 6,
+                "accuracy": 0.538462
+              },
+              "handwritten_both": {
+                "games": 13,
+                "wins": 6,
+                "losses": 7,
+                "accuracy": 0.461538
+              }
+            },
+            "all_games_v15": {
+              "games": 161,
+              "wins": 90,
+              "losses": 71,
+              "accuracy": 0.559006
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 3,
+                "wins": 3,
+                "losses": 0,
+                "accuracy": 1.0
+              },
+              "handwritten_both": {
+                "games": 3,
+                "wins": 0,
+                "losses": 3,
+                "accuracy": 0.0
+              }
+            },
+            "all_games_v15": {
+              "games": 135,
+              "wins": 87,
+              "losses": 48,
+              "accuracy": 0.644444
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 2,
+                "wins": 1,
+                "losses": 1,
+                "accuracy": 0.5
+              },
+              "handwritten_both": {
+                "games": 2,
+                "wins": 1,
+                "losses": 1,
+                "accuracy": 0.5
+              }
+            },
+            "all_games_v15": {
+              "games": 149,
+              "wins": 110,
+              "losses": 39,
+              "accuracy": 0.738255
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 214,
+              "wins": 183,
+              "losses": 31,
+              "accuracy": 0.85514
+            }
+          }
+        }
+      },
+      "original_units": {
+        "cohort_games": 659,
+        "baseline_all": {
+          "games": 659,
+          "wins": 470,
+          "losses": 189,
+          "accuracy": 0.713202
+        },
+        "rule_flip_all": {
+          "games": 659,
+          "wins": 468,
+          "losses": 191,
+          "accuracy": 0.710167
+        },
+        "new_wins_over_baseline": 1,
+        "new_losses_over_baseline": 3,
+        "net_winners_changed": -2,
+        "both_available": {
+          "games": 368,
+          "wins": 289,
+          "losses": 79,
+          "accuracy": 0.785326
+        },
+        "both_v15_agree": {
+          "games": 364,
+          "wins": 288,
+          "losses": 76,
+          "accuracy": 0.791209
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 4,
+            "wins": 3,
+            "losses": 1,
+            "accuracy": 0.75
+          },
+          "handwritten_both": {
+            "games": 4,
+            "wins": 1,
+            "losses": 3,
+            "accuracy": 0.25
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 291,
+            "wins": 179,
+            "losses": 112,
+            "accuracy": 0.61512
+          },
+          "higher_offense": {
+            "games": 291,
+            "wins": 151,
+            "losses": 140,
+            "accuracy": 0.5189
+          },
+          "higher_defense": {
+            "games": 291,
+            "wins": 140,
+            "losses": 151,
+            "accuracy": 0.4811
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 655,
+          "avoided_games": 4,
+          "retained_v15": {
+            "games": 655,
+            "wins": 467,
+            "losses": 188,
+            "accuracy": 0.712977
+          },
+          "avoided_v15": {
+            "games": 4,
+            "wins": 3,
+            "losses": 1,
+            "accuracy": 0.75
+          },
+          "avoided_handwritten": {
+            "games": 4,
+            "wins": 1,
+            "losses": 3,
+            "accuracy": 0.25
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 364,
+          "wins": 288,
+          "losses": 76,
+          "accuracy": 0.791209
+        },
+        "no_both_advantage_games": 291,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 2,
+                "wins": 1,
+                "losses": 1,
+                "accuracy": 0.5
+              },
+              "handwritten_both": {
+                "games": 2,
+                "wins": 1,
+                "losses": 1,
+                "accuracy": 0.5
+              }
+            },
+            "all_games_v15": {
+              "games": 161,
+              "wins": 90,
+              "losses": 71,
+              "accuracy": 0.559006
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 1,
+                "wins": 1,
+                "losses": 0,
+                "accuracy": 1.0
+              },
+              "handwritten_both": {
+                "games": 1,
+                "wins": 0,
+                "losses": 1,
+                "accuracy": 0.0
+              }
+            },
+            "all_games_v15": {
+              "games": 135,
+              "wins": 87,
+              "losses": 48,
+              "accuracy": 0.644444
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 1,
+                "wins": 1,
+                "losses": 0,
+                "accuracy": 1.0
+              },
+              "handwritten_both": {
+                "games": 1,
+                "wins": 0,
+                "losses": 1,
+                "accuracy": 0.0
+              }
+            },
+            "all_games_v15": {
+              "games": 149,
+              "wins": 110,
+              "losses": 39,
+              "accuracy": 0.738255
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 214,
+              "wins": 183,
+              "losses": 31,
+              "accuracy": 0.85514
+            }
+          }
+        }
+      },
+      "v15_conflicting_examples": [
+        {
+          "season": 2024,
+          "week": 3,
+          "game": "Toledo at Mississippi State",
+          "v15_pick": "Mississippi State",
+          "v15_confidence": 0.758,
+          "both_advantage_pick": "Toledo",
+          "actual_winner": "Toledo",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2024,
+          "week": 4,
+          "game": "Virginia at Coastal Carolina",
+          "v15_pick": "Virginia",
+          "v15_confidence": 0.732,
+          "both_advantage_pick": "Coastal Carolina",
+          "actual_winner": "Virginia",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 3,
+          "game": "Air Force at Baylor",
+          "v15_pick": "Baylor",
+          "v15_confidence": 0.68,
+          "both_advantage_pick": "Air Force",
+          "actual_winner": "Baylor",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 6,
+          "game": "Syracuse at UNLV",
+          "v15_pick": "Syracuse",
+          "v15_confidence": 0.638,
+          "both_advantage_pick": "UNLV",
+          "actual_winner": "Syracuse",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 5,
+          "game": "Georgia at Alabama",
+          "v15_pick": "Alabama",
+          "v15_confidence": 0.634,
+          "both_advantage_pick": "Georgia",
+          "actual_winner": "Alabama",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 6,
+          "game": "Western Michigan at Ball State",
+          "v15_pick": "Ball State",
+          "v15_confidence": 0.598,
+          "both_advantage_pick": "Western Michigan",
+          "actual_winner": "Western Michigan",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2024,
+          "week": 10,
+          "game": "Buffalo at Akron",
+          "v15_pick": "Akron",
+          "v15_confidence": 0.594,
+          "both_advantage_pick": "Buffalo",
+          "actual_winner": "Buffalo",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2024,
+          "week": 8,
+          "game": "Colorado at Arizona",
+          "v15_pick": "Colorado",
+          "v15_confidence": 0.583,
+          "both_advantage_pick": "Arizona",
+          "actual_winner": "Colorado",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 4,
+          "game": "Iowa at Minnesota",
+          "v15_pick": "Minnesota",
+          "v15_confidence": 0.568,
+          "both_advantage_pick": "Iowa",
+          "actual_winner": "Iowa",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2024,
+          "week": 8,
+          "game": "NC State at California",
+          "v15_pick": "NC State",
+          "v15_confidence": 0.542,
+          "both_advantage_pick": "California",
+          "actual_winner": "NC State",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 14,
+          "game": "NC State at North Carolina",
+          "v15_pick": "NC State",
+          "v15_confidence": 0.541,
+          "both_advantage_pick": "North Carolina",
+          "actual_winner": "NC State",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 14,
+          "game": "Navy at East Carolina",
+          "v15_pick": "East Carolina",
+          "v15_confidence": 0.541,
+          "both_advantage_pick": "Navy",
+          "actual_winner": "Navy",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2024,
+          "week": 4,
+          "game": "Utah at Oklahoma State",
+          "v15_pick": "Oklahoma State",
+          "v15_confidence": 0.531,
+          "both_advantage_pick": "Utah",
+          "actual_winner": "Utah",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2024,
+          "week": 10,
+          "game": "Coastal Carolina at Troy",
+          "v15_pick": "Troy",
+          "v15_confidence": 0.516,
+          "both_advantage_pick": "Coastal Carolina",
+          "actual_winner": "Troy",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 10,
+          "game": "UCLA at Nebraska",
+          "v15_pick": "UCLA",
+          "v15_confidence": 0.514,
+          "both_advantage_pick": "Nebraska",
+          "actual_winner": "UCLA",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 13,
+          "game": "Buffalo at Eastern Michigan",
+          "v15_pick": "Eastern Michigan",
+          "v15_confidence": 0.514,
+          "both_advantage_pick": "Buffalo",
+          "actual_winner": "Buffalo",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2024,
+          "week": 5,
+          "game": "Maryland at Indiana",
+          "v15_pick": "Indiana",
+          "v15_confidence": 0.509,
+          "both_advantage_pick": "Maryland",
+          "actual_winner": "Indiana",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2024,
+          "week": 14,
+          "game": "Kansas State at Iowa State",
+          "v15_pick": "Iowa State",
+          "v15_confidence": 0.508,
+          "both_advantage_pick": "Kansas State",
+          "actual_winner": "Iowa State",
+          "v15_won": true,
+          "handwritten_won": false
+        }
+      ]
+    },
+    "2025": {
+      "proposed": {
+        "cohort_games": 663,
+        "baseline_all": {
+          "games": 663,
+          "wins": 474,
+          "losses": 189,
+          "accuracy": 0.714932
+        },
+        "rule_flip_all": {
+          "games": 663,
+          "wins": 478,
+          "losses": 185,
+          "accuracy": 0.720965
+        },
+        "new_wins_over_baseline": 12,
+        "new_losses_over_baseline": 8,
+        "net_winners_changed": 4,
+        "both_available": {
+          "games": 375,
+          "wins": 284,
+          "losses": 91,
+          "accuracy": 0.757333
+        },
+        "both_v15_agree": {
+          "games": 355,
+          "wins": 272,
+          "losses": 83,
+          "accuracy": 0.766197
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 20,
+            "wins": 8,
+            "losses": 12,
+            "accuracy": 0.4
+          },
+          "handwritten_both": {
+            "games": 20,
+            "wins": 12,
+            "losses": 8,
+            "accuracy": 0.6
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 288,
+            "wins": 194,
+            "losses": 94,
+            "accuracy": 0.673611
+          },
+          "higher_offense": {
+            "games": 288,
+            "wins": 136,
+            "losses": 152,
+            "accuracy": 0.472222
+          },
+          "higher_defense": {
+            "games": 288,
+            "wins": 152,
+            "losses": 136,
+            "accuracy": 0.527778
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 643,
+          "avoided_games": 20,
+          "retained_v15": {
+            "games": 643,
+            "wins": 466,
+            "losses": 177,
+            "accuracy": 0.724728
+          },
+          "avoided_v15": {
+            "games": 20,
+            "wins": 8,
+            "losses": 12,
+            "accuracy": 0.4
+          },
+          "avoided_handwritten": {
+            "games": 20,
+            "wins": 12,
+            "losses": 8,
+            "accuracy": 0.6
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 355,
+          "wins": 272,
+          "losses": 83,
+          "accuracy": 0.766197
+        },
+        "no_both_advantage_games": 288,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 19,
+                "wins": 8,
+                "losses": 11,
+                "accuracy": 0.421053
+              },
+              "handwritten_both": {
+                "games": 19,
+                "wins": 11,
+                "losses": 8,
+                "accuracy": 0.578947
+              }
+            },
+            "all_games_v15": {
+              "games": 170,
+              "wins": 95,
+              "losses": 75,
+              "accuracy": 0.558824
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 177,
+              "wins": 117,
+              "losses": 60,
+              "accuracy": 0.661017
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 1,
+                "wins": 0,
+                "losses": 1,
+                "accuracy": 0.0
+              },
+              "handwritten_both": {
+                "games": 1,
+                "wins": 1,
+                "losses": 0,
+                "accuracy": 1.0
+              }
+            },
+            "all_games_v15": {
+              "games": 129,
+              "wins": 95,
+              "losses": 34,
+              "accuracy": 0.736434
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 187,
+              "wins": 167,
+              "losses": 20,
+              "accuracy": 0.893048
+            }
+          }
+        }
+      },
+      "original_units": {
+        "cohort_games": 663,
+        "baseline_all": {
+          "games": 663,
+          "wins": 474,
+          "losses": 189,
+          "accuracy": 0.714932
+        },
+        "rule_flip_all": {
+          "games": 663,
+          "wins": 475,
+          "losses": 188,
+          "accuracy": 0.71644
+        },
+        "new_wins_over_baseline": 4,
+        "new_losses_over_baseline": 3,
+        "net_winners_changed": 1,
+        "both_available": {
+          "games": 335,
+          "wins": 261,
+          "losses": 74,
+          "accuracy": 0.779104
+        },
+        "both_v15_agree": {
+          "games": 328,
+          "wins": 257,
+          "losses": 71,
+          "accuracy": 0.783537
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 7,
+            "wins": 3,
+            "losses": 4,
+            "accuracy": 0.428571
+          },
+          "handwritten_both": {
+            "games": 7,
+            "wins": 4,
+            "losses": 3,
+            "accuracy": 0.571429
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 328,
+            "wins": 214,
+            "losses": 114,
+            "accuracy": 0.652439
+          },
+          "higher_offense": {
+            "games": 328,
+            "wins": 155,
+            "losses": 173,
+            "accuracy": 0.472561
+          },
+          "higher_defense": {
+            "games": 328,
+            "wins": 173,
+            "losses": 155,
+            "accuracy": 0.527439
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 656,
+          "avoided_games": 7,
+          "retained_v15": {
+            "games": 656,
+            "wins": 471,
+            "losses": 185,
+            "accuracy": 0.717988
+          },
+          "avoided_v15": {
+            "games": 7,
+            "wins": 3,
+            "losses": 4,
+            "accuracy": 0.428571
+          },
+          "avoided_handwritten": {
+            "games": 7,
+            "wins": 4,
+            "losses": 3,
+            "accuracy": 0.571429
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 328,
+          "wins": 257,
+          "losses": 71,
+          "accuracy": 0.783537
+        },
+        "no_both_advantage_games": 328,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 6,
+                "wins": 2,
+                "losses": 4,
+                "accuracy": 0.333333
+              },
+              "handwritten_both": {
+                "games": 6,
+                "wins": 4,
+                "losses": 2,
+                "accuracy": 0.666667
+              }
+            },
+            "all_games_v15": {
+              "games": 170,
+              "wins": 95,
+              "losses": 75,
+              "accuracy": 0.558824
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 177,
+              "wins": 117,
+              "losses": 60,
+              "accuracy": 0.661017
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 1,
+                "wins": 1,
+                "losses": 0,
+                "accuracy": 1.0
+              },
+              "handwritten_both": {
+                "games": 1,
+                "wins": 0,
+                "losses": 1,
+                "accuracy": 0.0
+              }
+            },
+            "all_games_v15": {
+              "games": 129,
+              "wins": 95,
+              "losses": 34,
+              "accuracy": 0.736434
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 187,
+              "wins": 167,
+              "losses": 20,
+              "accuracy": 0.893048
+            }
+          }
+        }
+      },
+      "v15_conflicting_examples": [
+        {
+          "season": 2025,
+          "week": 3,
+          "game": "Old Dominion at Virginia Tech",
+          "v15_pick": "Virginia Tech",
+          "v15_confidence": 0.762,
+          "both_advantage_pick": "Old Dominion",
+          "actual_winner": "Old Dominion",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 6,
+          "game": "Miami (OH) at Northern Illinois",
+          "v15_pick": "Miami (OH)",
+          "v15_confidence": 0.599,
+          "both_advantage_pick": "Northern Illinois",
+          "actual_winner": "Miami (OH)",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2025,
+          "week": 8,
+          "game": "Akron at Ball State",
+          "v15_pick": "Ball State",
+          "v15_confidence": 0.585,
+          "both_advantage_pick": "Akron",
+          "actual_winner": "Ball State",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2025,
+          "week": 3,
+          "game": "Duke at Tulane",
+          "v15_pick": "Duke",
+          "v15_confidence": 0.572,
+          "both_advantage_pick": "Tulane",
+          "actual_winner": "Tulane",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 11,
+          "game": "Louisiana Tech at Delaware",
+          "v15_pick": "Delaware",
+          "v15_confidence": 0.571,
+          "both_advantage_pick": "Louisiana Tech",
+          "actual_winner": "Delaware",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2025,
+          "week": 6,
+          "game": "Sam Houston at New Mexico State",
+          "v15_pick": "New Mexico State",
+          "v15_confidence": 0.564,
+          "both_advantage_pick": "Sam Houston",
+          "actual_winner": "New Mexico State",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2025,
+          "week": 14,
+          "game": "Western Kentucky at Jacksonville State",
+          "v15_pick": "Western Kentucky",
+          "v15_confidence": 0.558,
+          "both_advantage_pick": "Jacksonville State",
+          "actual_winner": "Jacksonville State",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 10,
+          "game": "Arizona State at Iowa State",
+          "v15_pick": "Iowa State",
+          "v15_confidence": 0.543,
+          "both_advantage_pick": "Arizona State",
+          "actual_winner": "Arizona State",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 10,
+          "game": "North Carolina at Syracuse",
+          "v15_pick": "Syracuse",
+          "v15_confidence": 0.542,
+          "both_advantage_pick": "North Carolina",
+          "actual_winner": "North Carolina",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 4,
+          "game": "SMU at TCU",
+          "v15_pick": "SMU",
+          "v15_confidence": 0.541,
+          "both_advantage_pick": "TCU",
+          "actual_winner": "TCU",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 6,
+          "game": "Miami at Florida State",
+          "v15_pick": "Florida State",
+          "v15_confidence": 0.54,
+          "both_advantage_pick": "Miami",
+          "actual_winner": "Miami",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 11,
+          "game": "Southern Miss at Arkansas State",
+          "v15_pick": "Arkansas State",
+          "v15_confidence": 0.535,
+          "both_advantage_pick": "Southern Miss",
+          "actual_winner": "Southern Miss",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 8,
+          "game": "Southern Miss at Louisiana",
+          "v15_pick": "Louisiana",
+          "v15_confidence": 0.532,
+          "both_advantage_pick": "Southern Miss",
+          "actual_winner": "Southern Miss",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 12,
+          "game": "Clemson at Louisville",
+          "v15_pick": "Clemson",
+          "v15_confidence": 0.53,
+          "both_advantage_pick": "Louisville",
+          "actual_winner": "Clemson",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2025,
+          "week": 5,
+          "game": "Arkansas State at UL Monroe",
+          "v15_pick": "UL Monroe",
+          "v15_confidence": 0.525,
+          "both_advantage_pick": "Arkansas State",
+          "actual_winner": "UL Monroe",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2025,
+          "week": 12,
+          "game": "Wyoming at Fresno State",
+          "v15_pick": "Wyoming",
+          "v15_confidence": 0.513,
+          "both_advantage_pick": "Fresno State",
+          "actual_winner": "Fresno State",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 7,
+          "game": "Utah State at Hawai'i",
+          "v15_pick": "Hawai'i",
+          "v15_confidence": 0.512,
+          "both_advantage_pick": "Utah State",
+          "actual_winner": "Hawai'i",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2025,
+          "week": 14,
+          "game": "Louisiana Tech at Missouri State",
+          "v15_pick": "Missouri State",
+          "v15_confidence": 0.509,
+          "both_advantage_pick": "Louisiana Tech",
+          "actual_winner": "Louisiana Tech",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2025,
+          "week": 10,
+          "game": "Marshall at Coastal Carolina",
+          "v15_pick": "Coastal Carolina",
+          "v15_confidence": 0.503,
+          "both_advantage_pick": "Marshall",
+          "actual_winner": "Coastal Carolina",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2025,
+          "week": 7,
+          "game": "East Carolina at Tulane",
+          "v15_pick": "East Carolina",
+          "v15_confidence": 0.502,
+          "both_advantage_pick": "Tulane",
+          "actual_winner": "Tulane",
+          "v15_won": false,
+          "handwritten_won": true
+        }
+      ]
+    },
+    "2026": {
+      "proposed": {
+        "cohort_games": 228,
+        "baseline_all": {
+          "games": 228,
+          "wins": 164,
+          "losses": 64,
+          "accuracy": 0.719298
+        },
+        "rule_flip_all": {
+          "games": 228,
+          "wins": 163,
+          "losses": 65,
+          "accuracy": 0.714912
+        },
+        "new_wins_over_baseline": 1,
+        "new_losses_over_baseline": 2,
+        "net_winners_changed": -1,
+        "both_available": {
+          "games": 154,
+          "wins": 119,
+          "losses": 35,
+          "accuracy": 0.772727
+        },
+        "both_v15_agree": {
+          "games": 151,
+          "wins": 118,
+          "losses": 33,
+          "accuracy": 0.781457
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 3,
+            "wins": 2,
+            "losses": 1,
+            "accuracy": 0.666667
+          },
+          "handwritten_both": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 74,
+            "wins": 44,
+            "losses": 30,
+            "accuracy": 0.594595
+          },
+          "higher_offense": {
+            "games": 74,
+            "wins": 43,
+            "losses": 31,
+            "accuracy": 0.581081
+          },
+          "higher_defense": {
+            "games": 74,
+            "wins": 31,
+            "losses": 43,
+            "accuracy": 0.418919
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 225,
+          "avoided_games": 3,
+          "retained_v15": {
+            "games": 225,
+            "wins": 162,
+            "losses": 63,
+            "accuracy": 0.72
+          },
+          "avoided_v15": {
+            "games": 3,
+            "wins": 2,
+            "losses": 1,
+            "accuracy": 0.666667
+          },
+          "avoided_handwritten": {
+            "games": 3,
+            "wins": 1,
+            "losses": 2,
+            "accuracy": 0.333333
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 151,
+          "wins": 118,
+          "losses": 33,
+          "accuracy": 0.781457
+        },
+        "no_both_advantage_games": 74,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 3,
+                "wins": 2,
+                "losses": 1,
+                "accuracy": 0.666667
+              },
+              "handwritten_both": {
+                "games": 3,
+                "wins": 1,
+                "losses": 2,
+                "accuracy": 0.333333
+              }
+            },
+            "all_games_v15": {
+              "games": 49,
+              "wins": 25,
+              "losses": 24,
+              "accuracy": 0.510204
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 55,
+              "wins": 38,
+              "losses": 17,
+              "accuracy": 0.690909
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 46,
+              "wins": 32,
+              "losses": 14,
+              "accuracy": 0.695652
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 78,
+              "wins": 69,
+              "losses": 9,
+              "accuracy": 0.884615
+            }
+          }
+        }
+      },
+      "original_units": {
+        "cohort_games": 228,
+        "baseline_all": {
+          "games": 228,
+          "wins": 164,
+          "losses": 64,
+          "accuracy": 0.719298
+        },
+        "rule_flip_all": {
+          "games": 228,
+          "wins": 163,
+          "losses": 65,
+          "accuracy": 0.714912
+        },
+        "new_wins_over_baseline": 2,
+        "new_losses_over_baseline": 3,
+        "net_winners_changed": -1,
+        "both_available": {
+          "games": 154,
+          "wins": 113,
+          "losses": 41,
+          "accuracy": 0.733766
+        },
+        "both_v15_agree": {
+          "games": 149,
+          "wins": 111,
+          "losses": 38,
+          "accuracy": 0.744966
+        },
+        "both_v15_disagree": {
+          "v15": {
+            "games": 5,
+            "wins": 3,
+            "losses": 2,
+            "accuracy": 0.6
+          },
+          "handwritten_both": {
+            "games": 5,
+            "wins": 2,
+            "losses": 3,
+            "accuracy": 0.4
+          }
+        },
+        "split_available": {
+          "baseline": {
+            "games": 74,
+            "wins": 50,
+            "losses": 24,
+            "accuracy": 0.675676
+          },
+          "higher_offense": {
+            "games": 74,
+            "wins": 40,
+            "losses": 34,
+            "accuracy": 0.540541
+          },
+          "higher_defense": {
+            "games": 74,
+            "wins": 34,
+            "losses": 40,
+            "accuracy": 0.459459
+          }
+        },
+        "v15_abstain_if_both_disagrees": {
+          "bettable_games": 223,
+          "avoided_games": 5,
+          "retained_v15": {
+            "games": 223,
+            "wins": 161,
+            "losses": 62,
+            "accuracy": 0.721973
+          },
+          "avoided_v15": {
+            "games": 5,
+            "wins": 3,
+            "losses": 2,
+            "accuracy": 0.6
+          },
+          "avoided_handwritten": {
+            "games": 5,
+            "wins": 2,
+            "losses": 3,
+            "accuracy": 0.4
+          }
+        },
+        "v15_picks_confirmed_only": {
+          "games": 149,
+          "wins": 111,
+          "losses": 38,
+          "accuracy": 0.744966
+        },
+        "no_both_advantage_games": 74,
+        "ties_or_missing_edge_games": 0,
+        "by_baseline_confidence": {
+          "50_to_59pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 4,
+                "wins": 3,
+                "losses": 1,
+                "accuracy": 0.75
+              },
+              "handwritten_both": {
+                "games": 4,
+                "wins": 1,
+                "losses": 3,
+                "accuracy": 0.25
+              }
+            },
+            "all_games_v15": {
+              "games": 49,
+              "wins": 25,
+              "losses": 24,
+              "accuracy": 0.510204
+            }
+          },
+          "60_to_69pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 1,
+                "wins": 0,
+                "losses": 1,
+                "accuracy": 0.0
+              },
+              "handwritten_both": {
+                "games": 1,
+                "wins": 1,
+                "losses": 0,
+                "accuracy": 1.0
+              }
+            },
+            "all_games_v15": {
+              "games": 55,
+              "wins": 38,
+              "losses": 17,
+              "accuracy": 0.690909
+            }
+          },
+          "70_to_79pct": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 46,
+              "wins": 32,
+              "losses": 14,
+              "accuracy": 0.695652
+            }
+          },
+          "80pct_plus": {
+            "both_conflicts_v15": {
+              "v15": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              },
+              "handwritten_both": {
+                "games": 0,
+                "wins": 0,
+                "losses": 0,
+                "accuracy": null
+              }
+            },
+            "all_games_v15": {
+              "games": 78,
+              "wins": 69,
+              "losses": 9,
+              "accuracy": 0.884615
+            }
+          }
+        }
+      },
+      "v15_conflicting_examples": [
+        {
+          "season": 2026,
+          "week": 5,
+          "game": "Cincinnati at Arizona",
+          "v15_pick": "Arizona",
+          "v15_confidence": 0.59,
+          "both_advantage_pick": "Cincinnati",
+          "actual_winner": "Arizona",
+          "v15_won": true,
+          "handwritten_won": false
+        },
+        {
+          "season": 2026,
+          "week": 5,
+          "game": "California at UNLV",
+          "v15_pick": "California",
+          "v15_confidence": 0.549,
+          "both_advantage_pick": "UNLV",
+          "actual_winner": "UNLV",
+          "v15_won": false,
+          "handwritten_won": true
+        },
+        {
+          "season": 2026,
+          "week": 6,
+          "game": "UCF at Oklahoma State",
+          "v15_pick": "Oklahoma State",
+          "v15_confidence": 0.544,
+          "both_advantage_pick": "UCF",
+          "actual_winner": "Oklahoma State",
+          "v15_won": true,
+          "handwritten_won": false
+        }
+      ]
+    }
+  },
+  "combined": {
+    "proposed": {
+      "cohort_games": 2826,
+      "baseline_all": {
+        "games": 2826,
+        "wins": 2013,
+        "losses": 813,
+        "accuracy": 0.712314
+      },
+      "rule_flip_all": {
+        "games": 2826,
+        "wins": 2009,
+        "losses": 817,
+        "accuracy": 0.710899
+      },
+      "new_wins_over_baseline": 33,
+      "new_losses_over_baseline": 37,
+      "net_winners_changed": -4,
+      "both_available": {
+        "games": 1680,
+        "wins": 1265,
+        "losses": 415,
+        "accuracy": 0.752976
+      },
+      "both_v15_agree": {
+        "games": 1610,
+        "wins": 1232,
+        "losses": 378,
+        "accuracy": 0.765217
+      },
+      "both_v15_disagree": {
+        "v15": {
+          "games": 70,
+          "wins": 37,
+          "losses": 33,
+          "accuracy": 0.528571
+        },
+        "handwritten_both": {
+          "games": 70,
+          "wins": 33,
+          "losses": 37,
+          "accuracy": 0.471429
+        }
+      },
+      "split_available": {
+        "baseline": {
+          "games": 1146,
+          "wins": 744,
+          "losses": 402,
+          "accuracy": 0.649215
+        },
+        "higher_offense": {
+          "games": 1146,
+          "wins": 607,
+          "losses": 539,
+          "accuracy": 0.529668
+        },
+        "higher_defense": {
+          "games": 1146,
+          "wins": 539,
+          "losses": 607,
+          "accuracy": 0.470332
+        }
+      },
+      "v15_abstain_if_both_disagrees": {
+        "bettable_games": 2756,
+        "avoided_games": 70,
+        "retained_v15": {
+          "games": 2756,
+          "wins": 1976,
+          "losses": 780,
+          "accuracy": 0.716981
+        },
+        "avoided_v15": {
+          "games": 70,
+          "wins": 37,
+          "losses": 33,
+          "accuracy": 0.528571
+        },
+        "avoided_handwritten": {
+          "games": 70,
+          "wins": 33,
+          "losses": 37,
+          "accuracy": 0.471429
+        }
+      },
+      "v15_picks_confirmed_only": {
+        "games": 1610,
+        "wins": 1232,
+        "losses": 378,
+        "accuracy": 0.765217
+      },
+      "no_both_advantage_games": 1146,
+      "ties_or_missing_edge_games": 0,
+      "by_baseline_confidence": {
+        "50_to_59pct": {
+          "both_conflicts_v15": {
+            "v15": {
+              "games": 57,
+              "wins": 28,
+              "losses": 29,
+              "accuracy": 0.491228
+            },
+            "handwritten_both": {
+              "games": 57,
+              "wins": 29,
+              "losses": 28,
+              "accuracy": 0.508772
+            }
+          },
+          "all_games_v15": {
+            "games": 707,
+            "wins": 396,
+            "losses": 311,
+            "accuracy": 0.560113
+          }
+        },
+        "60_to_69pct": {
+          "both_conflicts_v15": {
+            "v15": {
+              "games": 10,
+              "wins": 8,
+              "losses": 2,
+              "accuracy": 0.8
+            },
+            "handwritten_both": {
+              "games": 10,
+              "wins": 2,
+              "losses": 8,
+              "accuracy": 0.2
+            }
+          },
+          "all_games_v15": {
+            "games": 655,
+            "wins": 432,
+            "losses": 223,
+            "accuracy": 0.659542
+          }
+        },
+        "70_to_79pct": {
+          "both_conflicts_v15": {
+            "v15": {
+              "games": 3,
+              "wins": 1,
+              "losses": 2,
+              "accuracy": 0.333333
+            },
+            "handwritten_both": {
+              "games": 3,
+              "wins": 2,
+              "losses": 1,
+              "accuracy": 0.666667
+            }
+          },
+          "all_games_v15": {
+            "games": 587,
+            "wins": 428,
+            "losses": 159,
+            "accuracy": 0.729131
+          }
+        },
+        "80pct_plus": {
+          "both_conflicts_v15": {
+            "v15": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "accuracy": null
+            },
+            "handwritten_both": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "accuracy": null
+            }
+          },
+          "all_games_v15": {
+            "games": 877,
+            "wins": 757,
+            "losses": 120,
+            "accuracy": 0.86317
+          }
+        }
+      }
+    },
+    "original_units": {
+      "cohort_games": 2826,
+      "baseline_all": {
+        "games": 2826,
+        "wins": 2013,
+        "losses": 813,
+        "accuracy": 0.712314
+      },
+      "rule_flip_all": {
+        "games": 2826,
+        "wins": 1998,
+        "losses": 828,
+        "accuracy": 0.707006
+      },
+      "new_wins_over_baseline": 9,
+      "new_losses_over_baseline": 24,
+      "net_winners_changed": -15,
+      "both_available": {
+        "games": 1535,
+        "wins": 1174,
+        "losses": 361,
+        "accuracy": 0.764821
+      },
+      "both_v15_agree": {
+        "games": 1502,
+        "wins": 1165,
+        "losses": 337,
+        "accuracy": 0.775632
+      },
+      "both_v15_disagree": {
+        "v15": {
+          "games": 33,
+          "wins": 24,
+          "losses": 9,
+          "accuracy": 0.727273
+        },
+        "handwritten_both": {
+          "games": 33,
+          "wins": 9,
+          "losses": 24,
+          "accuracy": 0.272727
+        }
+      },
+      "split_available": {
+        "baseline": {
+          "games": 1291,
+          "wins": 824,
+          "losses": 467,
+          "accuracy": 0.638265
+        },
+        "higher_offense": {
+          "games": 1291,
+          "wins": 680,
+          "losses": 611,
+          "accuracy": 0.526723
+        },
+        "higher_defense": {
+          "games": 1291,
+          "wins": 611,
+          "losses": 680,
+          "accuracy": 0.473277
+        }
+      },
+      "v15_abstain_if_both_disagrees": {
+        "bettable_games": 2793,
+        "avoided_games": 33,
+        "retained_v15": {
+          "games": 2793,
+          "wins": 1989,
+          "losses": 804,
+          "accuracy": 0.712137
+        },
+        "avoided_v15": {
+          "games": 33,
+          "wins": 24,
+          "losses": 9,
+          "accuracy": 0.727273
+        },
+        "avoided_handwritten": {
+          "games": 33,
+          "wins": 9,
+          "losses": 24,
+          "accuracy": 0.272727
+        }
+      },
+      "v15_picks_confirmed_only": {
+        "games": 1502,
+        "wins": 1165,
+        "losses": 337,
+        "accuracy": 0.775632
+      },
+      "no_both_advantage_games": 1291,
+      "ties_or_missing_edge_games": 0,
+      "by_baseline_confidence": {
+        "50_to_59pct": {
+          "both_conflicts_v15": {
+            "v15": {
+              "games": 26,
+              "wins": 18,
+              "losses": 8,
+              "accuracy": 0.692308
+            },
+            "handwritten_both": {
+              "games": 26,
+              "wins": 8,
+              "losses": 18,
+              "accuracy": 0.307692
+            }
+          },
+          "all_games_v15": {
+            "games": 707,
+            "wins": 396,
+            "losses": 311,
+            "accuracy": 0.560113
+          }
+        },
+        "60_to_69pct": {
+          "both_conflicts_v15": {
+            "v15": {
+              "games": 5,
+              "wins": 4,
+              "losses": 1,
+              "accuracy": 0.8
+            },
+            "handwritten_both": {
+              "games": 5,
+              "wins": 1,
+              "losses": 4,
+              "accuracy": 0.2
+            }
+          },
+          "all_games_v15": {
+            "games": 655,
+            "wins": 432,
+            "losses": 223,
+            "accuracy": 0.659542
+          }
+        },
+        "70_to_79pct": {
+          "both_conflicts_v15": {
+            "v15": {
+              "games": 2,
+              "wins": 2,
+              "losses": 0,
+              "accuracy": 1.0
+            },
+            "handwritten_both": {
+              "games": 2,
+              "wins": 0,
+              "losses": 2,
+              "accuracy": 0.0
+            }
+          },
+          "all_games_v15": {
+            "games": 587,
+            "wins": 428,
+            "losses": 159,
+            "accuracy": 0.729131
+          }
+        },
+        "80pct_plus": {
+          "both_conflicts_v15": {
+            "v15": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "accuracy": null
+            },
+            "handwritten_both": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "accuracy": null
+            }
+          },
+          "all_games_v15": {
+            "games": 877,
+            "wins": 757,
+            "losses": 120,
+            "accuracy": 0.86317
+          }
+        }
+      }
+    },
+    "v15_conflicting_examples": [
+      {
+        "season": 2025,
+        "week": 3,
+        "game": "Old Dominion at Virginia Tech",
+        "v15_pick": "Virginia Tech",
+        "v15_confidence": 0.762,
+        "both_advantage_pick": "Old Dominion",
+        "actual_winner": "Old Dominion",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2024,
+        "week": 3,
+        "game": "Toledo at Mississippi State",
+        "v15_pick": "Mississippi State",
+        "v15_confidence": 0.758,
+        "both_advantage_pick": "Toledo",
+        "actual_winner": "Toledo",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2024,
+        "week": 4,
+        "game": "Virginia at Coastal Carolina",
+        "v15_pick": "Virginia",
+        "v15_confidence": 0.732,
+        "both_advantage_pick": "Coastal Carolina",
+        "actual_winner": "Virginia",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2023,
+        "week": 4,
+        "game": "Memphis at Missouri",
+        "v15_pick": "Missouri",
+        "v15_confidence": 0.699,
+        "both_advantage_pick": "Memphis",
+        "actual_winner": "Missouri",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2024,
+        "week": 3,
+        "game": "Air Force at Baylor",
+        "v15_pick": "Baylor",
+        "v15_confidence": 0.68,
+        "both_advantage_pick": "Air Force",
+        "actual_winner": "Baylor",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2022,
+        "week": 13,
+        "game": "Louisville at Kentucky",
+        "v15_pick": "Kentucky",
+        "v15_confidence": 0.679,
+        "both_advantage_pick": "Louisville",
+        "actual_winner": "Kentucky",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2022,
+        "week": 3,
+        "game": "SMU at Maryland",
+        "v15_pick": "Maryland",
+        "v15_confidence": 0.671,
+        "both_advantage_pick": "SMU",
+        "actual_winner": "Maryland",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2022,
+        "week": 9,
+        "game": "Middle Tennessee at UTEP",
+        "v15_pick": "UTEP",
+        "v15_confidence": 0.667,
+        "both_advantage_pick": "Middle Tennessee",
+        "actual_winner": "Middle Tennessee",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2022,
+        "week": 11,
+        "game": "Miami at Georgia Tech",
+        "v15_pick": "Miami",
+        "v15_confidence": 0.661,
+        "both_advantage_pick": "Georgia Tech",
+        "actual_winner": "Miami",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2022,
+        "week": 11,
+        "game": "Kansas State at Baylor",
+        "v15_pick": "Baylor",
+        "v15_confidence": 0.643,
+        "both_advantage_pick": "Kansas State",
+        "actual_winner": "Kansas State",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2024,
+        "week": 6,
+        "game": "Syracuse at UNLV",
+        "v15_pick": "Syracuse",
+        "v15_confidence": 0.638,
+        "both_advantage_pick": "UNLV",
+        "actual_winner": "Syracuse",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2024,
+        "week": 5,
+        "game": "Georgia at Alabama",
+        "v15_pick": "Alabama",
+        "v15_confidence": 0.634,
+        "both_advantage_pick": "Georgia",
+        "actual_winner": "Alabama",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2022,
+        "week": 12,
+        "game": "Houston at East Carolina",
+        "v15_pick": "Houston",
+        "v15_confidence": 0.613,
+        "both_advantage_pick": "East Carolina",
+        "actual_winner": "Houston",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2023,
+        "week": 11,
+        "game": "Florida International at Middle Tennessee",
+        "v15_pick": "Florida International",
+        "v15_confidence": 0.599,
+        "both_advantage_pick": "Middle Tennessee",
+        "actual_winner": "Middle Tennessee",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2025,
+        "week": 6,
+        "game": "Miami (OH) at Northern Illinois",
+        "v15_pick": "Miami (OH)",
+        "v15_confidence": 0.599,
+        "both_advantage_pick": "Northern Illinois",
+        "actual_winner": "Miami (OH)",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2023,
+        "week": 12,
+        "game": "Cincinnati at West Virginia",
+        "v15_pick": "West Virginia",
+        "v15_confidence": 0.598,
+        "both_advantage_pick": "Cincinnati",
+        "actual_winner": "West Virginia",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2024,
+        "week": 6,
+        "game": "Western Michigan at Ball State",
+        "v15_pick": "Ball State",
+        "v15_confidence": 0.598,
+        "both_advantage_pick": "Western Michigan",
+        "actual_winner": "Western Michigan",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2024,
+        "week": 10,
+        "game": "Buffalo at Akron",
+        "v15_pick": "Akron",
+        "v15_confidence": 0.594,
+        "both_advantage_pick": "Buffalo",
+        "actual_winner": "Buffalo",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2022,
+        "week": 8,
+        "game": "Rice at Louisiana Tech",
+        "v15_pick": "Louisiana Tech",
+        "v15_confidence": 0.59,
+        "both_advantage_pick": "Rice",
+        "actual_winner": "Rice",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2026,
+        "week": 5,
+        "game": "Cincinnati at Arizona",
+        "v15_pick": "Arizona",
+        "v15_confidence": 0.59,
+        "both_advantage_pick": "Cincinnati",
+        "actual_winner": "Arizona",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2025,
+        "week": 8,
+        "game": "Akron at Ball State",
+        "v15_pick": "Ball State",
+        "v15_confidence": 0.585,
+        "both_advantage_pick": "Akron",
+        "actual_winner": "Ball State",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2023,
+        "week": 6,
+        "game": "Colorado State at Utah State",
+        "v15_pick": "Colorado State",
+        "v15_confidence": 0.583,
+        "both_advantage_pick": "Utah State",
+        "actual_winner": "Utah State",
+        "v15_won": false,
+        "handwritten_won": true
+      },
+      {
+        "season": 2024,
+        "week": 8,
+        "game": "Colorado at Arizona",
+        "v15_pick": "Colorado",
+        "v15_confidence": 0.583,
+        "both_advantage_pick": "Arizona",
+        "actual_winner": "Colorado",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2022,
+        "week": 10,
+        "game": "App State at Coastal Carolina",
+        "v15_pick": "Coastal Carolina",
+        "v15_confidence": 0.575,
+        "both_advantage_pick": "App State",
+        "actual_winner": "Coastal Carolina",
+        "v15_won": true,
+        "handwritten_won": false
+      },
+      {
+        "season": 2025,
+        "week": 3,
+        "game": "Duke at Tulane",
+        "v15_pick": "Duke",
+        "v15_confidence": 0.572,
+        "both_advantage_pick": "Tulane",
+        "actual_winner": "Tulane",
+        "v15_won": false,
+        "handwritten_won": true
+      }
+    ]
+  },
+  "sample_sizes": {
+    "2022": 630,
+    "2023": 646,
+    "2024": 659,
+    "2025": 663,
+    "2026": 228
+  },
+  "important_notes": [
+    "The rule always keeps V1.5 when handwritten unit advantages split; it flips ONLY when handwritten offense AND defense favor the SAME other team.",
+    "The rule is a hypothetical retrospective deterministic experiment, not a current production or value-tier selection.",
+    "Confirmation-filter accuracy and full-schedule accuracy differ in coverage. A high confirmed subset accuracy cannot automatically be compared to overall V1.5 accuracy.",
+    "All reported disagreements compare identical pregame stat availability; games were chosen by statistics and not by their final outcome.",
+    "A veto that abstains on disagreement can boost conditional hit rate by avoiding bets, but reduced coverage and the omitted results must be disclosed.",
+    "The original V1.5 offense/defense unit agreement is tested as a comparator using the SAME identical games, not a different qualifying population.",
+    "Historical data 2022-2026 are retrospective, have been examined previously, and could contain revisions; prospectively locked validation is required.",
+    "No ATS, moneyline, payout/ROI inference. Wins are straight-up winners only. Conference/home/SOS effects remain in V1.5 baseline."
+  ]
+}
