@@ -1,0 +1,3790 @@
+{
+  "created_at": "2026-10-12T14:34:00.467945+00:00",
+  "status": "retrospective research only: no production weights or tier changes",
+  "design": "Independent rushing offense/run defense standardized across all teams with valid earlier-week FBS games. Other input components are production-standardized. Prior blend retained unchanged. Zero out EITHER EPA or success rate in test families.",
+  "years": {
+    "2022": 634,
+    "2023": 651,
+    "2024": 661,
+    "2025": 663,
+    "2026": 228
+  },
+  "coverage": {
+    "2022": {
+      "3": {
+        "complete_past_games": 100,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 3.993223111766943,
+        "run_offense_sd": 1.5226834340115487,
+        "run_defense_allowed_mean": 3.974625065193752,
+        "run_defense_allowed_sd": 1.4192526494367,
+        "week": 3,
+        "graded": 50
+      },
+      "4": {
+        "complete_past_games": 150,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.1170921017722435,
+        "run_offense_sd": 1.394919647984706,
+        "run_defense_allowed_mean": 4.099740956262048,
+        "run_defense_allowed_sd": 1.2856907454720206,
+        "week": 4,
+        "graded": 60
+      },
+      "5": {
+        "complete_past_games": 210,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.101855700249326,
+        "run_offense_sd": 1.1760069827952646,
+        "run_defense_allowed_mean": 4.122110182953633,
+        "run_defense_allowed_sd": 1.080379188228399,
+        "week": 5,
+        "graded": 57
+      },
+      "6": {
+        "complete_past_games": 267,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.0945214571979145,
+        "run_offense_sd": 1.0721537420574048,
+        "run_defense_allowed_mean": 4.137885516427688,
+        "run_defense_allowed_sd": 0.9711873868443255,
+        "week": 6,
+        "graded": 57
+      },
+      "7": {
+        "complete_past_games": 324,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.1071615643184805,
+        "run_offense_sd": 0.9949967748972438,
+        "run_defense_allowed_mean": 4.145543823993786,
+        "run_defense_allowed_sd": 0.8923379667298302,
+        "week": 7,
+        "graded": 51
+      },
+      "8": {
+        "complete_past_games": 375,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.120281756682008,
+        "run_offense_sd": 0.968898558287801,
+        "run_defense_allowed_mean": 4.158066857851682,
+        "run_defense_allowed_sd": 0.8020848933969082,
+        "week": 8,
+        "graded": 52
+      },
+      "9": {
+        "complete_past_games": 427,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.129721575362301,
+        "run_offense_sd": 0.9009508710011586,
+        "run_defense_allowed_mean": 4.163467814465425,
+        "run_defense_allowed_sd": 0.7585699120847889,
+        "week": 9,
+        "graded": 47
+      },
+      "10": {
+        "complete_past_games": 474,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.097010019342437,
+        "run_offense_sd": 0.9104721284504359,
+        "run_defense_allowed_mean": 4.128210053498852,
+        "run_defense_allowed_sd": 0.7518750215199064,
+        "week": 10,
+        "graded": 60
+      },
+      "11": {
+        "complete_past_games": 534,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.136963341425232,
+        "run_offense_sd": 0.8742723268810625,
+        "run_defense_allowed_mean": 4.16283178261533,
+        "run_defense_allowed_sd": 0.7269225850617937,
+        "week": 11,
+        "graded": 64
+      },
+      "12": {
+        "complete_past_games": 598,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.1431199588459355,
+        "run_offense_sd": 0.8545743455440339,
+        "run_defense_allowed_mean": 4.172776720565357,
+        "run_defense_allowed_sd": 0.7138500035397438,
+        "week": 12,
+        "graded": 61
+      },
+      "13": {
+        "complete_past_games": 659,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.16538468227435,
+        "run_offense_sd": 0.8371818639957717,
+        "run_defense_allowed_mean": 4.192098591590527,
+        "run_defense_allowed_sd": 0.693551410973874,
+        "week": 13,
+        "graded": 63
+      },
+      "14": {
+        "complete_past_games": 722,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.193720505356444,
+        "run_offense_sd": 0.8251822545943083,
+        "run_defense_allowed_mean": 4.2162238696149075,
+        "run_defense_allowed_sd": 0.7140580795913811,
+        "week": 14,
+        "graded": 11
+      },
+      "15": {
+        "complete_past_games": 733,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.186769015492933,
+        "run_offense_sd": 0.8268196857795882,
+        "run_defense_allowed_mean": 4.21640834270073,
+        "run_defense_allowed_sd": 0.7162281130443109,
+        "week": 15,
+        "graded": 1
+      }
+    },
+    "2023": {
+      "3": {
+        "complete_past_games": 99,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 3.940177708054737,
+        "run_offense_sd": 1.4769346478127179,
+        "run_defense_allowed_mean": 3.974814830880663,
+        "run_defense_allowed_sd": 1.5594909624311941,
+        "week": 3,
+        "graded": 54
+      },
+      "4": {
+        "complete_past_games": 153,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 3.9486922007575647,
+        "run_offense_sd": 1.281650900659607,
+        "run_defense_allowed_mean": 3.9563501736818867,
+        "run_defense_allowed_sd": 1.2281710091503102,
+        "week": 4,
+        "graded": 63
+      },
+      "5": {
+        "complete_past_games": 216,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.024794321519487,
+        "run_offense_sd": 1.1114308957026204,
+        "run_defense_allowed_mean": 4.016246621627932,
+        "run_defense_allowed_sd": 1.0649940270234883,
+        "week": 5,
+        "graded": 56
+      },
+      "6": {
+        "complete_past_games": 272,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.101966688942943,
+        "run_offense_sd": 1.0724153366928502,
+        "run_defense_allowed_mean": 4.086679344663623,
+        "run_defense_allowed_sd": 0.9940847598947785,
+        "week": 6,
+        "graded": 49
+      },
+      "7": {
+        "complete_past_games": 321,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.118668728281709,
+        "run_offense_sd": 0.9903197257519357,
+        "run_defense_allowed_mean": 4.1239465951424705,
+        "run_defense_allowed_sd": 0.9502204755140777,
+        "week": 7,
+        "graded": 55
+      },
+      "8": {
+        "complete_past_games": 376,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.116242435859013,
+        "run_offense_sd": 0.9270749361388415,
+        "run_defense_allowed_mean": 4.124010898697915,
+        "run_defense_allowed_sd": 0.8595728399199707,
+        "week": 8,
+        "graded": 54
+      },
+      "9": {
+        "complete_past_games": 430,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.118326073851444,
+        "run_offense_sd": 0.8757735148137035,
+        "run_defense_allowed_mean": 4.113081096700431,
+        "run_defense_allowed_sd": 0.8494110548477966,
+        "week": 9,
+        "graded": 54
+      },
+      "10": {
+        "complete_past_games": 484,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.1234341890341515,
+        "run_offense_sd": 0.8462430159120131,
+        "run_defense_allowed_mean": 4.128860727198675,
+        "run_defense_allowed_sd": 0.810631693670548,
+        "week": 10,
+        "graded": 62
+      },
+      "11": {
+        "complete_past_games": 546,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.131475971738781,
+        "run_offense_sd": 0.8222992691991364,
+        "run_defense_allowed_mean": 4.143603362505419,
+        "run_defense_allowed_sd": 0.7740373751845776,
+        "week": 11,
+        "graded": 64
+      },
+      "12": {
+        "complete_past_games": 610,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.155064594482784,
+        "run_offense_sd": 0.7938048818935661,
+        "run_defense_allowed_mean": 4.167424971160782,
+        "run_defense_allowed_sd": 0.742307772620038,
+        "week": 12,
+        "graded": 64
+      },
+      "13": {
+        "complete_past_games": 674,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.170991421572798,
+        "run_offense_sd": 0.7839125089306113,
+        "run_defense_allowed_mean": 4.183700633220999,
+        "run_defense_allowed_sd": 0.7446402435307472,
+        "week": 13,
+        "graded": 65
+      },
+      "14": {
+        "complete_past_games": 739,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.1908265903132325,
+        "run_offense_sd": 0.7747488654568372,
+        "run_defense_allowed_mean": 4.207984337050621,
+        "run_defense_allowed_sd": 0.7375339348724959,
+        "week": 14,
+        "graded": 10
+      },
+      "15": {
+        "complete_past_games": 749,
+        "missing_box_games": 0,
+        "teams": 133,
+        "run_offense_mean": 4.184071374265197,
+        "run_offense_sd": 0.7727615366607646,
+        "run_defense_allowed_mean": 4.213375592587078,
+        "run_defense_allowed_sd": 0.7423977212476538,
+        "week": 15,
+        "graded": 1
+      }
+    },
+    "2024": {
+      "3": {
+        "complete_past_games": 88,
+        "missing_box_games": 0,
+        "teams": 131,
+        "run_offense_mean": 4.0530830662033726,
+        "run_offense_sd": 1.6506552677801547,
+        "run_defense_allowed_mean": 4.109974686680226,
+        "run_defense_allowed_sd": 1.6099579654332297,
+        "week": 3,
+        "graded": 49
+      },
+      "4": {
+        "complete_past_games": 140,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.176353831158972,
+        "run_offense_sd": 1.391815097392615,
+        "run_defense_allowed_mean": 4.1988546231834665,
+        "run_defense_allowed_sd": 1.3939920112079918,
+        "week": 4,
+        "graded": 54
+      },
+      "5": {
+        "complete_past_games": 194,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.245198225552399,
+        "run_offense_sd": 1.2563879560190732,
+        "run_defense_allowed_mean": 4.284501509191427,
+        "run_defense_allowed_sd": 1.261481224974168,
+        "week": 5,
+        "graded": 52
+      },
+      "6": {
+        "complete_past_games": 246,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.241513259839346,
+        "run_offense_sd": 1.1468808145426719,
+        "run_defense_allowed_mean": 4.266576543439053,
+        "run_defense_allowed_sd": 1.1776853031691867,
+        "week": 6,
+        "graded": 49
+      },
+      "7": {
+        "complete_past_games": 295,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.2380994100318565,
+        "run_offense_sd": 1.071710525491829,
+        "run_defense_allowed_mean": 4.285120965728691,
+        "run_defense_allowed_sd": 1.012853144072092,
+        "week": 7,
+        "graded": 52
+      },
+      "8": {
+        "complete_past_games": 347,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.254577669511213,
+        "run_offense_sd": 1.020786299102349,
+        "run_defense_allowed_mean": 4.29359974353764,
+        "run_defense_allowed_sd": 0.9519398638595448,
+        "week": 8,
+        "graded": 59
+      },
+      "9": {
+        "complete_past_games": 406,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.258167224079579,
+        "run_offense_sd": 0.9486194554264301,
+        "run_defense_allowed_mean": 4.277590154128874,
+        "run_defense_allowed_sd": 0.8521009622552599,
+        "week": 9,
+        "graded": 56
+      },
+      "10": {
+        "complete_past_games": 462,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.279357695903352,
+        "run_offense_sd": 0.8999354057099693,
+        "run_defense_allowed_mean": 4.294372959148767,
+        "run_defense_allowed_sd": 0.8453243668844866,
+        "week": 10,
+        "graded": 48
+      },
+      "11": {
+        "complete_past_games": 510,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.287562556093629,
+        "run_offense_sd": 0.8613662841520546,
+        "run_defense_allowed_mean": 4.308070761323475,
+        "run_defense_allowed_sd": 0.8254236775626821,
+        "week": 11,
+        "graded": 50
+      },
+      "12": {
+        "complete_past_games": 560,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.283522949191025,
+        "run_offense_sd": 0.8503218608768522,
+        "run_defense_allowed_mean": 4.308920945812302,
+        "run_defense_allowed_sd": 0.8127201674252061,
+        "week": 12,
+        "graded": 53
+      },
+      "13": {
+        "complete_past_games": 613,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.2853666280868925,
+        "run_offense_sd": 0.8349996308892188,
+        "run_defense_allowed_mean": 4.306858334261553,
+        "run_defense_allowed_sd": 0.803150383442313,
+        "week": 13,
+        "graded": 62
+      },
+      "14": {
+        "complete_past_games": 675,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.278612248496745,
+        "run_offense_sd": 0.8142241750518054,
+        "run_defense_allowed_mean": 4.302028477933832,
+        "run_defense_allowed_sd": 0.773753209175825,
+        "week": 14,
+        "graded": 67
+      },
+      "15": {
+        "complete_past_games": 742,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.280652860774501,
+        "run_offense_sd": 0.8162358321127371,
+        "run_defense_allowed_mean": 4.306622255851356,
+        "run_defense_allowed_sd": 0.7601433927703959,
+        "week": 15,
+        "graded": 9
+      },
+      "16": {
+        "complete_past_games": 751,
+        "missing_box_games": 0,
+        "teams": 134,
+        "run_offense_mean": 4.277924492046707,
+        "run_offense_sd": 0.8163708146736319,
+        "run_defense_allowed_mean": 4.317396646570496,
+        "run_defense_allowed_sd": 0.7553029595331583,
+        "week": 16,
+        "graded": 1
+      }
+    },
+    "2025": {
+      "3": {
+        "complete_past_games": 98,
+        "missing_box_games": 0,
+        "teams": 135,
+        "run_offense_mean": 4.1030682616675564,
+        "run_offense_sd": 1.594359722208612,
+        "run_defense_allowed_mean": 4.059585899648718,
+        "run_defense_allowed_sd": 1.5849362081908542,
+        "week": 3,
+        "graded": 46
+      },
+      "4": {
+        "complete_past_games": 145,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.1068191963315375,
+        "run_offense_sd": 1.2319148262446435,
+        "run_defense_allowed_mean": 4.139710335629629,
+        "run_defense_allowed_sd": 1.289320714048624,
+        "week": 4,
+        "graded": 50
+      },
+      "5": {
+        "complete_past_games": 195,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.2078300725051605,
+        "run_offense_sd": 1.1808597588500869,
+        "run_defense_allowed_mean": 4.232175265856103,
+        "run_defense_allowed_sd": 1.2034917068971882,
+        "week": 5,
+        "graded": 51
+      },
+      "6": {
+        "complete_past_games": 246,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.203620596032286,
+        "run_offense_sd": 1.049147756764335,
+        "run_defense_allowed_mean": 4.240313381376964,
+        "run_defense_allowed_sd": 1.0790475729400224,
+        "week": 6,
+        "graded": 50
+      },
+      "7": {
+        "complete_past_games": 296,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.179935689381889,
+        "run_offense_sd": 0.9822469540082123,
+        "run_defense_allowed_mean": 4.189140638449901,
+        "run_defense_allowed_sd": 0.9663443084396486,
+        "week": 7,
+        "graded": 56
+      },
+      "8": {
+        "complete_past_games": 352,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.16412917964248,
+        "run_offense_sd": 0.9374113047790266,
+        "run_defense_allowed_mean": 4.193509896979774,
+        "run_defense_allowed_sd": 0.8707410967808907,
+        "week": 8,
+        "graded": 59
+      },
+      "9": {
+        "complete_past_games": 411,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.196075284945485,
+        "run_offense_sd": 0.8692398310108749,
+        "run_defense_allowed_mean": 4.218295791481869,
+        "run_defense_allowed_sd": 0.8436017125482728,
+        "week": 9,
+        "graded": 53
+      },
+      "10": {
+        "complete_past_games": 464,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.200619300279276,
+        "run_offense_sd": 0.8360471753580906,
+        "run_defense_allowed_mean": 4.207498134844214,
+        "run_defense_allowed_sd": 0.8153429934289651,
+        "week": 10,
+        "graded": 52
+      },
+      "11": {
+        "complete_past_games": 516,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.189982012156531,
+        "run_offense_sd": 0.8075112794378876,
+        "run_defense_allowed_mean": 4.2033637710152405,
+        "run_defense_allowed_sd": 0.8089084218236958,
+        "week": 11,
+        "graded": 51
+      },
+      "12": {
+        "complete_past_games": 567,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.189198412591402,
+        "run_offense_sd": 0.8060647998484152,
+        "run_defense_allowed_mean": 4.200360884641228,
+        "run_defense_allowed_sd": 0.7697856039915394,
+        "week": 12,
+        "graded": 58
+      },
+      "13": {
+        "complete_past_games": 625,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.20134008227838,
+        "run_offense_sd": 0.8123008059770407,
+        "run_defense_allowed_mean": 4.220943642740174,
+        "run_defense_allowed_sd": 0.7617696611714152,
+        "week": 13,
+        "graded": 60
+      },
+      "14": {
+        "complete_past_games": 685,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.225546759624148,
+        "run_offense_sd": 0.7922515959461612,
+        "run_defense_allowed_mean": 4.23988634678492,
+        "run_defense_allowed_sd": 0.7644972112071131,
+        "week": 14,
+        "graded": 67
+      },
+      "15": {
+        "complete_past_games": 752,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.247070597135767,
+        "run_offense_sd": 0.7754112697991946,
+        "run_defense_allowed_mean": 4.258004340744154,
+        "run_defense_allowed_sd": 0.7625641587208982,
+        "week": 15,
+        "graded": 9
+      },
+      "16": {
+        "complete_past_games": 761,
+        "missing_box_games": 0,
+        "teams": 136,
+        "run_offense_mean": 4.2370983745187765,
+        "run_offense_sd": 0.7790424800796015,
+        "run_defense_allowed_mean": 4.254235154841542,
+        "run_defense_allowed_sd": 0.7687782429861159,
+        "week": 16,
+        "graded": 1
+      }
+    },
+    "2026": {
+      "3": {
+        "complete_past_games": 100,
+        "missing_box_games": 0,
+        "teams": 137,
+        "run_offense_mean": 3.859090227496376,
+        "run_offense_sd": 1.4472974071105862,
+        "run_defense_allowed_mean": 3.948802815851079,
+        "run_defense_allowed_sd": 1.441459450109512,
+        "week": 3,
+        "graded": 56
+      },
+      "4": {
+        "complete_past_games": 157,
+        "missing_box_games": 0,
+        "teams": 138,
+        "run_offense_mean": 4.080238074578135,
+        "run_offense_sd": 1.128401801651511,
+        "run_defense_allowed_mean": 4.112730738984061,
+        "run_defense_allowed_sd": 1.2268250840497075,
+        "week": 4,
+        "graded": 58
+      },
+      "5": {
+        "complete_past_games": 215,
+        "missing_box_games": 0,
+        "teams": 138,
+        "run_offense_mean": 4.092450693372147,
+        "run_offense_sd": 0.9970458585665584,
+        "run_defense_allowed_mean": 4.136725519380593,
+        "run_defense_allowed_sd": 1.0958943702206092,
+        "week": 5,
+        "graded": 56
+      },
+      "6": {
+        "complete_past_games": 271,
+        "missing_box_games": 0,
+        "teams": 138,
+        "run_offense_mean": 4.157826431510245,
+        "run_offense_sd": 0.925288314935696,
+        "run_defense_allowed_mean": 4.192149235639842,
+        "run_defense_allowed_sd": 1.016432082942262,
+        "week": 6,
+        "graded": 58
+      }
+    }
+  },
+  "baseline": {
+    "name": "baseline",
+    "offense": {
+      "epa": 0.4,
+      "success": 0.3,
+      "explosive": 0.15,
+      "red_zone": 0.15,
+      "rush": 0.0
+    },
+    "defense": {
+      "epa": 0.4,
+      "success": 0.3,
+      "explosive": 0.15,
+      "red_zone": 0.15,
+      "rush": 0.0
+    },
+    "scores": {
+      "2022": {
+        "all": {
+          "games": 634,
+          "wins": 433,
+          "accuracy": 0.682965,
+          "brier": 0.2057285,
+          "log_loss": 0.6002164,
+          "high_confidence_games": 197,
+          "high_confidence_wins": 161,
+          "high_confidence_accuracy": 0.817259
+        }
+      },
+      "2023": {
+        "all": {
+          "games": 651,
+          "wins": 477,
+          "accuracy": 0.732719,
+          "brier": 0.1841087,
+          "log_loss": 0.5445894,
+          "high_confidence_games": 206,
+          "high_confidence_wins": 180,
+          "high_confidence_accuracy": 0.873786
+        }
+      },
+      "2024": {
+        "all": {
+          "games": 661,
+          "wins": 471,
+          "accuracy": 0.712557,
+          "brier": 0.1889548,
+          "log_loss": 0.5565003,
+          "high_confidence_games": 214,
+          "high_confidence_wins": 183,
+          "high_confidence_accuracy": 0.85514
+        }
+      },
+      "2025": {
+        "all": {
+          "games": 663,
+          "wins": 474,
+          "accuracy": 0.714932,
+          "brier": 0.1857701,
+          "log_loss": 0.5462162,
+          "high_confidence_games": 187,
+          "high_confidence_wins": 167,
+          "high_confidence_accuracy": 0.893048
+        }
+      },
+      "2026": {
+        "all": {
+          "games": 228,
+          "wins": 164,
+          "accuracy": 0.719298,
+          "brier": 0.1808088,
+          "log_loss": 0.5329666,
+          "high_confidence_games": 78,
+          "high_confidence_wins": 69,
+          "high_confidence_accuracy": 0.884615
+        },
+        "week_6": {
+          "games": 58,
+          "wins": 37,
+          "accuracy": 0.637931,
+          "brier": 0.2213214,
+          "log_loss": 0.6343748,
+          "high_confidence_games": 11,
+          "high_confidence_wins": 9,
+          "high_confidence_accuracy": 0.818182
+        }
+      }
+    }
+  },
+  "selected_by_2024_brier": {
+    "name": "defense_epa_rush_20",
+    "offense": {
+      "epa": 0.4,
+      "success": 0.3,
+      "explosive": 0.15,
+      "red_zone": 0.15,
+      "rush": 0.0
+    },
+    "defense": {
+      "epa": 0.45,
+      "success": 0.0,
+      "explosive": 0.2,
+      "red_zone": 0.15,
+      "rush": 0.2
+    },
+    "scores": {
+      "2022": {
+        "all": {
+          "games": 634,
+          "wins": 431,
+          "accuracy": 0.679811,
+          "brier": 0.2055876,
+          "log_loss": 0.598528,
+          "high_confidence_games": 190,
+          "high_confidence_wins": 157,
+          "high_confidence_accuracy": 0.826316
+        }
+      },
+      "2023": {
+        "all": {
+          "games": 651,
+          "wins": 477,
+          "accuracy": 0.732719,
+          "brier": 0.1829838,
+          "log_loss": 0.5428318,
+          "high_confidence_games": 204,
+          "high_confidence_wins": 177,
+          "high_confidence_accuracy": 0.867647
+        }
+      },
+      "2024": {
+        "all": {
+          "games": 661,
+          "wins": 468,
+          "accuracy": 0.708018,
+          "brier": 0.1884546,
+          "log_loss": 0.5549456,
+          "high_confidence_games": 204,
+          "high_confidence_wins": 178,
+          "high_confidence_accuracy": 0.872549
+        }
+      },
+      "2025": {
+        "all": {
+          "games": 663,
+          "wins": 476,
+          "accuracy": 0.717949,
+          "brier": 0.1853333,
+          "log_loss": 0.5451673,
+          "high_confidence_games": 183,
+          "high_confidence_wins": 166,
+          "high_confidence_accuracy": 0.907104
+        }
+      },
+      "2026": {
+        "all": {
+          "games": 228,
+          "wins": 167,
+          "accuracy": 0.732456,
+          "brier": 0.1814038,
+          "log_loss": 0.5325412,
+          "high_confidence_games": 75,
+          "high_confidence_wins": 66,
+          "high_confidence_accuracy": 0.88
+        },
+        "week_6": {
+          "games": 58,
+          "wins": 37,
+          "accuracy": 0.637931,
+          "brier": 0.2254442,
+          "log_loss": 0.6408716,
+          "high_confidence_games": 13,
+          "high_confidence_wins": 10,
+          "high_confidence_accuracy": 0.769231
+        }
+      }
+    }
+  },
+  "all_results": [
+    {
+      "name": "baseline",
+      "offense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "defense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 433,
+            "accuracy": 0.682965,
+            "brier": 0.2057285,
+            "log_loss": 0.6002164,
+            "high_confidence_games": 197,
+            "high_confidence_wins": 161,
+            "high_confidence_accuracy": 0.817259
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 477,
+            "accuracy": 0.732719,
+            "brier": 0.1841087,
+            "log_loss": 0.5445894,
+            "high_confidence_games": 206,
+            "high_confidence_wins": 180,
+            "high_confidence_accuracy": 0.873786
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 471,
+            "accuracy": 0.712557,
+            "brier": 0.1889548,
+            "log_loss": 0.5565003,
+            "high_confidence_games": 214,
+            "high_confidence_wins": 183,
+            "high_confidence_accuracy": 0.85514
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 474,
+            "accuracy": 0.714932,
+            "brier": 0.1857701,
+            "log_loss": 0.5462162,
+            "high_confidence_games": 187,
+            "high_confidence_wins": 167,
+            "high_confidence_accuracy": 0.893048
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "accuracy": 0.719298,
+            "brier": 0.1808088,
+            "log_loss": 0.5329666,
+            "high_confidence_games": 78,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.884615
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2213214,
+            "log_loss": 0.6343748,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          }
+        }
+      }
+    },
+    {
+      "name": "offense_epa_rush_20",
+      "offense": {
+        "epa": 0.45,
+        "success": 0.0,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "defense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 425,
+            "accuracy": 0.670347,
+            "brier": 0.2083889,
+            "log_loss": 0.6069165,
+            "high_confidence_games": 193,
+            "high_confidence_wins": 156,
+            "high_confidence_accuracy": 0.80829
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 474,
+            "accuracy": 0.728111,
+            "brier": 0.1834629,
+            "log_loss": 0.5438015,
+            "high_confidence_games": 202,
+            "high_confidence_wins": 175,
+            "high_confidence_accuracy": 0.866337
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 467,
+            "accuracy": 0.706505,
+            "brier": 0.1899672,
+            "log_loss": 0.5581618,
+            "high_confidence_games": 211,
+            "high_confidence_wins": 183,
+            "high_confidence_accuracy": 0.867299
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 472,
+            "accuracy": 0.711916,
+            "brier": 0.1868241,
+            "log_loss": 0.5491853,
+            "high_confidence_games": 179,
+            "high_confidence_wins": 160,
+            "high_confidence_accuracy": 0.893855
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 166,
+            "accuracy": 0.72807,
+            "brier": 0.1818625,
+            "log_loss": 0.535176,
+            "high_confidence_games": 79,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.873418
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 38,
+            "accuracy": 0.655172,
+            "brier": 0.219173,
+            "log_loss": 0.6303816,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 0.666667
+          }
+        }
+      }
+    },
+    {
+      "name": "defense_epa_rush_20",
+      "offense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "defense": {
+        "epa": 0.45,
+        "success": 0.0,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 431,
+            "accuracy": 0.679811,
+            "brier": 0.2055876,
+            "log_loss": 0.598528,
+            "high_confidence_games": 190,
+            "high_confidence_wins": 157,
+            "high_confidence_accuracy": 0.826316
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 477,
+            "accuracy": 0.732719,
+            "brier": 0.1829838,
+            "log_loss": 0.5428318,
+            "high_confidence_games": 204,
+            "high_confidence_wins": 177,
+            "high_confidence_accuracy": 0.867647
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 468,
+            "accuracy": 0.708018,
+            "brier": 0.1884546,
+            "log_loss": 0.5549456,
+            "high_confidence_games": 204,
+            "high_confidence_wins": 178,
+            "high_confidence_accuracy": 0.872549
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 476,
+            "accuracy": 0.717949,
+            "brier": 0.1853333,
+            "log_loss": 0.5451673,
+            "high_confidence_games": 183,
+            "high_confidence_wins": 166,
+            "high_confidence_accuracy": 0.907104
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 167,
+            "accuracy": 0.732456,
+            "brier": 0.1814038,
+            "log_loss": 0.5325412,
+            "high_confidence_games": 75,
+            "high_confidence_wins": 66,
+            "high_confidence_accuracy": 0.88
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2254442,
+            "log_loss": 0.6408716,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.769231
+          }
+        }
+      }
+    },
+    {
+      "name": "both_epa_rush_20",
+      "offense": {
+        "epa": 0.45,
+        "success": 0.0,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "defense": {
+        "epa": 0.45,
+        "success": 0.0,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 425,
+            "accuracy": 0.670347,
+            "brier": 0.2083903,
+            "log_loss": 0.6052905,
+            "high_confidence_games": 197,
+            "high_confidence_wins": 160,
+            "high_confidence_accuracy": 0.812183
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 476,
+            "accuracy": 0.731183,
+            "brier": 0.1823951,
+            "log_loss": 0.5422031,
+            "high_confidence_games": 202,
+            "high_confidence_wins": 174,
+            "high_confidence_accuracy": 0.861386
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 461,
+            "accuracy": 0.697428,
+            "brier": 0.1894254,
+            "log_loss": 0.5561853,
+            "high_confidence_games": 211,
+            "high_confidence_wins": 185,
+            "high_confidence_accuracy": 0.876777
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 475,
+            "accuracy": 0.71644,
+            "brier": 0.1860378,
+            "log_loss": 0.5475819,
+            "high_confidence_games": 184,
+            "high_confidence_wins": 167,
+            "high_confidence_accuracy": 0.907609
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1823671,
+            "log_loss": 0.5347568,
+            "high_confidence_games": 75,
+            "high_confidence_wins": 67,
+            "high_confidence_accuracy": 0.893333
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2230486,
+            "log_loss": 0.6356457,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.769231
+          }
+        }
+      }
+    },
+    {
+      "name": "offense_epa_rush_35",
+      "offense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 427,
+            "accuracy": 0.673502,
+            "brier": 0.2082652,
+            "log_loss": 0.6070046,
+            "high_confidence_games": 205,
+            "high_confidence_wins": 161,
+            "high_confidence_accuracy": 0.785366
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 475,
+            "accuracy": 0.729647,
+            "brier": 0.1844137,
+            "log_loss": 0.546061,
+            "high_confidence_games": 203,
+            "high_confidence_wins": 174,
+            "high_confidence_accuracy": 0.857143
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 470,
+            "accuracy": 0.711044,
+            "brier": 0.190504,
+            "log_loss": 0.5591464,
+            "high_confidence_games": 211,
+            "high_confidence_wins": 186,
+            "high_confidence_accuracy": 0.881517
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 464,
+            "accuracy": 0.699849,
+            "brier": 0.187557,
+            "log_loss": 0.551014,
+            "high_confidence_games": 187,
+            "high_confidence_wins": 167,
+            "high_confidence_accuracy": 0.893048
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 166,
+            "accuracy": 0.72807,
+            "brier": 0.1834501,
+            "log_loss": 0.5394784,
+            "high_confidence_games": 78,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.884615
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 38,
+            "accuracy": 0.655172,
+            "brier": 0.2204625,
+            "log_loss": 0.6353623,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.692308
+          }
+        }
+      }
+    },
+    {
+      "name": "defense_epa_rush_35",
+      "offense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "defense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 429,
+            "accuracy": 0.676656,
+            "brier": 0.2050077,
+            "log_loss": 0.5969892,
+            "high_confidence_games": 199,
+            "high_confidence_wins": 166,
+            "high_confidence_accuracy": 0.834171
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 480,
+            "accuracy": 0.737327,
+            "brier": 0.1818983,
+            "log_loss": 0.5413036,
+            "high_confidence_games": 209,
+            "high_confidence_wins": 179,
+            "high_confidence_accuracy": 0.856459
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 465,
+            "accuracy": 0.70348,
+            "brier": 0.1885172,
+            "log_loss": 0.5554645,
+            "high_confidence_games": 209,
+            "high_confidence_wins": 182,
+            "high_confidence_accuracy": 0.870813
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 480,
+            "accuracy": 0.723982,
+            "brier": 0.1859661,
+            "log_loss": 0.5468205,
+            "high_confidence_games": 188,
+            "high_confidence_wins": 168,
+            "high_confidence_accuracy": 0.893617
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "accuracy": 0.719298,
+            "brier": 0.1803932,
+            "log_loss": 0.5297096,
+            "high_confidence_games": 72,
+            "high_confidence_wins": 65,
+            "high_confidence_accuracy": 0.902778
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2229885,
+            "log_loss": 0.6356391,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          }
+        }
+      }
+    },
+    {
+      "name": "both_epa_rush_35",
+      "offense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 431,
+            "accuracy": 0.679811,
+            "brier": 0.2072266,
+            "log_loss": 0.6027342,
+            "high_confidence_games": 200,
+            "high_confidence_wins": 168,
+            "high_confidence_accuracy": 0.84
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 482,
+            "accuracy": 0.740399,
+            "brier": 0.1821103,
+            "log_loss": 0.5427241,
+            "high_confidence_games": 213,
+            "high_confidence_wins": 182,
+            "high_confidence_accuracy": 0.85446
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 462,
+            "accuracy": 0.698941,
+            "brier": 0.1897426,
+            "log_loss": 0.5570928,
+            "high_confidence_games": 210,
+            "high_confidence_wins": 184,
+            "high_confidence_accuracy": 0.87619
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 474,
+            "accuracy": 0.714932,
+            "brier": 0.1871752,
+            "log_loss": 0.550593,
+            "high_confidence_games": 191,
+            "high_confidence_wins": 170,
+            "high_confidence_accuracy": 0.890052
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 166,
+            "accuracy": 0.72807,
+            "brier": 0.1829023,
+            "log_loss": 0.5364399,
+            "high_confidence_games": 79,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.873418
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2221558,
+            "log_loss": 0.6348651,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.785714
+          }
+        }
+      }
+    },
+    {
+      "name": "offense_epa_rush_50",
+      "offense": {
+        "epa": 0.3,
+        "success": 0.0,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "defense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 427,
+            "accuracy": 0.673502,
+            "brier": 0.2088068,
+            "log_loss": 0.6091313,
+            "high_confidence_games": 206,
+            "high_confidence_wins": 163,
+            "high_confidence_accuracy": 0.791262
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 473,
+            "accuracy": 0.726575,
+            "brier": 0.1857213,
+            "log_loss": 0.5493611,
+            "high_confidence_games": 215,
+            "high_confidence_wins": 186,
+            "high_confidence_accuracy": 0.865116
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 462,
+            "accuracy": 0.698941,
+            "brier": 0.1914428,
+            "log_loss": 0.5614189,
+            "high_confidence_games": 223,
+            "high_confidence_wins": 196,
+            "high_confidence_accuracy": 0.878924
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 463,
+            "accuracy": 0.698341,
+            "brier": 0.1891674,
+            "log_loss": 0.5550597,
+            "high_confidence_games": 196,
+            "high_confidence_wins": 172,
+            "high_confidence_accuracy": 0.877551
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1845795,
+            "log_loss": 0.5429092,
+            "high_confidence_games": 80,
+            "high_confidence_wins": 71,
+            "high_confidence_accuracy": 0.8875
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2208766,
+            "log_loss": 0.6376444,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.714286
+          }
+        }
+      }
+    },
+    {
+      "name": "defense_epa_rush_50",
+      "offense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "defense": {
+        "epa": 0.3,
+        "success": 0.0,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 431,
+            "accuracy": 0.679811,
+            "brier": 0.2057942,
+            "log_loss": 0.5991596,
+            "high_confidence_games": 208,
+            "high_confidence_wins": 173,
+            "high_confidence_accuracy": 0.831731
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 481,
+            "accuracy": 0.738863,
+            "brier": 0.1813491,
+            "log_loss": 0.5411958,
+            "high_confidence_games": 220,
+            "high_confidence_wins": 190,
+            "high_confidence_accuracy": 0.863636
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 461,
+            "accuracy": 0.697428,
+            "brier": 0.1895976,
+            "log_loss": 0.5583421,
+            "high_confidence_games": 218,
+            "high_confidence_wins": 189,
+            "high_confidence_accuracy": 0.866972
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 480,
+            "accuracy": 0.723982,
+            "brier": 0.1865705,
+            "log_loss": 0.5483719,
+            "high_confidence_games": 200,
+            "high_confidence_wins": 176,
+            "high_confidence_accuracy": 0.88
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 166,
+            "accuracy": 0.72807,
+            "brier": 0.1797501,
+            "log_loss": 0.5281801,
+            "high_confidence_games": 72,
+            "high_confidence_wins": 67,
+            "high_confidence_accuracy": 0.930556
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2216612,
+            "log_loss": 0.634053,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.846154
+          }
+        }
+      }
+    },
+    {
+      "name": "both_epa_rush_50",
+      "offense": {
+        "epa": 0.3,
+        "success": 0.0,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "defense": {
+        "epa": 0.3,
+        "success": 0.0,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 425,
+            "accuracy": 0.670347,
+            "brier": 0.2080934,
+            "log_loss": 0.6061638,
+            "high_confidence_games": 220,
+            "high_confidence_wins": 180,
+            "high_confidence_accuracy": 0.818182
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 481,
+            "accuracy": 0.738863,
+            "brier": 0.1829611,
+            "log_loss": 0.5463576,
+            "high_confidence_games": 231,
+            "high_confidence_wins": 196,
+            "high_confidence_accuracy": 0.848485
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 463,
+            "accuracy": 0.700454,
+            "brier": 0.1916288,
+            "log_loss": 0.5623469,
+            "high_confidence_games": 227,
+            "high_confidence_wins": 195,
+            "high_confidence_accuracy": 0.859031
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 471,
+            "accuracy": 0.710407,
+            "brier": 0.1888782,
+            "log_loss": 0.5552275,
+            "high_confidence_games": 205,
+            "high_confidence_wins": 181,
+            "high_confidence_accuracy": 0.882927
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 162,
+            "accuracy": 0.710526,
+            "brier": 0.1835172,
+            "log_loss": 0.5390823,
+            "high_confidence_games": 80,
+            "high_confidence_wins": 70,
+            "high_confidence_accuracy": 0.875
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 33,
+            "accuracy": 0.568966,
+            "brier": 0.2216087,
+            "log_loss": 0.6356374,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 13,
+            "high_confidence_accuracy": 0.8125
+          }
+        }
+      }
+    },
+    {
+      "name": "offense_success_rush_20",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.45,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "defense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 427,
+            "accuracy": 0.673502,
+            "brier": 0.2060642,
+            "log_loss": 0.6008598,
+            "high_confidence_games": 198,
+            "high_confidence_wins": 160,
+            "high_confidence_accuracy": 0.808081
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 466,
+            "accuracy": 0.715822,
+            "brier": 0.1857934,
+            "log_loss": 0.5481749,
+            "high_confidence_games": 202,
+            "high_confidence_wins": 176,
+            "high_confidence_accuracy": 0.871287
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 474,
+            "accuracy": 0.717095,
+            "brier": 0.1911099,
+            "log_loss": 0.5615504,
+            "high_confidence_games": 208,
+            "high_confidence_wins": 180,
+            "high_confidence_accuracy": 0.865385
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 465,
+            "accuracy": 0.701357,
+            "brier": 0.1876637,
+            "log_loss": 0.550689,
+            "high_confidence_games": 189,
+            "high_confidence_wins": 169,
+            "high_confidence_accuracy": 0.89418
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 168,
+            "accuracy": 0.736842,
+            "brier": 0.1836829,
+            "log_loss": 0.5417208,
+            "high_confidence_games": 81,
+            "high_confidence_wins": 72,
+            "high_confidence_accuracy": 0.888889
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2254617,
+            "log_loss": 0.6499441,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.769231
+          }
+        }
+      }
+    },
+    {
+      "name": "defense_success_rush_20",
+      "offense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.45,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 436,
+            "accuracy": 0.687697,
+            "brier": 0.2046369,
+            "log_loss": 0.5967186,
+            "high_confidence_games": 199,
+            "high_confidence_wins": 163,
+            "high_confidence_accuracy": 0.819095
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 477,
+            "accuracy": 0.732719,
+            "brier": 0.1829799,
+            "log_loss": 0.5422631,
+            "high_confidence_games": 211,
+            "high_confidence_wins": 186,
+            "high_confidence_accuracy": 0.881517
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 469,
+            "accuracy": 0.709531,
+            "brier": 0.1885647,
+            "log_loss": 0.5565412,
+            "high_confidence_games": 214,
+            "high_confidence_wins": 185,
+            "high_confidence_accuracy": 0.864486
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 473,
+            "accuracy": 0.713424,
+            "brier": 0.1879511,
+            "log_loss": 0.5516703,
+            "high_confidence_games": 187,
+            "high_confidence_wins": 164,
+            "high_confidence_accuracy": 0.877005
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 163,
+            "accuracy": 0.714912,
+            "brier": 0.1802048,
+            "log_loss": 0.5309694,
+            "high_confidence_games": 74,
+            "high_confidence_wins": 65,
+            "high_confidence_accuracy": 0.878378
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.218937,
+            "log_loss": 0.6297917,
+            "high_confidence_games": 10,
+            "high_confidence_wins": 8,
+            "high_confidence_accuracy": 0.8
+          }
+        }
+      }
+    },
+    {
+      "name": "both_success_rush_20",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.45,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.45,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 433,
+            "accuracy": 0.682965,
+            "brier": 0.2044121,
+            "log_loss": 0.5961536,
+            "high_confidence_games": 198,
+            "high_confidence_wins": 163,
+            "high_confidence_accuracy": 0.823232
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 473,
+            "accuracy": 0.726575,
+            "brier": 0.1843039,
+            "log_loss": 0.5448735,
+            "high_confidence_games": 210,
+            "high_confidence_wins": 184,
+            "high_confidence_accuracy": 0.87619
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 468,
+            "accuracy": 0.708018,
+            "brier": 0.19088,
+            "log_loss": 0.5618843,
+            "high_confidence_games": 208,
+            "high_confidence_wins": 178,
+            "high_confidence_accuracy": 0.855769
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 461,
+            "accuracy": 0.695324,
+            "brier": 0.189961,
+            "log_loss": 0.5562721,
+            "high_confidence_games": 181,
+            "high_confidence_wins": 162,
+            "high_confidence_accuracy": 0.895028
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.182942,
+            "log_loss": 0.5388493,
+            "high_confidence_games": 76,
+            "high_confidence_wins": 67,
+            "high_confidence_accuracy": 0.881579
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 38,
+            "accuracy": 0.655172,
+            "brier": 0.2232661,
+            "log_loss": 0.644374,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          }
+        }
+      }
+    },
+    {
+      "name": "offense_success_rush_35",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.35,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 425,
+            "accuracy": 0.670347,
+            "brier": 0.2067395,
+            "log_loss": 0.6029918,
+            "high_confidence_games": 202,
+            "high_confidence_wins": 163,
+            "high_confidence_accuracy": 0.806931
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 466,
+            "accuracy": 0.715822,
+            "brier": 0.1864821,
+            "log_loss": 0.5501553,
+            "high_confidence_games": 201,
+            "high_confidence_wins": 175,
+            "high_confidence_accuracy": 0.870647
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 470,
+            "accuracy": 0.711044,
+            "brier": 0.1915381,
+            "log_loss": 0.5621436,
+            "high_confidence_games": 211,
+            "high_confidence_wins": 181,
+            "high_confidence_accuracy": 0.85782
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 462,
+            "accuracy": 0.696833,
+            "brier": 0.1883916,
+            "log_loss": 0.5526458,
+            "high_confidence_games": 193,
+            "high_confidence_wins": 169,
+            "high_confidence_accuracy": 0.875648
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 166,
+            "accuracy": 0.72807,
+            "brier": 0.1849153,
+            "log_loss": 0.5449126,
+            "high_confidence_games": 81,
+            "high_confidence_wins": 71,
+            "high_confidence_accuracy": 0.876543
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2252466,
+            "log_loss": 0.6506105,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.714286
+          }
+        }
+      }
+    },
+    {
+      "name": "defense_success_rush_35",
+      "offense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.35,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 432,
+            "accuracy": 0.681388,
+            "brier": 0.2045692,
+            "log_loss": 0.5963223,
+            "high_confidence_games": 209,
+            "high_confidence_wins": 172,
+            "high_confidence_accuracy": 0.822967
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 470,
+            "accuracy": 0.721966,
+            "brier": 0.1820798,
+            "log_loss": 0.5411106,
+            "high_confidence_games": 217,
+            "high_confidence_wins": 188,
+            "high_confidence_accuracy": 0.866359
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 469,
+            "accuracy": 0.709531,
+            "brier": 0.188838,
+            "log_loss": 0.5573283,
+            "high_confidence_games": 216,
+            "high_confidence_wins": 186,
+            "high_confidence_accuracy": 0.861111
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 472,
+            "accuracy": 0.711916,
+            "brier": 0.1881939,
+            "log_loss": 0.5523903,
+            "high_confidence_games": 194,
+            "high_confidence_wins": 169,
+            "high_confidence_accuracy": 0.871134
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 163,
+            "accuracy": 0.714912,
+            "brier": 0.1794204,
+            "log_loss": 0.5288753,
+            "high_confidence_games": 73,
+            "high_confidence_wins": 67,
+            "high_confidence_accuracy": 0.917808
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2176584,
+            "log_loss": 0.6274641,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          }
+        }
+      }
+    },
+    {
+      "name": "both_success_rush_35",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.35,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.35,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 433,
+            "accuracy": 0.682965,
+            "brier": 0.2045093,
+            "log_loss": 0.5967394,
+            "high_confidence_games": 208,
+            "high_confidence_wins": 169,
+            "high_confidence_accuracy": 0.8125
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 477,
+            "accuracy": 0.732719,
+            "brier": 0.1837609,
+            "log_loss": 0.5450559,
+            "high_confidence_games": 220,
+            "high_confidence_wins": 191,
+            "high_confidence_accuracy": 0.868182
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 462,
+            "accuracy": 0.698941,
+            "brier": 0.1914994,
+            "log_loss": 0.563017,
+            "high_confidence_games": 213,
+            "high_confidence_wins": 183,
+            "high_confidence_accuracy": 0.859155
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 451,
+            "accuracy": 0.680241,
+            "brier": 0.1907581,
+            "log_loss": 0.5586076,
+            "high_confidence_games": 192,
+            "high_confidence_wins": 167,
+            "high_confidence_accuracy": 0.869792
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 166,
+            "accuracy": 0.72807,
+            "brier": 0.1833715,
+            "log_loss": 0.5398795,
+            "high_confidence_games": 78,
+            "high_confidence_wins": 68,
+            "high_confidence_accuracy": 0.871795
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2220119,
+            "log_loss": 0.6421277,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.846154
+          }
+        }
+      }
+    },
+    {
+      "name": "offense_success_rush_50",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.3,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "defense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 429,
+            "accuracy": 0.676656,
+            "brier": 0.2076822,
+            "log_loss": 0.6061465,
+            "high_confidence_games": 209,
+            "high_confidence_wins": 169,
+            "high_confidence_accuracy": 0.808612
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 467,
+            "accuracy": 0.717358,
+            "brier": 0.1876032,
+            "log_loss": 0.5532779,
+            "high_confidence_games": 218,
+            "high_confidence_wins": 190,
+            "high_confidence_accuracy": 0.87156
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 472,
+            "accuracy": 0.71407,
+            "brier": 0.1923899,
+            "log_loss": 0.564171,
+            "high_confidence_games": 222,
+            "high_confidence_wins": 189,
+            "high_confidence_accuracy": 0.851351
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 459,
+            "accuracy": 0.692308,
+            "brier": 0.189958,
+            "log_loss": 0.556781,
+            "high_confidence_games": 198,
+            "high_confidence_wins": 173,
+            "high_confidence_accuracy": 0.873737
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 167,
+            "accuracy": 0.732456,
+            "brier": 0.1859138,
+            "log_loss": 0.5478206,
+            "high_confidence_games": 83,
+            "high_confidence_wins": 72,
+            "high_confidence_accuracy": 0.86747
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2248394,
+            "log_loss": 0.6506233,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.733333
+          }
+        }
+      }
+    },
+    {
+      "name": "defense_success_rush_50",
+      "offense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.3,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 436,
+            "accuracy": 0.687697,
+            "brier": 0.2055637,
+            "log_loss": 0.5989605,
+            "high_confidence_games": 214,
+            "high_confidence_wins": 177,
+            "high_confidence_accuracy": 0.827103
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 473,
+            "accuracy": 0.726575,
+            "brier": 0.1816214,
+            "log_loss": 0.5412009,
+            "high_confidence_games": 221,
+            "high_confidence_wins": 192,
+            "high_confidence_accuracy": 0.868778
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 467,
+            "accuracy": 0.706505,
+            "brier": 0.1900499,
+            "log_loss": 0.5604886,
+            "high_confidence_games": 228,
+            "high_confidence_wins": 195,
+            "high_confidence_accuracy": 0.855263
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 471,
+            "accuracy": 0.710407,
+            "brier": 0.1885707,
+            "log_loss": 0.5534459,
+            "high_confidence_games": 200,
+            "high_confidence_wins": 173,
+            "high_confidence_accuracy": 0.865
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1788454,
+            "log_loss": 0.5277104,
+            "high_confidence_games": 72,
+            "high_confidence_wins": 65,
+            "high_confidence_accuracy": 0.902778
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.2169778,
+            "log_loss": 0.6274754,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.769231
+          }
+        }
+      }
+    },
+    {
+      "name": "both_success_rush_50",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.3,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.3,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 432,
+            "accuracy": 0.681388,
+            "brier": 0.205917,
+            "log_loss": 0.6015054,
+            "high_confidence_games": 226,
+            "high_confidence_wins": 183,
+            "high_confidence_accuracy": 0.809735
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 483,
+            "accuracy": 0.741935,
+            "brier": 0.1843843,
+            "log_loss": 0.5485067,
+            "high_confidence_games": 234,
+            "high_confidence_wins": 200,
+            "high_confidence_accuracy": 0.854701
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 457,
+            "accuracy": 0.691377,
+            "brier": 0.1935001,
+            "log_loss": 0.5684056,
+            "high_confidence_games": 225,
+            "high_confidence_wins": 191,
+            "high_confidence_accuracy": 0.848889
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 453,
+            "accuracy": 0.683258,
+            "brier": 0.1921567,
+            "log_loss": 0.5627696,
+            "high_confidence_games": 205,
+            "high_confidence_wins": 175,
+            "high_confidence_accuracy": 0.853659
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 162,
+            "accuracy": 0.710526,
+            "brier": 0.1839719,
+            "log_loss": 0.5422039,
+            "high_confidence_games": 82,
+            "high_confidence_wins": 71,
+            "high_confidence_accuracy": 0.865854
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 34,
+            "accuracy": 0.586207,
+            "brier": 0.2213714,
+            "log_loss": 0.6421941,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 13,
+            "high_confidence_accuracy": 0.8125
+          }
+        }
+      }
+    },
+    {
+      "name": "offense_both_rush_25",
+      "offense": {
+        "epa": 0.3,
+        "success": 0.25,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.25
+      },
+      "defense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 432,
+            "accuracy": 0.681388,
+            "brier": 0.2056282,
+            "log_loss": 0.6004222,
+            "high_confidence_games": 204,
+            "high_confidence_wins": 163,
+            "high_confidence_accuracy": 0.79902
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 474,
+            "accuracy": 0.728111,
+            "brier": 0.1841022,
+            "log_loss": 0.54463,
+            "high_confidence_games": 209,
+            "high_confidence_wins": 183,
+            "high_confidence_accuracy": 0.875598
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 463,
+            "accuracy": 0.700454,
+            "brier": 0.1891909,
+            "log_loss": 0.5562789,
+            "high_confidence_games": 213,
+            "high_confidence_wins": 185,
+            "high_confidence_accuracy": 0.868545
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 465,
+            "accuracy": 0.701357,
+            "brier": 0.1866263,
+            "log_loss": 0.5481513,
+            "high_confidence_games": 188,
+            "high_confidence_wins": 169,
+            "high_confidence_accuracy": 0.898936
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1819908,
+            "log_loss": 0.536144,
+            "high_confidence_games": 80,
+            "high_confidence_wins": 71,
+            "high_confidence_accuracy": 0.8875
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2211299,
+            "log_loss": 0.6351832,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.769231
+          }
+        }
+      }
+    },
+    {
+      "name": "defense_both_rush_25",
+      "offense": {
+        "epa": 0.4,
+        "success": 0.3,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.0
+      },
+      "defense": {
+        "epa": 0.3,
+        "success": 0.25,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.25
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 435,
+            "accuracy": 0.68612,
+            "brier": 0.2048669,
+            "log_loss": 0.5977619,
+            "high_confidence_games": 198,
+            "high_confidence_wins": 165,
+            "high_confidence_accuracy": 0.833333
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 477,
+            "accuracy": 0.732719,
+            "brier": 0.1816406,
+            "log_loss": 0.5402949,
+            "high_confidence_games": 213,
+            "high_confidence_wins": 185,
+            "high_confidence_accuracy": 0.868545
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 468,
+            "accuracy": 0.708018,
+            "brier": 0.1887686,
+            "log_loss": 0.5563795,
+            "high_confidence_games": 217,
+            "high_confidence_wins": 186,
+            "high_confidence_accuracy": 0.857143
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 482,
+            "accuracy": 0.726998,
+            "brier": 0.1853813,
+            "log_loss": 0.5455369,
+            "high_confidence_games": 191,
+            "high_confidence_wins": 171,
+            "high_confidence_accuracy": 0.895288
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "accuracy": 0.719298,
+            "brier": 0.1793461,
+            "log_loss": 0.5284401,
+            "high_confidence_games": 78,
+            "high_confidence_wins": 70,
+            "high_confidence_accuracy": 0.897436
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 36,
+            "accuracy": 0.62069,
+            "brier": 0.219011,
+            "log_loss": 0.629709,
+            "high_confidence_games": 12,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.833333
+          }
+        }
+      }
+    },
+    {
+      "name": "both_both_rush_25",
+      "offense": {
+        "epa": 0.3,
+        "success": 0.25,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.25
+      },
+      "defense": {
+        "epa": 0.3,
+        "success": 0.25,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.25
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 428,
+            "accuracy": 0.675079,
+            "brier": 0.204569,
+            "log_loss": 0.597527,
+            "high_confidence_games": 205,
+            "high_confidence_wins": 169,
+            "high_confidence_accuracy": 0.82439
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 485,
+            "accuracy": 0.745008,
+            "brier": 0.1816589,
+            "log_loss": 0.5405302,
+            "high_confidence_games": 221,
+            "high_confidence_wins": 191,
+            "high_confidence_accuracy": 0.864253
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 468,
+            "accuracy": 0.708018,
+            "brier": 0.1889986,
+            "log_loss": 0.5562652,
+            "high_confidence_games": 215,
+            "high_confidence_wins": 187,
+            "high_confidence_accuracy": 0.869767
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 472,
+            "accuracy": 0.711916,
+            "brier": 0.1860031,
+            "log_loss": 0.5470229,
+            "high_confidence_games": 194,
+            "high_confidence_wins": 174,
+            "high_confidence_accuracy": 0.896907
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 167,
+            "accuracy": 0.732456,
+            "brier": 0.1806551,
+            "log_loss": 0.5319242,
+            "high_confidence_games": 76,
+            "high_confidence_wins": 68,
+            "high_confidence_accuracy": 0.894737
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.2190796,
+            "log_loss": 0.6305393,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.785714
+          }
+        }
+      }
+    },
+    {
+      "name": "off_epa_rush_20_def_epa_rush_35",
+      "offense": {
+        "epa": 0.45,
+        "success": 0.0,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "defense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 430,
+            "accuracy": 0.678233,
+            "brier": 0.2075242,
+            "log_loss": 0.603118,
+            "high_confidence_games": 194,
+            "high_confidence_wins": 163,
+            "high_confidence_accuracy": 0.840206
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 483,
+            "accuracy": 0.741935,
+            "brier": 0.1812184,
+            "log_loss": 0.5403115,
+            "high_confidence_games": 205,
+            "high_confidence_wins": 174,
+            "high_confidence_accuracy": 0.84878
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 466,
+            "accuracy": 0.704992,
+            "brier": 0.1893947,
+            "log_loss": 0.5564718,
+            "high_confidence_games": 213,
+            "high_confidence_wins": 187,
+            "high_confidence_accuracy": 0.877934
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 475,
+            "accuracy": 0.71644,
+            "brier": 0.1866308,
+            "log_loss": 0.549142,
+            "high_confidence_games": 184,
+            "high_confidence_wins": 164,
+            "high_confidence_accuracy": 0.891304
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 166,
+            "accuracy": 0.72807,
+            "brier": 0.1812013,
+            "log_loss": 0.5319626,
+            "high_confidence_games": 75,
+            "high_confidence_wins": 67,
+            "high_confidence_accuracy": 0.893333
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2207046,
+            "log_loss": 0.6301242,
+            "high_confidence_games": 13,
+            "high_confidence_wins": 10,
+            "high_confidence_accuracy": 0.769231
+          }
+        }
+      }
+    },
+    {
+      "name": "off_epa_rush_35_def_epa_rush_20",
+      "offense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.45,
+        "success": 0.0,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 426,
+            "accuracy": 0.671924,
+            "brier": 0.2082221,
+            "log_loss": 0.6052272,
+            "high_confidence_games": 201,
+            "high_confidence_wins": 165,
+            "high_confidence_accuracy": 0.820896
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 479,
+            "accuracy": 0.735791,
+            "brier": 0.1833655,
+            "log_loss": 0.5447653,
+            "high_confidence_games": 210,
+            "high_confidence_wins": 181,
+            "high_confidence_accuracy": 0.861905
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 462,
+            "accuracy": 0.698941,
+            "brier": 0.1897422,
+            "log_loss": 0.5567171,
+            "high_confidence_games": 210,
+            "high_confidence_wins": 185,
+            "high_confidence_accuracy": 0.880952
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 467,
+            "accuracy": 0.704374,
+            "brier": 0.186612,
+            "log_loss": 0.5491018,
+            "high_confidence_games": 193,
+            "high_confidence_wins": 172,
+            "high_confidence_accuracy": 0.891192
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "accuracy": 0.719298,
+            "brier": 0.1840841,
+            "log_loss": 0.5392793,
+            "high_confidence_games": 78,
+            "high_confidence_wins": 70,
+            "high_confidence_accuracy": 0.897436
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2244328,
+            "log_loss": 0.6404475,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.785714
+          }
+        }
+      }
+    },
+    {
+      "name": "off_epa_rush_35_def_epa_rush_50",
+      "offense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.3,
+        "success": 0.0,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 421,
+            "accuracy": 0.664038,
+            "brier": 0.2076866,
+            "log_loss": 0.6042609,
+            "high_confidence_games": 207,
+            "high_confidence_wins": 174,
+            "high_confidence_accuracy": 0.84058
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 486,
+            "accuracy": 0.746544,
+            "brier": 0.1815239,
+            "log_loss": 0.542425,
+            "high_confidence_games": 217,
+            "high_confidence_wins": 186,
+            "high_confidence_accuracy": 0.857143
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 464,
+            "accuracy": 0.701967,
+            "brier": 0.1907557,
+            "log_loss": 0.5600551,
+            "high_confidence_games": 223,
+            "high_confidence_wins": 193,
+            "high_confidence_accuracy": 0.865471
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 475,
+            "accuracy": 0.71644,
+            "brier": 0.1876186,
+            "log_loss": 0.551841,
+            "high_confidence_games": 193,
+            "high_confidence_wins": 171,
+            "high_confidence_accuracy": 0.88601
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1821437,
+            "log_loss": 0.5351375,
+            "high_confidence_games": 77,
+            "high_confidence_wins": 67,
+            "high_confidence_accuracy": 0.87013
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 34,
+            "accuracy": 0.586207,
+            "brier": 0.2208837,
+            "log_loss": 0.6331866,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.8
+          }
+        }
+      }
+    },
+    {
+      "name": "off_epa_rush_50_def_epa_rush_35",
+      "offense": {
+        "epa": 0.3,
+        "success": 0.0,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "defense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 426,
+            "accuracy": 0.671924,
+            "brier": 0.207723,
+            "log_loss": 0.6047701,
+            "high_confidence_games": 209,
+            "high_confidence_wins": 171,
+            "high_confidence_accuracy": 0.818182
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 476,
+            "accuracy": 0.731183,
+            "brier": 0.1835076,
+            "log_loss": 0.546504,
+            "high_confidence_games": 221,
+            "high_confidence_wins": 191,
+            "high_confidence_accuracy": 0.864253
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 464,
+            "accuracy": 0.701967,
+            "brier": 0.1906427,
+            "log_loss": 0.559328,
+            "high_confidence_games": 218,
+            "high_confidence_wins": 189,
+            "high_confidence_accuracy": 0.866972
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 470,
+            "accuracy": 0.708899,
+            "brier": 0.1885536,
+            "log_loss": 0.5541939,
+            "high_confidence_games": 199,
+            "high_confidence_wins": 173,
+            "high_confidence_accuracy": 0.869347
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1842258,
+            "log_loss": 0.5402594,
+            "high_confidence_games": 76,
+            "high_confidence_wins": 67,
+            "high_confidence_accuracy": 0.881579
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 34,
+            "accuracy": 0.586207,
+            "brier": 0.2227918,
+            "log_loss": 0.6371968,
+            "high_confidence_games": 14,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.785714
+          }
+        }
+      }
+    },
+    {
+      "name": "off_epa_rush_35_def_success_rush_35",
+      "offense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.35,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 436,
+            "accuracy": 0.687697,
+            "brier": 0.2062675,
+            "log_loss": 0.6011814,
+            "high_confidence_games": 200,
+            "high_confidence_wins": 161,
+            "high_confidence_accuracy": 0.805
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 482,
+            "accuracy": 0.740399,
+            "brier": 0.1817202,
+            "log_loss": 0.5408473,
+            "high_confidence_games": 209,
+            "high_confidence_wins": 182,
+            "high_confidence_accuracy": 0.870813
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 461,
+            "accuracy": 0.697428,
+            "brier": 0.1901618,
+            "log_loss": 0.5591904,
+            "high_confidence_games": 218,
+            "high_confidence_wins": 187,
+            "high_confidence_accuracy": 0.857798
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 464,
+            "accuracy": 0.699849,
+            "brier": 0.1898811,
+            "log_loss": 0.5568517,
+            "high_confidence_games": 186,
+            "high_confidence_wins": 164,
+            "high_confidence_accuracy": 0.88172
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 166,
+            "accuracy": 0.72807,
+            "brier": 0.1817604,
+            "log_loss": 0.5350992,
+            "high_confidence_games": 73,
+            "high_confidence_wins": 65,
+            "high_confidence_accuracy": 0.890411
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 37,
+            "accuracy": 0.637931,
+            "brier": 0.21724,
+            "log_loss": 0.6268131,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          }
+        }
+      }
+    },
+    {
+      "name": "off_success_rush_35_def_epa_rush_35",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.35,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 428,
+            "accuracy": 0.675079,
+            "brier": 0.2054786,
+            "log_loss": 0.5982402,
+            "high_confidence_games": 211,
+            "high_confidence_wins": 176,
+            "high_confidence_accuracy": 0.834123
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 475,
+            "accuracy": 0.729647,
+            "brier": 0.1841452,
+            "log_loss": 0.5470155,
+            "high_confidence_games": 219,
+            "high_confidence_wins": 190,
+            "high_confidence_accuracy": 0.86758
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 468,
+            "accuracy": 0.708018,
+            "brier": 0.1905902,
+            "log_loss": 0.5600001,
+            "high_confidence_games": 210,
+            "high_confidence_wins": 183,
+            "high_confidence_accuracy": 0.871429
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 470,
+            "accuracy": 0.708899,
+            "brier": 0.188254,
+            "log_loss": 0.5526932,
+            "high_confidence_games": 195,
+            "high_confidence_wins": 170,
+            "high_confidence_accuracy": 0.871795
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1846044,
+            "log_loss": 0.5416129,
+            "high_confidence_games": 81,
+            "high_confidence_wins": 71,
+            "high_confidence_accuracy": 0.876543
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2271278,
+            "log_loss": 0.6504817,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.8
+          }
+        }
+      }
+    },
+    {
+      "name": "off_success_rush_35_def_success_rush_50",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.35,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.3,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 434,
+            "accuracy": 0.684543,
+            "brier": 0.2051678,
+            "log_loss": 0.5986762,
+            "high_confidence_games": 213,
+            "high_confidence_wins": 175,
+            "high_confidence_accuracy": 0.821596
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 478,
+            "accuracy": 0.734255,
+            "brier": 0.1832349,
+            "log_loss": 0.5451427,
+            "high_confidence_games": 225,
+            "high_confidence_wins": 194,
+            "high_confidence_accuracy": 0.862222
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 459,
+            "accuracy": 0.694402,
+            "brier": 0.1927476,
+            "log_loss": 0.5665471,
+            "high_confidence_games": 215,
+            "high_confidence_wins": 184,
+            "high_confidence_accuracy": 0.855814
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 457,
+            "accuracy": 0.689291,
+            "brier": 0.1909185,
+            "log_loss": 0.5592533,
+            "high_confidence_games": 196,
+            "high_confidence_wins": 170,
+            "high_confidence_accuracy": 0.867347
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1828247,
+            "log_loss": 0.5388862,
+            "high_confidence_games": 82,
+            "high_confidence_wins": 72,
+            "high_confidence_accuracy": 0.878049
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2214614,
+            "log_loss": 0.6420204,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 13,
+            "high_confidence_accuracy": 0.866667
+          }
+        }
+      }
+    },
+    {
+      "name": "off_epa_rush_50_def_success_rush_50",
+      "offense": {
+        "epa": 0.3,
+        "success": 0.0,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.3,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 432,
+            "accuracy": 0.681388,
+            "brier": 0.2073103,
+            "log_loss": 0.6050392,
+            "high_confidence_games": 219,
+            "high_confidence_wins": 177,
+            "high_confidence_accuracy": 0.808219
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 476,
+            "accuracy": 0.731183,
+            "brier": 0.1826474,
+            "log_loss": 0.5445714,
+            "high_confidence_games": 227,
+            "high_confidence_wins": 194,
+            "high_confidence_accuracy": 0.854626
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 461,
+            "accuracy": 0.697428,
+            "brier": 0.1921955,
+            "log_loss": 0.5646608,
+            "high_confidence_games": 235,
+            "high_confidence_wins": 201,
+            "high_confidence_accuracy": 0.855319
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 463,
+            "accuracy": 0.698341,
+            "brier": 0.1913483,
+            "log_loss": 0.5609631,
+            "high_confidence_games": 200,
+            "high_confidence_wins": 172,
+            "high_confidence_accuracy": 0.86
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 165,
+            "accuracy": 0.723684,
+            "brier": 0.1823974,
+            "log_loss": 0.5379501,
+            "high_confidence_games": 80,
+            "high_confidence_wins": 69,
+            "high_confidence_accuracy": 0.8625
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2173641,
+            "log_loss": 0.6291786,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 11,
+            "high_confidence_accuracy": 0.733333
+          }
+        }
+      }
+    },
+    {
+      "name": "off_success_rush_50_def_epa_rush_50",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.3,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "defense": {
+        "epa": 0.3,
+        "success": 0.0,
+        "explosive": 0.1,
+        "red_zone": 0.1,
+        "rush": 0.5
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 429,
+            "accuracy": 0.676656,
+            "brier": 0.2067307,
+            "log_loss": 0.6026009,
+            "high_confidence_games": 221,
+            "high_confidence_wins": 181,
+            "high_confidence_accuracy": 0.819005
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 482,
+            "accuracy": 0.740399,
+            "brier": 0.1847017,
+            "log_loss": 0.5503632,
+            "high_confidence_games": 232,
+            "high_confidence_wins": 198,
+            "high_confidence_accuracy": 0.853448
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 472,
+            "accuracy": 0.71407,
+            "brier": 0.1925828,
+            "log_loss": 0.5654389,
+            "high_confidence_games": 221,
+            "high_confidence_wins": 190,
+            "high_confidence_accuracy": 0.859729
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 462,
+            "accuracy": 0.696833,
+            "brier": 0.1898671,
+            "log_loss": 0.557315,
+            "high_confidence_games": 213,
+            "high_confidence_wins": 184,
+            "high_confidence_accuracy": 0.86385
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "accuracy": 0.719298,
+            "brier": 0.1851479,
+            "log_loss": 0.5436258,
+            "high_confidence_games": 82,
+            "high_confidence_wins": 73,
+            "high_confidence_accuracy": 0.890244
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 34,
+            "accuracy": 0.586207,
+            "brier": 0.2257652,
+            "log_loss": 0.6489084,
+            "high_confidence_games": 16,
+            "high_confidence_wins": 13,
+            "high_confidence_accuracy": 0.8125
+          }
+        }
+      }
+    },
+    {
+      "name": "off_epa_rush_20_def_success_rush_35",
+      "offense": {
+        "epa": 0.45,
+        "success": 0.0,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "defense": {
+        "epa": 0.0,
+        "success": 0.35,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 430,
+            "accuracy": 0.678233,
+            "brier": 0.2067061,
+            "log_loss": 0.6017586,
+            "high_confidence_games": 203,
+            "high_confidence_wins": 166,
+            "high_confidence_accuracy": 0.817734
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 481,
+            "accuracy": 0.738863,
+            "brier": 0.1810081,
+            "log_loss": 0.5391027,
+            "high_confidence_games": 209,
+            "high_confidence_wins": 182,
+            "high_confidence_accuracy": 0.870813
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 466,
+            "accuracy": 0.704992,
+            "brier": 0.1896254,
+            "log_loss": 0.5582176,
+            "high_confidence_games": 218,
+            "high_confidence_wins": 188,
+            "high_confidence_accuracy": 0.862385
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 465,
+            "accuracy": 0.701357,
+            "brier": 0.18919,
+            "log_loss": 0.5551835,
+            "high_confidence_games": 185,
+            "high_confidence_wins": 165,
+            "high_confidence_accuracy": 0.891892
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 168,
+            "accuracy": 0.736842,
+            "brier": 0.1801602,
+            "log_loss": 0.5309375,
+            "high_confidence_games": 73,
+            "high_confidence_wins": 66,
+            "high_confidence_accuracy": 0.90411
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 38,
+            "accuracy": 0.655172,
+            "brier": 0.2157092,
+            "log_loss": 0.6220845,
+            "high_confidence_games": 11,
+            "high_confidence_wins": 9,
+            "high_confidence_accuracy": 0.818182
+          }
+        }
+      }
+    },
+    {
+      "name": "off_success_rush_20_def_epa_rush_35",
+      "offense": {
+        "epa": 0.0,
+        "success": 0.45,
+        "explosive": 0.2,
+        "red_zone": 0.15,
+        "rush": 0.2
+      },
+      "defense": {
+        "epa": 0.35,
+        "success": 0.0,
+        "explosive": 0.15,
+        "red_zone": 0.15,
+        "rush": 0.35
+      },
+      "scores": {
+        "2022": {
+          "all": {
+            "games": 634,
+            "wins": 430,
+            "accuracy": 0.678233,
+            "brier": 0.204876,
+            "log_loss": 0.5964364,
+            "high_confidence_games": 200,
+            "high_confidence_wins": 169,
+            "high_confidence_accuracy": 0.845
+          }
+        },
+        "2023": {
+          "all": {
+            "games": 651,
+            "wins": 473,
+            "accuracy": 0.726575,
+            "brier": 0.1834998,
+            "log_loss": 0.5449305,
+            "high_confidence_games": 210,
+            "high_confidence_wins": 181,
+            "high_confidence_accuracy": 0.861905
+          }
+        },
+        "2024": {
+          "all": {
+            "games": 661,
+            "wins": 470,
+            "accuracy": 0.711044,
+            "brier": 0.1902657,
+            "log_loss": 0.5597103,
+            "high_confidence_games": 208,
+            "high_confidence_wins": 182,
+            "high_confidence_accuracy": 0.875
+          }
+        },
+        "2025": {
+          "all": {
+            "games": 663,
+            "wins": 469,
+            "accuracy": 0.707391,
+            "brier": 0.1877857,
+            "log_loss": 0.5512525,
+            "high_confidence_games": 187,
+            "high_confidence_wins": 168,
+            "high_confidence_accuracy": 0.898396
+          }
+        },
+        "2026": {
+          "all": {
+            "games": 228,
+            "wins": 164,
+            "accuracy": 0.719298,
+            "brier": 0.1833065,
+            "log_loss": 0.5381556,
+            "high_confidence_games": 78,
+            "high_confidence_wins": 68,
+            "high_confidence_accuracy": 0.871795
+          },
+          "week_6": {
+            "games": 58,
+            "wins": 35,
+            "accuracy": 0.603448,
+            "brier": 0.2272714,
+            "log_loss": 0.6501519,
+            "high_confidence_games": 15,
+            "high_confidence_wins": 12,
+            "high_confidence_accuracy": 0.8
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Sportsdataverse historical inputs may have changed since pregame. These are retrospective simulations.",
+    "Incomplete matched two-sided rushing box scores exclude affected games; cohort identical across all tested formulas.",
+    "Same-season FBS vs FBS completed games, Week 3 onward only; rushing data for 2026 ends Week 6.",
+    "2025/2026 have been examined previously and are not fully untouched unseen holdout seasons.",
+    "Multiple prespecified candidate variants still create selection risk; prospective lock-before-kickoff testing is necessary.",
+    "Only CURRENT-season offensive and defensive within-unit formula changes; prior-season efficiency/Elo blend, venue, SOS and conference log-odds fixed.",
+    "Run offense measured with rushing yards / rushing attempts; run defense uses opponent YPC allowed. These are not opponent-adjusted, so schedule/competition confounding must be checked.",
+    "EPA and success rate can share signal, but whether removing one improves out-of-season forecasting must be tested. No assumption of redundancy proves they are interchangeable.",
+    "These are straight-up winners and probability scores, not ATS bets, market edges, or betting ROI."
+  ]
+}
