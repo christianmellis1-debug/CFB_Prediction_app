@@ -1,0 +1,36 @@
+name: Audit 2026 Test A overlap with official Tier 4 prices
+on:
+  push:
+    branches:
+      - research/tier4-overlap-handwritten-2026-10-12
+    paths:
+      - 'research/handwritten_offense_defense_2026_10_12/audit_tier4_overlap_2026.py'
+      - '.github/workflows/tier4-overlap-handwritten.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cfb-tier4-overlap-2026
+  cancel-in-progress: false
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Retrieve bookmaker-specific historical game odds and compare overlap
+        run: python research/handwritten_offense_defense_2026_10_12/audit_tier4_overlap_2026.py
+      - name: Commit isolated analysis
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/handwritten_offense_defense_2026_10_12/tier4_overlap_2026_results.json
+          git add research/handwritten_offense_defense_2026_10_12/tier4_overlap_2026_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Archive Tier 4 2026 price rule overlap with prospective new-tier candidates'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
