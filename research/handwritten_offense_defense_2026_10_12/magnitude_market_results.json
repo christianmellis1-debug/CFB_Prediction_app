@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T16:36:21.417542+00:00",
+  "generated_at": "2026-10-12T16:38:14.486608+00:00",
   "question": "How much better does the handwritten offense/defense home team win as BOTH standardized unit gaps increase, relative to similarly favored home teams?",
   "total_pregame_eligible": 2826,
   "total_verified_spread_games": 2195,
@@ -141,6 +141,176 @@
       }
     }
   },
+  "all_seasons_independent_units": {
+    "comparison_population": 875,
+    "threshold": 0.5,
+    "offense_gap_bins": {
+      "0\u20130.25": {
+        "games": 145,
+        "wins": 96,
+        "losses": 49,
+        "su_win_rate": 0.662069,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.1294,
+        "mean_def_edge": 0.7597,
+        "mean_min_edge": 0.1251
+      },
+      "0.25\u20130.5": {
+        "games": 168,
+        "wins": 131,
+        "losses": 37,
+        "su_win_rate": 0.779762,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.3803,
+        "mean_def_edge": 0.7253,
+        "mean_min_edge": 0.314
+      },
+      "0.5\u20130.75": {
+        "games": 140,
+        "wins": 110,
+        "losses": 30,
+        "su_win_rate": 0.785714,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.6129,
+        "mean_def_edge": 0.6224,
+        "mean_min_edge": 0.43
+      },
+      "0.75\u20131": {
+        "games": 119,
+        "wins": 102,
+        "losses": 17,
+        "su_win_rate": 0.857143,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.8704,
+        "mean_def_edge": 0.7691,
+        "mean_min_edge": 0.568
+      },
+      "1\u20131.5": {
+        "games": 179,
+        "wins": 154,
+        "losses": 25,
+        "su_win_rate": 0.860335,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.2294,
+        "mean_def_edge": 0.9018,
+        "mean_min_edge": 0.7535
+      },
+      "1.5+": {
+        "games": 124,
+        "wins": 119,
+        "losses": 5,
+        "su_win_rate": 0.959677,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.922,
+        "mean_def_edge": 1.1573,
+        "mean_min_edge": 1.0962
+      }
+    },
+    "defense_gap_bins": {
+      "0\u20130.25": {
+        "games": 158,
+        "wins": 118,
+        "losses": 40,
+        "su_win_rate": 0.746835,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.7224,
+        "mean_def_edge": 0.1232,
+        "mean_min_edge": 0.1143
+      },
+      "0.25\u20130.5": {
+        "games": 171,
+        "wins": 129,
+        "losses": 42,
+        "su_win_rate": 0.754386,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.732,
+        "mean_def_edge": 0.3764,
+        "mean_min_edge": 0.3142
+      },
+      "0.5\u20130.75": {
+        "games": 137,
+        "wins": 106,
+        "losses": 31,
+        "su_win_rate": 0.773723,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.7179,
+        "mean_def_edge": 0.6218,
+        "mean_min_edge": 0.4694
+      },
+      "0.75\u20131": {
+        "games": 123,
+        "wins": 104,
+        "losses": 19,
+        "su_win_rate": 0.845528,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.8777,
+        "mean_def_edge": 0.8673,
+        "mean_min_edge": 0.6307
+      },
+      "1\u20131.5": {
+        "games": 161,
+        "wins": 141,
+        "losses": 20,
+        "su_win_rate": 0.875776,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.902,
+        "mean_def_edge": 1.2232,
+        "mean_min_edge": 0.7611
+      },
+      "1.5+": {
+        "games": 125,
+        "wins": 114,
+        "losses": 11,
+        "su_win_rate": 0.912,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.1166,
+        "mean_def_edge": 1.9437,
+        "mean_min_edge": 1.0664
+      }
+    },
+    "two_by_two": {
+      "both_below_threshold": {
+        "games": 130,
+        "wins": 87,
+        "losses": 43,
+        "su_win_rate": 0.669231,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.2639,
+        "mean_def_edge": 0.2661,
+        "mean_min_edge": 0.1734
+      },
+      "only_offense_at_least_threshold": {
+        "games": 199,
+        "wins": 160,
+        "losses": 39,
+        "su_win_rate": 0.80402,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.0302,
+        "mean_def_edge": 0.2474,
+        "mean_min_edge": 0.2474
+      },
+      "only_defense_at_least_threshold": {
+        "games": 183,
+        "wins": 140,
+        "losses": 43,
+        "su_win_rate": 0.765027,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.2642,
+        "mean_def_edge": 1.0787,
+        "mean_min_edge": 0.2642
+      },
+      "both_at_least_threshold": {
+        "games": 363,
+        "wins": 325,
+        "losses": 38,
+        "su_win_rate": 0.895317,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.2197,
+        "mean_def_edge": 1.1966,
+        "mean_min_edge": 0.9625
+      }
+    }
+  },
   "yearly": {
     "2022": {
       "magnitude": {
@@ -277,6 +447,176 @@
             "mean_off_edge": 2.048,
             "mean_def_edge": 2.012,
             "mean_min_edge": 1.8429
+          }
+        }
+      },
+      "independent_units": {
+        "comparison_population": 191,
+        "threshold": 0.5,
+        "offense_gap_bins": {
+          "0\u20130.25": {
+            "games": 32,
+            "wins": 18,
+            "losses": 14,
+            "su_win_rate": 0.5625,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.1223,
+            "mean_def_edge": 0.8013,
+            "mean_min_edge": 0.118
+          },
+          "0.25\u20130.5": {
+            "games": 36,
+            "wins": 28,
+            "losses": 8,
+            "su_win_rate": 0.777778,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.3975,
+            "mean_def_edge": 0.8211,
+            "mean_min_edge": 0.3197
+          },
+          "0.5\u20130.75": {
+            "games": 35,
+            "wins": 30,
+            "losses": 5,
+            "su_win_rate": 0.857143,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.6086,
+            "mean_def_edge": 0.6086,
+            "mean_min_edge": 0.406
+          },
+          "0.75\u20131": {
+            "games": 18,
+            "wins": 14,
+            "losses": 4,
+            "su_win_rate": 0.777778,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.8512,
+            "mean_def_edge": 0.7758,
+            "mean_min_edge": 0.5247
+          },
+          "1\u20131.5": {
+            "games": 43,
+            "wins": 31,
+            "losses": 12,
+            "su_win_rate": 0.72093,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.1855,
+            "mean_def_edge": 0.8114,
+            "mean_min_edge": 0.7177
+          },
+          "1.5+": {
+            "games": 27,
+            "wins": 25,
+            "losses": 2,
+            "su_win_rate": 0.925926,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.9424,
+            "mean_def_edge": 1.0865,
+            "mean_min_edge": 1.0364
+          }
+        },
+        "defense_gap_bins": {
+          "0\u20130.25": {
+            "games": 36,
+            "wins": 29,
+            "losses": 7,
+            "su_win_rate": 0.805556,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.7264,
+            "mean_def_edge": 0.1277,
+            "mean_min_edge": 0.1204
+          },
+          "0.25\u20130.5": {
+            "games": 36,
+            "wins": 28,
+            "losses": 8,
+            "su_win_rate": 0.777778,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.835,
+            "mean_def_edge": 0.3649,
+            "mean_min_edge": 0.3235
+          },
+          "0.5\u20130.75": {
+            "games": 39,
+            "wins": 27,
+            "losses": 12,
+            "su_win_rate": 0.692308,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.7712,
+            "mean_def_edge": 0.6315,
+            "mean_min_edge": 0.4636
+          },
+          "0.75\u20131": {
+            "games": 17,
+            "wins": 12,
+            "losses": 5,
+            "su_win_rate": 0.705882,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.7196,
+            "mean_def_edge": 0.8714,
+            "mean_min_edge": 0.5561
+          },
+          "1\u20131.5": {
+            "games": 33,
+            "wins": 27,
+            "losses": 6,
+            "su_win_rate": 0.818182,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.9219,
+            "mean_def_edge": 1.2364,
+            "mean_min_edge": 0.8054
+          },
+          "1.5+": {
+            "games": 30,
+            "wins": 23,
+            "losses": 7,
+            "su_win_rate": 0.766667,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.9776,
+            "mean_def_edge": 1.8906,
+            "mean_min_edge": 0.9229
+          }
+        },
+        "two_by_two": {
+          "both_below_threshold": {
+            "games": 24,
+            "wins": 20,
+            "losses": 4,
+            "su_win_rate": 0.833333,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.3,
+            "mean_def_edge": 0.2508,
+            "mean_min_edge": 0.1776
+          },
+          "only_offense_at_least_threshold": {
+            "games": 48,
+            "wins": 37,
+            "losses": 11,
+            "su_win_rate": 0.770833,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.021,
+            "mean_def_edge": 0.2441,
+            "mean_min_edge": 0.2441
+          },
+          "only_defense_at_least_threshold": {
+            "games": 44,
+            "wins": 26,
+            "losses": 18,
+            "su_win_rate": 0.590909,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.2505,
+            "mean_def_edge": 1.1178,
+            "mean_min_edge": 0.2505
+          },
+          "both_at_least_threshold": {
+            "games": 75,
+            "wins": 63,
+            "losses": 12,
+            "su_win_rate": 0.84,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.2138,
+            "mean_def_edge": 1.1704,
+            "mean_min_edge": 0.9437
           }
         }
       },
@@ -421,6 +761,176 @@
           }
         }
       },
+      "independent_units": {
+        "comparison_population": 198,
+        "threshold": 0.5,
+        "offense_gap_bins": {
+          "0\u20130.25": {
+            "games": 29,
+            "wins": 22,
+            "losses": 7,
+            "su_win_rate": 0.758621,
+            "mean_home_spread": -9.776,
+            "mean_off_edge": 0.15,
+            "mean_def_edge": 0.7545,
+            "mean_min_edge": 0.1457
+          },
+          "0.25\u20130.5": {
+            "games": 41,
+            "wins": 32,
+            "losses": 9,
+            "su_win_rate": 0.780488,
+            "mean_home_spread": -11.183,
+            "mean_off_edge": 0.3684,
+            "mean_def_edge": 0.6425,
+            "mean_min_edge": 0.3066
+          },
+          "0.5\u20130.75": {
+            "games": 30,
+            "wins": 22,
+            "losses": 8,
+            "su_win_rate": 0.733333,
+            "mean_home_spread": -11.35,
+            "mean_off_edge": 0.6079,
+            "mean_def_edge": 0.673,
+            "mean_min_edge": 0.444
+          },
+          "0.75\u20131": {
+            "games": 37,
+            "wins": 33,
+            "losses": 4,
+            "su_win_rate": 0.891892,
+            "mean_home_spread": -16.095,
+            "mean_off_edge": 0.871,
+            "mean_def_edge": 0.834,
+            "mean_min_edge": 0.5536
+          },
+          "1\u20131.5": {
+            "games": 39,
+            "wins": 34,
+            "losses": 5,
+            "su_win_rate": 0.871795,
+            "mean_home_spread": -18.756,
+            "mean_off_edge": 1.2139,
+            "mean_def_edge": 0.804,
+            "mean_min_edge": 0.6699
+          },
+          "1.5+": {
+            "games": 22,
+            "wins": 22,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -26.227,
+            "mean_off_edge": 1.8666,
+            "mean_def_edge": 0.9392,
+            "mean_min_edge": 0.9088
+          }
+        },
+        "defense_gap_bins": {
+          "0\u20130.25": {
+            "games": 40,
+            "wins": 30,
+            "losses": 10,
+            "su_win_rate": 0.75,
+            "mean_home_spread": -9.65,
+            "mean_off_edge": 0.7066,
+            "mean_def_edge": 0.1257,
+            "mean_min_edge": 0.1217
+          },
+          "0.25\u20130.5": {
+            "games": 35,
+            "wins": 26,
+            "losses": 9,
+            "su_win_rate": 0.742857,
+            "mean_home_spread": -11.729,
+            "mean_off_edge": 0.8187,
+            "mean_def_edge": 0.3577,
+            "mean_min_edge": 0.2995
+          },
+          "0.5\u20130.75": {
+            "games": 36,
+            "wins": 32,
+            "losses": 4,
+            "su_win_rate": 0.888889,
+            "mean_home_spread": -13.278,
+            "mean_off_edge": 0.7269,
+            "mean_def_edge": 0.6216,
+            "mean_min_edge": 0.4847
+          },
+          "0.75\u20131": {
+            "games": 32,
+            "wins": 27,
+            "losses": 5,
+            "su_win_rate": 0.84375,
+            "mean_home_spread": -15.281,
+            "mean_off_edge": 0.7947,
+            "mean_def_edge": 0.8603,
+            "mean_min_edge": 0.6004
+          },
+          "1\u20131.5": {
+            "games": 33,
+            "wins": 30,
+            "losses": 3,
+            "su_win_rate": 0.909091,
+            "mean_home_spread": -20.682,
+            "mean_off_edge": 0.8658,
+            "mean_def_edge": 1.2296,
+            "mean_min_edge": 0.734
+          },
+          "1.5+": {
+            "games": 22,
+            "wins": 20,
+            "losses": 2,
+            "su_win_rate": 0.909091,
+            "mean_home_spread": -24.568,
+            "mean_off_edge": 0.9653,
+            "mean_def_edge": 1.9661,
+            "mean_min_edge": 0.9311
+          }
+        },
+        "two_by_two": {
+          "both_below_threshold": {
+            "games": 29,
+            "wins": 19,
+            "losses": 10,
+            "su_win_rate": 0.655172,
+            "mean_home_spread": -7.362,
+            "mean_off_edge": 0.2674,
+            "mean_def_edge": 0.2516,
+            "mean_min_edge": 0.1758
+          },
+          "only_offense_at_least_threshold": {
+            "games": 46,
+            "wins": 37,
+            "losses": 9,
+            "su_win_rate": 0.804348,
+            "mean_home_spread": -12.674,
+            "mean_off_edge": 1.0688,
+            "mean_def_edge": 0.2229,
+            "mean_min_edge": 0.2229
+          },
+          "only_defense_at_least_threshold": {
+            "games": 41,
+            "wins": 35,
+            "losses": 6,
+            "su_win_rate": 0.853659,
+            "mean_home_spread": -12.89,
+            "mean_off_edge": 0.2853,
+            "mean_def_edge": 0.9981,
+            "mean_min_edge": 0.2853
+          },
+          "both_at_least_threshold": {
+            "games": 82,
+            "wins": 74,
+            "losses": 8,
+            "su_win_rate": 0.902439,
+            "mean_home_spread": -20.262,
+            "mean_off_edge": 1.094,
+            "mean_def_edge": 1.1319,
+            "mean_min_edge": 0.8496
+          }
+        }
+      },
       "priced_games": 646,
       "pregame_eligible": 646
     },
@@ -559,6 +1069,176 @@
             "mean_off_edge": 1.927,
             "mean_def_edge": 2.2186,
             "mean_min_edge": 1.8833
+          }
+        }
+      },
+      "independent_units": {
+        "comparison_population": 219,
+        "threshold": 0.5,
+        "offense_gap_bins": {
+          "0\u20130.25": {
+            "games": 41,
+            "wins": 28,
+            "losses": 13,
+            "su_win_rate": 0.682927,
+            "mean_home_spread": -7.939,
+            "mean_off_edge": 0.1254,
+            "mean_def_edge": 0.8755,
+            "mean_min_edge": 0.1164
+          },
+          "0.25\u20130.5": {
+            "games": 39,
+            "wins": 29,
+            "losses": 10,
+            "su_win_rate": 0.74359,
+            "mean_home_spread": -9.269,
+            "mean_off_edge": 0.384,
+            "mean_def_edge": 0.7464,
+            "mean_min_edge": 0.3528
+          },
+          "0.5\u20130.75": {
+            "games": 31,
+            "wins": 26,
+            "losses": 5,
+            "su_win_rate": 0.83871,
+            "mean_home_spread": -11.016,
+            "mean_off_edge": 0.6225,
+            "mean_def_edge": 0.5043,
+            "mean_min_edge": 0.3915
+          },
+          "0.75\u20131": {
+            "games": 29,
+            "wins": 27,
+            "losses": 2,
+            "su_win_rate": 0.931034,
+            "mean_home_spread": -13.052,
+            "mean_off_edge": 0.8761,
+            "mean_def_edge": 0.6996,
+            "mean_min_edge": 0.5784
+          },
+          "1\u20131.5": {
+            "games": 41,
+            "wins": 36,
+            "losses": 5,
+            "su_win_rate": 0.878049,
+            "mean_home_spread": -20.439,
+            "mean_off_edge": 1.2596,
+            "mean_def_edge": 0.9347,
+            "mean_min_edge": 0.7628
+          },
+          "1.5+": {
+            "games": 38,
+            "wins": 38,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -25.342,
+            "mean_off_edge": 1.8958,
+            "mean_def_edge": 1.2161,
+            "mean_min_edge": 1.1279
+          }
+        },
+        "defense_gap_bins": {
+          "0\u20130.25": {
+            "games": 36,
+            "wins": 24,
+            "losses": 12,
+            "su_win_rate": 0.666667,
+            "mean_home_spread": -9.014,
+            "mean_off_edge": 0.7688,
+            "mean_def_edge": 0.1179,
+            "mean_min_edge": 0.108
+          },
+          "0.25\u20130.5": {
+            "games": 43,
+            "wins": 35,
+            "losses": 8,
+            "su_win_rate": 0.813953,
+            "mean_home_spread": -12.151,
+            "mean_off_edge": 0.8277,
+            "mean_def_edge": 0.393,
+            "mean_min_edge": 0.3377
+          },
+          "0.5\u20130.75": {
+            "games": 32,
+            "wins": 27,
+            "losses": 5,
+            "su_win_rate": 0.84375,
+            "mean_home_spread": -10.875,
+            "mean_off_edge": 0.6776,
+            "mean_def_edge": 0.6087,
+            "mean_min_edge": 0.4681
+          },
+          "0.75\u20131": {
+            "games": 31,
+            "wins": 27,
+            "losses": 4,
+            "su_win_rate": 0.870968,
+            "mean_home_spread": -12.629,
+            "mean_off_edge": 0.8734,
+            "mean_def_edge": 0.8832,
+            "mean_min_edge": 0.6208
+          },
+          "1\u20131.5": {
+            "games": 47,
+            "wins": 41,
+            "losses": 6,
+            "su_win_rate": 0.87234,
+            "mean_home_spread": -17.011,
+            "mean_off_edge": 0.8398,
+            "mean_def_edge": 1.2176,
+            "mean_min_edge": 0.6887
+          },
+          "1.5+": {
+            "games": 30,
+            "wins": 30,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -27.4,
+            "mean_off_edge": 1.2335,
+            "mean_def_edge": 2.0077,
+            "mean_min_edge": 1.2189
+          }
+        },
+        "two_by_two": {
+          "both_below_threshold": {
+            "games": 26,
+            "wins": 14,
+            "losses": 12,
+            "su_win_rate": 0.538462,
+            "mean_home_spread": -6.154,
+            "mean_off_edge": 0.2529,
+            "mean_def_edge": 0.2972,
+            "mean_min_edge": 0.1919
+          },
+          "only_offense_at_least_threshold": {
+            "games": 53,
+            "wins": 45,
+            "losses": 8,
+            "su_win_rate": 0.849057,
+            "mean_home_spread": -12.962,
+            "mean_off_edge": 1.0697,
+            "mean_def_edge": 0.2532,
+            "mean_min_edge": 0.2532
+          },
+          "only_defense_at_least_threshold": {
+            "games": 54,
+            "wins": 43,
+            "losses": 11,
+            "su_win_rate": 0.796296,
+            "mean_home_spread": -9.759,
+            "mean_off_edge": 0.2508,
+            "mean_def_edge": 1.0607,
+            "mean_min_edge": 0.2508
+          },
+          "both_at_least_threshold": {
+            "games": 86,
+            "wins": 82,
+            "losses": 4,
+            "su_win_rate": 0.953488,
+            "mean_home_spread": -21.326,
+            "mean_off_edge": 1.2987,
+            "mean_def_edge": 1.2446,
+            "mean_min_edge": 1.0421
           }
         }
       },
@@ -703,6 +1383,176 @@
           }
         }
       },
+      "independent_units": {
+        "comparison_population": 185,
+        "threshold": 0.5,
+        "offense_gap_bins": {
+          "0\u20130.25": {
+            "games": 29,
+            "wins": 19,
+            "losses": 10,
+            "su_win_rate": 0.655172,
+            "mean_home_spread": -9.5,
+            "mean_off_edge": 0.1165,
+            "mean_def_edge": 0.6194,
+            "mean_min_edge": 0.1165
+          },
+          "0.25\u20130.5": {
+            "games": 39,
+            "wins": 29,
+            "losses": 10,
+            "su_win_rate": 0.74359,
+            "mean_home_spread": -9.064,
+            "mean_off_edge": 0.3821,
+            "mean_def_edge": 0.6472,
+            "mean_min_edge": 0.2763
+          },
+          "0.5\u20130.75": {
+            "games": 30,
+            "wins": 23,
+            "losses": 7,
+            "su_win_rate": 0.766667,
+            "mean_home_spread": -11.833,
+            "mean_off_edge": 0.619,
+            "mean_def_edge": 0.6193,
+            "mean_min_edge": 0.4344
+          },
+          "0.75\u20131": {
+            "games": 24,
+            "wins": 20,
+            "losses": 4,
+            "su_win_rate": 0.833333,
+            "mean_home_spread": -15.5,
+            "mean_off_edge": 0.8791,
+            "mean_def_edge": 0.7195,
+            "mean_min_edge": 0.5682
+          },
+          "1\u20131.5": {
+            "games": 42,
+            "wins": 39,
+            "losses": 3,
+            "su_win_rate": 0.928571,
+            "mean_home_spread": -23.881,
+            "mean_off_edge": 1.2657,
+            "mean_def_edge": 1.0694,
+            "mean_min_edge": 0.8469
+          },
+          "1.5+": {
+            "games": 21,
+            "wins": 20,
+            "losses": 1,
+            "su_win_rate": 0.952381,
+            "mean_home_spread": -28.786,
+            "mean_off_edge": 2.0108,
+            "mean_def_edge": 1.2239,
+            "mean_min_edge": 1.1973
+          }
+        },
+        "defense_gap_bins": {
+          "0\u20130.25": {
+            "games": 37,
+            "wins": 29,
+            "losses": 8,
+            "su_win_rate": 0.783784,
+            "mean_home_spread": -8.851,
+            "mean_off_edge": 0.6781,
+            "mean_def_edge": 0.1222,
+            "mean_min_edge": 0.1083
+          },
+          "0.25\u20130.5": {
+            "games": 46,
+            "wins": 31,
+            "losses": 15,
+            "su_win_rate": 0.673913,
+            "mean_home_spread": -9.826,
+            "mean_off_edge": 0.5278,
+            "mean_def_edge": 0.3846,
+            "mean_min_edge": 0.2952
+          },
+          "0.5\u20130.75": {
+            "games": 18,
+            "wins": 12,
+            "losses": 6,
+            "su_win_rate": 0.666667,
+            "mean_home_spread": -14.556,
+            "mean_off_edge": 0.7226,
+            "mean_def_edge": 0.6323,
+            "mean_min_edge": 0.461
+          },
+          "0.75\u20131": {
+            "games": 26,
+            "wins": 25,
+            "losses": 1,
+            "su_win_rate": 0.961538,
+            "mean_home_spread": -18.731,
+            "mean_off_edge": 1.1155,
+            "mean_def_edge": 0.8769,
+            "mean_min_edge": 0.7463
+          },
+          "1\u20131.5": {
+            "games": 26,
+            "wins": 23,
+            "losses": 3,
+            "su_win_rate": 0.884615,
+            "mean_home_spread": -20.885,
+            "mean_off_edge": 0.9758,
+            "mean_def_edge": 1.2382,
+            "mean_min_edge": 0.8262
+          },
+          "1.5+": {
+            "games": 32,
+            "wins": 30,
+            "losses": 2,
+            "su_win_rate": 0.9375,
+            "mean_home_spread": -27.875,
+            "mean_off_edge": 1.1433,
+            "mean_def_edge": 1.9088,
+            "mean_min_edge": 1.0865
+          }
+        },
+        "two_by_two": {
+          "both_below_threshold": {
+            "games": 41,
+            "wins": 27,
+            "losses": 14,
+            "su_win_rate": 0.658537,
+            "mean_home_spread": -5.72,
+            "mean_off_edge": 0.2505,
+            "mean_def_edge": 0.2626,
+            "mean_min_edge": 0.1498
+          },
+          "only_offense_at_least_threshold": {
+            "games": 42,
+            "wins": 33,
+            "losses": 9,
+            "su_win_rate": 0.785714,
+            "mean_home_spread": -12.976,
+            "mean_off_edge": 0.9308,
+            "mean_def_edge": 0.2725,
+            "mean_min_edge": 0.2725
+          },
+          "only_defense_at_least_threshold": {
+            "games": 27,
+            "wins": 21,
+            "losses": 6,
+            "su_win_rate": 0.777778,
+            "mean_home_spread": -14.611,
+            "mean_off_edge": 0.2967,
+            "mean_def_edge": 1.2013,
+            "mean_min_edge": 0.2967
+          },
+          "both_at_least_threshold": {
+            "games": 75,
+            "wins": 69,
+            "losses": 6,
+            "su_win_rate": 0.92,
+            "mean_home_spread": -23.86,
+            "mean_off_edge": 1.2794,
+            "mean_def_edge": 1.2669,
+            "mean_min_edge": 1.0125
+          }
+        }
+      },
       "priced_games": 663,
       "pregame_eligible": 663
     },
@@ -841,6 +1691,176 @@
             "mean_off_edge": 2.1826,
             "mean_def_edge": 2.1876,
             "mean_min_edge": 1.8581
+          }
+        }
+      },
+      "independent_units": {
+        "comparison_population": 82,
+        "threshold": 0.5,
+        "offense_gap_bins": {
+          "0\u20130.25": {
+            "games": 14,
+            "wins": 9,
+            "losses": 5,
+            "su_win_rate": 0.642857,
+            "mean_home_spread": -8.0,
+            "mean_off_edge": 0.1418,
+            "mean_def_edge": 0.6271,
+            "mean_min_edge": 0.1418
+          },
+          "0.25\u20130.5": {
+            "games": 13,
+            "wins": 13,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -13.808,
+            "mean_off_edge": 0.3538,
+            "mean_def_edge": 0.8921,
+            "mean_min_edge": 0.3187
+          },
+          "0.5\u20130.75": {
+            "games": 14,
+            "wins": 9,
+            "losses": 5,
+            "su_win_rate": 0.642857,
+            "mean_home_spread": -10.75,
+            "mean_off_edge": 0.5995,
+            "mean_def_edge": 0.8163,
+            "mean_min_edge": 0.5361
+          },
+          "0.75\u20131": {
+            "games": 11,
+            "wins": 8,
+            "losses": 3,
+            "su_win_rate": 0.727273,
+            "mean_home_spread": -11.727,
+            "mean_off_edge": 0.8659,
+            "mean_def_edge": 0.8312,
+            "mean_min_edge": 0.66
+          },
+          "1\u20131.5": {
+            "games": 14,
+            "wins": 14,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -22.071,
+            "mean_off_edge": 1.2105,
+            "mean_def_edge": 0.8531,
+            "mean_min_edge": 0.7894
+          },
+          "1.5+": {
+            "games": 16,
+            "wins": 14,
+            "losses": 2,
+            "su_win_rate": 0.875,
+            "mean_home_spread": -29.938,
+            "mean_off_edge": 1.9098,
+            "mean_def_edge": 1.3496,
+            "mean_min_edge": 1.2466
+          }
+        },
+        "defense_gap_bins": {
+          "0\u20130.25": {
+            "games": 9,
+            "wins": 6,
+            "losses": 3,
+            "su_win_rate": 0.666667,
+            "mean_home_spread": -12.0,
+            "mean_off_edge": 0.7737,
+            "mean_def_edge": 0.1195,
+            "mean_min_edge": 0.1072
+          },
+          "0.25\u20130.5": {
+            "games": 11,
+            "wins": 9,
+            "losses": 2,
+            "su_win_rate": 0.818182,
+            "mean_home_spread": -11.636,
+            "mean_off_edge": 0.5997,
+            "mean_def_edge": 0.3743,
+            "mean_min_edge": 0.3175
+          },
+          "0.5\u20130.75": {
+            "games": 12,
+            "wins": 8,
+            "losses": 4,
+            "su_win_rate": 0.666667,
+            "mean_home_spread": -10.292,
+            "mean_off_edge": 0.618,
+            "mean_def_edge": 0.6104,
+            "mean_min_edge": 0.4585
+          },
+          "0.75\u20131": {
+            "games": 17,
+            "wins": 13,
+            "losses": 4,
+            "su_win_rate": 0.764706,
+            "mean_home_spread": -13.294,
+            "mean_off_edge": 0.8364,
+            "mean_def_edge": 0.8328,
+            "mean_min_edge": 0.6032
+          },
+          "1\u20131.5": {
+            "games": 22,
+            "wins": 20,
+            "losses": 2,
+            "su_win_rate": 0.909091,
+            "mean_home_spread": -19.955,
+            "mean_off_edge": 0.9722,
+            "mean_def_edge": 1.1882,
+            "mean_min_edge": 0.8127
+          },
+          "1.5+": {
+            "games": 11,
+            "wins": 11,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -30.409,
+            "mean_off_edge": 1.4019,
+            "mean_def_edge": 1.9701,
+            "mean_min_edge": 1.2544
+          }
+        },
+        "two_by_two": {
+          "both_below_threshold": {
+            "games": 10,
+            "wins": 7,
+            "losses": 3,
+            "su_win_rate": 0.7,
+            "mean_home_spread": -7.4,
+            "mean_off_edge": 0.2508,
+            "mean_def_edge": 0.2786,
+            "mean_min_edge": 0.2051
+          },
+          "only_offense_at_least_threshold": {
+            "games": 10,
+            "wins": 8,
+            "losses": 2,
+            "su_win_rate": 0.8,
+            "mean_home_spread": -16.2,
+            "mean_off_edge": 1.1053,
+            "mean_def_edge": 0.2407,
+            "mean_min_edge": 0.2407
+          },
+          "only_defense_at_least_threshold": {
+            "games": 17,
+            "wins": 15,
+            "losses": 2,
+            "su_win_rate": 0.882353,
+            "mean_home_spread": -12.794,
+            "mean_off_edge": 0.2398,
+            "mean_def_edge": 1.0347,
+            "mean_min_edge": 0.2398
+          },
+          "both_at_least_threshold": {
+            "games": 45,
+            "wins": 37,
+            "losses": 8,
+            "su_win_rate": 0.822222,
+            "mean_home_spread": -20.122,
+            "mean_off_edge": 1.2082,
+            "mean_def_edge": 1.1489,
+            "mean_min_edge": 0.9635
           }
         }
       },
@@ -983,6 +2003,176 @@
           "mean_off_edge": 2.0634,
           "mean_def_edge": 2.0472,
           "mean_min_edge": 1.7983
+        }
+      }
+    },
+    "independent_units": {
+      "comparison_population": 51,
+      "threshold": 0.5,
+      "offense_gap_bins": {
+        "0\u20130.25": {
+          "games": 9,
+          "wins": 5,
+          "losses": 4,
+          "su_win_rate": 0.555556,
+          "mean_home_spread": -6.056,
+          "mean_off_edge": 0.1449,
+          "mean_def_edge": 0.5521,
+          "mean_min_edge": 0.1449
+        },
+        "0.25\u20130.5": {
+          "games": 9,
+          "wins": 9,
+          "losses": 0,
+          "su_win_rate": 1.0,
+          "mean_home_spread": -11.833,
+          "mean_off_edge": 0.3649,
+          "mean_def_edge": 0.767,
+          "mean_min_edge": 0.3142
+        },
+        "0.5\u20130.75": {
+          "games": 9,
+          "wins": 5,
+          "losses": 4,
+          "su_win_rate": 0.555556,
+          "mean_home_spread": -10.444,
+          "mean_off_edge": 0.6007,
+          "mean_def_edge": 0.8702,
+          "mean_min_edge": 0.5306
+        },
+        "0.75\u20131": {
+          "games": 7,
+          "wins": 4,
+          "losses": 3,
+          "su_win_rate": 0.571429,
+          "mean_home_spread": -10.214,
+          "mean_off_edge": 0.8972,
+          "mean_def_edge": 0.5782,
+          "mean_min_edge": 0.5737
+        },
+        "1\u20131.5": {
+          "games": 9,
+          "wins": 9,
+          "losses": 0,
+          "su_win_rate": 1.0,
+          "mean_home_spread": -22.167,
+          "mean_off_edge": 1.2224,
+          "mean_def_edge": 0.7797,
+          "mean_min_edge": 0.7479
+        },
+        "1.5+": {
+          "games": 8,
+          "wins": 7,
+          "losses": 1,
+          "su_win_rate": 0.875,
+          "mean_home_spread": -27.0,
+          "mean_off_edge": 1.9013,
+          "mean_def_edge": 1.1848,
+          "mean_min_edge": 1.1225
+        }
+      },
+      "defense_gap_bins": {
+        "0\u20130.25": {
+          "games": 8,
+          "wins": 5,
+          "losses": 3,
+          "su_win_rate": 0.625,
+          "mean_home_spread": -10.938,
+          "mean_off_edge": 0.7406,
+          "mean_def_edge": 0.1179,
+          "mean_min_edge": 0.1041
+        },
+        "0.25\u20130.5": {
+          "games": 8,
+          "wins": 6,
+          "losses": 2,
+          "su_win_rate": 0.75,
+          "mean_home_spread": -8.375,
+          "mean_off_edge": 0.5046,
+          "mean_def_edge": 0.3824,
+          "mean_min_edge": 0.3245
+        },
+        "0.5\u20130.75": {
+          "games": 8,
+          "wins": 6,
+          "losses": 2,
+          "su_win_rate": 0.75,
+          "mean_home_spread": -12.75,
+          "mean_off_edge": 0.7389,
+          "mean_def_edge": 0.6002,
+          "mean_min_edge": 0.5091
+        },
+        "0.75\u20131": {
+          "games": 13,
+          "wins": 9,
+          "losses": 4,
+          "su_win_rate": 0.692308,
+          "mean_home_spread": -13.692,
+          "mean_off_edge": 0.8741,
+          "mean_def_edge": 0.8388,
+          "mean_min_edge": 0.6078
+        },
+        "1\u20131.5": {
+          "games": 9,
+          "wins": 8,
+          "losses": 1,
+          "su_win_rate": 0.888889,
+          "mean_home_spread": -17.111,
+          "mean_off_edge": 0.9847,
+          "mean_def_edge": 1.2087,
+          "mean_min_edge": 0.8193
+        },
+        "1.5+": {
+          "games": 5,
+          "wins": 5,
+          "losses": 0,
+          "su_win_rate": 1.0,
+          "mean_home_spread": -30.7,
+          "mean_off_edge": 1.2778,
+          "mean_def_edge": 1.9321,
+          "mean_min_edge": 1.1717
+        }
+      },
+      "two_by_two": {
+        "both_below_threshold": {
+          "games": 9,
+          "wins": 6,
+          "losses": 3,
+          "su_win_rate": 0.666667,
+          "mean_home_spread": -5.611,
+          "mean_off_edge": 0.2642,
+          "mean_def_edge": 0.2771,
+          "mean_min_edge": 0.2135
+        },
+        "only_offense_at_least_threshold": {
+          "games": 7,
+          "wins": 5,
+          "losses": 2,
+          "su_win_rate": 0.714286,
+          "mean_home_spread": -14.857,
+          "mean_off_edge": 1.0835,
+          "mean_def_edge": 0.2154,
+          "mean_min_edge": 0.2154
+        },
+        "only_defense_at_least_threshold": {
+          "games": 9,
+          "wins": 8,
+          "losses": 1,
+          "su_win_rate": 0.888889,
+          "mean_home_spread": -12.278,
+          "mean_off_edge": 0.2457,
+          "mean_def_edge": 1.042,
+          "mean_min_edge": 0.2457
+        },
+        "both_at_least_threshold": {
+          "games": 26,
+          "wins": 20,
+          "losses": 6,
+          "su_win_rate": 0.769231,
+          "mean_home_spread": -18.346,
+          "mean_off_edge": 1.1659,
+          "mean_def_edge": 1.0333,
+          "mean_min_edge": 0.8844
         }
       }
     },
