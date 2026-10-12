@@ -1,0 +1,1565 @@
+{
+  "test": "Handwritten offense and defense 40/25/15/10/10",
+  "timestamp": "2026-10-12T14:53:14.862963+00:00",
+  "offense": {
+    "EPA": 40,
+    "rush_YPC": 25,
+    "completion_pct": 15,
+    "turnovers_committed_inverse": 10,
+    "explosive_offense": 10
+  },
+  "defense": {
+    "EPA_allowed_inverse": 40,
+    "rush_YPC_allowed_inverse": 25,
+    "completion_pct_allowed_inverse": 15,
+    "turnovers_forced": 10,
+    "explosive_allowed_inverse": 10
+  },
+  "baseline_weights": {
+    "offense": {
+      "epa": 0.4,
+      "success": 0.3,
+      "explosive": 0.15,
+      "red_zone": 0.15
+    },
+    "defense": {
+      "epa": 0.4,
+      "success": 0.3,
+      "explosive": 0.15,
+      "red_zone": 0.15
+    }
+  },
+  "evaluated_seasons": [
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+  ],
+  "scores": {
+    "2022": {
+      "baseline": {
+        "games": 630,
+        "wins": 431,
+        "losses": 199,
+        "accuracy": 0.684127,
+        "brier": 0.2049454,
+        "high_confidence_games": 194,
+        "high_confidence_wins": 159,
+        "high_confidence_accuracy": 0.819588
+      },
+      "handwritten": {
+        "games": 630,
+        "wins": 414,
+        "losses": 216,
+        "accuracy": 0.657143,
+        "brier": 0.2100987,
+        "high_confidence_games": 205,
+        "high_confidence_wins": 168,
+        "high_confidence_accuracy": 0.819512
+      },
+      "changed_picks": {
+        "changed_winners": 61,
+        "fixed_baseline_misses": 22,
+        "introduced_new_misses": 39,
+        "examples": [
+          {
+            "week": 3,
+            "matchup": "Penn State at Auburn",
+            "original_pick": "Auburn",
+            "custom_pick": "Penn State",
+            "actual": "Penn State"
+          },
+          {
+            "week": 3,
+            "matchup": "Texas Tech at NC State",
+            "original_pick": "Texas Tech",
+            "custom_pick": "NC State",
+            "actual": "NC State"
+          },
+          {
+            "week": 3,
+            "matchup": "Michigan State at Washington",
+            "original_pick": "Washington",
+            "custom_pick": "Michigan State",
+            "actual": "Washington"
+          },
+          {
+            "week": 3,
+            "matchup": "UCF at Florida Atlantic",
+            "original_pick": "Florida Atlantic",
+            "custom_pick": "UCF",
+            "actual": "UCF"
+          },
+          {
+            "week": 4,
+            "matchup": "Baylor at Iowa State",
+            "original_pick": "Baylor",
+            "custom_pick": "Iowa State",
+            "actual": "Baylor"
+          },
+          {
+            "week": 4,
+            "matchup": "Georgia Tech at UCF",
+            "original_pick": "UCF",
+            "custom_pick": "Georgia Tech",
+            "actual": "UCF"
+          },
+          {
+            "week": 4,
+            "matchup": "Arkansas at Texas A&M",
+            "original_pick": "Texas A&M",
+            "custom_pick": "Arkansas",
+            "actual": "Texas A&M"
+          },
+          {
+            "week": 5,
+            "matchup": "Kentucky at Ole Miss",
+            "original_pick": "Kentucky",
+            "custom_pick": "Ole Miss",
+            "actual": "Ole Miss"
+          },
+          {
+            "week": 5,
+            "matchup": "Northern Illinois at Ball State",
+            "original_pick": "Ball State",
+            "custom_pick": "Northern Illinois",
+            "actual": "Ball State"
+          },
+          {
+            "week": 5,
+            "matchup": "Miami (OH) at Buffalo",
+            "original_pick": "Buffalo",
+            "custom_pick": "Miami (OH)",
+            "actual": "Buffalo"
+          },
+          {
+            "week": 5,
+            "matchup": "San Jos\u00e9 State at Wyoming",
+            "original_pick": "Wyoming",
+            "custom_pick": "San Jos\u00e9 State",
+            "actual": "San Jos\u00e9 State"
+          },
+          {
+            "week": 5,
+            "matchup": "Virginia at Duke",
+            "original_pick": "Virginia",
+            "custom_pick": "Duke",
+            "actual": "Duke"
+          },
+          {
+            "week": 6,
+            "matchup": "UNLV at San Jos\u00e9 State",
+            "original_pick": "UNLV",
+            "custom_pick": "San Jos\u00e9 State",
+            "actual": "San Jos\u00e9 State"
+          },
+          {
+            "week": 6,
+            "matchup": "Tennessee at LSU",
+            "original_pick": "Tennessee",
+            "custom_pick": "LSU",
+            "actual": "Tennessee"
+          },
+          {
+            "week": 6,
+            "matchup": "Utah at UCLA",
+            "original_pick": "Utah",
+            "custom_pick": "UCLA",
+            "actual": "UCLA"
+          },
+          {
+            "week": 6,
+            "matchup": "BYU at Notre Dame",
+            "original_pick": "Notre Dame",
+            "custom_pick": "BYU",
+            "actual": "Notre Dame"
+          },
+          {
+            "week": 7,
+            "matchup": "Minnesota at Illinois",
+            "original_pick": "Minnesota",
+            "custom_pick": "Illinois",
+            "actual": "Illinois"
+          },
+          {
+            "week": 7,
+            "matchup": "New Mexico at New Mexico State",
+            "original_pick": "New Mexico State",
+            "custom_pick": "New Mexico",
+            "actual": "New Mexico State"
+          },
+          {
+            "week": 7,
+            "matchup": "Air Force at UNLV",
+            "original_pick": "Air Force",
+            "custom_pick": "UNLV",
+            "actual": "Air Force"
+          },
+          {
+            "week": 8,
+            "matchup": "Virginia at Georgia Tech",
+            "original_pick": "Virginia",
+            "custom_pick": "Georgia Tech",
+            "actual": "Virginia"
+          },
+          {
+            "week": 8,
+            "matchup": "Northern Illinois at Ohio",
+            "original_pick": "Ohio",
+            "custom_pick": "Northern Illinois",
+            "actual": "Ohio"
+          },
+          {
+            "week": 8,
+            "matchup": "West Virginia at Texas Tech",
+            "original_pick": "Texas Tech",
+            "custom_pick": "West Virginia",
+            "actual": "Texas Tech"
+          },
+          {
+            "week": 8,
+            "matchup": "BYU at Liberty",
+            "original_pick": "Liberty",
+            "custom_pick": "BYU",
+            "actual": "Liberty"
+          },
+          {
+            "week": 8,
+            "matchup": "Boise State at Air Force",
+            "original_pick": "Air Force",
+            "custom_pick": "Boise State",
+            "actual": "Boise State"
+          },
+          {
+            "week": 8,
+            "matchup": "Texas A&M at South Carolina",
+            "original_pick": "Texas A&M",
+            "custom_pick": "South Carolina",
+            "actual": "South Carolina"
+          }
+        ]
+      }
+    },
+    "2023": {
+      "baseline": {
+        "games": 646,
+        "wins": 474,
+        "losses": 172,
+        "accuracy": 0.733746,
+        "brier": 0.1835419,
+        "high_confidence_games": 204,
+        "high_confidence_wins": 179,
+        "high_confidence_accuracy": 0.877451
+      },
+      "handwritten": {
+        "games": 646,
+        "wins": 478,
+        "losses": 168,
+        "accuracy": 0.739938,
+        "brier": 0.182212,
+        "high_confidence_games": 207,
+        "high_confidence_wins": 180,
+        "high_confidence_accuracy": 0.869565
+      },
+      "changed_picks": {
+        "changed_winners": 56,
+        "fixed_baseline_misses": 30,
+        "introduced_new_misses": 26,
+        "examples": [
+          {
+            "week": 3,
+            "matchup": "LSU at Mississippi State",
+            "original_pick": "LSU",
+            "custom_pick": "Mississippi State",
+            "actual": "LSU"
+          },
+          {
+            "week": 4,
+            "matchup": "Texas Tech at West Virginia",
+            "original_pick": "West Virginia",
+            "custom_pick": "Texas Tech",
+            "actual": "West Virginia"
+          },
+          {
+            "week": 4,
+            "matchup": "Rice at South Florida",
+            "original_pick": "Rice",
+            "custom_pick": "South Florida",
+            "actual": "South Florida"
+          },
+          {
+            "week": 4,
+            "matchup": "Arkansas at LSU",
+            "original_pick": "Arkansas",
+            "custom_pick": "LSU",
+            "actual": "LSU"
+          },
+          {
+            "week": 5,
+            "matchup": "Temple at Tulsa",
+            "original_pick": "Temple",
+            "custom_pick": "Tulsa",
+            "actual": "Tulsa"
+          },
+          {
+            "week": 5,
+            "matchup": "Utah at Oregon State",
+            "original_pick": "Oregon State",
+            "custom_pick": "Utah",
+            "actual": "Oregon State"
+          },
+          {
+            "week": 5,
+            "matchup": "Ball State at Western Michigan",
+            "original_pick": "Ball State",
+            "custom_pick": "Western Michigan",
+            "actual": "Western Michigan"
+          },
+          {
+            "week": 5,
+            "matchup": "East Carolina at Rice",
+            "original_pick": "Rice",
+            "custom_pick": "East Carolina",
+            "actual": "Rice"
+          },
+          {
+            "week": 5,
+            "matchup": "Michigan State at Iowa",
+            "original_pick": "Michigan State",
+            "custom_pick": "Iowa",
+            "actual": "Iowa"
+          },
+          {
+            "week": 6,
+            "matchup": "Oklahoma at Texas",
+            "original_pick": "Oklahoma",
+            "custom_pick": "Texas",
+            "actual": "Oklahoma"
+          },
+          {
+            "week": 6,
+            "matchup": "Boston College at Army",
+            "original_pick": "Army",
+            "custom_pick": "Boston College",
+            "actual": "Boston College"
+          },
+          {
+            "week": 6,
+            "matchup": "Texas State at Louisiana",
+            "original_pick": "Texas State",
+            "custom_pick": "Louisiana",
+            "actual": "Louisiana"
+          },
+          {
+            "week": 6,
+            "matchup": "Arkansas at Ole Miss",
+            "original_pick": "Arkansas",
+            "custom_pick": "Ole Miss",
+            "actual": "Ole Miss"
+          },
+          {
+            "week": 6,
+            "matchup": "Colorado State at Utah State",
+            "original_pick": "Colorado State",
+            "custom_pick": "Utah State",
+            "actual": "Utah State"
+          },
+          {
+            "week": 7,
+            "matchup": "Louisiana Tech at Middle Tennessee",
+            "original_pick": "Louisiana Tech",
+            "custom_pick": "Middle Tennessee",
+            "actual": "Middle Tennessee"
+          },
+          {
+            "week": 7,
+            "matchup": "West Virginia at Houston",
+            "original_pick": "West Virginia",
+            "custom_pick": "Houston",
+            "actual": "Houston"
+          },
+          {
+            "week": 7,
+            "matchup": "Michigan State at Rutgers",
+            "original_pick": "Michigan State",
+            "custom_pick": "Rutgers",
+            "actual": "Rutgers"
+          },
+          {
+            "week": 7,
+            "matchup": "Florida at South Carolina",
+            "original_pick": "Florida",
+            "custom_pick": "South Carolina",
+            "actual": "Florida"
+          },
+          {
+            "week": 7,
+            "matchup": "Kansas at Oklahoma State",
+            "original_pick": "Oklahoma State",
+            "custom_pick": "Kansas",
+            "actual": "Oklahoma State"
+          },
+          {
+            "week": 7,
+            "matchup": "Marshall at Georgia State",
+            "original_pick": "Marshall",
+            "custom_pick": "Georgia State",
+            "actual": "Georgia State"
+          },
+          {
+            "week": 8,
+            "matchup": "Florida International at Sam Houston",
+            "original_pick": "Florida International",
+            "custom_pick": "Sam Houston",
+            "actual": "Florida International"
+          },
+          {
+            "week": 8,
+            "matchup": "Boston College at Georgia Tech",
+            "original_pick": "Georgia Tech",
+            "custom_pick": "Boston College",
+            "actual": "Boston College"
+          },
+          {
+            "week": 8,
+            "matchup": "Pittsburgh at Wake Forest",
+            "original_pick": "Wake Forest",
+            "custom_pick": "Pittsburgh",
+            "actual": "Wake Forest"
+          },
+          {
+            "week": 8,
+            "matchup": "Oklahoma State at West Virginia",
+            "original_pick": "West Virginia",
+            "custom_pick": "Oklahoma State",
+            "actual": "Oklahoma State"
+          },
+          {
+            "week": 8,
+            "matchup": "South Florida at UConn",
+            "original_pick": "South Florida",
+            "custom_pick": "UConn",
+            "actual": "South Florida"
+          }
+        ]
+      }
+    },
+    "2024": {
+      "baseline": {
+        "games": 659,
+        "wins": 470,
+        "losses": 189,
+        "accuracy": 0.713202,
+        "brier": 0.1889224,
+        "high_confidence_games": 214,
+        "high_confidence_wins": 183,
+        "high_confidence_accuracy": 0.85514
+      },
+      "handwritten": {
+        "games": 659,
+        "wins": 456,
+        "losses": 203,
+        "accuracy": 0.691958,
+        "brier": 0.1927706,
+        "high_confidence_games": 213,
+        "high_confidence_wins": 179,
+        "high_confidence_accuracy": 0.840376
+      },
+      "changed_picks": {
+        "changed_winners": 58,
+        "fixed_baseline_misses": 22,
+        "introduced_new_misses": 36,
+        "examples": [
+          {
+            "week": 3,
+            "matchup": "Arizona at Kansas State",
+            "original_pick": "Arizona",
+            "custom_pick": "Kansas State",
+            "actual": "Kansas State"
+          },
+          {
+            "week": 3,
+            "matchup": "Massachusetts at Buffalo",
+            "original_pick": "Massachusetts",
+            "custom_pick": "Buffalo",
+            "actual": "Buffalo"
+          },
+          {
+            "week": 3,
+            "matchup": "App State at East Carolina",
+            "original_pick": "App State",
+            "custom_pick": "East Carolina",
+            "actual": "App State"
+          },
+          {
+            "week": 4,
+            "matchup": "San Jos\u00e9 State at Washington State",
+            "original_pick": "San Jos\u00e9 State",
+            "custom_pick": "Washington State",
+            "actual": "Washington State"
+          },
+          {
+            "week": 4,
+            "matchup": "James Madison at North Carolina",
+            "original_pick": "James Madison",
+            "custom_pick": "North Carolina",
+            "actual": "James Madison"
+          },
+          {
+            "week": 4,
+            "matchup": "Rutgers at Virginia Tech",
+            "original_pick": "Rutgers",
+            "custom_pick": "Virginia Tech",
+            "actual": "Rutgers"
+          },
+          {
+            "week": 4,
+            "matchup": "Memphis at Navy",
+            "original_pick": "Navy",
+            "custom_pick": "Memphis",
+            "actual": "Navy"
+          },
+          {
+            "week": 4,
+            "matchup": "Utah at Oklahoma State",
+            "original_pick": "Oklahoma State",
+            "custom_pick": "Utah",
+            "actual": "Utah"
+          },
+          {
+            "week": 4,
+            "matchup": "Iowa at Minnesota",
+            "original_pick": "Minnesota",
+            "custom_pick": "Iowa",
+            "actual": "Iowa"
+          },
+          {
+            "week": 5,
+            "matchup": "Maryland at Indiana",
+            "original_pick": "Indiana",
+            "custom_pick": "Maryland",
+            "actual": "Indiana"
+          },
+          {
+            "week": 5,
+            "matchup": "TCU at Kansas",
+            "original_pick": "TCU",
+            "custom_pick": "Kansas",
+            "actual": "TCU"
+          },
+          {
+            "week": 5,
+            "matchup": "Arizona at Utah",
+            "original_pick": "Arizona",
+            "custom_pick": "Utah",
+            "actual": "Arizona"
+          },
+          {
+            "week": 6,
+            "matchup": "Syracuse at UNLV",
+            "original_pick": "Syracuse",
+            "custom_pick": "UNLV",
+            "actual": "Syracuse"
+          },
+          {
+            "week": 6,
+            "matchup": "Western Michigan at Ball State",
+            "original_pick": "Ball State",
+            "custom_pick": "Western Michigan",
+            "actual": "Western Michigan"
+          },
+          {
+            "week": 6,
+            "matchup": "Old Dominion at Coastal Carolina",
+            "original_pick": "Old Dominion",
+            "custom_pick": "Coastal Carolina",
+            "actual": "Coastal Carolina"
+          },
+          {
+            "week": 6,
+            "matchup": "Hawai'i at San Diego State",
+            "original_pick": "Hawai'i",
+            "custom_pick": "San Diego State",
+            "actual": "San Diego State"
+          },
+          {
+            "week": 6,
+            "matchup": "Duke at Georgia Tech",
+            "original_pick": "Duke",
+            "custom_pick": "Georgia Tech",
+            "actual": "Georgia Tech"
+          },
+          {
+            "week": 7,
+            "matchup": "Middle Tennessee at Louisiana Tech",
+            "original_pick": "Louisiana Tech",
+            "custom_pick": "Middle Tennessee",
+            "actual": "Louisiana Tech"
+          },
+          {
+            "week": 7,
+            "matchup": "Ball State at Kent State",
+            "original_pick": "Ball State",
+            "custom_pick": "Kent State",
+            "actual": "Ball State"
+          },
+          {
+            "week": 7,
+            "matchup": "Miami (OH) at Eastern Michigan",
+            "original_pick": "Miami (OH)",
+            "custom_pick": "Eastern Michigan",
+            "actual": "Miami (OH)"
+          },
+          {
+            "week": 7,
+            "matchup": "Old Dominion at Georgia State",
+            "original_pick": "Old Dominion",
+            "custom_pick": "Georgia State",
+            "actual": "Old Dominion"
+          },
+          {
+            "week": 7,
+            "matchup": "San Diego State at Wyoming",
+            "original_pick": "Wyoming",
+            "custom_pick": "San Diego State",
+            "actual": "San Diego State"
+          },
+          {
+            "week": 7,
+            "matchup": "Arizona at BYU",
+            "original_pick": "BYU",
+            "custom_pick": "Arizona",
+            "actual": "BYU"
+          },
+          {
+            "week": 7,
+            "matchup": "Syracuse at NC State",
+            "original_pick": "Syracuse",
+            "custom_pick": "NC State",
+            "actual": "Syracuse"
+          },
+          {
+            "week": 8,
+            "matchup": "UAB at South Florida",
+            "original_pick": "UAB",
+            "custom_pick": "South Florida",
+            "actual": "South Florida"
+          }
+        ]
+      }
+    },
+    "2025": {
+      "baseline": {
+        "games": 663,
+        "wins": 474,
+        "losses": 189,
+        "accuracy": 0.714932,
+        "brier": 0.1857701,
+        "high_confidence_games": 187,
+        "high_confidence_wins": 167,
+        "high_confidence_accuracy": 0.893048
+      },
+      "handwritten": {
+        "games": 663,
+        "wins": 470,
+        "losses": 193,
+        "accuracy": 0.708899,
+        "brier": 0.1866672,
+        "high_confidence_games": 188,
+        "high_confidence_wins": 169,
+        "high_confidence_accuracy": 0.898936
+      },
+      "changed_picks": {
+        "changed_winners": 56,
+        "fixed_baseline_misses": 26,
+        "introduced_new_misses": 30,
+        "examples": [
+          {
+            "week": 3,
+            "matchup": "Clemson at Georgia Tech",
+            "original_pick": "Georgia Tech",
+            "custom_pick": "Clemson",
+            "actual": "Georgia Tech"
+          },
+          {
+            "week": 3,
+            "matchup": "UConn at Delaware",
+            "original_pick": "Delaware",
+            "custom_pick": "UConn",
+            "actual": "Delaware"
+          },
+          {
+            "week": 4,
+            "matchup": "Texas Tech at Utah",
+            "original_pick": "Texas Tech",
+            "custom_pick": "Utah",
+            "actual": "Texas Tech"
+          },
+          {
+            "week": 4,
+            "matchup": "SMU at TCU",
+            "original_pick": "SMU",
+            "custom_pick": "TCU",
+            "actual": "TCU"
+          },
+          {
+            "week": 5,
+            "matchup": "Duke at Syracuse",
+            "original_pick": "Syracuse",
+            "custom_pick": "Duke",
+            "actual": "Duke"
+          },
+          {
+            "week": 5,
+            "matchup": "Eastern Michigan at Central Michigan",
+            "original_pick": "Eastern Michigan",
+            "custom_pick": "Central Michigan",
+            "actual": "Central Michigan"
+          },
+          {
+            "week": 5,
+            "matchup": "Arkansas State at UL Monroe",
+            "original_pick": "UL Monroe",
+            "custom_pick": "Arkansas State",
+            "actual": "UL Monroe"
+          },
+          {
+            "week": 5,
+            "matchup": "California at Boston College",
+            "original_pick": "Boston College",
+            "custom_pick": "California",
+            "actual": "California"
+          },
+          {
+            "week": 5,
+            "matchup": "Auburn at Texas A&M",
+            "original_pick": "Texas A&M",
+            "custom_pick": "Auburn",
+            "actual": "Texas A&M"
+          },
+          {
+            "week": 5,
+            "matchup": "UCLA at Northwestern",
+            "original_pick": "Northwestern",
+            "custom_pick": "UCLA",
+            "actual": "Northwestern"
+          },
+          {
+            "week": 5,
+            "matchup": "Western Kentucky at Missouri State",
+            "original_pick": "Western Kentucky",
+            "custom_pick": "Missouri State",
+            "actual": "Western Kentucky"
+          },
+          {
+            "week": 6,
+            "matchup": "Sam Houston at New Mexico State",
+            "original_pick": "New Mexico State",
+            "custom_pick": "Sam Houston",
+            "actual": "New Mexico State"
+          },
+          {
+            "week": 6,
+            "matchup": "Kansas State at Baylor",
+            "original_pick": "Baylor",
+            "custom_pick": "Kansas State",
+            "actual": "Baylor"
+          },
+          {
+            "week": 6,
+            "matchup": "Wake Forest at Virginia Tech",
+            "original_pick": "Wake Forest",
+            "custom_pick": "Virginia Tech",
+            "actual": "Wake Forest"
+          },
+          {
+            "week": 6,
+            "matchup": "Miami (OH) at Northern Illinois",
+            "original_pick": "Miami (OH)",
+            "custom_pick": "Northern Illinois",
+            "actual": "Miami (OH)"
+          },
+          {
+            "week": 6,
+            "matchup": "Miami at Florida State",
+            "original_pick": "Florida State",
+            "custom_pick": "Miami",
+            "actual": "Miami"
+          },
+          {
+            "week": 7,
+            "matchup": "East Carolina at Tulane",
+            "original_pick": "East Carolina",
+            "custom_pick": "Tulane",
+            "actual": "Tulane"
+          },
+          {
+            "week": 7,
+            "matchup": "Southern Miss at Georgia Southern",
+            "original_pick": "Georgia Southern",
+            "custom_pick": "Southern Miss",
+            "actual": "Southern Miss"
+          },
+          {
+            "week": 7,
+            "matchup": "Northern Illinois at Eastern Michigan",
+            "original_pick": "Eastern Michigan",
+            "custom_pick": "Northern Illinois",
+            "actual": "Eastern Michigan"
+          },
+          {
+            "week": 7,
+            "matchup": "Oklahoma at Texas",
+            "original_pick": "Oklahoma",
+            "custom_pick": "Texas",
+            "actual": "Texas"
+          },
+          {
+            "week": 7,
+            "matchup": "App State at Georgia State",
+            "original_pick": "App State",
+            "custom_pick": "Georgia State",
+            "actual": "App State"
+          },
+          {
+            "week": 7,
+            "matchup": "Utah State at Hawai'i",
+            "original_pick": "Hawai'i",
+            "custom_pick": "Utah State",
+            "actual": "Hawai'i"
+          },
+          {
+            "week": 8,
+            "matchup": "Washington at Michigan",
+            "original_pick": "Michigan",
+            "custom_pick": "Washington",
+            "actual": "Michigan"
+          },
+          {
+            "week": 8,
+            "matchup": "Texas State at Marshall",
+            "original_pick": "Texas State",
+            "custom_pick": "Marshall",
+            "actual": "Marshall"
+          },
+          {
+            "week": 8,
+            "matchup": "Southern Miss at Louisiana",
+            "original_pick": "Louisiana",
+            "custom_pick": "Southern Miss",
+            "actual": "Southern Miss"
+          }
+        ]
+      }
+    },
+    "2026": {
+      "baseline": {
+        "games": 228,
+        "wins": 164,
+        "losses": 64,
+        "accuracy": 0.719298,
+        "brier": 0.1808088,
+        "high_confidence_games": 78,
+        "high_confidence_wins": 69,
+        "high_confidence_accuracy": 0.884615
+      },
+      "handwritten": {
+        "games": 228,
+        "wins": 164,
+        "losses": 64,
+        "accuracy": 0.719298,
+        "brier": 0.180122,
+        "high_confidence_games": 78,
+        "high_confidence_wins": 72,
+        "high_confidence_accuracy": 0.923077
+      },
+      "changed_picks": {
+        "changed_winners": 16,
+        "fixed_baseline_misses": 8,
+        "introduced_new_misses": 8,
+        "examples": [
+          {
+            "week": 3,
+            "matchup": "Wyoming at Central Michigan",
+            "original_pick": "Wyoming",
+            "custom_pick": "Central Michigan",
+            "actual": "Central Michigan"
+          },
+          {
+            "week": 4,
+            "matchup": "Ball State at Kent State",
+            "original_pick": "Ball State",
+            "custom_pick": "Kent State",
+            "actual": "Kent State"
+          },
+          {
+            "week": 4,
+            "matchup": "Ole Miss at Florida",
+            "original_pick": "Ole Miss",
+            "custom_pick": "Florida",
+            "actual": "Florida"
+          },
+          {
+            "week": 4,
+            "matchup": "Iowa at Michigan",
+            "original_pick": "Michigan",
+            "custom_pick": "Iowa",
+            "actual": "Iowa"
+          },
+          {
+            "week": 4,
+            "matchup": "Vanderbilt at Auburn",
+            "original_pick": "Vanderbilt",
+            "custom_pick": "Auburn",
+            "actual": "Auburn"
+          },
+          {
+            "week": 4,
+            "matchup": "Missouri at Mississippi State",
+            "original_pick": "Mississippi State",
+            "custom_pick": "Missouri",
+            "actual": "Mississippi State"
+          },
+          {
+            "week": 4,
+            "matchup": "Massachusetts at Sacramento State",
+            "original_pick": "Sacramento State",
+            "custom_pick": "Massachusetts",
+            "actual": "Massachusetts"
+          },
+          {
+            "week": 4,
+            "matchup": "Air Force at Nevada",
+            "original_pick": "Air Force",
+            "custom_pick": "Nevada",
+            "actual": "Air Force"
+          },
+          {
+            "week": 5,
+            "matchup": "Old Dominion at Georgia State",
+            "original_pick": "Old Dominion",
+            "custom_pick": "Georgia State",
+            "actual": "Georgia State"
+          },
+          {
+            "week": 5,
+            "matchup": "Washington at USC",
+            "original_pick": "Washington",
+            "custom_pick": "USC",
+            "actual": "USC"
+          },
+          {
+            "week": 5,
+            "matchup": "Baylor at Arizona State",
+            "original_pick": "Baylor",
+            "custom_pick": "Arizona State",
+            "actual": "Baylor"
+          },
+          {
+            "week": 6,
+            "matchup": "UCF at Oklahoma State",
+            "original_pick": "Oklahoma State",
+            "custom_pick": "UCF",
+            "actual": "Oklahoma State"
+          },
+          {
+            "week": 6,
+            "matchup": "Tulane at Army",
+            "original_pick": "Army",
+            "custom_pick": "Tulane",
+            "actual": "Army"
+          },
+          {
+            "week": 6,
+            "matchup": "Ole Miss at Vanderbilt",
+            "original_pick": "Ole Miss",
+            "custom_pick": "Vanderbilt",
+            "actual": "Ole Miss"
+          },
+          {
+            "week": 6,
+            "matchup": "UConn at Temple",
+            "original_pick": "UConn",
+            "custom_pick": "Temple",
+            "actual": "UConn"
+          },
+          {
+            "week": 6,
+            "matchup": "Boise State at Fresno State",
+            "original_pick": "Boise State",
+            "custom_pick": "Fresno State",
+            "actual": "Boise State"
+          }
+        ]
+      },
+      "week_6": {
+        "baseline": {
+          "games": 58,
+          "wins": 37,
+          "losses": 21,
+          "accuracy": 0.637931,
+          "brier": 0.2213214,
+          "high_confidence_games": 11,
+          "high_confidence_wins": 9,
+          "high_confidence_accuracy": 0.818182
+        },
+        "handwritten": {
+          "games": 58,
+          "wins": 32,
+          "losses": 26,
+          "accuracy": 0.551724,
+          "brier": 0.2249246,
+          "high_confidence_games": 14,
+          "high_confidence_wins": 11,
+          "high_confidence_accuracy": 0.785714
+        }
+      }
+    }
+  },
+  "coverage": {
+    "2022": {
+      "3": {
+        "completed_history_games": 100,
+        "accepted_complete_games": 100,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 3,
+        "graded": 46
+      },
+      "4": {
+        "completed_history_games": 150,
+        "accepted_complete_games": 150,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 4,
+        "graded": 60
+      },
+      "5": {
+        "completed_history_games": 210,
+        "accepted_complete_games": 210,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 5,
+        "graded": 57
+      },
+      "6": {
+        "completed_history_games": 267,
+        "accepted_complete_games": 267,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 6,
+        "graded": 57
+      },
+      "7": {
+        "completed_history_games": 324,
+        "accepted_complete_games": 324,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 7,
+        "graded": 51
+      },
+      "8": {
+        "completed_history_games": 375,
+        "accepted_complete_games": 375,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 8,
+        "graded": 52
+      },
+      "9": {
+        "completed_history_games": 427,
+        "accepted_complete_games": 427,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 9,
+        "graded": 47
+      },
+      "10": {
+        "completed_history_games": 474,
+        "accepted_complete_games": 474,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 10,
+        "graded": 60
+      },
+      "11": {
+        "completed_history_games": 534,
+        "accepted_complete_games": 534,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 11,
+        "graded": 64
+      },
+      "12": {
+        "completed_history_games": 598,
+        "accepted_complete_games": 598,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 12,
+        "graded": 61
+      },
+      "13": {
+        "completed_history_games": 659,
+        "accepted_complete_games": 659,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 13,
+        "graded": 63
+      },
+      "14": {
+        "completed_history_games": 722,
+        "accepted_complete_games": 722,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 14,
+        "graded": 11
+      },
+      "15": {
+        "completed_history_games": 733,
+        "accepted_complete_games": 733,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 15,
+        "graded": 1
+      }
+    },
+    "2023": {
+      "3": {
+        "completed_history_games": 99,
+        "accepted_complete_games": 99,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 3,
+        "graded": 50
+      },
+      "4": {
+        "completed_history_games": 153,
+        "accepted_complete_games": 153,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 4,
+        "graded": 62
+      },
+      "5": {
+        "completed_history_games": 216,
+        "accepted_complete_games": 216,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 5,
+        "graded": 56
+      },
+      "6": {
+        "completed_history_games": 272,
+        "accepted_complete_games": 272,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 6,
+        "graded": 49
+      },
+      "7": {
+        "completed_history_games": 321,
+        "accepted_complete_games": 321,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 7,
+        "graded": 55
+      },
+      "8": {
+        "completed_history_games": 376,
+        "accepted_complete_games": 376,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 8,
+        "graded": 54
+      },
+      "9": {
+        "completed_history_games": 430,
+        "accepted_complete_games": 430,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 9,
+        "graded": 54
+      },
+      "10": {
+        "completed_history_games": 484,
+        "accepted_complete_games": 484,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 10,
+        "graded": 62
+      },
+      "11": {
+        "completed_history_games": 546,
+        "accepted_complete_games": 546,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 11,
+        "graded": 64
+      },
+      "12": {
+        "completed_history_games": 610,
+        "accepted_complete_games": 610,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 12,
+        "graded": 64
+      },
+      "13": {
+        "completed_history_games": 674,
+        "accepted_complete_games": 674,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 13,
+        "graded": 65
+      },
+      "14": {
+        "completed_history_games": 739,
+        "accepted_complete_games": 739,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 14,
+        "graded": 10
+      },
+      "15": {
+        "completed_history_games": 749,
+        "accepted_complete_games": 749,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 133,
+        "teams_with_valid_full_history": 133,
+        "week": 15,
+        "graded": 1
+      }
+    },
+    "2024": {
+      "3": {
+        "completed_history_games": 88,
+        "accepted_complete_games": 88,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 131,
+        "teams_with_valid_full_history": 131,
+        "week": 3,
+        "graded": 48
+      },
+      "4": {
+        "completed_history_games": 140,
+        "accepted_complete_games": 140,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 4,
+        "graded": 54
+      },
+      "5": {
+        "completed_history_games": 194,
+        "accepted_complete_games": 194,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 5,
+        "graded": 51
+      },
+      "6": {
+        "completed_history_games": 246,
+        "accepted_complete_games": 246,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 6,
+        "graded": 49
+      },
+      "7": {
+        "completed_history_games": 295,
+        "accepted_complete_games": 295,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 7,
+        "graded": 52
+      },
+      "8": {
+        "completed_history_games": 347,
+        "accepted_complete_games": 347,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 8,
+        "graded": 59
+      },
+      "9": {
+        "completed_history_games": 406,
+        "accepted_complete_games": 406,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 9,
+        "graded": 56
+      },
+      "10": {
+        "completed_history_games": 462,
+        "accepted_complete_games": 462,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 10,
+        "graded": 48
+      },
+      "11": {
+        "completed_history_games": 510,
+        "accepted_complete_games": 510,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 11,
+        "graded": 50
+      },
+      "12": {
+        "completed_history_games": 560,
+        "accepted_complete_games": 560,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 12,
+        "graded": 53
+      },
+      "13": {
+        "completed_history_games": 613,
+        "accepted_complete_games": 613,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 13,
+        "graded": 62
+      },
+      "14": {
+        "completed_history_games": 675,
+        "accepted_complete_games": 675,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 14,
+        "graded": 67
+      },
+      "15": {
+        "completed_history_games": 742,
+        "accepted_complete_games": 742,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 15,
+        "graded": 9
+      },
+      "16": {
+        "completed_history_games": 751,
+        "accepted_complete_games": 751,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 134,
+        "teams_with_valid_full_history": 134,
+        "week": 16,
+        "graded": 1
+      }
+    },
+    "2025": {
+      "3": {
+        "completed_history_games": 98,
+        "accepted_complete_games": 98,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 135,
+        "teams_with_valid_full_history": 135,
+        "week": 3,
+        "graded": 46
+      },
+      "4": {
+        "completed_history_games": 145,
+        "accepted_complete_games": 145,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 4,
+        "graded": 50
+      },
+      "5": {
+        "completed_history_games": 195,
+        "accepted_complete_games": 195,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 5,
+        "graded": 51
+      },
+      "6": {
+        "completed_history_games": 246,
+        "accepted_complete_games": 246,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 6,
+        "graded": 50
+      },
+      "7": {
+        "completed_history_games": 296,
+        "accepted_complete_games": 296,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 7,
+        "graded": 56
+      },
+      "8": {
+        "completed_history_games": 352,
+        "accepted_complete_games": 352,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 8,
+        "graded": 59
+      },
+      "9": {
+        "completed_history_games": 411,
+        "accepted_complete_games": 411,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 9,
+        "graded": 53
+      },
+      "10": {
+        "completed_history_games": 464,
+        "accepted_complete_games": 464,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 10,
+        "graded": 52
+      },
+      "11": {
+        "completed_history_games": 516,
+        "accepted_complete_games": 516,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 11,
+        "graded": 51
+      },
+      "12": {
+        "completed_history_games": 567,
+        "accepted_complete_games": 567,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 12,
+        "graded": 58
+      },
+      "13": {
+        "completed_history_games": 625,
+        "accepted_complete_games": 625,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 13,
+        "graded": 60
+      },
+      "14": {
+        "completed_history_games": 685,
+        "accepted_complete_games": 685,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 14,
+        "graded": 67
+      },
+      "15": {
+        "completed_history_games": 752,
+        "accepted_complete_games": 752,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 15,
+        "graded": 9
+      },
+      "16": {
+        "completed_history_games": 761,
+        "accepted_complete_games": 761,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 136,
+        "teams_with_valid_full_history": 136,
+        "week": 16,
+        "graded": 1
+      }
+    },
+    "2026": {
+      "3": {
+        "completed_history_games": 100,
+        "accepted_complete_games": 100,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 137,
+        "teams_with_valid_full_history": 137,
+        "week": 3,
+        "graded": 56
+      },
+      "4": {
+        "completed_history_games": 157,
+        "accepted_complete_games": 157,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 138,
+        "teams_with_valid_full_history": 138,
+        "week": 4,
+        "graded": 58
+      },
+      "5": {
+        "completed_history_games": 215,
+        "accepted_complete_games": 215,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 138,
+        "teams_with_valid_full_history": 138,
+        "week": 5,
+        "graded": 56
+      },
+      "6": {
+        "completed_history_games": 271,
+        "accepted_complete_games": 271,
+        "incomplete_box_games": 0,
+        "all_teams_seen": 138,
+        "teams_with_valid_full_history": 138,
+        "week": 6,
+        "graded": 58
+      }
+    }
+  },
+  "limitations": [
+    "Only current-season internal component scores are changed; previous-season Elo and efficiency prior are retained unchanged.",
+    "Prior-week rates are computed from complete regular-season FBS box-score game histories. Every team with incomplete past FBS game data is excluded.",
+    "Each raw rushing/completion/turnover component normalized among FBS teams with fully valid histories as of the week; production EPA and explosive z-ratings used unchanged.",
+    "Turnovers on offense are turnovers committed per previous game; on defense, forced takeaways per previous game. They can correlate and are not independent of offensive/defensive EPA.",
+    "Completion rate is a simplistic passing-efficiency proxy. It does not account for depth of target, yards per attempt, or opponent strength.",
+    "The same exact eligible games and recorded results are used for baseline and new formula. These are reconstructed, not archived pregame predictions.",
+    "All five seasons have already been examined in this project; there is no pristine blind held-out test. A prospective comparison is needed before any production change.",
+    "Not calibrated separately; comparing unchanged V1.5 sigmoid on the new formula tests the user's specified weights, not an optimized probability model.",
+    "Measures straight-up winning and Brier only; does not establish ATS accuracy, odds-based betting value, or ROI."
+  ]
+}
