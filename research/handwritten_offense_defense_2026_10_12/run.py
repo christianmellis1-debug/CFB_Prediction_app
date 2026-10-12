@@ -146,6 +146,7 @@ def year_inputs(year):
     prior=read_summary(None,year-1)
     lookup=prepare_full_boxes(boxes(year))
     full_scores, full_weeks=component_vectors(current)
+    prior_vector=model.build_prior_profiles(prior,schedule)
     collected=[]
     quality={}
     for week in sorted(schedule.week.dropna().astype(int).unique()):
@@ -186,6 +187,9 @@ def year_inputs(year):
             d=hc[1]-ac[1]
             old_off=float(np.asarray([.40,.30,.15,.15])@o)
             old_def=float(np.asarray([.40,.30,.15,.15])@d)
+            hp,ap=prior_vector(hid),prior_vector(aid)
+            prior_off_edge=float(hp[0]-ap[0])
+            prior_def_edge=float(hp[1]-ap[1])
             # Indices of independent prior-game box feature profiles:
             # 0 run off, 1 pass off, 2 fewer giveaways,
             # 3 run defense, 4 pass defense, 5 takeaways forced.
@@ -205,6 +209,10 @@ def year_inputs(year):
                 "home_win":int(float(g.home_points)>float(g.away_points)),
                 "baseline_probability":p,"custom_probability":candidate,
                 "offense_change":delta_o,"defense_change":delta_d,
+                "original_offense_edge":(1-cur_weight)*prior_off_edge+cur_weight*old_off,
+                "original_defense_edge":(1-cur_weight)*prior_def_edge+cur_weight*old_def,
+                "proposed_offense_edge":(1-cur_weight)*prior_off_edge+cur_weight*changed_off,
+                "proposed_defense_edge":(1-cur_weight)*prior_def_edge+cur_weight*changed_def,
                 "rush_off_edge":float(hv[0]-av[0]),
                 "rush_def_edge":float(hv[3]-av[3]),
             })
