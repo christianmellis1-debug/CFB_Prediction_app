@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 from research.handwritten_offense_defense_2026_10_12.run import year_inputs
+import model_v1_5 as model
 
 OUT=Path("research/handwritten_offense_defense_2026_10_12/unit_advantage_results.json")
 EPS=1e-10
@@ -76,7 +77,7 @@ def main():
         # The revised internal score has to match the previous A/B-test
         # delta for each game, proving the offense/defense comparisons are
         # based on precisely the same proposed probabilities as before.
-        w=frame.current_weight.to_numpy()
+        w=frame.week.map(model.current_season_weight).to_numpy(dtype=float)
         off=np.asarray(frame.proposed_offense_edge-frame.original_offense_edge)
         de=np.asarray(frame.proposed_defense_edge-frame.original_defense_edge)
         eoff=np.asarray(frame.offense_change*w)
