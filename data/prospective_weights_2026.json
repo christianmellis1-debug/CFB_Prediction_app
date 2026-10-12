@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "experiment": "cfb-internal-weights-v1-2026-10-12",
+  "season": 2026,
+  "snapshots": {},
+  "results": {},
+  "last_run": null,
+  "run_summary": {
+    "note": "Prospective-only: no historical games inserted; captures begin with first successful verified pregame check after activation."
+  }
+}
