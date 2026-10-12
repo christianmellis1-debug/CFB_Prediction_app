@@ -1,0 +1,46 @@
+name: Research matchup-weight models
+
+on:
+  push:
+    branches:
+      - research/matchup-weight-models-2026-10-12
+    paths:
+      - 'research/matchup_weight_models_2026_10_12/**'
+      - '.github/workflows/matchup-weights.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cfb-research-matchup-weights
+  cancel-in-progress: false
+
+jobs:
+  matchup-weights:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install model dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Regression unit tests
+        run: |
+          python -m unittest discover -s tests -p 'test_waterfall.py'
+          python -m unittest discover -s tests -p 'test_prospective_weights.py'
+      - name: Backtest fixed matchup weights and V1.5 hybrid candidates
+        run: PYTHONPATH=. python research/matchup_weight_models_2026_10_12/run.py
+      - name: Save isolated research results
+        if: github.ref == 'refs/heads/research/matchup-weight-models-2026-10-12'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/matchup_weight_models_2026_10_12/results.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record earlier-week matchup weighting comparison'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
