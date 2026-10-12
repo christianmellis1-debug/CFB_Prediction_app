@@ -1,0 +1,34 @@
+name: Inspect 2022 ESPN betting spread coverage
+on:
+  push:
+    branches:
+      - research/handwritten-home-field-ats-2026-10-12
+    paths:
+      - '.github/workflows/inspect-2022-spreads.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6
+      - name: Inspect 2022 lines and source fields
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          u="https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_betting/betting_2022.csv"
+          d=pd.read_csv(u,low_memory=False)
+          print("COLUMNS:",list(d.columns))
+          print("SOURCES",d.odds_source.value_counts(dropna=False).to_dict())
+          cols=[k for k in ("odds_source","game_spread_available","home_team_spread","game_spread","home_favorite","home_id","away_id","week","status") if k in d]
+          print("NON_NULL BY SOURCE",d.groupby("odds_source")[cols].count().to_string())
+          for source in d.odds_source.dropna().unique():
+              x=d[d.odds_source.eq(source)]
+              sample=[x for x in cols if x != "odds_source"]
+              print("SOURCE",source,":",x[sample].head(8).to_string(index=False))
+          PY
