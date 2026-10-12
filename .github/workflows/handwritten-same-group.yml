@@ -1,0 +1,47 @@
+name: Analyze handwritten model same-group P4 and G6 matchups
+
+on:
+  push:
+    branches:
+      - research/handwritten-same-group-2026-10-12
+    paths:
+      - 'research/handwritten_offense_defense_2026_10_12/same_group.py'
+      - 'tests/test_handwritten_same_group.py'
+      - '.github/workflows/handwritten-same-group.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cfb-handwritten-same-group
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned numerical dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Validate season-aware exclusions
+        run: |
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_same_group.py' -v
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_offense_defense.py'
+      - name: Compare full and same-group rating advantage records 2022–2026
+        run: PYTHONPATH=. python research/handwritten_offense_defense_2026_10_12/same_group.py
+      - name: Archive isolated research results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/handwritten_offense_defense_2026_10_12/same_group_results.json
+          git add research/handwritten_offense_defense_2026_10_12/same_group_games_2026.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record historical P4-P4 and G6-G6 handwritten rating selection'
+            git pull --rebase -X theirs origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
