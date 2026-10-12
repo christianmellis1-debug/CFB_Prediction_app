@@ -88,27 +88,6 @@ def standardized_team_profiles(history,lookup):
             invalid.update((hid,aid))
             invalid_games+=1
             continue
-        home,away=(lookup.loc[k] for k in keys)
-        for tid,own,opp in ((hid,home,away),(aid,away,home)):
-            totals.setdefault(tid,np.zeros(7,dtype=float))
-            # off rush yards / att; off pass completions / attempts;
-            # total own giveaways (per game), total opponent rushing
-            # yards / attempts, opponent pass comp / att, forced
-            # takeaways (per game), number of valid team games.
-            totals[tid]+=np.array([
-                own.rushingYards,own.rushingAttempts,
-                own.completions,own.pass_attempts,
-                own.turnovers,opp.rushingYards,opp.rushingAttempts,
-                opp.completions,opp.pass_attempts,opp.turnovers,1
-            ]) if False else 0  # overwritten below with validated 11-length vector
-        completed+=1
-    # Reaggregate explicitly with 11-element vectors for clarity.
-    totals={}
-    for _,g in history.iterrows():
-        hid,aid=int(g.home_id),int(g.away_id)
-        keys=((g.game_id,g.home_id),(g.game_id,g.away_id))
-        if not all(k in lookup.index for k in keys):
-            continue
         h,a=(lookup.loc[k] for k in keys)
         for tid,own,opp in ((hid,h,a),(aid,a,h)):
             totals.setdefault(tid,np.zeros(11,dtype=float))
@@ -118,6 +97,7 @@ def standardized_team_profiles(history,lookup):
                 opp.rushingYards,opp.rushingAttempts,
                 opp.completions,opp.pass_attempts,opp.turnovers,1.0
             ])
+        completed+=1
     eligible={tid:t for tid,t in totals.items()
               if tid not in invalid and t[10]>=1 and min(t[1],t[3],t[6],t[8])>0}
     quality={"completed_history_games":len(history),
