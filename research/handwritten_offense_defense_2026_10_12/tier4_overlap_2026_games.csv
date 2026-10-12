@@ -11,39 +11,39 @@ week,game_id,home,away,home_group,spread,magnitude,result,test_A,test_B,dk_home_
 3,401864574,App State,Charlotte,G6,-16.5,0.5285237817949071,W,True,False,,,,,False,False,,,
 3,401866422,Liberty,Ball State,G6,-14.5,1.6751446144137287,W,True,False,,,,,False,False,,,
 3,401869940,Delaware,Coastal Carolina,G6,-4.5,0.11068929778951964,W,True,True,,,,,False,False,,,
-4,401856813,Baylor,Colorado,P4,-8.5,0.2616265701688829,W,True,True,,,,,False,False,Baylor Bears,Colorado Buffaloes,ESPN team identity mismatch
-4,401858461,Indiana,Northwestern,P4,-20.5,1.1086263496993287,W,True,False,,,,,False,False,Indiana Hoosiers,Northwestern Wildcats,ESPN team identity mismatch
-4,401858465,Ohio State,Illinois,P4,-25.5,0.3234791852200447,W,True,False,,,,,False,False,Ohio State Buckeyes,Illinois Fighting Illini,ESPN team identity mismatch
-4,401858466,Penn State,Wisconsin,P4,-9.5,0.9001154394476432,L,True,True,,,,,False,False,Penn State Nittany Lions,Wisconsin Badgers,ESPN team identity mismatch
-4,401860891,Fresno State,Rice,G6,-12.5,0.6027427100107735,W,True,False,,,,,False,False,Fresno State Bulldogs,Rice Owls,ESPN team identity mismatch
-4,401860896,UTSA,Colorado State,G6,-14.5,0.0044068996206126365,W,True,False,,,,,False,False,UTSA Roadrunners,Colorado State Rams,ESPN team identity mismatch
-4,401862784,Tulane,Southern Miss,G6,-17.5,0.6054974466765599,W,True,False,,,,,False,False,Tulane Green Wave,Southern Miss Golden Eagles,ESPN team identity mismatch
-5,401856711,Texas A&M,Arkansas,P4,-13.5,0.24979480022616443,W,True,False,,,,,False,False,Texas A&M Aggies,Arkansas Razorbacks,ESPN team identity mismatch
-5,401856822,Iowa State,West Virginia,P4,-3.0,0.10728588160414282,W,True,True,,,,,False,False,Iowa State Cyclones,West Virginia Mountaineers,ESPN team identity mismatch
-5,401858246,SMU,Boston College,P4,-21.5,0.10995140350376603,W,True,False,,,,,False,False,SMU Mustangs,Boston College Eagles,ESPN team identity mismatch
-5,401858475,Nebraska,Maryland,P4,-15.5,0.8318348358703792,W,True,False,,,,,False,False,Nebraska Cornhuskers,Maryland Terrapins,ESPN team identity mismatch
-5,401858479,Wisconsin,Michigan State,P4,-8.5,0.3136389567297953,W,True,True,,,,,False,False,Wisconsin Badgers,Michigan State Spartans,ESPN team identity mismatch
-5,401864514,New Mexico,UTEP,G6,-23.5,1.184676682117902,W,True,False,,,,,False,False,New Mexico Lobos,UTEP Miners,ESPN team identity mismatch
-5,401864515,North Dakota State,Wyoming,G6,-17.5,0.448382476654024,W,True,False,,,,,False,False,North Dakota State Bison,Wyoming Cowboys,ESPN team identity mismatch
-5,401866430,Central Michigan,Akron,G6,-6.5,0.817118038833957,W,True,True,,,,,False,False,Central Michigan Chippewas,Akron Zips,ESPN team identity mismatch
-5,401866433,Massachusetts,Eastern Michigan,G6,-5.5,0.46274723676624674,L,True,True,,,,,False,False,Massachusetts Minutemen,Eastern Michigan Eagles,ESPN team identity mismatch
-5,401866477,Miami (OH),Bowling Green,G6,-10.5,0.2750551655596862,L,True,False,,,,,False,False,Miami (OH) RedHawks,Bowling Green Falcons,ESPN team identity mismatch
-5,401869932,Louisiana,Arkansas State,G6,-4.5,0.54989947510507,W,True,True,,,,,False,False,Louisiana Ragin' Cajuns,Arkansas State Red Wolves,ESPN team identity mismatch
-5,401869962,James Madison,Marshall,G6,-14.5,0.5419777975923264,W,True,False,,,,,False,False,James Madison Dukes,Marshall Thundering Herd,ESPN team identity mismatch
-6,401856716,Missouri,Texas A&M,P4,-4.5,0.36107659269808,W,True,True,,,,,False,False,Missouri Tigers,Texas A&M Aggies,ESPN team identity mismatch
-6,401856825,Kansas State,Houston,P4,-2.5,0.16457602717615533,L,True,True,,,,,False,False,Kansas State Wildcats,Houston Cougars,ESPN team identity mismatch
-6,401856826,BYU,Iowa State,P4,-11.5,0.42562979463320283,W,True,False,,,,,False,False,BYU Cougars,Iowa State Cyclones,ESPN team identity mismatch
-6,401858254,Louisville,Florida State,P4,-4.0,0.2548165442317949,W,True,True,,,,,False,False,Louisville Cardinals,Florida State Seminoles,ESPN team identity mismatch
-6,401858257,Notre Dame,Stanford,P4,-40.5,1.9318816275216273,W,True,False,,,,,False,False,Notre Dame Fighting Irish,Stanford Cardinal,ESPN team identity mismatch
-6,401858258,Virginia,Syracuse,P4,-14.0,0.4350933087599949,W,True,False,,,,,False,False,Virginia Cavaliers,Syracuse Orange,ESPN team identity mismatch
-6,401858483,Ohio State,Maryland,P4,-31.5,1.664636201858108,W,True,False,,,,,False,False,Ohio State Buckeyes,Maryland Terrapins,ESPN team identity mismatch
-6,401858484,Oregon,UCLA,P4,-10.0,0.11248555288854345,L,True,False,,,,,False,False,Oregon Ducks,UCLA Bruins,ESPN team identity mismatch
-6,401860922,Utah State,Washington State,G6,-4.0,0.05107802246384385,W,True,True,,,,,False,False,Utah State Aggies,Washington State Cougars,ESPN team identity mismatch
-6,401862796,North Texas,Charlotte,G6,-27.5,0.19731125797750249,W,True,False,,,,,False,False,North Texas Mean Green,Charlotte 49ers,ESPN team identity mismatch
-6,401862798,Memphis,UAB,G6,-15.5,0.024068532463987574,W,True,False,,,,,False,False,Memphis Tigers,UAB Blazers,ESPN team identity mismatch
-6,401862799,Navy,Tulsa,G6,-3.0,0.16759492368006723,W,True,True,,,,,False,False,Navy Midshipmen,Tulsa Golden Hurricane,ESPN team identity mismatch
-6,401864519,San José State,Wyoming,G6,-4.5,0.2066134842277329,L,True,True,,,,,False,False,San José State Spartans,Wyoming Cowboys,ESPN team identity mismatch
-6,401866437,Toledo,Buffalo,G6,-18.5,0.7602494278626233,L,True,False,,,,,False,False,Toledo Rockets,Buffalo Bulls,ESPN team identity mismatch
-6,401866439,Western Michigan,Kent State,G6,-13.5,0.7626216922193161,W,True,False,,,,,False,False,Western Michigan Broncos,Kent State Golden Flashes,ESPN team identity mismatch
-6,401870766,Liberty,Sam Houston,G6,-13.5,0.8605733960822309,W,True,False,,,,,False,False,Liberty Flames,Sam Houston Bearkats,ESPN team identity mismatch
-6,401871090,Troy,Southern Miss,G6,-9.5,0.12221617884492339,W,True,True,,,,,False,False,Troy Trojans,Southern Miss Golden Eagles,ESPN team identity mismatch
+4,401856813,Baylor,Colorado,P4,-8.5,0.2616265701688829,W,True,True,-345,275,-290,235,False,False,Baylor Bears,Colorado Buffaloes,
+4,401858461,Indiana,Northwestern,P4,-20.5,1.1086263496993287,W,True,False,-1650,950,-4000,1600,False,False,Indiana Hoosiers,Northwestern Wildcats,
+4,401858465,Ohio State,Illinois,P4,-25.5,0.3234791852200447,W,True,False,-4000,1600,-6500,2000,False,False,Ohio State Buckeyes,Illinois Fighting Illini,
+4,401858466,Penn State,Wisconsin,P4,-9.5,0.9001154394476432,L,True,True,-380,300,-455,350,False,False,Penn State Nittany Lions,Wisconsin Badgers,
+4,401860891,Fresno State,Rice,G6,-12.5,0.6027427100107735,W,True,False,-500,380,-520,390,False,True,Fresno State Bulldogs,Rice Owls,
+4,401860896,UTSA,Colorado State,G6,-14.5,0.0044068996206126365,W,True,False,-675,490,-575,425,True,True,UTSA Roadrunners,Colorado State Rams,
+4,401862784,Tulane,Southern Miss,G6,-17.5,0.6054974466765599,W,True,False,-1050,675,-1200,750,False,False,Tulane Green Wave,Southern Miss Golden Eagles,
+5,401856711,Texas A&M,Arkansas,P4,-13.5,0.24979480022616443,W,True,False,-600,440,-700,500,True,True,Texas A&M Aggies,Arkansas Razorbacks,
+5,401856822,Iowa State,West Virginia,P4,-3.0,0.10728588160414282,W,True,True,-155,130,-115,-105,False,False,Iowa State Cyclones,West Virginia Mountaineers,
+5,401858246,SMU,Boston College,P4,-21.5,0.10995140350376603,W,True,False,-1650,950,-2100,1100,False,False,SMU Mustangs,Boston College Eagles,
+5,401858475,Nebraska,Maryland,P4,-15.5,0.8318348358703792,W,True,False,-700,500,-550,410,True,True,Nebraska Cornhuskers,Maryland Terrapins,
+5,401858479,Wisconsin,Michigan State,P4,-8.5,0.3136389567297953,W,True,True,-355,280,-360,285,False,False,Wisconsin Badgers,Michigan State Spartans,
+5,401864514,New Mexico,UTEP,G6,-23.5,1.184676682117902,W,True,False,-3200,1400,-2100,1100,False,False,New Mexico Lobos,UTEP Miners,
+5,401864515,North Dakota State,Wyoming,G6,-17.5,0.448382476654024,W,True,False,-950,625,-1800,1000,True,False,North Dakota State Bison,Wyoming Cowboys,
+5,401866430,Central Michigan,Akron,G6,-6.5,0.817118038833957,W,True,True,-278,225,-225,185,False,False,Central Michigan Chippewas,Akron Zips,
+5,401866433,Massachusetts,Eastern Michigan,G6,-5.5,0.46274723676624674,L,True,True,-218,180,-130,124,False,False,Massachusetts Minutemen,Eastern Michigan Eagles,
+5,401866477,Miami (OH),Bowling Green,G6,-10.5,0.2750551655596862,L,True,False,-470,360,-850,575,False,True,Miami (OH) RedHawks,Bowling Green Falcons,
+5,401869932,Louisiana,Arkansas State,G6,-4.5,0.54989947510507,W,True,True,-205,170,-175,145,False,False,Louisiana Ragin' Cajuns,Arkansas State Red Wolves,
+5,401869962,James Madison,Marshall,G6,-14.5,0.5419777975923264,W,True,False,-750,525,-700,500,True,True,James Madison Dukes,Marshall Thundering Herd,
+6,401856716,Missouri,Texas A&M,P4,-4.5,0.36107659269808,W,True,True,-205,170,-118,-102,False,False,Missouri Tigers,Texas A&M Aggies,
+6,401856825,Kansas State,Houston,P4,-2.5,0.16457602717615533,L,True,True,-142,120,-130,110,False,False,Kansas State Wildcats,Houston Cougars,
+6,401856826,BYU,Iowa State,P4,-11.5,0.42562979463320283,W,True,False,-470,360,-650,470,False,True,BYU Cougars,Iowa State Cyclones,
+6,401858254,Louisville,Florida State,P4,-4.0,0.2548165442317949,W,True,True,-192,160,-305,245,False,False,Louisville Cardinals,Florida State Seminoles,
+6,401858257,Notre Dame,Stanford,P4,-40.5,1.9318816275216273,W,True,False,,,,,False,False,Notre Dame Fighting Irish,Stanford Cardinal,Missing valid Draft Kings closing moneyline
+6,401858258,Virginia,Syracuse,P4,-14.0,0.4350933087599949,W,True,False,-550,410,-340,270,True,False,Virginia Cavaliers,Syracuse Orange,
+6,401858483,Ohio State,Maryland,P4,-31.5,1.664636201858108,W,True,False,,,,,False,False,Ohio State Buckeyes,Maryland Terrapins,Missing valid Draft Kings closing moneyline
+6,401858484,Oregon,UCLA,P4,-10.0,0.11248555288854345,L,True,False,-410,320,-535,400,False,True,Oregon Ducks,UCLA Bruins,
+6,401860922,Utah State,Washington State,G6,-4.0,0.05107802246384385,W,True,True,-185,154,-142,120,False,False,Utah State Aggies,Washington State Cougars,
+6,401862796,North Texas,Charlotte,G6,-27.5,0.19731125797750249,W,True,False,-4500,1700,-4500,1700,False,False,North Texas Mean Green,Charlotte 49ers,
+6,401862798,Memphis,UAB,G6,-15.5,0.024068532463987574,W,True,False,-700,500,-650,470,True,True,Memphis Tigers,UAB Blazers,
+6,401862799,Navy,Tulsa,G6,-3.0,0.16759492368006723,W,True,True,-155,130,-162,136,False,False,Navy Midshipmen,Tulsa Golden Hurricane,
+6,401864519,San José State,Wyoming,G6,-4.5,0.2066134842277329,L,True,True,-192,160,-225,185,False,False,San José State Spartans,Wyoming Cowboys,
+6,401866437,Toledo,Buffalo,G6,-18.5,0.7602494278626233,L,True,False,-1100,700,-1350,800,False,False,Toledo Rockets,Buffalo Bulls,
+6,401866439,Western Michigan,Kent State,G6,-13.5,0.7626216922193161,W,True,False,-575,425,-750,525,True,True,Western Michigan Broncos,Kent State Golden Flashes,
+6,401870766,Liberty,Sam Houston,G6,-13.5,0.8605733960822309,W,True,False,-575,425,-600,440,True,True,Liberty Flames,Sam Houston Bearkats,
+6,401871090,Troy,Southern Miss,G6,-9.5,0.12221617884492339,W,True,True,-410,320,-340,270,False,False,Troy Trojans,Southern Miss Golden Eagles,
