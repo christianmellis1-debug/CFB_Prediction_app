@@ -1,0 +1,36 @@
+name: Audit custom candidate ex Tier4 moneylines below 500
+on:
+  push:
+    branches:
+      - research/nonoverlap-price-ceiling-2026-10-12
+    paths:
+      - 'research/handwritten_offense_defense_2026_10_12/nonoverlap_minus500_filter_2026.py'
+      - '.github/workflows/nonoverlap-price-ceiling.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: custom-tier-nonoverlap-price-ceiling
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Calculate all Week 3-6 DK closing price exclusions
+        run: PYTHONPATH=. python research/handwritten_offense_defense_2026_10_12/nonoverlap_minus500_filter_2026.py
+      - name: Save isolated research results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/handwritten_offense_defense_2026_10_12/nonoverlap_minus500_filter_2026.json
+          git add research/handwritten_offense_defense_2026_10_12/nonoverlap_minus500_filter_2026.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Archive 2026 non-Parlay Bridge selections under 500 moneyline filter'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
