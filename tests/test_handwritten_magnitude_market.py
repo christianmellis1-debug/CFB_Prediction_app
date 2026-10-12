@@ -2,7 +2,7 @@
 import unittest
 import pandas as pd
 from research.handwritten_offense_defense_2026_10_12.magnitude_market import (
-    magnitude_groups,market_favorites_comparison,spread_bucket
+    magnitude_groups,separate_unit_magnitudes,market_favorites_comparison,spread_bucket
 )
 
 def row(season,off,defense,win,spread,neutral=False):
@@ -33,6 +33,22 @@ class MagnitudeMarketTest(unittest.TestCase):
         self.assertEqual(result["nonoverlapping_bins"]["1–1.5"]["games"],1)
         self.assertEqual(result["nonoverlapping_bins"]["1.5+"]["games"],1)
         self.assertEqual(result["cumulative_minimum_thresholds"]["0.5"]["games"],3)
+
+    def test_independent_offensive_vs_defensive_gap_size(self):
+        d=pd.DataFrame([
+            row(2026,.2,.2,0,-5),
+            row(2026,.7,.2,1,-10),
+            row(2026,.2,.7,0,-10),
+            row(2026,.7,.7,1,-20),
+            row(2026,-.2,.6,1,-7),
+        ])
+        observed=separate_unit_magnitudes(d)
+        self.assertEqual(observed["comparison_population"],4)
+        bins=observed["two_by_two"]
+        self.assertEqual(bins["both_below_threshold"]["games"],1)
+        self.assertEqual(bins["only_offense_at_least_threshold"]["wins"],1)
+        self.assertEqual(bins["only_defense_at_least_threshold"]["wins"],0)
+        self.assertEqual(bins["both_at_least_threshold"]["wins"],1)
 
     def test_market_comparison_only_common_support_strata(self):
         d=pd.DataFrame([
