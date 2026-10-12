@@ -605,7 +605,7 @@ def select_waterfall(predictions, schedule, profiles, advantage_checks=None, wea
         # Reuse the valid two-sided DraftKings quote parsed above; do not
         # infer a favorite from a spread or approximate missing lines.
         tier6 = tier6_checks.get(str(gid), {})
-        if (stage is None and not neutral and fav == 'home' if valid_lines else False):
+        if stage is None and not neutral and valid_lines and fav == 'home':
             if (tier6.get('status') == 'ok' and tier6.get('qualifies') is True
                     and -500 < lines['home'] < 0):
                 stage, side = 6, 'home'
