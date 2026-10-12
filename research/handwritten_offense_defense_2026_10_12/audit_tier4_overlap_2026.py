@@ -59,7 +59,14 @@ def inspect(r):
     an=(away.get("team") or {}).get("displayName")
     q["espn_home"]=hn
     q["espn_away"]=an
-    if str(hn).casefold()!=q["home"].casefold() or str(an).casefold()!=q["away"].casefold():
+    # ESPN displayName appends the team's mascot to its short football name.
+    # Exact game IDs and both full-name prefixes independently verify identity.
+    # Do not accept an unrelated team's prefix without a following word boundary.
+    def same(short,display):
+        a=str(short).casefold()
+        b=str(display).casefold()
+        return b==a or b.startswith(a+" ")
+    if not same(q["home"],hn) or not same(q["away"],an):
         q["error"]="ESPN team identity mismatch"
         return q
     bet=j.get("pickcenter") or competition.get("odds") or j.get("odds") or []
