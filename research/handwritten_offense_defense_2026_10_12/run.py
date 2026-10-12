@@ -296,7 +296,7 @@ def main():
         ]
     }
     OUT.parent.mkdir(parents=True,exist_ok=True)
-    OUT.write_text(json.dumps(output,indent=2,allow_nan=False)+"\n")
+    OUT.write_text(json.dumps(output,indent=2,allow_nan=False,default=lambda x: x.item() if isinstance(x,np.generic) else str(x))+"\n")
     print(json.dumps({"offense":output["offense"],"defense":output["defense"],
                       "summary":scores},indent=2))
 
