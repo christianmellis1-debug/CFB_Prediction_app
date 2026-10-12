@@ -105,7 +105,7 @@ def standardized_team_profiles(history,lookup):
              "incomplete_box_games":invalid_games,
              "all_teams_seen":len(encountered),
              "teams_with_valid_full_history":len(eligible)}
-    if len(eligible)<3:
+    if len(eligible)<2:
         return {},quality
     ids=list(eligible)
     x=np.array([
