@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-12T14:34:00.467945+00:00",
+  "created_at": "2026-10-12T14:38:43.665854+00:00",
   "status": "retrospective research only: no production weights or tier changes",
   "design": "Independent rushing offense/run defense standardized across all teams with valid earlier-week FBS games. Other input components are production-standardized. Prior blend retained unchanged. Zero out EITHER EPA or success rate in test families.",
   "years": {
@@ -657,6 +657,98 @@
         "week": 6,
         "graded": 58
       }
+    }
+  },
+  "rush_signal_records": {
+    "2022": {
+      "better_rushing_offense": {
+        "games": 634,
+        "wins": 376,
+        "win_pct": 0.59306
+      },
+      "better_run_defense": {
+        "games": 634,
+        "wins": 383,
+        "win_pct": 0.604101
+      },
+      "same_team_has_both_rushing_edges": {
+        "games": 347,
+        "wins": 236,
+        "win_pct": 0.680115
+      },
+      "rushing_edges_disagree_games": 287
+    },
+    "2023": {
+      "better_rushing_offense": {
+        "games": 651,
+        "wins": 397,
+        "win_pct": 0.609831
+      },
+      "better_run_defense": {
+        "games": 651,
+        "wins": 405,
+        "win_pct": 0.62212
+      },
+      "same_team_has_both_rushing_edges": {
+        "games": 353,
+        "wins": 252,
+        "win_pct": 0.713881
+      },
+      "rushing_edges_disagree_games": 298
+    },
+    "2024": {
+      "better_rushing_offense": {
+        "games": 661,
+        "wins": 434,
+        "win_pct": 0.656581
+      },
+      "better_run_defense": {
+        "games": 661,
+        "wins": 410,
+        "win_pct": 0.620272
+      },
+      "same_team_has_both_rushing_edges": {
+        "games": 399,
+        "wins": 291,
+        "win_pct": 0.729323
+      },
+      "rushing_edges_disagree_games": 262
+    },
+    "2025": {
+      "better_rushing_offense": {
+        "games": 663,
+        "wins": 407,
+        "win_pct": 0.613876
+      },
+      "better_run_defense": {
+        "games": 663,
+        "wins": 392,
+        "win_pct": 0.591252
+      },
+      "same_team_has_both_rushing_edges": {
+        "games": 354,
+        "wins": 245,
+        "win_pct": 0.69209
+      },
+      "rushing_edges_disagree_games": 309
+    },
+    "2026": {
+      "better_rushing_offense": {
+        "games": 228,
+        "wins": 138,
+        "win_pct": 0.605263
+      },
+      "better_run_defense": {
+        "games": 228,
+        "wins": 144,
+        "win_pct": 0.631579
+      },
+      "same_team_has_both_rushing_edges": {
+        "games": 124,
+        "wins": 89,
+        "win_pct": 0.717742
+      },
+      "rushing_edges_disagree_games": 104
     }
   },
   "baseline": {
