@@ -119,7 +119,7 @@ def main():
         ]
     }
     OUT.parent.mkdir(parents=True,exist_ok=True)
-    OUT.write_text(json.dumps(output,indent=2,allow_nan=False)+"\n")
+    OUT.write_text(json.dumps(output,indent=2,allow_nan=False,default=lambda x: x.item() if isinstance(x,np.generic) else str(x))+"\n")
     print(json.dumps({
         "by_season":{year:v["proposed"] for year,v in years.items()},
         "combined":output["combined"],
