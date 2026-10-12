@@ -1,0 +1,46 @@
+name: Audit handwritten BOTH advantage versus V1.5
+
+on:
+  push:
+    branches:
+      - research/handwritten-confirmation-vs-v15-2026-10-12
+    paths:
+      - 'research/handwritten_offense_defense_2026_10_12/**'
+      - 'tests/test_handwritten_confirmation.py'
+      - '.github/workflows/handwritten-confirmation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+concurrency:
+  group: handwritten-confirmation-v15
+  cancel-in-progress: false
+
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned model dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Validate offense defense ratings and paired outcomes
+        run: |
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_offense_defense.py'
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_unit_advantages.py'
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_handwritten_confirmation.py'
+      - name: Test incremental handwritten BOTH-advantage predictive value
+        run: PYTHONPATH=. python research/handwritten_offense_defense_2026_10_12/confirmation_vs_v15.py
+      - name: Save retrospective paired comparisons on research branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/handwritten_offense_defense_2026_10_12/confirmation_vs_v15_results.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save handwritten BOTH advantage versus V1.5 head-to-head findings'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
