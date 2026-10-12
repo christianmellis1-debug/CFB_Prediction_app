@@ -1,0 +1,1064 @@
+{
+  "created_at": "2026-10-12T15:12:35.775769+00:00",
+  "interpretation": "Best means the higher-rated team IN THAT MATCHUP, not nationally the top-ranked offense/defense.",
+  "model": "User handwritten 40% EPA, 25% rushing YPC, 15% passing completion %, 10% turnovers, 10% explosive plays in both offense and defense; original production preseason ratings maintained.",
+  "definition": "Head-to-head strictly greater offense or defense score from exact V1.5 blended team ratings with handwritten current-season internal coefficients. Both = same team ahead at offense and defense; split = opposite teams ahead. Exact ties separated.",
+  "by_season": {
+    "2022": {
+      "proposed": {
+        "total_games": 630,
+        "higher_offense": {
+          "games": 630,
+          "wins": 398,
+          "losses": 232,
+          "win_rate": 0.631746
+        },
+        "higher_defense": {
+          "games": 630,
+          "wins": 374,
+          "losses": 256,
+          "win_rate": 0.593651
+        },
+        "same_team_better_at_both": {
+          "games": 358,
+          "wins": 250,
+          "losses": 108,
+          "win_rate": 0.698324
+        },
+        "different_teams_split_the_edges": {
+          "games": 272,
+          "better_offense": {
+            "games": 272,
+            "wins": 148,
+            "losses": 124,
+            "win_rate": 0.544118
+          },
+          "better_defense": {
+            "games": 272,
+            "wins": 124,
+            "losses": 148,
+            "win_rate": 0.455882
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7708,
+        "mean_abs_defense_rating_diff": 0.773
+      },
+      "existing_v15": {
+        "total_games": 630,
+        "higher_offense": {
+          "games": 630,
+          "wins": 403,
+          "losses": 227,
+          "win_rate": 0.639683
+        },
+        "higher_defense": {
+          "games": 630,
+          "wins": 369,
+          "losses": 261,
+          "win_rate": 0.585714
+        },
+        "same_team_better_at_both": {
+          "games": 322,
+          "wins": 232,
+          "losses": 90,
+          "win_rate": 0.720497
+        },
+        "different_teams_split_the_edges": {
+          "games": 308,
+          "better_offense": {
+            "games": 308,
+            "wins": 171,
+            "losses": 137,
+            "win_rate": 0.555195
+          },
+          "better_defense": {
+            "games": 308,
+            "wins": 137,
+            "losses": 171,
+            "win_rate": 0.444805
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.8295,
+        "mean_abs_defense_rating_diff": 0.8181
+      }
+    },
+    "2023": {
+      "proposed": {
+        "total_games": 646,
+        "higher_offense": {
+          "games": 646,
+          "wins": 451,
+          "losses": 195,
+          "win_rate": 0.698142
+        },
+        "higher_defense": {
+          "games": 646,
+          "wins": 423,
+          "losses": 223,
+          "win_rate": 0.654799
+        },
+        "same_team_better_at_both": {
+          "games": 390,
+          "wins": 309,
+          "losses": 81,
+          "win_rate": 0.792308
+        },
+        "different_teams_split_the_edges": {
+          "games": 256,
+          "better_offense": {
+            "games": 256,
+            "wins": 142,
+            "losses": 114,
+            "win_rate": 0.554688
+          },
+          "better_defense": {
+            "games": 256,
+            "wins": 114,
+            "losses": 142,
+            "win_rate": 0.445312
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7457,
+        "mean_abs_defense_rating_diff": 0.7193
+      },
+      "existing_v15": {
+        "total_games": 646,
+        "higher_offense": {
+          "games": 646,
+          "wins": 442,
+          "losses": 204,
+          "win_rate": 0.684211
+        },
+        "higher_defense": {
+          "games": 646,
+          "wins": 406,
+          "losses": 240,
+          "win_rate": 0.628483
+        },
+        "same_team_better_at_both": {
+          "games": 356,
+          "wins": 279,
+          "losses": 77,
+          "win_rate": 0.783708
+        },
+        "different_teams_split_the_edges": {
+          "games": 290,
+          "better_offense": {
+            "games": 290,
+            "wins": 163,
+            "losses": 127,
+            "win_rate": 0.562069
+          },
+          "better_defense": {
+            "games": 290,
+            "wins": 127,
+            "losses": 163,
+            "win_rate": 0.437931
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7935,
+        "mean_abs_defense_rating_diff": 0.7763
+      }
+    },
+    "2024": {
+      "proposed": {
+        "total_games": 659,
+        "higher_offense": {
+          "games": 659,
+          "wins": 441,
+          "losses": 218,
+          "win_rate": 0.669196
+        },
+        "higher_defense": {
+          "games": 659,
+          "wins": 421,
+          "losses": 238,
+          "win_rate": 0.638847
+        },
+        "same_team_better_at_both": {
+          "games": 403,
+          "wins": 303,
+          "losses": 100,
+          "win_rate": 0.751861
+        },
+        "different_teams_split_the_edges": {
+          "games": 256,
+          "better_offense": {
+            "games": 256,
+            "wins": 138,
+            "losses": 118,
+            "win_rate": 0.539062
+          },
+          "better_defense": {
+            "games": 256,
+            "wins": 118,
+            "losses": 138,
+            "win_rate": 0.460938
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7561,
+        "mean_abs_defense_rating_diff": 0.7325
+      },
+      "existing_v15": {
+        "total_games": 659,
+        "higher_offense": {
+          "games": 659,
+          "wins": 440,
+          "losses": 219,
+          "win_rate": 0.667678
+        },
+        "higher_defense": {
+          "games": 659,
+          "wins": 429,
+          "losses": 230,
+          "win_rate": 0.650986
+        },
+        "same_team_better_at_both": {
+          "games": 368,
+          "wins": 289,
+          "losses": 79,
+          "win_rate": 0.785326
+        },
+        "different_teams_split_the_edges": {
+          "games": 291,
+          "better_offense": {
+            "games": 291,
+            "wins": 151,
+            "losses": 140,
+            "win_rate": 0.5189
+          },
+          "better_defense": {
+            "games": 291,
+            "wins": 140,
+            "losses": 151,
+            "win_rate": 0.4811
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7963,
+        "mean_abs_defense_rating_diff": 0.7765
+      }
+    },
+    "2025": {
+      "proposed": {
+        "total_games": 663,
+        "higher_offense": {
+          "games": 663,
+          "wins": 420,
+          "losses": 243,
+          "win_rate": 0.633484
+        },
+        "higher_defense": {
+          "games": 663,
+          "wins": 436,
+          "losses": 227,
+          "win_rate": 0.657617
+        },
+        "same_team_better_at_both": {
+          "games": 375,
+          "wins": 284,
+          "losses": 91,
+          "win_rate": 0.757333
+        },
+        "different_teams_split_the_edges": {
+          "games": 288,
+          "better_offense": {
+            "games": 288,
+            "wins": 136,
+            "losses": 152,
+            "win_rate": 0.472222
+          },
+          "better_defense": {
+            "games": 288,
+            "wins": 152,
+            "losses": 136,
+            "win_rate": 0.527778
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7485,
+        "mean_abs_defense_rating_diff": 0.7437
+      },
+      "existing_v15": {
+        "total_games": 663,
+        "higher_offense": {
+          "games": 663,
+          "wins": 416,
+          "losses": 247,
+          "win_rate": 0.627451
+        },
+        "higher_defense": {
+          "games": 663,
+          "wins": 434,
+          "losses": 229,
+          "win_rate": 0.6546
+        },
+        "same_team_better_at_both": {
+          "games": 335,
+          "wins": 261,
+          "losses": 74,
+          "win_rate": 0.779104
+        },
+        "different_teams_split_the_edges": {
+          "games": 328,
+          "better_offense": {
+            "games": 328,
+            "wins": 155,
+            "losses": 173,
+            "win_rate": 0.472561
+          },
+          "better_defense": {
+            "games": 328,
+            "wins": 173,
+            "losses": 155,
+            "win_rate": 0.527439
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7992,
+        "mean_abs_defense_rating_diff": 0.7638
+      }
+    },
+    "2026": {
+      "proposed": {
+        "total_games": 228,
+        "higher_offense": {
+          "games": 228,
+          "wins": 162,
+          "losses": 66,
+          "win_rate": 0.710526
+        },
+        "higher_defense": {
+          "games": 228,
+          "wins": 150,
+          "losses": 78,
+          "win_rate": 0.657895
+        },
+        "same_team_better_at_both": {
+          "games": 154,
+          "wins": 119,
+          "losses": 35,
+          "win_rate": 0.772727
+        },
+        "different_teams_split_the_edges": {
+          "games": 74,
+          "better_offense": {
+            "games": 74,
+            "wins": 43,
+            "losses": 31,
+            "win_rate": 0.581081
+          },
+          "better_defense": {
+            "games": 74,
+            "wins": 31,
+            "losses": 43,
+            "win_rate": 0.418919
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7423,
+        "mean_abs_defense_rating_diff": 0.7273
+      },
+      "existing_v15": {
+        "total_games": 228,
+        "higher_offense": {
+          "games": 228,
+          "wins": 153,
+          "losses": 75,
+          "win_rate": 0.671053
+        },
+        "higher_defense": {
+          "games": 228,
+          "wins": 147,
+          "losses": 81,
+          "win_rate": 0.644737
+        },
+        "same_team_better_at_both": {
+          "games": 154,
+          "wins": 113,
+          "losses": 41,
+          "win_rate": 0.733766
+        },
+        "different_teams_split_the_edges": {
+          "games": 74,
+          "better_offense": {
+            "games": 74,
+            "wins": 40,
+            "losses": 34,
+            "win_rate": 0.540541
+          },
+          "better_defense": {
+            "games": 74,
+            "wins": 34,
+            "losses": 40,
+            "win_rate": 0.459459
+          }
+        },
+        "one_metric_tied_games": 0,
+        "both_metrics_tied_games": 0,
+        "mean_abs_offense_rating_diff": 0.7726,
+        "mean_abs_defense_rating_diff": 0.7463
+      }
+    }
+  },
+  "combined": {
+    "proposed": {
+      "total_games": 2826,
+      "higher_offense": {
+        "games": 2826,
+        "wins": 1872,
+        "losses": 954,
+        "win_rate": 0.66242
+      },
+      "higher_defense": {
+        "games": 2826,
+        "wins": 1804,
+        "losses": 1022,
+        "win_rate": 0.638358
+      },
+      "same_team_better_at_both": {
+        "games": 1680,
+        "wins": 1265,
+        "losses": 415,
+        "win_rate": 0.752976
+      },
+      "different_teams_split_the_edges": {
+        "games": 1146,
+        "better_offense": {
+          "games": 1146,
+          "wins": 607,
+          "losses": 539,
+          "win_rate": 0.529668
+        },
+        "better_defense": {
+          "games": 1146,
+          "wins": 539,
+          "losses": 607,
+          "win_rate": 0.470332
+        }
+      },
+      "one_metric_tied_games": 0,
+      "both_metrics_tied_games": 0,
+      "mean_abs_offense_rating_diff": 0.7541,
+      "mean_abs_defense_rating_diff": 0.7407
+    },
+    "existing_v15": {
+      "total_games": 2826,
+      "higher_offense": {
+        "games": 2826,
+        "wins": 1854,
+        "losses": 972,
+        "win_rate": 0.656051
+      },
+      "higher_defense": {
+        "games": 2826,
+        "wins": 1785,
+        "losses": 1041,
+        "win_rate": 0.631635
+      },
+      "same_team_better_at_both": {
+        "games": 1535,
+        "wins": 1174,
+        "losses": 361,
+        "win_rate": 0.764821
+      },
+      "different_teams_split_the_edges": {
+        "games": 1291,
+        "better_offense": {
+          "games": 1291,
+          "wins": 680,
+          "losses": 611,
+          "win_rate": 0.526723
+        },
+        "better_defense": {
+          "games": 1291,
+          "wins": 611,
+          "losses": 680,
+          "win_rate": 0.473277
+        }
+      },
+      "one_metric_tied_games": 0,
+      "both_metrics_tied_games": 0,
+      "mean_abs_offense_rating_diff": 0.8018,
+      "mean_abs_defense_rating_diff": 0.7803
+    }
+  },
+  "parity": {
+    "2022": {
+      "max_edge_parity_error": 4.996003610813204e-16,
+      "eligible_games": 630,
+      "excluded_earlier_box_data": {
+        "3": {
+          "completed_history_games": 100,
+          "accepted_complete_games": 100,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 3,
+          "graded": 46
+        },
+        "4": {
+          "completed_history_games": 150,
+          "accepted_complete_games": 150,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 4,
+          "graded": 60
+        },
+        "5": {
+          "completed_history_games": 210,
+          "accepted_complete_games": 210,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 5,
+          "graded": 57
+        },
+        "6": {
+          "completed_history_games": 267,
+          "accepted_complete_games": 267,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 6,
+          "graded": 57
+        },
+        "7": {
+          "completed_history_games": 324,
+          "accepted_complete_games": 324,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 7,
+          "graded": 51
+        },
+        "8": {
+          "completed_history_games": 375,
+          "accepted_complete_games": 375,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 8,
+          "graded": 52
+        },
+        "9": {
+          "completed_history_games": 427,
+          "accepted_complete_games": 427,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 9,
+          "graded": 47
+        },
+        "10": {
+          "completed_history_games": 474,
+          "accepted_complete_games": 474,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 10,
+          "graded": 60
+        },
+        "11": {
+          "completed_history_games": 534,
+          "accepted_complete_games": 534,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 11,
+          "graded": 64
+        },
+        "12": {
+          "completed_history_games": 598,
+          "accepted_complete_games": 598,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 12,
+          "graded": 61
+        },
+        "13": {
+          "completed_history_games": 659,
+          "accepted_complete_games": 659,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 13,
+          "graded": 63
+        },
+        "14": {
+          "completed_history_games": 722,
+          "accepted_complete_games": 722,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 14,
+          "graded": 11
+        },
+        "15": {
+          "completed_history_games": 733,
+          "accepted_complete_games": 733,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 15,
+          "graded": 1
+        }
+      }
+    },
+    "2023": {
+      "max_edge_parity_error": 6.661338147750939e-16,
+      "eligible_games": 646,
+      "excluded_earlier_box_data": {
+        "3": {
+          "completed_history_games": 99,
+          "accepted_complete_games": 99,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 3,
+          "graded": 50
+        },
+        "4": {
+          "completed_history_games": 153,
+          "accepted_complete_games": 153,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 4,
+          "graded": 62
+        },
+        "5": {
+          "completed_history_games": 216,
+          "accepted_complete_games": 216,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 5,
+          "graded": 56
+        },
+        "6": {
+          "completed_history_games": 272,
+          "accepted_complete_games": 272,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 6,
+          "graded": 49
+        },
+        "7": {
+          "completed_history_games": 321,
+          "accepted_complete_games": 321,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 7,
+          "graded": 55
+        },
+        "8": {
+          "completed_history_games": 376,
+          "accepted_complete_games": 376,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 8,
+          "graded": 54
+        },
+        "9": {
+          "completed_history_games": 430,
+          "accepted_complete_games": 430,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 9,
+          "graded": 54
+        },
+        "10": {
+          "completed_history_games": 484,
+          "accepted_complete_games": 484,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 10,
+          "graded": 62
+        },
+        "11": {
+          "completed_history_games": 546,
+          "accepted_complete_games": 546,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 11,
+          "graded": 64
+        },
+        "12": {
+          "completed_history_games": 610,
+          "accepted_complete_games": 610,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 12,
+          "graded": 64
+        },
+        "13": {
+          "completed_history_games": 674,
+          "accepted_complete_games": 674,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 13,
+          "graded": 65
+        },
+        "14": {
+          "completed_history_games": 739,
+          "accepted_complete_games": 739,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 14,
+          "graded": 10
+        },
+        "15": {
+          "completed_history_games": 749,
+          "accepted_complete_games": 749,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 133,
+          "teams_with_valid_full_history": 133,
+          "week": 15,
+          "graded": 1
+        }
+      }
+    },
+    "2024": {
+      "max_edge_parity_error": 3.885780586188048e-16,
+      "eligible_games": 659,
+      "excluded_earlier_box_data": {
+        "3": {
+          "completed_history_games": 88,
+          "accepted_complete_games": 88,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 131,
+          "teams_with_valid_full_history": 131,
+          "week": 3,
+          "graded": 48
+        },
+        "4": {
+          "completed_history_games": 140,
+          "accepted_complete_games": 140,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 4,
+          "graded": 54
+        },
+        "5": {
+          "completed_history_games": 194,
+          "accepted_complete_games": 194,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 5,
+          "graded": 51
+        },
+        "6": {
+          "completed_history_games": 246,
+          "accepted_complete_games": 246,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 6,
+          "graded": 49
+        },
+        "7": {
+          "completed_history_games": 295,
+          "accepted_complete_games": 295,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 7,
+          "graded": 52
+        },
+        "8": {
+          "completed_history_games": 347,
+          "accepted_complete_games": 347,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 8,
+          "graded": 59
+        },
+        "9": {
+          "completed_history_games": 406,
+          "accepted_complete_games": 406,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 9,
+          "graded": 56
+        },
+        "10": {
+          "completed_history_games": 462,
+          "accepted_complete_games": 462,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 10,
+          "graded": 48
+        },
+        "11": {
+          "completed_history_games": 510,
+          "accepted_complete_games": 510,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 11,
+          "graded": 50
+        },
+        "12": {
+          "completed_history_games": 560,
+          "accepted_complete_games": 560,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 12,
+          "graded": 53
+        },
+        "13": {
+          "completed_history_games": 613,
+          "accepted_complete_games": 613,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 13,
+          "graded": 62
+        },
+        "14": {
+          "completed_history_games": 675,
+          "accepted_complete_games": 675,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 14,
+          "graded": 67
+        },
+        "15": {
+          "completed_history_games": 742,
+          "accepted_complete_games": 742,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 15,
+          "graded": 9
+        },
+        "16": {
+          "completed_history_games": 751,
+          "accepted_complete_games": 751,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 134,
+          "teams_with_valid_full_history": 134,
+          "week": 16,
+          "graded": 1
+        }
+      }
+    },
+    "2025": {
+      "max_edge_parity_error": 4.440892098500626e-16,
+      "eligible_games": 663,
+      "excluded_earlier_box_data": {
+        "3": {
+          "completed_history_games": 98,
+          "accepted_complete_games": 98,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 135,
+          "teams_with_valid_full_history": 135,
+          "week": 3,
+          "graded": 46
+        },
+        "4": {
+          "completed_history_games": 145,
+          "accepted_complete_games": 145,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 4,
+          "graded": 50
+        },
+        "5": {
+          "completed_history_games": 195,
+          "accepted_complete_games": 195,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 5,
+          "graded": 51
+        },
+        "6": {
+          "completed_history_games": 246,
+          "accepted_complete_games": 246,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 6,
+          "graded": 50
+        },
+        "7": {
+          "completed_history_games": 296,
+          "accepted_complete_games": 296,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 7,
+          "graded": 56
+        },
+        "8": {
+          "completed_history_games": 352,
+          "accepted_complete_games": 352,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 8,
+          "graded": 59
+        },
+        "9": {
+          "completed_history_games": 411,
+          "accepted_complete_games": 411,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 9,
+          "graded": 53
+        },
+        "10": {
+          "completed_history_games": 464,
+          "accepted_complete_games": 464,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 10,
+          "graded": 52
+        },
+        "11": {
+          "completed_history_games": 516,
+          "accepted_complete_games": 516,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 11,
+          "graded": 51
+        },
+        "12": {
+          "completed_history_games": 567,
+          "accepted_complete_games": 567,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 12,
+          "graded": 58
+        },
+        "13": {
+          "completed_history_games": 625,
+          "accepted_complete_games": 625,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 13,
+          "graded": 60
+        },
+        "14": {
+          "completed_history_games": 685,
+          "accepted_complete_games": 685,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 14,
+          "graded": 67
+        },
+        "15": {
+          "completed_history_games": 752,
+          "accepted_complete_games": 752,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 15,
+          "graded": 9
+        },
+        "16": {
+          "completed_history_games": 761,
+          "accepted_complete_games": 761,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 136,
+          "teams_with_valid_full_history": 136,
+          "week": 16,
+          "graded": 1
+        }
+      }
+    },
+    "2026": {
+      "max_edge_parity_error": 3.885780586188048e-16,
+      "eligible_games": 228,
+      "excluded_earlier_box_data": {
+        "3": {
+          "completed_history_games": 100,
+          "accepted_complete_games": 100,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 137,
+          "teams_with_valid_full_history": 137,
+          "week": 3,
+          "graded": 56
+        },
+        "4": {
+          "completed_history_games": 157,
+          "accepted_complete_games": 157,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 138,
+          "teams_with_valid_full_history": 138,
+          "week": 4,
+          "graded": 58
+        },
+        "5": {
+          "completed_history_games": 215,
+          "accepted_complete_games": 215,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 138,
+          "teams_with_valid_full_history": 138,
+          "week": 5,
+          "graded": 56
+        },
+        "6": {
+          "completed_history_games": 271,
+          "accepted_complete_games": 271,
+          "incomplete_box_games": 0,
+          "all_teams_seen": 138,
+          "teams_with_valid_full_history": 138,
+          "week": 6,
+          "graded": 58
+        }
+      }
+    }
+  },
+  "limitations": [
+    "2022-2025 through regular season, 2026 only completed Weeks 3-6; all are retrospective, not originally locked pregame.",
+    "Only Week 3+ completed regular-season FBS games with complete earlier-week rushing/passing/turnovers and EPA/explosive stats; not a complete schedule.",
+    "Current-season ratings use the exact handwritten proposal; prior-season efficiency/Elo ratings stay unchanged as in the previous A/B test.",
+    "Higher offensive or defensive pregame rating is an association and not a controlled causal test. Better teams can also have more talent, easier schedules, home-field advantages, or favorable betting lines.",
+    "Two-team results on a single game: when offense and defense split, the offense advantage record and defense advantage record must sum to all split games.",
+    "All 2022-2026 seasons have been examined elsewhere; none is a truly unseen prospective holdout.",
+    "This is straight-up winner rate only. A 70% win rate does not establish ATS/ML betting profitability.",
+    "No production formula, official Value Shortlist, or existing immutable prospectively captured picks are changed."
+  ]
+}
