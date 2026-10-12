@@ -1,0 +1,1363 @@
+{
+  "generated_at": "2026-10-12T17:45:52.146619+00:00",
+  "fixed_rule": "Home team has BOTH positive custom 40/25/15/10/10 blended offense and defense gap, game nonneutral and strictly P4/P4 or G6/G6, no P4/P4 if 0.50 <= smaller advantage <0.75, home team must be favorite with a verified negative home spread.",
+  "test_A": "All favorite spreads strictly less than zero, including -10 and more negative",
+  "test_B": "Only home favorite spreads strictly greater than -10 and less than 0, such as -9.5 to -0.5; -10 excluded",
+  "betting_lines": "Sportsdataverse archive of ESPN CFB betting odds: game id, season, week matched; verified odds_source not default/injected",
+  "seasons": {
+    "2023": {
+      "tests": {
+        "A": {
+          "games": 141,
+          "wins": 118,
+          "losses": 23,
+          "win_pct": 0.836879,
+          "mean_spread": -13.649,
+          "by_group": {
+            "P4": {
+              "games": 68,
+              "wins": 56,
+              "losses": 12,
+              "win_pct": 0.823529,
+              "mean_spread": -14.868
+            },
+            "G6": {
+              "games": 73,
+              "wins": 62,
+              "losses": 11,
+              "win_pct": 0.849315,
+              "mean_spread": -12.514
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 56,
+              "wins": 43,
+              "losses": 13,
+              "win_pct": 0.767857,
+              "mean_spread": -9.875
+            },
+            "0.25\u20130.49": {
+              "games": 41,
+              "wins": 34,
+              "losses": 7,
+              "win_pct": 0.829268,
+              "mean_spread": -12.451
+            },
+            "0.50\u20130.74": {
+              "games": 10,
+              "wins": 9,
+              "losses": 1,
+              "win_pct": 0.9,
+              "mean_spread": -14.2
+            },
+            "0.75\u20130.99": {
+              "games": 19,
+              "wins": 18,
+              "losses": 1,
+              "win_pct": 0.947368,
+              "mean_spread": -18.342
+            },
+            "1.00+": {
+              "games": 15,
+              "wins": 14,
+              "losses": 1,
+              "win_pct": 0.933333,
+              "mean_spread": -24.7
+            }
+          }
+        },
+        "B": {
+          "games": 48,
+          "wins": 32,
+          "losses": 16,
+          "win_pct": 0.666667,
+          "mean_spread": -5.969,
+          "by_group": {
+            "P4": {
+              "games": 21,
+              "wins": 13,
+              "losses": 8,
+              "win_pct": 0.619048,
+              "mean_spread": -5.786
+            },
+            "G6": {
+              "games": 27,
+              "wins": 19,
+              "losses": 8,
+              "win_pct": 0.703704,
+              "mean_spread": -6.111
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 29,
+              "wins": 20,
+              "losses": 9,
+              "win_pct": 0.689655,
+              "mean_spread": -5.379
+            },
+            "0.25\u20130.49": {
+              "games": 19,
+              "wins": 12,
+              "losses": 7,
+              "win_pct": 0.631579,
+              "mean_spread": -6.868
+            },
+            "0.50\u20130.74": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "win_pct": null,
+              "mean_spread": null
+            },
+            "0.75\u20130.99": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "win_pct": null,
+              "mean_spread": null
+            },
+            "1.00+": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "win_pct": null,
+              "mean_spread": null
+            }
+          }
+        },
+        "A_heavy": {
+          "games": 93,
+          "wins": 86,
+          "losses": 7,
+          "win_pct": 0.924731,
+          "mean_spread": -17.613,
+          "by_group": {
+            "P4": {
+              "games": 47,
+              "wins": 43,
+              "losses": 4,
+              "win_pct": 0.914894,
+              "mean_spread": -18.926
+            },
+            "G6": {
+              "games": 46,
+              "wins": 43,
+              "losses": 3,
+              "win_pct": 0.934783,
+              "mean_spread": -16.272
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 27,
+              "wins": 23,
+              "losses": 4,
+              "win_pct": 0.851852,
+              "mean_spread": -14.704
+            },
+            "0.25\u20130.49": {
+              "games": 22,
+              "wins": 22,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -17.273
+            },
+            "0.50\u20130.74": {
+              "games": 10,
+              "wins": 9,
+              "losses": 1,
+              "win_pct": 0.9,
+              "mean_spread": -14.2
+            },
+            "0.75\u20130.99": {
+              "games": 19,
+              "wins": 18,
+              "losses": 1,
+              "win_pct": 0.947368,
+              "mean_spread": -18.342
+            },
+            "1.00+": {
+              "games": 15,
+              "wins": 14,
+              "losses": 1,
+              "win_pct": 0.933333,
+              "mean_spread": -24.7
+            }
+          }
+        },
+        "no_odds_qualifying_games": 145,
+        "missing_verified_spread_in_qualifying_games": 0,
+        "home_underdogs_or_pickem_in_qualifying_games": 4
+      },
+      "betting_source": {
+        "all_rows": 911,
+        "target_year_unique_id_rows": 911,
+        "spread_available": 911,
+        "source_counts": {
+          "core_odds_api": 882,
+          "summary_pickcenter": 29
+        },
+        "valid_source_and_spread_rows": 882,
+        "missing_or_invalid_source_rows": 29
+      }
+    },
+    "2024": {
+      "tests": {
+        "A": {
+          "games": 162,
+          "wins": 135,
+          "losses": 27,
+          "win_pct": 0.833333,
+          "mean_spread": -13.775,
+          "by_group": {
+            "P4": {
+              "games": 89,
+              "wins": 72,
+              "losses": 17,
+              "win_pct": 0.808989,
+              "mean_spread": -13.663
+            },
+            "G6": {
+              "games": 73,
+              "wins": 63,
+              "losses": 10,
+              "win_pct": 0.863014,
+              "mean_spread": -13.911
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 55,
+              "wins": 40,
+              "losses": 15,
+              "win_pct": 0.727273,
+              "mean_spread": -9.764
+            },
+            "0.25\u20130.49": {
+              "games": 51,
+              "wins": 41,
+              "losses": 10,
+              "win_pct": 0.803922,
+              "mean_spread": -11.422
+            },
+            "0.50\u20130.74": {
+              "games": 13,
+              "wins": 13,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -14.115
+            },
+            "0.75\u20130.99": {
+              "games": 17,
+              "wins": 15,
+              "losses": 2,
+              "win_pct": 0.882353,
+              "mean_spread": -16.618
+            },
+            "1.00+": {
+              "games": 26,
+              "wins": 26,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -24.846
+            }
+          }
+        },
+        "B": {
+          "games": 62,
+          "wins": 43,
+          "losses": 19,
+          "win_pct": 0.693548,
+          "mean_spread": -5.581,
+          "by_group": {
+            "P4": {
+              "games": 35,
+              "wins": 22,
+              "losses": 13,
+              "win_pct": 0.628571,
+              "mean_spread": -5.614
+            },
+            "G6": {
+              "games": 27,
+              "wins": 21,
+              "losses": 6,
+              "win_pct": 0.777778,
+              "mean_spread": -5.537
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 32,
+              "wins": 21,
+              "losses": 11,
+              "win_pct": 0.65625,
+              "mean_spread": -5.625
+            },
+            "0.25\u20130.49": {
+              "games": 23,
+              "wins": 16,
+              "losses": 7,
+              "win_pct": 0.695652,
+              "mean_spread": -5.326
+            },
+            "0.50\u20130.74": {
+              "games": 4,
+              "wins": 4,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -7.25
+            },
+            "0.75\u20130.99": {
+              "games": 3,
+              "wins": 2,
+              "losses": 1,
+              "win_pct": 0.666667,
+              "mean_spread": -4.833
+            },
+            "1.00+": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "win_pct": null,
+              "mean_spread": null
+            }
+          }
+        },
+        "A_heavy": {
+          "games": 100,
+          "wins": 92,
+          "losses": 8,
+          "win_pct": 0.92,
+          "mean_spread": -18.855,
+          "by_group": {
+            "P4": {
+              "games": 54,
+              "wins": 50,
+              "losses": 4,
+              "win_pct": 0.925926,
+              "mean_spread": -18.88
+            },
+            "G6": {
+              "games": 46,
+              "wins": 42,
+              "losses": 4,
+              "win_pct": 0.913043,
+              "mean_spread": -18.826
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 23,
+              "wins": 19,
+              "losses": 4,
+              "win_pct": 0.826087,
+              "mean_spread": -15.522
+            },
+            "0.25\u20130.49": {
+              "games": 28,
+              "wins": 25,
+              "losses": 3,
+              "win_pct": 0.892857,
+              "mean_spread": -16.429
+            },
+            "0.50\u20130.74": {
+              "games": 9,
+              "wins": 9,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -17.167
+            },
+            "0.75\u20130.99": {
+              "games": 14,
+              "wins": 13,
+              "losses": 1,
+              "win_pct": 0.928571,
+              "mean_spread": -19.143
+            },
+            "1.00+": {
+              "games": 26,
+              "wins": 26,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -24.846
+            }
+          }
+        },
+        "no_odds_qualifying_games": 169,
+        "missing_verified_spread_in_qualifying_games": 0,
+        "home_underdogs_or_pickem_in_qualifying_games": 7
+      },
+      "betting_source": {
+        "all_rows": 966,
+        "target_year_unique_id_rows": 966,
+        "spread_available": 956,
+        "source_counts": {
+          "core_odds_api": 956,
+          "default": 10
+        },
+        "valid_source_and_spread_rows": 956,
+        "missing_or_invalid_source_rows": 10
+      }
+    },
+    "2025": {
+      "tests": {
+        "A": {
+          "games": 138,
+          "wins": 108,
+          "losses": 30,
+          "win_pct": 0.782609,
+          "mean_spread": -14.42,
+          "by_group": {
+            "P4": {
+              "games": 68,
+              "wins": 56,
+              "losses": 12,
+              "win_pct": 0.823529,
+              "mean_spread": -15.088
+            },
+            "G6": {
+              "games": 70,
+              "wins": 52,
+              "losses": 18,
+              "win_pct": 0.742857,
+              "mean_spread": -13.771
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 50,
+              "wins": 36,
+              "losses": 14,
+              "win_pct": 0.72,
+              "mean_spread": -9.62
+            },
+            "0.25\u20130.49": {
+              "games": 42,
+              "wins": 29,
+              "losses": 13,
+              "win_pct": 0.690476,
+              "mean_spread": -11.19
+            },
+            "0.50\u20130.74": {
+              "games": 6,
+              "wins": 5,
+              "losses": 1,
+              "win_pct": 0.833333,
+              "mean_spread": -13.167
+            },
+            "0.75\u20130.99": {
+              "games": 19,
+              "wins": 18,
+              "losses": 1,
+              "win_pct": 0.947368,
+              "mean_spread": -20.184
+            },
+            "1.00+": {
+              "games": 21,
+              "wins": 20,
+              "losses": 1,
+              "win_pct": 0.952381,
+              "mean_spread": -27.452
+            }
+          }
+        },
+        "B": {
+          "games": 49,
+          "wins": 27,
+          "losses": 22,
+          "win_pct": 0.55102,
+          "mean_spread": -6.031,
+          "by_group": {
+            "P4": {
+              "games": 25,
+              "wins": 18,
+              "losses": 7,
+              "win_pct": 0.72,
+              "mean_spread": -6.3
+            },
+            "G6": {
+              "games": 24,
+              "wins": 9,
+              "losses": 15,
+              "win_pct": 0.375,
+              "mean_spread": -5.75
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 27,
+              "wins": 16,
+              "losses": 11,
+              "win_pct": 0.592593,
+              "mean_spread": -5.796
+            },
+            "0.25\u20130.49": {
+              "games": 20,
+              "wins": 11,
+              "losses": 9,
+              "win_pct": 0.55,
+              "mean_spread": -6.3
+            },
+            "0.50\u20130.74": {
+              "games": 1,
+              "wins": 0,
+              "losses": 1,
+              "win_pct": 0.0,
+              "mean_spread": -5.5
+            },
+            "0.75\u20130.99": {
+              "games": 1,
+              "wins": 0,
+              "losses": 1,
+              "win_pct": 0.0,
+              "mean_spread": -7.5
+            },
+            "1.00+": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "win_pct": null,
+              "mean_spread": null
+            }
+          }
+        },
+        "A_heavy": {
+          "games": 89,
+          "wins": 81,
+          "losses": 8,
+          "win_pct": 0.910112,
+          "mean_spread": -19.039,
+          "by_group": {
+            "P4": {
+              "games": 43,
+              "wins": 38,
+              "losses": 5,
+              "win_pct": 0.883721,
+              "mean_spread": -20.198
+            },
+            "G6": {
+              "games": 46,
+              "wins": 43,
+              "losses": 3,
+              "win_pct": 0.934783,
+              "mean_spread": -17.957
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 23,
+              "wins": 20,
+              "losses": 3,
+              "win_pct": 0.869565,
+              "mean_spread": -14.109
+            },
+            "0.25\u20130.49": {
+              "games": 22,
+              "wins": 18,
+              "losses": 4,
+              "win_pct": 0.818182,
+              "mean_spread": -15.636
+            },
+            "0.50\u20130.74": {
+              "games": 5,
+              "wins": 5,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -14.7
+            },
+            "0.75\u20130.99": {
+              "games": 18,
+              "wins": 18,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -20.889
+            },
+            "1.00+": {
+              "games": 21,
+              "wins": 20,
+              "losses": 1,
+              "win_pct": 0.952381,
+              "mean_spread": -27.452
+            }
+          }
+        },
+        "no_odds_qualifying_games": 145,
+        "missing_verified_spread_in_qualifying_games": 0,
+        "home_underdogs_or_pickem_in_qualifying_games": 7
+      },
+      "betting_source": {
+        "all_rows": 958,
+        "target_year_unique_id_rows": 958,
+        "spread_available": 946,
+        "source_counts": {
+          "core_odds_api": 946,
+          "default": 12
+        },
+        "valid_source_and_spread_rows": 946,
+        "missing_or_invalid_source_rows": 12
+      }
+    },
+    "2026": {
+      "tests": {
+        "A": {
+          "games": 48,
+          "wins": 40,
+          "losses": 8,
+          "win_pct": 0.833333,
+          "mean_spread": -13.0,
+          "by_group": {
+            "P4": {
+              "games": 25,
+              "wins": 21,
+              "losses": 4,
+              "win_pct": 0.84,
+              "mean_spread": -13.9
+            },
+            "G6": {
+              "games": 23,
+              "wins": 19,
+              "losses": 4,
+              "win_pct": 0.826087,
+              "mean_spread": -12.022
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 15,
+              "wins": 12,
+              "losses": 3,
+              "win_pct": 0.8,
+              "mean_spread": -11.033
+            },
+            "0.25\u20130.49": {
+              "games": 12,
+              "wins": 10,
+              "losses": 2,
+              "win_pct": 0.833333,
+              "mean_spread": -9.792
+            },
+            "0.50\u20130.74": {
+              "games": 5,
+              "wins": 5,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -13.1
+            },
+            "0.75\u20130.99": {
+              "games": 9,
+              "wins": 7,
+              "losses": 2,
+              "win_pct": 0.777778,
+              "mean_spread": -11.111
+            },
+            "1.00+": {
+              "games": 7,
+              "wins": 6,
+              "losses": 1,
+              "win_pct": 0.857143,
+              "mean_spread": -25.071
+            }
+          }
+        },
+        "B": {
+          "games": 19,
+          "wins": 15,
+          "losses": 4,
+          "win_pct": 0.789474,
+          "mean_spread": -5.395,
+          "by_group": {
+            "P4": {
+              "games": 10,
+              "wins": 8,
+              "losses": 2,
+              "win_pct": 0.8,
+              "mean_spread": -5.6
+            },
+            "G6": {
+              "games": 9,
+              "wins": 7,
+              "losses": 2,
+              "win_pct": 0.777778,
+              "mean_spread": -5.167
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 7,
+              "wins": 5,
+              "losses": 2,
+              "win_pct": 0.714286,
+              "mean_spread": -4.429
+            },
+            "0.25\u20130.49": {
+              "games": 7,
+              "wins": 6,
+              "losses": 1,
+              "win_pct": 0.857143,
+              "mean_spread": -5.5
+            },
+            "0.50\u20130.74": {
+              "games": 1,
+              "wins": 1,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -4.5
+            },
+            "0.75\u20130.99": {
+              "games": 4,
+              "wins": 3,
+              "losses": 1,
+              "win_pct": 0.75,
+              "mean_spread": -7.125
+            },
+            "1.00+": {
+              "games": 0,
+              "wins": 0,
+              "losses": 0,
+              "win_pct": null,
+              "mean_spread": null
+            }
+          }
+        },
+        "A_heavy": {
+          "games": 29,
+          "wins": 25,
+          "losses": 4,
+          "win_pct": 0.862069,
+          "mean_spread": -17.983,
+          "by_group": {
+            "P4": {
+              "games": 15,
+              "wins": 13,
+              "losses": 2,
+              "win_pct": 0.866667,
+              "mean_spread": -19.433
+            },
+            "G6": {
+              "games": 14,
+              "wins": 12,
+              "losses": 2,
+              "win_pct": 0.857143,
+              "mean_spread": -16.429
+            }
+          },
+          "by_magnitude": {
+            "0\u20130.24": {
+              "games": 8,
+              "wins": 7,
+              "losses": 1,
+              "win_pct": 0.875,
+              "mean_spread": -16.812
+            },
+            "0.25\u20130.49": {
+              "games": 5,
+              "wins": 4,
+              "losses": 1,
+              "win_pct": 0.8,
+              "mean_spread": -15.8
+            },
+            "0.50\u20130.74": {
+              "games": 4,
+              "wins": 4,
+              "losses": 0,
+              "win_pct": 1.0,
+              "mean_spread": -15.25
+            },
+            "0.75\u20130.99": {
+              "games": 5,
+              "wins": 4,
+              "losses": 1,
+              "win_pct": 0.8,
+              "mean_spread": -14.3
+            },
+            "1.00+": {
+              "games": 7,
+              "wins": 6,
+              "losses": 1,
+              "win_pct": 0.857143,
+              "mean_spread": -25.071
+            }
+          }
+        },
+        "no_odds_qualifying_games": 50,
+        "missing_verified_spread_in_qualifying_games": 0,
+        "home_underdogs_or_pickem_in_qualifying_games": 2
+      },
+      "betting_source": {
+        "all_rows": 448,
+        "target_year_unique_id_rows": 448,
+        "spread_available": 448,
+        "source_counts": {
+          "core_odds_api": 448
+        },
+        "valid_source_and_spread_rows": 448,
+        "missing_or_invalid_source_rows": 0
+      }
+    }
+  },
+  "2023_to_2025": {
+    "A": {
+      "games": 441,
+      "wins": 361,
+      "losses": 80,
+      "win_pct": 0.818594,
+      "mean_spread": -13.937,
+      "by_group": {
+        "P4": {
+          "games": 225,
+          "wins": 184,
+          "losses": 41,
+          "win_pct": 0.817778,
+          "mean_spread": -14.458
+        },
+        "G6": {
+          "games": 216,
+          "wins": 177,
+          "losses": 39,
+          "win_pct": 0.819444,
+          "mean_spread": -13.394
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 161,
+          "wins": 119,
+          "losses": 42,
+          "win_pct": 0.73913,
+          "mean_spread": -9.758
+        },
+        "0.25\u20130.49": {
+          "games": 134,
+          "wins": 104,
+          "losses": 30,
+          "win_pct": 0.776119,
+          "mean_spread": -11.664
+        },
+        "0.50\u20130.74": {
+          "games": 29,
+          "wins": 27,
+          "losses": 2,
+          "win_pct": 0.931034,
+          "mean_spread": -13.948
+        },
+        "0.75\u20130.99": {
+          "games": 55,
+          "wins": 51,
+          "losses": 4,
+          "win_pct": 0.927273,
+          "mean_spread": -18.445
+        },
+        "1.00+": {
+          "games": 62,
+          "wins": 60,
+          "losses": 2,
+          "win_pct": 0.967742,
+          "mean_spread": -25.694
+        }
+      }
+    },
+    "B": {
+      "games": 159,
+      "wins": 102,
+      "losses": 57,
+      "win_pct": 0.641509,
+      "mean_spread": -5.836,
+      "by_group": {
+        "P4": {
+          "games": 81,
+          "wins": 53,
+          "losses": 28,
+          "win_pct": 0.654321,
+          "mean_spread": -5.87
+        },
+        "G6": {
+          "games": 78,
+          "wins": 49,
+          "losses": 29,
+          "win_pct": 0.628205,
+          "mean_spread": -5.801
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 88,
+          "wins": 57,
+          "losses": 31,
+          "win_pct": 0.647727,
+          "mean_spread": -5.597
+        },
+        "0.25\u20130.49": {
+          "games": 62,
+          "wins": 39,
+          "losses": 23,
+          "win_pct": 0.629032,
+          "mean_spread": -6.113
+        },
+        "0.50\u20130.74": {
+          "games": 5,
+          "wins": 4,
+          "losses": 1,
+          "win_pct": 0.8,
+          "mean_spread": -6.9
+        },
+        "0.75\u20130.99": {
+          "games": 4,
+          "wins": 2,
+          "losses": 2,
+          "win_pct": 0.5,
+          "mean_spread": -5.5
+        },
+        "1.00+": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null,
+          "mean_spread": null
+        }
+      }
+    },
+    "A_heavy": {
+      "games": 282,
+      "wins": 259,
+      "losses": 23,
+      "win_pct": 0.91844,
+      "mean_spread": -18.504,
+      "by_group": {
+        "P4": {
+          "games": 144,
+          "wins": 131,
+          "losses": 13,
+          "win_pct": 0.909722,
+          "mean_spread": -19.288
+        },
+        "G6": {
+          "games": 138,
+          "wins": 128,
+          "losses": 10,
+          "win_pct": 0.927536,
+          "mean_spread": -17.685
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 73,
+          "wins": 62,
+          "losses": 11,
+          "win_pct": 0.849315,
+          "mean_spread": -14.774
+        },
+        "0.25\u20130.49": {
+          "games": 72,
+          "wins": 65,
+          "losses": 7,
+          "win_pct": 0.902778,
+          "mean_spread": -16.444
+        },
+        "0.50\u20130.74": {
+          "games": 24,
+          "wins": 23,
+          "losses": 1,
+          "win_pct": 0.958333,
+          "mean_spread": -15.417
+        },
+        "0.75\u20130.99": {
+          "games": 51,
+          "wins": 49,
+          "losses": 2,
+          "win_pct": 0.960784,
+          "mean_spread": -19.461
+        },
+        "1.00+": {
+          "games": 62,
+          "wins": 60,
+          "losses": 2,
+          "win_pct": 0.967742,
+          "mean_spread": -25.694
+        }
+      }
+    },
+    "no_odds_qualifying_games": 459,
+    "missing_verified_spread_in_qualifying_games": 0,
+    "home_underdogs_or_pickem_in_qualifying_games": 18
+  },
+  "2026_w3_to_w6": {
+    "A": {
+      "games": 48,
+      "wins": 40,
+      "losses": 8,
+      "win_pct": 0.833333,
+      "mean_spread": -13.0,
+      "by_group": {
+        "P4": {
+          "games": 25,
+          "wins": 21,
+          "losses": 4,
+          "win_pct": 0.84,
+          "mean_spread": -13.9
+        },
+        "G6": {
+          "games": 23,
+          "wins": 19,
+          "losses": 4,
+          "win_pct": 0.826087,
+          "mean_spread": -12.022
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 15,
+          "wins": 12,
+          "losses": 3,
+          "win_pct": 0.8,
+          "mean_spread": -11.033
+        },
+        "0.25\u20130.49": {
+          "games": 12,
+          "wins": 10,
+          "losses": 2,
+          "win_pct": 0.833333,
+          "mean_spread": -9.792
+        },
+        "0.50\u20130.74": {
+          "games": 5,
+          "wins": 5,
+          "losses": 0,
+          "win_pct": 1.0,
+          "mean_spread": -13.1
+        },
+        "0.75\u20130.99": {
+          "games": 9,
+          "wins": 7,
+          "losses": 2,
+          "win_pct": 0.777778,
+          "mean_spread": -11.111
+        },
+        "1.00+": {
+          "games": 7,
+          "wins": 6,
+          "losses": 1,
+          "win_pct": 0.857143,
+          "mean_spread": -25.071
+        }
+      }
+    },
+    "B": {
+      "games": 19,
+      "wins": 15,
+      "losses": 4,
+      "win_pct": 0.789474,
+      "mean_spread": -5.395,
+      "by_group": {
+        "P4": {
+          "games": 10,
+          "wins": 8,
+          "losses": 2,
+          "win_pct": 0.8,
+          "mean_spread": -5.6
+        },
+        "G6": {
+          "games": 9,
+          "wins": 7,
+          "losses": 2,
+          "win_pct": 0.777778,
+          "mean_spread": -5.167
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 7,
+          "wins": 5,
+          "losses": 2,
+          "win_pct": 0.714286,
+          "mean_spread": -4.429
+        },
+        "0.25\u20130.49": {
+          "games": 7,
+          "wins": 6,
+          "losses": 1,
+          "win_pct": 0.857143,
+          "mean_spread": -5.5
+        },
+        "0.50\u20130.74": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0,
+          "mean_spread": -4.5
+        },
+        "0.75\u20130.99": {
+          "games": 4,
+          "wins": 3,
+          "losses": 1,
+          "win_pct": 0.75,
+          "mean_spread": -7.125
+        },
+        "1.00+": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null,
+          "mean_spread": null
+        }
+      }
+    },
+    "A_heavy": {
+      "games": 29,
+      "wins": 25,
+      "losses": 4,
+      "win_pct": 0.862069,
+      "mean_spread": -17.983,
+      "by_group": {
+        "P4": {
+          "games": 15,
+          "wins": 13,
+          "losses": 2,
+          "win_pct": 0.866667,
+          "mean_spread": -19.433
+        },
+        "G6": {
+          "games": 14,
+          "wins": 12,
+          "losses": 2,
+          "win_pct": 0.857143,
+          "mean_spread": -16.429
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 8,
+          "wins": 7,
+          "losses": 1,
+          "win_pct": 0.875,
+          "mean_spread": -16.812
+        },
+        "0.25\u20130.49": {
+          "games": 5,
+          "wins": 4,
+          "losses": 1,
+          "win_pct": 0.8,
+          "mean_spread": -15.8
+        },
+        "0.50\u20130.74": {
+          "games": 4,
+          "wins": 4,
+          "losses": 0,
+          "win_pct": 1.0,
+          "mean_spread": -15.25
+        },
+        "0.75\u20130.99": {
+          "games": 5,
+          "wins": 4,
+          "losses": 1,
+          "win_pct": 0.8,
+          "mean_spread": -14.3
+        },
+        "1.00+": {
+          "games": 7,
+          "wins": 6,
+          "losses": 1,
+          "win_pct": 0.857143,
+          "mean_spread": -25.071
+        }
+      }
+    },
+    "no_odds_qualifying_games": 50,
+    "missing_verified_spread_in_qualifying_games": 0,
+    "home_underdogs_or_pickem_in_qualifying_games": 2
+  },
+  "2023_to_2026": {
+    "A": {
+      "games": 489,
+      "wins": 401,
+      "losses": 88,
+      "win_pct": 0.820041,
+      "mean_spread": -13.845,
+      "by_group": {
+        "P4": {
+          "games": 250,
+          "wins": 205,
+          "losses": 45,
+          "win_pct": 0.82,
+          "mean_spread": -14.402
+        },
+        "G6": {
+          "games": 239,
+          "wins": 196,
+          "losses": 43,
+          "win_pct": 0.820084,
+          "mean_spread": -13.262
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 176,
+          "wins": 131,
+          "losses": 45,
+          "win_pct": 0.744318,
+          "mean_spread": -9.866
+        },
+        "0.25\u20130.49": {
+          "games": 146,
+          "wins": 114,
+          "losses": 32,
+          "win_pct": 0.780822,
+          "mean_spread": -11.51
+        },
+        "0.50\u20130.74": {
+          "games": 34,
+          "wins": 32,
+          "losses": 2,
+          "win_pct": 0.941176,
+          "mean_spread": -13.824
+        },
+        "0.75\u20130.99": {
+          "games": 64,
+          "wins": 58,
+          "losses": 6,
+          "win_pct": 0.90625,
+          "mean_spread": -17.414
+        },
+        "1.00+": {
+          "games": 69,
+          "wins": 66,
+          "losses": 3,
+          "win_pct": 0.956522,
+          "mean_spread": -25.63
+        }
+      }
+    },
+    "B": {
+      "games": 178,
+      "wins": 117,
+      "losses": 61,
+      "win_pct": 0.657303,
+      "mean_spread": -5.789,
+      "by_group": {
+        "P4": {
+          "games": 91,
+          "wins": 61,
+          "losses": 30,
+          "win_pct": 0.67033,
+          "mean_spread": -5.841
+        },
+        "G6": {
+          "games": 87,
+          "wins": 56,
+          "losses": 31,
+          "win_pct": 0.643678,
+          "mean_spread": -5.736
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 95,
+          "wins": 62,
+          "losses": 33,
+          "win_pct": 0.652632,
+          "mean_spread": -5.511
+        },
+        "0.25\u20130.49": {
+          "games": 69,
+          "wins": 45,
+          "losses": 24,
+          "win_pct": 0.652174,
+          "mean_spread": -6.051
+        },
+        "0.50\u20130.74": {
+          "games": 6,
+          "wins": 5,
+          "losses": 1,
+          "win_pct": 0.833333,
+          "mean_spread": -6.5
+        },
+        "0.75\u20130.99": {
+          "games": 8,
+          "wins": 5,
+          "losses": 3,
+          "win_pct": 0.625,
+          "mean_spread": -6.312
+        },
+        "1.00+": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null,
+          "mean_spread": null
+        }
+      }
+    },
+    "A_heavy": {
+      "games": 311,
+      "wins": 284,
+      "losses": 27,
+      "win_pct": 0.913183,
+      "mean_spread": -18.455,
+      "by_group": {
+        "P4": {
+          "games": 159,
+          "wins": 144,
+          "losses": 15,
+          "win_pct": 0.90566,
+          "mean_spread": -19.302
+        },
+        "G6": {
+          "games": 152,
+          "wins": 140,
+          "losses": 12,
+          "win_pct": 0.921053,
+          "mean_spread": -17.569
+        }
+      },
+      "by_magnitude": {
+        "0\u20130.24": {
+          "games": 81,
+          "wins": 69,
+          "losses": 12,
+          "win_pct": 0.851852,
+          "mean_spread": -14.975
+        },
+        "0.25\u20130.49": {
+          "games": 77,
+          "wins": 69,
+          "losses": 8,
+          "win_pct": 0.896104,
+          "mean_spread": -16.403
+        },
+        "0.50\u20130.74": {
+          "games": 28,
+          "wins": 27,
+          "losses": 1,
+          "win_pct": 0.964286,
+          "mean_spread": -15.393
+        },
+        "0.75\u20130.99": {
+          "games": 56,
+          "wins": 53,
+          "losses": 3,
+          "win_pct": 0.946429,
+          "mean_spread": -19.0
+        },
+        "1.00+": {
+          "games": 69,
+          "wins": 66,
+          "losses": 3,
+          "win_pct": 0.956522,
+          "mean_spread": -25.63
+        }
+      }
+    },
+    "no_odds_qualifying_games": 509,
+    "missing_verified_spread_in_qualifying_games": 0,
+    "home_underdogs_or_pickem_in_qualifying_games": 20
+  },
+  "notes": [
+    "2023 to 2025 retrospective test was NOT a clean blind holdout: these historical seasons informed previous explorations; treat as robustness, not independent validation.",
+    "No re-estimation or change to original handwritten model ratings or existing app tiers.",
+    "The shared favorite/known-odds requirement is required for BOTH tests; without historical spread, games are never counted.",
+    "Test B is a strict subset of A; their win rate comparison is observational, not an independent A/B experiment.",
+    "Spread data may have been retrospectively archived, revised or captured late; not an immutable pre-kickoff record.",
+    "Straight-up win percentages are not ATS records and alone do not measure profitability."
+  ]
+}
