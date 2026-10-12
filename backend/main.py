@@ -277,7 +277,10 @@ def predictions(season: int = Query(..., ge=2001, le=2100), week: int = Query(..
                     weather_checks = build_weather_context(games, week, candidate_ids)
             except Exception:
                 weather_checks = {}
-        predicted = add_waterfall_value(predicted, games, boxes, week, weather_checks=weather_checks)
+        predicted = add_waterfall_value(predicted, games, boxes, week,
+                                        weather_checks=weather_checks,
+                                        published_summary=current,
+                                        prior_summary=prior)
         return {"season": season, "week": week, "model": "V1.5", "retrieved": datetime.now(timezone.utc).isoformat(), "games": json_rows(predicted), "value_card": json_rows(predicted[predicted["Value Selected"]].sort_values("Value Rank")), "value_card_status": predicted.attrs["waterfall"], "value_error": value_error}
     except Exception as exc:
         raise HTTPException(502, f"Unable to generate predictions: {exc}") from exc

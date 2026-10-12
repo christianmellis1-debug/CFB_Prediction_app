@@ -118,7 +118,8 @@ def main():
                 candidates = weather_tier_candidate_ids(predictions, schedule, profiles)
                 weather = build_weather_context(schedule, week, candidates) if candidates else {}
                 scored = add_waterfall_value(predictions, schedule, box, week,
-                                             weather_checks=weather, published_summary=current)
+                                             weather_checks=weather, published_summary=current,
+                                             prior_summary=prior)
                 lookup = {str(int(x["Game ID"])): x for _, x in scored.iterrows()}
                 for gid, game in pending.items():
                     if int(game["week"]) != week or gid not in lookup:
