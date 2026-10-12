@@ -1,0 +1,1900 @@
+{
+  "created_at": "2026-10-12T17:23:19.079911+00:00",
+  "definition": "FBS vs FBS, current user handwritten home offense+defense unit rating positive, strictly non-neutral, AND P4 vs P4 or G6 vs G6 only, with separate group cohorts.",
+  "p4": [
+    "ACC",
+    "Big 12",
+    "Big Ten",
+    "SEC"
+  ],
+  "g6": [
+    "American Athletic",
+    "Conference USA",
+    "Mid-American",
+    "Mountain West",
+    "Sun Belt"
+  ],
+  "exceptions": {
+    "Notre Dame": "P4 all seasons",
+    "Pac-12": "P4 in 2022\u20132023, unclassified 2024\u20132025, G6 in 2026",
+    "unrecognized teams": "excluded; never automatically classify as G6"
+  },
+  "years": {
+    "2022": {
+      "all_evaluated_games": 630,
+      "home_both_all_pregame_eligible": {
+        "games": 191,
+        "wins": 146,
+        "losses": 45,
+        "win_pct": 0.764398
+      },
+      "same_group_home_both": {
+        "games": 154,
+        "wins": 115,
+        "losses": 39,
+        "win_pct": 0.746753
+      },
+      "same_group_p4_v_p4": {
+        "games": 73,
+        "wins": 57,
+        "losses": 16,
+        "win_pct": 0.780822
+      },
+      "same_group_g6_v_g6": {
+        "games": 81,
+        "wins": 58,
+        "losses": 23,
+        "win_pct": 0.716049
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 37,
+        "wins": 31,
+        "losses": 6,
+        "win_pct": 0.837838
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 54,
+          "wins": 35,
+          "losses": 19,
+          "win_pct": 0.648148
+        },
+        "0.25\u20130.5": {
+          "games": 45,
+          "wins": 34,
+          "losses": 11,
+          "win_pct": 0.755556
+        },
+        "0.5\u20130.75": {
+          "games": 27,
+          "wins": 24,
+          "losses": 3,
+          "win_pct": 0.888889
+        },
+        "0.75\u20131": {
+          "games": 11,
+          "wins": 8,
+          "losses": 3,
+          "win_pct": 0.727273
+        },
+        "1+": {
+          "games": 17,
+          "wins": 14,
+          "losses": 3,
+          "win_pct": 0.823529
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 25,
+          "wins": 17,
+          "losses": 8,
+          "win_pct": 0.68
+        },
+        "0.25\u20130.5": {
+          "games": 19,
+          "wins": 14,
+          "losses": 5,
+          "win_pct": 0.736842
+        },
+        "0.5\u20130.75": {
+          "games": 14,
+          "wins": 14,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.75\u20131": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "win_pct": 0.666667
+        },
+        "1+": {
+          "games": 12,
+          "wins": 10,
+          "losses": 2,
+          "win_pct": 0.833333
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 29,
+          "wins": 18,
+          "losses": 11,
+          "win_pct": 0.62069
+        },
+        "0.25\u20130.5": {
+          "games": 26,
+          "wins": 20,
+          "losses": 6,
+          "win_pct": 0.769231
+        },
+        "0.5\u20130.75": {
+          "games": 13,
+          "wins": 10,
+          "losses": 3,
+          "win_pct": 0.769231
+        },
+        "0.75\u20131": {
+          "games": 8,
+          "wins": 6,
+          "losses": 2,
+          "win_pct": 0.75
+        },
+        "1+": {
+          "games": 5,
+          "wins": 4,
+          "losses": 1,
+          "win_pct": 0.8
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 100,
+          "wins": 80,
+          "losses": 20,
+          "win_pct": 0.8
+        },
+        "0.5": {
+          "games": 55,
+          "wins": 46,
+          "losses": 9,
+          "win_pct": 0.836364
+        },
+        "0.75": {
+          "games": 28,
+          "wins": 22,
+          "losses": 6,
+          "win_pct": 0.785714
+        },
+        "1.0": {
+          "games": 17,
+          "wins": 14,
+          "losses": 3,
+          "win_pct": 0.823529
+        }
+      },
+      "excluded_categories": {
+        "G6 vs P4": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "P4 vs G6": {
+          "games": 21,
+          "wins": 19,
+          "losses": 2,
+          "win_pct": 0.904762
+        },
+        "unclassified": {
+          "games": 14,
+          "wins": 10,
+          "losses": 4,
+          "win_pct": 0.714286
+        }
+      }
+    },
+    "2023": {
+      "all_evaluated_games": 646,
+      "home_both_all_pregame_eligible": {
+        "games": 198,
+        "wins": 165,
+        "losses": 33,
+        "win_pct": 0.833333
+      },
+      "same_group_home_both": {
+        "games": 161,
+        "wins": 134,
+        "losses": 27,
+        "win_pct": 0.832298
+      },
+      "same_group_p4_v_p4": {
+        "games": 85,
+        "wins": 70,
+        "losses": 15,
+        "win_pct": 0.823529
+      },
+      "same_group_g6_v_g6": {
+        "games": 76,
+        "wins": 64,
+        "losses": 12,
+        "win_pct": 0.842105
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 37,
+        "wins": 31,
+        "losses": 6,
+        "win_pct": 0.837838
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 59,
+          "wins": 45,
+          "losses": 14,
+          "win_pct": 0.762712
+        },
+        "0.25\u20130.5": {
+          "games": 42,
+          "wins": 34,
+          "losses": 8,
+          "win_pct": 0.809524
+        },
+        "0.5\u20130.75": {
+          "games": 26,
+          "wins": 23,
+          "losses": 3,
+          "win_pct": 0.884615
+        },
+        "0.75\u20131": {
+          "games": 19,
+          "wins": 18,
+          "losses": 1,
+          "win_pct": 0.947368
+        },
+        "1+": {
+          "games": 15,
+          "wins": 14,
+          "losses": 1,
+          "win_pct": 0.933333
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 22,
+          "wins": 15,
+          "losses": 7,
+          "win_pct": 0.681818
+        },
+        "0.25\u20130.5": {
+          "games": 23,
+          "wins": 19,
+          "losses": 4,
+          "win_pct": 0.826087
+        },
+        "0.5\u20130.75": {
+          "games": 16,
+          "wins": 14,
+          "losses": 2,
+          "win_pct": 0.875
+        },
+        "0.75\u20131": {
+          "games": 11,
+          "wins": 10,
+          "losses": 1,
+          "win_pct": 0.909091
+        },
+        "1+": {
+          "games": 13,
+          "wins": 12,
+          "losses": 1,
+          "win_pct": 0.923077
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 37,
+          "wins": 30,
+          "losses": 7,
+          "win_pct": 0.810811
+        },
+        "0.25\u20130.5": {
+          "games": 19,
+          "wins": 15,
+          "losses": 4,
+          "win_pct": 0.789474
+        },
+        "0.5\u20130.75": {
+          "games": 10,
+          "wins": 9,
+          "losses": 1,
+          "win_pct": 0.9
+        },
+        "0.75\u20131": {
+          "games": 8,
+          "wins": 8,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1+": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 102,
+          "wins": 89,
+          "losses": 13,
+          "win_pct": 0.872549
+        },
+        "0.5": {
+          "games": 60,
+          "wins": 55,
+          "losses": 5,
+          "win_pct": 0.916667
+        },
+        "0.75": {
+          "games": 34,
+          "wins": 32,
+          "losses": 2,
+          "win_pct": 0.941176
+        },
+        "1.0": {
+          "games": 15,
+          "wins": 14,
+          "losses": 1,
+          "win_pct": 0.933333
+        }
+      },
+      "excluded_categories": {
+        "G6 vs P4": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "P4 vs G6": {
+          "games": 26,
+          "wins": 23,
+          "losses": 3,
+          "win_pct": 0.884615
+        },
+        "unclassified": {
+          "games": 10,
+          "wins": 7,
+          "losses": 3,
+          "win_pct": 0.7
+        }
+      }
+    },
+    "2024": {
+      "all_evaluated_games": 659,
+      "home_both_all_pregame_eligible": {
+        "games": 219,
+        "wins": 184,
+        "losses": 35,
+        "win_pct": 0.840183
+      },
+      "same_group_home_both": {
+        "games": 179,
+        "wins": 146,
+        "losses": 33,
+        "win_pct": 0.815642
+      },
+      "same_group_p4_v_p4": {
+        "games": 101,
+        "wins": 82,
+        "losses": 19,
+        "win_pct": 0.811881
+      },
+      "same_group_g6_v_g6": {
+        "games": 78,
+        "wins": 64,
+        "losses": 14,
+        "win_pct": 0.820513
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 40,
+        "wins": 38,
+        "losses": 2,
+        "win_pct": 0.95
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 61,
+          "wins": 42,
+          "losses": 19,
+          "win_pct": 0.688525
+        },
+        "0.25\u20130.5": {
+          "games": 52,
+          "wins": 42,
+          "losses": 10,
+          "win_pct": 0.807692
+        },
+        "0.5\u20130.75": {
+          "games": 23,
+          "wins": 21,
+          "losses": 2,
+          "win_pct": 0.913043
+        },
+        "0.75\u20131": {
+          "games": 17,
+          "wins": 15,
+          "losses": 2,
+          "win_pct": 0.882353
+        },
+        "1+": {
+          "games": 26,
+          "wins": 26,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 42,
+          "wins": 29,
+          "losses": 13,
+          "win_pct": 0.690476
+        },
+        "0.25\u20130.5": {
+          "games": 26,
+          "wins": 22,
+          "losses": 4,
+          "win_pct": 0.846154
+        },
+        "0.5\u20130.75": {
+          "games": 10,
+          "wins": 8,
+          "losses": 2,
+          "win_pct": 0.8
+        },
+        "0.75\u20131": {
+          "games": 9,
+          "wins": 9,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1+": {
+          "games": 14,
+          "wins": 14,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 19,
+          "wins": 13,
+          "losses": 6,
+          "win_pct": 0.684211
+        },
+        "0.25\u20130.5": {
+          "games": 26,
+          "wins": 20,
+          "losses": 6,
+          "win_pct": 0.769231
+        },
+        "0.5\u20130.75": {
+          "games": 13,
+          "wins": 13,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.75\u20131": {
+          "games": 8,
+          "wins": 6,
+          "losses": 2,
+          "win_pct": 0.75
+        },
+        "1+": {
+          "games": 12,
+          "wins": 12,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 118,
+          "wins": 104,
+          "losses": 14,
+          "win_pct": 0.881356
+        },
+        "0.5": {
+          "games": 66,
+          "wins": 62,
+          "losses": 4,
+          "win_pct": 0.939394
+        },
+        "0.75": {
+          "games": 43,
+          "wins": 41,
+          "losses": 2,
+          "win_pct": 0.953488
+        },
+        "1.0": {
+          "games": 26,
+          "wins": 26,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "excluded_categories": {
+        "G6 vs P4": {
+          "games": 3,
+          "wins": 1,
+          "losses": 2,
+          "win_pct": 0.333333
+        },
+        "P4 vs G6": {
+          "games": 25,
+          "wins": 25,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "unclassified": {
+          "games": 12,
+          "wins": 12,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      }
+    },
+    "2025": {
+      "all_evaluated_games": 663,
+      "home_both_all_pregame_eligible": {
+        "games": 185,
+        "wins": 150,
+        "losses": 35,
+        "win_pct": 0.810811
+      },
+      "same_group_home_both": {
+        "games": 154,
+        "wins": 120,
+        "losses": 34,
+        "win_pct": 0.779221
+      },
+      "same_group_p4_v_p4": {
+        "games": 78,
+        "wins": 64,
+        "losses": 14,
+        "win_pct": 0.820513
+      },
+      "same_group_g6_v_g6": {
+        "games": 76,
+        "wins": 56,
+        "losses": 20,
+        "win_pct": 0.736842
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 31,
+        "wins": 30,
+        "losses": 1,
+        "win_pct": 0.967742
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 56,
+          "wins": 40,
+          "losses": 16,
+          "win_pct": 0.714286
+        },
+        "0.25\u20130.5": {
+          "games": 43,
+          "wins": 30,
+          "losses": 13,
+          "win_pct": 0.697674
+        },
+        "0.5\u20130.75": {
+          "games": 15,
+          "wins": 12,
+          "losses": 3,
+          "win_pct": 0.8
+        },
+        "0.75\u20131": {
+          "games": 19,
+          "wins": 18,
+          "losses": 1,
+          "win_pct": 0.947368
+        },
+        "1+": {
+          "games": 21,
+          "wins": 20,
+          "losses": 1,
+          "win_pct": 0.952381
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 23,
+          "wins": 18,
+          "losses": 5,
+          "win_pct": 0.782609
+        },
+        "0.25\u20130.5": {
+          "games": 22,
+          "wins": 17,
+          "losses": 5,
+          "win_pct": 0.772727
+        },
+        "0.5\u20130.75": {
+          "games": 9,
+          "wins": 7,
+          "losses": 2,
+          "win_pct": 0.777778
+        },
+        "0.75\u20131": {
+          "games": 10,
+          "wins": 9,
+          "losses": 1,
+          "win_pct": 0.9
+        },
+        "1+": {
+          "games": 14,
+          "wins": 13,
+          "losses": 1,
+          "win_pct": 0.928571
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 33,
+          "wins": 22,
+          "losses": 11,
+          "win_pct": 0.666667
+        },
+        "0.25\u20130.5": {
+          "games": 21,
+          "wins": 13,
+          "losses": 8,
+          "win_pct": 0.619048
+        },
+        "0.5\u20130.75": {
+          "games": 6,
+          "wins": 5,
+          "losses": 1,
+          "win_pct": 0.833333
+        },
+        "0.75\u20131": {
+          "games": 9,
+          "wins": 9,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1+": {
+          "games": 7,
+          "wins": 7,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 98,
+          "wins": 80,
+          "losses": 18,
+          "win_pct": 0.816327
+        },
+        "0.5": {
+          "games": 55,
+          "wins": 50,
+          "losses": 5,
+          "win_pct": 0.909091
+        },
+        "0.75": {
+          "games": 40,
+          "wins": 38,
+          "losses": 2,
+          "win_pct": 0.95
+        },
+        "1.0": {
+          "games": 21,
+          "wins": 20,
+          "losses": 1,
+          "win_pct": 0.952381
+        }
+      },
+      "excluded_categories": {
+        "G6 vs P4": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "P4 vs G6": {
+          "games": 23,
+          "wins": 22,
+          "losses": 1,
+          "win_pct": 0.956522
+        },
+        "unclassified": {
+          "games": 7,
+          "wins": 7,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      }
+    },
+    "2026": {
+      "all_evaluated_games": 228,
+      "home_both_all_pregame_eligible": {
+        "games": 82,
+        "wins": 67,
+        "losses": 15,
+        "win_pct": 0.817073
+      },
+      "same_group_home_both": {
+        "games": 59,
+        "wins": 44,
+        "losses": 15,
+        "win_pct": 0.745763
+      },
+      "same_group_p4_v_p4": {
+        "games": 35,
+        "wins": 25,
+        "losses": 10,
+        "win_pct": 0.714286
+      },
+      "same_group_g6_v_g6": {
+        "games": 24,
+        "wins": 19,
+        "losses": 5,
+        "win_pct": 0.791667
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 23,
+        "wins": 23,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 17,
+          "wins": 12,
+          "losses": 5,
+          "win_pct": 0.705882
+        },
+        "0.25\u20130.5": {
+          "games": 12,
+          "wins": 10,
+          "losses": 2,
+          "win_pct": 0.833333
+        },
+        "0.5\u20130.75": {
+          "games": 14,
+          "wins": 9,
+          "losses": 5,
+          "win_pct": 0.642857
+        },
+        "0.75\u20131": {
+          "games": 9,
+          "wins": 7,
+          "losses": 2,
+          "win_pct": 0.777778
+        },
+        "1+": {
+          "games": 7,
+          "wins": 6,
+          "losses": 1,
+          "win_pct": 0.857143
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 8,
+          "wins": 5,
+          "losses": 3,
+          "win_pct": 0.625
+        },
+        "0.25\u20130.5": {
+          "games": 8,
+          "wins": 8,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 9,
+          "wins": 4,
+          "losses": 5,
+          "win_pct": 0.444444
+        },
+        "0.75\u20131": {
+          "games": 5,
+          "wins": 4,
+          "losses": 1,
+          "win_pct": 0.8
+        },
+        "1+": {
+          "games": 5,
+          "wins": 4,
+          "losses": 1,
+          "win_pct": 0.8
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 9,
+          "wins": 7,
+          "losses": 2,
+          "win_pct": 0.777778
+        },
+        "0.25\u20130.5": {
+          "games": 4,
+          "wins": 2,
+          "losses": 2,
+          "win_pct": 0.5
+        },
+        "0.5\u20130.75": {
+          "games": 5,
+          "wins": 5,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.75\u20131": {
+          "games": 4,
+          "wins": 3,
+          "losses": 1,
+          "win_pct": 0.75
+        },
+        "1+": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 42,
+          "wins": 32,
+          "losses": 10,
+          "win_pct": 0.761905
+        },
+        "0.5": {
+          "games": 30,
+          "wins": 22,
+          "losses": 8,
+          "win_pct": 0.733333
+        },
+        "0.75": {
+          "games": 16,
+          "wins": 13,
+          "losses": 3,
+          "win_pct": 0.8125
+        },
+        "1.0": {
+          "games": 7,
+          "wins": 6,
+          "losses": 1,
+          "win_pct": 0.857143
+        }
+      },
+      "excluded_categories": {
+        "G6 vs P4": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "P4 vs G6": {
+          "games": 22,
+          "wins": 22,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      }
+    }
+  },
+  "combined": {
+    "all_evaluated_games": 2826,
+    "home_both_all_pregame_eligible": {
+      "games": 875,
+      "wins": 712,
+      "losses": 163,
+      "win_pct": 0.813714
+    },
+    "same_group_home_both": {
+      "games": 707,
+      "wins": 559,
+      "losses": 148,
+      "win_pct": 0.790665
+    },
+    "same_group_p4_v_p4": {
+      "games": 372,
+      "wins": 298,
+      "losses": 74,
+      "win_pct": 0.801075
+    },
+    "same_group_g6_v_g6": {
+      "games": 335,
+      "wins": 261,
+      "losses": 74,
+      "win_pct": 0.779104
+    },
+    "excluded_home_both_mixed_or_unclassified": {
+      "games": 168,
+      "wins": 153,
+      "losses": 15,
+      "win_pct": 0.910714
+    },
+    "bands_same_group_all": {
+      "0\u20130.25": {
+        "games": 247,
+        "wins": 174,
+        "losses": 73,
+        "win_pct": 0.704453
+      },
+      "0.25\u20130.5": {
+        "games": 194,
+        "wins": 150,
+        "losses": 44,
+        "win_pct": 0.773196
+      },
+      "0.5\u20130.75": {
+        "games": 105,
+        "wins": 89,
+        "losses": 16,
+        "win_pct": 0.847619
+      },
+      "0.75\u20131": {
+        "games": 75,
+        "wins": 66,
+        "losses": 9,
+        "win_pct": 0.88
+      },
+      "1+": {
+        "games": 86,
+        "wins": 80,
+        "losses": 6,
+        "win_pct": 0.930233
+      }
+    },
+    "bands_p4_v_p4": {
+      "0\u20130.25": {
+        "games": 120,
+        "wins": 84,
+        "losses": 36,
+        "win_pct": 0.7
+      },
+      "0.25\u20130.5": {
+        "games": 98,
+        "wins": 80,
+        "losses": 18,
+        "win_pct": 0.816327
+      },
+      "0.5\u20130.75": {
+        "games": 58,
+        "wins": 47,
+        "losses": 11,
+        "win_pct": 0.810345
+      },
+      "0.75\u20131": {
+        "games": 38,
+        "wins": 34,
+        "losses": 4,
+        "win_pct": 0.894737
+      },
+      "1+": {
+        "games": 58,
+        "wins": 53,
+        "losses": 5,
+        "win_pct": 0.913793
+      }
+    },
+    "bands_g6_v_g6": {
+      "0\u20130.25": {
+        "games": 127,
+        "wins": 90,
+        "losses": 37,
+        "win_pct": 0.708661
+      },
+      "0.25\u20130.5": {
+        "games": 96,
+        "wins": 70,
+        "losses": 26,
+        "win_pct": 0.729167
+      },
+      "0.5\u20130.75": {
+        "games": 47,
+        "wins": 42,
+        "losses": 5,
+        "win_pct": 0.893617
+      },
+      "0.75\u20131": {
+        "games": 37,
+        "wins": 32,
+        "losses": 5,
+        "win_pct": 0.864865
+      },
+      "1+": {
+        "games": 28,
+        "wins": 27,
+        "losses": 1,
+        "win_pct": 0.964286
+      }
+    },
+    "cumulative_same_group": {
+      "0.25": {
+        "games": 460,
+        "wins": 385,
+        "losses": 75,
+        "win_pct": 0.836957
+      },
+      "0.5": {
+        "games": 266,
+        "wins": 235,
+        "losses": 31,
+        "win_pct": 0.883459
+      },
+      "0.75": {
+        "games": 161,
+        "wins": 146,
+        "losses": 15,
+        "win_pct": 0.906832
+      },
+      "1.0": {
+        "games": 86,
+        "wins": 80,
+        "losses": 6,
+        "win_pct": 0.930233
+      }
+    },
+    "excluded_categories": {
+      "G6 vs P4": {
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "win_pct": 0.75
+      },
+      "P4 vs G6": {
+        "games": 117,
+        "wins": 111,
+        "losses": 6,
+        "win_pct": 0.948718
+      },
+      "unclassified": {
+        "games": 43,
+        "wins": 36,
+        "losses": 7,
+        "win_pct": 0.837209
+      }
+    }
+  },
+  "2026_weeks3_to6": {
+    "all_evaluated_games": 228,
+    "home_both_all_pregame_eligible": {
+      "games": 82,
+      "wins": 67,
+      "losses": 15,
+      "win_pct": 0.817073
+    },
+    "same_group_home_both": {
+      "games": 59,
+      "wins": 44,
+      "losses": 15,
+      "win_pct": 0.745763
+    },
+    "same_group_p4_v_p4": {
+      "games": 35,
+      "wins": 25,
+      "losses": 10,
+      "win_pct": 0.714286
+    },
+    "same_group_g6_v_g6": {
+      "games": 24,
+      "wins": 19,
+      "losses": 5,
+      "win_pct": 0.791667
+    },
+    "excluded_home_both_mixed_or_unclassified": {
+      "games": 23,
+      "wins": 23,
+      "losses": 0,
+      "win_pct": 1.0
+    },
+    "bands_same_group_all": {
+      "0\u20130.25": {
+        "games": 17,
+        "wins": 12,
+        "losses": 5,
+        "win_pct": 0.705882
+      },
+      "0.25\u20130.5": {
+        "games": 12,
+        "wins": 10,
+        "losses": 2,
+        "win_pct": 0.833333
+      },
+      "0.5\u20130.75": {
+        "games": 14,
+        "wins": 9,
+        "losses": 5,
+        "win_pct": 0.642857
+      },
+      "0.75\u20131": {
+        "games": 9,
+        "wins": 7,
+        "losses": 2,
+        "win_pct": 0.777778
+      },
+      "1+": {
+        "games": 7,
+        "wins": 6,
+        "losses": 1,
+        "win_pct": 0.857143
+      }
+    },
+    "bands_p4_v_p4": {
+      "0\u20130.25": {
+        "games": 8,
+        "wins": 5,
+        "losses": 3,
+        "win_pct": 0.625
+      },
+      "0.25\u20130.5": {
+        "games": 8,
+        "wins": 8,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "0.5\u20130.75": {
+        "games": 9,
+        "wins": 4,
+        "losses": 5,
+        "win_pct": 0.444444
+      },
+      "0.75\u20131": {
+        "games": 5,
+        "wins": 4,
+        "losses": 1,
+        "win_pct": 0.8
+      },
+      "1+": {
+        "games": 5,
+        "wins": 4,
+        "losses": 1,
+        "win_pct": 0.8
+      }
+    },
+    "bands_g6_v_g6": {
+      "0\u20130.25": {
+        "games": 9,
+        "wins": 7,
+        "losses": 2,
+        "win_pct": 0.777778
+      },
+      "0.25\u20130.5": {
+        "games": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_pct": 0.5
+      },
+      "0.5\u20130.75": {
+        "games": 5,
+        "wins": 5,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "0.75\u20131": {
+        "games": 4,
+        "wins": 3,
+        "losses": 1,
+        "win_pct": 0.75
+      },
+      "1+": {
+        "games": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_pct": 1.0
+      }
+    },
+    "cumulative_same_group": {
+      "0.25": {
+        "games": 42,
+        "wins": 32,
+        "losses": 10,
+        "win_pct": 0.761905
+      },
+      "0.5": {
+        "games": 30,
+        "wins": 22,
+        "losses": 8,
+        "win_pct": 0.733333
+      },
+      "0.75": {
+        "games": 16,
+        "wins": 13,
+        "losses": 3,
+        "win_pct": 0.8125
+      },
+      "1.0": {
+        "games": 7,
+        "wins": 6,
+        "losses": 1,
+        "win_pct": 0.857143
+      }
+    },
+    "excluded_categories": {
+      "G6 vs P4": {
+        "games": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "P4 vs G6": {
+        "games": 22,
+        "wins": 22,
+        "losses": 0,
+        "win_pct": 1.0
+      }
+    }
+  },
+  "2026_by_week": {
+    "3": {
+      "all_evaluated_games": 56,
+      "home_both_all_pregame_eligible": {
+        "games": 31,
+        "wins": 28,
+        "losses": 3,
+        "win_pct": 0.903226
+      },
+      "same_group_home_both": {
+        "games": 15,
+        "wins": 12,
+        "losses": 3,
+        "win_pct": 0.8
+      },
+      "same_group_p4_v_p4": {
+        "games": 11,
+        "wins": 8,
+        "losses": 3,
+        "win_pct": 0.727273
+      },
+      "same_group_g6_v_g6": {
+        "games": 4,
+        "wins": 4,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 16,
+        "wins": 16,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 4,
+          "wins": 3,
+          "losses": 1,
+          "win_pct": 0.75
+        },
+        "0.25\u20130.5": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "win_pct": 0.666667
+        },
+        "0.75\u20131": {
+          "games": 3,
+          "wins": 3,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1+": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "win_pct": 0.666667
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "win_pct": 0.666667
+        },
+        "0.25\u20130.5": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 2,
+          "wins": 1,
+          "losses": 1,
+          "win_pct": 0.5
+        },
+        "0.75\u20131": {
+          "games": 3,
+          "wins": 3,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1+": {
+          "games": 2,
+          "wins": 1,
+          "losses": 1,
+          "win_pct": 0.5
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.25\u20130.5": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.75\u20131": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        },
+        "1+": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 11,
+          "wins": 9,
+          "losses": 2,
+          "win_pct": 0.818182
+        },
+        "0.5": {
+          "games": 9,
+          "wins": 7,
+          "losses": 2,
+          "win_pct": 0.777778
+        },
+        "0.75": {
+          "games": 6,
+          "wins": 5,
+          "losses": 1,
+          "win_pct": 0.833333
+        },
+        "1.0": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "win_pct": 0.666667
+        }
+      },
+      "excluded_categories": {
+        "P4 vs G6": {
+          "games": 16,
+          "wins": 16,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      }
+    },
+    "4": {
+      "all_evaluated_games": 58,
+      "home_both_all_pregame_eligible": {
+        "games": 14,
+        "wins": 11,
+        "losses": 3,
+        "win_pct": 0.785714
+      },
+      "same_group_home_both": {
+        "games": 9,
+        "wins": 6,
+        "losses": 3,
+        "win_pct": 0.666667
+      },
+      "same_group_p4_v_p4": {
+        "games": 6,
+        "wins": 3,
+        "losses": 3,
+        "win_pct": 0.5
+      },
+      "same_group_g6_v_g6": {
+        "games": 3,
+        "wins": 3,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 5,
+        "wins": 5,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.25\u20130.5": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 4,
+          "wins": 2,
+          "losses": 2,
+          "win_pct": 0.5
+        },
+        "0.75\u20131": {
+          "games": 1,
+          "wins": 0,
+          "losses": 1,
+          "win_pct": 0.0
+        },
+        "1+": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        },
+        "0.25\u20130.5": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 2,
+          "wins": 0,
+          "losses": 2,
+          "win_pct": 0.0
+        },
+        "0.75\u20131": {
+          "games": 1,
+          "wins": 0,
+          "losses": 1,
+          "win_pct": 0.0
+        },
+        "1+": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.25\u20130.5": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        },
+        "0.5\u20130.75": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.75\u20131": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        },
+        "1+": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 8,
+          "wins": 5,
+          "losses": 3,
+          "win_pct": 0.625
+        },
+        "0.5": {
+          "games": 6,
+          "wins": 3,
+          "losses": 3,
+          "win_pct": 0.5
+        },
+        "0.75": {
+          "games": 2,
+          "wins": 1,
+          "losses": 1,
+          "win_pct": 0.5
+        },
+        "1.0": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "excluded_categories": {
+        "P4 vs G6": {
+          "games": 5,
+          "wins": 5,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      }
+    },
+    "5": {
+      "all_evaluated_games": 56,
+      "home_both_all_pregame_eligible": {
+        "games": 16,
+        "wins": 13,
+        "losses": 3,
+        "win_pct": 0.8125
+      },
+      "same_group_home_both": {
+        "games": 15,
+        "wins": 12,
+        "losses": 3,
+        "win_pct": 0.8
+      },
+      "same_group_p4_v_p4": {
+        "games": 8,
+        "wins": 7,
+        "losses": 1,
+        "win_pct": 0.875
+      },
+      "same_group_g6_v_g6": {
+        "games": 7,
+        "wins": 5,
+        "losses": 2,
+        "win_pct": 0.714286
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 3,
+          "wins": 3,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.25\u20130.5": {
+          "games": 4,
+          "wins": 2,
+          "losses": 2,
+          "win_pct": 0.5
+        },
+        "0.5\u20130.75": {
+          "games": 5,
+          "wins": 4,
+          "losses": 1,
+          "win_pct": 0.8
+        },
+        "0.75\u20131": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1+": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 3,
+          "wins": 3,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.25\u20130.5": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "win_pct": 0.666667
+        },
+        "0.75\u20131": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1+": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        },
+        "0.25\u20130.5": {
+          "games": 3,
+          "wins": 1,
+          "losses": 2,
+          "win_pct": 0.333333
+        },
+        "0.5\u20130.75": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.75\u20131": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1+": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 12,
+          "wins": 9,
+          "losses": 3,
+          "win_pct": 0.75
+        },
+        "0.5": {
+          "games": 8,
+          "wins": 7,
+          "losses": 1,
+          "win_pct": 0.875
+        },
+        "0.75": {
+          "games": 3,
+          "wins": 3,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "1.0": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "excluded_categories": {
+        "G6 vs P4": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      }
+    },
+    "6": {
+      "all_evaluated_games": 58,
+      "home_both_all_pregame_eligible": {
+        "games": 21,
+        "wins": 15,
+        "losses": 6,
+        "win_pct": 0.714286
+      },
+      "same_group_home_both": {
+        "games": 20,
+        "wins": 14,
+        "losses": 6,
+        "win_pct": 0.7
+      },
+      "same_group_p4_v_p4": {
+        "games": 10,
+        "wins": 7,
+        "losses": 3,
+        "win_pct": 0.7
+      },
+      "same_group_g6_v_g6": {
+        "games": 10,
+        "wins": 7,
+        "losses": 3,
+        "win_pct": 0.7
+      },
+      "excluded_home_both_mixed_or_unclassified": {
+        "games": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_pct": 1.0
+      },
+      "bands_same_group_all": {
+        "0\u20130.25": {
+          "games": 9,
+          "wins": 5,
+          "losses": 4,
+          "win_pct": 0.555556
+        },
+        "0.25\u20130.5": {
+          "games": 4,
+          "wins": 4,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 2,
+          "wins": 1,
+          "losses": 1,
+          "win_pct": 0.5
+        },
+        "0.75\u20131": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "win_pct": 0.666667
+        },
+        "1+": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "bands_p4_v_p4": {
+        "0\u20130.25": {
+          "games": 2,
+          "wins": 0,
+          "losses": 2,
+          "win_pct": 0.0
+        },
+        "0.25\u20130.5": {
+          "games": 4,
+          "wins": 4,
+          "losses": 0,
+          "win_pct": 1.0
+        },
+        "0.5\u20130.75": {
+          "games": 2,
+          "wins": 1,
+          "losses": 1,
+          "win_pct": 0.5
+        },
+        "0.75\u20131": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        },
+        "1+": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "bands_g6_v_g6": {
+        "0\u20130.25": {
+          "games": 7,
+          "wins": 5,
+          "losses": 2,
+          "win_pct": 0.714286
+        },
+        "0.25\u20130.5": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        },
+        "0.5\u20130.75": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        },
+        "0.75\u20131": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "win_pct": 0.666667
+        },
+        "1+": {
+          "games": 0,
+          "wins": 0,
+          "losses": 0,
+          "win_pct": null
+        }
+      },
+      "cumulative_same_group": {
+        "0.25": {
+          "games": 11,
+          "wins": 9,
+          "losses": 2,
+          "win_pct": 0.818182
+        },
+        "0.5": {
+          "games": 7,
+          "wins": 5,
+          "losses": 2,
+          "win_pct": 0.714286
+        },
+        "0.75": {
+          "games": 5,
+          "wins": 4,
+          "losses": 1,
+          "win_pct": 0.8
+        },
+        "1.0": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      },
+      "excluded_categories": {
+        "P4 vs G6": {
+          "games": 1,
+          "wins": 1,
+          "losses": 0,
+          "win_pct": 1.0
+        }
+      }
+    }
+  },
+  "note": [
+    "Historical model original 40/25/15/10/10 current-season internal unit ratings and prior-season/Elo blend unchanged; ONLY target matchups are filtered, as requested.",
+    "Underlying pregame feature profiles still use complete earlier FBS games across opponent groups; we are not filtering earlier history.",
+    "No -10 spread requirement. All point-spread and moneyline values are irrelevant for qualification.",
+    "Unclassified, P4 vs G6 and G6 vs P4 are excluded from proposed same-group tier candidate.",
+    "2024-2025 Pac-12 treated as unclassified for season-aware consistency; no automatic G6 assignment.",
+    "2026 Weeks 3\u20136 and prior seasons are retrospective reconstructed earlier-week backtests, not immutable archived pregame picks.",
+    "Straight-up winner accuracy is not betting profitability. Heavy favorites can inflate win rate even within group."
+  ]
+}
