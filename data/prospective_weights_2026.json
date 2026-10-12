@@ -1,11 +1,18 @@
 {
-  "schema": 1,
   "experiment": "cfb-internal-weights-v1-2026-10-12",
-  "season": 2026,
-  "snapshots": {},
+  "last_run": "2026-10-12T13:50:41.160288+00:00",
   "results": {},
-  "last_run": null,
   "run_summary": {
-    "note": "Prospective-only: no historical games inserted; captures begin with first successful verified pregame check after activation."
-  }
+    "eligible_pregame_games": 0,
+    "fetched": 0,
+    "missing_event_feeds": {},
+    "results_added": 0,
+    "skipped": {},
+    "snapshots_added": 0,
+    "total_locked": 0,
+    "total_settled": 0
+  },
+  "schema": 1,
+  "season": 2026,
+  "snapshots": {}
 }
