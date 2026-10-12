@@ -1,0 +1,50 @@
+name: Capture four-way prospective model weights
+
+on:
+  schedule:
+    - cron: '29 0,6,12,18 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - feature/prospective-weight-challengers-2026-10-11
+    paths:
+      - 'capture_prospective_weights.py'
+      - 'prospective_weights.py'
+      - 'prospective_weights_archive.py'
+      - 'tests/test_prospective_weights.py'
+      - '.github/workflows/prospective-weights.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cfb-four-way-prospective-weights
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install model dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Verify locked capture and challenger contracts
+        run: python -m unittest discover -s tests -p 'test_prospective_weights.py'
+      - name: Capture and grade all four models on matching pregame events
+        run: python capture_prospective_weights.py
+      - name: Save immutable pregame observations and later verified finals
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/prospective_weights_2026.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record prospective V1.5 weight challenger observations'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
