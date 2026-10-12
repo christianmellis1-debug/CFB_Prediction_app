@@ -44,7 +44,7 @@ from performance_cache import cache_calculation, clear_calculations
 # Include dependency source in cache keys so rule edits cannot reuse old results.
 _CALCULATION_REVISION = sha256(b"".join(
     (Path(__file__).parent / name).read_bytes()
-    for name in ("app.py", "model_v1_5.py", "matchup_advantages.py", "performance_cache.py")
+    for name in ("app.py", "model_v1_5.py", "matchup_advantages.py", "home_field_advantage_tier6.py", "performance_cache.py")
 )).hexdigest()
 _cached_calculation = cache_calculation(_CALCULATION_REVISION)
 add_waterfall_value = _cached_calculation(add_waterfall_value)
@@ -93,7 +93,7 @@ TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
     ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores."),
-    ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners below 80% model confidence with two or fewer of the five matchup advantages for the selected week. Official Tier 1–5 games and High/Very High confidence picks are excluded so the labels do not contradict each other. Missing data is shown separately."),
+    ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners below 80% model confidence with two or fewer of the five matchup advantages for the selected week. Official Tier 1–6 games and High/Very High confidence picks are excluded so the labels do not contradict each other. Missing data is shown separately."),
     ("export", None, "Export your picks", "Use Export picks above the navigation to download all picks for this week or only the picks matching your Game cards filters. Open the CSV in Excel to compare matchups."),
     ("results", "Model results", "Check model performance", "Compare model wins, losses, and accuracy by confidence, plus Value Pick records overall and by tier. Value Pick tracking starts in Week 3; Weeks 1 and 2 are excluded from the tier record."),
     ("scenario", "What-if bets", "Try a betting scenario", "Choose picks and stakes below to see potential profit if they win and the amount lost if they lose. Missing moneylines are excluded. A scenario does not place or record bets."),
@@ -244,7 +244,7 @@ def value_pick_performance(frame):
     groups = [("All value picks", work)]
     if "Value Stage" in work:
         stages = pd.to_numeric(work["Value Stage"], errors="coerce")
-        for stage in (1, 2, 3, 4, 5):
+        for stage in (1, 2, 3, 4, 5, 6):
             group = work[stages.eq(stage)]
             if group.empty:
                 continue
@@ -2003,6 +2003,7 @@ st.markdown("""
 .tier-stage-3 {--tier-accent:#be8d4e;--tier-tint:#be8d4e15;}
 .tier-stage-4 {--tier-accent:#8d79c3;--tier-tint:#8d79c315;}
 .tier-stage-5 {--tier-accent:#63a47b;--tier-tint:#63a47b15;}
+.tier-stage-6 {--tier-accent:#c78d63;--tier-tint:#c78d6315;}
 .cfb-tier-guide .cfb-tier-guide-card {border-left:4px solid var(--tier-accent);background:var(--tier-tint);}
 .cfb-tier-guide .cfb-tier-guide-number {color:var(--tier-accent);background:var(--tier-tint);border:1px solid var(--tier-accent);}
 .value-pick-callout {padding:11px 12px;margin-top:11px;border:1px solid #80978b35;border-left:4px solid var(--tier-accent);border-radius:11px;background:var(--tier-tint);font-size:12px;line-height:1.5;}
@@ -2371,7 +2372,7 @@ try:
     waterfall_boxes = download_advantage_boxes(season)
 except Exception:
     waterfall_boxes = pd.DataFrame()
-    st.warning("Tiers 1–4 are unavailable because FBS box scores could not be loaded. Tier 5 can still use the published weekly team-summary snapshot.")
+    st.warning("Tiers 1–4 and 6 are unavailable because FBS box scores could not be loaded. Tier 5 can still use the published weekly team-summary snapshot.")
 weather_checks = {}
 weather_candidates = []
 try:
@@ -2398,7 +2399,7 @@ if weather_candidates:
             f"Tier 2 weather could not be verified for {missing_weather} candidate game(s). "
             "Those games are excluded from the Storm Front tier."
         )
-pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week, weather_checks=weather_checks, published_summary=published_current)
+pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week, weather_checks=weather_checks, published_summary=published_current, prior_summary=prior)
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
 if st.session_state.get("moneyline_history_season") != season:
     line_history.clear()
@@ -2473,13 +2474,13 @@ with value_tab:
     st.markdown(
         """
         <h3 style="margin:0 0 12px 0; white-space:nowrap;">
-            Value Picks · Five-stage waterfall
+            Value Picks · Six-stage waterfall
         </h3>
         """,
         unsafe_allow_html=True,
     )
     value_picks = pred[pred["Value Selected"]].sort_values("Value Rank")
-    tier_names = ("Complete Game", "Storm Front", "Takeaway Trouble", "Parlay Bridge", "Home Turf Hammer")
+    tier_names = ("Complete Game", "Storm Front", "Takeaway Trouble", "Parlay Bridge", "Home Turf Hammer", "Home Field Advantage")
     tier_counts = pd.to_numeric(value_picks["Value Stage"], errors="coerce").value_counts()
     tier_chips = []
     for stage, tier_name in enumerate(tier_names, 1):
@@ -2522,6 +2523,12 @@ with value_tab:
                 "Home Turf Hammer",
                 "In a Power Four matchup, the home team leads in red-zone offense, red-zone defense, explosive offense, and limiting explosive plays. Uses the prior week’s published stats.",
                 "42–11",
+            ),
+            (
+                "6",
+                "Home Field Advantage",
+                "Straight-up home favorites with stronger pregame offense and defense under the 40/25/15/10/10 formula. Same-group P4/P4 or G6/G6 only; exclude P4 magnitude 0.50–0.74 and moneylines of −500 or shorter. Uses prior-week data and valid DraftKings odds.",
+                "17–6 (2026 W3–6 retrospective)",
             ),
         ]
         st.markdown("""
@@ -3264,7 +3271,7 @@ with cards_tab:
                 tour_at("risky")
                 st.subheader(f"Risky picks · {len(risky_indices)}")
                 st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
-                st.write("A warning means a non-tiered pick below 80% model confidence has 0, 1 or 2 of the five matchup advantages. Official Tier 1–5 Value Picks and High/Very High confidence picks (80%+) are excluded so the labels never contradict each other. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
+                st.write("A warning means a non-tiered pick below 80% model confidence has 0, 1 or 2 of the five matchup advantages. Official Tier 1–6 Value Picks and High/Very High confidence picks (80%+) are excluded so the labels never contradict each other. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
                 if not advantage_checks:
                     st.info(advantage_error)
                 elif risky_indices:
@@ -3364,6 +3371,7 @@ if performance_tab.open:
                             result_week,
                             weather_checks=historical_weather,
                             published_summary=published_current,
+                            prior_summary=prior,
                         )
                         value_performance_frames.append(week_value)
                     except Exception:
@@ -3477,10 +3485,10 @@ if performance_tab.open:
                 # Graded tier scorecards reuse the result summary; pushes do not count in the win-rate denominator.
                 tier_record_cards = []
                 tier_names = ("Complete Game", "Storm Front", "Takeaway Trouble",
-                              "Parlay Bridge", "Home Turf Hammer")
+                              "Parlay Bridge", "Home Turf Hammer", "Home Field Advantage")
                 for _, tier_row in value_summary.iloc[1:].iterrows():
                     tier_label = str(tier_row["Tier"])
-                    tier_stage = next((n for n in range(1, 6) if f"Tier {n}" in tier_label), None)
+                    tier_stage = next((n for n in range(1, 7) if f"Tier {n}" in tier_label), None)
                     if tier_stage is None:
                         continue
                     tier_wins, tier_losses, tier_pushes = (int(tier_row[k]) for k in ("Wins", "Losses", "Pushes"))
@@ -3737,7 +3745,7 @@ with scenario_tab:
                                 st.warning(f"Week {scenario_week} odds could not be loaded; those bets are excluded.")
                         week_predictions = add_betting_value(attach_odds(week_predictions, scenario_games, quotes))
                         if scenario_mode == "Best betting opportunities":
-                            week_predictions = add_waterfall_value(week_predictions, schedule, waterfall_boxes, scenario_week, published_summary=published_current)
+                            week_predictions = add_waterfall_value(week_predictions, schedule, waterfall_boxes, scenario_week, published_summary=published_current, prior_summary=prior)
                             week_predictions = waterfall_scenario_rows(week_predictions)
                         if not week_predictions.empty:
                             scenario_frames.append(simulate_stakes(week_predictions, stakes))
