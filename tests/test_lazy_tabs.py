@@ -48,6 +48,8 @@ def overlay_live_scores(frame, scores): return frame
 def show_shadow_tracking(st, season, week):
     st.session_state['performance_runs'] = st.session_state.get('performance_runs',0)+1
     st.checkbox('Show entire selected season', value=True, key='shadow_all_weeks')
+def show_weight_challenger_comparison(st, season, week):
+    st.session_state['weight_comparison_runs'] = st.session_state.get('weight_comparison_runs',0)+1
 def christians_parlay(*args, **kwargs): return None
 def future_priced_picks(*args):
     result = pred.copy()
@@ -76,6 +78,7 @@ class LazyTabTests(unittest.TestCase):
         app = AppTest.from_string(harness()).run()
         self.assertFalse(app.exception)
         self.assertNotIn('performance_runs', app.session_state)
+        self.assertNotIn('weight_comparison_runs', app.session_state)
         self.assertNotIn('parlay_runs', app.session_state)
         self.switch(app, 'Model results')
         app.radio(key='model_results_period').set_value('Season to date')
