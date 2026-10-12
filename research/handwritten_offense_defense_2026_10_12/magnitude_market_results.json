@@ -1,0 +1,2070 @@
+{
+  "generated_at": "2026-10-12T16:36:21.417542+00:00",
+  "question": "How much better does the handwritten offense/defense home team win as BOTH standardized unit gaps increase, relative to similarly favored home teams?",
+  "total_pregame_eligible": 2826,
+  "total_verified_spread_games": 2195,
+  "definition": "Only nonneutral HOME team with both positive blended rating gaps. Magnitude is min(offense gap,defense gap), not combined offense+defense or market spread.",
+  "all_seasons": {
+    "total": {
+      "games": 875,
+      "wins": 712,
+      "losses": 163,
+      "su_win_rate": 0.813714,
+      "mean_home_spread": null,
+      "mean_off_edge": 0.8348,
+      "mean_def_edge": 0.8178,
+      "mean_min_edge": 0.5366
+    },
+    "magnitude_definition": "Minimum of positive offense and defense blended standard-rating gaps, home minus away.",
+    "nonoverlapping_bins": {
+      "0\u20130.25": {
+        "games": 278,
+        "wins": 202,
+        "losses": 76,
+        "su_win_rate": 0.726619,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.4682,
+        "mean_def_edge": 0.4536,
+        "mean_min_edge": 0.1226
+      },
+      "0.25\u20130.5": {
+        "games": 234,
+        "wins": 185,
+        "losses": 49,
+        "su_win_rate": 0.790598,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.6731,
+        "mean_def_edge": 0.663,
+        "mean_min_edge": 0.3677
+      },
+      "0.5\u20130.75": {
+        "games": 128,
+        "wins": 108,
+        "losses": 20,
+        "su_win_rate": 0.84375,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.8685,
+        "mean_def_edge": 0.8129,
+        "mean_min_edge": 0.6026
+      },
+      "0.75\u20131": {
+        "games": 99,
+        "wins": 90,
+        "losses": 9,
+        "su_win_rate": 0.909091,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.1635,
+        "mean_def_edge": 1.0982,
+        "mean_min_edge": 0.8565
+      },
+      "1\u20131.5": {
+        "games": 103,
+        "wins": 94,
+        "losses": 9,
+        "su_win_rate": 0.912621,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.4456,
+        "mean_def_edge": 1.483,
+        "mean_min_edge": 1.2253
+      },
+      "1.5+": {
+        "games": 33,
+        "wins": 33,
+        "losses": 0,
+        "su_win_rate": 1.0,
+        "mean_home_spread": null,
+        "mean_off_edge": 2.046,
+        "mean_def_edge": 2.0857,
+        "mean_min_edge": 1.856
+      }
+    },
+    "cumulative_minimum_thresholds": {
+      "0.0": {
+        "games": 875,
+        "wins": 712,
+        "losses": 163,
+        "su_win_rate": 0.813714,
+        "mean_home_spread": null,
+        "mean_off_edge": 0.8348,
+        "mean_def_edge": 0.8178,
+        "mean_min_edge": 0.5366
+      },
+      "0.25": {
+        "games": 597,
+        "wins": 510,
+        "losses": 87,
+        "su_win_rate": 0.854271,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.0055,
+        "mean_def_edge": 0.9874,
+        "mean_min_edge": 0.7293
+      },
+      "0.5": {
+        "games": 363,
+        "wins": 325,
+        "losses": 38,
+        "su_win_rate": 0.895317,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.2197,
+        "mean_def_edge": 1.1966,
+        "mean_min_edge": 0.9625
+      },
+      "0.75": {
+        "games": 235,
+        "wins": 217,
+        "losses": 18,
+        "su_win_rate": 0.923404,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.411,
+        "mean_def_edge": 1.4055,
+        "mean_min_edge": 1.1585
+      },
+      "1.0": {
+        "games": 136,
+        "wins": 127,
+        "losses": 9,
+        "su_win_rate": 0.933824,
+        "mean_home_spread": null,
+        "mean_off_edge": 1.5913,
+        "mean_def_edge": 1.6292,
+        "mean_min_edge": 1.3783
+      },
+      "1.5": {
+        "games": 33,
+        "wins": 33,
+        "losses": 0,
+        "su_win_rate": 1.0,
+        "mean_home_spread": null,
+        "mean_off_edge": 2.046,
+        "mean_def_edge": 2.0857,
+        "mean_min_edge": 1.856
+      }
+    }
+  },
+  "yearly": {
+    "2022": {
+      "magnitude": {
+        "total": {
+          "games": 191,
+          "wins": 146,
+          "losses": 45,
+          "su_win_rate": 0.764398,
+          "mean_home_spread": null,
+          "mean_off_edge": 0.8286,
+          "mean_def_edge": 0.8099,
+          "mean_min_edge": 0.512
+        },
+        "magnitude_definition": "Minimum of positive offense and defense blended standard-rating gaps, home minus away.",
+        "nonoverlapping_bins": {
+          "0\u20130.25": {
+            "games": 63,
+            "wins": 44,
+            "losses": 19,
+            "su_win_rate": 0.698413,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.4668,
+            "mean_def_edge": 0.4677,
+            "mean_min_edge": 0.1206
+          },
+          "0.25\u20130.5": {
+            "games": 53,
+            "wins": 39,
+            "losses": 14,
+            "su_win_rate": 0.735849,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.7136,
+            "mean_def_edge": 0.7067,
+            "mean_min_edge": 0.3662
+          },
+          "0.5\u20130.75": {
+            "games": 35,
+            "wins": 31,
+            "losses": 4,
+            "su_win_rate": 0.885714,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.9605,
+            "mean_def_edge": 0.8204,
+            "mean_min_edge": 0.6178
+          },
+          "0.75\u20131": {
+            "games": 12,
+            "wins": 9,
+            "losses": 3,
+            "su_win_rate": 0.75,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.0918,
+            "mean_def_edge": 1.2368,
+            "mean_min_edge": 0.8602
+          },
+          "1\u20131.5": {
+            "games": 20,
+            "wins": 15,
+            "losses": 5,
+            "su_win_rate": 0.75,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.3968,
+            "mean_def_edge": 1.4062,
+            "mean_min_edge": 1.2046
+          },
+          "1.5+": {
+            "games": 8,
+            "wins": 8,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": null,
+            "mean_off_edge": 2.048,
+            "mean_def_edge": 2.012,
+            "mean_min_edge": 1.8429
+          }
+        },
+        "cumulative_minimum_thresholds": {
+          "0.0": {
+            "games": 191,
+            "wins": 146,
+            "losses": 45,
+            "su_win_rate": 0.764398,
+            "mean_home_spread": null,
+            "mean_off_edge": 0.8286,
+            "mean_def_edge": 0.8099,
+            "mean_min_edge": 0.512
+          },
+          "0.25": {
+            "games": 128,
+            "wins": 102,
+            "losses": 26,
+            "su_win_rate": 0.796875,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.0067,
+            "mean_def_edge": 0.9784,
+            "mean_min_edge": 0.7046
+          },
+          "0.5": {
+            "games": 75,
+            "wins": 63,
+            "losses": 12,
+            "su_win_rate": 0.84,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.2138,
+            "mean_def_edge": 1.1704,
+            "mean_min_edge": 0.9437
+          },
+          "0.75": {
+            "games": 40,
+            "wins": 32,
+            "losses": 8,
+            "su_win_rate": 0.8,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.4355,
+            "mean_def_edge": 1.4766,
+            "mean_min_edge": 1.2289
+          },
+          "1.0": {
+            "games": 28,
+            "wins": 23,
+            "losses": 5,
+            "su_win_rate": 0.821429,
+            "mean_home_spread": null,
+            "mean_off_edge": 1.5828,
+            "mean_def_edge": 1.5793,
+            "mean_min_edge": 1.3869
+          },
+          "1.5": {
+            "games": 8,
+            "wins": 8,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": null,
+            "mean_off_edge": 2.048,
+            "mean_def_edge": 2.012,
+            "mean_min_edge": 1.8429
+          }
+        }
+      },
+      "priced_games": 1,
+      "pregame_eligible": 630
+    },
+    "2023": {
+      "magnitude": {
+        "total": {
+          "games": 198,
+          "wins": 165,
+          "losses": 33,
+          "su_win_rate": 0.833333,
+          "mean_home_spread": -15.083,
+          "mean_off_edge": 0.7996,
+          "mean_def_edge": 0.7641,
+          "mean_min_edge": 0.4885
+        },
+        "magnitude_definition": "Minimum of positive offense and defense blended standard-rating gaps, home minus away.",
+        "nonoverlapping_bins": {
+          "0\u20130.25": {
+            "games": 65,
+            "wins": 50,
+            "losses": 15,
+            "su_win_rate": 0.769231,
+            "mean_home_spread": -10.038,
+            "mean_off_edge": 0.4947,
+            "mean_def_edge": 0.4063,
+            "mean_min_edge": 0.1347
+          },
+          "0.25\u20130.5": {
+            "games": 51,
+            "wins": 41,
+            "losses": 10,
+            "su_win_rate": 0.803922,
+            "mean_home_spread": -13.186,
+            "mean_off_edge": 0.715,
+            "mean_def_edge": 0.6287,
+            "mean_min_edge": 0.3587
+          },
+          "0.5\u20130.75": {
+            "games": 33,
+            "wins": 28,
+            "losses": 5,
+            "su_win_rate": 0.848485,
+            "mean_home_spread": -15.182,
+            "mean_off_edge": 0.8562,
+            "mean_def_edge": 0.8001,
+            "mean_min_edge": 0.5919
+          },
+          "0.75\u20131": {
+            "games": 27,
+            "wins": 26,
+            "losses": 1,
+            "su_win_rate": 0.962963,
+            "mean_home_spread": -20.981,
+            "mean_off_edge": 1.0762,
+            "mean_def_edge": 1.2303,
+            "mean_min_edge": 0.846
+          },
+          "1\u20131.5": {
+            "games": 19,
+            "wins": 17,
+            "losses": 2,
+            "su_win_rate": 0.894737,
+            "mean_home_spread": -26.026,
+            "mean_off_edge": 1.3863,
+            "mean_def_edge": 1.4326,
+            "mean_min_edge": 1.1575
+          },
+          "1.5+": {
+            "games": 3,
+            "wins": 3,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -33.167,
+            "mean_off_edge": 2.0184,
+            "mean_def_edge": 1.9906,
+            "mean_min_edge": 1.7677
+          }
+        },
+        "cumulative_minimum_thresholds": {
+          "0.0": {
+            "games": 198,
+            "wins": 165,
+            "losses": 33,
+            "su_win_rate": 0.833333,
+            "mean_home_spread": -15.083,
+            "mean_off_edge": 0.7996,
+            "mean_def_edge": 0.7641,
+            "mean_min_edge": 0.4885
+          },
+          "0.25": {
+            "games": 133,
+            "wins": 115,
+            "losses": 18,
+            "su_win_rate": 0.864662,
+            "mean_home_spread": -17.549,
+            "mean_off_edge": 0.9487,
+            "mean_def_edge": 0.9389,
+            "mean_min_edge": 0.6614
+          },
+          "0.5": {
+            "games": 82,
+            "wins": 74,
+            "losses": 8,
+            "su_win_rate": 0.902439,
+            "mean_home_spread": -20.262,
+            "mean_off_edge": 1.094,
+            "mean_def_edge": 1.1319,
+            "mean_min_edge": 0.8496
+          },
+          "0.75": {
+            "games": 49,
+            "wins": 46,
+            "losses": 3,
+            "su_win_rate": 0.938776,
+            "mean_home_spread": -23.684,
+            "mean_off_edge": 1.2541,
+            "mean_def_edge": 1.3553,
+            "mean_min_edge": 1.0232
+          },
+          "1.0": {
+            "games": 22,
+            "wins": 20,
+            "losses": 2,
+            "su_win_rate": 0.909091,
+            "mean_home_spread": -27.0,
+            "mean_off_edge": 1.4725,
+            "mean_def_edge": 1.5087,
+            "mean_min_edge": 1.2407
+          },
+          "1.5": {
+            "games": 3,
+            "wins": 3,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -33.167,
+            "mean_off_edge": 2.0184,
+            "mean_def_edge": 1.9906,
+            "mean_min_edge": 1.7677
+          }
+        }
+      },
+      "priced_games": 646,
+      "pregame_eligible": 646
+    },
+    "2024": {
+      "magnitude": {
+        "total": {
+          "games": 219,
+          "wins": 184,
+          "losses": 35,
+          "su_win_rate": 0.840183,
+          "mean_home_spread": -14.648,
+          "mean_off_edge": 0.8607,
+          "mean_def_edge": 0.8469,
+          "mean_min_edge": 0.5551
+        },
+        "magnitude_definition": "Minimum of positive offense and defense blended standard-rating gaps, home minus away.",
+        "nonoverlapping_bins": {
+          "0\u20130.25": {
+            "games": 70,
+            "wins": 49,
+            "losses": 21,
+            "su_win_rate": 0.7,
+            "mean_home_spread": -8.879,
+            "mean_off_edge": 0.4566,
+            "mean_def_edge": 0.5614,
+            "mean_min_edge": 0.1168
+          },
+          "0.25\u20130.5": {
+            "games": 63,
+            "wins": 53,
+            "losses": 10,
+            "su_win_rate": 0.84127,
+            "mean_home_spread": -11.944,
+            "mean_off_edge": 0.7118,
+            "mean_def_edge": 0.621,
+            "mean_min_edge": 0.3774
+          },
+          "0.5\u20130.75": {
+            "games": 25,
+            "wins": 23,
+            "losses": 2,
+            "su_win_rate": 0.92,
+            "mean_home_spread": -14.26,
+            "mean_off_edge": 0.8775,
+            "mean_def_edge": 0.7492,
+            "mean_min_edge": 0.6093
+          },
+          "0.75\u20131": {
+            "games": 22,
+            "wins": 20,
+            "losses": 2,
+            "su_win_rate": 0.909091,
+            "mean_home_spread": -17.045,
+            "mean_off_edge": 1.2395,
+            "mean_def_edge": 1.0434,
+            "mean_min_edge": 0.8836
+          },
+          "1\u20131.5": {
+            "games": 29,
+            "wins": 29,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -25.948,
+            "mean_off_edge": 1.4902,
+            "mean_def_edge": 1.4886,
+            "mean_min_edge": 1.2454
+          },
+          "1.5+": {
+            "games": 10,
+            "wins": 10,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -35.0,
+            "mean_off_edge": 1.927,
+            "mean_def_edge": 2.2186,
+            "mean_min_edge": 1.8833
+          }
+        },
+        "cumulative_minimum_thresholds": {
+          "0.0": {
+            "games": 219,
+            "wins": 184,
+            "losses": 35,
+            "su_win_rate": 0.840183,
+            "mean_home_spread": -14.648,
+            "mean_off_edge": 0.8607,
+            "mean_def_edge": 0.8469,
+            "mean_min_edge": 0.5551
+          },
+          "0.25": {
+            "games": 149,
+            "wins": 135,
+            "losses": 14,
+            "su_win_rate": 0.90604,
+            "mean_home_spread": -17.359,
+            "mean_off_edge": 1.0506,
+            "mean_def_edge": 0.981,
+            "mean_min_edge": 0.7611
+          },
+          "0.5": {
+            "games": 86,
+            "wins": 82,
+            "losses": 4,
+            "su_win_rate": 0.953488,
+            "mean_home_spread": -21.326,
+            "mean_off_edge": 1.2987,
+            "mean_def_edge": 1.2446,
+            "mean_min_edge": 1.0421
+          },
+          "0.75": {
+            "games": 61,
+            "wins": 59,
+            "losses": 2,
+            "su_win_rate": 0.967213,
+            "mean_home_spread": -24.221,
+            "mean_off_edge": 1.4714,
+            "mean_def_edge": 1.4477,
+            "mean_min_edge": 1.2195
+          },
+          "1.0": {
+            "games": 39,
+            "wins": 39,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -28.269,
+            "mean_off_edge": 1.6022,
+            "mean_def_edge": 1.6757,
+            "mean_min_edge": 1.409
+          },
+          "1.5": {
+            "games": 10,
+            "wins": 10,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -35.0,
+            "mean_off_edge": 1.927,
+            "mean_def_edge": 2.2186,
+            "mean_min_edge": 1.8833
+          }
+        }
+      },
+      "priced_games": 657,
+      "pregame_eligible": 659
+    },
+    "2025": {
+      "magnitude": {
+        "total": {
+          "games": 185,
+          "wins": 150,
+          "losses": 35,
+          "su_win_rate": 0.810811,
+          "mean_home_spread": -16.019,
+          "mean_off_edge": 0.8288,
+          "mean_def_edge": 0.809,
+          "mean_min_edge": 0.5489
+        },
+        "magnitude_definition": "Minimum of positive offense and defense blended standard-rating gaps, home minus away.",
+        "nonoverlapping_bins": {
+          "0\u20130.25": {
+            "games": 60,
+            "wins": 44,
+            "losses": 16,
+            "su_win_rate": 0.733333,
+            "mean_home_spread": -9.55,
+            "mean_off_edge": 0.469,
+            "mean_def_edge": 0.3607,
+            "mean_min_edge": 0.1176
+          },
+          "0.25\u20130.5": {
+            "games": 50,
+            "wins": 37,
+            "losses": 13,
+            "su_win_rate": 0.74,
+            "mean_home_spread": -12.02,
+            "mean_off_edge": 0.5848,
+            "mean_def_edge": 0.6601,
+            "mean_min_edge": 0.3708
+          },
+          "0.5\u20130.75": {
+            "games": 19,
+            "wins": 15,
+            "losses": 4,
+            "su_win_rate": 0.789474,
+            "mean_home_spread": -15.921,
+            "mean_off_edge": 0.8359,
+            "mean_def_edge": 0.88,
+            "mean_min_edge": 0.588
+          },
+          "0.75\u20131": {
+            "games": 26,
+            "wins": 25,
+            "losses": 1,
+            "su_win_rate": 0.961538,
+            "mean_home_spread": -21.462,
+            "mean_off_edge": 1.2291,
+            "mean_def_edge": 0.9995,
+            "mean_min_edge": 0.8599
+          },
+          "1\u20131.5": {
+            "games": 23,
+            "wins": 22,
+            "losses": 1,
+            "su_win_rate": 0.956522,
+            "mean_home_spread": -29.457,
+            "mean_off_edge": 1.4445,
+            "mean_def_edge": 1.6816,
+            "mean_min_edge": 1.2753
+          },
+          "1.5+": {
+            "games": 7,
+            "wins": 7,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -35.929,
+            "mean_off_edge": 2.1281,
+            "mean_def_edge": 1.948,
+            "mean_min_edge": 1.8683
+          }
+        },
+        "cumulative_minimum_thresholds": {
+          "0.0": {
+            "games": 185,
+            "wins": 150,
+            "losses": 35,
+            "su_win_rate": 0.810811,
+            "mean_home_spread": -16.019,
+            "mean_off_edge": 0.8288,
+            "mean_def_edge": 0.809,
+            "mean_min_edge": 0.5489
+          },
+          "0.25": {
+            "games": 125,
+            "wins": 106,
+            "losses": 19,
+            "su_win_rate": 0.848,
+            "mean_home_spread": -19.124,
+            "mean_off_edge": 1.0016,
+            "mean_def_edge": 1.0242,
+            "mean_min_edge": 0.7558
+          },
+          "0.5": {
+            "games": 75,
+            "wins": 69,
+            "losses": 6,
+            "su_win_rate": 0.92,
+            "mean_home_spread": -23.86,
+            "mean_off_edge": 1.2794,
+            "mean_def_edge": 1.2669,
+            "mean_min_edge": 1.0125
+          },
+          "0.75": {
+            "games": 56,
+            "wins": 54,
+            "losses": 2,
+            "su_win_rate": 0.964286,
+            "mean_home_spread": -26.554,
+            "mean_off_edge": 1.4299,
+            "mean_def_edge": 1.3982,
+            "mean_min_edge": 1.1566
+          },
+          "1.0": {
+            "games": 30,
+            "wins": 29,
+            "losses": 1,
+            "su_win_rate": 0.966667,
+            "mean_home_spread": -30.967,
+            "mean_off_edge": 1.604,
+            "mean_def_edge": 1.7438,
+            "mean_min_edge": 1.4137
+          },
+          "1.5": {
+            "games": 7,
+            "wins": 7,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -35.929,
+            "mean_off_edge": 2.1281,
+            "mean_def_edge": 1.948,
+            "mean_min_edge": 1.8683
+          }
+        }
+      },
+      "priced_games": 663,
+      "pregame_eligible": 663
+    },
+    "2026": {
+      "magnitude": {
+        "total": {
+          "games": 82,
+          "wins": 67,
+          "losses": 15,
+          "su_win_rate": 0.817073,
+          "mean_home_spread": -16.573,
+          "mean_off_edge": 0.8781,
+          "mean_def_edge": 0.9084,
+          "mean_min_edge": 0.6328
+        },
+        "magnitude_definition": "Minimum of positive offense and defense blended standard-rating gaps, home minus away.",
+        "nonoverlapping_bins": {
+          "0\u20130.25": {
+            "games": 20,
+            "wins": 15,
+            "losses": 5,
+            "su_win_rate": 0.75,
+            "mean_home_spread": -10.675,
+            "mean_off_edge": 0.4251,
+            "mean_def_edge": 0.4649,
+            "mean_min_edge": 0.1251
+          },
+          "0.25\u20130.5": {
+            "games": 17,
+            "wins": 15,
+            "losses": 2,
+            "su_win_rate": 0.882353,
+            "mean_home_spread": -14.118,
+            "mean_off_edge": 0.5374,
+            "mean_def_edge": 0.7933,
+            "mean_min_edge": 0.3548
+          },
+          "0.5\u20130.75": {
+            "games": 16,
+            "wins": 11,
+            "losses": 5,
+            "su_win_rate": 0.6875,
+            "mean_home_spread": -12.281,
+            "mean_off_edge": 0.7174,
+            "mean_def_edge": 0.8429,
+            "mean_min_edge": 0.5978
+          },
+          "0.75\u20131": {
+            "games": 12,
+            "wins": 10,
+            "losses": 2,
+            "su_win_rate": 0.833333,
+            "mean_home_spread": -14.625,
+            "mean_off_edge": 1.1498,
+            "mean_def_edge": 0.9764,
+            "mean_min_edge": 0.8194
+          },
+          "1\u20131.5": {
+            "games": 12,
+            "wins": 11,
+            "losses": 1,
+            "su_win_rate": 0.916667,
+            "mean_home_spread": -29.167,
+            "mean_off_edge": 1.5149,
+            "mean_def_edge": 1.2967,
+            "mean_min_edge": 1.2225
+          },
+          "1.5+": {
+            "games": 5,
+            "wins": 5,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -36.7,
+            "mean_off_edge": 2.1826,
+            "mean_def_edge": 2.1876,
+            "mean_min_edge": 1.8581
+          }
+        },
+        "cumulative_minimum_thresholds": {
+          "0.0": {
+            "games": 82,
+            "wins": 67,
+            "losses": 15,
+            "su_win_rate": 0.817073,
+            "mean_home_spread": -16.573,
+            "mean_off_edge": 0.8781,
+            "mean_def_edge": 0.9084,
+            "mean_min_edge": 0.6328
+          },
+          "0.25": {
+            "games": 62,
+            "wins": 52,
+            "losses": 10,
+            "su_win_rate": 0.83871,
+            "mean_home_spread": -18.476,
+            "mean_off_edge": 1.0243,
+            "mean_def_edge": 1.0514,
+            "mean_min_edge": 0.7966
+          },
+          "0.5": {
+            "games": 45,
+            "wins": 37,
+            "losses": 8,
+            "su_win_rate": 0.822222,
+            "mean_home_spread": -20.122,
+            "mean_off_edge": 1.2082,
+            "mean_def_edge": 1.1489,
+            "mean_min_edge": 0.9635
+          },
+          "0.75": {
+            "games": 29,
+            "wins": 26,
+            "losses": 3,
+            "su_win_rate": 0.896552,
+            "mean_home_spread": -24.448,
+            "mean_off_edge": 1.479,
+            "mean_def_edge": 1.3178,
+            "mean_min_edge": 1.1653
+          },
+          "1.0": {
+            "games": 17,
+            "wins": 16,
+            "losses": 1,
+            "su_win_rate": 0.941176,
+            "mean_home_spread": -31.382,
+            "mean_off_edge": 1.7113,
+            "mean_def_edge": 1.5587,
+            "mean_min_edge": 1.4094
+          },
+          "1.5": {
+            "games": 5,
+            "wins": 5,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -36.7,
+            "mean_off_edge": 2.1826,
+            "mean_def_edge": 2.1876,
+            "mean_min_edge": 1.8581
+          }
+        }
+      },
+      "priced_games": 228,
+      "pregame_eligible": 228
+    }
+  },
+  "2026_weeks_4_to_6": {
+    "magnitude": {
+      "total": {
+        "games": 51,
+        "wins": 39,
+        "losses": 12,
+        "su_win_rate": 0.764706,
+        "mean_home_spread": -14.549,
+        "mean_off_edge": 0.8331,
+        "mean_def_edge": 0.7891,
+        "mean_min_edge": 0.5615
+      },
+      "magnitude_definition": "Minimum of positive offense and defense blended standard-rating gaps, home minus away.",
+      "nonoverlapping_bins": {
+        "0\u20130.25": {
+          "games": 14,
+          "wins": 10,
+          "losses": 4,
+          "su_win_rate": 0.714286,
+          "mean_home_spread": -9.679,
+          "mean_off_edge": 0.4845,
+          "mean_def_edge": 0.3825,
+          "mean_min_edge": 0.1208
+        },
+        "0.25\u20130.5": {
+          "games": 11,
+          "wins": 9,
+          "losses": 2,
+          "su_win_rate": 0.818182,
+          "mean_home_spread": -11.773,
+          "mean_off_edge": 0.49,
+          "mean_def_edge": 0.7295,
+          "mean_min_edge": 0.359
+        },
+        "0.5\u20130.75": {
+          "games": 12,
+          "wins": 8,
+          "losses": 4,
+          "su_win_rate": 0.666667,
+          "mean_home_spread": -11.917,
+          "mean_off_edge": 0.7522,
+          "mean_def_edge": 0.8536,
+          "mean_min_edge": 0.5989
+        },
+        "0.75\u20131": {
+          "games": 7,
+          "wins": 5,
+          "losses": 2,
+          "su_win_rate": 0.714286,
+          "mean_home_spread": -15.357,
+          "mean_off_edge": 1.3214,
+          "mean_def_edge": 0.8314,
+          "mean_min_edge": 0.8269
+        },
+        "1\u20131.5": {
+          "games": 5,
+          "wins": 5,
+          "losses": 0,
+          "su_win_rate": 1.0,
+          "mean_home_spread": -30.9,
+          "mean_off_edge": 1.5824,
+          "mean_def_edge": 1.3419,
+          "mean_min_edge": 1.2847
+        },
+        "1.5+": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "su_win_rate": 1.0,
+          "mean_home_spread": -36.0,
+          "mean_off_edge": 2.0634,
+          "mean_def_edge": 2.0472,
+          "mean_min_edge": 1.7983
+        }
+      },
+      "cumulative_minimum_thresholds": {
+        "0.0": {
+          "games": 51,
+          "wins": 39,
+          "losses": 12,
+          "su_win_rate": 0.764706,
+          "mean_home_spread": -14.549,
+          "mean_off_edge": 0.8331,
+          "mean_def_edge": 0.7891,
+          "mean_min_edge": 0.5615
+        },
+        "0.25": {
+          "games": 37,
+          "wins": 29,
+          "losses": 8,
+          "su_win_rate": 0.783784,
+          "mean_home_spread": -16.392,
+          "mean_off_edge": 0.965,
+          "mean_def_edge": 0.943,
+          "mean_min_edge": 0.7282
+        },
+        "0.5": {
+          "games": 26,
+          "wins": 20,
+          "losses": 6,
+          "su_win_rate": 0.769231,
+          "mean_home_spread": -18.346,
+          "mean_off_edge": 1.1659,
+          "mean_def_edge": 1.0333,
+          "mean_min_edge": 0.8844
+        },
+        "0.75": {
+          "games": 14,
+          "wins": 12,
+          "losses": 2,
+          "su_win_rate": 0.857143,
+          "mean_home_spread": -23.857,
+          "mean_off_edge": 1.5206,
+          "mean_def_edge": 1.1874,
+          "mean_min_edge": 1.1292
+        },
+        "1.0": {
+          "games": 7,
+          "wins": 7,
+          "losses": 0,
+          "su_win_rate": 1.0,
+          "mean_home_spread": -32.357,
+          "mean_off_edge": 1.7198,
+          "mean_def_edge": 1.5434,
+          "mean_min_edge": 1.4315
+        },
+        "1.5": {
+          "games": 2,
+          "wins": 2,
+          "losses": 0,
+          "su_win_rate": 1.0,
+          "mean_home_spread": -36.0,
+          "mean_off_edge": 2.0634,
+          "mean_def_edge": 2.0472,
+          "mean_min_edge": 1.7983
+        }
+      }
+    },
+    "market": {
+      "qualifying_spread_priced_home_favorites": 101,
+      "both_home_favorite": {
+        "games": 50,
+        "wins": 39,
+        "losses": 11,
+        "su_win_rate": 0.78,
+        "mean_home_spread": -14.96,
+        "mean_off_edge": 0.8464,
+        "mean_def_edge": 0.8012,
+        "mean_min_edge": 0.5693
+      },
+      "other_home_favorites": {
+        "games": 51,
+        "wins": 36,
+        "losses": 15,
+        "su_win_rate": 0.705882,
+        "mean_home_spread": -6.853,
+        "mean_off_edge": 0.1044,
+        "mean_def_edge": -0.1291,
+        "mean_min_edge": -0.4694
+      },
+      "stratified_comparison": {
+        "matched_by_year_and_spread_bucket_games": 50,
+        "selected_both_wins": 39,
+        "selected_both_win_rate": 0.78,
+        "comparator_weighted_win_rate": 0.85712,
+        "difference_percentage_points": -7.712,
+        "both_games_with_no_spread_stratum_controls": 0,
+        "strata_with_both_and_comparator": 4,
+        "strata_with_no_comparator": 0
+      },
+      "strata": {
+        "2026 : 14\u201320.5 point favorite": {
+          "season": 2026,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 12,
+            "wins": 11,
+            "losses": 1,
+            "su_win_rate": 0.916667,
+            "mean_home_spread": -16.458,
+            "mean_off_edge": 0.919,
+            "mean_def_edge": 0.8001,
+            "mean_min_edge": 0.5363
+          },
+          "other_home_favorites": {
+            "games": 4,
+            "wins": 4,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -18.75,
+            "mean_off_edge": 0.2344,
+            "mean_def_edge": 0.2671,
+            "mean_min_edge": -0.4994
+          },
+          "common_support": true
+        },
+        "2026 : 21+ point favorite": {
+          "season": 2026,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 11,
+            "wins": 11,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -30.591,
+            "mean_off_edge": 1.5122,
+            "mean_def_edge": 1.2625,
+            "mean_min_edge": 1.0081
+          },
+          "other_home_favorites": {
+            "games": 1,
+            "wins": 1,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -21.5,
+            "mean_off_edge": -0.0233,
+            "mean_def_edge": 0.5715,
+            "mean_min_edge": -0.0233
+          },
+          "common_support": true
+        },
+        "2026 : 7\u201313.5 point favorite": {
+          "season": 2026,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 15,
+            "wins": 9,
+            "losses": 6,
+            "su_win_rate": 0.6,
+            "mean_home_spread": -11.133,
+            "mean_off_edge": 0.6195,
+            "mean_def_edge": 0.6216,
+            "mean_min_edge": 0.4432
+          },
+          "other_home_favorites": {
+            "games": 17,
+            "wins": 15,
+            "losses": 2,
+            "su_win_rate": 0.882353,
+            "mean_home_spread": -9.324,
+            "mean_off_edge": 0.2363,
+            "mean_def_edge": -0.0973,
+            "mean_min_edge": -0.3796
+          },
+          "common_support": true
+        },
+        "2026 : Under 7 point favorite": {
+          "season": 2026,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 12,
+            "wins": 8,
+            "losses": 4,
+            "su_win_rate": 0.666667,
+            "mean_home_spread": -3.917,
+            "mean_off_edge": 0.4469,
+            "mean_def_edge": 0.6041,
+            "mean_min_edge": 0.3578
+          },
+          "other_home_favorites": {
+            "games": 29,
+            "wins": 16,
+            "losses": 13,
+            "su_win_rate": 0.551724,
+            "mean_home_spread": -3.259,
+            "mean_off_edge": 0.0135,
+            "mean_def_edge": -0.2266,
+            "mean_min_edge": -0.5333
+          },
+          "common_support": true
+        }
+      },
+      "notes": [
+        "Spread buckets are signed home favorite lines: <7, 7\u201313.5, 14\u201320.5, 21+ points. Other home favorites lack at least one handwritten edge.",
+        "Standardized control rate weights each comparison stratum by the number of both-advantage selections. Only common-support strata are included.",
+        "Some very large favorites have no available same-season comparison team; those games are excluded from the standardized comparison and disclosed.",
+        "Market spread is only an approximate control for favorite strength and may be a revised retrospective line, not frozen at a known pregame timestamp.",
+        "No claim of causality, statistical significance or out-of-sample improvement based solely on these historical descriptive rates."
+      ]
+    }
+  },
+  "market": {
+    "2023_2025": {
+      "qualifying_spread_priced_home_favorites": 1169,
+      "both_home_favorite": {
+        "games": 582,
+        "wins": 488,
+        "losses": 94,
+        "su_win_rate": 0.838488,
+        "mean_home_spread": -15.828,
+        "mean_off_edge": 0.846,
+        "mean_def_edge": 0.8266,
+        "mean_min_edge": 0.5443
+      },
+      "other_home_favorites": {
+        "games": 587,
+        "wins": 392,
+        "losses": 195,
+        "su_win_rate": 0.667802,
+        "mean_home_spread": -6.788,
+        "mean_off_edge": 0.1198,
+        "mean_def_edge": 0.0306,
+        "mean_min_edge": -0.5144
+      },
+      "stratified_comparison": {
+        "matched_by_year_and_spread_bucket_games": 582,
+        "selected_both_wins": 488,
+        "selected_both_win_rate": 0.838488,
+        "comparator_weighted_win_rate": 0.807177,
+        "difference_percentage_points": 3.131,
+        "both_games_with_no_spread_stratum_controls": 0,
+        "strata_with_both_and_comparator": 12,
+        "strata_with_no_comparator": 0
+      },
+      "strata": {
+        "2023 : 14\u201320.5 point favorite": {
+          "season": 2023,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 57,
+            "wins": 53,
+            "losses": 4,
+            "su_win_rate": 0.929825,
+            "mean_home_spread": -17.009,
+            "mean_off_edge": 0.8558,
+            "mean_def_edge": 0.8298,
+            "mean_min_edge": 0.4976
+          },
+          "other_home_favorites": {
+            "games": 12,
+            "wins": 12,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -17.583,
+            "mean_off_edge": 0.5123,
+            "mean_def_edge": 0.3442,
+            "mean_min_edge": -0.4018
+          },
+          "common_support": true
+        },
+        "2023 : 21+ point favorite": {
+          "season": 2023,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 47,
+            "wins": 44,
+            "losses": 3,
+            "su_win_rate": 0.93617,
+            "mean_home_spread": -27.372,
+            "mean_off_edge": 1.2558,
+            "mean_def_edge": 1.2208,
+            "mean_min_edge": 0.8522
+          },
+          "other_home_favorites": {
+            "games": 9,
+            "wins": 8,
+            "losses": 1,
+            "su_win_rate": 0.888889,
+            "mean_home_spread": -26.611,
+            "mean_off_edge": 0.8807,
+            "mean_def_edge": 0.5377,
+            "mean_min_edge": -0.255
+          },
+          "common_support": true
+        },
+        "2023 : 7\u201313.5 point favorite": {
+          "season": 2023,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 55,
+            "wins": 43,
+            "losses": 12,
+            "su_win_rate": 0.781818,
+            "mean_home_spread": -10.564,
+            "mean_off_edge": 0.6102,
+            "mean_def_edge": 0.5794,
+            "mean_min_edge": 0.3557
+          },
+          "other_home_favorites": {
+            "games": 43,
+            "wins": 31,
+            "losses": 12,
+            "su_win_rate": 0.72093,
+            "mean_home_spread": -9.791,
+            "mean_off_edge": 0.4521,
+            "mean_def_edge": 0.0377,
+            "mean_min_edge": -0.5061
+          },
+          "common_support": true
+        },
+        "2023 : Under 7 point favorite": {
+          "season": 2023,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 35,
+            "wins": 23,
+            "losses": 12,
+            "su_win_rate": 0.657143,
+            "mean_home_spread": -4.614,
+            "mean_off_edge": 0.444,
+            "mean_def_edge": 0.4057,
+            "mean_min_edge": 0.2381
+          },
+          "other_home_favorites": {
+            "games": 132,
+            "wins": 74,
+            "losses": 58,
+            "su_win_rate": 0.560606,
+            "mean_home_spread": -3.364,
+            "mean_off_edge": -0.0547,
+            "mean_def_edge": -0.0387,
+            "mean_min_edge": -0.5401
+          },
+          "common_support": true
+        },
+        "2024 : 14\u201320.5 point favorite": {
+          "season": 2024,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 52,
+            "wins": 49,
+            "losses": 3,
+            "su_win_rate": 0.942308,
+            "mean_home_spread": -17.615,
+            "mean_off_edge": 0.988,
+            "mean_def_edge": 0.9069,
+            "mean_min_edge": 0.5859
+          },
+          "other_home_favorites": {
+            "games": 13,
+            "wins": 11,
+            "losses": 2,
+            "su_win_rate": 0.846154,
+            "mean_home_spread": -17.192,
+            "mean_off_edge": 0.6971,
+            "mean_def_edge": 0.1123,
+            "mean_min_edge": -0.2777
+          },
+          "common_support": true
+        },
+        "2024 : 21+ point favorite": {
+          "season": 2024,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 53,
+            "wins": 52,
+            "losses": 1,
+            "su_win_rate": 0.981132,
+            "mean_home_spread": -28.415,
+            "mean_off_edge": 1.4899,
+            "mean_def_edge": 1.3213,
+            "mean_min_edge": 1.0566
+          },
+          "other_home_favorites": {
+            "games": 7,
+            "wins": 7,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -28.357,
+            "mean_off_edge": -0.2822,
+            "mean_def_edge": 0.6431,
+            "mean_min_edge": -0.4787
+          },
+          "common_support": true
+        },
+        "2024 : 7\u201313.5 point favorite": {
+          "season": 2024,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 60,
+            "wins": 49,
+            "losses": 11,
+            "su_win_rate": 0.816667,
+            "mean_home_spread": -10.233,
+            "mean_off_edge": 0.5784,
+            "mean_def_edge": 0.6339,
+            "mean_min_edge": 0.3477
+          },
+          "other_home_favorites": {
+            "games": 38,
+            "wins": 26,
+            "losses": 12,
+            "su_win_rate": 0.684211,
+            "mean_home_spread": -9.237,
+            "mean_off_edge": 0.3399,
+            "mean_def_edge": -0.0231,
+            "mean_min_edge": -0.4722
+          },
+          "common_support": true
+        },
+        "2024 : Under 7 point favorite": {
+          "season": 2024,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 46,
+            "wins": 31,
+            "losses": 15,
+            "su_win_rate": 0.673913,
+            "mean_home_spread": -4.174,
+            "mean_off_edge": 0.4327,
+            "mean_def_edge": 0.5993,
+            "mean_min_edge": 0.2833
+          },
+          "other_home_favorites": {
+            "games": 119,
+            "wins": 71,
+            "losses": 48,
+            "su_win_rate": 0.596639,
+            "mean_home_spread": -3.378,
+            "mean_off_edge": -0.0212,
+            "mean_def_edge": -0.0963,
+            "mean_min_edge": -0.5443
+          },
+          "common_support": true
+        },
+        "2025 : 14\u201320.5 point favorite": {
+          "season": 2025,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 48,
+            "wins": 43,
+            "losses": 5,
+            "su_win_rate": 0.895833,
+            "mean_home_spread": -17.0,
+            "mean_off_edge": 0.9106,
+            "mean_def_edge": 0.7268,
+            "mean_min_edge": 0.4931
+          },
+          "other_home_favorites": {
+            "games": 11,
+            "wins": 10,
+            "losses": 1,
+            "su_win_rate": 0.909091,
+            "mean_home_spread": -17.5,
+            "mean_off_edge": 0.887,
+            "mean_def_edge": 0.2052,
+            "mean_min_edge": -0.2438
+          },
+          "common_support": true
+        },
+        "2025 : 21+ point favorite": {
+          "season": 2025,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 52,
+            "wins": 52,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -29.731,
+            "mean_off_edge": 1.3732,
+            "mean_def_edge": 1.4487,
+            "mean_min_edge": 1.0658
+          },
+          "other_home_favorites": {
+            "games": 7,
+            "wins": 6,
+            "losses": 1,
+            "su_win_rate": 0.857143,
+            "mean_home_spread": -25.357,
+            "mean_off_edge": 0.1576,
+            "mean_def_edge": 1.0377,
+            "mean_min_edge": -0.1492
+          },
+          "common_support": true
+        },
+        "2025 : 7\u201313.5 point favorite": {
+          "season": 2025,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 50,
+            "wins": 35,
+            "losses": 15,
+            "su_win_rate": 0.7,
+            "mean_home_spread": -10.14,
+            "mean_off_edge": 0.5109,
+            "mean_def_edge": 0.5457,
+            "mean_min_edge": 0.2984
+          },
+          "other_home_favorites": {
+            "games": 59,
+            "wins": 48,
+            "losses": 11,
+            "su_win_rate": 0.813559,
+            "mean_home_spread": -9.907,
+            "mean_off_edge": 0.2634,
+            "mean_def_edge": 0.2416,
+            "mean_min_edge": -0.3371
+          },
+          "common_support": true
+        },
+        "2025 : Under 7 point favorite": {
+          "season": 2025,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 27,
+            "wins": 14,
+            "losses": 13,
+            "su_win_rate": 0.518519,
+            "mean_home_spread": -4.315,
+            "mean_off_edge": 0.3651,
+            "mean_def_edge": 0.3719,
+            "mean_min_edge": 0.226
+          },
+          "other_home_favorites": {
+            "games": 137,
+            "wins": 88,
+            "losses": 49,
+            "su_win_rate": 0.642336,
+            "mean_home_spread": -3.938,
+            "mean_off_edge": 0.0012,
+            "mean_def_edge": -0.0358,
+            "mean_min_edge": -0.6458
+          },
+          "common_support": true
+        }
+      },
+      "notes": [
+        "Spread buckets are signed home favorite lines: <7, 7\u201313.5, 14\u201320.5, 21+ points. Other home favorites lack at least one handwritten edge.",
+        "Standardized control rate weights each comparison stratum by the number of both-advantage selections. Only common-support strata are included.",
+        "Some very large favorites have no available same-season comparison team; those games are excluded from the standardized comparison and disclosed.",
+        "Market spread is only an approximate control for favorite strength and may be a revised retrospective line, not frozen at a known pregame timestamp.",
+        "No claim of causality, statistical significance or out-of-sample improvement based solely on these historical descriptive rates."
+      ]
+    },
+    "2026_weeks_3_to_6": {
+      "qualifying_spread_priced_home_favorites": 141,
+      "both_home_favorite": {
+        "games": 80,
+        "wins": 67,
+        "losses": 13,
+        "su_win_rate": 0.8375,
+        "mean_home_spread": -17.094,
+        "mean_off_edge": 0.896,
+        "mean_def_edge": 0.9224,
+        "mean_min_edge": 0.6446
+      },
+      "other_home_favorites": {
+        "games": 61,
+        "wins": 44,
+        "losses": 17,
+        "su_win_rate": 0.721311,
+        "mean_home_spread": -6.934,
+        "mean_off_edge": 0.0662,
+        "mean_def_edge": -0.1542,
+        "mean_min_edge": -0.4781
+      },
+      "stratified_comparison": {
+        "matched_by_year_and_spread_bucket_games": 80,
+        "selected_both_wins": 67,
+        "selected_both_win_rate": 0.8375,
+        "comparator_weighted_win_rate": 0.883929,
+        "difference_percentage_points": -4.643,
+        "both_games_with_no_spread_stratum_controls": 0,
+        "strata_with_both_and_comparator": 4,
+        "strata_with_no_comparator": 0
+      },
+      "strata": {
+        "2026 : 14\u201320.5 point favorite": {
+          "season": 2026,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 20,
+            "wins": 18,
+            "losses": 2,
+            "su_win_rate": 0.9,
+            "mean_home_spread": -16.875,
+            "mean_off_edge": 0.8892,
+            "mean_def_edge": 0.8996,
+            "mean_min_edge": 0.5798
+          },
+          "other_home_favorites": {
+            "games": 5,
+            "wins": 5,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -18.5,
+            "mean_off_edge": 0.1273,
+            "mean_def_edge": 0.3638,
+            "mean_min_edge": -0.4597
+          },
+          "common_support": true
+        },
+        "2026 : 21+ point favorite": {
+          "season": 2026,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 24,
+            "wins": 24,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -31.542,
+            "mean_off_edge": 1.4049,
+            "mean_def_edge": 1.3211,
+            "mean_min_edge": 1.0112
+          },
+          "other_home_favorites": {
+            "games": 2,
+            "wins": 2,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -21.5,
+            "mean_off_edge": -0.026,
+            "mean_def_edge": 0.5966,
+            "mean_min_edge": -0.026
+          },
+          "common_support": true
+        },
+        "2026 : 7\u201313.5 point favorite": {
+          "season": 2026,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 19,
+            "wins": 13,
+            "losses": 6,
+            "su_win_rate": 0.684211,
+            "mean_home_spread": -10.947,
+            "mean_off_edge": 0.6381,
+            "mean_def_edge": 0.6733,
+            "mean_min_edge": 0.4724
+          },
+          "other_home_favorites": {
+            "games": 19,
+            "wins": 17,
+            "losses": 2,
+            "su_win_rate": 0.894737,
+            "mean_home_spread": -9.079,
+            "mean_off_edge": 0.2682,
+            "mean_def_edge": -0.1304,
+            "mean_min_edge": -0.383
+          },
+          "common_support": true
+        },
+        "2026 : Under 7 point favorite": {
+          "season": 2026,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 17,
+            "wins": 12,
+            "losses": 5,
+            "su_win_rate": 0.705882,
+            "mean_home_spread": -3.824,
+            "mean_off_edge": 0.4738,
+            "mean_def_edge": 0.6646,
+            "mean_min_edge": 0.3957
+          },
+          "other_home_favorites": {
+            "games": 35,
+            "wins": 20,
+            "losses": 15,
+            "su_win_rate": 0.571429,
+            "mean_home_spread": -3.286,
+            "mean_off_edge": -0.0469,
+            "mean_def_edge": -0.2841,
+            "mean_min_edge": -0.5581
+          },
+          "common_support": true
+        }
+      },
+      "notes": [
+        "Spread buckets are signed home favorite lines: <7, 7\u201313.5, 14\u201320.5, 21+ points. Other home favorites lack at least one handwritten edge.",
+        "Standardized control rate weights each comparison stratum by the number of both-advantage selections. Only common-support strata are included.",
+        "Some very large favorites have no available same-season comparison team; those games are excluded from the standardized comparison and disclosed.",
+        "Market spread is only an approximate control for favorite strength and may be a revised retrospective line, not frozen at a known pregame timestamp.",
+        "No claim of causality, statistical significance or out-of-sample improvement based solely on these historical descriptive rates."
+      ]
+    },
+    "2023_2026": {
+      "qualifying_spread_priced_home_favorites": 1310,
+      "both_home_favorite": {
+        "games": 662,
+        "wins": 555,
+        "losses": 107,
+        "su_win_rate": 0.838369,
+        "mean_home_spread": -15.981,
+        "mean_off_edge": 0.852,
+        "mean_def_edge": 0.8382,
+        "mean_min_edge": 0.5564
+      },
+      "other_home_favorites": {
+        "games": 648,
+        "wins": 436,
+        "losses": 212,
+        "su_win_rate": 0.67284,
+        "mean_home_spread": -6.802,
+        "mean_off_edge": 0.1148,
+        "mean_def_edge": 0.0132,
+        "mean_min_edge": -0.511
+      },
+      "stratified_comparison": {
+        "matched_by_year_and_spread_bucket_games": 662,
+        "selected_both_wins": 555,
+        "selected_both_win_rate": 0.838369,
+        "comparator_weighted_win_rate": 0.816452,
+        "difference_percentage_points": 2.192,
+        "both_games_with_no_spread_stratum_controls": 0,
+        "strata_with_both_and_comparator": 16,
+        "strata_with_no_comparator": 0
+      },
+      "strata": {
+        "2023 : 14\u201320.5 point favorite": {
+          "season": 2023,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 57,
+            "wins": 53,
+            "losses": 4,
+            "su_win_rate": 0.929825,
+            "mean_home_spread": -17.009,
+            "mean_off_edge": 0.8558,
+            "mean_def_edge": 0.8298,
+            "mean_min_edge": 0.4976
+          },
+          "other_home_favorites": {
+            "games": 12,
+            "wins": 12,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -17.583,
+            "mean_off_edge": 0.5123,
+            "mean_def_edge": 0.3442,
+            "mean_min_edge": -0.4018
+          },
+          "common_support": true
+        },
+        "2023 : 21+ point favorite": {
+          "season": 2023,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 47,
+            "wins": 44,
+            "losses": 3,
+            "su_win_rate": 0.93617,
+            "mean_home_spread": -27.372,
+            "mean_off_edge": 1.2558,
+            "mean_def_edge": 1.2208,
+            "mean_min_edge": 0.8522
+          },
+          "other_home_favorites": {
+            "games": 9,
+            "wins": 8,
+            "losses": 1,
+            "su_win_rate": 0.888889,
+            "mean_home_spread": -26.611,
+            "mean_off_edge": 0.8807,
+            "mean_def_edge": 0.5377,
+            "mean_min_edge": -0.255
+          },
+          "common_support": true
+        },
+        "2023 : 7\u201313.5 point favorite": {
+          "season": 2023,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 55,
+            "wins": 43,
+            "losses": 12,
+            "su_win_rate": 0.781818,
+            "mean_home_spread": -10.564,
+            "mean_off_edge": 0.6102,
+            "mean_def_edge": 0.5794,
+            "mean_min_edge": 0.3557
+          },
+          "other_home_favorites": {
+            "games": 43,
+            "wins": 31,
+            "losses": 12,
+            "su_win_rate": 0.72093,
+            "mean_home_spread": -9.791,
+            "mean_off_edge": 0.4521,
+            "mean_def_edge": 0.0377,
+            "mean_min_edge": -0.5061
+          },
+          "common_support": true
+        },
+        "2023 : Under 7 point favorite": {
+          "season": 2023,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 35,
+            "wins": 23,
+            "losses": 12,
+            "su_win_rate": 0.657143,
+            "mean_home_spread": -4.614,
+            "mean_off_edge": 0.444,
+            "mean_def_edge": 0.4057,
+            "mean_min_edge": 0.2381
+          },
+          "other_home_favorites": {
+            "games": 132,
+            "wins": 74,
+            "losses": 58,
+            "su_win_rate": 0.560606,
+            "mean_home_spread": -3.364,
+            "mean_off_edge": -0.0547,
+            "mean_def_edge": -0.0387,
+            "mean_min_edge": -0.5401
+          },
+          "common_support": true
+        },
+        "2024 : 14\u201320.5 point favorite": {
+          "season": 2024,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 52,
+            "wins": 49,
+            "losses": 3,
+            "su_win_rate": 0.942308,
+            "mean_home_spread": -17.615,
+            "mean_off_edge": 0.988,
+            "mean_def_edge": 0.9069,
+            "mean_min_edge": 0.5859
+          },
+          "other_home_favorites": {
+            "games": 13,
+            "wins": 11,
+            "losses": 2,
+            "su_win_rate": 0.846154,
+            "mean_home_spread": -17.192,
+            "mean_off_edge": 0.6971,
+            "mean_def_edge": 0.1123,
+            "mean_min_edge": -0.2777
+          },
+          "common_support": true
+        },
+        "2024 : 21+ point favorite": {
+          "season": 2024,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 53,
+            "wins": 52,
+            "losses": 1,
+            "su_win_rate": 0.981132,
+            "mean_home_spread": -28.415,
+            "mean_off_edge": 1.4899,
+            "mean_def_edge": 1.3213,
+            "mean_min_edge": 1.0566
+          },
+          "other_home_favorites": {
+            "games": 7,
+            "wins": 7,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -28.357,
+            "mean_off_edge": -0.2822,
+            "mean_def_edge": 0.6431,
+            "mean_min_edge": -0.4787
+          },
+          "common_support": true
+        },
+        "2024 : 7\u201313.5 point favorite": {
+          "season": 2024,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 60,
+            "wins": 49,
+            "losses": 11,
+            "su_win_rate": 0.816667,
+            "mean_home_spread": -10.233,
+            "mean_off_edge": 0.5784,
+            "mean_def_edge": 0.6339,
+            "mean_min_edge": 0.3477
+          },
+          "other_home_favorites": {
+            "games": 38,
+            "wins": 26,
+            "losses": 12,
+            "su_win_rate": 0.684211,
+            "mean_home_spread": -9.237,
+            "mean_off_edge": 0.3399,
+            "mean_def_edge": -0.0231,
+            "mean_min_edge": -0.4722
+          },
+          "common_support": true
+        },
+        "2024 : Under 7 point favorite": {
+          "season": 2024,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 46,
+            "wins": 31,
+            "losses": 15,
+            "su_win_rate": 0.673913,
+            "mean_home_spread": -4.174,
+            "mean_off_edge": 0.4327,
+            "mean_def_edge": 0.5993,
+            "mean_min_edge": 0.2833
+          },
+          "other_home_favorites": {
+            "games": 119,
+            "wins": 71,
+            "losses": 48,
+            "su_win_rate": 0.596639,
+            "mean_home_spread": -3.378,
+            "mean_off_edge": -0.0212,
+            "mean_def_edge": -0.0963,
+            "mean_min_edge": -0.5443
+          },
+          "common_support": true
+        },
+        "2025 : 14\u201320.5 point favorite": {
+          "season": 2025,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 48,
+            "wins": 43,
+            "losses": 5,
+            "su_win_rate": 0.895833,
+            "mean_home_spread": -17.0,
+            "mean_off_edge": 0.9106,
+            "mean_def_edge": 0.7268,
+            "mean_min_edge": 0.4931
+          },
+          "other_home_favorites": {
+            "games": 11,
+            "wins": 10,
+            "losses": 1,
+            "su_win_rate": 0.909091,
+            "mean_home_spread": -17.5,
+            "mean_off_edge": 0.887,
+            "mean_def_edge": 0.2052,
+            "mean_min_edge": -0.2438
+          },
+          "common_support": true
+        },
+        "2025 : 21+ point favorite": {
+          "season": 2025,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 52,
+            "wins": 52,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -29.731,
+            "mean_off_edge": 1.3732,
+            "mean_def_edge": 1.4487,
+            "mean_min_edge": 1.0658
+          },
+          "other_home_favorites": {
+            "games": 7,
+            "wins": 6,
+            "losses": 1,
+            "su_win_rate": 0.857143,
+            "mean_home_spread": -25.357,
+            "mean_off_edge": 0.1576,
+            "mean_def_edge": 1.0377,
+            "mean_min_edge": -0.1492
+          },
+          "common_support": true
+        },
+        "2025 : 7\u201313.5 point favorite": {
+          "season": 2025,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 50,
+            "wins": 35,
+            "losses": 15,
+            "su_win_rate": 0.7,
+            "mean_home_spread": -10.14,
+            "mean_off_edge": 0.5109,
+            "mean_def_edge": 0.5457,
+            "mean_min_edge": 0.2984
+          },
+          "other_home_favorites": {
+            "games": 59,
+            "wins": 48,
+            "losses": 11,
+            "su_win_rate": 0.813559,
+            "mean_home_spread": -9.907,
+            "mean_off_edge": 0.2634,
+            "mean_def_edge": 0.2416,
+            "mean_min_edge": -0.3371
+          },
+          "common_support": true
+        },
+        "2025 : Under 7 point favorite": {
+          "season": 2025,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 27,
+            "wins": 14,
+            "losses": 13,
+            "su_win_rate": 0.518519,
+            "mean_home_spread": -4.315,
+            "mean_off_edge": 0.3651,
+            "mean_def_edge": 0.3719,
+            "mean_min_edge": 0.226
+          },
+          "other_home_favorites": {
+            "games": 137,
+            "wins": 88,
+            "losses": 49,
+            "su_win_rate": 0.642336,
+            "mean_home_spread": -3.938,
+            "mean_off_edge": 0.0012,
+            "mean_def_edge": -0.0358,
+            "mean_min_edge": -0.6458
+          },
+          "common_support": true
+        },
+        "2026 : 14\u201320.5 point favorite": {
+          "season": 2026,
+          "spread_bucket": "14\u201320.5 point favorite",
+          "double_advantage": {
+            "games": 20,
+            "wins": 18,
+            "losses": 2,
+            "su_win_rate": 0.9,
+            "mean_home_spread": -16.875,
+            "mean_off_edge": 0.8892,
+            "mean_def_edge": 0.8996,
+            "mean_min_edge": 0.5798
+          },
+          "other_home_favorites": {
+            "games": 5,
+            "wins": 5,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -18.5,
+            "mean_off_edge": 0.1273,
+            "mean_def_edge": 0.3638,
+            "mean_min_edge": -0.4597
+          },
+          "common_support": true
+        },
+        "2026 : 21+ point favorite": {
+          "season": 2026,
+          "spread_bucket": "21+ point favorite",
+          "double_advantage": {
+            "games": 24,
+            "wins": 24,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -31.542,
+            "mean_off_edge": 1.4049,
+            "mean_def_edge": 1.3211,
+            "mean_min_edge": 1.0112
+          },
+          "other_home_favorites": {
+            "games": 2,
+            "wins": 2,
+            "losses": 0,
+            "su_win_rate": 1.0,
+            "mean_home_spread": -21.5,
+            "mean_off_edge": -0.026,
+            "mean_def_edge": 0.5966,
+            "mean_min_edge": -0.026
+          },
+          "common_support": true
+        },
+        "2026 : 7\u201313.5 point favorite": {
+          "season": 2026,
+          "spread_bucket": "7\u201313.5 point favorite",
+          "double_advantage": {
+            "games": 19,
+            "wins": 13,
+            "losses": 6,
+            "su_win_rate": 0.684211,
+            "mean_home_spread": -10.947,
+            "mean_off_edge": 0.6381,
+            "mean_def_edge": 0.6733,
+            "mean_min_edge": 0.4724
+          },
+          "other_home_favorites": {
+            "games": 19,
+            "wins": 17,
+            "losses": 2,
+            "su_win_rate": 0.894737,
+            "mean_home_spread": -9.079,
+            "mean_off_edge": 0.2682,
+            "mean_def_edge": -0.1304,
+            "mean_min_edge": -0.383
+          },
+          "common_support": true
+        },
+        "2026 : Under 7 point favorite": {
+          "season": 2026,
+          "spread_bucket": "Under 7 point favorite",
+          "double_advantage": {
+            "games": 17,
+            "wins": 12,
+            "losses": 5,
+            "su_win_rate": 0.705882,
+            "mean_home_spread": -3.824,
+            "mean_off_edge": 0.4738,
+            "mean_def_edge": 0.6646,
+            "mean_min_edge": 0.3957
+          },
+          "other_home_favorites": {
+            "games": 35,
+            "wins": 20,
+            "losses": 15,
+            "su_win_rate": 0.571429,
+            "mean_home_spread": -3.286,
+            "mean_off_edge": -0.0469,
+            "mean_def_edge": -0.2841,
+            "mean_min_edge": -0.5581
+          },
+          "common_support": true
+        }
+      },
+      "notes": [
+        "Spread buckets are signed home favorite lines: <7, 7\u201313.5, 14\u201320.5, 21+ points. Other home favorites lack at least one handwritten edge.",
+        "Standardized control rate weights each comparison stratum by the number of both-advantage selections. Only common-support strata are included.",
+        "Some very large favorites have no available same-season comparison team; those games are excluded from the standardized comparison and disclosed.",
+        "Market spread is only an approximate control for favorite strength and may be a revised retrospective line, not frozen at a known pregame timestamp.",
+        "No claim of causality, statistical significance or out-of-sample improvement based solely on these historical descriptive rates."
+      ]
+    }
+  },
+  "caveats": [
+    "Retrospective tests; the user's exact offense/defense weights and same historical current-season/prior rating blending are preserved; no code changes to the live app.",
+    "A high straight-up win rate among very large favorites is expected and does not establish betting value or predictive improvement beyond the market.",
+    "Magnitude thresholds are cumulative/overlapping; use nonoverlapping bins for independent descriptive comparisons.",
+    "Spread-matched controls are by year and coarse spread group, not randomized or a fully calibrated betting-market win-probability model.",
+    "2022 odds have extremely low verified-coverage in source; 2022 remains in pure magnitude summary but cannot provide meaningful spread-matched comparisons.",
+    "Earlier-week data and reconstructed model outputs can differ from originally captured pregame records; all seasons have been inspected before, so results aren't pristine forward validation.",
+    "Zero-game bins have null meaningful hit rate rather than counting losses.",
+    "Results are straight-up and use historical spreads solely for price matching, not ATS grading, and do not estimate positive ROI."
+  ]
+}
