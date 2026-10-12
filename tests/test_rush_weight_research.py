@@ -25,13 +25,16 @@ class RushWeightResearch(unittest.TestCase):
             {"game_id": 100, "team_id": 2, "rushingYards": 60, "rushingAttempts": 20},
             {"game_id": 101, "team_id": 3, "rushingYards": 90, "rushingAttempts": 20},
             {"game_id": 101, "team_id": 4, "rushingYards": 110, "rushingAttempts": 20},
+            {"game_id": 102, "team_id": 1, "rushingYards": 60, "rushingAttempts": 20},
+            {"game_id": 102, "team_id": 3, "rushingYards": 160, "rushingAttempts": 20},
         ])
         games = pd.DataFrame([
             {"game_id": 100, "home_id": 1, "away_id": 2},
             {"game_id": 101, "home_id": 3, "away_id": 4},
+            {"game_id": 102, "home_id": 1, "away_id": 3},
         ])
         z, report = rush_zscores(games, valid_rush_box(boxes))
-        self.assertEqual(report["complete_past_games"], 2)
+        self.assertEqual(report["complete_past_games"], 3)
         self.assertGreater(z[1][0], z[2][0])
         self.assertGreater(z[1][1], z[2][1])
         self.assertNotEqual(z[1][0], z[1][1])
