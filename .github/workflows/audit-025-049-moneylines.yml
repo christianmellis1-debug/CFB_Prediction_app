@@ -1,0 +1,32 @@
+name: Verify 2026 0.25–0.49 magnitude moneylines
+on:
+  push:
+    branches:
+      - research/handwritten-025-049-moneylines-2026-10-12
+    paths:
+      - 'research/handwritten_offense_defense_2026_10_12/audit_moneylines_025_049.py'
+      - '.github/workflows/audit-025-049-moneylines.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  odds:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Inspect ESPN DraftKings moneylines for all 17 identified games
+        run: PYTHONPATH=. python research/handwritten_offense_defense_2026_10_12/audit_moneylines_025_049.py
+      - name: Save audit to research branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/handwritten_offense_defense_2026_10_12/moneyline_025_049_audit_2026.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Archive 2026 0.25-0.49 magnitude moneyline source audit'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
