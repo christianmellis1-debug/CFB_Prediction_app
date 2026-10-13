@@ -1,0 +1,36 @@
+name: Research combined Tests A and B
+on:
+  push:
+    branches:
+      - research/test-ab-conditional-2026-10-13
+    paths:
+      - 'research/test_ab_combination.py'
+      - '.github/workflows/research-test-ab-combination.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: research-test-ab-combination
+  cancel-in-progress: false
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Audit matched historical and locked-2026 predictions
+        run: PYTHONPATH=. python research/test_ab_combination.py
+      - name: Preserve numerical research results separately from production
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_ab_combination_results.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record fixed-signal Test A/B combination validation'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
