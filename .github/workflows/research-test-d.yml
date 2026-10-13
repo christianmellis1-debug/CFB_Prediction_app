@@ -1,0 +1,39 @@
+name: Research Test D missing-stat and early-season weights
+on:
+  push:
+    branches:
+      - research/test-d-missing-data-early-season-2026-10-13
+    paths:
+      - 'research/test_d_missing_early.py'
+      - '.github/workflows/research-test-d.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: research-test-d
+  cancel-in-progress: false
+jobs:
+  investigate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install research dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Verify research syntax
+        run: python -m py_compile research/test_d_missing_early.py
+      - name: Run the retrospective early-season and missing-stat evaluation
+        run: PYTHONPATH=. python -u research/test_d_missing_early.py
+      - name: Preserve standalone numerical results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_d_results.json research/test_d_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Test D historical early-season diagnostics'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
