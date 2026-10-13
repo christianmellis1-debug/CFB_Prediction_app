@@ -1,0 +1,39 @@
+name: Research Test B venue adjustment
+on:
+  push:
+    branches:
+      - research/test-b-venue-calibration-2026-10-13
+    paths:
+      - 'research/test_b_venue.py'
+      - '.github/workflows/research-test-b-venue.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: research-test-b-venue
+  cancel-in-progress: false
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Check syntax
+        run: python -m py_compile research/test_b_venue.py
+      - name: Run opponent-adjusted historical venue comparison
+        run: PYTHONPATH=. python research/test_b_venue.py
+      - name: Save research outputs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_b_venue_results.json research/test_b_venue_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Test B venue calibration audit'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
