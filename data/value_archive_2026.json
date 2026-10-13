@@ -1,11 +1,11 @@
 {
   "results": {},
   "run_status": {
-    "checked_at": "2026-10-13T08:24:54.080264+00:00",
+    "checked_at": "2026-10-13T19:57:09.139806+00:00",
     "eligible_in_window": 2,
     "missing_events": [],
     "new_results": 0,
-    "new_snapshots": 2,
+    "new_snapshots": 0,
     "selected_total": 0,
     "skipped": {}
   },
