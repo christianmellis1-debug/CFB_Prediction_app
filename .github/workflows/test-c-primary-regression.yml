@@ -1,0 +1,30 @@
+name: Test C primary predictor regression
+on:
+  push:
+    branches:
+      - feature/test-c-primary-market-blend-2026-10-13
+    paths:
+      - 'app.py'
+      - 'primary_market_blend.py'
+      - 'tests/test_primary_market_blend.py'
+      - '.github/workflows/test-c-primary-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install exact dependencies
+        run: pip install -r requirements.txt
+      - name: Compile all primary modules
+        run: python -m py_compile app.py primary_market_blend.py model_v1_5.py shadow_tracking.py
+      - name: Verify Test C primary predictor
+        run: python -m unittest discover -s tests -p 'test_primary_market_blend.py' -v
+      - name: Verify all app regression tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
