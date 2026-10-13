@@ -1,0 +1,5043 @@
+{
+  "title": "Test D Missing/limited statistical data and early-season weight",
+  "created": "2026-10-13T20:10:32.716254+00:00",
+  "sources": {
+    "summary2023": "68cf94d6b246f88de944c3eb754759b0f4171d8d61a8f5c2d20275cc78f86837",
+    "summary2024": "29b08fc3e97397604d1b882a660ad154f002eb89aa15eba9dea8cdc798cb4350",
+    "summary2025": "84bcfc141ef09b0cd64d132346166dbb38a6a95c5e33dd2be54909707c162ccd",
+    "summary2026": "0179ba03d5395659681425918f480762277c5d34bdca3d20737d4910961ab18d",
+    "schedule2024": "32b9162088eb41f36479ea6f587ebdd8043baa1bc201b139820a35ded47944b2",
+    "schedule2025": "ddbe0906cee509e942b7219110bb692f68fd6f7f23983545b6001d125b207718",
+    "schedule2026": "5452f2787291cdf0d73186bcfae3ac61b66a3d3e6d04b27e8e6be3dfde0aaeb0"
+  },
+  "variants": {
+    "baseline": [
+      0.0,
+      false,
+      "baseline"
+    ],
+    "conservative_minus_10": [
+      -0.1,
+      false,
+      "delta"
+    ],
+    "conservative_minus_20": [
+      -0.2,
+      false,
+      "delta"
+    ],
+    "half_current_weight": [
+      0.5,
+      false,
+      "ratio"
+    ],
+    "aggressive_plus_10": [
+      0.1,
+      false,
+      "delta"
+    ],
+    "preserve_prior_when_no_snapshot": [
+      0.0,
+      true,
+      "baseline"
+    ],
+    "conservative_minus_10_and_preserve_prior": [
+      -0.1,
+      true,
+      "delta"
+    ]
+  },
+  "audits": {
+    "2024": {
+      "weeks": {
+        "1": {
+          "games": 39
+        },
+        "2": {
+          "games": 49
+        },
+        "3": {
+          "games": 52
+        },
+        "4": {
+          "games": 54
+        },
+        "5": {
+          "games": 52
+        },
+        "6": {
+          "games": 49
+        }
+      },
+      "frozen_2026_games": 0
+    },
+    "2025": {
+      "weeks": {
+        "1": {
+          "games": 48
+        },
+        "2": {
+          "games": 50
+        },
+        "3": {
+          "games": 47
+        },
+        "4": {
+          "games": 50
+        },
+        "5": {
+          "games": 51
+        },
+        "6": {
+          "games": 50
+        }
+      },
+      "frozen_2026_games": 0
+    },
+    "2026": {
+      "weeks": {
+        "1": {
+          "games": 51
+        },
+        "2": {
+          "games": 49
+        },
+        "3": {
+          "games": 57
+        },
+        "4": {
+          "games": 58
+        },
+        "5": {
+          "games": 56
+        },
+        "6": {
+          "games": 58
+        }
+      },
+      "frozen_2026_games": 112
+    }
+  },
+  "design": "Baseline full V1.5 recreated on prior-week snapshots. Pick minimum 2024 Weeks1\u20136 Brier, then report unchanged 2025. 2026 W5\u20136 original frozen baseline plus retrospectively estimated variant log-odds deltas, not frozen challenger predictions.",
+  "selected_on_2024": "aggressive_plus_10",
+  "per_year": {
+    "2024": {
+      "all": {
+        "baseline": {
+          "games": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.179832,
+          "log_loss": 0.526691,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 295,
+          "wins": 213,
+          "losses": 82,
+          "accuracy": 0.722034,
+          "brier": 0.183151,
+          "log_loss": 0.536302,
+          "flips": 10,
+          "fixed": 6,
+          "broken": 4
+        },
+        "conservative_minus_20": {
+          "games": 295,
+          "wins": 210,
+          "losses": 85,
+          "accuracy": 0.711864,
+          "brier": 0.187555,
+          "log_loss": 0.549302,
+          "flips": 15,
+          "fixed": 7,
+          "broken": 8
+        },
+        "half_current_weight": {
+          "games": 295,
+          "wins": 204,
+          "losses": 91,
+          "accuracy": 0.691525,
+          "brier": 0.192332,
+          "log_loss": 0.562182,
+          "flips": 23,
+          "fixed": 8,
+          "broken": 15
+        },
+        "aggressive_plus_10": {
+          "games": 295,
+          "wins": 212,
+          "losses": 83,
+          "accuracy": 0.718644,
+          "brier": 0.177677,
+          "log_loss": 0.520663,
+          "flips": 3,
+          "fixed": 2,
+          "broken": 1
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.181723,
+          "log_loss": 0.533949,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 295,
+          "wins": 213,
+          "losses": 82,
+          "accuracy": 0.722034,
+          "brier": 0.184371,
+          "log_loss": 0.541568,
+          "flips": 12,
+          "fixed": 7,
+          "broken": 5
+        }
+      },
+      "any_missing_team_snapshot": {
+        "baseline": {
+          "games": 84,
+          "wins": 62,
+          "losses": 22,
+          "accuracy": 0.738095,
+          "brier": 0.169183,
+          "log_loss": 0.497467,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 84,
+          "wins": 62,
+          "losses": 22,
+          "accuracy": 0.738095,
+          "brier": 0.173442,
+          "log_loss": 0.509769,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_20": {
+          "games": 84,
+          "wins": 61,
+          "losses": 23,
+          "accuracy": 0.72619,
+          "brier": 0.178123,
+          "log_loss": 0.524964,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "half_current_weight": {
+          "games": 84,
+          "wins": 61,
+          "losses": 23,
+          "accuracy": 0.72619,
+          "brier": 0.176775,
+          "log_loss": 0.51958,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "aggressive_plus_10": {
+          "games": 84,
+          "wins": 63,
+          "losses": 21,
+          "accuracy": 0.75,
+          "brier": 0.165632,
+          "log_loss": 0.488581,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 84,
+          "wins": 62,
+          "losses": 22,
+          "accuracy": 0.738095,
+          "brier": 0.175823,
+          "log_loss": 0.522956,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 84,
+          "wins": 62,
+          "losses": 22,
+          "accuracy": 0.738095,
+          "brier": 0.177727,
+          "log_loss": 0.528262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        }
+      },
+      "both_team_snapshots_present": {
+        "baseline": {
+          "games": 211,
+          "wins": 149,
+          "losses": 62,
+          "accuracy": 0.706161,
+          "brier": 0.184072,
+          "log_loss": 0.538326,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 211,
+          "wins": 151,
+          "losses": 60,
+          "accuracy": 0.71564,
+          "brier": 0.187016,
+          "log_loss": 0.546865,
+          "flips": 10,
+          "fixed": 6,
+          "broken": 4
+        },
+        "conservative_minus_20": {
+          "games": 211,
+          "wins": 149,
+          "losses": 62,
+          "accuracy": 0.706161,
+          "brier": 0.19131,
+          "log_loss": 0.55899,
+          "flips": 14,
+          "fixed": 7,
+          "broken": 7
+        },
+        "half_current_weight": {
+          "games": 211,
+          "wins": 143,
+          "losses": 68,
+          "accuracy": 0.677725,
+          "brier": 0.198526,
+          "log_loss": 0.579141,
+          "flips": 22,
+          "fixed": 8,
+          "broken": 14
+        },
+        "aggressive_plus_10": {
+          "games": 211,
+          "wins": 149,
+          "losses": 62,
+          "accuracy": 0.706161,
+          "brier": 0.182472,
+          "log_loss": 0.533434,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 211,
+          "wins": 149,
+          "losses": 62,
+          "accuracy": 0.706161,
+          "brier": 0.184072,
+          "log_loss": 0.538326,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 211,
+          "wins": 151,
+          "losses": 60,
+          "accuracy": 0.71564,
+          "brier": 0.187016,
+          "log_loss": 0.546865,
+          "flips": 10,
+          "fixed": 6,
+          "broken": 4
+        }
+      },
+      "any_missing_adjusted_epa": {
+        "baseline": {
+          "games": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170382,
+          "log_loss": 0.498493,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 158,
+          "wins": 119,
+          "losses": 39,
+          "accuracy": 0.753165,
+          "brier": 0.171833,
+          "log_loss": 0.503255,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.174398,
+          "log_loss": 0.511689,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "half_current_weight": {
+          "games": 158,
+          "wins": 116,
+          "losses": 42,
+          "accuracy": 0.734177,
+          "brier": 0.174513,
+          "log_loss": 0.510862,
+          "flips": 8,
+          "fixed": 3,
+          "broken": 5
+        },
+        "aggressive_plus_10": {
+          "games": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170126,
+          "log_loss": 0.497686,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.173911,
+          "log_loss": 0.512044,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 158,
+          "wins": 119,
+          "losses": 39,
+          "accuracy": 0.753165,
+          "brier": 0.174111,
+          "log_loss": 0.513086,
+          "flips": 7,
+          "fixed": 4,
+          "broken": 3
+        }
+      },
+      "any_three_plus_missing_core_metrics": {
+        "baseline": {
+          "games": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170382,
+          "log_loss": 0.498493,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 158,
+          "wins": 119,
+          "losses": 39,
+          "accuracy": 0.753165,
+          "brier": 0.171833,
+          "log_loss": 0.503255,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.174398,
+          "log_loss": 0.511689,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "half_current_weight": {
+          "games": 158,
+          "wins": 116,
+          "losses": 42,
+          "accuracy": 0.734177,
+          "brier": 0.174513,
+          "log_loss": 0.510862,
+          "flips": 8,
+          "fixed": 3,
+          "broken": 5
+        },
+        "aggressive_plus_10": {
+          "games": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170126,
+          "log_loss": 0.497686,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.173911,
+          "log_loss": 0.512044,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 158,
+          "wins": 119,
+          "losses": 39,
+          "accuracy": 0.753165,
+          "brier": 0.174111,
+          "log_loss": 0.513086,
+          "flips": 7,
+          "fixed": 4,
+          "broken": 3
+        }
+      },
+      "either_team_fewer_than_2_prior_fbs": {
+        "baseline": {
+          "games": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.170265,
+          "log_loss": 0.499135,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.171823,
+          "log_loss": 0.504062,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 151,
+          "wins": 112,
+          "losses": 39,
+          "accuracy": 0.741722,
+          "brier": 0.174437,
+          "log_loss": 0.512567,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "half_current_weight": {
+          "games": 151,
+          "wins": 111,
+          "losses": 40,
+          "accuracy": 0.735099,
+          "brier": 0.174149,
+          "log_loss": 0.510521,
+          "flips": 7,
+          "fixed": 2,
+          "broken": 5
+        },
+        "aggressive_plus_10": {
+          "games": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.169874,
+          "log_loss": 0.498086,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 151,
+          "wins": 113,
+          "losses": 38,
+          "accuracy": 0.748344,
+          "brier": 0.17469,
+          "log_loss": 0.514784,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 151,
+          "wins": 113,
+          "losses": 38,
+          "accuracy": 0.748344,
+          "brier": 0.174833,
+          "log_loss": 0.515607,
+          "flips": 5,
+          "fixed": 2,
+          "broken": 3
+        }
+      },
+      "both_teams_at_least_2_prior_fbs": {
+        "baseline": {
+          "games": 144,
+          "wins": 97,
+          "losses": 47,
+          "accuracy": 0.673611,
+          "brier": 0.189865,
+          "log_loss": 0.555587,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 144,
+          "wins": 99,
+          "losses": 45,
+          "accuracy": 0.6875,
+          "brier": 0.195029,
+          "log_loss": 0.57011,
+          "flips": 6,
+          "fixed": 4,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 144,
+          "wins": 98,
+          "losses": 46,
+          "accuracy": 0.680556,
+          "brier": 0.201311,
+          "log_loss": 0.587822,
+          "flips": 9,
+          "fixed": 5,
+          "broken": 4
+        },
+        "half_current_weight": {
+          "games": 144,
+          "wins": 93,
+          "losses": 51,
+          "accuracy": 0.645833,
+          "brier": 0.2114,
+          "log_loss": 0.616353,
+          "flips": 16,
+          "fixed": 6,
+          "broken": 10
+        },
+        "aggressive_plus_10": {
+          "games": 144,
+          "wins": 98,
+          "losses": 46,
+          "accuracy": 0.680556,
+          "brier": 0.185859,
+          "log_loss": 0.544337,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 144,
+          "wins": 98,
+          "losses": 46,
+          "accuracy": 0.680556,
+          "brier": 0.189098,
+          "log_loss": 0.554045,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 144,
+          "wins": 100,
+          "losses": 44,
+          "accuracy": 0.694444,
+          "brier": 0.194373,
+          "log_loss": 0.568791,
+          "flips": 7,
+          "fixed": 5,
+          "broken": 2
+        }
+      },
+      "week1_2": {
+        "baseline": {
+          "games": 88,
+          "wins": 63,
+          "losses": 25,
+          "accuracy": 0.715909,
+          "brier": 0.185047,
+          "log_loss": 0.532365,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 88,
+          "wins": 62,
+          "losses": 26,
+          "accuracy": 0.704545,
+          "brier": 0.189968,
+          "log_loss": 0.546734,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "conservative_minus_20": {
+          "games": 88,
+          "wins": 61,
+          "losses": 27,
+          "accuracy": 0.693182,
+          "brier": 0.195233,
+          "log_loss": 0.563793,
+          "flips": 2,
+          "fixed": 0,
+          "broken": 2
+        },
+        "half_current_weight": {
+          "games": 88,
+          "wins": 61,
+          "losses": 27,
+          "accuracy": 0.693182,
+          "brier": 0.194,
+          "log_loss": 0.559008,
+          "flips": 2,
+          "fixed": 0,
+          "broken": 2
+        },
+        "aggressive_plus_10": {
+          "games": 88,
+          "wins": 64,
+          "losses": 24,
+          "accuracy": 0.727273,
+          "brier": 0.180669,
+          "log_loss": 0.52109,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 88,
+          "wins": 62,
+          "losses": 26,
+          "accuracy": 0.704545,
+          "brier": 0.193351,
+          "log_loss": 0.56196,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 88,
+          "wins": 61,
+          "losses": 27,
+          "accuracy": 0.693182,
+          "brier": 0.195625,
+          "log_loss": 0.568494,
+          "flips": 2,
+          "fixed": 0,
+          "broken": 2
+        }
+      },
+      "week3_4": {
+        "baseline": {
+          "games": 106,
+          "wins": 79,
+          "losses": 27,
+          "accuracy": 0.745283,
+          "brier": 0.157363,
+          "log_loss": 0.467817,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 106,
+          "wins": 83,
+          "losses": 23,
+          "accuracy": 0.783019,
+          "brier": 0.155713,
+          "log_loss": 0.4639,
+          "flips": 6,
+          "fixed": 5,
+          "broken": 1
+        },
+        "conservative_minus_20": {
+          "games": 106,
+          "wins": 81,
+          "losses": 25,
+          "accuracy": 0.764151,
+          "brier": 0.155666,
+          "log_loss": 0.464032,
+          "flips": 8,
+          "fixed": 5,
+          "broken": 3
+        },
+        "half_current_weight": {
+          "games": 106,
+          "wins": 80,
+          "losses": 26,
+          "accuracy": 0.754717,
+          "brier": 0.157063,
+          "log_loss": 0.467883,
+          "flips": 11,
+          "fixed": 6,
+          "broken": 5
+        },
+        "aggressive_plus_10": {
+          "games": 106,
+          "wins": 78,
+          "losses": 28,
+          "accuracy": 0.735849,
+          "brier": 0.160617,
+          "log_loss": 0.475914,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 106,
+          "wins": 79,
+          "losses": 27,
+          "accuracy": 0.745283,
+          "brier": 0.156773,
+          "log_loss": 0.46554,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 106,
+          "wins": 83,
+          "losses": 23,
+          "accuracy": 0.783019,
+          "brier": 0.155304,
+          "log_loss": 0.462282,
+          "flips": 6,
+          "fixed": 5,
+          "broken": 1
+        }
+      },
+      "week5_6": {
+        "baseline": {
+          "games": 101,
+          "wins": 69,
+          "losses": 32,
+          "accuracy": 0.683168,
+          "brier": 0.19887,
+          "log_loss": 0.583538,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 101,
+          "wins": 68,
+          "losses": 33,
+          "accuracy": 0.673267,
+          "brier": 0.206008,
+          "log_loss": 0.603199,
+          "flips": 3,
+          "fixed": 1,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 101,
+          "wins": 68,
+          "losses": 33,
+          "accuracy": 0.673267,
+          "brier": 0.214334,
+          "log_loss": 0.626166,
+          "flips": 5,
+          "fixed": 2,
+          "broken": 3
+        },
+        "half_current_weight": {
+          "games": 101,
+          "wins": 63,
+          "losses": 38,
+          "accuracy": 0.623762,
+          "brier": 0.227894,
+          "log_loss": 0.663913,
+          "flips": 10,
+          "fixed": 2,
+          "broken": 8
+        },
+        "aggressive_plus_10": {
+          "games": 101,
+          "wins": 70,
+          "losses": 31,
+          "accuracy": 0.693069,
+          "brier": 0.192975,
+          "log_loss": 0.567254,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 101,
+          "wins": 70,
+          "losses": 31,
+          "accuracy": 0.693069,
+          "brier": 0.197777,
+          "log_loss": 0.581339,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 101,
+          "wins": 69,
+          "losses": 32,
+          "accuracy": 0.683168,
+          "brier": 0.205072,
+          "log_loss": 0.601318,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        }
+      }
+    },
+    "2025": {
+      "all": {
+        "baseline": {
+          "games": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184023,
+          "log_loss": 0.537878,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.18518,
+          "log_loss": 0.541692,
+          "flips": 9,
+          "fixed": 5,
+          "broken": 4
+        },
+        "conservative_minus_20": {
+          "games": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.18729,
+          "log_loss": 0.549348,
+          "flips": 13,
+          "fixed": 7,
+          "broken": 6
+        },
+        "half_current_weight": {
+          "games": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.189175,
+          "log_loss": 0.556228,
+          "flips": 19,
+          "fixed": 10,
+          "broken": 9
+        },
+        "aggressive_plus_10": {
+          "games": 296,
+          "wins": 208,
+          "losses": 88,
+          "accuracy": 0.702703,
+          "brier": 0.184104,
+          "log_loss": 0.538271,
+          "flips": 11,
+          "fixed": 5,
+          "broken": 6
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 296,
+          "wins": 211,
+          "losses": 85,
+          "accuracy": 0.712838,
+          "brier": 0.185547,
+          "log_loss": 0.544137,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.186257,
+          "log_loss": 0.546447,
+          "flips": 9,
+          "fixed": 5,
+          "broken": 4
+        }
+      },
+      "any_missing_team_snapshot": {
+        "baseline": {
+          "games": 83,
+          "wins": 59,
+          "losses": 24,
+          "accuracy": 0.710843,
+          "brier": 0.17286,
+          "log_loss": 0.510964,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 83,
+          "wins": 61,
+          "losses": 22,
+          "accuracy": 0.73494,
+          "brier": 0.174708,
+          "log_loss": 0.518142,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "conservative_minus_20": {
+          "games": 83,
+          "wins": 61,
+          "losses": 22,
+          "accuracy": 0.73494,
+          "brier": 0.176792,
+          "log_loss": 0.527583,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "half_current_weight": {
+          "games": 83,
+          "wins": 61,
+          "losses": 22,
+          "accuracy": 0.73494,
+          "brier": 0.176242,
+          "log_loss": 0.524576,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "aggressive_plus_10": {
+          "games": 83,
+          "wins": 58,
+          "losses": 25,
+          "accuracy": 0.698795,
+          "brier": 0.171403,
+          "log_loss": 0.506371,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 83,
+          "wins": 61,
+          "losses": 22,
+          "accuracy": 0.73494,
+          "brier": 0.178293,
+          "log_loss": 0.533285,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 83,
+          "wins": 61,
+          "losses": 22,
+          "accuracy": 0.73494,
+          "brier": 0.17855,
+          "log_loss": 0.535099,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        }
+      },
+      "both_team_snapshots_present": {
+        "baseline": {
+          "games": 213,
+          "wins": 150,
+          "losses": 63,
+          "accuracy": 0.704225,
+          "brier": 0.188373,
+          "log_loss": 0.548366,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 213,
+          "wins": 149,
+          "losses": 64,
+          "accuracy": 0.699531,
+          "brier": 0.189261,
+          "log_loss": 0.550869,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "conservative_minus_20": {
+          "games": 213,
+          "wins": 149,
+          "losses": 64,
+          "accuracy": 0.699531,
+          "brier": 0.191381,
+          "log_loss": 0.557829,
+          "flips": 11,
+          "fixed": 5,
+          "broken": 6
+        },
+        "half_current_weight": {
+          "games": 213,
+          "wins": 149,
+          "losses": 64,
+          "accuracy": 0.699531,
+          "brier": 0.194214,
+          "log_loss": 0.568562,
+          "flips": 17,
+          "fixed": 8,
+          "broken": 9
+        },
+        "aggressive_plus_10": {
+          "games": 213,
+          "wins": 150,
+          "losses": 63,
+          "accuracy": 0.704225,
+          "brier": 0.189052,
+          "log_loss": 0.550701,
+          "flips": 10,
+          "fixed": 5,
+          "broken": 5
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 213,
+          "wins": 150,
+          "losses": 63,
+          "accuracy": 0.704225,
+          "brier": 0.188373,
+          "log_loss": 0.548366,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 213,
+          "wins": 149,
+          "losses": 64,
+          "accuracy": 0.699531,
+          "brier": 0.189261,
+          "log_loss": 0.550869,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        }
+      },
+      "any_missing_adjusted_epa": {
+        "baseline": {
+          "games": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.1849,
+          "log_loss": 0.538833,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.188474,
+          "log_loss": 0.550793,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "half_current_weight": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.189729,
+          "log_loss": 0.554959,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "aggressive_plus_10": {
+          "games": 155,
+          "wins": 109,
+          "losses": 46,
+          "accuracy": 0.703226,
+          "brier": 0.178912,
+          "log_loss": 0.52502,
+          "flips": 5,
+          "fixed": 2,
+          "broken": 3
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 155,
+          "wins": 112,
+          "losses": 43,
+          "accuracy": 0.722581,
+          "brier": 0.184492,
+          "log_loss": 0.542066,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.186957,
+          "log_loss": 0.547914,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        }
+      },
+      "any_three_plus_missing_core_metrics": {
+        "baseline": {
+          "games": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.1849,
+          "log_loss": 0.538833,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.188474,
+          "log_loss": 0.550793,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "half_current_weight": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.189729,
+          "log_loss": 0.554959,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "aggressive_plus_10": {
+          "games": 155,
+          "wins": 109,
+          "losses": 46,
+          "accuracy": 0.703226,
+          "brier": 0.178912,
+          "log_loss": 0.52502,
+          "flips": 5,
+          "fixed": 2,
+          "broken": 3
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 155,
+          "wins": 112,
+          "losses": 43,
+          "accuracy": 0.722581,
+          "brier": 0.184492,
+          "log_loss": 0.542066,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.186957,
+          "log_loss": 0.547914,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        }
+      },
+      "either_team_fewer_than_2_prior_fbs": {
+        "baseline": {
+          "games": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.1849,
+          "log_loss": 0.538833,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.188474,
+          "log_loss": 0.550793,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "half_current_weight": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.189729,
+          "log_loss": 0.554959,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "aggressive_plus_10": {
+          "games": 155,
+          "wins": 109,
+          "losses": 46,
+          "accuracy": 0.703226,
+          "brier": 0.178912,
+          "log_loss": 0.52502,
+          "flips": 5,
+          "fixed": 2,
+          "broken": 3
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 155,
+          "wins": 112,
+          "losses": 43,
+          "accuracy": 0.722581,
+          "brier": 0.184492,
+          "log_loss": 0.542066,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.186957,
+          "log_loss": 0.547914,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        }
+      },
+      "both_teams_at_least_2_prior_fbs": {
+        "baseline": {
+          "games": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.186707,
+          "log_loss": 0.546413,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.185489,
+          "log_loss": 0.544835,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.185988,
+          "log_loss": 0.54776,
+          "flips": 8,
+          "fixed": 4,
+          "broken": 4
+        },
+        "half_current_weight": {
+          "games": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.188565,
+          "log_loss": 0.557622,
+          "flips": 14,
+          "fixed": 7,
+          "broken": 7
+        },
+        "aggressive_plus_10": {
+          "games": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.18981,
+          "log_loss": 0.552837,
+          "flips": 6,
+          "fixed": 3,
+          "broken": 3
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.186707,
+          "log_loss": 0.546413,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.185489,
+          "log_loss": 0.544835,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        }
+      },
+      "week1_2": {
+        "baseline": {
+          "games": 98,
+          "wins": 72,
+          "losses": 26,
+          "accuracy": 0.734694,
+          "brier": 0.163319,
+          "log_loss": 0.484788,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 98,
+          "wins": 74,
+          "losses": 24,
+          "accuracy": 0.755102,
+          "brier": 0.164703,
+          "log_loss": 0.490022,
+          "flips": 4,
+          "fixed": 3,
+          "broken": 1
+        },
+        "conservative_minus_20": {
+          "games": 98,
+          "wins": 74,
+          "losses": 24,
+          "accuracy": 0.755102,
+          "brier": 0.16638,
+          "log_loss": 0.497466,
+          "flips": 4,
+          "fixed": 3,
+          "broken": 1
+        },
+        "half_current_weight": {
+          "games": 98,
+          "wins": 74,
+          "losses": 24,
+          "accuracy": 0.755102,
+          "brier": 0.165896,
+          "log_loss": 0.494881,
+          "flips": 4,
+          "fixed": 3,
+          "broken": 1
+        },
+        "aggressive_plus_10": {
+          "games": 98,
+          "wins": 71,
+          "losses": 27,
+          "accuracy": 0.72449,
+          "brier": 0.162369,
+          "log_loss": 0.482056,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 98,
+          "wins": 74,
+          "losses": 24,
+          "accuracy": 0.755102,
+          "brier": 0.168365,
+          "log_loss": 0.504586,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 98,
+          "wins": 74,
+          "losses": 24,
+          "accuracy": 0.755102,
+          "brier": 0.168316,
+          "log_loss": 0.505108,
+          "flips": 4,
+          "fixed": 3,
+          "broken": 1
+        }
+      },
+      "week3_4": {
+        "baseline": {
+          "games": 97,
+          "wins": 67,
+          "losses": 30,
+          "accuracy": 0.690722,
+          "brier": 0.194687,
+          "log_loss": 0.560604,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 97,
+          "wins": 66,
+          "losses": 31,
+          "accuracy": 0.680412,
+          "brier": 0.198323,
+          "log_loss": 0.567628,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "conservative_minus_20": {
+          "games": 97,
+          "wins": 67,
+          "losses": 30,
+          "accuracy": 0.690722,
+          "brier": 0.202592,
+          "log_loss": 0.578872,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "half_current_weight": {
+          "games": 97,
+          "wins": 67,
+          "losses": 30,
+          "accuracy": 0.690722,
+          "brier": 0.20524,
+          "log_loss": 0.587803,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "aggressive_plus_10": {
+          "games": 97,
+          "wins": 67,
+          "losses": 30,
+          "accuracy": 0.690722,
+          "brier": 0.192305,
+          "log_loss": 0.55837,
+          "flips": 6,
+          "fixed": 3,
+          "broken": 3
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 97,
+          "wins": 67,
+          "losses": 30,
+          "accuracy": 0.690722,
+          "brier": 0.194238,
+          "log_loss": 0.559702,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 97,
+          "wins": 66,
+          "losses": 31,
+          "accuracy": 0.680412,
+          "brier": 0.19796,
+          "log_loss": 0.566896,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        }
+      },
+      "week5_6": {
+        "baseline": {
+          "games": 101,
+          "wins": 70,
+          "losses": 31,
+          "accuracy": 0.693069,
+          "brier": 0.193872,
+          "log_loss": 0.567565,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 101,
+          "wins": 70,
+          "losses": 31,
+          "accuracy": 0.693069,
+          "brier": 0.192427,
+          "log_loss": 0.566919,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 101,
+          "wins": 69,
+          "losses": 32,
+          "accuracy": 0.683168,
+          "brier": 0.192883,
+          "log_loss": 0.571334,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "half_current_weight": {
+          "games": 101,
+          "wins": 69,
+          "losses": 32,
+          "accuracy": 0.683168,
+          "brier": 0.196333,
+          "log_loss": 0.585427,
+          "flips": 13,
+          "fixed": 6,
+          "broken": 7
+        },
+        "aggressive_plus_10": {
+          "games": 101,
+          "wins": 70,
+          "losses": 31,
+          "accuracy": 0.693069,
+          "brier": 0.197315,
+          "log_loss": 0.573513,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 101,
+          "wins": 70,
+          "losses": 31,
+          "accuracy": 0.693069,
+          "brier": 0.193872,
+          "log_loss": 0.567565,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 101,
+          "wins": 70,
+          "losses": 31,
+          "accuracy": 0.693069,
+          "brier": 0.192427,
+          "log_loss": 0.566919,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        }
+      }
+    },
+    "2026": {
+      "all": {
+        "baseline": {
+          "games": 329,
+          "wins": 242,
+          "losses": 87,
+          "accuracy": 0.735562,
+          "brier": 0.17117,
+          "log_loss": 0.512365,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 329,
+          "wins": 243,
+          "losses": 86,
+          "accuracy": 0.738602,
+          "brier": 0.169882,
+          "log_loss": 0.508776,
+          "flips": 9,
+          "fixed": 5,
+          "broken": 4
+        },
+        "conservative_minus_20": {
+          "games": 329,
+          "wins": 243,
+          "losses": 86,
+          "accuracy": 0.738602,
+          "brier": 0.169778,
+          "log_loss": 0.508619,
+          "flips": 13,
+          "fixed": 7,
+          "broken": 6
+        },
+        "half_current_weight": {
+          "games": 329,
+          "wins": 243,
+          "losses": 86,
+          "accuracy": 0.738602,
+          "brier": 0.170923,
+          "log_loss": 0.510332,
+          "flips": 19,
+          "fixed": 10,
+          "broken": 9
+        },
+        "aggressive_plus_10": {
+          "games": 329,
+          "wins": 240,
+          "losses": 89,
+          "accuracy": 0.729483,
+          "brier": 0.173823,
+          "log_loss": 0.519646,
+          "flips": 10,
+          "fixed": 4,
+          "broken": 6
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 329,
+          "wins": 243,
+          "losses": 86,
+          "accuracy": 0.738602,
+          "brier": 0.170753,
+          "log_loss": 0.512697,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 329,
+          "wins": 243,
+          "losses": 86,
+          "accuracy": 0.738602,
+          "brier": 0.169683,
+          "log_loss": 0.509419,
+          "flips": 9,
+          "fixed": 5,
+          "broken": 4
+        }
+      },
+      "any_missing_team_snapshot": {
+        "baseline": {
+          "games": 88,
+          "wins": 73,
+          "losses": 15,
+          "accuracy": 0.829545,
+          "brier": 0.125353,
+          "log_loss": 0.40151,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 88,
+          "wins": 74,
+          "losses": 14,
+          "accuracy": 0.840909,
+          "brier": 0.125372,
+          "log_loss": 0.402814,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_20": {
+          "games": 88,
+          "wins": 74,
+          "losses": 14,
+          "accuracy": 0.840909,
+          "brier": 0.126198,
+          "log_loss": 0.406744,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "half_current_weight": {
+          "games": 88,
+          "wins": 74,
+          "losses": 14,
+          "accuracy": 0.840909,
+          "brier": 0.125774,
+          "log_loss": 0.404793,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "aggressive_plus_10": {
+          "games": 88,
+          "wins": 73,
+          "losses": 15,
+          "accuracy": 0.829545,
+          "brier": 0.126291,
+          "log_loss": 0.403171,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 88,
+          "wins": 74,
+          "losses": 14,
+          "accuracy": 0.840909,
+          "brier": 0.123796,
+          "log_loss": 0.402752,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 88,
+          "wins": 74,
+          "losses": 14,
+          "accuracy": 0.840909,
+          "brier": 0.124625,
+          "log_loss": 0.405219,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        }
+      },
+      "both_team_snapshots_present": {
+        "baseline": {
+          "games": 241,
+          "wins": 169,
+          "losses": 72,
+          "accuracy": 0.701245,
+          "brier": 0.187899,
+          "log_loss": 0.552843,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 241,
+          "wins": 169,
+          "losses": 72,
+          "accuracy": 0.701245,
+          "brier": 0.186135,
+          "log_loss": 0.547467,
+          "flips": 8,
+          "fixed": 4,
+          "broken": 4
+        },
+        "conservative_minus_20": {
+          "games": 241,
+          "wins": 169,
+          "losses": 72,
+          "accuracy": 0.701245,
+          "brier": 0.185691,
+          "log_loss": 0.545818,
+          "flips": 12,
+          "fixed": 6,
+          "broken": 6
+        },
+        "half_current_weight": {
+          "games": 241,
+          "wins": 169,
+          "losses": 72,
+          "accuracy": 0.701245,
+          "brier": 0.187409,
+          "log_loss": 0.548869,
+          "flips": 18,
+          "fixed": 9,
+          "broken": 9
+        },
+        "aggressive_plus_10": {
+          "games": 241,
+          "wins": 167,
+          "losses": 74,
+          "accuracy": 0.692946,
+          "brier": 0.19118,
+          "log_loss": 0.562176,
+          "flips": 10,
+          "fixed": 4,
+          "broken": 6
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 241,
+          "wins": 169,
+          "losses": 72,
+          "accuracy": 0.701245,
+          "brier": 0.187899,
+          "log_loss": 0.552843,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 241,
+          "wins": 169,
+          "losses": 72,
+          "accuracy": 0.701245,
+          "brier": 0.186135,
+          "log_loss": 0.547467,
+          "flips": 8,
+          "fixed": 4,
+          "broken": 4
+        }
+      },
+      "any_missing_adjusted_epa": {
+        "baseline": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144642,
+          "log_loss": 0.44904,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.143376,
+          "log_loss": 0.447604,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "conservative_minus_20": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.142933,
+          "log_loss": 0.449091,
+          "flips": 3,
+          "fixed": 2,
+          "broken": 1
+        },
+        "half_current_weight": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.142944,
+          "log_loss": 0.449069,
+          "flips": 3,
+          "fixed": 2,
+          "broken": 1
+        },
+        "aggressive_plus_10": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.147012,
+          "log_loss": 0.453757,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.143747,
+          "log_loss": 0.449755,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.142946,
+          "log_loss": 0.448987,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        }
+      },
+      "any_three_plus_missing_core_metrics": {
+        "baseline": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144642,
+          "log_loss": 0.44904,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.143376,
+          "log_loss": 0.447604,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "conservative_minus_20": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.142933,
+          "log_loss": 0.449091,
+          "flips": 3,
+          "fixed": 2,
+          "broken": 1
+        },
+        "half_current_weight": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.142944,
+          "log_loss": 0.449069,
+          "flips": 3,
+          "fixed": 2,
+          "broken": 1
+        },
+        "aggressive_plus_10": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.147012,
+          "log_loss": 0.453757,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.143747,
+          "log_loss": 0.449755,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.142946,
+          "log_loss": 0.448987,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        }
+      },
+      "either_team_fewer_than_2_prior_fbs": {
+        "baseline": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144642,
+          "log_loss": 0.44904,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.143376,
+          "log_loss": 0.447604,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "conservative_minus_20": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.142933,
+          "log_loss": 0.449091,
+          "flips": 3,
+          "fixed": 2,
+          "broken": 1
+        },
+        "half_current_weight": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.142944,
+          "log_loss": 0.449069,
+          "flips": 3,
+          "fixed": 2,
+          "broken": 1
+        },
+        "aggressive_plus_10": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.147012,
+          "log_loss": 0.453757,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 153,
+          "wins": 120,
+          "losses": 33,
+          "accuracy": 0.784314,
+          "brier": 0.143747,
+          "log_loss": 0.449755,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.142946,
+          "log_loss": 0.448987,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        }
+      },
+      "both_teams_at_least_2_prior_fbs": {
+        "baseline": {
+          "games": 176,
+          "wins": 123,
+          "losses": 53,
+          "accuracy": 0.698864,
+          "brier": 0.19423,
+          "log_loss": 0.567414,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 176,
+          "wins": 124,
+          "losses": 52,
+          "accuracy": 0.704545,
+          "brier": 0.192925,
+          "log_loss": 0.561953,
+          "flips": 7,
+          "fixed": 4,
+          "broken": 3
+        },
+        "conservative_minus_20": {
+          "games": 176,
+          "wins": 123,
+          "losses": 53,
+          "accuracy": 0.698864,
+          "brier": 0.193114,
+          "log_loss": 0.560367,
+          "flips": 10,
+          "fixed": 5,
+          "broken": 5
+        },
+        "half_current_weight": {
+          "games": 176,
+          "wins": 123,
+          "losses": 53,
+          "accuracy": 0.698864,
+          "brier": 0.195246,
+          "log_loss": 0.563588,
+          "flips": 16,
+          "fixed": 8,
+          "broken": 8
+        },
+        "aggressive_plus_10": {
+          "games": 176,
+          "wins": 121,
+          "losses": 55,
+          "accuracy": 0.6875,
+          "brier": 0.197131,
+          "log_loss": 0.576924,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 176,
+          "wins": 123,
+          "losses": 53,
+          "accuracy": 0.698864,
+          "brier": 0.19423,
+          "log_loss": 0.567414,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 176,
+          "wins": 124,
+          "losses": 52,
+          "accuracy": 0.704545,
+          "brier": 0.192925,
+          "log_loss": 0.561953,
+          "flips": 7,
+          "fixed": 4,
+          "broken": 3
+        }
+      },
+      "week1_2": {
+        "baseline": {
+          "games": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.14809,
+          "log_loss": 0.461921,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 100,
+          "wins": 77,
+          "losses": 23,
+          "accuracy": 0.77,
+          "brier": 0.147429,
+          "log_loss": 0.464381,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_20": {
+          "games": 100,
+          "wins": 78,
+          "losses": 22,
+          "accuracy": 0.78,
+          "brier": 0.147473,
+          "log_loss": 0.469378,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "half_current_weight": {
+          "games": 100,
+          "wins": 78,
+          "losses": 22,
+          "accuracy": 0.78,
+          "brier": 0.147213,
+          "log_loss": 0.467918,
+          "flips": 2,
+          "fixed": 2,
+          "broken": 0
+        },
+        "aggressive_plus_10": {
+          "games": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.149548,
+          "log_loss": 0.462305,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 100,
+          "wins": 77,
+          "losses": 23,
+          "accuracy": 0.77,
+          "brier": 0.147022,
+          "log_loss": 0.463653,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 100,
+          "wins": 77,
+          "losses": 23,
+          "accuracy": 0.77,
+          "brier": 0.146985,
+          "log_loss": 0.466965,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        }
+      },
+      "week3_4": {
+        "baseline": {
+          "games": 115,
+          "wins": 87,
+          "losses": 28,
+          "accuracy": 0.756522,
+          "brier": 0.15738,
+          "log_loss": 0.473243,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 115,
+          "wins": 87,
+          "losses": 28,
+          "accuracy": 0.756522,
+          "brier": 0.155887,
+          "log_loss": 0.467792,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 115,
+          "wins": 88,
+          "losses": 27,
+          "accuracy": 0.765217,
+          "brier": 0.155671,
+          "log_loss": 0.465782,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "half_current_weight": {
+          "games": 115,
+          "wins": 89,
+          "losses": 26,
+          "accuracy": 0.773913,
+          "brier": 0.157097,
+          "log_loss": 0.469307,
+          "flips": 6,
+          "fixed": 4,
+          "broken": 2
+        },
+        "aggressive_plus_10": {
+          "games": 115,
+          "wins": 87,
+          "losses": 28,
+          "accuracy": 0.756522,
+          "brier": 0.160586,
+          "log_loss": 0.482532,
+          "flips": 6,
+          "fixed": 3,
+          "broken": 3
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 115,
+          "wins": 87,
+          "losses": 28,
+          "accuracy": 0.756522,
+          "brier": 0.157117,
+          "log_loss": 0.472687,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 115,
+          "wins": 87,
+          "losses": 28,
+          "accuracy": 0.756522,
+          "brier": 0.155702,
+          "log_loss": 0.467385,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        }
+      },
+      "week5_6": {
+        "baseline": {
+          "games": 114,
+          "wins": 79,
+          "losses": 35,
+          "accuracy": 0.692982,
+          "brier": 0.205326,
+          "log_loss": 0.596078,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10": {
+          "games": 114,
+          "wins": 79,
+          "losses": 35,
+          "accuracy": 0.692982,
+          "brier": 0.203697,
+          "log_loss": 0.589062,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        },
+        "conservative_minus_20": {
+          "games": 114,
+          "wins": 77,
+          "losses": 37,
+          "accuracy": 0.675439,
+          "brier": 0.203573,
+          "log_loss": 0.586252,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "half_current_weight": {
+          "games": 114,
+          "wins": 76,
+          "losses": 38,
+          "accuracy": 0.666667,
+          "brier": 0.205669,
+          "log_loss": 0.588921,
+          "flips": 11,
+          "fixed": 4,
+          "broken": 7
+        },
+        "aggressive_plus_10": {
+          "games": 114,
+          "wins": 77,
+          "losses": 37,
+          "accuracy": 0.675439,
+          "brier": 0.208472,
+          "log_loss": 0.607384,
+          "flips": 4,
+          "fixed": 1,
+          "broken": 3
+        },
+        "preserve_prior_when_no_snapshot": {
+          "games": 114,
+          "wins": 79,
+          "losses": 35,
+          "accuracy": 0.692982,
+          "brier": 0.205326,
+          "log_loss": 0.596078,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "conservative_minus_10_and_preserve_prior": {
+          "games": 114,
+          "wins": 79,
+          "losses": 35,
+          "accuracy": 0.692982,
+          "brier": 0.203697,
+          "log_loss": 0.589062,
+          "flips": 4,
+          "fixed": 2,
+          "broken": 2
+        }
+      }
+    }
+  },
+  "frozen_2026_weeks5_6": {
+    "all": {
+      "baseline": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207327,
+        "log_loss": 0.599257,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      },
+      "conservative_minus_20": {
+        "games": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.207202,
+        "log_loss": 0.596433,
+        "flips": 6,
+        "fixed": 2,
+        "broken": 4
+      },
+      "half_current_weight": {
+        "games": 112,
+        "wins": 74,
+        "losses": 38,
+        "accuracy": 0.660714,
+        "brier": 0.209338,
+        "log_loss": 0.599197,
+        "flips": 11,
+        "fixed": 4,
+        "broken": 7
+      },
+      "aggressive_plus_10": {
+        "games": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.212183,
+        "log_loss": 0.617819,
+        "flips": 4,
+        "fixed": 1,
+        "broken": 3
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207327,
+        "log_loss": 0.599257,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      }
+    },
+    "both_team_snapshots_present": {
+      "baseline": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207327,
+        "log_loss": 0.599257,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      },
+      "conservative_minus_20": {
+        "games": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.207202,
+        "log_loss": 0.596433,
+        "flips": 6,
+        "fixed": 2,
+        "broken": 4
+      },
+      "half_current_weight": {
+        "games": 112,
+        "wins": 74,
+        "losses": 38,
+        "accuracy": 0.660714,
+        "brier": 0.209338,
+        "log_loss": 0.599197,
+        "flips": 11,
+        "fixed": 4,
+        "broken": 7
+      },
+      "aggressive_plus_10": {
+        "games": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.212183,
+        "log_loss": 0.617819,
+        "flips": 4,
+        "fixed": 1,
+        "broken": 3
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207327,
+        "log_loss": 0.599257,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      }
+    },
+    "both_teams_at_least_2_prior_fbs": {
+      "baseline": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207327,
+        "log_loss": 0.599257,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      },
+      "conservative_minus_20": {
+        "games": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.207202,
+        "log_loss": 0.596433,
+        "flips": 6,
+        "fixed": 2,
+        "broken": 4
+      },
+      "half_current_weight": {
+        "games": 112,
+        "wins": 74,
+        "losses": 38,
+        "accuracy": 0.660714,
+        "brier": 0.209338,
+        "log_loss": 0.599197,
+        "flips": 11,
+        "fixed": 4,
+        "broken": 7
+      },
+      "aggressive_plus_10": {
+        "games": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.212183,
+        "log_loss": 0.617819,
+        "flips": 4,
+        "fixed": 1,
+        "broken": 3
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207327,
+        "log_loss": 0.599257,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      }
+    },
+    "week5_6": {
+      "baseline": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207327,
+        "log_loss": 0.599257,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      },
+      "conservative_minus_20": {
+        "games": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.207202,
+        "log_loss": 0.596433,
+        "flips": 6,
+        "fixed": 2,
+        "broken": 4
+      },
+      "half_current_weight": {
+        "games": 112,
+        "wins": 74,
+        "losses": 38,
+        "accuracy": 0.660714,
+        "brier": 0.209338,
+        "log_loss": 0.599197,
+        "flips": 11,
+        "fixed": 4,
+        "broken": 7
+      },
+      "aggressive_plus_10": {
+        "games": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.212183,
+        "log_loss": 0.617819,
+        "flips": 4,
+        "fixed": 1,
+        "broken": 3
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207327,
+        "log_loss": 0.599257,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      }
+    }
+  },
+  "combined_2024_2025": {
+    "all": {
+      "baseline": {
+        "games": 591,
+        "wins": 420,
+        "losses": 171,
+        "accuracy": 0.71066,
+        "brier": 0.181931,
+        "log_loss": 0.532294,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 591,
+        "wins": 423,
+        "losses": 168,
+        "accuracy": 0.715736,
+        "brier": 0.184167,
+        "log_loss": 0.539002,
+        "flips": 19,
+        "fixed": 11,
+        "broken": 8
+      },
+      "conservative_minus_20": {
+        "games": 591,
+        "wins": 420,
+        "losses": 171,
+        "accuracy": 0.71066,
+        "brier": 0.187422,
+        "log_loss": 0.549325,
+        "flips": 28,
+        "fixed": 14,
+        "broken": 14
+      },
+      "half_current_weight": {
+        "games": 591,
+        "wins": 414,
+        "losses": 177,
+        "accuracy": 0.700508,
+        "brier": 0.190751,
+        "log_loss": 0.5592,
+        "flips": 42,
+        "fixed": 18,
+        "broken": 24
+      },
+      "aggressive_plus_10": {
+        "games": 591,
+        "wins": 420,
+        "losses": 171,
+        "accuracy": 0.71066,
+        "brier": 0.180896,
+        "log_loss": 0.529482,
+        "flips": 14,
+        "fixed": 7,
+        "broken": 7
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 591,
+        "wins": 422,
+        "losses": 169,
+        "accuracy": 0.714044,
+        "brier": 0.183638,
+        "log_loss": 0.539052,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 591,
+        "wins": 423,
+        "losses": 168,
+        "accuracy": 0.715736,
+        "brier": 0.185316,
+        "log_loss": 0.544012,
+        "flips": 21,
+        "fixed": 12,
+        "broken": 9
+      }
+    },
+    "any_missing_team_snapshot": {
+      "baseline": {
+        "games": 167,
+        "wins": 121,
+        "losses": 46,
+        "accuracy": 0.724551,
+        "brier": 0.171011,
+        "log_loss": 0.504175,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 167,
+        "wins": 123,
+        "losses": 44,
+        "accuracy": 0.736527,
+        "brier": 0.174071,
+        "log_loss": 0.51393,
+        "flips": 2,
+        "fixed": 2,
+        "broken": 0
+      },
+      "conservative_minus_20": {
+        "games": 167,
+        "wins": 122,
+        "losses": 45,
+        "accuracy": 0.730539,
+        "brier": 0.177462,
+        "log_loss": 0.526266,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "half_current_weight": {
+        "games": 167,
+        "wins": 122,
+        "losses": 45,
+        "accuracy": 0.730539,
+        "brier": 0.17651,
+        "log_loss": 0.522063,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "aggressive_plus_10": {
+        "games": 167,
+        "wins": 121,
+        "losses": 46,
+        "accuracy": 0.724551,
+        "brier": 0.1685,
+        "log_loss": 0.497423,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 167,
+        "wins": 123,
+        "losses": 44,
+        "accuracy": 0.736527,
+        "brier": 0.177051,
+        "log_loss": 0.528089,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 167,
+        "wins": 123,
+        "losses": 44,
+        "accuracy": 0.736527,
+        "brier": 0.178136,
+        "log_loss": 0.53166,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      }
+    },
+    "both_team_snapshots_present": {
+      "baseline": {
+        "games": 424,
+        "wins": 299,
+        "losses": 125,
+        "accuracy": 0.705189,
+        "brier": 0.186233,
+        "log_loss": 0.543369,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 424,
+        "wins": 300,
+        "losses": 124,
+        "accuracy": 0.707547,
+        "brier": 0.188144,
+        "log_loss": 0.548877,
+        "flips": 17,
+        "fixed": 9,
+        "broken": 8
+      },
+      "conservative_minus_20": {
+        "games": 424,
+        "wins": 298,
+        "losses": 126,
+        "accuracy": 0.70283,
+        "brier": 0.191346,
+        "log_loss": 0.558407,
+        "flips": 25,
+        "fixed": 12,
+        "broken": 13
+      },
+      "half_current_weight": {
+        "games": 424,
+        "wins": 292,
+        "losses": 132,
+        "accuracy": 0.688679,
+        "brier": 0.19636,
+        "log_loss": 0.573827,
+        "flips": 39,
+        "fixed": 16,
+        "broken": 23
+      },
+      "aggressive_plus_10": {
+        "games": 424,
+        "wins": 299,
+        "losses": 125,
+        "accuracy": 0.705189,
+        "brier": 0.185778,
+        "log_loss": 0.542109,
+        "flips": 12,
+        "fixed": 6,
+        "broken": 6
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 424,
+        "wins": 299,
+        "losses": 125,
+        "accuracy": 0.705189,
+        "brier": 0.186233,
+        "log_loss": 0.543369,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 424,
+        "wins": 300,
+        "losses": 124,
+        "accuracy": 0.707547,
+        "brier": 0.188144,
+        "log_loss": 0.548877,
+        "flips": 17,
+        "fixed": 9,
+        "broken": 8
+      }
+    },
+    "any_missing_adjusted_epa": {
+      "baseline": {
+        "games": 313,
+        "wins": 228,
+        "losses": 85,
+        "accuracy": 0.728435,
+        "brier": 0.175928,
+        "log_loss": 0.514152,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 313,
+        "wins": 230,
+        "losses": 83,
+        "accuracy": 0.734824,
+        "brier": 0.178304,
+        "log_loss": 0.520873,
+        "flips": 10,
+        "fixed": 6,
+        "broken": 4
+      },
+      "conservative_minus_20": {
+        "games": 313,
+        "wins": 228,
+        "losses": 85,
+        "accuracy": 0.728435,
+        "brier": 0.181369,
+        "log_loss": 0.531053,
+        "flips": 12,
+        "fixed": 6,
+        "broken": 6
+      },
+      "half_current_weight": {
+        "games": 313,
+        "wins": 227,
+        "losses": 86,
+        "accuracy": 0.72524,
+        "brier": 0.182048,
+        "log_loss": 0.532699,
+        "flips": 13,
+        "fixed": 6,
+        "broken": 7
+      },
+      "aggressive_plus_10": {
+        "games": 313,
+        "wins": 227,
+        "losses": 86,
+        "accuracy": 0.72524,
+        "brier": 0.174477,
+        "log_loss": 0.511222,
+        "flips": 7,
+        "fixed": 3,
+        "broken": 4
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 313,
+        "wins": 230,
+        "losses": 83,
+        "accuracy": 0.734824,
+        "brier": 0.179151,
+        "log_loss": 0.526911,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 313,
+        "wins": 230,
+        "losses": 83,
+        "accuracy": 0.734824,
+        "brier": 0.180472,
+        "log_loss": 0.530333,
+        "flips": 12,
+        "fixed": 7,
+        "broken": 5
+      }
+    },
+    "any_three_plus_missing_core_metrics": {
+      "baseline": {
+        "games": 313,
+        "wins": 228,
+        "losses": 85,
+        "accuracy": 0.728435,
+        "brier": 0.175928,
+        "log_loss": 0.514152,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 313,
+        "wins": 230,
+        "losses": 83,
+        "accuracy": 0.734824,
+        "brier": 0.178304,
+        "log_loss": 0.520873,
+        "flips": 10,
+        "fixed": 6,
+        "broken": 4
+      },
+      "conservative_minus_20": {
+        "games": 313,
+        "wins": 228,
+        "losses": 85,
+        "accuracy": 0.728435,
+        "brier": 0.181369,
+        "log_loss": 0.531053,
+        "flips": 12,
+        "fixed": 6,
+        "broken": 6
+      },
+      "half_current_weight": {
+        "games": 313,
+        "wins": 227,
+        "losses": 86,
+        "accuracy": 0.72524,
+        "brier": 0.182048,
+        "log_loss": 0.532699,
+        "flips": 13,
+        "fixed": 6,
+        "broken": 7
+      },
+      "aggressive_plus_10": {
+        "games": 313,
+        "wins": 227,
+        "losses": 86,
+        "accuracy": 0.72524,
+        "brier": 0.174477,
+        "log_loss": 0.511222,
+        "flips": 7,
+        "fixed": 3,
+        "broken": 4
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 313,
+        "wins": 230,
+        "losses": 83,
+        "accuracy": 0.734824,
+        "brier": 0.179151,
+        "log_loss": 0.526911,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 313,
+        "wins": 230,
+        "losses": 83,
+        "accuracy": 0.734824,
+        "brier": 0.180472,
+        "log_loss": 0.530333,
+        "flips": 12,
+        "fixed": 7,
+        "broken": 5
+      }
+    },
+    "either_team_fewer_than_2_prior_fbs": {
+      "baseline": {
+        "games": 306,
+        "wins": 224,
+        "losses": 82,
+        "accuracy": 0.732026,
+        "brier": 0.175998,
+        "log_loss": 0.514827,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 306,
+        "wins": 225,
+        "losses": 81,
+        "accuracy": 0.735294,
+        "brier": 0.178447,
+        "log_loss": 0.521674,
+        "flips": 9,
+        "fixed": 5,
+        "broken": 4
+      },
+      "conservative_minus_20": {
+        "games": 306,
+        "wins": 223,
+        "losses": 83,
+        "accuracy": 0.728758,
+        "brier": 0.181547,
+        "log_loss": 0.531929,
+        "flips": 11,
+        "fixed": 5,
+        "broken": 6
+      },
+      "half_current_weight": {
+        "games": 306,
+        "wins": 222,
+        "losses": 84,
+        "accuracy": 0.72549,
+        "brier": 0.182041,
+        "log_loss": 0.533031,
+        "flips": 12,
+        "fixed": 5,
+        "broken": 7
+      },
+      "aggressive_plus_10": {
+        "games": 306,
+        "wins": 223,
+        "losses": 83,
+        "accuracy": 0.728758,
+        "brier": 0.174452,
+        "log_loss": 0.511729,
+        "flips": 7,
+        "fixed": 3,
+        "broken": 4
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 306,
+        "wins": 225,
+        "losses": 81,
+        "accuracy": 0.735294,
+        "brier": 0.179655,
+        "log_loss": 0.528603,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 306,
+        "wins": 224,
+        "losses": 82,
+        "accuracy": 0.732026,
+        "brier": 0.180974,
+        "log_loss": 0.531971,
+        "flips": 10,
+        "fixed": 5,
+        "broken": 5
+      }
+    },
+    "both_teams_at_least_2_prior_fbs": {
+      "baseline": {
+        "games": 285,
+        "wins": 196,
+        "losses": 89,
+        "accuracy": 0.687719,
+        "brier": 0.188302,
+        "log_loss": 0.551049,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 285,
+        "wins": 198,
+        "losses": 87,
+        "accuracy": 0.694737,
+        "brier": 0.190309,
+        "log_loss": 0.557606,
+        "flips": 10,
+        "fixed": 6,
+        "broken": 4
+      },
+      "conservative_minus_20": {
+        "games": 285,
+        "wins": 197,
+        "losses": 88,
+        "accuracy": 0.691228,
+        "brier": 0.19373,
+        "log_loss": 0.568002,
+        "flips": 17,
+        "fixed": 9,
+        "broken": 8
+      },
+      "half_current_weight": {
+        "games": 285,
+        "wins": 192,
+        "losses": 93,
+        "accuracy": 0.673684,
+        "brier": 0.200103,
+        "log_loss": 0.587297,
+        "flips": 30,
+        "fixed": 13,
+        "broken": 17
+      },
+      "aggressive_plus_10": {
+        "games": 285,
+        "wins": 197,
+        "losses": 88,
+        "accuracy": 0.691228,
+        "brier": 0.187814,
+        "log_loss": 0.548542,
+        "flips": 7,
+        "fixed": 4,
+        "broken": 3
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 285,
+        "wins": 197,
+        "losses": 88,
+        "accuracy": 0.691228,
+        "brier": 0.187915,
+        "log_loss": 0.550269,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 285,
+        "wins": 199,
+        "losses": 86,
+        "accuracy": 0.698246,
+        "brier": 0.189978,
+        "log_loss": 0.556939,
+        "flips": 11,
+        "fixed": 7,
+        "broken": 4
+      }
+    },
+    "week1_2": {
+      "baseline": {
+        "games": 186,
+        "wins": 135,
+        "losses": 51,
+        "accuracy": 0.725806,
+        "brier": 0.173599,
+        "log_loss": 0.507297,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 186,
+        "wins": 136,
+        "losses": 50,
+        "accuracy": 0.731183,
+        "brier": 0.176656,
+        "log_loss": 0.516853,
+        "flips": 5,
+        "fixed": 3,
+        "broken": 2
+      },
+      "conservative_minus_20": {
+        "games": 186,
+        "wins": 135,
+        "losses": 51,
+        "accuracy": 0.725806,
+        "brier": 0.180031,
+        "log_loss": 0.528847,
+        "flips": 6,
+        "fixed": 3,
+        "broken": 3
+      },
+      "half_current_weight": {
+        "games": 186,
+        "wins": 135,
+        "losses": 51,
+        "accuracy": 0.725806,
+        "brier": 0.179192,
+        "log_loss": 0.525221,
+        "flips": 6,
+        "fixed": 3,
+        "broken": 3
+      },
+      "aggressive_plus_10": {
+        "games": 186,
+        "wins": 135,
+        "losses": 51,
+        "accuracy": 0.725806,
+        "brier": 0.171027,
+        "log_loss": 0.500523,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 186,
+        "wins": 136,
+        "losses": 50,
+        "accuracy": 0.731183,
+        "brier": 0.180186,
+        "log_loss": 0.531731,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 186,
+        "wins": 135,
+        "losses": 51,
+        "accuracy": 0.725806,
+        "brier": 0.181236,
+        "log_loss": 0.535097,
+        "flips": 6,
+        "fixed": 3,
+        "broken": 3
+      }
+    },
+    "week3_4": {
+      "baseline": {
+        "games": 203,
+        "wins": 146,
+        "losses": 57,
+        "accuracy": 0.719212,
+        "brier": 0.175198,
+        "log_loss": 0.512153,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 203,
+        "wins": 149,
+        "losses": 54,
+        "accuracy": 0.73399,
+        "brier": 0.176074,
+        "log_loss": 0.513465,
+        "flips": 7,
+        "fixed": 5,
+        "broken": 2
+      },
+      "conservative_minus_20": {
+        "games": 203,
+        "wins": 148,
+        "losses": 55,
+        "accuracy": 0.729064,
+        "brier": 0.178089,
+        "log_loss": 0.518906,
+        "flips": 10,
+        "fixed": 6,
+        "broken": 4
+      },
+      "half_current_weight": {
+        "games": 203,
+        "wins": 147,
+        "losses": 56,
+        "accuracy": 0.724138,
+        "brier": 0.180084,
+        "log_loss": 0.525185,
+        "flips": 13,
+        "fixed": 7,
+        "broken": 6
+      },
+      "aggressive_plus_10": {
+        "games": 203,
+        "wins": 145,
+        "losses": 58,
+        "accuracy": 0.714286,
+        "brier": 0.175759,
+        "log_loss": 0.515314,
+        "flips": 7,
+        "fixed": 3,
+        "broken": 4
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 203,
+        "wins": 146,
+        "losses": 57,
+        "accuracy": 0.719212,
+        "brier": 0.174675,
+        "log_loss": 0.510533,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 203,
+        "wins": 149,
+        "losses": 54,
+        "accuracy": 0.73399,
+        "brier": 0.175686,
+        "log_loss": 0.51227,
+        "flips": 7,
+        "fixed": 5,
+        "broken": 2
+      }
+    },
+    "week5_6": {
+      "baseline": {
+        "games": 202,
+        "wins": 139,
+        "losses": 63,
+        "accuracy": 0.688119,
+        "brier": 0.196371,
+        "log_loss": 0.575551,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 202,
+        "wins": 138,
+        "losses": 64,
+        "accuracy": 0.683168,
+        "brier": 0.199217,
+        "log_loss": 0.585059,
+        "flips": 7,
+        "fixed": 3,
+        "broken": 4
+      },
+      "conservative_minus_20": {
+        "games": 202,
+        "wins": 137,
+        "losses": 65,
+        "accuracy": 0.678218,
+        "brier": 0.203608,
+        "log_loss": 0.59875,
+        "flips": 12,
+        "fixed": 5,
+        "broken": 7
+      },
+      "half_current_weight": {
+        "games": 202,
+        "wins": 132,
+        "losses": 70,
+        "accuracy": 0.653465,
+        "brier": 0.212114,
+        "log_loss": 0.62467,
+        "flips": 23,
+        "fixed": 8,
+        "broken": 15
+      },
+      "aggressive_plus_10": {
+        "games": 202,
+        "wins": 140,
+        "losses": 62,
+        "accuracy": 0.693069,
+        "brier": 0.195145,
+        "log_loss": 0.570384,
+        "flips": 5,
+        "fixed": 3,
+        "broken": 2
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 202,
+        "wins": 140,
+        "losses": 62,
+        "accuracy": 0.693069,
+        "brier": 0.195824,
+        "log_loss": 0.574452,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 202,
+        "wins": 139,
+        "losses": 63,
+        "accuracy": 0.688119,
+        "brier": 0.198749,
+        "log_loss": 0.584119,
+        "flips": 8,
+        "fixed": 4,
+        "broken": 4
+      }
+    }
+  },
+  "weekly": {
+    "2024-W1": {
+      "baseline": {
+        "games": 39,
+        "wins": 30,
+        "losses": 9,
+        "accuracy": 0.769231,
+        "brier": 0.165626,
+        "log_loss": 0.484383,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 39,
+        "wins": 30,
+        "losses": 9,
+        "accuracy": 0.769231,
+        "brier": 0.171248,
+        "log_loss": 0.502466,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_20": {
+        "games": 39,
+        "wins": 30,
+        "losses": 9,
+        "accuracy": 0.769231,
+        "brier": 0.176841,
+        "log_loss": 0.523409,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "half_current_weight": {
+        "games": 39,
+        "wins": 30,
+        "losses": 9,
+        "accuracy": 0.769231,
+        "brier": 0.174058,
+        "log_loss": 0.51261,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "aggressive_plus_10": {
+        "games": 39,
+        "wins": 30,
+        "losses": 9,
+        "accuracy": 0.769231,
+        "brier": 0.16019,
+        "log_loss": 0.4697,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 39,
+        "wins": 30,
+        "losses": 9,
+        "accuracy": 0.769231,
+        "brier": 0.182275,
+        "log_loss": 0.546761,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 39,
+        "wins": 30,
+        "losses": 9,
+        "accuracy": 0.769231,
+        "brier": 0.182275,
+        "log_loss": 0.546761,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "2024-W2": {
+      "baseline": {
+        "games": 49,
+        "wins": 33,
+        "losses": 16,
+        "accuracy": 0.673469,
+        "brier": 0.200504,
+        "log_loss": 0.570554,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 49,
+        "wins": 32,
+        "losses": 17,
+        "accuracy": 0.653061,
+        "brier": 0.204867,
+        "log_loss": 0.581967,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 49,
+        "wins": 31,
+        "losses": 18,
+        "accuracy": 0.632653,
+        "brier": 0.209872,
+        "log_loss": 0.595936,
+        "flips": 2,
+        "fixed": 0,
+        "broken": 2
+      },
+      "half_current_weight": {
+        "games": 49,
+        "wins": 31,
+        "losses": 18,
+        "accuracy": 0.632653,
+        "brier": 0.209872,
+        "log_loss": 0.595936,
+        "flips": 2,
+        "fixed": 0,
+        "broken": 2
+      },
+      "aggressive_plus_10": {
+        "games": 49,
+        "wins": 34,
+        "losses": 15,
+        "accuracy": 0.693878,
+        "brier": 0.196969,
+        "log_loss": 0.561992,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 49,
+        "wins": 32,
+        "losses": 17,
+        "accuracy": 0.653061,
+        "brier": 0.202166,
+        "log_loss": 0.574058,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 49,
+        "wins": 31,
+        "losses": 18,
+        "accuracy": 0.632653,
+        "brier": 0.20625,
+        "log_loss": 0.585792,
+        "flips": 2,
+        "fixed": 0,
+        "broken": 2
+      }
+    },
+    "2024-W3": {
+      "baseline": {
+        "games": 52,
+        "wins": 42,
+        "losses": 10,
+        "accuracy": 0.807692,
+        "brier": 0.144041,
+        "log_loss": 0.441979,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 52,
+        "wins": 44,
+        "losses": 8,
+        "accuracy": 0.846154,
+        "brier": 0.140022,
+        "log_loss": 0.432176,
+        "flips": 2,
+        "fixed": 2,
+        "broken": 0
+      },
+      "conservative_minus_20": {
+        "games": 52,
+        "wins": 44,
+        "losses": 8,
+        "accuracy": 0.846154,
+        "brier": 0.138009,
+        "log_loss": 0.427191,
+        "flips": 2,
+        "fixed": 2,
+        "broken": 0
+      },
+      "half_current_weight": {
+        "games": 52,
+        "wins": 43,
+        "losses": 9,
+        "accuracy": 0.826923,
+        "brier": 0.137698,
+        "log_loss": 0.426405,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "aggressive_plus_10": {
+        "games": 52,
+        "wins": 41,
+        "losses": 11,
+        "accuracy": 0.788462,
+        "brier": 0.150124,
+        "log_loss": 0.456871,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 52,
+        "wins": 42,
+        "losses": 10,
+        "accuracy": 0.807692,
+        "brier": 0.142838,
+        "log_loss": 0.437338,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 52,
+        "wins": 44,
+        "losses": 8,
+        "accuracy": 0.846154,
+        "brier": 0.139188,
+        "log_loss": 0.428877,
+        "flips": 2,
+        "fixed": 2,
+        "broken": 0
+      }
+    },
+    "2024-W4": {
+      "baseline": {
+        "games": 54,
+        "wins": 37,
+        "losses": 17,
+        "accuracy": 0.685185,
+        "brier": 0.170192,
+        "log_loss": 0.492697,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 54,
+        "wins": 39,
+        "losses": 15,
+        "accuracy": 0.722222,
+        "brier": 0.170823,
+        "log_loss": 0.494449,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 54,
+        "wins": 37,
+        "losses": 17,
+        "accuracy": 0.685185,
+        "brier": 0.172669,
+        "log_loss": 0.499509,
+        "flips": 6,
+        "fixed": 3,
+        "broken": 3
+      },
+      "half_current_weight": {
+        "games": 54,
+        "wins": 37,
+        "losses": 17,
+        "accuracy": 0.685185,
+        "brier": 0.175712,
+        "log_loss": 0.507825,
+        "flips": 8,
+        "fixed": 4,
+        "broken": 4
+      },
+      "aggressive_plus_10": {
+        "games": 54,
+        "wins": 37,
+        "losses": 17,
+        "accuracy": 0.685185,
+        "brier": 0.17072,
+        "log_loss": 0.494252,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 54,
+        "wins": 37,
+        "losses": 17,
+        "accuracy": 0.685185,
+        "brier": 0.170192,
+        "log_loss": 0.492697,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 54,
+        "wins": 39,
+        "losses": 15,
+        "accuracy": 0.722222,
+        "brier": 0.170823,
+        "log_loss": 0.494449,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      }
+    },
+    "2024-W5": {
+      "baseline": {
+        "games": 52,
+        "wins": 39,
+        "losses": 13,
+        "accuracy": 0.75,
+        "brier": 0.179349,
+        "log_loss": 0.533532,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 52,
+        "wins": 38,
+        "losses": 14,
+        "accuracy": 0.730769,
+        "brier": 0.183936,
+        "log_loss": 0.54554,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 52,
+        "wins": 38,
+        "losses": 14,
+        "accuracy": 0.730769,
+        "brier": 0.18966,
+        "log_loss": 0.560863,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "half_current_weight": {
+        "games": 52,
+        "wins": 36,
+        "losses": 16,
+        "accuracy": 0.692308,
+        "brier": 0.198162,
+        "log_loss": 0.584358,
+        "flips": 3,
+        "fixed": 0,
+        "broken": 3
+      },
+      "aggressive_plus_10": {
+        "games": 52,
+        "wins": 39,
+        "losses": 13,
+        "accuracy": 0.75,
+        "brier": 0.176072,
+        "log_loss": 0.525047,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 52,
+        "wins": 40,
+        "losses": 12,
+        "accuracy": 0.769231,
+        "brier": 0.177224,
+        "log_loss": 0.529262,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 52,
+        "wins": 39,
+        "losses": 13,
+        "accuracy": 0.75,
+        "brier": 0.182119,
+        "log_loss": 0.541887,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      }
+    },
+    "2024-W6": {
+      "baseline": {
+        "games": 49,
+        "wins": 30,
+        "losses": 19,
+        "accuracy": 0.612245,
+        "brier": 0.219587,
+        "log_loss": 0.636605,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 49,
+        "wins": 30,
+        "losses": 19,
+        "accuracy": 0.612245,
+        "brier": 0.22943,
+        "log_loss": 0.664388,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 49,
+        "wins": 30,
+        "losses": 19,
+        "accuracy": 0.612245,
+        "brier": 0.240518,
+        "log_loss": 0.695467,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      },
+      "half_current_weight": {
+        "games": 49,
+        "wins": 27,
+        "losses": 22,
+        "accuracy": 0.55102,
+        "brier": 0.259447,
+        "log_loss": 0.74834,
+        "flips": 7,
+        "fixed": 2,
+        "broken": 5
+      },
+      "aggressive_plus_10": {
+        "games": 49,
+        "wins": 31,
+        "losses": 18,
+        "accuracy": 0.632653,
+        "brier": 0.210913,
+        "log_loss": 0.612046,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 49,
+        "wins": 30,
+        "losses": 19,
+        "accuracy": 0.612245,
+        "brier": 0.219587,
+        "log_loss": 0.636605,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 49,
+        "wins": 30,
+        "losses": 19,
+        "accuracy": 0.612245,
+        "brier": 0.22943,
+        "log_loss": 0.664388,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      }
+    },
+    "2025-W1": {
+      "baseline": {
+        "games": 48,
+        "wins": 36,
+        "losses": 12,
+        "accuracy": 0.75,
+        "brier": 0.166377,
+        "log_loss": 0.500662,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 48,
+        "wins": 36,
+        "losses": 12,
+        "accuracy": 0.75,
+        "brier": 0.168132,
+        "log_loss": 0.508816,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_20": {
+        "games": 48,
+        "wins": 36,
+        "losses": 12,
+        "accuracy": 0.75,
+        "brier": 0.17007,
+        "log_loss": 0.518914,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "half_current_weight": {
+        "games": 48,
+        "wins": 36,
+        "losses": 12,
+        "accuracy": 0.75,
+        "brier": 0.169082,
+        "log_loss": 0.513636,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "aggressive_plus_10": {
+        "games": 48,
+        "wins": 35,
+        "losses": 13,
+        "accuracy": 0.729167,
+        "brier": 0.164881,
+        "log_loss": 0.494701,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 48,
+        "wins": 36,
+        "losses": 12,
+        "accuracy": 0.75,
+        "brier": 0.172142,
+        "log_loss": 0.530737,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 48,
+        "wins": 36,
+        "losses": 12,
+        "accuracy": 0.75,
+        "brier": 0.172142,
+        "log_loss": 0.530737,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "2025-W2": {
+      "baseline": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.160383,
+        "log_loss": 0.469549,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 50,
+        "wins": 38,
+        "losses": 12,
+        "accuracy": 0.76,
+        "brier": 0.16141,
+        "log_loss": 0.471979,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 50,
+        "wins": 38,
+        "losses": 12,
+        "accuracy": 0.76,
+        "brier": 0.162836,
+        "log_loss": 0.476876,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "half_current_weight": {
+        "games": 50,
+        "wins": 38,
+        "losses": 12,
+        "accuracy": 0.76,
+        "brier": 0.162836,
+        "log_loss": 0.476876,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "aggressive_plus_10": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.159957,
+        "log_loss": 0.469916,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 50,
+        "wins": 38,
+        "losses": 12,
+        "accuracy": 0.76,
+        "brier": 0.164739,
+        "log_loss": 0.479481,
+        "flips": 2,
+        "fixed": 2,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 50,
+        "wins": 38,
+        "losses": 12,
+        "accuracy": 0.76,
+        "brier": 0.164644,
+        "log_loss": 0.480505,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      }
+    },
+    "2025-W3": {
+      "baseline": {
+        "games": 47,
+        "wins": 31,
+        "losses": 16,
+        "accuracy": 0.659574,
+        "brier": 0.203352,
+        "log_loss": 0.577153,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 47,
+        "wins": 30,
+        "losses": 17,
+        "accuracy": 0.638298,
+        "brier": 0.210267,
+        "log_loss": 0.592094,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 47,
+        "wins": 30,
+        "losses": 17,
+        "accuracy": 0.638298,
+        "brier": 0.217814,
+        "log_loss": 0.611803,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "half_current_weight": {
+        "games": 47,
+        "wins": 30,
+        "losses": 17,
+        "accuracy": 0.638298,
+        "brier": 0.221617,
+        "log_loss": 0.623256,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "aggressive_plus_10": {
+        "games": 47,
+        "wins": 32,
+        "losses": 15,
+        "accuracy": 0.680851,
+        "brier": 0.197839,
+        "log_loss": 0.567569,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 47,
+        "wins": 31,
+        "losses": 16,
+        "accuracy": 0.659574,
+        "brier": 0.202425,
+        "log_loss": 0.575291,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 47,
+        "wins": 30,
+        "losses": 17,
+        "accuracy": 0.638298,
+        "brier": 0.209517,
+        "log_loss": 0.590583,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      }
+    },
+    "2025-W4": {
+      "baseline": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.186542,
+        "log_loss": 0.545048,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.187097,
+        "log_loss": 0.54463,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_20": {
+        "games": 50,
+        "wins": 37,
+        "losses": 13,
+        "accuracy": 0.74,
+        "brier": 0.188283,
+        "log_loss": 0.547917,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "half_current_weight": {
+        "games": 50,
+        "wins": 37,
+        "losses": 13,
+        "accuracy": 0.74,
+        "brier": 0.189846,
+        "log_loss": 0.554478,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "aggressive_plus_10": {
+        "games": 50,
+        "wins": 35,
+        "losses": 15,
+        "accuracy": 0.7,
+        "brier": 0.187104,
+        "log_loss": 0.549724,
+        "flips": 3,
+        "fixed": 1,
+        "broken": 2
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.186542,
+        "log_loss": 0.545048,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.187097,
+        "log_loss": 0.54463,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "2025-W5": {
+      "baseline": {
+        "games": 51,
+        "wins": 34,
+        "losses": 17,
+        "accuracy": 0.666667,
+        "brier": 0.195498,
+        "log_loss": 0.565249,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 51,
+        "wins": 34,
+        "losses": 17,
+        "accuracy": 0.666667,
+        "brier": 0.192231,
+        "log_loss": 0.558238,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 51,
+        "wins": 35,
+        "losses": 16,
+        "accuracy": 0.686275,
+        "brier": 0.19136,
+        "log_loss": 0.557652,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "half_current_weight": {
+        "games": 51,
+        "wins": 34,
+        "losses": 17,
+        "accuracy": 0.666667,
+        "brier": 0.193229,
+        "log_loss": 0.565313,
+        "flips": 8,
+        "fixed": 4,
+        "broken": 4
+      },
+      "aggressive_plus_10": {
+        "games": 51,
+        "wins": 34,
+        "losses": 17,
+        "accuracy": 0.666667,
+        "brier": 0.201379,
+        "log_loss": 0.579018,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 51,
+        "wins": 34,
+        "losses": 17,
+        "accuracy": 0.666667,
+        "brier": 0.195498,
+        "log_loss": 0.565249,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 51,
+        "wins": 34,
+        "losses": 17,
+        "accuracy": 0.666667,
+        "brier": 0.192231,
+        "log_loss": 0.558238,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      }
+    },
+    "2025-W6": {
+      "baseline": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.192213,
+        "log_loss": 0.569927,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.192627,
+        "log_loss": 0.575774,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 50,
+        "wins": 34,
+        "losses": 16,
+        "accuracy": 0.68,
+        "brier": 0.194436,
+        "log_loss": 0.58529,
+        "flips": 4,
+        "fixed": 1,
+        "broken": 3
+      },
+      "half_current_weight": {
+        "games": 50,
+        "wins": 35,
+        "losses": 15,
+        "accuracy": 0.7,
+        "brier": 0.1995,
+        "log_loss": 0.605944,
+        "flips": 5,
+        "fixed": 2,
+        "broken": 3
+      },
+      "aggressive_plus_10": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.193171,
+        "log_loss": 0.567898,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.192213,
+        "log_loss": 0.569927,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 50,
+        "wins": 36,
+        "losses": 14,
+        "accuracy": 0.72,
+        "brier": 0.192627,
+        "log_loss": 0.575774,
+        "flips": 2,
+        "fixed": 1,
+        "broken": 1
+      }
+    },
+    "2026-W1": {
+      "baseline": {
+        "games": 51,
+        "wins": 41,
+        "losses": 10,
+        "accuracy": 0.803922,
+        "brier": 0.132844,
+        "log_loss": 0.427153,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 51,
+        "wins": 41,
+        "losses": 10,
+        "accuracy": 0.803922,
+        "brier": 0.133322,
+        "log_loss": 0.430452,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_20": {
+        "games": 51,
+        "wins": 41,
+        "losses": 10,
+        "accuracy": 0.803922,
+        "brier": 0.134247,
+        "log_loss": 0.435723,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "half_current_weight": {
+        "games": 51,
+        "wins": 41,
+        "losses": 10,
+        "accuracy": 0.803922,
+        "brier": 0.133736,
+        "log_loss": 0.43286,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "aggressive_plus_10": {
+        "games": 51,
+        "wins": 41,
+        "losses": 10,
+        "accuracy": 0.803922,
+        "brier": 0.132953,
+        "log_loss": 0.426165,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 51,
+        "wins": 41,
+        "losses": 10,
+        "accuracy": 0.803922,
+        "brier": 0.135513,
+        "log_loss": 0.442689,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 51,
+        "wins": 41,
+        "losses": 10,
+        "accuracy": 0.803922,
+        "brier": 0.135513,
+        "log_loss": 0.442689,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "2026-W2": {
+      "baseline": {
+        "games": 49,
+        "wins": 35,
+        "losses": 14,
+        "accuracy": 0.714286,
+        "brier": 0.163957,
+        "log_loss": 0.498107,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 49,
+        "wins": 36,
+        "losses": 13,
+        "accuracy": 0.734694,
+        "brier": 0.162111,
+        "log_loss": 0.499695,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "conservative_minus_20": {
+        "games": 49,
+        "wins": 37,
+        "losses": 12,
+        "accuracy": 0.755102,
+        "brier": 0.16124,
+        "log_loss": 0.504407,
+        "flips": 2,
+        "fixed": 2,
+        "broken": 0
+      },
+      "half_current_weight": {
+        "games": 49,
+        "wins": 37,
+        "losses": 12,
+        "accuracy": 0.755102,
+        "brier": 0.16124,
+        "log_loss": 0.504407,
+        "flips": 2,
+        "fixed": 2,
+        "broken": 0
+      },
+      "aggressive_plus_10": {
+        "games": 49,
+        "wins": 35,
+        "losses": 14,
+        "accuracy": 0.714286,
+        "brier": 0.16682,
+        "log_loss": 0.499921,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 49,
+        "wins": 36,
+        "losses": 13,
+        "accuracy": 0.734694,
+        "brier": 0.159001,
+        "log_loss": 0.485473,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 49,
+        "wins": 36,
+        "losses": 13,
+        "accuracy": 0.734694,
+        "brier": 0.158924,
+        "log_loss": 0.492232,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      }
+    },
+    "2026-W3": {
+      "baseline": {
+        "games": 57,
+        "wins": 47,
+        "losses": 10,
+        "accuracy": 0.824561,
+        "brier": 0.135029,
+        "log_loss": 0.418352,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 57,
+        "wins": 46,
+        "losses": 11,
+        "accuracy": 0.807018,
+        "brier": 0.129613,
+        "log_loss": 0.40304,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 57,
+        "wins": 46,
+        "losses": 11,
+        "accuracy": 0.807018,
+        "brier": 0.125397,
+        "log_loss": 0.390205,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "half_current_weight": {
+        "games": 57,
+        "wins": 46,
+        "losses": 11,
+        "accuracy": 0.807018,
+        "brier": 0.123693,
+        "log_loss": 0.384639,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "aggressive_plus_10": {
+        "games": 57,
+        "wins": 45,
+        "losses": 12,
+        "accuracy": 0.789474,
+        "brier": 0.141756,
+        "log_loss": 0.436386,
+        "flips": 4,
+        "fixed": 1,
+        "broken": 3
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 57,
+        "wins": 47,
+        "losses": 10,
+        "accuracy": 0.824561,
+        "brier": 0.134498,
+        "log_loss": 0.41723,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 57,
+        "wins": 46,
+        "losses": 11,
+        "accuracy": 0.807018,
+        "brier": 0.129239,
+        "log_loss": 0.40222,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      }
+    },
+    "2026-W4": {
+      "baseline": {
+        "games": 58,
+        "wins": 40,
+        "losses": 18,
+        "accuracy": 0.689655,
+        "brier": 0.179345,
+        "log_loss": 0.527188,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 58,
+        "wins": 41,
+        "losses": 17,
+        "accuracy": 0.706897,
+        "brier": 0.181708,
+        "log_loss": 0.531427,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 58,
+        "wins": 42,
+        "losses": 16,
+        "accuracy": 0.724138,
+        "brier": 0.185424,
+        "log_loss": 0.540057,
+        "flips": 4,
+        "fixed": 3,
+        "broken": 1
+      },
+      "half_current_weight": {
+        "games": 58,
+        "wins": 43,
+        "losses": 15,
+        "accuracy": 0.741379,
+        "brier": 0.189925,
+        "log_loss": 0.552516,
+        "flips": 5,
+        "fixed": 4,
+        "broken": 1
+      },
+      "aggressive_plus_10": {
+        "games": 58,
+        "wins": 42,
+        "losses": 16,
+        "accuracy": 0.724138,
+        "brier": 0.179091,
+        "log_loss": 0.527883,
+        "flips": 2,
+        "fixed": 2,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 58,
+        "wins": 40,
+        "losses": 18,
+        "accuracy": 0.689655,
+        "brier": 0.179345,
+        "log_loss": 0.527188,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 58,
+        "wins": 41,
+        "losses": 17,
+        "accuracy": 0.706897,
+        "brier": 0.181708,
+        "log_loss": 0.531427,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      }
+    },
+    "2026-W5": {
+      "baseline": {
+        "games": 56,
+        "wins": 42,
+        "losses": 14,
+        "accuracy": 0.75,
+        "brier": 0.184914,
+        "log_loss": 0.546282,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 56,
+        "wins": 41,
+        "losses": 15,
+        "accuracy": 0.732143,
+        "brier": 0.184141,
+        "log_loss": 0.541748,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 56,
+        "wins": 40,
+        "losses": 16,
+        "accuracy": 0.714286,
+        "brier": 0.184186,
+        "log_loss": 0.540413,
+        "flips": 2,
+        "fixed": 0,
+        "broken": 2
+      },
+      "half_current_weight": {
+        "games": 56,
+        "wins": 39,
+        "losses": 17,
+        "accuracy": 0.696429,
+        "brier": 0.185738,
+        "log_loss": 0.543185,
+        "flips": 5,
+        "fixed": 1,
+        "broken": 4
+      },
+      "aggressive_plus_10": {
+        "games": 56,
+        "wins": 42,
+        "losses": 14,
+        "accuracy": 0.75,
+        "brier": 0.186294,
+        "log_loss": 0.553968,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 56,
+        "wins": 42,
+        "losses": 14,
+        "accuracy": 0.75,
+        "brier": 0.184914,
+        "log_loss": 0.546282,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 56,
+        "wins": 41,
+        "losses": 15,
+        "accuracy": 0.732143,
+        "brier": 0.184141,
+        "log_loss": 0.541748,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      }
+    },
+    "2026-W6": {
+      "baseline": {
+        "games": 58,
+        "wins": 37,
+        "losses": 21,
+        "accuracy": 0.637931,
+        "brier": 0.225034,
+        "log_loss": 0.644158,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10": {
+        "games": 58,
+        "wins": 38,
+        "losses": 20,
+        "accuracy": 0.655172,
+        "brier": 0.222579,
+        "log_loss": 0.634744,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      },
+      "conservative_minus_20": {
+        "games": 58,
+        "wins": 37,
+        "losses": 21,
+        "accuracy": 0.637931,
+        "brier": 0.22229,
+        "log_loss": 0.63051,
+        "flips": 4,
+        "fixed": 2,
+        "broken": 2
+      },
+      "half_current_weight": {
+        "games": 58,
+        "wins": 37,
+        "losses": 21,
+        "accuracy": 0.637931,
+        "brier": 0.224914,
+        "log_loss": 0.633079,
+        "flips": 6,
+        "fixed": 3,
+        "broken": 3
+      },
+      "aggressive_plus_10": {
+        "games": 58,
+        "wins": 35,
+        "losses": 23,
+        "accuracy": 0.603448,
+        "brier": 0.229885,
+        "log_loss": 0.658957,
+        "flips": 4,
+        "fixed": 1,
+        "broken": 3
+      },
+      "preserve_prior_when_no_snapshot": {
+        "games": 58,
+        "wins": 37,
+        "losses": 21,
+        "accuracy": 0.637931,
+        "brier": 0.225034,
+        "log_loss": 0.644158,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "conservative_minus_10_and_preserve_prior": {
+        "games": 58,
+        "wins": 38,
+        "losses": 20,
+        "accuracy": 0.655172,
+        "brier": 0.222579,
+        "log_loss": 0.634744,
+        "flips": 3,
+        "fixed": 2,
+        "broken": 1
+      }
+    }
+  },
+  "limitations": [
+    "Candidate selection and same-year comparison on 2024 cause model-selection bias.",
+    "2024/25 historical predictions are retrospective, using published/revised weekly summaries.",
+    "2026 Week5\u20136 candidate probabilities are approximations by anchoring retrospective log-odds effects to immutable baseline forecasts.",
+    "The no-snapshot substitute uses the existing prior vector; missing metrics within an existing snapshot are unchanged.",
+    "No test directly changes Test C market blend, tiers, moneyline outcomes, or profitability.",
+    "A successful independent V1.5 candidate need not meaningfully improve market-dominated Test C."
+  ]
+}
