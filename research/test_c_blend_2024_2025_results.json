@@ -1,0 +1,727 @@
+{
+  "title": "Test C frozen 16.93% V1.5 / 83.07% market vs V1.5 for 2024 and 2025",
+  "created_utc": "2026-10-13T18:32:50.970735+00:00",
+  "model_weight": 0.16927926947215113,
+  "source_urls": {
+    "model": "https://raw.githubusercontent.com/christianmellis1-debug/CFB_Prediction_app/44e7a7cb474e9c19a1af1bfa4774309e6b46b3e6/research/test_b_venue_games.csv",
+    "archived_odds": "https://raw.githubusercontent.com/christianmellis1-debug/CFB_Prediction_app/17a68114f48a4308d1e8312296537d701a65047b/research/test_c_historical_validation_games.csv"
+  },
+  "data_provenance": {
+    "model": "Retrospective reconstruction of current V1.5 using currently published 2024/2025 weekly summaries; NOT recorded pregame forecast",
+    "market": "ESPN BET historical open odds, same bookmaker for both sides, removed margin; recorded in ESPN archived game JSON; quote timing not independently authenticated",
+    "cohort": "1,514 reconstructed games; primary matched cohort requires usable same-book opening lines",
+    "decision": "No production update unless improvement in winners is reliably demonstrated and independent from previously-used fitting years"
+  },
+  "season": {
+    "2024": {
+      "v15": {
+        "n": 717,
+        "wins": 506,
+        "losses": 211,
+        "accuracy": 0.705718,
+        "brier": 0.192427,
+        "log_loss": 0.564255
+      },
+      "market": {
+        "n": 717,
+        "wins": 510,
+        "losses": 207,
+        "accuracy": 0.711297,
+        "brier": 0.184393,
+        "log_loss": 0.544338
+      },
+      "blend": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.183489,
+        "log_loss": 0.542297
+      },
+      "additional_winners": 3,
+      "accuracy_lift_pp": 0.41841,
+      "improved_brier": 0.008937,
+      "improved_log_loss": 0.021958,
+      "switches": 103,
+      "fixes": 53,
+      "breaks": 50,
+      "paired_two_sided_p": 0.8438977,
+      "v15_fallback_for_missing_prices": {
+        "n": 752,
+        "wins": 539,
+        "note": "Matched priced games use blend; unpriced games use V1.5 unchanged."
+      }
+    },
+    "2025": {
+      "v15": {
+        "n": 720,
+        "wins": 504,
+        "losses": 216,
+        "accuracy": 0.7,
+        "brier": 0.193357,
+        "log_loss": 0.566954
+      },
+      "market": {
+        "n": 720,
+        "wins": 524,
+        "losses": 196,
+        "accuracy": 0.727778,
+        "brier": 0.182413,
+        "log_loss": 0.541194
+      },
+      "blend": {
+        "n": 720,
+        "wins": 527,
+        "losses": 193,
+        "accuracy": 0.731944,
+        "brier": 0.182276,
+        "log_loss": 0.540736
+      },
+      "additional_winners": 23,
+      "accuracy_lift_pp": 3.19444,
+      "improved_brier": 0.011081,
+      "improved_log_loss": 0.026218,
+      "switches": 115,
+      "fixes": 69,
+      "breaks": 46,
+      "paired_two_sided_p": 0.0397505,
+      "v15_fallback_for_missing_prices": {
+        "n": 762,
+        "wins": 569,
+        "note": "Matched priced games use blend; unpriced games use V1.5 unchanged."
+      }
+    }
+  },
+  "combined": {
+    "primary_open": {
+      "v15": {
+        "n": 1437,
+        "wins": 1010,
+        "losses": 427,
+        "accuracy": 0.702853,
+        "brier": 0.192893,
+        "log_loss": 0.565607
+      },
+      "market": {
+        "n": 1437,
+        "wins": 1034,
+        "losses": 403,
+        "accuracy": 0.719555,
+        "brier": 0.183401,
+        "log_loss": 0.542763
+      },
+      "blend": {
+        "n": 1437,
+        "wins": 1036,
+        "losses": 401,
+        "accuracy": 0.720946,
+        "brier": 0.182882,
+        "log_loss": 0.541515
+      },
+      "additional_winners": 26,
+      "accuracy_lift_pp": 1.80932,
+      "improved_brier": 0.010011,
+      "improved_log_loss": 0.024092,
+      "switches": 218,
+      "fixes": 122,
+      "breaks": 96,
+      "paired_two_sided_p": 0.0901846,
+      "week_cluster_bootstrap": {
+        "method": "Week-cluster bootstrap, stratified by season, 5000 fixed-seed replicates",
+        "accuracy_lift_pp_95_ci": [
+          -0.058961,
+          3.804197
+        ],
+        "brier_improvement_95_ci": [
+          0.005028,
+          0.015158
+        ],
+        "note": "Week clustering does not fully capture dependence across repeated teams; descriptive only."
+      }
+    }
+  },
+  "windows": {
+    "weeks1-4": {
+      "2024": {
+        "v15": {
+          "n": 162,
+          "wins": 115,
+          "losses": 47,
+          "accuracy": 0.709877,
+          "brier": 0.182869,
+          "log_loss": 0.52959
+        },
+        "market": {
+          "n": 162,
+          "wins": 115,
+          "losses": 47,
+          "accuracy": 0.709877,
+          "brier": 0.179157,
+          "log_loss": 0.525616
+        },
+        "blend": {
+          "n": 162,
+          "wins": 117,
+          "losses": 45,
+          "accuracy": 0.722222,
+          "brier": 0.177073,
+          "log_loss": 0.519743
+        },
+        "additional_winners": 2,
+        "accuracy_lift_pp": 1.23457,
+        "improved_brier": 0.005796,
+        "improved_log_loss": 0.009847,
+        "switches": 26,
+        "fixes": 14,
+        "breaks": 12,
+        "paired_two_sided_p": 0.845019
+      },
+      "2025": {
+        "v15": {
+          "n": 170,
+          "wins": 114,
+          "losses": 56,
+          "accuracy": 0.670588,
+          "brier": 0.204774,
+          "log_loss": 0.592365
+        },
+        "market": {
+          "n": 170,
+          "wins": 122,
+          "losses": 48,
+          "accuracy": 0.717647,
+          "brier": 0.186448,
+          "log_loss": 0.544651
+        },
+        "blend": {
+          "n": 170,
+          "wins": 121,
+          "losses": 49,
+          "accuracy": 0.711765,
+          "brier": 0.186809,
+          "log_loss": 0.545556
+        },
+        "additional_winners": 7,
+        "accuracy_lift_pp": 4.11765,
+        "improved_brier": 0.017966,
+        "improved_log_loss": 0.046809,
+        "switches": 31,
+        "fixes": 19,
+        "breaks": 12,
+        "paired_two_sided_p": 0.2810415
+      }
+    },
+    "weeks5-8": {
+      "2024": {
+        "v15": {
+          "n": 212,
+          "wins": 144,
+          "losses": 68,
+          "accuracy": 0.679245,
+          "brier": 0.204252,
+          "log_loss": 0.593139
+        },
+        "market": {
+          "n": 212,
+          "wins": 152,
+          "losses": 60,
+          "accuracy": 0.716981,
+          "brier": 0.186006,
+          "log_loss": 0.548126
+        },
+        "blend": {
+          "n": 212,
+          "wins": 149,
+          "losses": 63,
+          "accuracy": 0.70283,
+          "brier": 0.186412,
+          "log_loss": 0.549001
+        },
+        "additional_winners": 5,
+        "accuracy_lift_pp": 2.35849,
+        "improved_brier": 0.01784,
+        "improved_log_loss": 0.044138,
+        "switches": 33,
+        "fixes": 19,
+        "breaks": 14,
+        "paired_two_sided_p": 0.4868502
+      },
+      "2025": {
+        "v15": {
+          "n": 211,
+          "wins": 144,
+          "losses": 67,
+          "accuracy": 0.682464,
+          "brier": 0.206298,
+          "log_loss": 0.598281
+        },
+        "market": {
+          "n": 211,
+          "wins": 159,
+          "losses": 52,
+          "accuracy": 0.753555,
+          "brier": 0.18653,
+          "log_loss": 0.558764
+        },
+        "blend": {
+          "n": 211,
+          "wins": 159,
+          "losses": 52,
+          "accuracy": 0.753555,
+          "brier": 0.187807,
+          "log_loss": 0.560894
+        },
+        "additional_winners": 15,
+        "accuracy_lift_pp": 7.109,
+        "improved_brier": 0.018491,
+        "improved_log_loss": 0.037387,
+        "switches": 33,
+        "fixes": 24,
+        "breaks": 9,
+        "paired_two_sided_p": 0.013531
+      }
+    },
+    "weeks9-plus": {
+      "2024": {
+        "v15": {
+          "n": 343,
+          "wins": 247,
+          "losses": 96,
+          "accuracy": 0.720117,
+          "brier": 0.189632,
+          "log_loss": 0.562775
+        },
+        "market": {
+          "n": 343,
+          "wins": 243,
+          "losses": 100,
+          "accuracy": 0.708455,
+          "brier": 0.18587,
+          "log_loss": 0.55084
+        },
+        "blend": {
+          "n": 343,
+          "wins": 243,
+          "losses": 100,
+          "accuracy": 0.708455,
+          "brier": 0.184713,
+          "log_loss": 0.548807
+        },
+        "additional_winners": -4,
+        "accuracy_lift_pp": -1.16618,
+        "improved_brier": 0.004919,
+        "improved_log_loss": 0.013968,
+        "switches": 44,
+        "fixes": 20,
+        "breaks": 24,
+        "paired_two_sided_p": 0.6515878
+      },
+      "2025": {
+        "v15": {
+          "n": 339,
+          "wins": 246,
+          "losses": 93,
+          "accuracy": 0.725664,
+          "brier": 0.179578,
+          "log_loss": 0.534712
+        },
+        "market": {
+          "n": 339,
+          "wins": 243,
+          "losses": 96,
+          "accuracy": 0.716814,
+          "brier": 0.177828,
+          "log_loss": 0.528524
+        },
+        "blend": {
+          "n": 339,
+          "wins": 247,
+          "losses": 92,
+          "accuracy": 0.728614,
+          "brier": 0.176561,
+          "log_loss": 0.525773
+        },
+        "additional_winners": 1,
+        "accuracy_lift_pp": 0.29499,
+        "improved_brier": 0.003016,
+        "improved_log_loss": 0.008939,
+        "switches": 51,
+        "fixes": 26,
+        "breaks": 25,
+        "paired_two_sided_p": 1.0
+      }
+    }
+  },
+  "robustness": {
+    "primary_open": {
+      "combined": {
+        "v15": {
+          "n": 1437,
+          "wins": 1010,
+          "losses": 427,
+          "accuracy": 0.702853,
+          "brier": 0.192893,
+          "log_loss": 0.565607
+        },
+        "market": {
+          "n": 1437,
+          "wins": 1034,
+          "losses": 403,
+          "accuracy": 0.719555,
+          "brier": 0.183401,
+          "log_loss": 0.542763
+        },
+        "blend": {
+          "n": 1437,
+          "wins": 1036,
+          "losses": 401,
+          "accuracy": 0.720946,
+          "brier": 0.182882,
+          "log_loss": 0.541515
+        },
+        "additional_winners": 26,
+        "accuracy_lift_pp": 1.80932,
+        "improved_brier": 0.010011,
+        "improved_log_loss": 0.024092,
+        "switches": 218,
+        "fixes": 122,
+        "breaks": 96,
+        "paired_two_sided_p": 0.0901846
+      },
+      "by_season": {
+        "2024": {
+          "v15": {
+            "n": 717,
+            "wins": 506,
+            "losses": 211,
+            "accuracy": 0.705718,
+            "brier": 0.192427,
+            "log_loss": 0.564255
+          },
+          "market": {
+            "n": 717,
+            "wins": 510,
+            "losses": 207,
+            "accuracy": 0.711297,
+            "brier": 0.184393,
+            "log_loss": 0.544338
+          },
+          "blend": {
+            "n": 717,
+            "wins": 509,
+            "losses": 208,
+            "accuracy": 0.709902,
+            "brier": 0.183489,
+            "log_loss": 0.542297
+          },
+          "additional_winners": 3,
+          "accuracy_lift_pp": 0.41841,
+          "improved_brier": 0.008937,
+          "improved_log_loss": 0.021958,
+          "switches": 103,
+          "fixes": 53,
+          "breaks": 50,
+          "paired_two_sided_p": 0.8438977
+        },
+        "2025": {
+          "v15": {
+            "n": 720,
+            "wins": 504,
+            "losses": 216,
+            "accuracy": 0.7,
+            "brier": 0.193357,
+            "log_loss": 0.566954
+          },
+          "market": {
+            "n": 720,
+            "wins": 524,
+            "losses": 196,
+            "accuracy": 0.727778,
+            "brier": 0.182413,
+            "log_loss": 0.541194
+          },
+          "blend": {
+            "n": 720,
+            "wins": 527,
+            "losses": 193,
+            "accuracy": 0.731944,
+            "brier": 0.182276,
+            "log_loss": 0.540736
+          },
+          "additional_winners": 23,
+          "accuracy_lift_pp": 3.19444,
+          "improved_brier": 0.011081,
+          "improved_log_loss": 0.026218,
+          "switches": 115,
+          "fixes": 69,
+          "breaks": 46,
+          "paired_two_sided_p": 0.0397505
+        }
+      }
+    },
+    "primary_close": {
+      "combined": {
+        "v15": {
+          "n": 1425,
+          "wins": 1002,
+          "losses": 423,
+          "accuracy": 0.703158,
+          "brier": 0.192967,
+          "log_loss": 0.565979
+        },
+        "market": {
+          "n": 1425,
+          "wins": 1022,
+          "losses": 403,
+          "accuracy": 0.717193,
+          "brier": 0.183901,
+          "log_loss": 0.543848
+        },
+        "blend": {
+          "n": 1425,
+          "wins": 1022,
+          "losses": 403,
+          "accuracy": 0.717193,
+          "brier": 0.183364,
+          "log_loss": 0.542766
+        },
+        "additional_winners": 20,
+        "accuracy_lift_pp": 1.40351,
+        "improved_brier": 0.009603,
+        "improved_log_loss": 0.023213,
+        "switches": 200,
+        "fixes": 110,
+        "breaks": 90,
+        "paired_two_sided_p": 0.178964
+      },
+      "by_season": {
+        "2024": {
+          "v15": {
+            "n": 713,
+            "wins": 502,
+            "losses": 211,
+            "accuracy": 0.704067,
+            "brier": 0.193493,
+            "log_loss": 0.567191
+          },
+          "market": {
+            "n": 713,
+            "wins": 502,
+            "losses": 211,
+            "accuracy": 0.704067,
+            "brier": 0.185804,
+            "log_loss": 0.547801
+          },
+          "blend": {
+            "n": 713,
+            "wins": 499,
+            "losses": 214,
+            "accuracy": 0.69986,
+            "brier": 0.184881,
+            "log_loss": 0.545962
+          },
+          "additional_winners": -3,
+          "accuracy_lift_pp": -0.42076,
+          "improved_brier": 0.008612,
+          "improved_log_loss": 0.021229,
+          "switches": 101,
+          "fixes": 49,
+          "breaks": 52,
+          "paired_two_sided_p": 0.8423821
+        },
+        "2025": {
+          "v15": {
+            "n": 712,
+            "wins": 500,
+            "losses": 212,
+            "accuracy": 0.702247,
+            "brier": 0.192441,
+            "log_loss": 0.564765
+          },
+          "market": {
+            "n": 712,
+            "wins": 520,
+            "losses": 192,
+            "accuracy": 0.730337,
+            "brier": 0.181995,
+            "log_loss": 0.53989
+          },
+          "blend": {
+            "n": 712,
+            "wins": 523,
+            "losses": 189,
+            "accuracy": 0.734551,
+            "brier": 0.181845,
+            "log_loss": 0.539565
+          },
+          "additional_winners": 23,
+          "accuracy_lift_pp": 3.23034,
+          "improved_brier": 0.010596,
+          "improved_log_loss": 0.025201,
+          "switches": 99,
+          "fixes": 61,
+          "breaks": 38,
+          "paired_two_sided_p": 0.0265251
+        }
+      }
+    },
+    "fallback_open": {
+      "combined": {
+        "v15": {
+          "n": 1465,
+          "wins": 1043,
+          "losses": 422,
+          "accuracy": 0.711945,
+          "brier": 0.187545,
+          "log_loss": 0.55176
+        },
+        "market": {
+          "n": 1465,
+          "wins": 1069,
+          "losses": 396,
+          "accuracy": 0.729693,
+          "brier": 0.17748,
+          "log_loss": 0.527288
+        },
+        "blend": {
+          "n": 1465,
+          "wins": 1071,
+          "losses": 394,
+          "accuracy": 0.731058,
+          "brier": 0.177056,
+          "log_loss": 0.526334
+        },
+        "additional_winners": 28,
+        "accuracy_lift_pp": 1.91126,
+        "improved_brier": 0.010489,
+        "improved_log_loss": 0.025426,
+        "switches": 218,
+        "fixes": 123,
+        "breaks": 95,
+        "paired_two_sided_p": 0.0672028
+      },
+      "by_season": {
+        "2024": {
+          "v15": {
+            "n": 735,
+            "wins": 522,
+            "losses": 213,
+            "accuracy": 0.710204,
+            "brier": 0.18947,
+            "log_loss": 0.556785
+          },
+          "market": {
+            "n": 735,
+            "wins": 529,
+            "losses": 206,
+            "accuracy": 0.719728,
+            "brier": 0.180524,
+            "log_loss": 0.534441
+          },
+          "blend": {
+            "n": 735,
+            "wins": 527,
+            "losses": 208,
+            "accuracy": 0.717007,
+            "brier": 0.179731,
+            "log_loss": 0.532737
+          },
+          "additional_winners": 5,
+          "accuracy_lift_pp": 0.68027,
+          "improved_brier": 0.009738,
+          "improved_log_loss": 0.024048,
+          "switches": 105,
+          "fixes": 55,
+          "breaks": 50,
+          "paired_two_sided_p": 0.6964677
+        },
+        "2025": {
+          "v15": {
+            "n": 730,
+            "wins": 521,
+            "losses": 209,
+            "accuracy": 0.713699,
+            "brier": 0.185607,
+            "log_loss": 0.546701
+          },
+          "market": {
+            "n": 730,
+            "wins": 540,
+            "losses": 190,
+            "accuracy": 0.739726,
+            "brier": 0.174416,
+            "log_loss": 0.520086
+          },
+          "blend": {
+            "n": 730,
+            "wins": 544,
+            "losses": 186,
+            "accuracy": 0.745205,
+            "brier": 0.174362,
+            "log_loss": 0.519888
+          },
+          "additional_winners": 23,
+          "accuracy_lift_pp": 3.15068,
+          "improved_brier": 0.011245,
+          "improved_log_loss": 0.026813,
+          "switches": 113,
+          "fixes": 68,
+          "breaks": 45,
+          "paired_two_sided_p": 0.0380186
+        }
+      }
+    }
+  },
+  "coverage": {
+    "2024": {
+      "reconstructed_games": 752,
+      "priced_primary_open": 717,
+      "missing_price": 35,
+      "missing_price_v15": {
+        "n": 35,
+        "wins": 30,
+        "losses": 5,
+        "accuracy": 0.857143,
+        "brier": 0.095443,
+        "log_loss": 0.305154
+      },
+      "full_year_v15": {
+        "n": 752,
+        "wins": 536,
+        "losses": 216,
+        "accuracy": 0.712766,
+        "brier": 0.187913,
+        "log_loss": 0.552196
+      }
+    },
+    "2025": {
+      "reconstructed_games": 762,
+      "priced_primary_open": 720,
+      "missing_price": 42,
+      "missing_price_v15": {
+        "n": 42,
+        "wins": 42,
+        "losses": 0,
+        "accuracy": 1.0,
+        "brier": 0.005965,
+        "log_loss": 0.053683
+      },
+      "full_year_v15": {
+        "n": 762,
+        "wins": 546,
+        "losses": 216,
+        "accuracy": 0.716535,
+        "brier": 0.183029,
+        "log_loss": 0.538663
+      }
+    }
+  },
+  "risk_notes": [
+    "Sportsbook information dominates the blend, so probability cannot be interpreted as an independent betting edge over the same sportsbook.",
+    "Winner improvement is a paired outcome from the same games; statistically inconclusive when p>=0.05 or interval crosses 0.",
+    "ESPN BET historical odds are not DraftKings; deployment performance may depend on provider and capture time.",
+    "2024 and 2025 model predictions were reconstructed after games, and 2025 was used in earlier model development.",
+    "Missing lines are not random; all comparisons of priced matches use the EXACT same game cohort.",
+    "Do not alter tiers/waterfall selections, value scoring, live app model, or other production pathways on this basis."
+  ]
+}
