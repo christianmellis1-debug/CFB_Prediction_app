@@ -1,0 +1,40 @@
+name: Test C historical market validation
+on:
+  push:
+    branches:
+      - research/test-c-external-validation-2026-10-13
+    paths:
+      - 'research/validate_test_c_historical.py'
+      - '.github/workflows/test-c-historical-validation.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: test-c-historical-market-validation
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install analysis dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Verify script syntax
+        run: python -m py_compile research/validate_test_c_historical.py
+      - name: Retrieve archived 2024-25 opening ESPN BET lines and validate Test C
+        run: python research/validate_test_c_historical.py
+      - name: Commit research-only dataset and findings
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_c_historical_validation_results.json research/test_c_historical_validation_games.csv research/test_c_historical_odds_coverage.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record historical external market validation for Test C'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
