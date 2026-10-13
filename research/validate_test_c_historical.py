@@ -115,7 +115,7 @@ def quality(d):
         'high_confidence_70_plus':measure(hc),'high_confidence_not_flagged':measure(nonflag_hc),
         'warning_rate':round(len(flags)/len(d),4),
         'losers_caught':int(flags.model_correct.eq(0).sum()),
-        'fraction_all_model_losses_caught':round(int((~flags.model_correct).sum())/int(d.model_correct.eq(0).sum()),4) if d.model_correct.eq(0).sum() else 0,
+        'fraction_all_model_losses_caught':round(int(flags.model_correct.eq(0).sum())/int(d.model_correct.eq(0).sum()),4) if d.model_correct.eq(0).sum() else 0,
         'model_brier':round(float(np.mean((d.model_home-d.y)**2)),6),
         'market_brier':round(float(np.mean((d.market_home-d.y)**2)),6),
         'model_logloss':round(float(np.mean(-d.y*np.log(np.clip(d.model_home,1e-9,1-1e-9))-(1-d.y)*np.log(np.clip(1-d.model_home,1e-9,1-1e-9)))),6),
@@ -127,7 +127,7 @@ def quality(d):
     if len(flags)>0 and len(nonflag_hc)>0:
         a=int(flags.model_correct.sum());b=len(flags)-a
         c=int(nonflag_hc.model_correct.sum());e=len(nonflag_hc)-c
-        y['flag_vs_other_high_conf_fisher_two_sided_p']=round(float(fisher_exact([[a,b],[c,e]]).pvalue),6)
+        y['flag_vs_other_high_conf_fisher_two_sided_p']=float(fisher_exact([[a,b],[c,e]]).pvalue)
     return y
 
 def build():
