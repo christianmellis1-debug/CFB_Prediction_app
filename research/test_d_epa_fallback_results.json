@@ -1,0 +1,5347 @@
+{
+  "title": "Test D2 raw versus adjusted EPA fallback",
+  "generated_utc": "2026-10-13T21:21:43.362787+00:00",
+  "strategy": "Keep independent V1.5 formula/priors; change EPA scoring fallback only, inside each prior-week cross-sectional feature transform.",
+  "candidate_descriptions": {
+    "baseline": "Adj EPA, raw EPA fallback when missing, in one cross-sectional z-scoring group.",
+    "raw_all": "Use raw EPA for every team even when adjusted exists.",
+    "missing_neutral": "Missing adjusted EPA gets z=0; do not use raw.",
+    "raw_shrink_25": "Existing mixed-source EPA z-score shrunk to 25% for missing adjusted value only.",
+    "raw_shrink_50": "Existing mixed-source EPA z-score shrunk to 50% for missing adjusted value only.",
+    "raw_shrink_75": "Existing mixed-source EPA z-score shrunk to 75% for missing adjusted value only.",
+    "separate_standardization": "For missing adjusted EPA only, use separately standardized raw EPA z-score, avoiding mixed units."
+  },
+  "source_hashes": {
+    "summary2023": "d9d493a936823fdf992649fc635d0bfccba6467d86a79a0cd1c1b5d688edf958",
+    "summary2024": "0de1d2f38617b72cd594ae5733c852bba9edee6ae4f32708e880ff844c10da10",
+    "summary2025": "91012e1ab3f7ed547229689eeccf7e2ae02bdf744a79f527e6bbdd5b75b3bbb4",
+    "summary2026": "fe97b89a4f7524081990326d70116792919d1664e293b36d5e53173a1e7d8d2f",
+    "schedule2024": "32b9162088eb41f36479ea6f587ebdd8043baa1bc201b139820a35ded47944b2",
+    "schedule2025": "ddbe0906cee509e942b7219110bb692f68fd6f7f23983545b6001d125b207718",
+    "schedule2026": "5452f2787291cdf0d73186bcfae3ac61b66a3d3e6d04b27e8e6be3dfde0aaeb0"
+  },
+  "coverage": {
+    "2024": {
+      "weeks": {
+        "1": 39,
+        "2": 49,
+        "3": 52,
+        "4": 54,
+        "5": 52,
+        "6": 49,
+        "7": 52,
+        "8": 59,
+        "9": 56,
+        "10": 48,
+        "11": 50,
+        "12": 53,
+        "13": 62,
+        "14": 67,
+        "15": 9,
+        "16": 1
+      }
+    },
+    "2025": {
+      "weeks": {
+        "1": 48,
+        "2": 50,
+        "3": 47,
+        "4": 50,
+        "5": 51,
+        "6": 50,
+        "7": 56,
+        "8": 59,
+        "9": 53,
+        "10": 52,
+        "11": 51,
+        "12": 58,
+        "13": 60,
+        "14": 67,
+        "15": 9,
+        "16": 1
+      }
+    },
+    "2026": {
+      "weeks": {
+        "1": 51,
+        "2": 49,
+        "3": 57,
+        "4": 58,
+        "5": 56,
+        "6": 58
+      }
+    }
+  },
+  "source_completeness": {
+    "2024": {
+      "1": {
+        "rows": 75,
+        "adj_off_available": 3,
+        "adj_def_available": 3,
+        "raw_off_available": 75,
+        "raw_def_available": 75,
+        "off_missing_raw_exists": 72,
+        "def_missing_raw_exists": 72,
+        "off_raw_adj_correlation": null,
+        "def_raw_adj_correlation": null
+      },
+      "2": {
+        "rows": 130,
+        "adj_off_available": 40,
+        "adj_def_available": 40,
+        "raw_off_available": 130,
+        "raw_def_available": 130,
+        "off_missing_raw_exists": 90,
+        "def_missing_raw_exists": 90,
+        "off_raw_adj_correlation": 0.9358385146536207,
+        "def_raw_adj_correlation": 0.9504397756916826
+      },
+      "3": {
+        "rows": 133,
+        "adj_off_available": 114,
+        "adj_def_available": 114,
+        "raw_off_available": 133,
+        "raw_def_available": 133,
+        "off_missing_raw_exists": 19,
+        "def_missing_raw_exists": 19,
+        "off_raw_adj_correlation": 0.884160565988848,
+        "def_raw_adj_correlation": 0.9344666739633887
+      },
+      "4": {
+        "rows": 133,
+        "adj_off_available": 131,
+        "adj_def_available": 131,
+        "raw_off_available": 133,
+        "raw_def_available": 133,
+        "off_missing_raw_exists": 2,
+        "def_missing_raw_exists": 2,
+        "off_raw_adj_correlation": 0.8880272657923076,
+        "def_raw_adj_correlation": 0.9158828759114569
+      },
+      "5": {
+        "rows": 134,
+        "adj_off_available": 133,
+        "adj_def_available": 133,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 1,
+        "def_missing_raw_exists": 1,
+        "off_raw_adj_correlation": 0.9141270908855934,
+        "def_raw_adj_correlation": 0.9036128519886936
+      },
+      "6": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9201425415548636,
+        "def_raw_adj_correlation": 0.8794092952797123
+      },
+      "7": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9084500914253781,
+        "def_raw_adj_correlation": 0.8777345588884726
+      },
+      "8": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9102609831519259,
+        "def_raw_adj_correlation": 0.8736986443383464
+      },
+      "9": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9083681811267912,
+        "def_raw_adj_correlation": 0.8781736990161232
+      },
+      "10": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9069895039536519,
+        "def_raw_adj_correlation": 0.8849071544382406
+      },
+      "11": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.8996747855095135,
+        "def_raw_adj_correlation": 0.8846935873743296
+      },
+      "12": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.8999748933687854,
+        "def_raw_adj_correlation": 0.886636404106145
+      },
+      "13": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9017648588272188,
+        "def_raw_adj_correlation": 0.8862236233822319
+      },
+      "14": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9002875448922102,
+        "def_raw_adj_correlation": 0.8849351370117939
+      },
+      "15": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9032780674574299,
+        "def_raw_adj_correlation": 0.8844217626060111
+      },
+      "16": {
+        "rows": 134,
+        "adj_off_available": 134,
+        "adj_def_available": 134,
+        "raw_off_available": 134,
+        "raw_def_available": 134,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.90295323027054,
+        "def_raw_adj_correlation": 0.8857804891670884
+      }
+    },
+    "2025": {
+      "1": {
+        "rows": 93,
+        "adj_off_available": 3,
+        "adj_def_available": 3,
+        "raw_off_available": 93,
+        "raw_def_available": 93,
+        "off_missing_raw_exists": 90,
+        "def_missing_raw_exists": 90,
+        "off_raw_adj_correlation": null,
+        "def_raw_adj_correlation": null
+      },
+      "2": {
+        "rows": 135,
+        "adj_off_available": 58,
+        "adj_def_available": 58,
+        "raw_off_available": 135,
+        "raw_def_available": 135,
+        "off_missing_raw_exists": 77,
+        "def_missing_raw_exists": 77,
+        "off_raw_adj_correlation": 0.9584335650176856,
+        "def_raw_adj_correlation": 0.923643308260901
+      },
+      "3": {
+        "rows": 136,
+        "adj_off_available": 121,
+        "adj_def_available": 121,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 15,
+        "def_missing_raw_exists": 15,
+        "off_raw_adj_correlation": 0.9397226757798022,
+        "def_raw_adj_correlation": 0.8783282942258
+      },
+      "4": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9276880427230734,
+        "def_raw_adj_correlation": 0.869589513192848
+      },
+      "5": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9200987711177946,
+        "def_raw_adj_correlation": 0.8574110766728551
+      },
+      "6": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9187197992601193,
+        "def_raw_adj_correlation": 0.8717191313618705
+      },
+      "7": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.926860258020553,
+        "def_raw_adj_correlation": 0.8703465315520095
+      },
+      "8": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9105696520401485,
+        "def_raw_adj_correlation": 0.8647594286652628
+      },
+      "9": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9040234478345655,
+        "def_raw_adj_correlation": 0.8799097955249809
+      },
+      "10": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9015649576151458,
+        "def_raw_adj_correlation": 0.8868502171783934
+      },
+      "11": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9105473335302102,
+        "def_raw_adj_correlation": 0.8660542668698151
+      },
+      "12": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9121879147520371,
+        "def_raw_adj_correlation": 0.8651709564023892
+      },
+      "13": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9105567579002126,
+        "def_raw_adj_correlation": 0.8631145603043769
+      },
+      "14": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9108473155917296,
+        "def_raw_adj_correlation": 0.868162454807754
+      },
+      "15": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9102502387868985,
+        "def_raw_adj_correlation": 0.8690746055933284
+      },
+      "16": {
+        "rows": 136,
+        "adj_off_available": 136,
+        "adj_def_available": 136,
+        "raw_off_available": 136,
+        "raw_def_available": 136,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.9103212198340564,
+        "def_raw_adj_correlation": 0.8689484221772559
+      }
+    },
+    "2026": {
+      "1": {
+        "rows": 94,
+        "adj_off_available": 8,
+        "adj_def_available": 8,
+        "raw_off_available": 94,
+        "raw_def_available": 94,
+        "off_missing_raw_exists": 86,
+        "def_missing_raw_exists": 86,
+        "off_raw_adj_correlation": 0.9430309641054445,
+        "def_raw_adj_correlation": 0.8733750364655847
+      },
+      "2": {
+        "rows": 137,
+        "adj_off_available": 58,
+        "adj_def_available": 58,
+        "raw_off_available": 137,
+        "raw_def_available": 137,
+        "off_missing_raw_exists": 79,
+        "def_missing_raw_exists": 79,
+        "off_raw_adj_correlation": 0.902438663765318,
+        "def_raw_adj_correlation": 0.9380045154190291
+      },
+      "3": {
+        "rows": 138,
+        "adj_off_available": 133,
+        "adj_def_available": 133,
+        "raw_off_available": 138,
+        "raw_def_available": 138,
+        "off_missing_raw_exists": 5,
+        "def_missing_raw_exists": 5,
+        "off_raw_adj_correlation": 0.8898154757503136,
+        "def_raw_adj_correlation": 0.8901912532585451
+      },
+      "4": {
+        "rows": 138,
+        "adj_off_available": 138,
+        "adj_def_available": 138,
+        "raw_off_available": 138,
+        "raw_def_available": 138,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.8910959649270784,
+        "def_raw_adj_correlation": 0.9004924901342231
+      },
+      "5": {
+        "rows": 138,
+        "adj_off_available": 138,
+        "adj_def_available": 138,
+        "raw_off_available": 138,
+        "raw_def_available": 138,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.8981342665057616,
+        "def_raw_adj_correlation": 0.8904615863333558
+      },
+      "6": {
+        "rows": 138,
+        "adj_off_available": 138,
+        "adj_def_available": 138,
+        "raw_off_available": 138,
+        "raw_def_available": 138,
+        "off_missing_raw_exists": 0,
+        "def_missing_raw_exists": 0,
+        "off_raw_adj_correlation": 0.909080765976343,
+        "def_raw_adj_correlation": 0.8769298625642755
+      }
+    }
+  },
+  "selection_rule": "Minimum 2024 Weeks1\u20136 Brier. Hold on 2025 Weeks1\u20136, 2025 full season and 2026 W5\u20136 frozen baseline plus retrospective log-odds correction.",
+  "chosen_2024_early": "raw_all",
+  "v15": {
+    "2024_week1_6": {
+      "all": {
+        "baseline": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.179832,
+          "log_loss": 0.526691,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 295,
+          "wins": 213,
+          "losses": 82,
+          "accuracy": 0.722034,
+          "brier": 0.179285,
+          "log_loss": 0.527891,
+          "flips": 8,
+          "fixed": 5,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 295,
+          "wins": 210,
+          "losses": 85,
+          "accuracy": 0.711864,
+          "brier": 0.179513,
+          "log_loss": 0.525839,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 295,
+          "wins": 209,
+          "losses": 86,
+          "accuracy": 0.708475,
+          "brier": 0.179379,
+          "log_loss": 0.525703,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.17941,
+          "log_loss": 0.525747,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 295,
+          "wins": 210,
+          "losses": 85,
+          "accuracy": 0.711864,
+          "brier": 0.179567,
+          "log_loss": 0.526082,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.179784,
+          "log_loss": 0.526464,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "early_weeks1_6": {
+        "baseline": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.179832,
+          "log_loss": 0.526691,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 295,
+          "wins": 213,
+          "losses": 82,
+          "accuracy": 0.722034,
+          "brier": 0.179285,
+          "log_loss": 0.527891,
+          "flips": 8,
+          "fixed": 5,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 295,
+          "wins": 210,
+          "losses": 85,
+          "accuracy": 0.711864,
+          "brier": 0.179513,
+          "log_loss": 0.525839,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 295,
+          "wins": 209,
+          "losses": 86,
+          "accuracy": 0.708475,
+          "brier": 0.179379,
+          "log_loss": 0.525703,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.17941,
+          "log_loss": 0.525747,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 295,
+          "wins": 210,
+          "losses": 85,
+          "accuracy": 0.711864,
+          "brier": 0.179567,
+          "log_loss": 0.526082,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.179784,
+          "log_loss": 0.526464,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_missing_adj_epa": {
+        "baseline": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170382,
+          "log_loss": 0.498493,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 158,
+          "wins": 115,
+          "losses": 43,
+          "accuracy": 0.727848,
+          "brier": 0.171205,
+          "log_loss": 0.500648,
+          "flips": 3,
+          "fixed": 0,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169741,
+          "log_loss": 0.496895,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 158,
+          "wins": 116,
+          "losses": 42,
+          "accuracy": 0.734177,
+          "brier": 0.169535,
+          "log_loss": 0.496648,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.169594,
+          "log_loss": 0.496729,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169886,
+          "log_loss": 0.497355,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170248,
+          "log_loss": 0.498061,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_raw_fallback_available": {
+        "baseline": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.170358,
+          "log_loss": 0.498652,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 100,
+          "wins": 74,
+          "losses": 26,
+          "accuracy": 0.74,
+          "brier": 0.171199,
+          "log_loss": 0.500797,
+          "flips": 2,
+          "fixed": 0,
+          "broken": 2
+        },
+        "missing_neutral": {
+          "n": 100,
+          "wins": 75,
+          "losses": 25,
+          "accuracy": 0.75,
+          "brier": 0.169331,
+          "log_loss": 0.496079,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 100,
+          "wins": 74,
+          "losses": 26,
+          "accuracy": 0.74,
+          "brier": 0.169021,
+          "log_loss": 0.495738,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.169114,
+          "log_loss": 0.495865,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 100,
+          "wins": 75,
+          "losses": 25,
+          "accuracy": 0.75,
+          "brier": 0.169576,
+          "log_loss": 0.496854,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.170131,
+          "log_loss": 0.497921,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "missing_adjusted_but_raw_available": {
+        "baseline": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.170358,
+          "log_loss": 0.498652,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 100,
+          "wins": 74,
+          "losses": 26,
+          "accuracy": 0.74,
+          "brier": 0.171199,
+          "log_loss": 0.500797,
+          "flips": 2,
+          "fixed": 0,
+          "broken": 2
+        },
+        "missing_neutral": {
+          "n": 100,
+          "wins": 75,
+          "losses": 25,
+          "accuracy": 0.75,
+          "brier": 0.169331,
+          "log_loss": 0.496079,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 100,
+          "wins": 74,
+          "losses": 26,
+          "accuracy": 0.74,
+          "brier": 0.169021,
+          "log_loss": 0.495738,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.169114,
+          "log_loss": 0.495865,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 100,
+          "wins": 75,
+          "losses": 25,
+          "accuracy": 0.75,
+          "brier": 0.169576,
+          "log_loss": 0.496854,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.170131,
+          "log_loss": 0.497921,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "adjusted_epa_for_both_teams": {
+        "baseline": {
+          "n": 137,
+          "wins": 93,
+          "losses": 44,
+          "accuracy": 0.678832,
+          "brier": 0.190732,
+          "log_loss": 0.559212,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 137,
+          "wins": 98,
+          "losses": 39,
+          "accuracy": 0.715328,
+          "brier": 0.188603,
+          "log_loss": 0.55931,
+          "flips": 5,
+          "fixed": 5,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 137,
+          "wins": 93,
+          "losses": 44,
+          "accuracy": 0.678832,
+          "brier": 0.190782,
+          "log_loss": 0.55922,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 137,
+          "wins": 93,
+          "losses": 44,
+          "accuracy": 0.678832,
+          "brier": 0.190732,
+          "log_loss": 0.559212,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 137,
+          "wins": 93,
+          "losses": 44,
+          "accuracy": 0.678832,
+          "brier": 0.190732,
+          "log_loss": 0.559212,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 137,
+          "wins": 93,
+          "losses": 44,
+          "accuracy": 0.678832,
+          "brier": 0.190732,
+          "log_loss": 0.559212,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 137,
+          "wins": 93,
+          "losses": 44,
+          "accuracy": 0.678832,
+          "brier": 0.190782,
+          "log_loss": 0.55922,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "off_epa_missing_either": {
+        "baseline": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170382,
+          "log_loss": 0.498493,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 158,
+          "wins": 115,
+          "losses": 43,
+          "accuracy": 0.727848,
+          "brier": 0.171205,
+          "log_loss": 0.500648,
+          "flips": 3,
+          "fixed": 0,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169741,
+          "log_loss": 0.496895,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 158,
+          "wins": 116,
+          "losses": 42,
+          "accuracy": 0.734177,
+          "brier": 0.169535,
+          "log_loss": 0.496648,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.169594,
+          "log_loss": 0.496729,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169886,
+          "log_loss": 0.497355,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170248,
+          "log_loss": 0.498061,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "def_epa_missing_either": {
+        "baseline": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170382,
+          "log_loss": 0.498493,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 158,
+          "wins": 115,
+          "losses": 43,
+          "accuracy": 0.727848,
+          "brier": 0.171205,
+          "log_loss": 0.500648,
+          "flips": 3,
+          "fixed": 0,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169741,
+          "log_loss": 0.496895,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 158,
+          "wins": 116,
+          "losses": 42,
+          "accuracy": 0.734177,
+          "brier": 0.169535,
+          "log_loss": 0.496648,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.169594,
+          "log_loss": 0.496729,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169886,
+          "log_loss": 0.497355,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170248,
+          "log_loss": 0.498061,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "both_teams_four_fbs_prior_games": {
+        "baseline": {
+          "n": 10,
+          "wins": 6,
+          "losses": 4,
+          "accuracy": 0.6,
+          "brier": 0.246426,
+          "log_loss": 0.678955,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 10,
+          "wins": 6,
+          "losses": 4,
+          "accuracy": 0.6,
+          "brier": 0.240758,
+          "log_loss": 0.664919,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 10,
+          "wins": 6,
+          "losses": 4,
+          "accuracy": 0.6,
+          "brier": 0.246396,
+          "log_loss": 0.678784,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 10,
+          "wins": 6,
+          "losses": 4,
+          "accuracy": 0.6,
+          "brier": 0.246426,
+          "log_loss": 0.678955,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 10,
+          "wins": 6,
+          "losses": 4,
+          "accuracy": 0.6,
+          "brier": 0.246426,
+          "log_loss": 0.678955,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 10,
+          "wins": 6,
+          "losses": 4,
+          "accuracy": 0.6,
+          "brier": 0.246426,
+          "log_loss": 0.678955,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 10,
+          "wins": 6,
+          "losses": 4,
+          "accuracy": 0.6,
+          "brier": 0.246396,
+          "log_loss": 0.678784,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_team_under_two_fbs_prior": {
+        "baseline": {
+          "n": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.170265,
+          "log_loss": 0.499135,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 151,
+          "wins": 111,
+          "losses": 40,
+          "accuracy": 0.735099,
+          "brier": 0.171153,
+          "log_loss": 0.50143,
+          "flips": 3,
+          "fixed": 0,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 151,
+          "wins": 112,
+          "losses": 39,
+          "accuracy": 0.741722,
+          "brier": 0.170118,
+          "log_loss": 0.498628,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 151,
+          "wins": 112,
+          "losses": 39,
+          "accuracy": 0.741722,
+          "brier": 0.169836,
+          "log_loss": 0.498177,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.169771,
+          "log_loss": 0.497989,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 151,
+          "wins": 113,
+          "losses": 38,
+          "accuracy": 0.748344,
+          "brier": 0.169924,
+          "log_loss": 0.49832,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.170169,
+          "log_loss": 0.498823,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      }
+    },
+    "2025_week1_6": {
+      "all": {
+        "baseline": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184023,
+          "log_loss": 0.537878,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 296,
+          "wins": 212,
+          "losses": 84,
+          "accuracy": 0.716216,
+          "brier": 0.185472,
+          "log_loss": 0.542055,
+          "flips": 7,
+          "fixed": 5,
+          "broken": 2
+        },
+        "missing_neutral": {
+          "n": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.18478,
+          "log_loss": 0.538723,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.184972,
+          "log_loss": 0.539113,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184649,
+          "log_loss": 0.538479,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184331,
+          "log_loss": 0.538069,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.183537,
+          "log_loss": 0.536547,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "early_weeks1_6": {
+        "baseline": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184023,
+          "log_loss": 0.537878,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 296,
+          "wins": 212,
+          "losses": 84,
+          "accuracy": 0.716216,
+          "brier": 0.185472,
+          "log_loss": 0.542055,
+          "flips": 7,
+          "fixed": 5,
+          "broken": 2
+        },
+        "missing_neutral": {
+          "n": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.18478,
+          "log_loss": 0.538723,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.184972,
+          "log_loss": 0.539113,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184649,
+          "log_loss": 0.538479,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184331,
+          "log_loss": 0.538069,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.183537,
+          "log_loss": 0.536547,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_missing_adj_epa": {
+        "baseline": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.181802,
+          "log_loss": 0.53038,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183325,
+          "log_loss": 0.532343,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183394,
+          "log_loss": 0.532472,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.182777,
+          "log_loss": 0.531262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18217,
+          "log_loss": 0.530478,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18095,
+          "log_loss": 0.528187,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_raw_fallback_available": {
+        "baseline": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.197582,
+          "log_loss": 0.564748,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.196921,
+          "log_loss": 0.561883,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.200361,
+          "log_loss": 0.568323,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.200448,
+          "log_loss": 0.568479,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.199472,
+          "log_loss": 0.566565,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.198511,
+          "log_loss": 0.565325,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.196606,
+          "log_loss": 0.561749,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "missing_adjusted_but_raw_available": {
+        "baseline": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.197582,
+          "log_loss": 0.564748,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.196921,
+          "log_loss": 0.561883,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.200361,
+          "log_loss": 0.568323,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.200448,
+          "log_loss": 0.568479,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.199472,
+          "log_loss": 0.566565,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.198511,
+          "log_loss": 0.565325,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.196606,
+          "log_loss": 0.561749,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "adjusted_epa_for_both_teams": {
+        "baseline": {
+          "n": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.186707,
+          "log_loss": 0.546413,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 141,
+          "wins": 101,
+          "losses": 40,
+          "accuracy": 0.716312,
+          "brier": 0.189507,
+          "log_loss": 0.55489,
+          "flips": 6,
+          "fixed": 4,
+          "broken": 2
+        },
+        "missing_neutral": {
+          "n": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.18638,
+          "log_loss": 0.545736,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.186707,
+          "log_loss": 0.546413,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.186707,
+          "log_loss": 0.546413,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.186707,
+          "log_loss": 0.546413,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 141,
+          "wins": 99,
+          "losses": 42,
+          "accuracy": 0.702128,
+          "brier": 0.18638,
+          "log_loss": 0.545736,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "off_epa_missing_either": {
+        "baseline": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.181802,
+          "log_loss": 0.53038,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183325,
+          "log_loss": 0.532343,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183394,
+          "log_loss": 0.532472,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.182777,
+          "log_loss": 0.531262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18217,
+          "log_loss": 0.530478,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18095,
+          "log_loss": 0.528187,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "def_epa_missing_either": {
+        "baseline": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.181802,
+          "log_loss": 0.53038,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183325,
+          "log_loss": 0.532343,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183394,
+          "log_loss": 0.532472,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.182777,
+          "log_loss": 0.531262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18217,
+          "log_loss": 0.530478,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18095,
+          "log_loss": 0.528187,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "both_teams_four_fbs_prior_games": {
+        "baseline": {
+          "n": 8,
+          "wins": 7,
+          "losses": 1,
+          "accuracy": 0.875,
+          "brier": 0.130307,
+          "log_loss": 0.420047,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 8,
+          "wins": 7,
+          "losses": 1,
+          "accuracy": 0.875,
+          "brier": 0.139153,
+          "log_loss": 0.438509,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 8,
+          "wins": 7,
+          "losses": 1,
+          "accuracy": 0.875,
+          "brier": 0.130307,
+          "log_loss": 0.420047,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 8,
+          "wins": 7,
+          "losses": 1,
+          "accuracy": 0.875,
+          "brier": 0.130307,
+          "log_loss": 0.420047,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 8,
+          "wins": 7,
+          "losses": 1,
+          "accuracy": 0.875,
+          "brier": 0.130307,
+          "log_loss": 0.420047,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 8,
+          "wins": 7,
+          "losses": 1,
+          "accuracy": 0.875,
+          "brier": 0.130307,
+          "log_loss": 0.420047,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 8,
+          "wins": 7,
+          "losses": 1,
+          "accuracy": 0.875,
+          "brier": 0.130307,
+          "log_loss": 0.420047,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_team_under_two_fbs_prior": {
+        "baseline": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.181802,
+          "log_loss": 0.53038,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183325,
+          "log_loss": 0.532343,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183394,
+          "log_loss": 0.532472,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.182777,
+          "log_loss": 0.531262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18217,
+          "log_loss": 0.530478,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18095,
+          "log_loss": 0.528187,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      }
+    },
+    "2024_all": {
+      "all": {
+        "baseline": {
+          "n": 752,
+          "wins": 536,
+          "losses": 216,
+          "accuracy": 0.712766,
+          "brier": 0.187913,
+          "log_loss": 0.552196,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 752,
+          "wins": 540,
+          "losses": 212,
+          "accuracy": 0.718085,
+          "brier": 0.189567,
+          "log_loss": 0.558317,
+          "flips": 20,
+          "fixed": 12,
+          "broken": 8
+        },
+        "missing_neutral": {
+          "n": 752,
+          "wins": 535,
+          "losses": 217,
+          "accuracy": 0.711436,
+          "brier": 0.187788,
+          "log_loss": 0.551862,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 752,
+          "wins": 534,
+          "losses": 218,
+          "accuracy": 0.710106,
+          "brier": 0.187735,
+          "log_loss": 0.551808,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 752,
+          "wins": 536,
+          "losses": 216,
+          "accuracy": 0.712766,
+          "brier": 0.187747,
+          "log_loss": 0.551825,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 752,
+          "wins": 535,
+          "losses": 217,
+          "accuracy": 0.711436,
+          "brier": 0.187809,
+          "log_loss": 0.551957,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 752,
+          "wins": 536,
+          "losses": 216,
+          "accuracy": 0.712766,
+          "brier": 0.187894,
+          "log_loss": 0.552107,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "early_weeks1_6": {
+        "baseline": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.179832,
+          "log_loss": 0.526691,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 295,
+          "wins": 213,
+          "losses": 82,
+          "accuracy": 0.722034,
+          "brier": 0.179285,
+          "log_loss": 0.527891,
+          "flips": 8,
+          "fixed": 5,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 295,
+          "wins": 210,
+          "losses": 85,
+          "accuracy": 0.711864,
+          "brier": 0.179513,
+          "log_loss": 0.525839,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 295,
+          "wins": 209,
+          "losses": 86,
+          "accuracy": 0.708475,
+          "brier": 0.179379,
+          "log_loss": 0.525703,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.17941,
+          "log_loss": 0.525747,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 295,
+          "wins": 210,
+          "losses": 85,
+          "accuracy": 0.711864,
+          "brier": 0.179567,
+          "log_loss": 0.526082,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 295,
+          "wins": 211,
+          "losses": 84,
+          "accuracy": 0.715254,
+          "brier": 0.179784,
+          "log_loss": 0.526464,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "late_weeks7plus": {
+        "baseline": {
+          "n": 457,
+          "wins": 325,
+          "losses": 132,
+          "accuracy": 0.71116,
+          "brier": 0.193129,
+          "log_loss": 0.568659,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 457,
+          "wins": 327,
+          "losses": 130,
+          "accuracy": 0.715536,
+          "brier": 0.196204,
+          "log_loss": 0.577957,
+          "flips": 12,
+          "fixed": 7,
+          "broken": 5
+        },
+        "missing_neutral": {
+          "n": 457,
+          "wins": 325,
+          "losses": 132,
+          "accuracy": 0.71116,
+          "brier": 0.193129,
+          "log_loss": 0.568659,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 457,
+          "wins": 325,
+          "losses": 132,
+          "accuracy": 0.71116,
+          "brier": 0.193129,
+          "log_loss": 0.568659,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 457,
+          "wins": 325,
+          "losses": 132,
+          "accuracy": 0.71116,
+          "brier": 0.193129,
+          "log_loss": 0.568659,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 457,
+          "wins": 325,
+          "losses": 132,
+          "accuracy": 0.71116,
+          "brier": 0.193129,
+          "log_loss": 0.568659,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 457,
+          "wins": 325,
+          "losses": 132,
+          "accuracy": 0.71116,
+          "brier": 0.193129,
+          "log_loss": 0.568659,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_missing_adj_epa": {
+        "baseline": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170382,
+          "log_loss": 0.498493,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 158,
+          "wins": 115,
+          "losses": 43,
+          "accuracy": 0.727848,
+          "brier": 0.171205,
+          "log_loss": 0.500648,
+          "flips": 3,
+          "fixed": 0,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169741,
+          "log_loss": 0.496895,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 158,
+          "wins": 116,
+          "losses": 42,
+          "accuracy": 0.734177,
+          "brier": 0.169535,
+          "log_loss": 0.496648,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.169594,
+          "log_loss": 0.496729,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169886,
+          "log_loss": 0.497355,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170248,
+          "log_loss": 0.498061,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_raw_fallback_available": {
+        "baseline": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.170358,
+          "log_loss": 0.498652,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 100,
+          "wins": 74,
+          "losses": 26,
+          "accuracy": 0.74,
+          "brier": 0.171199,
+          "log_loss": 0.500797,
+          "flips": 2,
+          "fixed": 0,
+          "broken": 2
+        },
+        "missing_neutral": {
+          "n": 100,
+          "wins": 75,
+          "losses": 25,
+          "accuracy": 0.75,
+          "brier": 0.169331,
+          "log_loss": 0.496079,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 100,
+          "wins": 74,
+          "losses": 26,
+          "accuracy": 0.74,
+          "brier": 0.169021,
+          "log_loss": 0.495738,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.169114,
+          "log_loss": 0.495865,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 100,
+          "wins": 75,
+          "losses": 25,
+          "accuracy": 0.75,
+          "brier": 0.169576,
+          "log_loss": 0.496854,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.170131,
+          "log_loss": 0.497921,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "missing_adjusted_but_raw_available": {
+        "baseline": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.170358,
+          "log_loss": 0.498652,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 100,
+          "wins": 74,
+          "losses": 26,
+          "accuracy": 0.74,
+          "brier": 0.171199,
+          "log_loss": 0.500797,
+          "flips": 2,
+          "fixed": 0,
+          "broken": 2
+        },
+        "missing_neutral": {
+          "n": 100,
+          "wins": 75,
+          "losses": 25,
+          "accuracy": 0.75,
+          "brier": 0.169331,
+          "log_loss": 0.496079,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 100,
+          "wins": 74,
+          "losses": 26,
+          "accuracy": 0.74,
+          "brier": 0.169021,
+          "log_loss": 0.495738,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.169114,
+          "log_loss": 0.495865,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 100,
+          "wins": 75,
+          "losses": 25,
+          "accuracy": 0.75,
+          "brier": 0.169576,
+          "log_loss": 0.496854,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 100,
+          "wins": 76,
+          "losses": 24,
+          "accuracy": 0.76,
+          "brier": 0.170131,
+          "log_loss": 0.497921,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "adjusted_epa_for_both_teams": {
+        "baseline": {
+          "n": 594,
+          "wins": 418,
+          "losses": 176,
+          "accuracy": 0.703704,
+          "brier": 0.192576,
+          "log_loss": 0.566481,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 594,
+          "wins": 425,
+          "losses": 169,
+          "accuracy": 0.715488,
+          "brier": 0.194451,
+          "log_loss": 0.573656,
+          "flips": 17,
+          "fixed": 12,
+          "broken": 5
+        },
+        "missing_neutral": {
+          "n": 594,
+          "wins": 418,
+          "losses": 176,
+          "accuracy": 0.703704,
+          "brier": 0.192588,
+          "log_loss": 0.566482,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 594,
+          "wins": 418,
+          "losses": 176,
+          "accuracy": 0.703704,
+          "brier": 0.192576,
+          "log_loss": 0.566481,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 594,
+          "wins": 418,
+          "losses": 176,
+          "accuracy": 0.703704,
+          "brier": 0.192576,
+          "log_loss": 0.566481,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 594,
+          "wins": 418,
+          "losses": 176,
+          "accuracy": 0.703704,
+          "brier": 0.192576,
+          "log_loss": 0.566481,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 594,
+          "wins": 418,
+          "losses": 176,
+          "accuracy": 0.703704,
+          "brier": 0.192588,
+          "log_loss": 0.566482,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "off_epa_missing_either": {
+        "baseline": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170382,
+          "log_loss": 0.498493,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 158,
+          "wins": 115,
+          "losses": 43,
+          "accuracy": 0.727848,
+          "brier": 0.171205,
+          "log_loss": 0.500648,
+          "flips": 3,
+          "fixed": 0,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169741,
+          "log_loss": 0.496895,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 158,
+          "wins": 116,
+          "losses": 42,
+          "accuracy": 0.734177,
+          "brier": 0.169535,
+          "log_loss": 0.496648,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.169594,
+          "log_loss": 0.496729,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169886,
+          "log_loss": 0.497355,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170248,
+          "log_loss": 0.498061,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "def_epa_missing_either": {
+        "baseline": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170382,
+          "log_loss": 0.498493,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 158,
+          "wins": 115,
+          "losses": 43,
+          "accuracy": 0.727848,
+          "brier": 0.171205,
+          "log_loss": 0.500648,
+          "flips": 3,
+          "fixed": 0,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169741,
+          "log_loss": 0.496895,
+          "flips": 7,
+          "fixed": 3,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 158,
+          "wins": 116,
+          "losses": 42,
+          "accuracy": 0.734177,
+          "brier": 0.169535,
+          "log_loss": 0.496648,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.169594,
+          "log_loss": 0.496729,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 158,
+          "wins": 117,
+          "losses": 41,
+          "accuracy": 0.740506,
+          "brier": 0.169886,
+          "log_loss": 0.497355,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 158,
+          "wins": 118,
+          "losses": 40,
+          "accuracy": 0.746835,
+          "brier": 0.170248,
+          "log_loss": 0.498061,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "both_teams_four_fbs_prior_games": {
+        "baseline": {
+          "n": 463,
+          "wins": 327,
+          "losses": 136,
+          "accuracy": 0.706263,
+          "brier": 0.194925,
+          "log_loss": 0.572638,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 463,
+          "wins": 329,
+          "losses": 134,
+          "accuracy": 0.710583,
+          "brier": 0.198113,
+          "log_loss": 0.58208,
+          "flips": 12,
+          "fixed": 7,
+          "broken": 5
+        },
+        "missing_neutral": {
+          "n": 463,
+          "wins": 327,
+          "losses": 136,
+          "accuracy": 0.706263,
+          "brier": 0.194925,
+          "log_loss": 0.572634,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 463,
+          "wins": 327,
+          "losses": 136,
+          "accuracy": 0.706263,
+          "brier": 0.194925,
+          "log_loss": 0.572638,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 463,
+          "wins": 327,
+          "losses": 136,
+          "accuracy": 0.706263,
+          "brier": 0.194925,
+          "log_loss": 0.572638,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 463,
+          "wins": 327,
+          "losses": 136,
+          "accuracy": 0.706263,
+          "brier": 0.194925,
+          "log_loss": 0.572638,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 463,
+          "wins": 327,
+          "losses": 136,
+          "accuracy": 0.706263,
+          "brier": 0.194925,
+          "log_loss": 0.572634,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_team_under_two_fbs_prior": {
+        "baseline": {
+          "n": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.170265,
+          "log_loss": 0.499135,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 151,
+          "wins": 111,
+          "losses": 40,
+          "accuracy": 0.735099,
+          "brier": 0.171153,
+          "log_loss": 0.50143,
+          "flips": 3,
+          "fixed": 0,
+          "broken": 3
+        },
+        "missing_neutral": {
+          "n": 151,
+          "wins": 112,
+          "losses": 39,
+          "accuracy": 0.741722,
+          "brier": 0.170118,
+          "log_loss": 0.498628,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_25": {
+          "n": 151,
+          "wins": 112,
+          "losses": 39,
+          "accuracy": 0.741722,
+          "brier": 0.169836,
+          "log_loss": 0.498177,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "raw_shrink_50": {
+          "n": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.169771,
+          "log_loss": 0.497989,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 151,
+          "wins": 113,
+          "losses": 38,
+          "accuracy": 0.748344,
+          "brier": 0.169924,
+          "log_loss": 0.49832,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 151,
+          "wins": 114,
+          "losses": 37,
+          "accuracy": 0.754967,
+          "brier": 0.170169,
+          "log_loss": 0.498823,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      }
+    },
+    "2025_all": {
+      "all": {
+        "baseline": {
+          "n": 762,
+          "wins": 546,
+          "losses": 216,
+          "accuracy": 0.716535,
+          "brier": 0.183029,
+          "log_loss": 0.538663,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 762,
+          "wins": 546,
+          "losses": 216,
+          "accuracy": 0.716535,
+          "brier": 0.1845,
+          "log_loss": 0.54227,
+          "flips": 28,
+          "fixed": 14,
+          "broken": 14
+        },
+        "missing_neutral": {
+          "n": 762,
+          "wins": 547,
+          "losses": 215,
+          "accuracy": 0.717848,
+          "brier": 0.183322,
+          "log_loss": 0.538992,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 762,
+          "wins": 547,
+          "losses": 215,
+          "accuracy": 0.717848,
+          "brier": 0.183397,
+          "log_loss": 0.539143,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 762,
+          "wins": 546,
+          "losses": 216,
+          "accuracy": 0.716535,
+          "brier": 0.183272,
+          "log_loss": 0.538897,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 762,
+          "wins": 546,
+          "losses": 216,
+          "accuracy": 0.716535,
+          "brier": 0.183148,
+          "log_loss": 0.538738,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 762,
+          "wins": 546,
+          "losses": 216,
+          "accuracy": 0.716535,
+          "brier": 0.18284,
+          "log_loss": 0.538146,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "early_weeks1_6": {
+        "baseline": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184023,
+          "log_loss": 0.537878,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 296,
+          "wins": 212,
+          "losses": 84,
+          "accuracy": 0.716216,
+          "brier": 0.185472,
+          "log_loss": 0.542055,
+          "flips": 7,
+          "fixed": 5,
+          "broken": 2
+        },
+        "missing_neutral": {
+          "n": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.18478,
+          "log_loss": 0.538723,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 296,
+          "wins": 210,
+          "losses": 86,
+          "accuracy": 0.709459,
+          "brier": 0.184972,
+          "log_loss": 0.539113,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184649,
+          "log_loss": 0.538479,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.184331,
+          "log_loss": 0.538069,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 296,
+          "wins": 209,
+          "losses": 87,
+          "accuracy": 0.706081,
+          "brier": 0.183537,
+          "log_loss": 0.536547,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "late_weeks7plus": {
+        "baseline": {
+          "n": 466,
+          "wins": 337,
+          "losses": 129,
+          "accuracy": 0.723176,
+          "brier": 0.182397,
+          "log_loss": 0.539162,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 466,
+          "wins": 334,
+          "losses": 132,
+          "accuracy": 0.716738,
+          "brier": 0.183882,
+          "log_loss": 0.542406,
+          "flips": 21,
+          "fixed": 9,
+          "broken": 12
+        },
+        "missing_neutral": {
+          "n": 466,
+          "wins": 337,
+          "losses": 129,
+          "accuracy": 0.723176,
+          "brier": 0.182397,
+          "log_loss": 0.539162,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 466,
+          "wins": 337,
+          "losses": 129,
+          "accuracy": 0.723176,
+          "brier": 0.182397,
+          "log_loss": 0.539162,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 466,
+          "wins": 337,
+          "losses": 129,
+          "accuracy": 0.723176,
+          "brier": 0.182397,
+          "log_loss": 0.539162,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 466,
+          "wins": 337,
+          "losses": 129,
+          "accuracy": 0.723176,
+          "brier": 0.182397,
+          "log_loss": 0.539162,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 466,
+          "wins": 337,
+          "losses": 129,
+          "accuracy": 0.723176,
+          "brier": 0.182397,
+          "log_loss": 0.539162,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_missing_adj_epa": {
+        "baseline": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.181802,
+          "log_loss": 0.53038,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183325,
+          "log_loss": 0.532343,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183394,
+          "log_loss": 0.532472,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.182777,
+          "log_loss": 0.531262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18217,
+          "log_loss": 0.530478,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18095,
+          "log_loss": 0.528187,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_raw_fallback_available": {
+        "baseline": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.197582,
+          "log_loss": 0.564748,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.196921,
+          "log_loss": 0.561883,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.200361,
+          "log_loss": 0.568323,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.200448,
+          "log_loss": 0.568479,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.199472,
+          "log_loss": 0.566565,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.198511,
+          "log_loss": 0.565325,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.196606,
+          "log_loss": 0.561749,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "missing_adjusted_but_raw_available": {
+        "baseline": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.197582,
+          "log_loss": 0.564748,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.196921,
+          "log_loss": 0.561883,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.200361,
+          "log_loss": 0.568323,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 98,
+          "wins": 67,
+          "losses": 31,
+          "accuracy": 0.683673,
+          "brier": 0.200448,
+          "log_loss": 0.568479,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.199472,
+          "log_loss": 0.566565,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.198511,
+          "log_loss": 0.565325,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 98,
+          "wins": 66,
+          "losses": 32,
+          "accuracy": 0.673469,
+          "brier": 0.196606,
+          "log_loss": 0.561749,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "adjusted_epa_for_both_teams": {
+        "baseline": {
+          "n": 607,
+          "wins": 436,
+          "losses": 171,
+          "accuracy": 0.718287,
+          "brier": 0.183398,
+          "log_loss": 0.540847,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 607,
+          "wins": 435,
+          "losses": 172,
+          "accuracy": 0.716639,
+          "brier": 0.185189,
+          "log_loss": 0.545306,
+          "flips": 27,
+          "fixed": 13,
+          "broken": 14
+        },
+        "missing_neutral": {
+          "n": 607,
+          "wins": 436,
+          "losses": 171,
+          "accuracy": 0.718287,
+          "brier": 0.183322,
+          "log_loss": 0.54069,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 607,
+          "wins": 436,
+          "losses": 171,
+          "accuracy": 0.718287,
+          "brier": 0.183398,
+          "log_loss": 0.540847,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 607,
+          "wins": 436,
+          "losses": 171,
+          "accuracy": 0.718287,
+          "brier": 0.183398,
+          "log_loss": 0.540847,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 607,
+          "wins": 436,
+          "losses": 171,
+          "accuracy": 0.718287,
+          "brier": 0.183398,
+          "log_loss": 0.540847,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 607,
+          "wins": 436,
+          "losses": 171,
+          "accuracy": 0.718287,
+          "brier": 0.183322,
+          "log_loss": 0.54069,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "off_epa_missing_either": {
+        "baseline": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.181802,
+          "log_loss": 0.53038,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183325,
+          "log_loss": 0.532343,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183394,
+          "log_loss": 0.532472,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.182777,
+          "log_loss": 0.531262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18217,
+          "log_loss": 0.530478,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18095,
+          "log_loss": 0.528187,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "def_epa_missing_either": {
+        "baseline": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.181802,
+          "log_loss": 0.53038,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183325,
+          "log_loss": 0.532343,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183394,
+          "log_loss": 0.532472,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.182777,
+          "log_loss": 0.531262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18217,
+          "log_loss": 0.530478,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18095,
+          "log_loss": 0.528187,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "both_teams_four_fbs_prior_games": {
+        "baseline": {
+          "n": 474,
+          "wins": 344,
+          "losses": 130,
+          "accuracy": 0.725738,
+          "brier": 0.181518,
+          "log_loss": 0.537152,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 474,
+          "wins": 341,
+          "losses": 133,
+          "accuracy": 0.719409,
+          "brier": 0.183127,
+          "log_loss": 0.540652,
+          "flips": 21,
+          "fixed": 9,
+          "broken": 12
+        },
+        "missing_neutral": {
+          "n": 474,
+          "wins": 344,
+          "losses": 130,
+          "accuracy": 0.725738,
+          "brier": 0.181518,
+          "log_loss": 0.537152,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 474,
+          "wins": 344,
+          "losses": 130,
+          "accuracy": 0.725738,
+          "brier": 0.181518,
+          "log_loss": 0.537152,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 474,
+          "wins": 344,
+          "losses": 130,
+          "accuracy": 0.725738,
+          "brier": 0.181518,
+          "log_loss": 0.537152,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 474,
+          "wins": 344,
+          "losses": 130,
+          "accuracy": 0.725738,
+          "brier": 0.181518,
+          "log_loss": 0.537152,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 474,
+          "wins": 344,
+          "losses": 130,
+          "accuracy": 0.725738,
+          "brier": 0.181518,
+          "log_loss": 0.537152,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_team_under_two_fbs_prior": {
+        "baseline": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.181583,
+          "log_loss": 0.530113,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.181802,
+          "log_loss": 0.53038,
+          "flips": 1,
+          "fixed": 1,
+          "broken": 0
+        },
+        "missing_neutral": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183325,
+          "log_loss": 0.532343,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 155,
+          "wins": 111,
+          "losses": 44,
+          "accuracy": 0.716129,
+          "brier": 0.183394,
+          "log_loss": 0.532472,
+          "flips": 5,
+          "fixed": 3,
+          "broken": 2
+        },
+        "raw_shrink_50": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.182777,
+          "log_loss": 0.531262,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18217,
+          "log_loss": 0.530478,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 155,
+          "wins": 110,
+          "losses": 45,
+          "accuracy": 0.709677,
+          "brier": 0.18095,
+          "log_loss": 0.528187,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      }
+    },
+    "2026_week1_6": {
+      "all": {
+        "baseline": {
+          "n": 329,
+          "wins": 242,
+          "losses": 87,
+          "accuracy": 0.735562,
+          "brier": 0.17117,
+          "log_loss": 0.512365,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 329,
+          "wins": 239,
+          "losses": 90,
+          "accuracy": 0.726444,
+          "brier": 0.174464,
+          "log_loss": 0.521592,
+          "flips": 9,
+          "fixed": 3,
+          "broken": 6
+        },
+        "missing_neutral": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.171025,
+          "log_loss": 0.511204,
+          "flips": 3,
+          "fixed": 1,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.170777,
+          "log_loss": 0.510832,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_50": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.170868,
+          "log_loss": 0.5112,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.171,
+          "log_loss": 0.511712,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.171418,
+          "log_loss": 0.512834,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        }
+      },
+      "early_weeks1_6": {
+        "baseline": {
+          "n": 329,
+          "wins": 242,
+          "losses": 87,
+          "accuracy": 0.735562,
+          "brier": 0.17117,
+          "log_loss": 0.512365,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 329,
+          "wins": 239,
+          "losses": 90,
+          "accuracy": 0.726444,
+          "brier": 0.174464,
+          "log_loss": 0.521592,
+          "flips": 9,
+          "fixed": 3,
+          "broken": 6
+        },
+        "missing_neutral": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.171025,
+          "log_loss": 0.511204,
+          "flips": 3,
+          "fixed": 1,
+          "broken": 2
+        },
+        "raw_shrink_25": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.170777,
+          "log_loss": 0.510832,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_50": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.170868,
+          "log_loss": 0.5112,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.171,
+          "log_loss": 0.511712,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 329,
+          "wins": 241,
+          "losses": 88,
+          "accuracy": 0.732523,
+          "brier": 0.171418,
+          "log_loss": 0.512834,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        }
+      },
+      "one_or_both_missing_adj_epa": {
+        "baseline": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144642,
+          "log_loss": 0.44904,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.14549,
+          "log_loss": 0.451287,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "missing_neutral": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144067,
+          "log_loss": 0.446097,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_25": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.143799,
+          "log_loss": 0.445744,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_50": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.143994,
+          "log_loss": 0.446535,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.144278,
+          "log_loss": 0.447638,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144912,
+          "log_loss": 0.449601,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_or_both_raw_fallback_available": {
+        "baseline": {
+          "n": 94,
+          "wins": 72,
+          "losses": 22,
+          "accuracy": 0.765957,
+          "brier": 0.151042,
+          "log_loss": 0.462249,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 94,
+          "wins": 71,
+          "losses": 23,
+          "accuracy": 0.755319,
+          "brier": 0.150911,
+          "log_loss": 0.462897,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "missing_neutral": {
+          "n": 94,
+          "wins": 72,
+          "losses": 22,
+          "accuracy": 0.765957,
+          "brier": 0.150108,
+          "log_loss": 0.457493,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_25": {
+          "n": 94,
+          "wins": 71,
+          "losses": 23,
+          "accuracy": 0.755319,
+          "brier": 0.149669,
+          "log_loss": 0.456883,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_50": {
+          "n": 94,
+          "wins": 71,
+          "losses": 23,
+          "accuracy": 0.755319,
+          "brier": 0.149988,
+          "log_loss": 0.458171,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 94,
+          "wins": 71,
+          "losses": 23,
+          "accuracy": 0.755319,
+          "brier": 0.15045,
+          "log_loss": 0.459966,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 94,
+          "wins": 72,
+          "losses": 22,
+          "accuracy": 0.765957,
+          "brier": 0.151483,
+          "log_loss": 0.463197,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "missing_adjusted_but_raw_available": {
+        "baseline": {
+          "n": 94,
+          "wins": 72,
+          "losses": 22,
+          "accuracy": 0.765957,
+          "brier": 0.151042,
+          "log_loss": 0.462249,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 94,
+          "wins": 71,
+          "losses": 23,
+          "accuracy": 0.755319,
+          "brier": 0.150911,
+          "log_loss": 0.462897,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "missing_neutral": {
+          "n": 94,
+          "wins": 72,
+          "losses": 22,
+          "accuracy": 0.765957,
+          "brier": 0.150108,
+          "log_loss": 0.457493,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_25": {
+          "n": 94,
+          "wins": 71,
+          "losses": 23,
+          "accuracy": 0.755319,
+          "brier": 0.149669,
+          "log_loss": 0.456883,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_50": {
+          "n": 94,
+          "wins": 71,
+          "losses": 23,
+          "accuracy": 0.755319,
+          "brier": 0.149988,
+          "log_loss": 0.458171,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 94,
+          "wins": 71,
+          "losses": 23,
+          "accuracy": 0.755319,
+          "brier": 0.15045,
+          "log_loss": 0.459966,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 94,
+          "wins": 72,
+          "losses": 22,
+          "accuracy": 0.765957,
+          "brier": 0.151483,
+          "log_loss": 0.463197,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "adjusted_epa_for_both_teams": {
+        "baseline": {
+          "n": 176,
+          "wins": 123,
+          "losses": 53,
+          "accuracy": 0.698864,
+          "brier": 0.19423,
+          "log_loss": 0.567414,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 176,
+          "wins": 121,
+          "losses": 55,
+          "accuracy": 0.6875,
+          "brier": 0.199651,
+          "log_loss": 0.582709,
+          "flips": 8,
+          "fixed": 3,
+          "broken": 5
+        },
+        "missing_neutral": {
+          "n": 176,
+          "wins": 122,
+          "losses": 54,
+          "accuracy": 0.693182,
+          "brier": 0.19446,
+          "log_loss": 0.567803,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_25": {
+          "n": 176,
+          "wins": 123,
+          "losses": 53,
+          "accuracy": 0.698864,
+          "brier": 0.19423,
+          "log_loss": 0.567414,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 176,
+          "wins": 123,
+          "losses": 53,
+          "accuracy": 0.698864,
+          "brier": 0.19423,
+          "log_loss": 0.567414,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 176,
+          "wins": 123,
+          "losses": 53,
+          "accuracy": 0.698864,
+          "brier": 0.19423,
+          "log_loss": 0.567414,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 176,
+          "wins": 122,
+          "losses": 54,
+          "accuracy": 0.693182,
+          "brier": 0.19446,
+          "log_loss": 0.567803,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        }
+      },
+      "off_epa_missing_either": {
+        "baseline": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144642,
+          "log_loss": 0.44904,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.14549,
+          "log_loss": 0.451287,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "missing_neutral": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144067,
+          "log_loss": 0.446097,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_25": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.143799,
+          "log_loss": 0.445744,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_50": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.143994,
+          "log_loss": 0.446535,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.144278,
+          "log_loss": 0.447638,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144912,
+          "log_loss": 0.449601,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "def_epa_missing_either": {
+        "baseline": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144642,
+          "log_loss": 0.44904,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.14549,
+          "log_loss": 0.451287,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "missing_neutral": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144067,
+          "log_loss": 0.446097,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_25": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.143799,
+          "log_loss": 0.445744,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_50": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.143994,
+          "log_loss": 0.446535,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.144278,
+          "log_loss": 0.447638,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144912,
+          "log_loss": 0.449601,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "both_teams_four_fbs_prior_games": {
+        "baseline": {
+          "n": 36,
+          "wins": 22,
+          "losses": 14,
+          "accuracy": 0.611111,
+          "brier": 0.218439,
+          "log_loss": 0.614523,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 36,
+          "wins": 21,
+          "losses": 15,
+          "accuracy": 0.583333,
+          "brier": 0.221296,
+          "log_loss": 0.620232,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "missing_neutral": {
+          "n": 36,
+          "wins": 22,
+          "losses": 14,
+          "accuracy": 0.611111,
+          "brier": 0.218439,
+          "log_loss": 0.614523,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 36,
+          "wins": 22,
+          "losses": 14,
+          "accuracy": 0.611111,
+          "brier": 0.218439,
+          "log_loss": 0.614523,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 36,
+          "wins": 22,
+          "losses": 14,
+          "accuracy": 0.611111,
+          "brier": 0.218439,
+          "log_loss": 0.614523,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 36,
+          "wins": 22,
+          "losses": 14,
+          "accuracy": 0.611111,
+          "brier": 0.218439,
+          "log_loss": 0.614523,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 36,
+          "wins": 22,
+          "losses": 14,
+          "accuracy": 0.611111,
+          "brier": 0.218439,
+          "log_loss": 0.614523,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "one_team_under_two_fbs_prior": {
+        "baseline": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144642,
+          "log_loss": 0.44904,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.14549,
+          "log_loss": 0.451287,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "missing_neutral": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144067,
+          "log_loss": 0.446097,
+          "flips": 2,
+          "fixed": 1,
+          "broken": 1
+        },
+        "raw_shrink_25": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.143799,
+          "log_loss": 0.445744,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_50": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.143994,
+          "log_loss": 0.446535,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "raw_shrink_75": {
+          "n": 153,
+          "wins": 118,
+          "losses": 35,
+          "accuracy": 0.771242,
+          "brier": 0.144278,
+          "log_loss": 0.447638,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "separate_standardization": {
+          "n": 153,
+          "wins": 119,
+          "losses": 34,
+          "accuracy": 0.777778,
+          "brier": 0.144912,
+          "log_loss": 0.449601,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      }
+    },
+    "2026_frozen_week5_6": {
+      "all": {
+        "baseline": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 112,
+          "wins": 75,
+          "losses": 37,
+          "accuracy": 0.669643,
+          "brier": 0.215775,
+          "log_loss": 0.625326,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "missing_neutral": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "early_weeks1_6": {
+        "baseline": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 112,
+          "wins": 75,
+          "losses": 37,
+          "accuracy": 0.669643,
+          "brier": 0.215775,
+          "log_loss": 0.625326,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "missing_neutral": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "adjusted_epa_for_both_teams": {
+        "baseline": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 112,
+          "wins": 75,
+          "losses": 37,
+          "accuracy": 0.669643,
+          "brier": 0.215775,
+          "log_loss": 0.625326,
+          "flips": 6,
+          "fixed": 2,
+          "broken": 4
+        },
+        "missing_neutral": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.208983,
+          "log_loss": 0.606358,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      },
+      "both_teams_four_fbs_prior_games": {
+        "baseline": {
+          "n": 34,
+          "wins": 20,
+          "losses": 14,
+          "accuracy": 0.588235,
+          "brier": 0.231259,
+          "log_loss": 0.649472,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_all": {
+          "n": 34,
+          "wins": 19,
+          "losses": 15,
+          "accuracy": 0.558824,
+          "brier": 0.234293,
+          "log_loss": 0.655687,
+          "flips": 1,
+          "fixed": 0,
+          "broken": 1
+        },
+        "missing_neutral": {
+          "n": 34,
+          "wins": 20,
+          "losses": 14,
+          "accuracy": 0.588235,
+          "brier": 0.231259,
+          "log_loss": 0.649472,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_25": {
+          "n": 34,
+          "wins": 20,
+          "losses": 14,
+          "accuracy": 0.588235,
+          "brier": 0.231259,
+          "log_loss": 0.649472,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_50": {
+          "n": 34,
+          "wins": 20,
+          "losses": 14,
+          "accuracy": 0.588235,
+          "brier": 0.231259,
+          "log_loss": 0.649472,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "raw_shrink_75": {
+          "n": 34,
+          "wins": 20,
+          "losses": 14,
+          "accuracy": 0.588235,
+          "brier": 0.231259,
+          "log_loss": 0.649472,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        },
+        "separate_standardization": {
+          "n": 34,
+          "wins": 20,
+          "losses": 14,
+          "accuracy": 0.588235,
+          "brier": 0.231259,
+          "log_loss": 0.649472,
+          "flips": 0,
+          "fixed": 0,
+          "broken": 0
+        }
+      }
+    }
+  },
+  "test_c": {
+    "2024_early": {
+      "baseline": {
+        "n": 263,
+        "wins": 190,
+        "losses": 73,
+        "accuracy": 0.722433,
+        "brier": 0.180681,
+        "log_loss": 0.532669,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_all": {
+        "n": 263,
+        "wins": 191,
+        "losses": 72,
+        "accuracy": 0.726236,
+        "brier": 0.180608,
+        "log_loss": 0.532651,
+        "flips": 1,
+        "fixed": 1,
+        "broken": 0
+      },
+      "missing_neutral": {
+        "n": 263,
+        "wins": 190,
+        "losses": 73,
+        "accuracy": 0.722433,
+        "brier": 0.180869,
+        "log_loss": 0.533035,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_25": {
+        "n": 263,
+        "wins": 190,
+        "losses": 73,
+        "accuracy": 0.722433,
+        "brier": 0.180805,
+        "log_loss": 0.532933,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_50": {
+        "n": 263,
+        "wins": 190,
+        "losses": 73,
+        "accuracy": 0.722433,
+        "brier": 0.180755,
+        "log_loss": 0.532821,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_75": {
+        "n": 263,
+        "wins": 190,
+        "losses": 73,
+        "accuracy": 0.722433,
+        "brier": 0.180714,
+        "log_loss": 0.532734,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "separate_standardization": {
+        "n": 263,
+        "wins": 190,
+        "losses": 73,
+        "accuracy": 0.722433,
+        "brier": 0.18071,
+        "log_loss": 0.5327,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "2025_early": {
+      "baseline": {
+        "n": 269,
+        "wins": 199,
+        "losses": 70,
+        "accuracy": 0.739777,
+        "brier": 0.180532,
+        "log_loss": 0.535503,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_all": {
+        "n": 269,
+        "wins": 199,
+        "losses": 70,
+        "accuracy": 0.739777,
+        "brier": 0.180588,
+        "log_loss": 0.535874,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "missing_neutral": {
+        "n": 269,
+        "wins": 199,
+        "losses": 70,
+        "accuracy": 0.739777,
+        "brier": 0.180676,
+        "log_loss": 0.536,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_25": {
+        "n": 269,
+        "wins": 199,
+        "losses": 70,
+        "accuracy": 0.739777,
+        "brier": 0.18073,
+        "log_loss": 0.536082,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_50": {
+        "n": 269,
+        "wins": 199,
+        "losses": 70,
+        "accuracy": 0.739777,
+        "brier": 0.180673,
+        "log_loss": 0.535907,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_75": {
+        "n": 269,
+        "wins": 199,
+        "losses": 70,
+        "accuracy": 0.739777,
+        "brier": 0.180607,
+        "log_loss": 0.535714,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "separate_standardization": {
+        "n": 269,
+        "wins": 199,
+        "losses": 70,
+        "accuracy": 0.739777,
+        "brier": 0.180441,
+        "log_loss": 0.535301,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "2024_full": {
+      "baseline": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.183489,
+        "log_loss": 0.542297,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_all": {
+        "n": 717,
+        "wins": 512,
+        "losses": 205,
+        "accuracy": 0.714086,
+        "brier": 0.183616,
+        "log_loss": 0.542802,
+        "flips": 3,
+        "fixed": 3,
+        "broken": 0
+      },
+      "missing_neutral": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.183558,
+        "log_loss": 0.542432,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_25": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.183535,
+        "log_loss": 0.542394,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_50": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.183517,
+        "log_loss": 0.542353,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_75": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.183501,
+        "log_loss": 0.542321,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "separate_standardization": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.1835,
+        "log_loss": 0.542309,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "2025_full": {
+      "baseline": {
+        "n": 720,
+        "wins": 527,
+        "losses": 193,
+        "accuracy": 0.731944,
+        "brier": 0.182276,
+        "log_loss": 0.540736,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_all": {
+        "n": 720,
+        "wins": 530,
+        "losses": 190,
+        "accuracy": 0.736111,
+        "brier": 0.182214,
+        "log_loss": 0.540625,
+        "flips": 7,
+        "fixed": 5,
+        "broken": 2
+      },
+      "missing_neutral": {
+        "n": 720,
+        "wins": 527,
+        "losses": 193,
+        "accuracy": 0.731944,
+        "brier": 0.18233,
+        "log_loss": 0.540922,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_25": {
+        "n": 720,
+        "wins": 527,
+        "losses": 193,
+        "accuracy": 0.731944,
+        "brier": 0.182351,
+        "log_loss": 0.540952,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_50": {
+        "n": 720,
+        "wins": 527,
+        "losses": 193,
+        "accuracy": 0.731944,
+        "brier": 0.182329,
+        "log_loss": 0.540887,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_75": {
+        "n": 720,
+        "wins": 527,
+        "losses": 193,
+        "accuracy": 0.731944,
+        "brier": 0.182304,
+        "log_loss": 0.540815,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "separate_standardization": {
+        "n": 720,
+        "wins": 527,
+        "losses": 193,
+        "accuracy": 0.731944,
+        "brier": 0.182243,
+        "log_loss": 0.54066,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "2026_frozen_w5_6": {
+      "baseline": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.696429,
+        "brier": 0.191192,
+        "log_loss": 0.559877,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_all": {
+        "n": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.192032,
+        "log_loss": 0.561817,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "missing_neutral": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.696429,
+        "brier": 0.191192,
+        "log_loss": 0.559877,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_25": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.696429,
+        "brier": 0.191192,
+        "log_loss": 0.559877,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_50": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.696429,
+        "brier": 0.191192,
+        "log_loss": 0.559877,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "raw_shrink_75": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.696429,
+        "brier": 0.191192,
+        "log_loss": 0.559877,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "separate_standardization": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.696429,
+        "brier": 0.191192,
+        "log_loss": 0.559877,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    }
+  },
+  "limits": [
+    "Weekly source data retrieved currently may differ from what was public before historical game starts.",
+    "2026 modified V1.5 predictor probabilities are retrospective sensitivity adjustments to frozen V1.5 baselines, not separately frozen forecasts.",
+    "Eligibility includes regular-season FBS-versus-FBS games; underlying cumulative summary statistics may include FCS competition.",
+    "The source completeness check reflects last available pre-week team records; missing whole-team row distinct from absent adjusted EPA.",
+    "2024 selection introduces tuning bias and previous V1.5 model weights used past-season data.",
+    "Market quotes use different books (ESPN BET historically, original archived sportsbook in 2026).",
+    "All financial/ROI/ATS results are out of scope and betting tiers are unaffected."
+  ]
+}
