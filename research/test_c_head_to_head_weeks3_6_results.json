@@ -1,0 +1,1967 @@
+{
+  "name": "Test C alert and challenger vs V1.5, 2026 Weeks 3\u20136",
+  "generated_utc": "2026-10-13T18:08:05.734095+00:00",
+  "definition": {
+    "warning": "V1.5 chosen winner >=70%; no-vig DraftKings OPEN probability same team <55%",
+    "market_switch": "Change only flagged winners when DK favorite is the opposite side",
+    "fade": "Invert every flagged winner, regardless of DK favorite (diagnostic only)",
+    "abstain": "Exclude flagged picks; report remaining pick accuracy and coverage",
+    "blend": "Re-pick blended home probability, 16.9279269% V1.5 and 83.0720731% DK",
+    "week3_4": "V1.5 retrospection from prior-week 2026 summaries currently published",
+    "week5_6": "frozen pregame original V1.5 snapshots with score verification"
+  },
+  "cautions": [
+    "Threshold was chosen after studying Weeks 5\u20136 2026; Week 5\u20136 is in-sample",
+    "Weeks 3\u20134 use retrospective V1.5, not locked game-day forecasts; no genuinely prospective out-of-sample test in this comparison",
+    "Betting raw archive opening lines can be edited/revised and lack independent publication timestamps",
+    "Market prices may be absent for some games; headline head-to-head uses only common quoted games",
+    "The warning is a rare event; forced flips and abstention cannot be interpreted as betting profitability"
+  ],
+  "data_audit": {
+    "schedule_total": 229,
+    "with_baseline": 227,
+    "excluded_without_baseline": [
+      {
+        "id": "401858257",
+        "week": 6,
+        "game": "Stanford at Notre Dame",
+        "reason": "missing_pregame_frozen_v15"
+      },
+      {
+        "id": "401858483",
+        "week": 6,
+        "game": "Maryland at Ohio State",
+        "reason": "missing_pregame_frozen_v15"
+      }
+    ],
+    "total_with_open": 221,
+    "total_with_close": 221,
+    "frozen": 112,
+    "retrospective": 115,
+    "odds_failure_reasons": {}
+  },
+  "by_week": {
+    "3": {
+      "scheduled_model": {
+        "n": 57,
+        "wins": 47,
+        "losses": 10,
+        "accuracy": 0.82456,
+        "brier": 0.135029,
+        "log_loss": 0.418352
+      },
+      "dk_coverage_n": 53,
+      "dk_coverage_rate": 0.92982,
+      "same_quote_cohort": {
+        "v15": {
+          "n": 53,
+          "wins": 43,
+          "losses": 10,
+          "accuracy": 0.81132,
+          "brier": 0.145203,
+          "log_loss": 0.449039
+        },
+        "c_market_switch": {
+          "n": 53,
+          "wins": 42,
+          "losses": 11,
+          "accuracy": 0.79245,
+          "brier": 0.149866,
+          "log_loss": 0.459701
+        },
+        "c_fade_every_warning": {
+          "n": 53,
+          "wins": 42,
+          "losses": 11,
+          "accuracy": 0.79245,
+          "brier": 0.158092,
+          "log_loss": 0.480543
+        },
+        "market_only": {
+          "n": 53,
+          "wins": 46,
+          "losses": 7,
+          "accuracy": 0.86792,
+          "brier": 0.11888,
+          "log_loss": 0.376712
+        },
+        "existing_1693_blend": {
+          "n": 53,
+          "wins": 45,
+          "losses": 8,
+          "accuracy": 0.84906,
+          "brier": 0.120868,
+          "log_loss": 0.384111
+        },
+        "half_half": {
+          "n": 53,
+          "wins": 45,
+          "losses": 8,
+          "accuracy": 0.84906,
+          "brier": 0.127655,
+          "log_loss": 0.403589
+        }
+      },
+      "flags_n": 1,
+      "flags_model_correct": 1,
+      "flags_model_incorrect": 0,
+      "flags_market_agrees": 0,
+      "flags_market_disagrees": 1,
+      "baseline_after_exclusion": {
+        "n": 52,
+        "wins": 42,
+        "losses": 10,
+        "accuracy": 0.80769,
+        "brier": 0.147513,
+        "log_loss": 0.454356
+      },
+      "remaining_games": 52,
+      "switched_n": 1,
+      "switched_fixed": 0,
+      "switched_broken": 1,
+      "flagged_games": [
+        {
+          "id": "401860887",
+          "week": 3,
+          "game": "James Madison at San Diego State",
+          "model_picked_team": "James Madison",
+          "model_confidence": 0.8415422966681874,
+          "market_on_pick": 0.4782608695652174,
+          "home_ml": -120.0,
+          "away_ml": 100.0,
+          "model_correct": 1,
+          "market_agrees": false,
+          "c_correct": 0
+        }
+      ],
+      "changed_games": [
+        {
+          "id": "401860887",
+          "week": 3,
+          "game": "James Madison at San Diego State",
+          "model_picked_team": "James Madison",
+          "model_confidence": 0.8415422966681874,
+          "market_on_pick": 0.4782608695652174,
+          "model_correct": 1,
+          "c_correct": 0
+        }
+      ]
+    },
+    "4": {
+      "scheduled_model": {
+        "n": 58,
+        "wins": 40,
+        "losses": 18,
+        "accuracy": 0.68966,
+        "brier": 0.179345,
+        "log_loss": 0.527188
+      },
+      "dk_coverage_n": 56,
+      "dk_coverage_rate": 0.96552,
+      "same_quote_cohort": {
+        "v15": {
+          "n": 56,
+          "wins": 38,
+          "losses": 18,
+          "accuracy": 0.67857,
+          "brier": 0.185724,
+          "log_loss": 0.545108
+        },
+        "c_market_switch": {
+          "n": 56,
+          "wins": 37,
+          "losses": 19,
+          "accuracy": 0.66071,
+          "brier": 0.186812,
+          "log_loss": 0.547446
+        },
+        "c_fade_every_warning": {
+          "n": 56,
+          "wins": 37,
+          "losses": 19,
+          "accuracy": 0.66071,
+          "brier": 0.195521,
+          "log_loss": 0.567105
+        },
+        "market_only": {
+          "n": 56,
+          "wins": 45,
+          "losses": 11,
+          "accuracy": 0.80357,
+          "brier": 0.159508,
+          "log_loss": 0.485952
+        },
+        "existing_1693_blend": {
+          "n": 56,
+          "wins": 46,
+          "losses": 10,
+          "accuracy": 0.82143,
+          "brier": 0.161334,
+          "log_loss": 0.490816
+        },
+        "half_half": {
+          "n": 56,
+          "wins": 43,
+          "losses": 13,
+          "accuracy": 0.76786,
+          "brier": 0.167973,
+          "log_loss": 0.506264
+        }
+      },
+      "flags_n": 3,
+      "flags_model_correct": 2,
+      "flags_model_incorrect": 1,
+      "flags_market_agrees": 0,
+      "flags_market_disagrees": 3,
+      "baseline_after_exclusion": {
+        "n": 53,
+        "wins": 36,
+        "losses": 17,
+        "accuracy": 0.67925,
+        "brier": 0.183745,
+        "log_loss": 0.540234
+      },
+      "remaining_games": 53,
+      "switched_n": 3,
+      "switched_fixed": 1,
+      "switched_broken": 2,
+      "flagged_games": [
+        {
+          "id": "401869941",
+          "week": 4,
+          "game": "Liberty at Coastal Carolina",
+          "model_picked_team": "Liberty",
+          "model_confidence": 0.7376864331311068,
+          "market_on_pick": 0.4782608695652174,
+          "home_ml": -120.0,
+          "away_ml": 100.0,
+          "model_correct": 1,
+          "market_agrees": false,
+          "c_correct": 0
+        },
+        {
+          "id": "401860893",
+          "week": 4,
+          "game": "San Diego State at Toledo",
+          "model_picked_team": "Toledo",
+          "model_confidence": 0.7724905696599945,
+          "market_on_pick": 0.4826358742837298,
+          "home_ml": -102.0,
+          "away_ml": -118.0,
+          "model_correct": 1,
+          "market_agrees": false,
+          "c_correct": 0
+        },
+        {
+          "id": "401861970",
+          "week": 4,
+          "game": "UConn at Miami (OH)",
+          "model_picked_team": "UConn",
+          "model_confidence": 0.735868149083337,
+          "market_on_pick": 0.4279403644395362,
+          "home_ml": -148.0,
+          "away_ml": 124.0,
+          "model_correct": 0,
+          "market_agrees": false,
+          "c_correct": 1
+        }
+      ],
+      "changed_games": [
+        {
+          "id": "401869941",
+          "week": 4,
+          "game": "Liberty at Coastal Carolina",
+          "model_picked_team": "Liberty",
+          "model_confidence": 0.7376864331311068,
+          "market_on_pick": 0.4782608695652174,
+          "model_correct": 1,
+          "c_correct": 0
+        },
+        {
+          "id": "401860893",
+          "week": 4,
+          "game": "San Diego State at Toledo",
+          "model_picked_team": "Toledo",
+          "model_confidence": 0.7724905696599945,
+          "market_on_pick": 0.4826358742837298,
+          "model_correct": 1,
+          "c_correct": 0
+        },
+        {
+          "id": "401861970",
+          "week": 4,
+          "game": "UConn at Miami (OH)",
+          "model_picked_team": "UConn",
+          "model_confidence": 0.735868149083337,
+          "market_on_pick": 0.4279403644395362,
+          "model_correct": 0,
+          "c_correct": 1
+        }
+      ]
+    },
+    "5": {
+      "scheduled_model": {
+        "n": 56,
+        "wins": 42,
+        "losses": 14,
+        "accuracy": 0.75,
+        "brier": 0.184914,
+        "log_loss": 0.546282
+      },
+      "dk_coverage_n": 56,
+      "dk_coverage_rate": 1.0,
+      "same_quote_cohort": {
+        "v15": {
+          "n": 56,
+          "wins": 42,
+          "losses": 14,
+          "accuracy": 0.75,
+          "brier": 0.184914,
+          "log_loss": 0.546282
+        },
+        "c_market_switch": {
+          "n": 56,
+          "wins": 41,
+          "losses": 15,
+          "accuracy": 0.73214,
+          "brier": 0.190998,
+          "log_loss": 0.559049
+        },
+        "c_fade_every_warning": {
+          "n": 56,
+          "wins": 40,
+          "losses": 16,
+          "accuracy": 0.71429,
+          "brier": 0.203883,
+          "log_loss": 0.589011
+        },
+        "market_only": {
+          "n": 56,
+          "wins": 38,
+          "losses": 18,
+          "accuracy": 0.67857,
+          "brier": 0.186435,
+          "log_loss": 0.540156
+        },
+        "existing_1693_blend": {
+          "n": 56,
+          "wins": 41,
+          "losses": 15,
+          "accuracy": 0.73214,
+          "brier": 0.183726,
+          "log_loss": 0.536478
+        },
+        "half_half": {
+          "n": 56,
+          "wins": 41,
+          "losses": 15,
+          "accuracy": 0.73214,
+          "brier": 0.181316,
+          "log_loss": 0.534799
+        }
+      },
+      "flags_n": 2,
+      "flags_model_correct": 2,
+      "flags_model_incorrect": 0,
+      "flags_market_agrees": 1,
+      "flags_market_disagrees": 1,
+      "baseline_after_exclusion": {
+        "n": 54,
+        "wins": 40,
+        "losses": 14,
+        "accuracy": 0.74074,
+        "brier": 0.189669,
+        "log_loss": 0.556571
+      },
+      "remaining_games": 54,
+      "switched_n": 1,
+      "switched_fixed": 0,
+      "switched_broken": 1,
+      "flagged_games": [
+        {
+          "id": "401858245",
+          "week": 5,
+          "game": "Pittsburgh at Virginia Tech",
+          "model_picked_team": "Pittsburgh",
+          "model_confidence": 0.7262201586881623,
+          "market_on_pick": 0.35527082119976705,
+          "home_ml": -205.0,
+          "away_ml": 170.0,
+          "model_correct": 1,
+          "market_agrees": false,
+          "c_correct": 0
+        },
+        {
+          "id": "401856822",
+          "week": 5,
+          "game": "West Virginia at Iowa State",
+          "model_picked_team": "Iowa State",
+          "model_confidence": 0.8049163347780218,
+          "market_on_pick": 0.5108342361863488,
+          "home_ml": -115.0,
+          "away_ml": -105.0,
+          "model_correct": 1,
+          "market_agrees": true,
+          "c_correct": 1
+        }
+      ],
+      "changed_games": [
+        {
+          "id": "401858245",
+          "week": 5,
+          "game": "Pittsburgh at Virginia Tech",
+          "model_picked_team": "Pittsburgh",
+          "model_confidence": 0.7262201586881623,
+          "market_on_pick": 0.35527082119976705,
+          "model_correct": 1,
+          "c_correct": 0
+        }
+      ]
+    },
+    "6": {
+      "scheduled_model": {
+        "n": 56,
+        "wins": 35,
+        "losses": 21,
+        "accuracy": 0.625,
+        "brier": 0.233053,
+        "log_loss": 0.666435
+      },
+      "dk_coverage_n": 56,
+      "dk_coverage_rate": 1.0,
+      "same_quote_cohort": {
+        "v15": {
+          "n": 56,
+          "wins": 35,
+          "losses": 21,
+          "accuracy": 0.625,
+          "brier": 0.233053,
+          "log_loss": 0.666435
+        },
+        "c_market_switch": {
+          "n": 56,
+          "wins": 37,
+          "losses": 19,
+          "accuracy": 0.66071,
+          "brier": 0.216931,
+          "log_loss": 0.630055
+        },
+        "c_fade_every_warning": {
+          "n": 56,
+          "wins": 37,
+          "losses": 19,
+          "accuracy": 0.66071,
+          "brier": 0.211469,
+          "log_loss": 0.61647
+        },
+        "market_only": {
+          "n": 56,
+          "wins": 37,
+          "losses": 19,
+          "accuracy": 0.66071,
+          "brier": 0.212191,
+          "log_loss": 0.614307
+        },
+        "existing_1693_blend": {
+          "n": 56,
+          "wins": 37,
+          "losses": 19,
+          "accuracy": 0.66071,
+          "brier": 0.212019,
+          "log_loss": 0.613359
+        },
+        "half_half": {
+          "n": 56,
+          "wins": 36,
+          "losses": 20,
+          "accuracy": 0.64286,
+          "brier": 0.216039,
+          "log_loss": 0.622144
+        }
+      },
+      "flags_n": 4,
+      "flags_model_correct": 1,
+      "flags_model_incorrect": 3,
+      "flags_market_agrees": 2,
+      "flags_market_disagrees": 2,
+      "baseline_after_exclusion": {
+        "n": 52,
+        "wins": 34,
+        "losses": 18,
+        "accuracy": 0.65385,
+        "brier": 0.213983,
+        "log_loss": 0.622594
+      },
+      "remaining_games": 52,
+      "switched_n": 2,
+      "switched_fixed": 2,
+      "switched_broken": 0,
+      "flagged_games": [
+        {
+          "id": "401858260",
+          "week": 6,
+          "game": "Wake Forest at NC State",
+          "model_picked_team": "Wake Forest",
+          "model_confidence": 0.7618074086516152,
+          "market_on_pick": 0.5427435387673956,
+          "home_ml": 110.0,
+          "away_ml": -130.0,
+          "model_correct": 1,
+          "market_agrees": true,
+          "c_correct": 1
+        },
+        {
+          "id": "401866436",
+          "week": 6,
+          "game": "Sacramento State at Bowling Green",
+          "model_picked_team": "Sacramento State",
+          "model_confidence": 0.7644400223296439,
+          "market_on_pick": 0.3194444444444444,
+          "home_ml": -245.0,
+          "away_ml": 200.0,
+          "model_correct": 0,
+          "market_agrees": false,
+          "c_correct": 1
+        },
+        {
+          "id": "401869965",
+          "week": 6,
+          "game": "Louisiana at Louisiana Tech",
+          "model_picked_team": "Louisiana",
+          "model_confidence": 0.7994288842240219,
+          "market_on_pick": 0.46753246753246747,
+          "home_ml": -125.0,
+          "away_ml": 105.0,
+          "model_correct": 0,
+          "market_agrees": false,
+          "c_correct": 1
+        },
+        {
+          "id": "401858485",
+          "week": 6,
+          "game": "USC at Penn State",
+          "model_picked_team": "Penn State",
+          "model_confidence": 0.8023063745278046,
+          "market_on_pick": 0.5043297540699688,
+          "home_ml": -112.0,
+          "away_ml": -108.0,
+          "model_correct": 0,
+          "market_agrees": true,
+          "c_correct": 0
+        }
+      ],
+      "changed_games": [
+        {
+          "id": "401866436",
+          "week": 6,
+          "game": "Sacramento State at Bowling Green",
+          "model_picked_team": "Sacramento State",
+          "model_confidence": 0.7644400223296439,
+          "market_on_pick": 0.3194444444444444,
+          "model_correct": 0,
+          "c_correct": 1
+        },
+        {
+          "id": "401869965",
+          "week": 6,
+          "game": "Louisiana at Louisiana Tech",
+          "model_picked_team": "Louisiana",
+          "model_confidence": 0.7994288842240219,
+          "market_on_pick": 0.46753246753246747,
+          "model_correct": 0,
+          "c_correct": 1
+        }
+      ]
+    }
+  },
+  "all_weeks": {
+    "scheduled_model": {
+      "n": 227,
+      "wins": 164,
+      "losses": 63,
+      "accuracy": 0.72247,
+      "brier": 0.182841,
+      "log_loss": 0.538921
+    },
+    "dk_coverage_n": 221,
+    "dk_coverage_rate": 0.97357,
+    "same_quote_cohort": {
+      "v15": {
+        "n": 221,
+        "wins": 158,
+        "losses": 63,
+        "accuracy": 0.71493,
+        "brier": 0.187794,
+        "log_loss": 0.55311
+      },
+      "c_market_switch": {
+        "n": 221,
+        "wins": 157,
+        "losses": 64,
+        "accuracy": 0.71041,
+        "brier": 0.186644,
+        "log_loss": 0.550276
+      },
+      "c_fade_every_warning": {
+        "n": 221,
+        "wins": 156,
+        "losses": 65,
+        "accuracy": 0.70588,
+        "brier": 0.192705,
+        "log_loss": 0.564405
+      },
+      "market_only": {
+        "n": 221,
+        "wins": 166,
+        "losses": 55,
+        "accuracy": 0.75113,
+        "brier": 0.169937,
+        "log_loss": 0.506014
+      },
+      "existing_1693_blend": {
+        "n": 221,
+        "wins": 169,
+        "losses": 52,
+        "accuracy": 0.76471,
+        "brier": 0.170147,
+        "log_loss": 0.507848
+      },
+      "half_half": {
+        "n": 221,
+        "wins": 165,
+        "losses": 56,
+        "accuracy": 0.74661,
+        "brier": 0.173864,
+        "log_loss": 0.518235
+      }
+    },
+    "flags_n": 10,
+    "flags_model_correct": 6,
+    "flags_model_incorrect": 4,
+    "flags_market_agrees": 3,
+    "flags_market_disagrees": 7,
+    "baseline_after_exclusion": {
+      "n": 211,
+      "wins": 152,
+      "losses": 59,
+      "accuracy": 0.72038,
+      "brier": 0.183784,
+      "log_loss": 0.543548
+    },
+    "remaining_games": 211,
+    "switched_n": 7,
+    "switched_fixed": 3,
+    "switched_broken": 4,
+    "flagged_games": [
+      {
+        "id": "401860887",
+        "week": 3,
+        "game": "James Madison at San Diego State",
+        "model_picked_team": "James Madison",
+        "model_confidence": 0.8415422966681874,
+        "market_on_pick": 0.4782608695652174,
+        "home_ml": -120.0,
+        "away_ml": 100.0,
+        "model_correct": 1,
+        "market_agrees": false,
+        "c_correct": 0
+      },
+      {
+        "id": "401869941",
+        "week": 4,
+        "game": "Liberty at Coastal Carolina",
+        "model_picked_team": "Liberty",
+        "model_confidence": 0.7376864331311068,
+        "market_on_pick": 0.4782608695652174,
+        "home_ml": -120.0,
+        "away_ml": 100.0,
+        "model_correct": 1,
+        "market_agrees": false,
+        "c_correct": 0
+      },
+      {
+        "id": "401860893",
+        "week": 4,
+        "game": "San Diego State at Toledo",
+        "model_picked_team": "Toledo",
+        "model_confidence": 0.7724905696599945,
+        "market_on_pick": 0.4826358742837298,
+        "home_ml": -102.0,
+        "away_ml": -118.0,
+        "model_correct": 1,
+        "market_agrees": false,
+        "c_correct": 0
+      },
+      {
+        "id": "401861970",
+        "week": 4,
+        "game": "UConn at Miami (OH)",
+        "model_picked_team": "UConn",
+        "model_confidence": 0.735868149083337,
+        "market_on_pick": 0.4279403644395362,
+        "home_ml": -148.0,
+        "away_ml": 124.0,
+        "model_correct": 0,
+        "market_agrees": false,
+        "c_correct": 1
+      },
+      {
+        "id": "401858245",
+        "week": 5,
+        "game": "Pittsburgh at Virginia Tech",
+        "model_picked_team": "Pittsburgh",
+        "model_confidence": 0.7262201586881623,
+        "market_on_pick": 0.35527082119976705,
+        "home_ml": -205.0,
+        "away_ml": 170.0,
+        "model_correct": 1,
+        "market_agrees": false,
+        "c_correct": 0
+      },
+      {
+        "id": "401856822",
+        "week": 5,
+        "game": "West Virginia at Iowa State",
+        "model_picked_team": "Iowa State",
+        "model_confidence": 0.8049163347780218,
+        "market_on_pick": 0.5108342361863488,
+        "home_ml": -115.0,
+        "away_ml": -105.0,
+        "model_correct": 1,
+        "market_agrees": true,
+        "c_correct": 1
+      },
+      {
+        "id": "401858260",
+        "week": 6,
+        "game": "Wake Forest at NC State",
+        "model_picked_team": "Wake Forest",
+        "model_confidence": 0.7618074086516152,
+        "market_on_pick": 0.5427435387673956,
+        "home_ml": 110.0,
+        "away_ml": -130.0,
+        "model_correct": 1,
+        "market_agrees": true,
+        "c_correct": 1
+      },
+      {
+        "id": "401866436",
+        "week": 6,
+        "game": "Sacramento State at Bowling Green",
+        "model_picked_team": "Sacramento State",
+        "model_confidence": 0.7644400223296439,
+        "market_on_pick": 0.3194444444444444,
+        "home_ml": -245.0,
+        "away_ml": 200.0,
+        "model_correct": 0,
+        "market_agrees": false,
+        "c_correct": 1
+      },
+      {
+        "id": "401869965",
+        "week": 6,
+        "game": "Louisiana at Louisiana Tech",
+        "model_picked_team": "Louisiana",
+        "model_confidence": 0.7994288842240219,
+        "market_on_pick": 0.46753246753246747,
+        "home_ml": -125.0,
+        "away_ml": 105.0,
+        "model_correct": 0,
+        "market_agrees": false,
+        "c_correct": 1
+      },
+      {
+        "id": "401858485",
+        "week": 6,
+        "game": "USC at Penn State",
+        "model_picked_team": "Penn State",
+        "model_confidence": 0.8023063745278046,
+        "market_on_pick": 0.5043297540699688,
+        "home_ml": -112.0,
+        "away_ml": -108.0,
+        "model_correct": 0,
+        "market_agrees": true,
+        "c_correct": 0
+      }
+    ],
+    "changed_games": [
+      {
+        "id": "401860887",
+        "week": 3,
+        "game": "James Madison at San Diego State",
+        "model_picked_team": "James Madison",
+        "model_confidence": 0.8415422966681874,
+        "market_on_pick": 0.4782608695652174,
+        "model_correct": 1,
+        "c_correct": 0
+      },
+      {
+        "id": "401869941",
+        "week": 4,
+        "game": "Liberty at Coastal Carolina",
+        "model_picked_team": "Liberty",
+        "model_confidence": 0.7376864331311068,
+        "market_on_pick": 0.4782608695652174,
+        "model_correct": 1,
+        "c_correct": 0
+      },
+      {
+        "id": "401860893",
+        "week": 4,
+        "game": "San Diego State at Toledo",
+        "model_picked_team": "Toledo",
+        "model_confidence": 0.7724905696599945,
+        "market_on_pick": 0.4826358742837298,
+        "model_correct": 1,
+        "c_correct": 0
+      },
+      {
+        "id": "401861970",
+        "week": 4,
+        "game": "UConn at Miami (OH)",
+        "model_picked_team": "UConn",
+        "model_confidence": 0.735868149083337,
+        "market_on_pick": 0.4279403644395362,
+        "model_correct": 0,
+        "c_correct": 1
+      },
+      {
+        "id": "401858245",
+        "week": 5,
+        "game": "Pittsburgh at Virginia Tech",
+        "model_picked_team": "Pittsburgh",
+        "model_confidence": 0.7262201586881623,
+        "market_on_pick": 0.35527082119976705,
+        "model_correct": 1,
+        "c_correct": 0
+      },
+      {
+        "id": "401866436",
+        "week": 6,
+        "game": "Sacramento State at Bowling Green",
+        "model_picked_team": "Sacramento State",
+        "model_confidence": 0.7644400223296439,
+        "market_on_pick": 0.3194444444444444,
+        "model_correct": 0,
+        "c_correct": 1
+      },
+      {
+        "id": "401869965",
+        "week": 6,
+        "game": "Louisiana at Louisiana Tech",
+        "model_picked_team": "Louisiana",
+        "model_confidence": 0.7994288842240219,
+        "market_on_pick": 0.46753246753246747,
+        "model_correct": 0,
+        "c_correct": 1
+      }
+    ]
+  },
+  "w3_w4_retrospective": {
+    "scheduled_model": {
+      "n": 115,
+      "wins": 87,
+      "losses": 28,
+      "accuracy": 0.75652,
+      "brier": 0.15738,
+      "log_loss": 0.473243
+    },
+    "dk_coverage_n": 109,
+    "dk_coverage_rate": 0.94783,
+    "same_quote_cohort": {
+      "v15": {
+        "n": 109,
+        "wins": 81,
+        "losses": 28,
+        "accuracy": 0.74312,
+        "brier": 0.166021,
+        "log_loss": 0.498395
+      },
+      "c_market_switch": {
+        "n": 109,
+        "wins": 79,
+        "losses": 30,
+        "accuracy": 0.72477,
+        "brier": 0.168847,
+        "log_loss": 0.504781
+      },
+      "c_fade_every_warning": {
+        "n": 109,
+        "wins": 79,
+        "losses": 30,
+        "accuracy": 0.72477,
+        "brier": 0.177321,
+        "log_loss": 0.525015
+      },
+      "market_only": {
+        "n": 109,
+        "wins": 91,
+        "losses": 18,
+        "accuracy": 0.83486,
+        "brier": 0.139753,
+        "log_loss": 0.432835
+      },
+      "existing_1693_blend": {
+        "n": 109,
+        "wins": 91,
+        "losses": 18,
+        "accuracy": 0.83486,
+        "brier": 0.141658,
+        "log_loss": 0.438932
+      },
+      "half_half": {
+        "n": 109,
+        "wins": 88,
+        "losses": 21,
+        "accuracy": 0.80734,
+        "brier": 0.148369,
+        "log_loss": 0.45634
+      }
+    },
+    "flags_n": 4,
+    "flags_model_correct": 3,
+    "flags_model_incorrect": 1,
+    "flags_market_agrees": 0,
+    "flags_market_disagrees": 4,
+    "baseline_after_exclusion": {
+      "n": 105,
+      "wins": 78,
+      "losses": 27,
+      "accuracy": 0.74286,
+      "brier": 0.165801,
+      "log_loss": 0.497704
+    },
+    "remaining_games": 105,
+    "switched_n": 4,
+    "switched_fixed": 1,
+    "switched_broken": 3,
+    "flagged_games": [
+      {
+        "id": "401860887",
+        "week": 3,
+        "game": "James Madison at San Diego State",
+        "model_picked_team": "James Madison",
+        "model_confidence": 0.8415422966681874,
+        "market_on_pick": 0.4782608695652174,
+        "home_ml": -120.0,
+        "away_ml": 100.0,
+        "model_correct": 1,
+        "market_agrees": false,
+        "c_correct": 0
+      },
+      {
+        "id": "401869941",
+        "week": 4,
+        "game": "Liberty at Coastal Carolina",
+        "model_picked_team": "Liberty",
+        "model_confidence": 0.7376864331311068,
+        "market_on_pick": 0.4782608695652174,
+        "home_ml": -120.0,
+        "away_ml": 100.0,
+        "model_correct": 1,
+        "market_agrees": false,
+        "c_correct": 0
+      },
+      {
+        "id": "401860893",
+        "week": 4,
+        "game": "San Diego State at Toledo",
+        "model_picked_team": "Toledo",
+        "model_confidence": 0.7724905696599945,
+        "market_on_pick": 0.4826358742837298,
+        "home_ml": -102.0,
+        "away_ml": -118.0,
+        "model_correct": 1,
+        "market_agrees": false,
+        "c_correct": 0
+      },
+      {
+        "id": "401861970",
+        "week": 4,
+        "game": "UConn at Miami (OH)",
+        "model_picked_team": "UConn",
+        "model_confidence": 0.735868149083337,
+        "market_on_pick": 0.4279403644395362,
+        "home_ml": -148.0,
+        "away_ml": 124.0,
+        "model_correct": 0,
+        "market_agrees": false,
+        "c_correct": 1
+      }
+    ],
+    "changed_games": [
+      {
+        "id": "401860887",
+        "week": 3,
+        "game": "James Madison at San Diego State",
+        "model_picked_team": "James Madison",
+        "model_confidence": 0.8415422966681874,
+        "market_on_pick": 0.4782608695652174,
+        "model_correct": 1,
+        "c_correct": 0
+      },
+      {
+        "id": "401869941",
+        "week": 4,
+        "game": "Liberty at Coastal Carolina",
+        "model_picked_team": "Liberty",
+        "model_confidence": 0.7376864331311068,
+        "market_on_pick": 0.4782608695652174,
+        "model_correct": 1,
+        "c_correct": 0
+      },
+      {
+        "id": "401860893",
+        "week": 4,
+        "game": "San Diego State at Toledo",
+        "model_picked_team": "Toledo",
+        "model_confidence": 0.7724905696599945,
+        "market_on_pick": 0.4826358742837298,
+        "model_correct": 1,
+        "c_correct": 0
+      },
+      {
+        "id": "401861970",
+        "week": 4,
+        "game": "UConn at Miami (OH)",
+        "model_picked_team": "UConn",
+        "model_confidence": 0.735868149083337,
+        "market_on_pick": 0.4279403644395362,
+        "model_correct": 0,
+        "c_correct": 1
+      }
+    ]
+  },
+  "w5_w6_frozen": {
+    "scheduled_model": {
+      "n": 112,
+      "wins": 77,
+      "losses": 35,
+      "accuracy": 0.6875,
+      "brier": 0.208983,
+      "log_loss": 0.606358
+    },
+    "dk_coverage_n": 112,
+    "dk_coverage_rate": 1.0,
+    "same_quote_cohort": {
+      "v15": {
+        "n": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.208983,
+        "log_loss": 0.606358
+      },
+      "c_market_switch": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.69643,
+        "brier": 0.203965,
+        "log_loss": 0.594552
+      },
+      "c_fade_every_warning": {
+        "n": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.207676,
+        "log_loss": 0.60274
+      },
+      "market_only": {
+        "n": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.66964,
+        "brier": 0.199313,
+        "log_loss": 0.577232
+      },
+      "existing_1693_blend": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.69643,
+        "brier": 0.197872,
+        "log_loss": 0.574919
+      },
+      "half_half": {
+        "n": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.198677,
+        "log_loss": 0.578472
+      }
+    },
+    "flags_n": 6,
+    "flags_model_correct": 3,
+    "flags_model_incorrect": 3,
+    "flags_market_agrees": 3,
+    "flags_market_disagrees": 3,
+    "baseline_after_exclusion": {
+      "n": 106,
+      "wins": 74,
+      "losses": 32,
+      "accuracy": 0.69811,
+      "brier": 0.201597,
+      "log_loss": 0.58896
+    },
+    "remaining_games": 106,
+    "switched_n": 3,
+    "switched_fixed": 2,
+    "switched_broken": 1,
+    "flagged_games": [
+      {
+        "id": "401858245",
+        "week": 5,
+        "game": "Pittsburgh at Virginia Tech",
+        "model_picked_team": "Pittsburgh",
+        "model_confidence": 0.7262201586881623,
+        "market_on_pick": 0.35527082119976705,
+        "home_ml": -205.0,
+        "away_ml": 170.0,
+        "model_correct": 1,
+        "market_agrees": false,
+        "c_correct": 0
+      },
+      {
+        "id": "401856822",
+        "week": 5,
+        "game": "West Virginia at Iowa State",
+        "model_picked_team": "Iowa State",
+        "model_confidence": 0.8049163347780218,
+        "market_on_pick": 0.5108342361863488,
+        "home_ml": -115.0,
+        "away_ml": -105.0,
+        "model_correct": 1,
+        "market_agrees": true,
+        "c_correct": 1
+      },
+      {
+        "id": "401858260",
+        "week": 6,
+        "game": "Wake Forest at NC State",
+        "model_picked_team": "Wake Forest",
+        "model_confidence": 0.7618074086516152,
+        "market_on_pick": 0.5427435387673956,
+        "home_ml": 110.0,
+        "away_ml": -130.0,
+        "model_correct": 1,
+        "market_agrees": true,
+        "c_correct": 1
+      },
+      {
+        "id": "401866436",
+        "week": 6,
+        "game": "Sacramento State at Bowling Green",
+        "model_picked_team": "Sacramento State",
+        "model_confidence": 0.7644400223296439,
+        "market_on_pick": 0.3194444444444444,
+        "home_ml": -245.0,
+        "away_ml": 200.0,
+        "model_correct": 0,
+        "market_agrees": false,
+        "c_correct": 1
+      },
+      {
+        "id": "401869965",
+        "week": 6,
+        "game": "Louisiana at Louisiana Tech",
+        "model_picked_team": "Louisiana",
+        "model_confidence": 0.7994288842240219,
+        "market_on_pick": 0.46753246753246747,
+        "home_ml": -125.0,
+        "away_ml": 105.0,
+        "model_correct": 0,
+        "market_agrees": false,
+        "c_correct": 1
+      },
+      {
+        "id": "401858485",
+        "week": 6,
+        "game": "USC at Penn State",
+        "model_picked_team": "Penn State",
+        "model_confidence": 0.8023063745278046,
+        "market_on_pick": 0.5043297540699688,
+        "home_ml": -112.0,
+        "away_ml": -108.0,
+        "model_correct": 0,
+        "market_agrees": true,
+        "c_correct": 0
+      }
+    ],
+    "changed_games": [
+      {
+        "id": "401858245",
+        "week": 5,
+        "game": "Pittsburgh at Virginia Tech",
+        "model_picked_team": "Pittsburgh",
+        "model_confidence": 0.7262201586881623,
+        "market_on_pick": 0.35527082119976705,
+        "model_correct": 1,
+        "c_correct": 0
+      },
+      {
+        "id": "401866436",
+        "week": 6,
+        "game": "Sacramento State at Bowling Green",
+        "model_picked_team": "Sacramento State",
+        "model_confidence": 0.7644400223296439,
+        "market_on_pick": 0.3194444444444444,
+        "model_correct": 0,
+        "c_correct": 1
+      },
+      {
+        "id": "401869965",
+        "week": 6,
+        "game": "Louisiana at Louisiana Tech",
+        "model_picked_team": "Louisiana",
+        "model_confidence": 0.7994288842240219,
+        "market_on_pick": 0.46753246753246747,
+        "model_correct": 0,
+        "c_correct": 1
+      }
+    ]
+  },
+  "closing_line_sensitivity": {
+    "all": {
+      "scheduled_model": {
+        "n": 221,
+        "wins": 158,
+        "losses": 63,
+        "accuracy": 0.71493,
+        "brier": 0.187794,
+        "log_loss": 0.55311
+      },
+      "dk_coverage_n": 221,
+      "dk_coverage_rate": 1.0,
+      "same_quote_cohort": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.71493,
+          "brier": 0.187794,
+          "log_loss": 0.55311
+        },
+        "c_market_switch": {
+          "n": 221,
+          "wins": 161,
+          "losses": 60,
+          "accuracy": 0.72851,
+          "brier": 0.180276,
+          "log_loss": 0.535857
+        },
+        "c_fade_every_warning": {
+          "n": 221,
+          "wins": 161,
+          "losses": 60,
+          "accuracy": 0.72851,
+          "brier": 0.180213,
+          "log_loss": 0.536152
+        },
+        "market_only": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.76471,
+          "brier": 0.160864,
+          "log_loss": 0.487053
+        },
+        "existing_1693_blend": {
+          "n": 221,
+          "wins": 170,
+          "losses": 51,
+          "accuracy": 0.76923,
+          "brier": 0.162673,
+          "log_loss": 0.492153
+        },
+        "half_half": {
+          "n": 221,
+          "wins": 162,
+          "losses": 59,
+          "accuracy": 0.73303,
+          "brier": 0.169441,
+          "log_loss": 0.508579
+        }
+      },
+      "flags_n": 7,
+      "flags_model_correct": 2,
+      "flags_model_incorrect": 5,
+      "flags_market_agrees": 0,
+      "flags_market_disagrees": 7,
+      "baseline_after_exclusion": {
+        "n": 214,
+        "wins": 156,
+        "losses": 58,
+        "accuracy": 0.72897,
+        "brier": 0.179198,
+        "log_loss": 0.533241
+      },
+      "remaining_games": 214,
+      "switched_n": 7,
+      "switched_fixed": 5,
+      "switched_broken": 2,
+      "flagged_games": [
+        {
+          "id": "401860887",
+          "week": 3,
+          "game": "James Madison at San Diego State",
+          "model_picked_team": "James Madison",
+          "model_confidence": 0.8415422966681874,
+          "market_on_pick": 0.4365079365079365,
+          "home_ml": -120.0,
+          "away_ml": 100.0,
+          "model_correct": 1,
+          "market_agrees": false,
+          "c_correct": 0
+        },
+        {
+          "id": "401861970",
+          "week": 4,
+          "game": "UConn at Miami (OH)",
+          "model_picked_team": "UConn",
+          "model_confidence": 0.735868149083337,
+          "market_on_pick": 0.4365079365079365,
+          "home_ml": -148.0,
+          "away_ml": 124.0,
+          "model_correct": 0,
+          "market_agrees": false,
+          "c_correct": 1
+        },
+        {
+          "id": "401858245",
+          "week": 5,
+          "game": "Pittsburgh at Virginia Tech",
+          "model_picked_team": "Pittsburgh",
+          "model_confidence": 0.7262201586881623,
+          "market_on_pick": 0.4891657638136512,
+          "home_ml": -205.0,
+          "away_ml": 170.0,
+          "model_correct": 1,
+          "market_agrees": false,
+          "c_correct": 0
+        },
+        {
+          "id": "401869842",
+          "week": 5,
+          "game": "Army at Louisiana Tech",
+          "model_picked_team": "Army",
+          "model_confidence": 0.8033919568603918,
+          "market_on_pick": 0.5,
+          "home_ml": 145.0,
+          "away_ml": -175.0,
+          "model_correct": 0,
+          "market_agrees": false,
+          "c_correct": 1
+        },
+        {
+          "id": "401866436",
+          "week": 6,
+          "game": "Sacramento State at Bowling Green",
+          "model_picked_team": "Sacramento State",
+          "model_confidence": 0.7644400223296439,
+          "market_on_pick": 0.26645768025078365,
+          "home_ml": -245.0,
+          "away_ml": 200.0,
+          "model_correct": 0,
+          "market_agrees": false,
+          "c_correct": 1
+        },
+        {
+          "id": "401869965",
+          "week": 6,
+          "game": "Louisiana at Louisiana Tech",
+          "model_picked_team": "Louisiana",
+          "model_confidence": 0.7994288842240219,
+          "market_on_pick": 0.41700735895339336,
+          "home_ml": -125.0,
+          "away_ml": 105.0,
+          "model_correct": 0,
+          "market_agrees": false,
+          "c_correct": 1
+        },
+        {
+          "id": "401858485",
+          "week": 6,
+          "game": "USC at Penn State",
+          "model_picked_team": "Penn State",
+          "model_confidence": 0.8023063745278046,
+          "market_on_pick": 0.4782608695652174,
+          "home_ml": -112.0,
+          "away_ml": -108.0,
+          "model_correct": 0,
+          "market_agrees": false,
+          "c_correct": 1
+        }
+      ],
+      "changed_games": [
+        {
+          "id": "401860887",
+          "week": 3,
+          "game": "James Madison at San Diego State",
+          "model_picked_team": "James Madison",
+          "model_confidence": 0.8415422966681874,
+          "market_on_pick": 0.4365079365079365,
+          "model_correct": 1,
+          "c_correct": 0
+        },
+        {
+          "id": "401861970",
+          "week": 4,
+          "game": "UConn at Miami (OH)",
+          "model_picked_team": "UConn",
+          "model_confidence": 0.735868149083337,
+          "market_on_pick": 0.4365079365079365,
+          "model_correct": 0,
+          "c_correct": 1
+        },
+        {
+          "id": "401858245",
+          "week": 5,
+          "game": "Pittsburgh at Virginia Tech",
+          "model_picked_team": "Pittsburgh",
+          "model_confidence": 0.7262201586881623,
+          "market_on_pick": 0.4891657638136512,
+          "model_correct": 1,
+          "c_correct": 0
+        },
+        {
+          "id": "401869842",
+          "week": 5,
+          "game": "Army at Louisiana Tech",
+          "model_picked_team": "Army",
+          "model_confidence": 0.8033919568603918,
+          "market_on_pick": 0.5,
+          "model_correct": 0,
+          "c_correct": 1
+        },
+        {
+          "id": "401866436",
+          "week": 6,
+          "game": "Sacramento State at Bowling Green",
+          "model_picked_team": "Sacramento State",
+          "model_confidence": 0.7644400223296439,
+          "market_on_pick": 0.26645768025078365,
+          "model_correct": 0,
+          "c_correct": 1
+        },
+        {
+          "id": "401869965",
+          "week": 6,
+          "game": "Louisiana at Louisiana Tech",
+          "model_picked_team": "Louisiana",
+          "model_confidence": 0.7994288842240219,
+          "market_on_pick": 0.41700735895339336,
+          "model_correct": 0,
+          "c_correct": 1
+        },
+        {
+          "id": "401858485",
+          "week": 6,
+          "game": "USC at Penn State",
+          "model_picked_team": "Penn State",
+          "model_confidence": 0.8023063745278046,
+          "market_on_pick": 0.4782608695652174,
+          "model_correct": 0,
+          "c_correct": 1
+        }
+      ]
+    },
+    "by_week": {
+      "3": {
+        "scheduled_model": {
+          "n": 53,
+          "wins": 43,
+          "losses": 10,
+          "accuracy": 0.81132,
+          "brier": 0.145203,
+          "log_loss": 0.449039
+        },
+        "dk_coverage_n": 53,
+        "dk_coverage_rate": 1.0,
+        "same_quote_cohort": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.81132,
+            "brier": 0.145203,
+            "log_loss": 0.449039
+          },
+          "c_market_switch": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.79245,
+            "brier": 0.150721,
+            "log_loss": 0.461424
+          },
+          "c_fade_every_warning": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.79245,
+            "brier": 0.158092,
+            "log_loss": 0.480543
+          },
+          "market_only": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.84906,
+            "brier": 0.117926,
+            "log_loss": 0.380122
+          },
+          "existing_1693_blend": {
+            "n": 53,
+            "wins": 46,
+            "losses": 7,
+            "accuracy": 0.86792,
+            "brier": 0.119902,
+            "log_loss": 0.386578
+          },
+          "half_half": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.81132,
+            "brier": 0.126868,
+            "log_loss": 0.404772
+          }
+        },
+        "flags_n": 1,
+        "flags_model_correct": 1,
+        "flags_model_incorrect": 0,
+        "flags_market_agrees": 0,
+        "flags_market_disagrees": 1,
+        "baseline_after_exclusion": {
+          "n": 52,
+          "wins": 42,
+          "losses": 10,
+          "accuracy": 0.80769,
+          "brier": 0.147513,
+          "log_loss": 0.454356
+        },
+        "remaining_games": 52,
+        "switched_n": 1,
+        "switched_fixed": 0,
+        "switched_broken": 1,
+        "flagged_games": [
+          {
+            "id": "401860887",
+            "week": 3,
+            "game": "James Madison at San Diego State",
+            "model_picked_team": "James Madison",
+            "model_confidence": 0.8415422966681874,
+            "market_on_pick": 0.4365079365079365,
+            "home_ml": -120.0,
+            "away_ml": 100.0,
+            "model_correct": 1,
+            "market_agrees": false,
+            "c_correct": 0
+          }
+        ],
+        "changed_games": [
+          {
+            "id": "401860887",
+            "week": 3,
+            "game": "James Madison at San Diego State",
+            "model_picked_team": "James Madison",
+            "model_confidence": 0.8415422966681874,
+            "market_on_pick": 0.4365079365079365,
+            "model_correct": 1,
+            "c_correct": 0
+          }
+        ]
+      },
+      "4": {
+        "scheduled_model": {
+          "n": 56,
+          "wins": 38,
+          "losses": 18,
+          "accuracy": 0.67857,
+          "brier": 0.185724,
+          "log_loss": 0.545108
+        },
+        "dk_coverage_n": 56,
+        "dk_coverage_rate": 1.0,
+        "same_quote_cohort": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.67857,
+            "brier": 0.185724,
+            "log_loss": 0.545108
+          },
+          "c_market_switch": {
+            "n": 56,
+            "wins": 39,
+            "losses": 17,
+            "accuracy": 0.69643,
+            "brier": 0.179457,
+            "log_loss": 0.531578
+          },
+          "c_fade_every_warning": {
+            "n": 56,
+            "wins": 39,
+            "losses": 17,
+            "accuracy": 0.69643,
+            "brier": 0.1773,
+            "log_loss": 0.526812
+          },
+          "market_only": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.82143,
+            "brier": 0.145313,
+            "log_loss": 0.455789
+          },
+          "existing_1693_blend": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.82143,
+            "brier": 0.149852,
+            "log_loss": 0.466762
+          },
+          "half_half": {
+            "n": 56,
+            "wins": 43,
+            "losses": 13,
+            "accuracy": 0.76786,
+            "brier": 0.161427,
+            "log_loss": 0.492537
+          }
+        },
+        "flags_n": 1,
+        "flags_model_correct": 0,
+        "flags_model_incorrect": 1,
+        "flags_market_agrees": 0,
+        "flags_market_disagrees": 1,
+        "baseline_after_exclusion": {
+          "n": 55,
+          "wins": 38,
+          "losses": 17,
+          "accuracy": 0.69091,
+          "brier": 0.179255,
+          "log_loss": 0.530814
+        },
+        "remaining_games": 55,
+        "switched_n": 1,
+        "switched_fixed": 1,
+        "switched_broken": 0,
+        "flagged_games": [
+          {
+            "id": "401861970",
+            "week": 4,
+            "game": "UConn at Miami (OH)",
+            "model_picked_team": "UConn",
+            "model_confidence": 0.735868149083337,
+            "market_on_pick": 0.4365079365079365,
+            "home_ml": -148.0,
+            "away_ml": 124.0,
+            "model_correct": 0,
+            "market_agrees": false,
+            "c_correct": 1
+          }
+        ],
+        "changed_games": [
+          {
+            "id": "401861970",
+            "week": 4,
+            "game": "UConn at Miami (OH)",
+            "model_picked_team": "UConn",
+            "model_confidence": 0.735868149083337,
+            "market_on_pick": 0.4365079365079365,
+            "model_correct": 0,
+            "c_correct": 1
+          }
+        ]
+      },
+      "5": {
+        "scheduled_model": {
+          "n": 56,
+          "wins": 42,
+          "losses": 14,
+          "accuracy": 0.75,
+          "brier": 0.184914,
+          "log_loss": 0.546282
+        },
+        "dk_coverage_n": 56,
+        "dk_coverage_rate": 1.0,
+        "same_quote_cohort": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.184914,
+            "log_loss": 0.546282
+          },
+          "c_market_switch": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.181174,
+            "log_loss": 0.53667
+          },
+          "c_fade_every_warning": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.182157,
+            "log_loss": 0.538566
+          },
+          "market_only": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.73214,
+            "brier": 0.167426,
+            "log_loss": 0.498869
+          },
+          "existing_1693_blend": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.73214,
+            "brier": 0.168182,
+            "log_loss": 0.501856
+          },
+          "half_half": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.73214,
+            "brier": 0.17225,
+            "log_loss": 0.513244
+          }
+        },
+        "flags_n": 2,
+        "flags_model_correct": 1,
+        "flags_model_incorrect": 1,
+        "flags_market_agrees": 0,
+        "flags_market_disagrees": 2,
+        "baseline_after_exclusion": {
+          "n": 54,
+          "wins": 41,
+          "losses": 13,
+          "accuracy": 0.75926,
+          "brier": 0.178422,
+          "log_loss": 0.530469
+        },
+        "remaining_games": 54,
+        "switched_n": 2,
+        "switched_fixed": 1,
+        "switched_broken": 1,
+        "flagged_games": [
+          {
+            "id": "401858245",
+            "week": 5,
+            "game": "Pittsburgh at Virginia Tech",
+            "model_picked_team": "Pittsburgh",
+            "model_confidence": 0.7262201586881623,
+            "market_on_pick": 0.4891657638136512,
+            "home_ml": -205.0,
+            "away_ml": 170.0,
+            "model_correct": 1,
+            "market_agrees": false,
+            "c_correct": 0
+          },
+          {
+            "id": "401869842",
+            "week": 5,
+            "game": "Army at Louisiana Tech",
+            "model_picked_team": "Army",
+            "model_confidence": 0.8033919568603918,
+            "market_on_pick": 0.5,
+            "home_ml": 145.0,
+            "away_ml": -175.0,
+            "model_correct": 0,
+            "market_agrees": false,
+            "c_correct": 1
+          }
+        ],
+        "changed_games": [
+          {
+            "id": "401858245",
+            "week": 5,
+            "game": "Pittsburgh at Virginia Tech",
+            "model_picked_team": "Pittsburgh",
+            "model_confidence": 0.7262201586881623,
+            "market_on_pick": 0.4891657638136512,
+            "model_correct": 1,
+            "c_correct": 0
+          },
+          {
+            "id": "401869842",
+            "week": 5,
+            "game": "Army at Louisiana Tech",
+            "model_picked_team": "Army",
+            "model_confidence": 0.8033919568603918,
+            "market_on_pick": 0.5,
+            "model_correct": 0,
+            "c_correct": 1
+          }
+        ]
+      },
+      "6": {
+        "scheduled_model": {
+          "n": 56,
+          "wins": 35,
+          "losses": 21,
+          "accuracy": 0.625,
+          "brier": 0.233053,
+          "log_loss": 0.666435
+        },
+        "dk_coverage_n": 56,
+        "dk_coverage_rate": 1.0,
+        "same_quote_cohort": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.233053,
+            "log_loss": 0.666435
+          },
+          "c_market_switch": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.67857,
+            "brier": 0.208169,
+            "log_loss": 0.609768
+          },
+          "c_fade_every_warning": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.67857,
+            "brier": 0.202118,
+            "log_loss": 0.595709
+          },
+          "market_only": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.66071,
+            "brier": 0.210491,
+            "log_loss": 0.607702
+          },
+          "existing_1693_blend": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.66071,
+            "brier": 0.210466,
+            "log_loss": 0.60776
+          },
+          "half_half": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.214937,
+            "log_loss": 0.618202
+          }
+        },
+        "flags_n": 3,
+        "flags_model_correct": 0,
+        "flags_model_incorrect": 3,
+        "flags_market_agrees": 0,
+        "flags_market_disagrees": 3,
+        "baseline_after_exclusion": {
+          "n": 53,
+          "wins": 35,
+          "losses": 18,
+          "accuracy": 0.66038,
+          "brier": 0.211016,
+          "log_loss": 0.61598
+        },
+        "remaining_games": 53,
+        "switched_n": 3,
+        "switched_fixed": 3,
+        "switched_broken": 0,
+        "flagged_games": [
+          {
+            "id": "401866436",
+            "week": 6,
+            "game": "Sacramento State at Bowling Green",
+            "model_picked_team": "Sacramento State",
+            "model_confidence": 0.7644400223296439,
+            "market_on_pick": 0.26645768025078365,
+            "home_ml": -245.0,
+            "away_ml": 200.0,
+            "model_correct": 0,
+            "market_agrees": false,
+            "c_correct": 1
+          },
+          {
+            "id": "401869965",
+            "week": 6,
+            "game": "Louisiana at Louisiana Tech",
+            "model_picked_team": "Louisiana",
+            "model_confidence": 0.7994288842240219,
+            "market_on_pick": 0.41700735895339336,
+            "home_ml": -125.0,
+            "away_ml": 105.0,
+            "model_correct": 0,
+            "market_agrees": false,
+            "c_correct": 1
+          },
+          {
+            "id": "401858485",
+            "week": 6,
+            "game": "USC at Penn State",
+            "model_picked_team": "Penn State",
+            "model_confidence": 0.8023063745278046,
+            "market_on_pick": 0.4782608695652174,
+            "home_ml": -112.0,
+            "away_ml": -108.0,
+            "model_correct": 0,
+            "market_agrees": false,
+            "c_correct": 1
+          }
+        ],
+        "changed_games": [
+          {
+            "id": "401866436",
+            "week": 6,
+            "game": "Sacramento State at Bowling Green",
+            "model_picked_team": "Sacramento State",
+            "model_confidence": 0.7644400223296439,
+            "market_on_pick": 0.26645768025078365,
+            "model_correct": 0,
+            "c_correct": 1
+          },
+          {
+            "id": "401869965",
+            "week": 6,
+            "game": "Louisiana at Louisiana Tech",
+            "model_picked_team": "Louisiana",
+            "model_confidence": 0.7994288842240219,
+            "market_on_pick": 0.41700735895339336,
+            "model_correct": 0,
+            "c_correct": 1
+          },
+          {
+            "id": "401858485",
+            "week": 6,
+            "game": "USC at Penn State",
+            "model_picked_team": "Penn State",
+            "model_confidence": 0.8023063745278046,
+            "market_on_pick": 0.4782608695652174,
+            "model_correct": 0,
+            "c_correct": 1
+          }
+        ]
+      }
+    }
+  }
+}
