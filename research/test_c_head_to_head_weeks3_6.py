@@ -125,14 +125,19 @@ def main():
         prediction=model.predict_week(summary[2026],summary[2025],schedule,week,include_completed=True)
         baselines[week]={str(int(r["Game ID"])):float(r["Home Win %"]) for _,r in prediction.iterrows()}
     candidates={}
+    skipped_missing_baseline=[]
     for _,g in games.iterrows():
         id=str(int(g.game_id));week=int(g.week)
         if week in (3,4):
             baseline=baselines[week].get(id);predtype="retrospective"
-            if baseline is None:raise AssertionError("No reconstructed V1.5 for "+id)
+            if baseline is None:
+                skipped_missing_baseline.append({"id":id,"week":week,"game":str(g.away_team)+" at "+str(g.home_team),"reason":"missing_retrospective_v15"})
+                continue
         else:
             s=locked["snapshots"].get(id);o=locked["results"].get(id)
-            if not s or not o:raise AssertionError("Missing frozen W5–6 "+id)
+            if not s or not o:
+                skipped_missing_baseline.append({"id":id,"week":week,"game":str(g.away_team)+" at "+str(g.home_team),"reason":"missing_pregame_frozen_v15"})
+                continue
             if s.get("captured_at") is None or s.get("kickoff") is None or s["captured_at"]>=s["kickoff"]:
                 raise AssertionError("Not pregame "+id)
             if num(o.get("home_score"))!=num(g.home_points) or num(o.get("away_score"))!=num(g.away_points):
@@ -200,7 +205,7 @@ def main():
          "Betting raw archive opening lines can be edited/revised and lack independent publication timestamps",
          "Market prices may be absent for some games; headline head-to-head uses only common quoted games",
          "The warning is a rare event; forced flips and abstention cannot be interpreted as betting profitability"],
-       "data_audit":{"schedule_total":len(games),"total_with_open":sum(r["has_open"] for r in allrows),
+       "data_audit":{"schedule_total":len(games),"with_baseline":len(candidates),"excluded_without_baseline":skipped_missing_baseline,"total_with_open":sum(r["has_open"] for r in allrows),
                      "total_with_close":sum(r["has_close"] for r in allrows),
                      "frozen":sum(r["prediction_provenance"]=="frozen" for r in allrows),
                      "retrospective":sum(r["prediction_provenance"]=="retrospective" for r in allrows),
