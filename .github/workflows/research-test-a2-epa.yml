@@ -26,7 +26,7 @@ jobs:
       - name: Validate research syntax
         run: python -m py_compile research/test_a_recent_epa.py
       - name: Compare pregame last-three EPA with model
-        run: python research/test_a_recent_epa.py
+        run: PYTHONPATH=. python research/test_a_recent_epa.py
       - name: Save research output only, not production predictions
         run: |
           git config user.name 'github-actions[bot]'
