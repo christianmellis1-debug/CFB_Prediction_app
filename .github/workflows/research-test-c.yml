@@ -1,0 +1,39 @@
+name: Research Test C confidence and odds
+on:
+  push:
+    branches:
+      - research/test-c-market-confidence-2026-10-13
+    paths:
+      - 'research/test_c_market_confidence.py'
+      - '.github/workflows/research-test-c.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: research-test-c
+  cancel-in-progress: false
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Check script
+        run: python -m py_compile research/test_c_market_confidence.py
+      - name: Evaluate historical confidence and frozen market quotes
+        run: PYTHONPATH=. python research/test_c_market_confidence.py
+      - name: Record research results only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_c_results.json research/test_c_game_results.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Test C calibration and market warning outcomes'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
