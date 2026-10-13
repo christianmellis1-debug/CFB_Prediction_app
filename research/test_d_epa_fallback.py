@@ -218,10 +218,10 @@ def main():
             games=eligible[eligible.week.eq(week)]
             if week>=18:continue
             prior_data,last=describe_missing(current,s,week)
-            probs={mode:run_variant(current,prior,s,week,mode) for mode in MODES}
+            prob_maps={mode:run_variant(current,prior,s,week,mode) for mode in MODES}
             for _,g in games.iterrows():
                 gid=str(int(g.game_id))
-                if gid not in probs["baseline"]:continue
+                if gid not in prob_maps["baseline"]:continue
                 h=prior_data(int(g.home_id));a=prior_data(int(g.away_id))
                 epamissing=any(not z[v] for z in (h,a) for v in ("adj_off","adj_def"))
                 rawfallback=any((not z[adj]) and z[raw] for z in (h,a) for adj,raw in
@@ -240,13 +240,13 @@ def main():
                         frozen=True
                 elif year in (2024,2025):
                     market=prices.get((year,gid))
-                base=probs["baseline"][gid]
+                base=prob_maps["baseline"][gid]
                 if frozen:
                     probs={mode:float(expit(logit(np.clip(realbaseline,1e-9,1-1e-9))+
-                                 logit(np.clip(probs[mode][gid],1e-9,1-1e-9))-
+                                 logit(np.clip(prob_maps[mode][gid],1e-9,1-1e-9))-
                                  logit(np.clip(base,1e-9,1-1e-9)))) for mode in MODES}
                 else:
-                    probs={mode:probs[mode][gid] for mode in MODES}
+                    probs={mode:prob_maps[mode][gid] for mode in MODES}
                 rows.append(dict(year=year,week=week,game_id=gid,
                   game=str(g.away_team)+" at "+str(g.home_team),
                   y=int(g.home_points>g.away_points),prob=probs,
