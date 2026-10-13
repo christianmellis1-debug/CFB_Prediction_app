@@ -1,0 +1,1515 @@
+year,week,id,game,error,provider_count,primary_open,fallback_open,primary_close
+2024,1,401635525,Florida State at Georgia Tech,,2,True,True,True
+2024,1,401643696,SMU at Nevada,,2,True,True,True
+2024,1,401640998,Coastal Carolina at Jacksonville State,,2,True,True,True
+2024,1,401628448,North Carolina at Minnesota,,2,True,True,True
+2024,1,401628328,Temple at Oklahoma,,2,False,False,False
+2024,1,401628453,Florida Atlantic at Michigan State,,1,True,False,True
+2024,1,401628461,Western Michigan at Wisconsin,,2,True,True,True
+2024,1,401634300,TCU at Stanford,,2,True,True,True
+2024,1,401628333,Virginia Tech at Vanderbilt,,2,True,True,True
+2024,1,401634305,Kent State at Pittsburgh,,2,True,True,True
+2024,1,401628451,UConn at Maryland,,2,True,True,True
+2024,1,401628457,Penn State at West Virginia,,2,True,True,True
+2024,1,401628323,Clemson at Georgia,,5,True,True,True
+2024,1,401628322,Miami at Florida,,3,True,True,True
+2024,1,401628449,Florida International at Indiana,,2,True,True,True
+2024,1,401644683,Miami (OH) at Northwestern,,2,True,True,True
+2024,1,401641015,Kennesaw State at UTSA,,1,False,True,False
+2024,1,401628455,Akron at Ohio State,,2,False,False,False
+2024,1,401628454,UTEP at Nebraska,,1,False,True,False
+2024,1,401628331,Colorado State at Texas,,2,True,True,True
+2024,1,401634304,Ohio at Syracuse,,2,True,True,True
+2024,1,401629039,Eastern Michigan at Massachusetts,,2,True,True,True
+2024,1,401643700,Boise State at Georgia Southern,,2,True,True,True
+2024,1,401628329,Old Dominion at South Carolina,,2,True,True,True
+2024,1,401643775,North Texas at South Alabama,,2,True,True,True
+2024,1,401641039,Sam Houston at Rice,,2,True,True,True
+2024,1,401636611,UNLV at Houston,,0,False,False,False
+2024,1,401643701,Nevada at Troy,,2,True,True,True
+2024,1,401628319,Western Kentucky at Alabama,,2,True,True,False
+2024,1,401628452,Fresno State at Michigan,,0,False,False,False
+2024,1,401628459,UCLA at Hawai'i,,1,True,False,True
+2024,1,401628332,Notre Dame at Texas A&M,,3,True,False,True
+2024,1,401628324,Southern Miss at Kentucky,,2,True,True,True
+2024,1,401643774,James Madison at Charlotte,,1,False,True,False
+2024,1,401634302,Georgia State at Georgia Tech,,1,False,True,False
+2024,1,401636608,New Mexico at Arizona,,1,True,False,True
+2024,1,401636609,Wyoming at Arizona State,,1,True,False,True
+2024,1,401628334,USC at LSU,,5,True,True,True
+2024,1,401634306,Boston College at Florida State,,2,True,True,True
+2024,2,401634765,BYU at SMU,,2,True,True,True
+2024,2,401635533,Duke at Northwestern,,2,True,True,True
+2024,2,401628471,Akron at Rutgers,,2,True,True,True
+2024,2,401628470,Bowling Green at Penn State,,2,True,True,False
+2024,2,401645323,Army at Florida Atlantic,,2,True,True,True
+2024,2,401636616,Kansas State at Tulane,,2,True,True,True
+2024,2,401635538,Pittsburgh at Cincinnati,,2,True,True,True
+2024,2,401635534,Georgia Tech at Syracuse,,2,True,True,True
+2024,2,401628336,Arkansas at Oklahoma State,,2,True,True,True
+2024,2,401628347,Texas at Michigan,,6,True,True,True
+2024,2,401643784,Troy at Memphis,,2,True,True,True
+2024,2,401636618,Baylor at Utah,,2,True,True,True
+2024,2,401628977,Northern Illinois at Notre Dame,,2,True,True,True
+2024,2,401628464,Iowa State at Iowa,,2,True,True,True
+2024,2,401629040,Massachusetts at Toledo,,2,True,True,True
+2024,2,401645324,Temple at Navy,,2,True,True,True
+2024,2,401628340,South Carolina at Kentucky,,2,True,True,True
+2024,2,401628337,California at Auburn,,2,True,True,True
+2024,2,401628465,Michigan State at Maryland,,2,True,True,True
+2024,2,401628473,Eastern Michigan at Washington,,2,True,True,True
+2024,2,401635535,Jacksonville State at Louisville,,2,True,True,True
+2024,2,401635537,Charlotte at North Carolina,,2,True,True,True
+2024,2,401643783,UTSA at Texas State,,2,True,True,True
+2024,2,401628342,Middle Tennessee at Ole Miss,,2,True,True,False
+2024,2,401635540,Marshall at Virginia Tech,,2,True,True,True
+2024,2,401640979,Central Michigan at Florida International,,2,True,True,True
+2024,2,401643778,East Carolina at Old Dominion,,2,True,True,True
+2024,2,401643781,South Alabama at Ohio,,2,True,True,True
+2024,2,401636617,Sam Houston at UCF,,2,True,True,True
+2024,2,401643780,UAB at UL Monroe,,2,True,True,True
+2024,2,401643705,San José State at Air Force,,2,True,True,True
+2024,2,401628462,Kansas at Illinois,,2,True,True,True
+2024,2,401628335,South Florida at Alabama,,2,True,True,True
+2024,2,401641016,Louisiana at Kennesaw State,,2,True,True,True
+2024,2,401643708,Georgia Southern at Nevada,,2,True,True,True
+2024,2,401628344,Buffalo at Missouri,,2,True,True,True
+2024,2,401643779,Tulsa at Arkansas State,,2,True,True,True
+2024,2,401635639,Virginia at Wake Forest,,2,True,True,True
+2024,2,401628346,Tennessee at NC State,,2,True,True,True
+2024,2,401628467,Colorado at Nebraska,,1,False,True,False
+2024,2,401628468,Western Michigan at Ohio State,,2,False,True,False
+2024,2,401628345,Houston at Oklahoma,,2,True,True,True
+2024,2,401635532,App State at Clemson,,2,True,True,True
+2024,2,401636859,Texas Tech at Washington State,,2,True,True,True
+2024,2,401628469,Boise State at Oregon,,2,True,True,True
+2024,2,401640989,Liberty at New Mexico State,,2,True,True,True
+2024,2,401628343,Mississippi State at Arizona State,,2,True,True,True
+2024,2,401643709,Oregon State at San Diego State,,2,True,True,True
+2024,2,401628472,Utah State at USC,,2,True,True,True
+2024,3,401636867,Arizona State at Texas State,,2,True,True,True
+2024,3,401636863,UNLV at Kansas,,2,True,True,True
+2024,3,401636864,Arizona at Kansas State,,2,True,True,True
+2024,3,401636869,Oklahoma State at Tulsa,,2,True,True,True
+2024,3,401628479,Arkansas State at Michigan,,1,False,True,False
+2024,3,401635542,Memphis at Florida State,,2,True,True,True
+2024,3,401628475,Central Michigan at Illinois,,2,True,True,True
+2024,3,401628359,LSU at South Carolina,,2,True,True,True
+2024,3,401635546,Louisiana Tech at NC State,,2,True,True,True
+2024,3,401628350,Alabama at Wisconsin,,2,True,True,True
+2024,3,401636865,Cincinnati at Miami (OH),,2,True,True,True
+2024,3,401636868,North Texas at Texas Tech,,1,False,True,False
+2024,3,401628357,Boston College at Missouri,,2,True,True,True
+2024,3,401629041,Massachusetts at Buffalo,,2,True,True,True
+2024,3,401643786,Coastal Carolina at Temple,,2,True,True,True
+2024,3,401628483,Oregon at Oregon State,,1,False,True,False
+2024,3,401635547,West Virginia at Pittsburgh,,2,True,True,True
+2024,3,401635544,Ball State at Miami,,1,False,True,False
+2024,3,401628358,Tulane at Oklahoma,,2,True,True,True
+2024,3,401628353,Texas A&M at Florida,,2,True,True,True
+2024,3,401628481,Nevada at Minnesota,,2,True,True,True
+2024,3,401628484,Washington State at Washington,,1,False,True,False
+2024,3,401628978,Notre Dame at Purdue,,2,True,True,True
+2024,3,401628477,Troy at Iowa,,2,True,True,True
+2024,3,401643785,App State at East Carolina,,2,True,True,True
+2024,3,401628351,UAB at Arkansas,,1,False,True,False
+2024,3,401636870,Utah at Utah State,,2,True,True,True
+2024,3,401640990,UTEP at Liberty,,2,True,True,True
+2024,3,401640980,Florida International at Florida Atlantic,,2,True,True,True
+2024,3,401635548,Virginia Tech at Old Dominion,,2,True,True,True
+2024,3,401629030,UConn at Duke,,2,True,True,True
+2024,3,401628355,Ole Miss at Wake Forest,,2,True,True,True
+2024,3,401628362,Vanderbilt at Georgia State,,2,True,True,True
+2024,3,401640999,Jacksonville State at Eastern Michigan,,2,True,True,True
+2024,3,401628361,UTSA at Texas,,2,True,True,True
+2024,3,401641017,Kennesaw State at San José State,,2,True,True,True
+2024,3,401641024,Western Kentucky at Middle Tennessee,,2,True,True,True
+2024,3,401643789,South Florida at Southern Miss,,1,False,True,False
+2024,3,401641040,Hawai'i at Sam Houston,,1,False,True,False
+2024,3,401636861,Colorado at Colorado State,,2,True,True,True
+2024,3,401636860,Air Force at Baylor,,2,True,True,True
+2024,3,401628356,Toledo at Mississippi State,,2,True,True,True
+2024,3,401628352,New Mexico at Auburn,,2,True,True,True
+2024,3,401628476,Indiana at UCLA,,2,True,True,True
+2024,3,401636866,UCF at TCU,,2,True,True,True
+2024,3,401628354,Georgia at Kentucky,,2,True,True,True
+2024,3,401628360,Kent State at Tennessee,,2,False,False,False
+2024,3,401628478,Maryland at Virginia,,1,False,True,False
+2024,3,401636862,Rice at Houston,,2,True,True,True
+2024,3,401636871,BYU at Wyoming,,1,False,True,False
+2024,3,401641033,New Mexico State at Fresno State,,2,True,True,True
+2024,3,401635541,San Diego State at California,,2,True,True,True
+2024,4,401643790,South Alabama at App State,,1,False,True,False
+2024,4,401634766,Stanford at Syracuse,,2,True,True,True
+2024,4,401628485,Illinois at Nebraska,,2,True,True,True
+2024,4,401643714,San José State at Washington State,,1,False,True,False
+2024,4,401628486,Charlotte at Indiana,,2,True,True,True
+2024,4,401645328,Rice at Army,,2,True,True,True
+2024,4,401628367,Florida at Mississippi State,,1,False,True,False
+2024,4,401643791,Tulane at Louisiana,,2,True,True,True
+2024,4,401635552,NC State at Clemson,,2,True,True,True
+2024,4,401635556,James Madison at North Carolina,,2,True,True,True
+2024,4,401636873,Houston at Cincinnati,,1,False,True,False
+2024,4,401628492,Marshall at Ohio State,,2,False,True,False
+2024,4,401636879,Kansas at West Virginia,,2,True,True,True
+2024,4,401628364,Ohio at Kentucky,,2,True,True,True
+2024,4,401644735,Ball State at Central Michigan,,2,True,True,True
+2024,4,401643715,Utah State at Temple,,2,True,True,True
+2024,4,401636875,Arkansas State at Iowa State,,2,True,True,True
+2024,4,401635558,Virginia at Coastal Carolina,,2,True,True,True
+2024,4,401641000,Southern Miss at Jacksonville State,,2,True,True,True
+2024,4,401628489,USC at Michigan,,2,True,True,True
+2024,4,401628494,Rutgers at Virginia Tech,,2,True,True,True
+2024,4,401628493,Kent State at Penn State,,1,False,False,False
+2024,4,401644736,Buffalo at Northern Illinois,,2,True,True,True
+2024,4,401628365,UCLA at LSU,,1,False,True,False
+2024,4,401636877,Arizona State at Texas Tech,,2,True,True,True
+2024,4,401628979,Miami (OH) at Notre Dame,,2,True,True,True
+2024,4,401635554,Georgia Tech at Louisville,,2,True,True,True
+2024,4,401628363,Arkansas at Auburn,,2,True,True,True
+2024,4,401645329,Memphis at Navy,,2,True,True,True
+2024,4,401636876,Utah at Oklahoma State,,2,True,True,True
+2024,4,401635553,Duke at Middle Tennessee,,2,True,True,True
+2024,4,401628368,Vanderbilt at Missouri,,2,True,True,True
+2024,4,401641028,UTEP at Colorado State,,2,True,True,True
+2024,4,401635557,TCU at SMU,,1,False,True,False
+2024,4,401640991,East Carolina at Liberty,,2,True,True,True
+2024,4,401629031,Florida Atlantic at UConn,,2,True,True,True
+2024,4,401641008,Tulsa at Louisiana Tech,,2,True,True,True
+2024,4,401635555,Miami at South Florida,,2,True,True,True
+2024,4,401628491,Northwestern at Washington,,1,False,True,False
+2024,4,401635551,California at Florida State,,2,True,True,True
+2024,4,401641034,New Mexico State at Sam Houston,,2,True,True,True
+2024,4,401641037,Toledo at Western Kentucky,,2,True,True,True
+2024,4,401643716,Wyoming at North Texas,,2,True,True,True
+2024,4,401628487,Iowa at Minnesota,,2,True,True,True
+2024,4,401628369,Tennessee at Oklahoma,,2,True,True,True
+2024,4,401628372,Bowling Green at Texas A&M,,1,False,True,False
+2024,4,401628370,Akron at South Carolina,,2,True,True,True
+2024,4,401628366,Georgia Southern at Ole Miss,,2,True,True,True
+2024,4,401628371,UL Monroe at Texas,,2,False,True,False
+2024,4,401636874,Baylor at Colorado,,2,True,True,True
+2024,4,401628490,Michigan State at Boston College,,2,True,True,True
+2024,4,401643717,Purdue at Oregon State,,2,True,True,True
+2024,4,401643711,Fresno State at New Mexico,,2,True,True,True
+2024,4,401636872,Kansas State at BYU,,2,True,True,True
+2024,5,401645331,Army at Temple,,1,True,False,True
+2024,5,401634767,Virginia Tech at Miami,,2,True,True,True
+2024,5,401628501,Washington at Rutgers,,2,True,True,True
+2024,5,401645337,South Florida at Tulane,,2,True,True,True
+2024,5,401635564,Northern Illinois at NC State,,2,True,True,True
+2024,5,401628497,Minnesota at Michigan,,2,True,True,True
+2024,5,401629032,Buffalo at UConn,,2,True,True,True
+2024,5,401628496,Maryland at Indiana,,2,True,True,True
+2024,5,401628377,Kentucky at Ole Miss,,2,True,True,True
+2024,5,401628499,Nebraska at Purdue,,2,True,True,True
+2024,5,401645332,Navy at UAB,,2,True,True,True
+2024,5,401635560,Western Kentucky at Boston College,,2,True,True,True
+2024,5,401636880,BYU at Baylor,,2,True,True,True
+2024,5,401636883,Oklahoma State at Kansas State,,2,True,True,True
+2024,5,401643793,Ball State at James Madison,,2,True,True,True
+2024,5,401641041,Texas State at Sam Houston,,2,True,True,True
+2024,5,401643721,San Diego State at Central Michigan,,2,True,True,True
+2024,5,401644739,Eastern Michigan at Kent State,,2,True,True,True
+2024,5,401636882,TCU at Kansas,,2,True,True,True
+2024,5,401643794,Western Michigan at Marshall,,2,True,True,True
+2024,5,401644738,Akron at Ohio,,2,True,True,True
+2024,5,401629043,Massachusetts at Miami (OH),,2,True,True,True
+2024,5,401628502,Wisconsin at USC,,2,True,True,True
+2024,5,401636885,Colorado at UCF,,2,True,True,True
+2024,5,401628980,Louisville at Notre Dame,,2,True,True,True
+2024,5,401643720,Fresno State at UNLV,,2,True,True,True
+2024,5,401628373,Arkansas at Texas A&M,,2,True,True,True
+2024,5,401635659,Louisiana at Wake Forest,,2,True,True,True
+2024,5,401643792,Georgia Southern at Georgia State,,2,True,True,True
+2024,5,401628375,Oklahoma at Auburn,,2,True,True,True
+2024,5,401635562,North Carolina at Duke,,2,True,True,True
+2024,5,401645334,UTSA at East Carolina,,2,True,True,True
+2024,5,401628378,Mississippi State at Texas,,2,True,True,True
+2024,5,401643795,Old Dominion at Bowling Green,,2,True,True,True
+2024,5,401640981,Louisiana Tech at Florida International,,2,True,True,True
+2024,5,401643796,UL Monroe at Troy,,2,True,True,True
+2024,5,401636881,Iowa State at Houston,,2,True,True,True
+2024,5,401645336,Tulsa at North Texas,,2,True,True,True
+2024,5,401645333,Charlotte at Rice,,2,True,True,True
+2024,5,401635561,Stanford at Clemson,,2,True,True,True
+2024,5,401628498,Ohio State at Michigan State,,2,True,True,True
+2024,5,401641025,Middle Tennessee at Memphis,,2,True,True,True
+2024,5,401628495,Illinois at Penn State,,2,True,True,True
+2024,5,401628374,Georgia at Alabama,,5,True,False,True
+2024,5,401628376,South Alabama at LSU,,2,True,True,True
+2024,5,401635563,Florida State at SMU,,2,True,True,True
+2024,5,401641035,New Mexico at New Mexico State,,2,True,True,True
+2024,5,401643718,Air Force at Wyoming,,2,True,True,True
+2024,5,401636884,Cincinnati at Texas Tech,,2,True,True,True
+2024,5,401643719,Washington State at Boise State,,2,True,True,True
+2024,5,401636886,Arizona at Utah,,2,True,True,True
+2024,5,401628500,Oregon at UCLA,,2,True,True,True
+2024,6,401643797,Texas State at Troy,,2,True,True,True
+2024,6,401641029,Sam Houston at UTEP,,2,True,True,True
+2024,6,401641001,Jacksonville State at Kennesaw State,,2,True,True,True
+2024,6,401636891,Houston at TCU,,2,True,True,True
+2024,6,401634779,Syracuse at UNLV,,2,True,True,True
+2024,6,401628506,Michigan State at Oregon,,2,True,True,True
+2024,6,401635572,Pittsburgh at North Carolina,,2,True,True,True
+2024,6,401635638,Wake Forest at NC State,,2,True,True,True
+2024,6,401635571,SMU at Louisville,,2,True,True,True
+2024,6,401628383,Missouri at Texas A&M,,2,True,True,True
+2024,6,401628509,Purdue at Wisconsin,,2,True,True,True
+2024,6,401628510,UCLA at Penn State,,2,True,True,True
+2024,6,401629044,Massachusetts at Northern Illinois,,2,True,True,True
+2024,6,401635567,Boston College at Virginia,,2,True,True,True
+2024,6,401643722,Navy at Air Force,,2,True,True,True
+2024,6,401645339,Army at Tulsa,,2,True,True,True
+2024,6,401645338,Tulane at UAB,,2,True,True,True
+2024,6,401644741,Western Michigan at Ball State,,2,True,True,True
+2024,6,401628381,Auburn at Georgia,,2,True,True,True
+2024,6,401628503,Indiana at Northwestern,,2,True,True,True
+2024,6,401628504,Iowa at Ohio State,,2,True,True,True
+2024,6,401629033,Temple at UConn,,2,True,True,True
+2024,6,401635573,Virginia Tech at Stanford,,2,True,True,True
+2024,6,401628382,Ole Miss at South Carolina,,2,True,True,True
+2024,6,401644684,Miami (OH) at Toledo,,2,True,True,True
+2024,6,401644740,Bowling Green at Akron,,2,True,True,True
+2024,6,401643799,App State at Marshall,,2,True,True,True
+2024,6,401645340,East Carolina at Charlotte,,2,True,True,True
+2024,6,401628508,Rutgers at Nebraska,,2,True,True,True
+2024,6,401636890,West Virginia at Oklahoma State,,2,True,True,True
+2024,6,401628384,Alabama at Vanderbilt,,2,True,True,True
+2024,6,401643724,Colorado State at Oregon State,,2,True,True,True
+2024,6,401643801,James Madison at UL Monroe,,2,True,True,True
+2024,6,401643723,Utah State at Boise State,,2,True,True,True
+2024,6,401643798,Old Dominion at Coastal Carolina,,2,True,True,True
+2024,6,401643802,Louisiana at Southern Miss,,2,True,True,True
+2024,6,401643800,South Alabama at Arkansas State,,2,True,True,True
+2024,6,401635569,Clemson at Florida State,,4,True,True,True
+2024,6,401628379,Tennessee at Arkansas,,1,True,False,True
+2024,6,401628505,Michigan at Washington,,2,True,True,True
+2024,6,401636889,Baylor at Iowa State,,2,True,True,True
+2024,6,401628507,USC at Minnesota,,2,True,True,True
+2024,6,401643726,Nevada at San José State,,2,True,True,True
+2024,6,401628380,UCF at Florida,,2,True,True,True
+2024,6,401643725,Hawai'i at San Diego State,,2,True,True,True
+2024,6,401635570,Duke at Georgia Tech,,2,True,True,True
+2024,6,401636888,Kansas at Arizona State,,2,True,True,True
+2024,6,401635568,Miami at California,,1,True,False,True
+2024,6,401636887,Texas Tech at Arizona,,1,True,False,True
+2024,7,401640982,Florida International at Liberty,,2,True,True,True
+2024,7,401641002,New Mexico State at Jacksonville State,,2,True,True,True
+2024,7,401643803,Coastal Carolina at James Madison,,2,True,True,True
+2024,7,401641030,UTEP at Western Kentucky,,2,True,True,True
+2024,7,401641009,Middle Tennessee at Louisiana Tech,,2,True,True,True
+2024,7,401628513,Northwestern at Maryland,,2,True,True,True
+2024,7,401643733,UNLV at Utah State,,2,True,True,True
+2024,7,401636892,Utah at Arizona State,,2,True,True,True
+2024,7,401628517,Wisconsin at Rutgers,,2,True,True,True
+2024,7,401628389,Missouri at Massachusetts,,2,True,True,True
+2024,7,401644743,Ball State at Kent State,,2,True,True,True
+2024,7,401628512,Washington at Iowa,,2,True,True,True
+2024,7,401628385,South Carolina at Alabama,,2,True,True,True
+2024,7,401644745,Toledo at Buffalo,,2,True,True,True
+2024,7,401645342,UAB at Army,,2,True,True,True
+2024,7,401635577,Georgia Tech at North Carolina,,2,True,True,True
+2024,7,401635576,Clemson at Wake Forest,,2,True,True,True
+2024,7,401644685,Miami (OH) at Eastern Michigan,,2,True,True,True
+2024,7,401644744,Northern Illinois at Bowling Green,,2,True,True,True
+2024,7,401636895,Cincinnati at UCF,,2,True,True,True
+2024,7,401628511,Purdue at Illinois,,2,True,True,True
+2024,7,401628981,Stanford at Notre Dame,,2,True,True,True
+2024,7,401628390,Texas at Oklahoma,,2,True,True,True
+2024,7,401643805,Old Dominion at Georgia State,,2,True,True,True
+2024,7,401643732,San Diego State at Wyoming,,2,True,True,True
+2024,7,401628516,Penn State at USC,,2,True,True,True
+2024,7,401635578,Louisville at Virginia,,2,True,True,True
+2024,7,401645341,Memphis at South Florida,,2,True,True,True
+2024,7,401643729,San José State at Colorado State,,2,True,True,True
+2024,7,401644742,Akron at Western Michigan,,2,True,True,True
+2024,7,401635575,California at Pittsburgh,,2,True,True,True
+2024,7,401636893,Arizona at BYU,,2,True,True,True
+2024,7,401644746,Ohio at Central Michigan,,2,True,True,True
+2024,7,401628386,Mississippi State at Georgia,,2,True,True,True
+2024,7,401643807,Southern Miss at UL Monroe,,2,True,True,True
+2024,7,401645344,UTSA at Rice,,2,True,True,True
+2024,7,401628391,Florida at Tennessee,,2,True,True,True
+2024,7,401645343,North Texas at Florida Atlantic,,2,True,True,True
+2024,7,401643727,Air Force at New Mexico,,2,True,True,True
+2024,7,401643730,Washington State at Fresno State,,2,True,True,True
+2024,7,401643808,Arkansas State at Texas State,,2,True,True,True
+2024,7,401628388,Ole Miss at LSU,,2,True,True,True
+2024,7,401643806,App State at Louisiana,,2,True,True,True
+2024,7,401643731,Oregon State at Nevada,,2,True,True,True
+2024,7,401628515,Ohio State at Oregon,,2,True,True,True
+2024,7,401628387,Vanderbilt at Kentucky,,2,True,True,True
+2024,7,401643804,Marshall at Georgia Southern,,2,True,True,True
+2024,7,401635574,Syracuse at NC State,,2,True,True,True
+2024,7,401636896,Iowa State at West Virginia,,2,True,True,True
+2024,7,401628514,Minnesota at UCLA,,2,True,True,True
+2024,7,401636894,Kansas State at Colorado,,2,True,True,True
+2024,7,401643728,Boise State at Hawai'i,,2,True,True,True
+2024,8,401643809,Troy at South Alabama,,2,True,True,True
+2024,8,401641019,Kennesaw State at Middle Tennessee,,2,True,True,True
+2024,8,401641010,Louisiana Tech at New Mexico State,,2,True,True,True
+2024,8,401641038,Western Kentucky at Sam Houston,,2,True,True,True
+2024,8,401640983,Florida International at UTEP,,2,True,True,True
+2024,8,401643810,Georgia State at Marshall,,2,True,True,True
+2024,8,401634768,Boston College at Virginia Tech,,2,True,True,True
+2024,8,401634769,Florida State at Duke,,2,True,True,True
+2024,8,401628523,Oregon at Purdue,,2,True,True,True
+2024,8,401636898,Oklahoma State at BYU,,2,True,True,True
+2024,8,401643735,Fresno State at Nevada,,2,True,True,True
+2024,8,401629034,Wake Forest at UConn,,2,True,True,True
+2024,8,401628395,Auburn at Missouri,,2,True,True,True
+2024,8,401636899,Arizona State at Cincinnati,,2,True,True,True
+2024,8,401628522,Wisconsin at Northwestern,,2,True,True,True
+2024,8,401628519,Nebraska at Indiana,,2,True,True,True
+2024,8,401635588,Virginia at Clemson,,2,True,True,True
+2024,8,401628524,UCLA at Rutgers,,2,True,True,True
+2024,8,401635589,Miami at Louisville,,2,True,True,True
+2024,8,401645346,East Carolina at Army,,2,True,True,True
+2024,8,401643811,Louisiana at Coastal Carolina,,2,True,True,True
+2024,8,401628396,South Carolina at Oklahoma,,2,True,True,True
+2024,8,401645351,Tulsa at Temple,,2,True,True,True
+2024,8,401644750,Central Michigan at Eastern Michigan,,2,True,True,True
+2024,8,401628397,Alabama at Tennessee,,2,True,True,True
+2024,8,401643736,Hawai'i at Washington State,,2,True,True,True
+2024,8,401644686,Ohio at Miami (OH),,2,True,True,True
+2024,8,401644749,Western Michigan at Buffalo,,2,True,True,True
+2024,8,401644751,Toledo at Northern Illinois,,2,True,True,True
+2024,8,401645345,UAB at South Florida,,2,True,True,True
+2024,8,401643813,Texas State at Old Dominion,,2,True,True,True
+2024,8,401645347,Charlotte at Navy,,2,True,True,True
+2024,8,401645348,Florida Atlantic at UTSA,,2,True,True,True
+2024,8,401628982,Notre Dame at Georgia Tech,,2,True,True,True
+2024,8,401628518,Michigan at Illinois,,2,True,True,True
+2024,8,401644748,Kent State at Bowling Green,,2,True,True,True
+2024,8,401645350,Rice at Tulane,,2,True,True,True
+2024,8,401635587,NC State at California,,2,True,True,True
+2024,8,401636901,Houston at Kansas,,2,True,True,True
+2024,8,401643738,Wyoming at San José State,,2,True,True,True
+2024,8,401628521,USC at Maryland,,2,True,True,True
+2024,8,401636897,Colorado at Arizona,,2,True,True,True
+2024,8,401643737,New Mexico at Utah State,,2,True,True,True
+2024,8,401643812,James Madison at Georgia Southern,,2,True,True,True
+2024,8,401636902,Baylor at Texas Tech,,2,True,True,True
+2024,8,401628394,Texas A&M at Mississippi State,,2,True,True,True
+2024,8,401643814,Arkansas State at Southern Miss,,2,True,True,True
+2024,8,401628392,LSU at Arkansas,,2,True,True,True
+2024,8,401628399,Ball State at Vanderbilt,,2,True,True,True
+2024,8,401628398,Georgia at Texas,,3,True,True,True
+2024,8,401636900,UCF at Iowa State,,2,True,True,True
+2024,8,401645349,North Texas at Memphis,,2,True,True,True
+2024,8,401636904,Kansas State at West Virginia,,2,True,True,True
+2024,8,401628520,Iowa at Michigan State,,2,True,True,True
+2024,8,401628393,Kentucky at Florida,,2,True,True,True
+2024,8,401635590,SMU at Stanford,,2,True,True,True
+2024,8,401643734,Colorado State at Air Force,,2,True,True,True
+2024,8,401643739,UNLV at Oregon State,,2,True,True,True
+2024,8,401636903,TCU at Utah,,2,True,True,True
+2024,9,401640984,Sam Houston at Florida International,,2,True,True,True
+2024,9,401641011,UTEP at Louisiana Tech,,2,True,True,True
+2024,9,401640993,Liberty at Kennesaw State,,2,True,True,True
+2024,9,401641003,Middle Tennessee at Jacksonville State,,2,True,True,True
+2024,9,401643815,Georgia Southern at Old Dominion,,2,True,True,True
+2024,9,401634770,Syracuse at Pittsburgh,,2,True,True,True
+2024,9,401634771,Louisville at Boston College,,2,True,True,True
+2024,9,401643740,Boise State at UNLV,,2,True,True,True
+2024,9,401628532,Rutgers at USC,,2,True,True,True
+2024,9,401644755,Buffalo at Ohio,,2,True,True,True
+2024,9,401628983,Notre Dame at Navy,,2,True,True,True
+2024,9,401645353,Charlotte at Memphis,,2,True,True,True
+2024,9,401635597,Georgia Tech at Virginia Tech,,2,True,True,True
+2024,9,401628402,Oklahoma at Ole Miss,,2,True,True,True
+2024,9,401635598,North Carolina at Virginia,,2,True,True,True
+2024,9,401628526,Washington at Indiana,,2,True,True,True
+2024,9,401645354,Tulane at North Texas,,2,True,True,True
+2024,9,401628530,Nebraska at Ohio State,,2,True,True,True
+2024,9,401628403,Arkansas at Mississippi State,,2,True,True,True
+2024,9,401643816,Georgia State at App State,,2,True,True,True
+2024,9,401644687,Central Michigan at Miami (OH),,2,True,True,True
+2024,9,401645352,Temple at East Carolina,,2,True,True,True
+2024,9,401645355,UTSA at Tulsa,,2,True,True,True
+2024,9,401636911,BYU at UCF,,2,True,True,True
+2024,9,401636910,Texas Tech at TCU,,2,True,True,True
+2024,9,401636906,Oklahoma State at Baylor,,2,True,True,True
+2024,9,401635599,Wake Forest at Stanford,,2,True,True,True
+2024,9,401628528,Maryland at Minnesota,,2,True,True,True
+2024,9,401643817,Southern Miss at James Madison,,2,True,True,True
+2024,9,401644754,Bowling Green at Toledo,,2,True,True,True
+2024,9,401628525,Illinois at Oregon,,2,True,True,True
+2024,9,401628400,Missouri at Alabama,,2,True,True,True
+2024,9,401629035,Rice at UConn,,2,True,True,True
+2024,9,401628527,Northwestern at Iowa,,2,True,True,True
+2024,9,401644752,Eastern Michigan at Akron,,2,True,True,True
+2024,9,401644756,Kent State at Western Michigan,,2,True,True,True
+2024,9,401644753,Northern Illinois at Ball State,,2,True,True,True
+2024,9,401635594,Oregon State at California,,2,True,True,True
+2024,9,401628405,Texas at Vanderbilt,,2,True,True,True
+2024,9,401643819,UL Monroe at South Alabama,,2,True,True,True
+2024,9,401643741,New Mexico at Colorado State,,2,True,True,True
+2024,9,401636908,Utah at Houston,,2,True,True,True
+2024,9,401643818,Troy at Arkansas State,,2,True,True,True
+2024,9,401643745,Utah State at Wyoming,,2,True,True,True
+2024,9,401635596,Florida State at Miami,,2,True,True,True
+2024,9,401636905,West Virginia at Arizona,,2,True,True,True
+2024,9,401628529,Michigan State at Michigan,,2,True,True,True
+2024,9,401628531,Penn State at Wisconsin,,2,True,True,True
+2024,9,401628404,LSU at Texas A&M,,2,True,True,True
+2024,9,401628401,Auburn at Kentucky,,2,True,True,True
+2024,9,401636909,Kansas at Kansas State,,2,True,True,True
+2024,9,401643742,San José State at Fresno State,,2,True,True,True
+2024,9,401635595,SMU at Duke,,2,True,True,True
+2024,9,401636907,Cincinnati at Colorado,,2,True,True,True
+2024,9,401643744,Washington State at San Diego State,,2,True,True,True
+2024,9,401643743,Nevada at Hawai'i,,2,True,True,True
+2024,10,401640985,New Mexico State at Florida International,,2,True,True,True
+2024,10,401643820,Louisiana at Texas State,,2,True,True,True
+2024,10,401641012,Louisiana Tech at Sam Houston,,2,True,True,True
+2024,10,401640994,Jacksonville State at Liberty,,2,True,True,True
+2024,10,401641020,Kennesaw State at Western Kentucky,,2,True,True,True
+2024,10,401645356,Tulane at Charlotte,,2,True,True,True
+2024,10,401629036,Georgia State at UConn,,2,True,True,True
+2024,10,401645357,South Florida at Florida Atlantic,,2,True,True,True
+2024,10,401643747,San Diego State at Boise State,,2,True,True,True
+2024,10,401645359,Memphis at UTSA,,2,True,True,True
+2024,10,401635601,Duke at Miami,,2,True,True,True
+2024,10,401643746,Air Force at Army,,2,True,True,True
+2024,10,401635604,Virginia Tech at Syracuse,,2,True,True,True
+2024,10,401644757,Buffalo at Akron,,2,True,True,True
+2024,10,401628406,Ole Miss at Arkansas,,2,True,True,True
+2024,10,401635516,Stanford at NC State,,2,True,True,True
+2024,10,401644758,Toledo at Eastern Michigan,,2,True,True,True
+2024,10,401628533,Minnesota at Illinois,,2,True,True,True
+2024,10,401628538,Northwestern at Purdue,,2,True,True,True
+2024,10,401628539,Ohio State at Penn State,,2,True,True,True
+2024,10,401628407,Vanderbilt at Auburn,,2,True,True,True
+2024,10,401645358,Tulsa at UAB,,2,True,True,True
+2024,10,401643821,Old Dominion at App State,,2,True,True,True
+2024,10,401628408,Florida at Georgia,,2,True,True,True
+2024,10,401628534,Indiana at Michigan State,,2,True,True,True
+2024,10,401628536,Oregon at Michigan,,2,True,True,True
+2024,10,401628537,UCLA at Nebraska,,2,True,True,True
+2024,10,401636916,Arizona at UCF,,2,True,True,True
+2024,10,401636913,Kansas State at Houston,,2,True,True,True
+2024,10,401635602,North Carolina at Florida State,,2,True,True,True
+2024,10,401636915,Arizona State at Oklahoma State,,2,True,True,True
+2024,10,401643822,UL Monroe at Marshall,,2,True,True,True
+2024,10,401636914,Texas Tech at Iowa State,,2,True,True,True
+2024,10,401641026,Middle Tennessee at UTEP,,2,True,True,True
+2024,10,401643824,Coastal Carolina at Troy,,2,True,True,True
+2024,10,401645360,Navy at Rice,,2,True,True,True
+2024,10,401643750,Wyoming at New Mexico,,2,True,True,True
+2024,10,401628409,Massachusetts at Mississippi State,,2,True,True,True
+2024,10,401643749,Hawai'i at Fresno State,,2,True,True,True
+2024,10,401635600,Louisville at Clemson,,2,True,True,True
+2024,10,401643823,Georgia Southern at South Alabama,,2,True,True,True
+2024,10,401628540,USC at Washington,,2,True,True,True
+2024,10,401628411,Texas A&M at South Carolina,,2,True,True,True
+2024,10,401628535,Wisconsin at Iowa,,2,True,True,True
+2024,10,401628412,Kentucky at Tennessee,,2,True,True,True
+2024,10,401643748,Colorado State at Nevada,,2,True,True,True
+2024,10,401636912,TCU at Baylor,,2,True,True,True
+2024,10,401635627,Pittsburgh at SMU,,2,True,True,True
+2024,11,401644760,Bowling Green at Central Michigan,,2,True,True,True
+2024,11,401644688,Miami (OH) at Ball State,,2,True,True,True
+2024,11,401644761,Ohio at Kent State,,2,True,True,True
+2024,11,401644762,Northern Illinois at Western Michigan,,2,True,True,True
+2024,11,401643825,App State at Coastal Carolina,,2,True,True,True
+2024,11,401645361,Florida Atlantic at East Carolina,,2,True,True,True
+2024,11,401634773,California at Wake Forest,,2,True,True,True
+2024,11,401628542,Iowa at UCLA,,2,True,True,True
+2024,11,401645362,Rice at Memphis,,2,True,True,True
+2024,11,401643754,New Mexico at San Diego State,,2,True,True,True
+2024,11,401635606,Syracuse at Boston College,,2,True,True,True
+2024,11,401636918,West Virginia at Cincinnati,,2,True,True,True
+2024,11,401628544,Minnesota at Rutgers,,2,True,True,True
+2024,11,401628417,Florida at Texas,,2,True,True,True
+2024,11,401635609,Miami at Georgia Tech,,2,True,True,True
+2024,11,401628545,Purdue at Ohio State,,2,False,True,False
+2024,11,401645363,Navy at South Florida,,2,True,True,True
+2024,11,401643828,Texas State at UL Monroe,,2,True,True,True
+2024,11,401640995,Liberty at Middle Tennessee,,2,True,True,True
+2024,11,401629037,UConn at UAB,,2,True,True,True
+2024,11,401643829,Marshall at Southern Miss,,2,True,True,True
+2024,11,401628541,Michigan at Indiana,,2,True,True,True
+2024,11,401635607,Clemson at Virginia Tech,,2,True,True,True
+2024,11,401643826,Georgia State at James Madison,,2,True,True,True
+2024,11,401628414,Georgia at Ole Miss,,4,True,True,True
+2024,11,401643755,San José State at Oregon State,,2,True,True,True
+2024,11,401635608,Duke at NC State,,2,True,True,True
+2024,11,401636919,Iowa State at Kansas,,2,True,True,True
+2024,11,401629045,Army at North Texas,,2,True,True,True
+2024,11,401636921,Colorado at Texas Tech,,2,True,True,True
+2024,11,401645364,Temple at Tulane,,2,True,True,True
+2024,11,401641021,Kennesaw State at UTEP,,2,True,True,True
+2024,11,401628418,South Carolina at Vanderbilt,,2,True,True,True
+2024,11,401641004,Jacksonville State at Louisiana Tech,,2,True,True,True
+2024,11,401643827,Arkansas State at Louisiana,,2,True,True,True
+2024,11,401641036,Western Kentucky at New Mexico State,,2,True,True,True
+2024,11,401636917,UCF at Arizona State,,2,True,True,True
+2024,11,401628416,Mississippi State at Tennessee,,2,True,True,True
+2024,11,401628543,Maryland at Oregon,,2,True,True,True
+2024,11,401636920,Oklahoma State at TCU,,2,True,True,True
+2024,11,401628984,Florida State at Notre Dame,,2,True,True,True
+2024,11,401628413,Alabama at LSU,,4,True,True,True
+2024,11,401628415,Oklahoma at Missouri,,2,True,True,True
+2024,11,401643752,Nevada at Boise State,,2,True,True,True
+2024,11,401635610,Virginia at Pittsburgh,,2,True,True,True
+2024,11,401628546,Washington at Penn State,,2,True,True,True
+2024,11,401643753,UNLV at Hawai'i,,2,True,True,True
+2024,11,401643751,Fresno State at Air Force,,2,True,True,True
+2024,11,401636922,BYU at Utah,,2,True,True,True
+2024,11,401643756,Utah State at Washington State,,2,True,True,True
+2024,12,401644764,Western Michigan at Bowling Green,,2,True,True,True
+2024,12,401644763,Ball State at Buffalo,,2,True,True,True
+2024,12,401644765,Central Michigan at Toledo,,2,True,True,True
+2024,12,401644689,Kent State at Miami (OH),,2,True,True,True
+2024,12,401644767,Eastern Michigan at Ohio,,2,True,True,True
+2024,12,401644766,Akron at Northern Illinois,,2,True,True,True
+2024,12,401645365,East Carolina at Tulsa,,2,True,True,True
+2024,12,401645366,North Texas at UTSA,,2,True,True,True
+2024,12,401643759,Wyoming at Colorado State,,2,True,True,True
+2024,12,401628553,UCLA at Washington,,2,True,True,True
+2024,12,401636923,Houston at Arizona,,2,True,True,True
+2024,12,401641013,Louisiana Tech at Western Kentucky,,2,True,True,True
+2024,12,401628550,Ohio State at Northwestern,,2,True,True,True
+2024,12,401628419,Texas at Arkansas,,2,True,True,True
+2024,12,401636925,Utah at Colorado,,2,True,True,True
+2024,12,401645370,Tulane at Navy,,2,True,True,True
+2024,12,401629046,Liberty at Massachusetts,,2,True,True,True
+2024,12,401635582,Clemson at Pittsburgh,,2,True,True,True
+2024,12,401628426,UL Monroe at Auburn,,2,True,True,True
+2024,12,401643832,Coastal Carolina at Marshall,,2,True,True,True
+2024,12,401645369,Florida Atlantic at Temple,,2,True,True,True
+2024,12,401640986,Florida International at Jacksonville State,,2,True,True,True
+2024,12,401628547,Michigan State at Illinois,,2,True,True,True
+2024,12,401635581,Syracuse at California,,2,True,True,True
+2024,12,401641022,Sam Houston at Kennesaw State,,2,True,True,True
+2024,12,401643760,Hawai'i at Utah State,,2,True,True,True
+2024,12,401628985,Virginia at Notre Dame,,2,True,True,True
+2024,12,401628552,Penn State at Purdue,,2,True,True,True
+2024,12,401645368,South Florida at Charlotte,,2,True,True,True
+2024,12,401628420,LSU at Florida,,2,True,True,True
+2024,12,401635517,Louisville at Stanford,,2,True,True,True
+2024,12,401635580,Boston College at SMU,,2,True,True,True
+2024,12,401643757,Oregon State at Air Force,,2,True,True,True
+2024,12,401636929,Baylor at West Virginia,,2,True,True,True
+2024,12,401628549,Nebraska at USC,,2,True,True,True
+2024,12,401643833,James Madison at Old Dominion,,2,True,True,True
+2024,12,401643830,Troy at Georgia Southern,,2,True,True,True
+2024,12,401628423,Missouri at South Carolina,,2,True,True,True
+2024,12,401643831,Arkansas State at Georgia State,,2,True,True,True
+2024,12,401628548,Rutgers at Maryland,,2,True,True,True
+2024,12,401643758,Boise State at San José State,,2,True,True,True
+2024,12,401636927,Arizona State at Kansas State,,2,True,True,True
+2024,12,401643835,Southern Miss at Texas State,,2,True,True,True
+2024,12,401643834,South Alabama at Louisiana,,2,True,True,True
+2024,12,401628551,Oregon at Wisconsin,,2,True,True,True
+2024,12,401628421,Tennessee at Georgia,,2,True,True,True
+2024,12,401628424,New Mexico State at Texas A&M,,2,True,True,False
+2024,12,401635583,Wake Forest at North Carolina,,2,True,True,True
+2024,12,401645367,UAB at Memphis,,2,True,True,True
+2024,12,401636926,Cincinnati at Iowa State,,2,True,True,True
+2024,12,401643761,Washington State at New Mexico,,2,True,True,True
+2024,12,401636924,Kansas at BYU,,2,True,True,True
+2024,12,401643762,San Diego State at UNLV,,2,True,True,True
+2024,13,401644769,Akron at Kent State,,2,True,True,True
+2024,13,401644770,Western Michigan at Central Michigan,,2,True,True,True
+2024,13,401644690,Northern Illinois at Miami (OH),,2,True,True,True
+2024,13,401644772,Buffalo at Eastern Michigan,,2,True,True,True
+2024,13,401644773,Ohio at Toledo,,2,True,True,True
+2024,13,401634772,NC State at Georgia Tech,,2,True,True,True
+2024,13,401645374,Temple at UTSA,,2,True,True,True
+2024,13,401628558,Purdue at Michigan State,,2,True,True,True
+2024,13,401643767,UNLV at San José State,,2,True,True,True
+2024,13,401628429,Ole Miss at Florida,,2,True,True,True
+2024,13,401628555,Indiana at Ohio State,,2,True,True,True
+2024,13,401628556,Iowa at Maryland,,2,True,True,True
+2024,13,401628554,Illinois at Rutgers,,2,True,True,True
+2024,13,401635612,North Carolina at Boston College,,2,True,True,True
+2024,13,401635618,Wake Forest at Miami,,2,True,True,True
+2024,13,401635619,SMU at Virginia,,2,True,True,True
+2024,13,401635518,UConn at Syracuse,,2,True,True,True
+2024,13,401641005,Sam Houston at Jacksonville State,,2,True,True,True
+2024,13,401628430,Massachusetts at Georgia,,2,False,True,False
+2024,13,401628435,UTEP at Tennessee,,2,False,False,False
+2024,13,401640996,Western Kentucky at Liberty,,2,True,True,True
+2024,13,401645373,Rice at UAB,,2,True,True,True
+2024,13,401644774,Bowling Green at Ball State,,2,True,True,True
+2024,13,401643836,James Madison at App State,,2,True,True,True
+2024,13,401641027,New Mexico State at Middle Tennessee,,2,True,True,True
+2024,13,401636935,Arizona at TCU,,2,True,True,True
+2024,13,401640987,Florida International at Kennesaw State,,2,True,True,True
+2024,13,401643841,South Alabama at Southern Miss,,2,True,True,True
+2024,13,401645371,Charlotte at Florida Atlantic,,2,True,True,True
+2024,13,401643839,UL Monroe at Arkansas State,,2,True,True,True
+2024,13,401645375,Tulsa at South Florida,,2,True,True,True
+2024,13,401643837,Georgia Southern at Coastal Carolina,,2,True,True,True
+2024,13,401643766,San Diego State at Utah State,,2,True,True,True
+2024,13,401628560,Wisconsin at Nebraska,,2,True,True,True
+2024,13,401628559,Penn State at Minnesota,,2,True,True,True
+2024,13,401628557,Northwestern at Michigan,,2,True,True,True
+2024,13,401628436,Kentucky at Texas,,2,True,True,True
+2024,13,401645372,East Carolina at North Texas,,2,True,True,True
+2024,13,401636932,Colorado at Kansas,,2,True,True,True
+2024,13,401635613,Stanford at California,,2,True,True,True
+2024,13,401636934,Texas Tech at Oklahoma State,,2,True,True,True
+2024,13,401636937,UCF at West Virginia,,2,True,True,True
+2024,13,401636930,BYU at Arizona State,,2,True,True,True
+2024,13,401628427,Louisiana Tech at Arkansas,,2,True,True,True
+2024,13,401635617,Pittsburgh at Louisville,,2,True,True,True
+2024,13,401628432,Missouri at Mississippi State,,2,True,True,True
+2024,13,401643840,Troy at Louisiana,,2,True,True,True
+2024,13,401643764,Boise State at Wyoming,,2,True,True,True
+2024,13,401628572,Washington State at Oregon State,,2,True,True,True
+2024,13,401640959,Army at Notre Dame,,2,True,True,True
+2024,13,401643842,Georgia State at Texas State,,2,True,True,True
+2024,13,401636931,Baylor at Houston,,2,True,True,True
+2024,13,401636936,Iowa State at Utah,,2,True,True,True
+2024,13,401628428,Texas A&M at Auburn,,2,True,True,True
+2024,13,401643838,Marshall at Old Dominion,,2,True,True,True
+2024,13,401628433,Alabama at Oklahoma,,2,True,True,True
+2024,13,401628431,Vanderbilt at LSU,,2,True,True,True
+2024,13,401635615,Virginia Tech at Duke,,2,True,True,True
+2024,13,401636933,Cincinnati at Kansas State,,2,True,True,True
+2024,13,401628561,USC at UCLA,,2,True,True,True
+2024,13,401643765,Colorado State at Fresno State,,2,True,True,True
+2024,13,401643763,Air Force at Nevada,,2,True,True,True
+2024,14,401644776,Kent State at Buffalo,,2,True,True,True
+2024,14,401644775,Toledo at Akron,,2,True,True,True
+2024,14,401645376,Memphis at Tulane,,2,True,True,True
+2024,14,401644691,Miami (OH) at Bowling Green,,2,True,True,True
+2024,14,401645379,Navy at East Carolina,,2,True,True,True
+2024,14,401644777,Ball State at Ohio,,2,True,True,True
+2024,14,401643769,Oregon State at Boise State,,2,True,True,True
+2024,14,401636938,Oklahoma State at Colorado,,2,True,True,True
+2024,14,401628568,Minnesota at Wisconsin,,2,True,True,True
+2024,14,401643770,Utah State at Colorado State,,2,True,True,True
+2024,14,401628442,Mississippi State at Ole Miss,,2,True,True,True
+2024,14,401640997,Liberty at Sam Houston,,2,True,True,True
+2024,14,401643843,Texas State at South Alabama,,2,True,True,True
+2024,14,401635625,Stanford at San José State,,2,True,True,True
+2024,14,401628562,Nebraska at Iowa,,2,True,True,True
+2024,14,401628439,Georgia Tech at Georgia,,2,True,True,True
+2024,14,401636939,Utah at UCF,,2,True,True,True
+2024,14,401628440,Louisville at Kentucky,,2,True,True,True
+2024,14,401628444,South Carolina at Clemson,,2,True,True,True
+2024,14,401628563,Illinois at Northwestern,,2,True,True,True
+2024,14,401628566,Michigan at Ohio State,,7,True,True,True
+2024,14,401629038,UConn at Massachusetts,,2,True,True,True
+2024,14,401635622,Duke at Wake Forest,,2,True,True,True
+2024,14,401636941,Kansas at Baylor,,2,True,True,True
+2024,14,401643848,Louisiana at UL Monroe,,2,True,True,True
+2024,14,401628446,Tennessee at Vanderbilt,,2,True,True,True
+2024,14,401645381,North Texas at Temple,,2,True,True,True
+2024,14,401636945,West Virginia at Texas Tech,,2,True,True,True
+2024,14,401645378,UTSA at Army,,2,True,True,True
+2024,14,401644780,Eastern Michigan at Western Michigan,,2,True,True,True
+2024,14,401645382,South Florida at Rice,,2,True,True,True
+2024,14,401640988,Middle Tennessee at Florida International,,2,True,True,True
+2024,14,401643845,Coastal Carolina at Georgia State,,2,True,True,True
+2024,14,401643849,Southern Miss at Troy,,2,True,True,True
+2024,14,401643847,Old Dominion at Arkansas State,,2,True,True,True
+2024,14,401635620,Pittsburgh at Boston College,,2,True,True,True
+2024,14,401644779,Central Michigan at Northern Illinois,,2,True,True,True
+2024,14,401636940,Arizona State at Arizona,,2,True,True,True
+2024,14,401635623,Miami at Syracuse,,2,True,True,True
+2024,14,401628443,Arkansas at Missouri,,2,True,True,True
+2024,14,401645377,UAB at Charlotte,,2,True,True,True
+2024,14,401645380,Florida Atlantic at Tulsa,,2,True,True,True
+2024,14,401628437,Auburn at Alabama,,2,True,True,True
+2024,14,401628571,Notre Dame at USC,,2,True,True,True
+2024,14,401628567,Rutgers at Michigan State,,2,True,True,True
+2024,14,401635624,NC State at North Carolina,,2,True,True,True
+2024,14,401628565,Maryland at Penn State,,2,True,True,True
+2024,14,401635621,California at SMU,,2,True,True,True
+2024,14,401628570,Fresno State at UCLA,,2,True,True,True
+2024,14,401641014,Kennesaw State at Louisiana Tech,,2,True,True,True
+2024,14,401641031,UTEP at New Mexico State,,2,True,True,True
+2024,14,401641006,Jacksonville State at Western Kentucky,,2,True,True,True
+2024,14,401636943,TCU at Cincinnati,,2,True,True,True
+2024,14,401643844,App State at Georgia Southern,,2,True,True,True
+2024,14,401643773,Wyoming at Washington State,,2,True,True,True
+2024,14,401628438,Florida at Florida State,,2,True,True,True
+2024,14,401628441,Oklahoma at LSU,,2,True,True,True
+2024,14,401628564,Purdue at Indiana,,2,True,True,True
+2024,14,401628445,Texas at Texas A&M,,2,True,True,True
+2024,14,401636944,Kansas State at Iowa State,,2,True,True,True
+2024,14,401628569,Washington at Oregon,,2,True,True,True
+2024,14,401635640,Virginia at Virginia Tech,,2,True,True,True
+2024,14,401643846,Marshall at James Madison,,2,True,True,True
+2024,14,401643772,Nevada at UNLV,,2,True,True,True
+2024,14,401636942,Houston at BYU,,2,True,True,True
+2024,14,401643768,Air Force at San Diego State,,2,True,True,True
+2024,14,401643771,New Mexico at Hawai'i,,2,True,True,True
+2024,15,401673466,Western Kentucky at Jacksonville State,,2,True,True,True
+2024,15,401673462,Tulane at Army,,2,True,True,True
+2024,15,401673468,UNLV at Boise State,,2,True,True,True
+2024,15,401673465,Iowa State at Arizona State,,2,True,True,True
+2024,15,401673467,Ohio at Miami (OH),,2,True,True,True
+2024,15,401673469,Georgia at Texas,,2,True,True,True
+2024,15,401673470,Marshall at Louisiana,,2,True,True,True
+2024,15,401673464,Penn State at Oregon,,2,True,True,True
+2024,15,401673463,Clemson at SMU,,2,True,True,True
+2024,16,401645383,Navy at Army,,2,True,True,True
+2025,1,401756846,Iowa State at Kansas State,,2,True,True,True
+2025,1,401756847,Fresno State at Kansas,,2,True,True,True
+2025,1,401757218,Sam Houston at Western Kentucky,,2,True,True,True
+2025,1,401754516,Stanford at Hawai'i,,2,True,True,True
+2025,1,401762522,Boise State at South Florida,,2,True,True,True
+2025,1,401752794,Ohio at Rutgers,,2,True,True,True
+2025,1,401762789,Wyoming at Akron,,2,True,True,True
+2025,1,401756848,Jacksonville State at UCF,,2,True,True,True
+2025,1,401754373,East Carolina at NC State,,2,True,True,True
+2025,1,401752793,Buffalo at Minnesota,,2,True,True,True
+2025,1,401762791,Miami (OH) at Wisconsin,,2,True,True,True
+2025,1,401752796,Nebraska at Cincinnati,,2,True,True,True
+2025,1,401754374,Kennesaw State at Wake Forest,,2,True,True,True
+2025,1,401752802,Western Michigan at Michigan State,,2,True,True,True
+2025,1,401761589,App State at Charlotte,,2,True,True,True
+2025,1,401752667,Auburn at Baylor,,2,True,True,True
+2025,1,401754375,Georgia Tech at Colorado,,2,True,True,True
+2025,1,401757224,UNLV at Sam Houston,,2,True,True,True
+2025,1,401760358,Central Michigan at San José State,,2,True,False,True
+2025,1,401752673,Mississippi State at Southern Miss,,2,True,True,True
+2025,1,401752676,Syracuse at Tennessee,,2,True,True,True
+2025,1,401752801,Ball State at Purdue,,2,True,True,True
+2025,1,401752797,Florida Atlantic at Maryland,,2,True,True,True
+2025,1,401752677,Texas at Ohio State,,2,True,True,True
+2025,1,401752803,Northwestern at Tulane,,2,True,True,True
+2025,1,401752670,Toledo at Kentucky,,2,True,True,True
+2025,1,401752806,Old Dominion at Indiana,,2,True,True,True
+2025,1,401752665,Alabama at Florida State,,2,True,True,True
+2025,1,401752807,Nevada at Penn State,,2,False,False,False
+2025,1,401762456,Temple at Massachusetts,,2,True,True,True
+2025,1,401752669,Marshall at Georgia,,2,False,False,False
+2025,1,401754616,Coastal Carolina at Virginia,,2,True,True,True
+2025,1,401752678,UTSA at Texas A&M,,2,True,True,True
+2025,1,401757225,UTEP at Utah State,,1,True,False,True
+2025,1,401752808,New Mexico at Michigan,,2,False,False,False
+2025,1,401752798,Missouri State at USC,,2,False,False,False
+2025,1,401752671,LSU at Clemson,,2,True,True,True
+2025,1,401752672,Georgia State at Ole Miss,,2,False,True,False
+2025,1,401761594,Eastern Michigan at Texas State,,2,True,True,True
+2025,1,401761592,Rice at Louisiana,,2,True,False,True
+2025,1,401760361,Georgia Southern at Fresno State,,1,True,False,False
+2025,1,401756849,Hawai'i at Arizona,,2,True,True,True
+2025,1,401752936,California at Oregon State,,2,True,True,True
+2025,1,401752800,Utah at UCLA,,2,True,True,True
+2025,1,401752805,Colorado State at Washington,,2,True,True,True
+2025,1,401752680,Virginia Tech at South Carolina,,2,True,True,True
+2025,1,401754522,Notre Dame at Miami,,2,True,True,True
+2025,1,401754523,TCU at North Carolina,,2,True,True,True
+2025,2,401754528,James Madison at Louisville,,2,True,True,True
+2025,2,401752826,Northern Illinois at Maryland,,2,True,True,True
+2025,2,401752822,Iowa at Iowa State,,2,True,True,True
+2025,2,401754524,Virginia at NC State,,2,True,True,True
+2025,2,401752693,San José State at Texas,,2,False,True,False
+2025,2,401752811,Florida International at Penn State,,2,False,True,False
+2025,2,401752812,Kennesaw State at Indiana,,2,False,True,False
+2025,2,401752825,Illinois at Duke,,2,True,True,True
+2025,2,401757227,Liberty at Jacksonville State,,2,True,True,True
+2025,2,401756885,Kent State at Texas Tech,,2,False,False,False
+2025,2,401754618,UConn at Syracuse,,2,True,True,True
+2025,2,401754529,Central Michigan at Pittsburgh,,2,True,True,True
+2025,2,401754525,Baylor at SMU,,2,True,True,True
+2025,2,401752694,Utah State at Texas A&M,,2,False,True,False
+2025,2,401762461,North Texas at Western Michigan,,2,True,True,True
+2025,2,401756881,Delaware at Colorado,,2,True,True,True
+2025,2,401754637,Troy at Clemson,,2,False,True,False
+2025,2,401752686,Ole Miss at Kentucky,,2,True,True,True
+2025,2,401752689,Kansas at Missouri,,2,True,True,True
+2025,2,401752824,Oklahoma State at Oregon,,2,False,True,False
+2025,2,401756880,Bowling Green at Cincinnati,,2,True,True,True
+2025,2,401761603,Texas State at UTSA,,2,True,True,True
+2025,2,401762458,UAB at Navy,,2,True,True,True
+2025,2,401752937,Fresno State at Oregon State,,2,True,True,True
+2025,2,401752818,Miami (OH) at Rutgers,,2,True,True,True
+2025,2,401756883,West Virginia at Ohio,,2,True,True,True
+2025,2,401752820,Middle Tennessee at Wisconsin,,2,False,True,False
+2025,2,401752684,South Florida at Florida,,2,True,True,True
+2025,2,401752682,Arkansas State at Arkansas,,2,True,True,True
+2025,2,401757228,Missouri State at Marshall,,2,True,True,True
+2025,2,401761601,Tulane at South Alabama,,2,True,True,True
+2025,2,401756882,Army at Kansas State,,2,True,True,True
+2025,2,401761598,Memphis at Georgia State,,2,True,True,True
+2025,2,401757232,Western Kentucky at Toledo,,2,True,True,True
+2025,2,401754527,North Carolina at Charlotte,,2,True,True,True
+2025,2,401756884,Houston at Rice,,2,True,True,True
+2025,2,401752814,Georgia Southern at USC,,2,False,True,False
+2025,2,401752816,Boston College at Michigan State,,2,True,True,True
+2025,2,401752810,Akron at Nebraska,,2,False,True,False
+2025,2,401752688,Arizona State at Mississippi State,,2,True,True,True
+2025,2,401752683,Ball State at Auburn,,2,False,False,False
+2025,2,401752687,Louisiana Tech at LSU,,2,False,True,False
+2025,2,401752695,Vanderbilt at Virginia Tech,,2,True,True,True
+2025,2,401752690,Michigan at Oklahoma,,2,True,True,True
+2025,2,401752681,UL Monroe at Alabama,,2,False,True,False
+2025,2,401752823,UCLA at UNLV,,2,True,True,True
+2025,2,401757229,Tulsa at New Mexico State,,2,True,True,True
+2025,2,401754526,Stanford at BYU,,2,True,True,True
+2025,2,401752948,San Diego State at Washington State,,2,True,True,True
+2025,2,401757230,Sam Houston at Hawai'i,,2,True,True,True
+2025,3,401754531,NC State at Wake Forest,,2,True,True,True
+2025,3,401756893,Colorado at Houston,,2,True,True,True
+2025,3,401756888,Kansas State at Arizona,,2,True,True,True
+2025,3,401752837,New Mexico at UCLA,,2,True,True,True
+2025,3,401762817,Buffalo at Kent State,,2,True,True,True
+2025,3,401752696,Wisconsin at Alabama,,2,True,True,True
+2025,3,401752831,Oregon at Northwestern,,2,True,True,True
+2025,3,401761608,Memphis at Troy,,2,True,True,True
+2025,3,401752839,Central Michigan at Michigan,,2,True,True,True
+2025,3,401752703,Oklahoma at Temple,,2,True,True,True
+2025,3,401754623,Clemson at Georgia Tech,,2,True,True,True
+2025,3,401752697,South Alabama at Auburn,,2,True,True,True
+2025,3,401752702,Louisiana at Missouri,,2,True,True,True
+2025,3,401757168,UConn at Delaware,,2,True,True,True
+2025,3,401754615,SMU at Missouri State,,2,True,True,True
+2025,3,401752832,USC at Purdue,,2,True,True,True
+2025,3,401752705,Georgia at Tennessee,,2,True,True,True
+2025,3,401754638,Pittsburgh at West Virginia,,2,True,True,True
+2025,3,401752938,Oregon State at Texas Tech,,2,True,True,True
+2025,3,401752949,Washington State at North Texas,,2,True,True,True
+2025,3,401756890,Iowa State at Arkansas State,,2,True,True,True
+2025,3,401752706,UTEP at Texas,,2,False,True,False
+2025,3,401754535,South Florida at Miami,,2,True,True,True
+2025,3,401757258,Middle Tennessee at Nevada,,2,True,True,True
+2025,3,401757256,Liberty at Bowling Green,,2,True,True,True
+2025,3,401757233,Florida Atlantic at Florida International,,2,True,True,True
+2025,3,401757234,Jacksonville State at Georgia Southern,,2,True,True,True
+2025,3,401754536,Old Dominion at Virginia Tech,,2,True,True,True
+2025,3,401761607,App State at Southern Miss,,2,True,True,True
+2025,3,401752700,Arkansas at Ole Miss,,2,True,True,True
+2025,3,401752829,Western Michigan at Illinois,,2,True,True,True
+2025,3,401752827,Ohio at Ohio State,,2,False,True,False
+2025,3,401761604,East Carolina at Coastal Carolina,,2,True,True,True
+2025,3,401752830,Massachusetts at Iowa,,2,False,False,False
+2025,3,401752699,Florida at LSU,,2,True,True,True
+2025,3,401757257,New Mexico State at Louisiana Tech,,2,True,True,True
+2025,3,401752698,Eastern Michigan at Kentucky,,2,True,True,True
+2025,3,401752707,Texas A&M at Notre Dame,,2,True,True,True
+2025,3,401752704,Vanderbilt at South Carolina,,2,True,True,True
+2025,3,401762465,Navy at Tulsa,,2,True,True,True
+2025,3,401754534,Duke at Tulane,,2,True,True,True
+2025,3,401756895,Utah at Wyoming,,2,True,True,True
+2025,3,401762463,Akron at UAB,,2,True,True,True
+2025,3,401760368,Air Force at Utah State,,2,True,True,True
+2025,3,401752840,Minnesota at California,,2,True,True,True
+2025,3,401754533,Boston College at Stanford,,2,True,True,True
+2025,3,401756889,Texas State at Arizona State,,2,True,True,True
+2025,4,401762468,Rice at Charlotte,,2,True,True,True
+2025,4,401756900,Tulsa at Oklahoma State,,2,True,True,True
+2025,4,401752844,Iowa at Rutgers,,2,True,True,True
+2025,4,401760376,UNLV at Miami (OH),,2,True,True,True
+2025,4,401752708,Arkansas at Memphis,,2,True,True,True
+2025,4,401752845,Maryland at Wisconsin,,1,True,False,True
+2025,4,401762469,North Texas at Army,,2,True,True,True
+2025,4,401754642,Bowling Green at Louisville,,2,True,True,True
+2025,4,401756901,Texas Tech at Utah,,2,True,True,True
+2025,4,401754537,Syracuse at Clemson,,2,True,True,True
+2025,4,401754636,SMU at TCU,,2,True,True,True
+2025,4,401752715,UAB at Tennessee,,2,False,True,False
+2025,4,401752841,Oregon State at Oregon,,2,False,True,False
+2025,4,401752848,Purdue at Notre Dame,,2,True,True,True
+2025,4,401752714,Auburn at Oklahoma,,2,True,True,True
+2025,4,401752711,Tulane at Ole Miss,,2,True,True,True
+2025,4,401757169,Ball State at UConn,,2,True,True,True
+2025,4,401752846,Michigan at Nebraska,,2,True,True,True
+2025,4,401761610,Louisiana at Eastern Michigan,,2,True,True,True
+2025,4,401754640,North Carolina at UCF,,2,True,True,True
+2025,4,401754541,Kent State at Florida State,,2,False,False,False
+2025,4,401762820,Toledo at Western Michigan,,2,True,True,True
+2025,4,401757262,James Madison at Liberty,,2,True,True,True
+2025,4,401761613,Troy at Buffalo,,2,True,True,True
+2025,4,401754538,NC State at Duke,,2,True,True,True
+2025,4,401752712,Northern Illinois at Mississippi State,,2,True,True,True
+2025,4,401754542,Temple at Georgia Tech,,2,True,True,True
+2025,4,401757261,Arkansas State at Kennesaw State,,2,True,True,True
+2025,4,401757259,Delaware at Florida International,,2,True,True,True
+2025,4,401756899,West Virginia at Kansas,,2,True,True,True
+2025,4,401761611,Coastal Carolina at South Alabama,,2,True,True,True
+2025,4,401760372,Boise State at Air Force,,2,True,True,True
+2025,4,401757268,Nevada at Western Kentucky,,2,True,True,True
+2025,4,401752713,South Carolina at Missouri,,2,True,True,True
+2025,4,401757264,Marshall at Middle Tennessee,,2,True,True,True
+2025,4,401752709,Florida at Miami,,2,True,True,True
+2025,4,401752843,Illinois at Indiana,,2,True,True,True
+2025,4,401756896,Arizona State at Baylor,,2,True,True,True
+2025,4,401752842,Washington at Washington State,,2,True,True,True
+2025,4,401756898,BYU at East Carolina,,2,True,True,True
+2025,4,401757263,Southern Miss at Louisiana Tech,,2,True,True,True
+2025,4,401752716,Georgia State at Vanderbilt,,2,True,True,True
+2025,4,401754539,Stanford at Virginia,,2,True,True,True
+2025,4,401752723,Sam Houston at Texas,,2,False,False,False
+2025,4,401757267,UL Monroe at UTEP,,2,True,True,True
+2025,4,401760373,UTSA at Colorado State,,2,True,True,True
+2025,4,401756897,Wyoming at Colorado,,2,True,True,True
+2025,4,401754540,California at San Diego State,,2,True,True,True
+2025,4,401752847,Michigan State at USC,,2,True,True,True
+2025,4,401760374,Fresno State at Hawai'i,,2,True,True,True
+2025,5,401762471,Army at East Carolina,,2,True,True,True
+2025,5,401754543,Florida State at Virginia,,2,True,True,True
+2025,5,401756902,TCU at Arizona State,,2,True,True,True
+2025,5,401752939,Houston at Oregon State,,2,True,True,True
+2025,5,401754545,Duke at Syracuse,,2,True,True,True
+2025,5,401756905,Cincinnati at Kansas,,2,True,True,True
+2025,5,401754546,Georgia Tech at Wake Forest,,2,True,True,True
+2025,5,401752850,USC at Illinois,,2,True,True,True
+2025,5,401756906,UCF at Kansas State,,2,True,True,True
+2025,5,401752849,Rutgers at Minnesota,,2,True,True,True
+2025,5,401762825,Bowling Green at Ohio,,2,True,True,True
+2025,5,401754547,Louisville at Pittsburgh,,2,True,True,True
+2025,5,401752717,Notre Dame at Arkansas,,2,True,True,True
+2025,5,401761617,South Alabama at North Texas,,2,True,True,True
+2025,5,401752725,Utah State at Vanderbilt,,2,True,True,True
+2025,5,401762826,Eastern Michigan at Central Michigan,,2,True,True,True
+2025,5,401761614,Georgia Southern at James Madison,,2,True,True,True
+2025,5,401761616,Arkansas State at UL Monroe,,2,True,True,True
+2025,5,401757170,UConn at Buffalo,,2,True,True,True
+2025,5,401756908,Utah at West Virginia,,1,True,False,True
+2025,5,401752853,Indiana at Iowa,,2,True,True,True
+2025,5,401754544,California at Boston College,,2,True,True,True
+2025,5,401752719,LSU at Ole Miss,,2,True,True,True
+2025,5,401762824,Akron at Toledo,,2,True,True,True
+2025,5,401752724,Auburn at Texas A&M,,2,True,True,True
+2025,5,401762473,Rice at Navy,,2,True,True,True
+2025,5,401752852,Ohio State at Washington,,2,True,True,True
+2025,5,401752851,UCLA at Northwestern,,2,True,True,True
+2025,5,401760380,San Diego State at Northern Illinois,,2,True,True,True
+2025,5,401756907,Baylor at Oklahoma State,,2,True,True,True
+2025,5,401762474,Tulane at Tulsa,,2,True,True,True
+2025,5,401757274,New Mexico State at New Mexico,,2,True,True,True
+2025,5,401760378,Hawai'i at Air Force,,2,True,True,True
+2025,5,401752720,Tennessee at Mississippi State,,2,True,True,True
+2025,5,401757271,Liberty at Old Dominion,,2,True,True,True
+2025,5,401757270,Middle Tennessee at Kennesaw State,,2,True,True,True
+2025,5,401756904,Arizona at Iowa State,,2,True,True,True
+2025,5,401762472,Memphis at Florida Atlantic,,2,True,True,True
+2025,5,401754548,Virginia Tech at NC State,,2,True,True,True
+2025,5,401757269,Jacksonville State at Southern Miss,,2,True,True,True
+2025,5,401757273,Western Kentucky at Missouri State,,2,True,True,True
+2025,5,401760379,App State at Boise State,,2,True,True,True
+2025,5,401752721,Massachusetts at Missouri,,2,False,False,False
+2025,5,401752718,Alabama at Georgia,,2,True,True,True
+2025,5,401754549,San José State at Stanford,,2,True,True,True
+2025,5,401752854,Oregon at Penn State,,2,True,True,True
+2025,5,401752950,Washington State at Colorado State,,2,True,True,True
+2025,5,401752722,Kentucky at South Carolina,,2,True,True,True
+2025,5,401761615,Marshall at Louisiana,,2,True,True,True
+2025,5,401757272,Louisiana Tech at UTEP,,2,True,True,True
+2025,5,401756903,BYU at Colorado,,2,True,True,True
+2025,6,401757275,Sam Houston at New Mexico State,,2,True,True,True
+2025,6,401762475,Charlotte at South Florida,,2,True,True,True
+2025,6,401757276,Western Kentucky at Delaware,,2,True,True,True
+2025,6,401760384,New Mexico at San José State,,2,True,True,True
+2025,6,401760382,Colorado State at San Diego State,,2,True,True,True
+2025,6,401756909,West Virginia at BYU,,2,True,True,True
+2025,6,401752728,Kentucky at Georgia,,2,True,True,True
+2025,6,401762830,Ohio at Ball State,,2,True,True,True
+2025,6,401756912,Iowa State at Cincinnati,,2,True,True,True
+2025,6,401752861,Illinois at Purdue,,2,True,True,True
+2025,6,401756911,Kansas State at Baylor,,2,True,True,True
+2025,6,401760381,Air Force at Navy,,2,True,True,True
+2025,6,401752856,Wisconsin at Michigan,,2,True,True,True
+2025,6,401762476,Army at UAB,,2,True,True,True
+2025,6,401754552,Clemson at North Carolina,,2,True,True,True
+2025,6,401754550,Boston College at Pittsburgh,,2,True,True,True
+2025,6,401754556,Wake Forest at Virginia Tech,,2,True,True,True
+2025,6,401762479,UTSA at Temple,,2,True,True,True
+2025,6,401762832,Western Michigan at Massachusetts,,2,True,True,True
+2025,6,401756910,Oklahoma State at Arizona,,2,True,True,True
+2025,6,401762873,Miami (OH) at Northern Illinois,,2,True,True,True
+2025,6,401752857,Washington at Maryland,,2,True,True,True
+2025,6,401754555,Syracuse at SMU,,2,True,True,True
+2025,6,401752858,UL Monroe at Northwestern,,2,True,True,True
+2025,6,401762831,Eastern Michigan at Buffalo,,2,True,True,True
+2025,6,401752940,Oregon State at App State,,2,True,True,True
+2025,6,401752727,Texas at Florida,,2,True,True,True
+2025,6,401757171,Florida International at UConn,,2,True,True,True
+2025,6,401757165,Boise State at Notre Dame,,2,True,True,True
+2025,6,401762829,Central Michigan at Akron,,2,True,True,True
+2025,6,401752855,Penn State at UCLA,,2,True,True,True
+2025,6,401754554,Virginia at Louisville,,2,True,True,True
+2025,6,401752726,Vanderbilt at Alabama,,2,True,True,True
+2025,6,401761618,James Madison at Georgia State,,2,True,True,True
+2025,6,401752729,Kent State at Oklahoma,,2,False,False,False
+2025,6,401752860,Michigan State at Nebraska,,2,True,True,True
+2025,6,401761620,Texas State at Arkansas State,,2,True,True,True
+2025,6,401761619,Coastal Carolina at Old Dominion,,2,True,True,True
+2025,6,401760385,UNLV at Wyoming,,2,True,True,True
+2025,6,401761621,South Alabama at Troy,,2,True,True,True
+2025,6,401756913,Texas Tech at Houston,,2,True,True,True
+2025,6,401762477,Florida Atlantic at Rice,,2,True,True,True
+2025,6,401754553,Miami at Florida State,,2,True,True,True
+2025,6,401752730,Mississippi State at Texas A&M,,2,True,True,True
+2025,6,401756915,Kansas at UCF,,2,True,True,True
+2025,6,401752859,Minnesota at Ohio State,,2,True,True,True
+2025,6,401756914,Colorado at TCU,,2,True,True,True
+2025,6,401762478,Tulsa at Memphis,,2,True,True,True
+2025,6,401760383,Nevada at Fresno State,,2,True,True,True
+2025,6,401754551,Duke at California,,2,True,True,True
+2025,7,401757278,Missouri State at Middle Tennessee,,2,True,True,True
+2025,7,401757277,Liberty at UTEP,,2,True,True,True
+2025,7,401757280,Louisiana Tech at Kennesaw State,,2,True,True,True
+2025,7,401762480,East Carolina at Tulane,,2,True,True,True
+2025,7,401761622,Southern Miss at Georgia Southern,,2,True,True,True
+2025,7,401757279,Jacksonville State at Sam Houston,,2,True,True,True
+2025,7,401762481,South Florida at North Texas,,2,True,True,True
+2025,7,401752862,Rutgers at Washington,,2,True,True,True
+2025,7,401760388,Fresno State at Colorado State,,2,True,True,True
+2025,7,401762835,Toledo at Bowling Green,,2,True,True,True
+2025,7,401752863,UCLA at Michigan State,,2,True,True,True
+2025,7,401762833,Miami (OH) at Akron,,2,True,True,True
+2025,7,401754559,Pittsburgh at Florida State,,2,True,True,True
+2025,7,401754561,Stanford at SMU,,2,True,True,True
+2025,7,401752734,Alabama at Missouri,,2,True,True,True
+2025,7,401756920,Houston at Oklahoma State,,2,True,True,True
+2025,7,401762483,Charlotte at Army,,2,True,True,True
+2025,7,401756917,UCF at Cincinnati,,2,True,True,True
+2025,7,401752865,Ohio State at Illinois,,2,True,True,True
+2025,7,401761625,Louisiana at James Madison,,2,True,True,True
+2025,7,401752733,Washington State at Ole Miss,,2,False,True,False
+2025,7,401762836,Northern Illinois at Eastern Michigan,,2,True,True,True
+2025,7,401762837,Massachusetts at Kent State,,2,True,True,True
+2025,7,401752870,Indiana at Oregon,,2,True,True,True
+2025,7,401762834,Ball State at Western Michigan,,2,True,True,True
+2025,7,401756919,TCU at Kansas State,,2,True,True,True
+2025,7,401760386,Air Force at UNLV,,2,True,True,True
+2025,7,401754563,Wake Forest at Oregon State,,2,True,True,True
+2025,7,401756918,Iowa State at Colorado,,2,True,True,True
+2025,7,401754560,Virginia Tech at Georgia Tech,,2,True,True,True
+2025,7,401752736,Oklahoma at Texas,,2,True,True,True
+2025,7,401761626,Old Dominion at Marshall,,2,True,True,True
+2025,7,401752867,Nebraska at Maryland,,2,True,True,True
+2025,7,401752866,Northwestern at Penn State,,2,True,True,True
+2025,7,401761624,App State at Georgia State,,2,True,True,True
+2025,7,401754562,NC State at Notre Dame,,2,True,True,True
+2025,7,401762484,Navy at Temple,,2,True,True,True
+2025,7,401752735,Arkansas at Tennessee,,2,True,True,True
+2025,7,401762482,UAB at Florida Atlantic,,2,True,True,True
+2025,7,401752737,Florida at Texas A&M,,2,True,True,True
+2025,7,401760391,San José State at Wyoming,,2,True,True,True
+2025,7,401761623,UL Monroe at Coastal Carolina,,2,True,True,True
+2025,7,401752869,Iowa at Wisconsin,,2,True,True,True
+2025,7,401756921,Kansas at Texas Tech,,2,True,True,True
+2025,7,401752868,Michigan at USC,,2,True,True,True
+2025,7,401752864,Purdue at Minnesota,,2,True,True,True
+2025,7,401762485,Rice at UTSA,,2,True,True,True
+2025,7,401754558,Clemson at Boston College,,2,True,True,True
+2025,7,401752731,Georgia at Auburn,,2,True,True,True
+2025,7,401752732,South Carolina at LSU,,2,True,True,True
+2025,7,401761627,Troy at Texas State,,2,True,True,True
+2025,7,401756916,BYU at Arizona,,2,True,True,True
+2025,7,401760387,New Mexico at Boise State,,2,True,True,True
+2025,7,401756922,Arizona State at Utah,,2,True,True,True
+2025,7,401760390,San Diego State at Nevada,,2,True,True,True
+2025,7,401760389,Utah State at Hawai'i,,2,True,True,True
+2025,8,401757282,New Mexico State at Liberty,,2,True,True,True
+2025,8,401761628,Arkansas State at South Alabama,,2,True,True,True
+2025,8,401757281,Florida International at Western Kentucky,,2,True,True,True
+2025,8,401757284,UTEP at Sam Houston,,2,True,True,True
+2025,8,401757283,Delaware at Jacksonville State,,2,True,True,True
+2025,8,401762486,Tulsa at East Carolina,,2,True,True,True
+2025,8,401754564,Louisville at Miami,,2,True,True,True
+2025,8,401752872,Nebraska at Minnesota,,2,True,True,True
+2025,8,401760396,San José State at Utah State,,2,True,True,True
+2025,8,401754371,North Carolina at California,,2,True,True,True
+2025,8,401756925,Arizona at Houston,,2,True,True,True
+2025,8,401762839,Central Michigan at Bowling Green,,2,True,True,True
+2025,8,401756927,Baylor at TCU,,2,True,True,True
+2025,8,401752745,LSU at Vanderbilt,,2,True,True,True
+2025,8,401754569,UConn at Boston College,,2,True,True,True
+2025,8,401752873,Washington at Michigan,,2,True,True,True
+2025,8,401762488,Army at Tulane,,2,True,True,True
+2025,8,401762841,Eastern Michigan at Miami (OH),,2,True,True,True
+2025,8,401754566,Georgia Tech at Duke,,2,True,True,True
+2025,8,401752744,Oklahoma at South Carolina,,2,True,True,True
+2025,8,401756928,West Virginia at UCF,,2,True,True,True
+2025,8,401762842,Kent State at Toledo,,2,True,True,True
+2025,8,401762840,Buffalo at Massachusetts,,2,True,True,True
+2025,8,401761633,Troy at UL Monroe,,2,True,True,True
+2025,8,401752874,Purdue at Northwestern,,2,True,True,True
+2025,8,401761631,Old Dominion at James Madison,,2,True,True,True
+2025,8,401752739,Texas A&M at Arkansas,,2,True,True,True
+2025,8,401752742,Ole Miss at Georgia,,2,True,True,True
+2025,8,401752877,Ohio State at Wisconsin,,2,False,True,False
+2025,8,401762838,Akron at Ball State,,2,True,True,True
+2025,8,401752878,Michigan State at Indiana,,2,False,True,False
+2025,8,401761629,Coastal Carolina at App State,,2,True,True,True
+2025,8,401754565,SMU at Clemson,,2,True,True,True
+2025,8,401760393,UNLV at Boise State,,2,True,True,True
+2025,8,401762491,UTSA at North Texas,,2,True,True,True
+2025,8,401762843,Northern Illinois at Ohio,,2,True,True,True
+2025,8,401761632,Texas State at Marshall,,2,True,True,True
+2025,8,401760392,Wyoming at Air Force,,2,True,True,True
+2025,8,401762489,Temple at Charlotte,,2,True,True,True
+2025,8,401762487,Memphis at UAB,,2,True,True,True
+2025,8,401756923,Texas Tech at Arizona State,,2,True,True,True
+2025,8,401752741,Mississippi State at Florida,,2,True,True,True
+2025,8,401761668,Southern Miss at Louisiana,,2,True,True,True
+2025,8,401752876,Oregon at Rutgers,,2,True,True,True
+2025,8,401752951,Washington State at Virginia,,2,True,True,True
+2025,8,401752743,Texas at Kentucky,,2,True,True,True
+2025,8,401761630,Georgia State at Georgia Southern,,2,True,True,True
+2025,8,401752879,Maryland at UCLA,,2,True,True,True
+2025,8,401760394,Hawai'i at Colorado State,,2,True,True,True
+2025,8,401752875,Penn State at Iowa,,2,True,True,True
+2025,8,401754568,Pittsburgh at Syracuse,,2,True,True,True
+2025,8,401762490,Florida Atlantic at South Florida,,2,True,True,True
+2025,8,401752738,Tennessee at Alabama,,2,True,True,True
+2025,8,401752871,USC at Notre Dame,,2,True,True,True
+2025,8,401752740,Missouri at Auburn,,2,True,True,True
+2025,8,401756924,Utah at BYU,,2,True,True,True
+2025,8,401756926,Cincinnati at Oklahoma State,,2,True,True,True
+2025,8,401760395,Nevada at New Mexico,,2,True,True,True
+2025,8,401754567,Florida State at Stanford,,2,True,True,True
+2025,9,401757285,Kennesaw State at Florida International,,2,True,True,True
+2025,9,401757286,Western Kentucky at Louisiana Tech,,2,True,True,True
+2025,9,401757287,Middle Tennessee at Delaware,,2,True,True,True
+2025,9,401757288,Missouri State at New Mexico State,,2,True,True,True
+2025,9,401761634,South Alabama at Georgia State,,2,True,True,True
+2025,9,401762492,North Texas at Charlotte,,2,False,True,False
+2025,9,401754372,California at Virginia Tech,,2,True,True,True
+2025,9,401760397,Boise State at Nevada,,2,True,True,True
+2025,9,401762494,South Florida at Memphis,,2,True,True,True
+2025,9,401762848,Ohio at Eastern Michigan,,2,True,True,True
+2025,9,401754571,Syracuse at Georgia Tech,,2,True,True,True
+2025,9,401762846,Bowling Green at Kent State,,2,True,True,True
+2025,9,401752750,Ole Miss at Oklahoma,,2,True,True,True
+2025,9,401752883,Northwestern at Nebraska,,2,True,True,True
+2025,9,401761635,App State at Old Dominion,,2,True,True,True
+2025,9,401752942,SMU at Wake Forest,,2,True,True,True
+2025,9,401754573,Virginia at North Carolina,,2,True,True,True
+2025,9,401752884,Rutgers at Purdue,,2,True,True,True
+2025,9,401756932,Kansas State at Kansas,,2,True,True,True
+2025,9,401752885,UCLA at Indiana,,2,True,True,True
+2025,9,401752746,Auburn at Arkansas,,2,True,True,True
+2025,9,401762844,Akron at Buffalo,,2,True,True,True
+2025,9,401760400,Utah State at New Mexico,,2,True,True,True
+2025,9,401757172,UConn at Rice,,2,True,True,True
+2025,9,401752880,Illinois at Washington,,2,True,True,True
+2025,9,401752952,Toledo at Washington State,,2,True,True,True
+2025,9,401754574,NC State at Pittsburgh,,2,True,True,True
+2025,9,401760399,San Diego State at Fresno State,,2,True,True,True
+2025,9,401752751,Alabama at South Carolina,,2,True,True,True
+2025,9,401762845,Ball State at Northern Illinois,,2,True,True,True
+2025,9,401762495,Temple at Tulsa,,2,True,True,True
+2025,9,401752752,Missouri at Vanderbilt,,2,True,True,True
+2025,9,401762847,Massachusetts at Central Michigan,,2,True,True,True
+2025,9,401762874,Western Michigan at Miami (OH),,2,True,True,True
+2025,9,401756931,BYU at Iowa State,,2,True,True,True
+2025,9,401762493,Florida Atlantic at Navy,,2,True,True,True
+2025,9,401752882,Minnesota at Iowa,,2,True,True,True
+2025,9,401761637,UL Monroe at Southern Miss,,2,True,True,True
+2025,9,401756930,Baylor at Cincinnati,,2,True,True,True
+2025,9,401756933,Oklahoma State at Texas Tech,,2,False,False,False
+2025,9,401752749,Texas at Mississippi State,,2,True,True,True
+2025,9,401756935,TCU at West Virginia,,2,True,True,True
+2025,9,401754572,Stanford at Miami,,2,False,True,False
+2025,9,401761638,Louisiana at Troy,,2,True,True,True
+2025,9,401761636,Georgia Southern at Arkansas State,,2,True,True,True
+2025,9,401752886,Wisconsin at Oregon,,2,False,True,False
+2025,9,401752881,Michigan at Michigan State,,2,True,True,True
+2025,9,401754570,Boston College at Louisville,,2,True,True,True
+2025,9,401760398,Colorado State at Wyoming,,2,True,True,True
+2025,9,401752748,Texas A&M at LSU,,2,True,True,True
+2025,9,401752747,Tennessee at Kentucky,,2,True,True,True
+2025,9,401756929,Houston at Arizona State,,2,True,True,True
+2025,9,401756934,Colorado at Utah,,2,True,True,True
+2025,10,401761639,James Madison at Texas State,,2,True,True,True
+2025,10,401757289,UTEP at Kennesaw State,,2,True,True,True
+2025,10,401757292,Jacksonville State at Middle Tennessee,,2,True,True,True
+2025,10,401757291,Florida International at Missouri State,,2,True,True,True
+2025,10,401762443,Tulane at UTSA,,2,True,True,True
+2025,10,401761640,Marshall at Coastal Carolina,,2,True,True,True
+2025,10,401762497,Memphis at Rice,,2,True,True,True
+2025,10,401754575,North Carolina at Syracuse,,2,True,True,True
+2025,10,401757290,Sam Houston at Louisiana Tech,,2,True,True,True
+2025,10,401762499,Navy at North Texas,,2,True,True,True
+2025,10,401754581,Miami at SMU,,2,True,True,True
+2025,10,401760401,Army at Air Force,,2,True,True,True
+2025,10,401757173,UAB at UConn,,2,True,True,True
+2025,10,401752889,Penn State at Ohio State,,2,True,True,True
+2025,10,401752891,Rutgers at Illinois,,2,True,True,True
+2025,10,401756938,West Virginia at Houston,,2,True,True,True
+2025,10,401756936,UCF at Baylor,,2,True,True,True
+2025,10,401762849,Buffalo at Bowling Green,,2,True,True,True
+2025,10,401752758,Vanderbilt at Texas,,2,True,True,True
+2025,10,401754577,Duke at Clemson,,2,True,True,True
+2025,10,401756939,Arizona State at Iowa State,,2,True,True,True
+2025,10,401762498,East Carolina at Temple,,2,True,True,True
+2025,10,401760404,New Mexico at UNLV,,2,True,True,True
+2025,10,401754580,Louisville at Virginia Tech,,2,True,True,True
+2025,10,401754582,Pittsburgh at Stanford,,2,True,True,True
+2025,10,401754583,Notre Dame at Boston College,,2,True,True,True
+2025,10,401757294,New Mexico State at Western Kentucky,,2,True,True,True
+2025,10,401761641,Old Dominion at UL Monroe,,2,True,True,True
+2025,10,401761642,Louisiana at South Alabama,,2,True,True,True
+2025,10,401752888,Michigan State at Minnesota,,2,True,True,True
+2025,10,401752887,Indiana at Maryland,,2,True,True,True
+2025,10,401760402,Fresno State at Boise State,,2,True,True,True
+2025,10,401756941,Texas Tech at Kansas State,,2,True,True,True
+2025,10,401757293,Delaware at Liberty,,2,True,True,True
+2025,10,401752755,Georgia at Florida,,2,True,True,True
+2025,10,401754576,Virginia at California,,2,True,True,True
+2025,10,401756940,Oklahoma State at Kansas,,2,False,True,True
+2025,10,401762850,Central Michigan at Western Michigan,,2,True,True,True
+2025,10,401752753,Mississippi State at Arkansas,,2,True,True,True
+2025,10,401760405,Wyoming at San Diego State,,2,True,True,True
+2025,10,401752756,South Carolina at Ole Miss,,2,True,True,True
+2025,10,401756937,Arizona at Colorado,,2,True,True,True
+2025,10,401752890,Purdue at Michigan,,2,True,True,True
+2025,10,401752757,Oklahoma at Tennessee,,2,True,True,True
+2025,10,401754579,Georgia Tech at NC State,,2,True,True,True
+2025,10,401752892,USC at Nebraska,,2,True,True,True
+2025,10,401754578,Wake Forest at Florida State,,2,True,True,True
+2025,10,401752943,Washington State at Oregon State,,2,True,True,True
+2025,10,401752754,Kentucky at Auburn,,2,True,True,True
+2025,10,401761643,Arkansas State at Troy,,2,True,True,True
+2025,10,401756942,Cincinnati at Utah,,2,True,True,True
+2025,10,401760403,Hawai'i at San José State,,2,True,True,True
+2025,11,401762852,Miami (OH) at Ohio,,2,True,True,True
+2025,11,401762851,Massachusetts at Akron,,2,True,True,True
+2025,11,401762853,Kent State at Ball State,,2,True,True,True
+2025,11,401762854,Northern Illinois at Toledo,,2,True,True,True
+2025,11,401762500,UTSA at South Florida,,2,True,True,True
+2025,11,401761644,Georgia Southern at App State,,2,True,True,True
+2025,11,401756946,Houston at UCF,,2,True,True,True
+2025,11,401762501,Tulane at Memphis,,2,True,True,True
+2025,11,401752896,Northwestern at USC,,2,True,True,True
+2025,11,401761647,Southern Miss at Arkansas State,,2,True,True,True
+2025,11,401756947,Colorado at West Virginia,,2,True,True,True
+2025,11,401761646,James Madison at Marshall,,2,True,True,True
+2025,11,401756945,BYU at Texas Tech,,2,True,True,True
+2025,11,401754584,SMU at Boston College,,2,True,True,True
+2025,11,401762503,Temple at Army,,2,True,True,True
+2025,11,401752762,Georgia at Mississippi State,,2,True,True,True
+2025,11,401752893,Indiana at Penn State,,2,True,True,True
+2025,11,401757299,Missouri State at Liberty,,2,True,True,True
+2025,11,401762855,Bowling Green at Eastern Michigan,,2,True,True,True
+2025,11,401752897,Ohio State at Purdue,,2,True,True,True
+2025,11,401762502,UAB at Rice,,2,True,True,True
+2025,11,401752894,Maryland at Rutgers,,2,True,True,True
+2025,11,401762504,Charlotte at East Carolina,,2,True,True,True
+2025,11,401762505,Tulsa at Florida Atlantic,,2,True,True,True
+2025,11,401757295,Louisiana Tech at Delaware,,2,True,True,True
+2025,11,401757296,Florida International at Middle Tennessee,,2,True,True,True
+2025,11,401757297,Jacksonville State at UTEP,,2,True,True,True
+2025,11,401754587,Syracuse at Miami,,2,True,True,True
+2025,11,401756944,Iowa State at TCU,,2,True,True,True
+2025,11,401756943,Kansas at Arizona,,2,True,True,True
+2025,11,401754590,Duke at UConn,,2,True,True,True
+2025,11,401752898,Oregon at Iowa,,2,True,True,True
+2025,11,401752763,Texas A&M at Missouri,,2,True,True,True
+2025,11,401752764,Auburn at Vanderbilt,,2,True,True,True
+2025,11,401761645,Georgia State at Coastal Carolina,,2,True,True,True
+2025,11,401757298,Kennesaw State at New Mexico State,,2,True,True,True
+2025,11,401754588,Stanford at North Carolina,,2,True,True,True
+2025,11,401752899,Washington at Wisconsin,,2,True,True,True
+2025,11,401761648,Texas State at Louisiana,,2,True,True,True
+2025,11,401760406,Air Force at San José State,,2,True,True,True
+2025,11,401754589,Wake Forest at Virginia,,2,True,True,True
+2025,11,401754585,California at Louisville,,2,True,True,True
+2025,11,401754586,Florida State at Clemson,,2,True,True,True
+2025,11,401752760,Florida at Kentucky,,2,True,True,True
+2025,11,401757166,Navy at Notre Dame,,2,True,True,True
+2025,11,401760409,Nevada at Utah State,,2,True,True,True
+2025,11,401752759,LSU at Alabama,,2,True,True,True
+2025,11,401752895,Nebraska at UCLA,,2,True,True,True
+2025,11,401760407,UNLV at Colorado State,,2,True,True,True
+2025,11,401752944,Sam Houston at Oregon State,,2,True,True,True
+2025,11,401760408,San Diego State at Hawai'i,,2,True,True,True
+2025,12,401762856,Kent State at Akron,,2,True,True,True
+2025,12,401762857,Ohio at Western Michigan,,2,True,True,True
+2025,12,401762859,Northern Illinois at Massachusetts,,2,True,True,True
+2025,12,401762860,Toledo at Miami (OH),,2,True,True,True
+2025,12,401762858,Buffalo at Central Michigan,,2,True,True,True
+2025,12,401761649,Troy at Old Dominion,,2,True,True,True
+2025,12,401754591,Clemson at Louisville,,2,True,True,True
+2025,12,401752904,Minnesota at Oregon,,2,True,True,True
+2025,12,401756952,Kansas State at Oklahoma State,,2,True,True,True
+2025,12,401756951,Arizona at Cincinnati,,2,True,True,True
+2025,12,401752905,Michigan at Northwestern,,2,True,True,True
+2025,12,401752772,South Carolina at Texas A&M,,2,True,True,True
+2025,12,401752901,Wisconsin at Indiana,,2,False,True,True
+2025,12,401757174,Air Force at UConn,,2,True,True,True
+2025,12,401754597,Notre Dame at Pittsburgh,,2,True,True,True
+2025,12,401762507,UTSA at Charlotte,,2,True,True,True
+2025,12,401762510,South Florida at Navy,,2,True,True,True
+2025,12,401762861,Eastern Michigan at Ball State,,2,True,True,True
+2025,12,401752768,Arkansas at LSU,,2,True,True,True
+2025,12,401756948,West Virginia at Arizona State,,2,True,True,True
+2025,12,401752945,Oregon State at Tulsa,,2,True,True,True
+2025,12,401761651,Marshall at Georgia State,,2,True,True,True
+2025,12,401762506,North Texas at UAB,,2,True,True,True
+2025,12,401757304,UTEP at Missouri State,,2,True,True,True
+2025,12,401760411,Colorado State at New Mexico,,2,True,True,True
+2025,12,401752903,Penn State at Michigan State,,2,True,True,True
+2025,12,401761654,Texas State at Southern Miss,,2,True,True,True
+2025,12,401761653,South Alabama at UL Monroe,,2,True,True,True
+2025,12,401760413,San José State at Nevada,,2,True,True,True
+2025,12,401752765,Oklahoma at Alabama,,2,True,True,True
+2025,12,401754595,NC State at Miami,,2,True,True,True
+2025,12,401752907,Iowa at USC,,2,True,True,True
+2025,12,401754592,Georgia Tech at Boston College,,2,True,True,True
+2025,12,401761652,App State at James Madison,,2,True,True,True
+2025,12,401754593,Virginia at Duke,,2,True,True,True
+2025,12,401757303,Middle Tennessee at Western Kentucky,,2,True,True,True
+2025,12,401752906,Maryland at Illinois,,2,True,True,True
+2025,12,401756953,UCF at Texas Tech,,2,True,True,True
+2025,12,401762509,Florida Atlantic at Tulane,,2,True,True,True
+2025,12,401762508,Memphis at East Carolina,,2,True,True,True
+2025,12,401752771,New Mexico State at Tennessee,,2,False,False,False
+2025,12,401754596,North Carolina at Wake Forest,,2,True,True,True
+2025,12,401757301,Liberty at Florida International,,2,True,True,True
+2025,12,401761650,Coastal Carolina at Georgia Southern,,2,True,True,True
+2025,12,401757300,Delaware at Sam Houston,,2,True,True,True
+2025,12,401752769,Florida at Ole Miss,,2,True,True,True
+2025,12,401752902,Purdue at Washington,,2,True,True,True
+2025,12,401760414,Utah State at UNLV,,2,True,True,True
+2025,12,401756949,Utah at Baylor,,2,True,True,True
+2025,12,401752766,Texas at Georgia,,2,True,True,True
+2025,12,401754594,Virginia Tech at Florida State,,2,True,True,True
+2025,12,401752900,UCLA at Ohio State,,2,True,True,False
+2025,12,401752770,Mississippi State at Missouri,,2,True,True,True
+2025,12,401757302,Kennesaw State at Jacksonville State,,2,True,True,True
+2025,12,401752953,Louisiana Tech at Washington State,,2,True,True,True
+2025,12,401756950,TCU at BYU,,2,True,True,True
+2025,12,401760410,Boise State at San Diego State,,2,True,True,True
+2025,12,401760412,Wyoming at Fresno State,,2,True,True,True
+2025,13,401762864,Western Michigan at Northern Illinois,,2,True,True,True
+2025,13,401762863,Massachusetts at Ohio,,2,False,False,False
+2025,13,401762862,Akron at Bowling Green,,2,True,True,True
+2025,13,401762865,Miami (OH) at Buffalo,,2,True,True,True
+2025,13,401762866,Central Michigan at Kent State,,2,True,True,True
+2025,13,401761655,Louisiana at Arkansas State,,2,True,True,True
+2025,13,401754598,Florida State at NC State,,2,True,True,True
+2025,13,401760418,Hawai'i at UNLV,,2,True,True,True
+2025,13,401762512,Tulsa at Army,,2,True,True,True
+2025,13,401754606,Delaware at Wake Forest,,2,True,True,True
+2025,13,401756958,Kansas at Iowa State,,2,True,True,True
+2025,13,401752912,Rutgers at Ohio State,,2,False,True,True
+2025,13,401752778,Missouri at Oklahoma,,2,True,True,True
+2025,13,401754602,Louisville at SMU,,2,True,True,True
+2025,13,401754603,Miami at Virginia Tech,,2,True,True,True
+2025,13,401752909,Minnesota at Northwestern,,2,True,True,True
+2025,13,401752776,Charlotte at Georgia,,2,False,False,False
+2025,13,401752954,Washington State at James Madison,,2,True,True,True
+2025,13,401756954,Baylor at Arizona,,2,True,True,True
+2025,13,401761657,Old Dominion at Georgia Southern,,2,True,True,True
+2025,13,401757306,Missouri State at Kennesaw State,,2,True,True,True
+2025,13,401760419,Nevada at Wyoming,,2,True,True,True
+2025,13,401762867,Ball State at Toledo,,2,True,True,True
+2025,13,401761656,Marshall at App State,,2,True,True,True
+2025,13,401762511,South Florida at UAB,,2,True,True,True
+2025,13,401757307,Liberty at Louisiana Tech,,2,True,True,True
+2025,13,401757175,UConn at Florida Atlantic,,2,True,True,True
+2025,13,401757308,Sam Houston at Middle Tennessee,,2,True,True,True
+2025,13,401757309,New Mexico State at UTEP,,2,True,True,True
+2025,13,401754604,Syracuse at Notre Dame,,2,False,False,False
+2025,13,401752911,USC at Oregon,,2,True,True,True
+2025,13,401752780,Arkansas at Texas,,2,True,True,True
+2025,13,401762513,East Carolina at UTSA,,2,True,True,True
+2025,13,401757305,Jacksonville State at Florida International,,2,True,True,True
+2025,13,401752782,Kentucky at Vanderbilt,,2,True,True,True
+2025,13,401752913,Michigan State at Iowa,,2,True,True,True
+2025,13,401761658,Southern Miss at South Alabama,,2,True,True,True
+2025,13,401754600,Duke at North Carolina,,2,True,True,True
+2025,13,401762515,Tulane at Temple,,2,True,True,True
+2025,13,401756959,Oklahoma State at UCF,,2,True,True,True
+2025,13,401756957,TCU at Houston,,2,True,True,True
+2025,13,401752914,Michigan at Maryland,,2,True,True,True
+2025,13,401756960,Kansas State at Utah,,2,True,True,True
+2025,13,401761660,Georgia State at Troy,,2,True,True,True
+2025,13,401752779,Coastal Carolina at South Carolina,,2,True,True,True
+2025,13,401761659,UL Monroe at Texas State,,2,True,True,True
+2025,13,401752908,Nebraska at Penn State,,2,True,True,True
+2025,13,401760415,New Mexico at Air Force,,2,True,True,True
+2025,13,401760416,Colorado State at Boise State,,2,True,True,True
+2025,13,401754601,Pittsburgh at Georgia Tech,,2,True,True,True
+2025,13,401754599,California at Stanford,,2,True,True,True
+2025,13,401762514,North Texas at Rice,,2,True,True,True
+2025,13,401752775,Tennessee at Florida,,2,True,True,True
+2025,13,401752915,Illinois at Wisconsin,,2,True,True,True
+2025,13,401752777,Western Kentucky at LSU,,2,True,True,True
+2025,13,401756955,BYU at Cincinnati,,2,True,True,True
+2025,13,401756956,Arizona State at Colorado,,2,True,True,True
+2025,13,401760417,Utah State at Fresno State,,2,True,True,True
+2025,13,401752910,Washington at UCLA,,2,True,True,True
+2025,13,401760420,San José State at San Diego State,,2,True,True,True
+2025,14,401762868,Bowling Green at Massachusetts,,3,True,True,True
+2025,14,401762869,Western Michigan at Eastern Michigan,,3,True,True,True
+2025,14,401762516,Navy at Memphis,,3,True,True,True
+2025,14,401762870,Ohio at Buffalo,,3,True,True,True
+2025,14,401762871,Kent State at Northern Illinois,,3,True,True,True
+2025,14,401752788,Ole Miss at Mississippi State,,3,True,True,True
+2025,14,401752916,Iowa at Nebraska,,3,True,True,True
+2025,14,401756964,Utah at Kansas,,3,True,True,True
+2025,14,401760421,Air Force at Colorado State,,3,True,True,True
+2025,14,401762442,Temple at North Texas,,3,True,True,True
+2025,14,401752786,Georgia at Georgia Tech,,3,True,True,True
+2025,14,401760426,San Diego State at New Mexico,,3,True,True,True
+2025,14,401760422,Boise State at Utah State,,4,True,True,True
+2025,14,401752924,Indiana at Purdue,,3,True,True,True
+2025,14,401752792,Texas A&M at Texas,,3,True,True,True
+2025,14,401756961,Arizona at Arizona State,,3,True,True,True
+2025,14,401752790,Clemson at South Carolina,,3,True,True,True
+2025,14,401752921,Ohio State at Michigan,,3,True,True,True
+2025,14,401756968,Texas Tech at West Virginia,,3,True,True,True
+2025,14,401762872,Toledo at Central Michigan,,2,True,True,True
+2025,14,401762875,Ball State at Miami (OH),,2,True,True,True
+2025,14,401756966,Iowa State at Oklahoma State,,3,True,True,True
+2025,14,401762519,East Carolina at Florida Atlantic,,2,True,True,True
+2025,14,401754611,Miami at Pittsburgh,,3,True,True,True
+2025,14,401756965,Colorado at Kansas State,,3,True,True,True
+2025,14,401752787,Kentucky at Louisville,,3,True,True,True
+2025,14,401756962,Houston at Baylor,,3,True,True,True
+2025,14,401756963,UCF at BYU,,3,True,True,True
+2025,14,401757311,Florida International at Sam Houston,,2,True,True,True
+2025,14,401757310,UTEP at Delaware,,2,True,True,True
+2025,14,401761663,Georgia Southern at Marshall,,3,True,True,True
+2025,14,401761664,Georgia State at Old Dominion,,2,True,True,True
+2025,14,401757314,Louisiana Tech at Missouri State,,2,True,True,True
+2025,14,401757312,Western Kentucky at Jacksonville State,,2,True,True,True
+2025,14,401761661,Arkansas State at App State,,2,True,True,True
+2025,14,401761667,South Alabama at Texas State,,2,True,True,True
+2025,14,401757315,Middle Tennessee at New Mexico State,,3,True,True,True
+2025,14,401761665,UL Monroe at Louisiana,,3,True,True,True
+2025,14,401762517,UAB at Tulsa,,3,True,True,True
+2025,14,401754608,Boston College at Syracuse,,2,True,True,True
+2025,14,401752920,Penn State at Rutgers,,4,True,True,True
+2025,14,401752783,Missouri at Arkansas,,3,True,True,True
+2025,14,401762441,Army at UTSA,,2,True,True,True
+2025,14,401752918,Wisconsin at Minnesota,,2,True,True,True
+2025,14,401752917,Oregon at Washington,,3,True,True,True
+2025,14,401756967,Cincinnati at TCU,,3,True,True,True
+2025,14,401754610,Wake Forest at Duke,,3,True,True,True
+2025,14,401752789,LSU at Oklahoma,,3,True,True,True
+2025,14,401752791,Vanderbilt at Tennessee,,3,True,True,True
+2025,14,401757313,Kennesaw State at Liberty,,2,True,True,True
+2025,14,401761666,Troy at Southern Miss,,3,True,True,True
+2025,14,401761662,James Madison at Coastal Carolina,,2,True,True,True
+2025,14,401752785,Florida State at Florida,,3,True,True,True
+2025,14,401752946,Oregon State at Washington State,,2,True,True,True
+2025,14,401752923,Maryland at Michigan State,,3,True,True,True
+2025,14,401762520,Rice at South Florida,,2,True,True,True
+2025,14,401754613,Virginia Tech at Virginia,,3,True,True,True
+2025,14,401754612,North Carolina at NC State,,3,True,True,True
+2025,14,401752784,Alabama at Auburn,,3,True,True,True
+2025,14,401752919,UCLA at USC,,3,True,True,True
+2025,14,401752922,Northwestern at Illinois,,3,True,True,True
+2025,14,401762518,Charlotte at Tulane,,3,True,True,True
+2025,14,401754609,SMU at California,,2,True,True,True
+2025,14,401760425,UNLV at Nevada,,3,True,True,True
+2025,14,401754614,Notre Dame at Stanford,,3,True,True,True
+2025,14,401760423,Fresno State at San José State,,3,True,True,True
+2025,14,401760424,Wyoming at Hawai'i,,3,True,True,True
+2025,15,401777325,Kennesaw State at Jacksonville State,,2,True,False,False
+2025,15,401777352,Troy at James Madison,,2,True,False,False
+2025,15,401777326,UNLV at Boise State,,2,True,False,False
+2025,15,401777324,North Texas at Tulane,,2,True,False,False
+2025,15,401777327,BYU at Texas Tech,,2,True,False,False
+2025,15,401777329,Miami (OH) at Western Michigan,,2,True,False,False
+2025,15,401777351,Georgia at Alabama,,2,True,False,False
+2025,15,401777328,Duke at Virginia,,2,True,False,False
+2025,15,401777353,Indiana at Ohio State,,2,True,False,False
+2025,16,401762521,Army at Navy,,1,False,False,False

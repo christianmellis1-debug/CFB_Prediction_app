@@ -1,0 +1,1233 @@
+{
+  "experiment": "Test C independent-era retrospective market-disagreement replication",
+  "generated": "2026-10-13T17:49:33.842233+00:00",
+  "threshold_frozen": "predicted V1.5 win chance >=70% AND same-side sportsbook no-vig probability <55%",
+  "limitations": [
+    "2024 and 2025 model probabilities are RECONSTRUCTED using currently published weekly data; they were not frozen before kickoff.",
+    "2026 threshold was retrospectively chosen on that year: no fresh 2026 validation in this report.",
+    "Historical ESPN BET archived opening and closing lines were extracted from SportsDataverse cfbfastR-cfb-raw ESPN game betting snapshots; quote authenticity and timestamps were not independently confirmed.",
+    "2025 is not a pristine model-wide holdout because existing model calibration and parameters were informed by historical seasons.",
+    "ESPN BET archived historical lines may differ from the original 2026 DraftKings book; opening is preferred to guard against late/live quote leakage.",
+    "Odds missingness may be selective: comparisons apply only to matchups with valid two-sided historical quote pairs.",
+    "Warnings would mark a game as needing review, not automatically reverse the picked winner or establish betting ROI."
+  ],
+  "overall_requested": 1514,
+  "archives_fetched": 1514,
+  "coverage": {
+    "2024": {
+      "requested": 752,
+      "not_found": 0,
+      "other_errors": {},
+      "primary_open": 717,
+      "primary_close": 713,
+      "fallback_open": 735
+    },
+    "2025": {
+      "requested": 762,
+      "not_found": 0,
+      "other_errors": {},
+      "primary_open": 720,
+      "primary_close": 712,
+      "fallback_open": 730
+    },
+    "combined": {
+      "requested": 1514,
+      "not_found": 0,
+      "other_errors": {},
+      "primary_open": 1437,
+      "primary_close": 1425,
+      "fallback_open": 1465
+    }
+  },
+  "samples": {
+    "2024": {
+      "primary_open": {
+        "all": {
+          "n": 717,
+          "wins": 506,
+          "losses": 211,
+          "accuracy": 0.7057,
+          "wilson95": [
+            0.6713,
+            0.7379
+          ]
+        },
+        "flagged": {
+          "n": 22,
+          "wins": 9,
+          "losses": 13,
+          "accuracy": 0.4091,
+          "wilson95": [
+            0.2326,
+            0.6127
+          ]
+        },
+        "not_flagged": {
+          "n": 695,
+          "wins": 497,
+          "losses": 198,
+          "accuracy": 0.7151,
+          "wilson95": [
+            0.6804,
+            0.7474
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 399,
+          "wins": 318,
+          "losses": 81,
+          "accuracy": 0.797,
+          "wilson95": [
+            0.7548,
+            0.8335
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 377,
+          "wins": 309,
+          "losses": 68,
+          "accuracy": 0.8196,
+          "wilson95": [
+            0.7777,
+            0.8552
+          ]
+        },
+        "warning_rate": 0.0307,
+        "losers_caught": 13,
+        "fraction_all_model_losses_caught": -0.1469,
+        "model_brier": 0.192427,
+        "market_brier": 0.184393,
+        "model_logloss": 0.564255,
+        "market_logloss": 0.544338,
+        "book_favorite_wins": 510,
+        "abstain_accuracy": 0.7151,
+        "abstain_coverage": 0.9693,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 4.3e-05
+      },
+      "fallback_open": {
+        "all": {
+          "n": 735,
+          "wins": 522,
+          "losses": 213,
+          "accuracy": 0.7102,
+          "wilson95": [
+            0.6764,
+            0.7418
+          ]
+        },
+        "flagged": {
+          "n": 22,
+          "wins": 9,
+          "losses": 13,
+          "accuracy": 0.4091,
+          "wilson95": [
+            0.2326,
+            0.6127
+          ]
+        },
+        "not_flagged": {
+          "n": 713,
+          "wins": 513,
+          "losses": 200,
+          "accuracy": 0.7195,
+          "wilson95": [
+            0.6854,
+            0.7512
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 411,
+          "wins": 330,
+          "losses": 81,
+          "accuracy": 0.8029,
+          "wilson95": [
+            0.7617,
+            0.8385
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 389,
+          "wins": 321,
+          "losses": 68,
+          "accuracy": 0.8252,
+          "wilson95": [
+            0.7843,
+            0.8597
+          ]
+        },
+        "warning_rate": 0.0299,
+        "losers_caught": 13,
+        "fraction_all_model_losses_caught": -0.1455,
+        "model_brier": 0.18947,
+        "market_brier": 0.180524,
+        "model_logloss": 0.556785,
+        "market_logloss": 0.534441,
+        "book_favorite_wins": 529,
+        "abstain_accuracy": 0.7195,
+        "abstain_coverage": 0.9701,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 3.1e-05
+      },
+      "primary_close": {
+        "all": {
+          "n": 713,
+          "wins": 502,
+          "losses": 211,
+          "accuracy": 0.7041,
+          "wilson95": [
+            0.6695,
+            0.7364
+          ]
+        },
+        "flagged": {
+          "n": 19,
+          "wins": 9,
+          "losses": 10,
+          "accuracy": 0.4737,
+          "wilson95": [
+            0.2733,
+            0.6829
+          ]
+        },
+        "not_flagged": {
+          "n": 694,
+          "wins": 493,
+          "losses": 201,
+          "accuracy": 0.7104,
+          "wilson95": [
+            0.6755,
+            0.7429
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 395,
+          "wins": 314,
+          "losses": 81,
+          "accuracy": 0.7949,
+          "wilson95": [
+            0.7524,
+            0.8318
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 376,
+          "wins": 305,
+          "losses": 71,
+          "accuracy": 0.8112,
+          "wilson95": [
+            0.7685,
+            0.8475
+          ]
+        },
+        "warning_rate": 0.0266,
+        "losers_caught": 10,
+        "fraction_all_model_losses_caught": -0.1327,
+        "model_brier": 0.193493,
+        "market_brier": 0.185804,
+        "model_logloss": 0.567191,
+        "market_logloss": 0.547801,
+        "book_favorite_wins": 502,
+        "abstain_accuracy": 0.7104,
+        "abstain_coverage": 0.9734,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 0.001459
+      }
+    },
+    "2025": {
+      "primary_open": {
+        "all": {
+          "n": 720,
+          "wins": 504,
+          "losses": 216,
+          "accuracy": 0.7,
+          "wilson95": [
+            0.6655,
+            0.7323
+          ]
+        },
+        "flagged": {
+          "n": 16,
+          "wins": 6,
+          "losses": 10,
+          "accuracy": 0.375,
+          "wilson95": [
+            0.1848,
+            0.6136
+          ]
+        },
+        "not_flagged": {
+          "n": 704,
+          "wins": 498,
+          "losses": 206,
+          "accuracy": 0.7074,
+          "wilson95": [
+            0.6727,
+            0.7398
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 339,
+          "wins": 275,
+          "losses": 64,
+          "accuracy": 0.8112,
+          "wilson95": [
+            0.7662,
+            0.8493
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 323,
+          "wins": 269,
+          "losses": 54,
+          "accuracy": 0.8328,
+          "wilson95": [
+            0.7883,
+            0.8695
+          ]
+        },
+        "warning_rate": 0.0222,
+        "losers_caught": 10,
+        "fraction_all_model_losses_caught": -0.1019,
+        "model_brier": 0.193357,
+        "market_brier": 0.182413,
+        "model_logloss": 0.566954,
+        "market_logloss": 0.541194,
+        "book_favorite_wins": 524,
+        "abstain_accuracy": 0.7074,
+        "abstain_coverage": 0.9778,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 9.5e-05
+      },
+      "fallback_open": {
+        "all": {
+          "n": 730,
+          "wins": 521,
+          "losses": 209,
+          "accuracy": 0.7137,
+          "wilson95": [
+            0.6799,
+            0.7453
+          ]
+        },
+        "flagged": {
+          "n": 16,
+          "wins": 6,
+          "losses": 10,
+          "accuracy": 0.375,
+          "wilson95": [
+            0.1848,
+            0.6136
+          ]
+        },
+        "not_flagged": {
+          "n": 714,
+          "wins": 515,
+          "losses": 199,
+          "accuracy": 0.7213,
+          "wilson95": [
+            0.6873,
+            0.7529
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 360,
+          "wins": 297,
+          "losses": 63,
+          "accuracy": 0.825,
+          "wilson95": [
+            0.7824,
+            0.8608
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 344,
+          "wins": 291,
+          "losses": 53,
+          "accuracy": 0.8459,
+          "wilson95": [
+            0.804,
+            0.8802
+          ]
+        },
+        "warning_rate": 0.0219,
+        "losers_caught": 10,
+        "fraction_all_model_losses_caught": -0.1053,
+        "model_brier": 0.185607,
+        "market_brier": 0.174416,
+        "model_logloss": 0.546701,
+        "market_logloss": 0.520086,
+        "book_favorite_wins": 540,
+        "abstain_accuracy": 0.7213,
+        "abstain_coverage": 0.9781,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 4.7e-05
+      },
+      "primary_close": {
+        "all": {
+          "n": 712,
+          "wins": 500,
+          "losses": 212,
+          "accuracy": 0.7022,
+          "wilson95": [
+            0.6676,
+            0.7347
+          ]
+        },
+        "flagged": {
+          "n": 11,
+          "wins": 5,
+          "losses": 6,
+          "accuracy": 0.4545,
+          "wilson95": [
+            0.2127,
+            0.7199
+          ]
+        },
+        "not_flagged": {
+          "n": 701,
+          "wins": 495,
+          "losses": 206,
+          "accuracy": 0.7061,
+          "wilson95": [
+            0.6714,
+            0.7387
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 340,
+          "wins": 276,
+          "losses": 64,
+          "accuracy": 0.8118,
+          "wilson95": [
+            0.7668,
+            0.8497
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 329,
+          "wins": 271,
+          "losses": 58,
+          "accuracy": 0.8237,
+          "wilson95": [
+            0.7789,
+            0.8611
+          ]
+        },
+        "warning_rate": 0.0154,
+        "losers_caught": 6,
+        "fraction_all_model_losses_caught": -0.0755,
+        "model_brier": 0.192441,
+        "market_brier": 0.181995,
+        "model_logloss": 0.564765,
+        "market_logloss": 0.53989,
+        "book_favorite_wins": 520,
+        "abstain_accuracy": 0.7061,
+        "abstain_coverage": 0.9846,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 0.007556
+      }
+    },
+    "combined": {
+      "primary_open": {
+        "all": {
+          "n": 1437,
+          "wins": 1010,
+          "losses": 427,
+          "accuracy": 0.7029,
+          "wilson95": [
+            0.6787,
+            0.7259
+          ]
+        },
+        "flagged": {
+          "n": 38,
+          "wins": 15,
+          "losses": 23,
+          "accuracy": 0.3947,
+          "wilson95": [
+            0.256,
+            0.5528
+          ]
+        },
+        "not_flagged": {
+          "n": 1399,
+          "wins": 995,
+          "losses": 404,
+          "accuracy": 0.7112,
+          "wilson95": [
+            0.6869,
+            0.7344
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 738,
+          "wins": 593,
+          "losses": 145,
+          "accuracy": 0.8035,
+          "wilson95": [
+            0.7733,
+            0.8306
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 700,
+          "wins": 578,
+          "losses": 122,
+          "accuracy": 0.8257,
+          "wilson95": [
+            0.7959,
+            0.852
+          ]
+        },
+        "warning_rate": 0.0264,
+        "losers_caught": 23,
+        "fraction_all_model_losses_caught": -0.1241,
+        "model_brier": 0.192893,
+        "market_brier": 0.183401,
+        "model_logloss": 0.565607,
+        "market_logloss": 0.542763,
+        "book_favorite_wins": 1034,
+        "abstain_accuracy": 0.7112,
+        "abstain_coverage": 0.9736,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 0.0
+      },
+      "fallback_open": {
+        "all": {
+          "n": 1465,
+          "wins": 1043,
+          "losses": 422,
+          "accuracy": 0.7119,
+          "wilson95": [
+            0.6882,
+            0.7346
+          ]
+        },
+        "flagged": {
+          "n": 38,
+          "wins": 15,
+          "losses": 23,
+          "accuracy": 0.3947,
+          "wilson95": [
+            0.256,
+            0.5528
+          ]
+        },
+        "not_flagged": {
+          "n": 1427,
+          "wins": 1028,
+          "losses": 399,
+          "accuracy": 0.7204,
+          "wilson95": [
+            0.6965,
+            0.7431
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 771,
+          "wins": 627,
+          "losses": 144,
+          "accuracy": 0.8132,
+          "wilson95": [
+            0.7842,
+            0.8392
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 733,
+          "wins": 612,
+          "losses": 121,
+          "accuracy": 0.8349,
+          "wilson95": [
+            0.8063,
+            0.86
+          ]
+        },
+        "warning_rate": 0.0259,
+        "losers_caught": 23,
+        "fraction_all_model_losses_caught": -0.1256,
+        "model_brier": 0.187545,
+        "market_brier": 0.17748,
+        "model_logloss": 0.55176,
+        "market_logloss": 0.527288,
+        "book_favorite_wins": 1069,
+        "abstain_accuracy": 0.7204,
+        "abstain_coverage": 0.9741,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 0.0
+      },
+      "primary_close": {
+        "all": {
+          "n": 1425,
+          "wins": 1002,
+          "losses": 423,
+          "accuracy": 0.7032,
+          "wilson95": [
+            0.6789,
+            0.7263
+          ]
+        },
+        "flagged": {
+          "n": 30,
+          "wins": 14,
+          "losses": 16,
+          "accuracy": 0.4667,
+          "wilson95": [
+            0.3023,
+            0.6386
+          ]
+        },
+        "not_flagged": {
+          "n": 1395,
+          "wins": 988,
+          "losses": 407,
+          "accuracy": 0.7082,
+          "wilson95": [
+            0.6838,
+            0.7315
+          ]
+        },
+        "high_confidence_70_plus": {
+          "n": 735,
+          "wins": 590,
+          "losses": 145,
+          "accuracy": 0.8027,
+          "wilson95": [
+            0.7724,
+            0.8299
+          ]
+        },
+        "high_confidence_not_flagged": {
+          "n": 705,
+          "wins": 576,
+          "losses": 129,
+          "accuracy": 0.817,
+          "wilson95": [
+            0.7868,
+            0.8438
+          ]
+        },
+        "warning_rate": 0.0211,
+        "losers_caught": 16,
+        "fraction_all_model_losses_caught": -0.104,
+        "model_brier": 0.192967,
+        "market_brier": 0.183901,
+        "model_logloss": 0.565979,
+        "market_logloss": 0.543848,
+        "book_favorite_wins": 1022,
+        "abstain_accuracy": 0.7082,
+        "abstain_coverage": 0.9789,
+        "flag_vs_other_high_conf_fisher_two_sided_p": 2.8e-05
+      }
+    }
+  },
+  "examples": {
+    "2024": [
+      {
+        "game": "Notre Dame at Texas A&M",
+        "year": 2024,
+        "week": 1,
+        "model_confidence": 0.704,
+        "market_same_side": 0.4783,
+        "model_correct": true
+      },
+      {
+        "game": "UTSA at Texas State",
+        "year": 2024,
+        "week": 2,
+        "model_confidence": 0.7732,
+        "market_same_side": 0.4783,
+        "model_correct": false
+      },
+      {
+        "game": "South Alabama at Ohio",
+        "year": 2024,
+        "week": 2,
+        "model_confidence": 0.7151,
+        "market_same_side": 0.5217,
+        "model_correct": false
+      },
+      {
+        "game": "Arizona State at Texas State",
+        "year": 2024,
+        "week": 3,
+        "model_confidence": 0.7231,
+        "market_same_side": 0.5325,
+        "model_correct": true
+      },
+      {
+        "game": "Cincinnati at Miami (OH)",
+        "year": 2024,
+        "week": 3,
+        "model_confidence": 0.7322,
+        "market_same_side": 0.5325,
+        "model_correct": true
+      },
+      {
+        "game": "Toledo at Western Kentucky",
+        "year": 2024,
+        "week": 4,
+        "model_confidence": 0.7623,
+        "market_same_side": 0.5108,
+        "model_correct": false
+      },
+      {
+        "game": "Washington at Rutgers",
+        "year": 2024,
+        "week": 5,
+        "model_confidence": 0.8284,
+        "market_same_side": 0.438,
+        "model_correct": false
+      },
+      {
+        "game": "Georgia Southern at Georgia State",
+        "year": 2024,
+        "week": 5,
+        "model_confidence": 0.7415,
+        "market_same_side": 0.5,
+        "model_correct": false
+      },
+      {
+        "game": "Washington at Iowa",
+        "year": 2024,
+        "week": 7,
+        "model_confidence": 0.7667,
+        "market_same_side": 0.4289,
+        "model_correct": false
+      },
+      {
+        "game": "San Jos\u00e9 State at Colorado State",
+        "year": 2024,
+        "week": 7,
+        "model_confidence": 0.8161,
+        "market_same_side": 0.5427,
+        "model_correct": false
+      },
+      {
+        "game": "Wake Forest at UConn",
+        "year": 2024,
+        "week": 8,
+        "model_confidence": 0.701,
+        "market_same_side": 0.5217,
+        "model_correct": false
+      },
+      {
+        "game": "Western Michigan at Buffalo",
+        "year": 2024,
+        "week": 8,
+        "model_confidence": 0.7142,
+        "market_same_side": 0.5,
+        "model_correct": false
+      },
+      {
+        "game": "Michigan at Illinois",
+        "year": 2024,
+        "week": 8,
+        "model_confidence": 0.7071,
+        "market_same_side": 0.5108,
+        "model_correct": false
+      },
+      {
+        "game": "Troy at Arkansas State",
+        "year": 2024,
+        "week": 9,
+        "model_confidence": 0.7034,
+        "market_same_side": 0.2914,
+        "model_correct": false
+      },
+      {
+        "game": "Northwestern at Purdue",
+        "year": 2024,
+        "week": 10,
+        "model_confidence": 0.8844,
+        "market_same_side": 0.5325,
+        "model_correct": true
+      },
+      {
+        "game": "Old Dominion at App State",
+        "year": 2024,
+        "week": 10,
+        "model_confidence": 0.7333,
+        "market_same_side": 0.5427,
+        "model_correct": false
+      },
+      {
+        "game": "Arizona State at Oklahoma State",
+        "year": 2024,
+        "week": 10,
+        "model_confidence": 0.7069,
+        "market_same_side": 0.5217,
+        "model_correct": true
+      },
+      {
+        "game": "USC at Washington",
+        "year": 2024,
+        "week": 10,
+        "model_confidence": 0.7111,
+        "market_same_side": 0.4573,
+        "model_correct": true
+      },
+      {
+        "game": "Northern Illinois at Western Michigan",
+        "year": 2024,
+        "week": 11,
+        "model_confidence": 0.7638,
+        "market_same_side": 0.5108,
+        "model_correct": true
+      },
+      {
+        "game": "Arkansas State at Georgia State",
+        "year": 2024,
+        "week": 12,
+        "model_confidence": 0.7081,
+        "market_same_side": 0.5108,
+        "model_correct": false
+      },
+      {
+        "game": "Western Kentucky at Liberty",
+        "year": 2024,
+        "week": 13,
+        "model_confidence": 0.7319,
+        "market_same_side": 0.4783,
+        "model_correct": true
+      },
+      {
+        "game": "Western Kentucky at Jacksonville State",
+        "year": 2024,
+        "week": 15,
+        "model_confidence": 0.7467,
+        "market_same_side": 0.5325,
+        "model_correct": true
+      }
+    ],
+    "2025": [
+      {
+        "game": "Stanford at Hawai'i",
+        "year": 2025,
+        "week": 1,
+        "model_confidence": 0.794,
+        "market_same_side": 0.4675,
+        "model_correct": false
+      },
+      {
+        "game": "Notre Dame at Miami",
+        "year": 2025,
+        "week": 1,
+        "model_confidence": 0.8577,
+        "market_same_side": 0.5325,
+        "model_correct": false
+      },
+      {
+        "game": "Michigan at Oklahoma",
+        "year": 2025,
+        "week": 2,
+        "model_confidence": 0.7288,
+        "market_same_side": 0.3493,
+        "model_correct": false
+      },
+      {
+        "game": "San Diego State at Washington State",
+        "year": 2025,
+        "week": 2,
+        "model_confidence": 0.7296,
+        "market_same_side": 0.5217,
+        "model_correct": true
+      },
+      {
+        "game": "Jacksonville State at Georgia Southern",
+        "year": 2025,
+        "week": 3,
+        "model_confidence": 0.726,
+        "market_same_side": 0.4009,
+        "model_correct": false
+      },
+      {
+        "game": "App State at Southern Miss",
+        "year": 2025,
+        "week": 3,
+        "model_confidence": 0.8918,
+        "market_same_side": 0.5108,
+        "model_correct": false
+      },
+      {
+        "game": "LSU at Ole Miss",
+        "year": 2025,
+        "week": 5,
+        "model_confidence": 0.8232,
+        "market_same_side": 0.5427,
+        "model_correct": true
+      },
+      {
+        "game": "Jacksonville State at Southern Miss",
+        "year": 2025,
+        "week": 5,
+        "model_confidence": 0.7517,
+        "market_same_side": 0.4118,
+        "model_correct": false
+      },
+      {
+        "game": "San Jos\u00e9 State at Stanford",
+        "year": 2025,
+        "week": 5,
+        "model_confidence": 0.7952,
+        "market_same_side": 0.5427,
+        "model_correct": true
+      },
+      {
+        "game": "New Mexico at San Jos\u00e9 State",
+        "year": 2025,
+        "week": 6,
+        "model_confidence": 0.7001,
+        "market_same_side": 0.438,
+        "model_correct": false
+      },
+      {
+        "game": "South Florida at North Texas",
+        "year": 2025,
+        "week": 7,
+        "model_confidence": 0.7768,
+        "market_same_side": 0.5325,
+        "model_correct": false
+      },
+      {
+        "game": "Michigan at USC",
+        "year": 2025,
+        "week": 7,
+        "model_confidence": 0.7117,
+        "market_same_side": 0.5427,
+        "model_correct": true
+      },
+      {
+        "game": "Rutgers at Purdue",
+        "year": 2025,
+        "week": 9,
+        "model_confidence": 0.7426,
+        "market_same_side": 0.4289,
+        "model_correct": false
+      },
+      {
+        "game": "Army at Air Force",
+        "year": 2025,
+        "week": 10,
+        "model_confidence": 0.7526,
+        "market_same_side": 0.4892,
+        "model_correct": true
+      },
+      {
+        "game": "Delaware at Liberty",
+        "year": 2025,
+        "week": 10,
+        "model_confidence": 0.7453,
+        "market_same_side": 0.4289,
+        "model_correct": false
+      },
+      {
+        "game": "Nebraska at UCLA",
+        "year": 2025,
+        "week": 11,
+        "model_confidence": 0.7232,
+        "market_same_side": 0.4573,
+        "model_correct": true
+      }
+    ],
+    "combined": [
+      {
+        "game": "Notre Dame at Texas A&M",
+        "year": 2024,
+        "week": 1,
+        "model_confidence": 0.704,
+        "market_same_side": 0.4783,
+        "model_correct": true
+      },
+      {
+        "game": "Stanford at Hawai'i",
+        "year": 2025,
+        "week": 1,
+        "model_confidence": 0.794,
+        "market_same_side": 0.4675,
+        "model_correct": false
+      },
+      {
+        "game": "Notre Dame at Miami",
+        "year": 2025,
+        "week": 1,
+        "model_confidence": 0.8577,
+        "market_same_side": 0.5325,
+        "model_correct": false
+      },
+      {
+        "game": "UTSA at Texas State",
+        "year": 2024,
+        "week": 2,
+        "model_confidence": 0.7732,
+        "market_same_side": 0.4783,
+        "model_correct": false
+      },
+      {
+        "game": "Michigan at Oklahoma",
+        "year": 2025,
+        "week": 2,
+        "model_confidence": 0.7288,
+        "market_same_side": 0.3493,
+        "model_correct": false
+      },
+      {
+        "game": "San Diego State at Washington State",
+        "year": 2025,
+        "week": 2,
+        "model_confidence": 0.7296,
+        "market_same_side": 0.5217,
+        "model_correct": true
+      },
+      {
+        "game": "South Alabama at Ohio",
+        "year": 2024,
+        "week": 2,
+        "model_confidence": 0.7151,
+        "market_same_side": 0.5217,
+        "model_correct": false
+      },
+      {
+        "game": "Arizona State at Texas State",
+        "year": 2024,
+        "week": 3,
+        "model_confidence": 0.7231,
+        "market_same_side": 0.5325,
+        "model_correct": true
+      },
+      {
+        "game": "Cincinnati at Miami (OH)",
+        "year": 2024,
+        "week": 3,
+        "model_confidence": 0.7322,
+        "market_same_side": 0.5325,
+        "model_correct": true
+      },
+      {
+        "game": "App State at Southern Miss",
+        "year": 2025,
+        "week": 3,
+        "model_confidence": 0.8918,
+        "market_same_side": 0.5108,
+        "model_correct": false
+      },
+      {
+        "game": "Jacksonville State at Georgia Southern",
+        "year": 2025,
+        "week": 3,
+        "model_confidence": 0.726,
+        "market_same_side": 0.4009,
+        "model_correct": false
+      },
+      {
+        "game": "Toledo at Western Kentucky",
+        "year": 2024,
+        "week": 4,
+        "model_confidence": 0.7623,
+        "market_same_side": 0.5108,
+        "model_correct": false
+      },
+      {
+        "game": "LSU at Ole Miss",
+        "year": 2025,
+        "week": 5,
+        "model_confidence": 0.8232,
+        "market_same_side": 0.5427,
+        "model_correct": true
+      },
+      {
+        "game": "Jacksonville State at Southern Miss",
+        "year": 2025,
+        "week": 5,
+        "model_confidence": 0.7517,
+        "market_same_side": 0.4118,
+        "model_correct": false
+      },
+      {
+        "game": "Washington at Rutgers",
+        "year": 2024,
+        "week": 5,
+        "model_confidence": 0.8284,
+        "market_same_side": 0.438,
+        "model_correct": false
+      },
+      {
+        "game": "Georgia Southern at Georgia State",
+        "year": 2024,
+        "week": 5,
+        "model_confidence": 0.7415,
+        "market_same_side": 0.5,
+        "model_correct": false
+      },
+      {
+        "game": "San Jos\u00e9 State at Stanford",
+        "year": 2025,
+        "week": 5,
+        "model_confidence": 0.7952,
+        "market_same_side": 0.5427,
+        "model_correct": true
+      },
+      {
+        "game": "New Mexico at San Jos\u00e9 State",
+        "year": 2025,
+        "week": 6,
+        "model_confidence": 0.7001,
+        "market_same_side": 0.438,
+        "model_correct": false
+      },
+      {
+        "game": "San Jos\u00e9 State at Colorado State",
+        "year": 2024,
+        "week": 7,
+        "model_confidence": 0.8161,
+        "market_same_side": 0.5427,
+        "model_correct": false
+      },
+      {
+        "game": "Washington at Iowa",
+        "year": 2024,
+        "week": 7,
+        "model_confidence": 0.7667,
+        "market_same_side": 0.4289,
+        "model_correct": false
+      },
+      {
+        "game": "Michigan at USC",
+        "year": 2025,
+        "week": 7,
+        "model_confidence": 0.7117,
+        "market_same_side": 0.5427,
+        "model_correct": true
+      },
+      {
+        "game": "South Florida at North Texas",
+        "year": 2025,
+        "week": 7,
+        "model_confidence": 0.7768,
+        "market_same_side": 0.5325,
+        "model_correct": false
+      },
+      {
+        "game": "Western Michigan at Buffalo",
+        "year": 2024,
+        "week": 8,
+        "model_confidence": 0.7142,
+        "market_same_side": 0.5,
+        "model_correct": false
+      },
+      {
+        "game": "Wake Forest at UConn",
+        "year": 2024,
+        "week": 8,
+        "model_confidence": 0.701,
+        "market_same_side": 0.5217,
+        "model_correct": false
+      },
+      {
+        "game": "Michigan at Illinois",
+        "year": 2024,
+        "week": 8,
+        "model_confidence": 0.7071,
+        "market_same_side": 0.5108,
+        "model_correct": false
+      },
+      {
+        "game": "Rutgers at Purdue",
+        "year": 2025,
+        "week": 9,
+        "model_confidence": 0.7426,
+        "market_same_side": 0.4289,
+        "model_correct": false
+      },
+      {
+        "game": "Troy at Arkansas State",
+        "year": 2024,
+        "week": 9,
+        "model_confidence": 0.7034,
+        "market_same_side": 0.2914,
+        "model_correct": false
+      },
+      {
+        "game": "Old Dominion at App State",
+        "year": 2024,
+        "week": 10,
+        "model_confidence": 0.7333,
+        "market_same_side": 0.5427,
+        "model_correct": false
+      },
+      {
+        "game": "Army at Air Force",
+        "year": 2025,
+        "week": 10,
+        "model_confidence": 0.7526,
+        "market_same_side": 0.4892,
+        "model_correct": true
+      },
+      {
+        "game": "Northwestern at Purdue",
+        "year": 2024,
+        "week": 10,
+        "model_confidence": 0.8844,
+        "market_same_side": 0.5325,
+        "model_correct": true
+      },
+      {
+        "game": "USC at Washington",
+        "year": 2024,
+        "week": 10,
+        "model_confidence": 0.7111,
+        "market_same_side": 0.4573,
+        "model_correct": true
+      },
+      {
+        "game": "Arizona State at Oklahoma State",
+        "year": 2024,
+        "week": 10,
+        "model_confidence": 0.7069,
+        "market_same_side": 0.5217,
+        "model_correct": true
+      },
+      {
+        "game": "Delaware at Liberty",
+        "year": 2025,
+        "week": 10,
+        "model_confidence": 0.7453,
+        "market_same_side": 0.4289,
+        "model_correct": false
+      },
+      {
+        "game": "Nebraska at UCLA",
+        "year": 2025,
+        "week": 11,
+        "model_confidence": 0.7232,
+        "market_same_side": 0.4573,
+        "model_correct": true
+      },
+      {
+        "game": "Northern Illinois at Western Michigan",
+        "year": 2024,
+        "week": 11,
+        "model_confidence": 0.7638,
+        "market_same_side": 0.5108,
+        "model_correct": true
+      },
+      {
+        "game": "Arkansas State at Georgia State",
+        "year": 2024,
+        "week": 12,
+        "model_confidence": 0.7081,
+        "market_same_side": 0.5108,
+        "model_correct": false
+      },
+      {
+        "game": "Western Kentucky at Liberty",
+        "year": 2024,
+        "week": 13,
+        "model_confidence": 0.7319,
+        "market_same_side": 0.4783,
+        "model_correct": true
+      },
+      {
+        "game": "Western Kentucky at Jacksonville State",
+        "year": 2024,
+        "week": 15,
+        "model_confidence": 0.7467,
+        "market_same_side": 0.5325,
+        "model_correct": true
+      }
+    ]
+  }
+}
