@@ -218,7 +218,7 @@ def main():
         conf=r["model_confidence"];onpick=p if base>=.5 else 1-p
         warn=conf>=.7 and onpick<.55
         agree=(base>=.5)==(p>=.5)
-        rr=dict(r,market_home=p,market_on_pick=onpick,warning=warn,
+        rr=dict(r,has_open=True,market_home=p,market_on_pick=onpick,warning=warn,
           market_agrees=agree,conditional_home=p if warn and not agree else base,
           c_correct=int(((p if warn and not agree else base)>=.5)==bool(r["home_won"])),
           fade_home=1-base if warn else base,blend1693_home=N*base+(1-N)*p,
