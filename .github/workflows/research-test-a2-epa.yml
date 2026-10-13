@@ -1,0 +1,39 @@
+name: Research Test A2 recent EPA
+on:
+  push:
+    branches:
+      - research/test-a-three-game-epa-2026-10-13
+    paths:
+      - 'research/test_a_recent_epa.py'
+      - '.github/workflows/research-test-a2-epa.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: research-test-a2-epa
+  cancel-in-progress: false
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install research dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Validate research syntax
+        run: python -m py_compile research/test_a_recent_epa.py
+      - name: Compare pregame last-three EPA with model
+        run: python research/test_a_recent_epa.py
+      - name: Save research output only, not production predictions
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_a_recent_epa_results.json research/test_a_recent_epa_game_results.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Test A2 recent EPA research results'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
