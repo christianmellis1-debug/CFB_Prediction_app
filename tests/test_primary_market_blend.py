@@ -121,8 +121,8 @@ class TestCProductionTests(unittest.TestCase):
         self.assertEqual(self.blended(frozen_snapshots=bad)['Predicted Winner'],'Home')
 
     def test_market_can_change_probability_without_winner_change(self):
-        self.frame.loc[0,'Home ML']=-600
-        self.frame.loc[0,'Away ML']=450
+        self.frame.loc[0,'Home ML']='-600'
+        self.frame.loc[0,'Away ML']='+450'
         row=self.blended()
         self.assertEqual(row['Predicted Winner'],'Home')
         self.assertEqual(row['V1.5 Predicted Winner'],'Home')
