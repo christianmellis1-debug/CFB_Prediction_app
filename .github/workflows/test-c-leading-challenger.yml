@@ -1,0 +1,47 @@
+name: Validate Test C leading prediction challenger
+on:
+  push:
+    branches:
+      - research/test-c-leading-challenger-1693-2026-10-13
+    paths:
+      - 'shadow_tracking.py'
+      - 'tests/test_test_c_challenger.py'
+      - '.github/workflows/test-c-leading-challenger.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install numpy==2.2.6 pandas==2.2.3 scipy==1.15.3
+      - name: Existing frozen model tests
+        run: python -m unittest discover -s tests -p 'test_shadow_tracking.py'
+      - name: Test C challenger-specific tests
+        run: python -m unittest discover -s tests -p 'test_test_c_challenger.py'
+      - name: Audit archived paired 2026 head-to-head
+        run: |
+          python - <<'PY'
+          import math
+          from shadow_tracking import load, winner_comparison, CHALLENGER_NAME
+          log = load()
+          data, games = winner_comparison(log, 2026)
+          x = data.set_index('Method')
+          baseline = x.loc['Frozen V1.5']
+          c = x.loc[CHALLENGER_NAME]
+          assert len(games) == 112
+          assert baseline['Correct winners'] == 77
+          assert c['Correct winners'] == 78
+          assert c['Winner switches vs V1.5'] == 17
+          assert c['Errors fixed'] == 9
+          assert c['New errors'] == 8
+          assert math.isclose(c['Brier score (lower is better)'], .19119240278476632, abs_tol=1e-10)
+          assert math.isclose(baseline['Brier score (lower is better)'], .20898345230564436, abs_tol=1e-10)
+          assert all(games['Week'].isin([5,6]))
+          print(data.to_string(index=False))
+          PY

@@ -4,6 +4,8 @@ on:
     - cron: '17 2,8,14,20 * * *'
   workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
       - '.github/workflows/shadow-tracking.yml'
       - 'capture_shadow.py'

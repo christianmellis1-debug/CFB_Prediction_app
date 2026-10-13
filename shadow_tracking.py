@@ -142,16 +142,117 @@ def comparison(log, season, week=None):
           'ROI':net/risk if risk else None})
     return pd.DataFrame(rows)
 
+
+CHALLENGER_NAME = 'Test C · 16.93% V1.5 / 83.07% sportsbook'
+CHALLENGER_STATUS = 'SHADOW_ONLY'
+
+
+def winner_comparison(log, season, week=None):
+    """Prospective head-to-head with *each method's own predicted winner*.
+
+    This is intentionally separate from comparison(), which evaluates the
+    frozen original-side hypothetical value picks. Snapshots and final scores
+    remain immutable; historical outcomes are never backfilled as forecasts.
+    """
+    import pandas as pd
+    eligible = [
+        (s, log['results'][gid])
+        for gid, s in log.get('snapshots', {}).items()
+        if s.get('season') == int(season)
+        and (week is None or s.get('week') == int(week))
+        and gid in log.get('results', {})
+        and log['results'][gid].get('outcome') in ('win', 'loss')
+    ]
+    score_rows = []
+    records = []
+    for s, result in eligible:
+        original = s.get('picked_side')
+        if original not in ('home', 'away'):
+            continue
+        p_model = float(s['model_probability'])
+        p_market = float(s['market_probability'])
+        locked_weight = float(s.get('model_weight', MODEL_WEIGHT))
+        if (not all(math.isfinite(v) for v in (p_model, p_market, locked_weight))
+                or not 0 <= p_model <= 1 or not 0 <= p_market <= 1
+                or not 0 <= locked_weight <= 1
+                or not math.isclose(locked_weight, MODEL_WEIGHT, abs_tol=1e-12)):
+            continue
+        # Model/market probabilities in the archive are for the ORIGINAL
+        # predicted side. Model-selected-side probability may be <.5 after
+        # blending, so the challenger must select the opposite winner.
+        p_blend = locked_weight * p_model + (1 - locked_weight) * p_market
+        changed = p_blend < .5
+        outcome_original = result['outcome'] == 'win'
+        outcome_challenger = not outcome_original if changed else outcome_original
+        score_rows.append((p_model, p_blend, outcome_original,
+                           outcome_challenger, changed))
+        records.append({
+            'Game ID': s['game_id'],
+            'Week': s['week'],
+            'V1.5 Winner': s['picked_team'],
+            'Test C Winner': (s['home'] if original == 'away' else s['away']) if changed else s['picked_team'],
+            'V1.5 Confidence': p_model,
+            'Test C Confidence': max(p_blend, 1 - p_blend),
+            'Switched Winner': changed,
+            'V1.5 Correct': outcome_original,
+            'Test C Correct': outcome_challenger,
+        })
+    def metrics(method):
+        if not score_rows:
+            return {'Method': method, 'Settled games': 0, 'Correct winners': 0,
+                    'Incorrect winners': 0, 'Winner accuracy': None,
+                    'Brier score (lower is better)': None,
+                    'Log loss (lower is better)': None,
+                    'Winner switches vs V1.5': 0, 'Errors fixed': 0, 'New errors': 0}
+        n = len(score_rows)
+        if method == 'Frozen V1.5':
+            preds = [(p0, y0, y0) for p0, pb, y0, yc, flipped in score_rows]
+        else:
+            preds = [(pb, y0, yc) for p0, pb, y0, yc, flipped in score_rows]
+        correct = sum(int(c) for p, y, c in preds)
+        errors_fixed = sum(int(flip and not y0) for p0, pb, y0, yc, flip in score_rows)
+        new_errors = sum(int(flip and y0) for p0, pb, y0, yc, flip in score_rows)
+        # Scores use probabilities for the ORIGINAL selected team, because
+        # final outcomes are also recorded relative to that team. This is
+        # equivalent to home-win probability Brier/log loss (symmetry).
+        brier = sum((p - int(y)) ** 2 for p, y, c in preds) / n
+        eps = 1e-12
+        ll = sum(-int(y) * math.log(min(1-eps, max(eps, p)))
+                 -(1-int(y)) * math.log(min(1-eps, max(eps, 1-p)))
+                 for p, y, c in preds) / n
+        is_challenger = method != 'Frozen V1.5'
+        return {
+            'Method': method, 'Settled games': n,
+            'Correct winners': correct, 'Incorrect winners': n - correct,
+            'Winner accuracy': correct / n,
+            'Brier score (lower is better)': brier,
+            'Log loss (lower is better)': ll,
+            'Winner switches vs V1.5': sum(int(x[4]) for x in score_rows) if is_challenger else 0,
+            'Errors fixed': errors_fixed if is_challenger else 0,
+            'New errors': new_errors if is_challenger else 0,
+        }
+    score = pd.DataFrame([metrics('Frozen V1.5'), metrics(CHALLENGER_NAME)])
+    games = pd.DataFrame(records)
+    return score, games
+
 def show_shadow_tracking(st, season, week):
     with st.expander('Forward test · current model vs sportsbook blend'):
         log=load()
         st.caption('Separate research only. Recommendations and value labels above are unchanged. The model and blend are frozen for this experiment; neither retrains from these results.')
         st.write('We lock the first eligible observation within seven days of kickoff, using a confirmed pregame status and both moneylines from one sportsbook. DraftKings is preferred. Games without an eligible snapshot are excluded; earlier weeks are not backfilled.')
-        st.caption('Blend: 16.93% model + 83.07% sportsbook probability after removing the two-sided margin. Both methods keep the same predicted winner and use the existing value thresholds. Hypothetical stake: $10 per qualifying pick.')
+        st.caption('Blend: 16.93% model + 83.07% sportsbook probability after removing the two-sided margin. The original-side value-bet research below keeps the same predicted winner; the new Test C prediction table independently allows winner changes. Hypothetical original-side value-bet stake: $10 per qualifying pick.')
         st.caption('Capture checks are scheduled every six hours. GitHub may delay runs. Last completed check (UTC): '+str(log.get('last_run') or 'Waiting for first check'))
         if log.get('run_summary'):
             st.json(log['run_summary'],expanded=False)
         all_weeks=st.checkbox('Show entire selected season',value=True,key='shadow_all_weeks')
+        winner_rows, winner_games = winner_comparison(log, int(season), None if all_weeks else int(week))
+        st.write('**Prediction challenger · straight-up winners**')
+        st.dataframe(winner_rows,hide_index=True,use_container_width=True)
+        st.caption('Test C may choose a different winner. Both methods use the same locked pregame games and prices. This is a shadow-only comparison, not an update to published predictions or waterfall tiers.')
+        if not winner_games.empty:
+            with st.expander('Inspect Test C winner changes'):
+                st.dataframe(winner_games[winner_games['Switched Winner']],hide_index=True,use_container_width=True)
+        st.write('**Original-side value-bet research (unchanged)**')
         rows=comparison(log,int(season),None if all_weeks else int(week))
         st.dataframe(rows,hide_index=True,use_container_width=True)
         st.caption('ROI excludes refunded stakes. Pending games are not losses. Brier score evaluates probability quality across the same settled games; a better score does not establish profitable betting. Quote capture time is not the sportsbook’s update time.')
