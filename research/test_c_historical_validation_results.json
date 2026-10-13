@@ -1,6 +1,6 @@
 {
   "experiment": "Test C independent-era retrospective market-disagreement replication",
-  "generated": "2026-10-13T17:49:33.842233+00:00",
+  "generated": "2026-10-13T17:51:11.318061+00:00",
   "threshold_frozen": "predicted V1.5 win chance >=70% AND same-side sportsbook no-vig probability <55%",
   "limitations": [
     "2024 and 2025 model probabilities are RECONSTRUCTED using currently published weekly data; they were not frozen before kickoff.",
@@ -94,7 +94,7 @@
         },
         "warning_rate": 0.0307,
         "losers_caught": 13,
-        "fraction_all_model_losses_caught": -0.1469,
+        "fraction_all_model_losses_caught": 0.0616,
         "model_brier": 0.192427,
         "market_brier": 0.184393,
         "model_logloss": 0.564255,
@@ -102,7 +102,7 @@
         "book_favorite_wins": 510,
         "abstain_accuracy": 0.7151,
         "abstain_coverage": 0.9693,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 4.3e-05
+        "flag_vs_other_high_conf_fisher_two_sided_p": 4.3291734632002904e-05
       },
       "fallback_open": {
         "all": {
@@ -157,7 +157,7 @@
         },
         "warning_rate": 0.0299,
         "losers_caught": 13,
-        "fraction_all_model_losses_caught": -0.1455,
+        "fraction_all_model_losses_caught": 0.061,
         "model_brier": 0.18947,
         "market_brier": 0.180524,
         "model_logloss": 0.556785,
@@ -165,7 +165,7 @@
         "book_favorite_wins": 529,
         "abstain_accuracy": 0.7195,
         "abstain_coverage": 0.9701,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 3.1e-05
+        "flag_vs_other_high_conf_fisher_two_sided_p": 3.088811043487011e-05
       },
       "primary_close": {
         "all": {
@@ -220,7 +220,7 @@
         },
         "warning_rate": 0.0266,
         "losers_caught": 10,
-        "fraction_all_model_losses_caught": -0.1327,
+        "fraction_all_model_losses_caught": 0.0474,
         "model_brier": 0.193493,
         "market_brier": 0.185804,
         "model_logloss": 0.567191,
@@ -228,7 +228,7 @@
         "book_favorite_wins": 502,
         "abstain_accuracy": 0.7104,
         "abstain_coverage": 0.9734,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 0.001459
+        "flag_vs_other_high_conf_fisher_two_sided_p": 0.0014593840027591076
       }
     },
     "2025": {
@@ -285,7 +285,7 @@
         },
         "warning_rate": 0.0222,
         "losers_caught": 10,
-        "fraction_all_model_losses_caught": -0.1019,
+        "fraction_all_model_losses_caught": 0.0463,
         "model_brier": 0.193357,
         "market_brier": 0.182413,
         "model_logloss": 0.566954,
@@ -293,7 +293,7 @@
         "book_favorite_wins": 524,
         "abstain_accuracy": 0.7074,
         "abstain_coverage": 0.9778,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 9.5e-05
+        "flag_vs_other_high_conf_fisher_two_sided_p": 9.491872521117455e-05
       },
       "fallback_open": {
         "all": {
@@ -348,7 +348,7 @@
         },
         "warning_rate": 0.0219,
         "losers_caught": 10,
-        "fraction_all_model_losses_caught": -0.1053,
+        "fraction_all_model_losses_caught": 0.0478,
         "model_brier": 0.185607,
         "market_brier": 0.174416,
         "model_logloss": 0.546701,
@@ -356,7 +356,7 @@
         "book_favorite_wins": 540,
         "abstain_accuracy": 0.7213,
         "abstain_coverage": 0.9781,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 4.7e-05
+        "flag_vs_other_high_conf_fisher_two_sided_p": 4.724923201472374e-05
       },
       "primary_close": {
         "all": {
@@ -411,7 +411,7 @@
         },
         "warning_rate": 0.0154,
         "losers_caught": 6,
-        "fraction_all_model_losses_caught": -0.0755,
+        "fraction_all_model_losses_caught": 0.0283,
         "model_brier": 0.192441,
         "market_brier": 0.181995,
         "model_logloss": 0.564765,
@@ -419,7 +419,7 @@
         "book_favorite_wins": 520,
         "abstain_accuracy": 0.7061,
         "abstain_coverage": 0.9846,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 0.007556
+        "flag_vs_other_high_conf_fisher_two_sided_p": 0.007555644963511565
       }
     },
     "combined": {
@@ -476,7 +476,7 @@
         },
         "warning_rate": 0.0264,
         "losers_caught": 23,
-        "fraction_all_model_losses_caught": -0.1241,
+        "fraction_all_model_losses_caught": 0.0539,
         "model_brier": 0.192893,
         "market_brier": 0.183401,
         "model_logloss": 0.565607,
@@ -484,7 +484,7 @@
         "book_favorite_wins": 1034,
         "abstain_accuracy": 0.7112,
         "abstain_coverage": 0.9736,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 0.0
+        "flag_vs_other_high_conf_fisher_two_sided_p": 1.3000457146721208e-08
       },
       "fallback_open": {
         "all": {
@@ -539,7 +539,7 @@
         },
         "warning_rate": 0.0259,
         "losers_caught": 23,
-        "fraction_all_model_losses_caught": -0.1256,
+        "fraction_all_model_losses_caught": 0.0545,
         "model_brier": 0.187545,
         "market_brier": 0.17748,
         "model_logloss": 0.55176,
@@ -547,7 +547,7 @@
         "book_favorite_wins": 1069,
         "abstain_accuracy": 0.7204,
         "abstain_coverage": 0.9741,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 0.0
+        "flag_vs_other_high_conf_fisher_two_sided_p": 4.593476900612707e-09
       },
       "primary_close": {
         "all": {
@@ -602,7 +602,7 @@
         },
         "warning_rate": 0.0211,
         "losers_caught": 16,
-        "fraction_all_model_losses_caught": -0.104,
+        "fraction_all_model_losses_caught": 0.0378,
         "model_brier": 0.192967,
         "market_brier": 0.183901,
         "model_logloss": 0.565979,
@@ -610,7 +610,7 @@
         "book_favorite_wins": 1022,
         "abstain_accuracy": 0.7082,
         "abstain_coverage": 0.9789,
-        "flag_vs_other_high_conf_fisher_two_sided_p": 2.8e-05
+        "flag_vs_other_high_conf_fisher_two_sided_p": 2.8420213919508113e-05
       }
     }
   },
