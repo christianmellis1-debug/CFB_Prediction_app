@@ -1,0 +1,698 @@
+{
+  "experiment": "Test C, market disagreement and confidence calibration",
+  "generated_utc": "2026-10-13T17:42:54.403204+00:00",
+  "scope": "Only 2026 Weeks 5-6 contain locked pregame model predictions and both sides of matching DraftKings moneylines; 2024-25 have model reconstruction only.",
+  "caveats": [
+    "Thresholds examined retrospectively; Week 6 split is not a clean unseen holdout.",
+    "Bookmaker probability is no-vig from same-book two-sided American moneylines.",
+    "Available quotes were locked 0-7 days before kickoff, and are not necessarily closing lines.",
+    "Historical 2024-25 confidence samples are retrospective V1.5 reconstructed with later-published summary data.",
+    "Betting profitability and ATS performance are not measured in this experiment."
+  ],
+  "archive_audit": {
+    "snapshots": 171,
+    "settled_valid": 112,
+    "skips": {
+      "not_settled": 59
+    },
+    "weeks": {
+      "5": 56,
+      "6": 56
+    }
+  },
+  "model_2026": {
+    "n": 112,
+    "wins": 77,
+    "losses": 35,
+    "accuracy": 0.6875,
+    "mean_confidence": 0.7147469868378232,
+    "brier": 0.20898345230564436,
+    "log_loss": 0.6063583083511092
+  },
+  "market_2026": {
+    "n": 112,
+    "wins": 77,
+    "losses": 35,
+    "accuracy": 0.6875,
+    "mean_confidence": 0.7065487622613311,
+    "brier": 0.1913110169364928,
+    "log_loss": 0.5593186125295743
+  },
+  "week_2026": {
+    "5": {
+      "model": {
+        "n": 56,
+        "wins": 42,
+        "losses": 14,
+        "accuracy": 0.75,
+        "mean_confidence": 0.729742432688334,
+        "brier": 0.18491361842837176,
+        "log_loss": 0.5462816582448102
+      },
+      "market": {
+        "n": 56,
+        "wins": 39,
+        "losses": 17,
+        "accuracy": 0.6964285714285714,
+        "mean_confidence": 0.7199358048479148,
+        "brier": 0.16916229526848361,
+        "log_loss": 0.501620814653406
+      }
+    },
+    "6": {
+      "model": {
+        "n": 56,
+        "wins": 35,
+        "losses": 21,
+        "accuracy": 0.625,
+        "mean_confidence": 0.6997515409873127,
+        "brier": 0.23305328618291693,
+        "log_loss": 0.6664349584574083
+      },
+      "market": {
+        "n": 56,
+        "wins": 38,
+        "losses": 18,
+        "accuracy": 0.6785714285714286,
+        "mean_confidence": 0.6931617196747473,
+        "brier": 0.21345973860450193,
+        "log_loss": 0.6170164104057427
+      }
+    }
+  },
+  "model_bands_2026": [
+    {
+      "range": "50-60%",
+      "n": 31,
+      "correct": 17,
+      "actual_rate": 0.5483870967741935,
+      "predicted_mean": 0.5552684315943975,
+      "gap_actual_minus_predicted": -0.0068813348202040325
+    },
+    {
+      "range": "60-70%",
+      "n": 22,
+      "correct": 16,
+      "actual_rate": 0.7272727272727273,
+      "predicted_mean": 0.6627750613769173,
+      "gap_actual_minus_predicted": 0.06449766589580996
+    },
+    {
+      "range": "70-80%",
+      "n": 27,
+      "correct": 18,
+      "actual_rate": 0.6666666666666666,
+      "predicted_mean": 0.7590765560025307,
+      "gap_actual_minus_predicted": -0.09240988933586403
+    },
+    {
+      "range": "80-90%",
+      "n": 24,
+      "correct": 19,
+      "actual_rate": 0.7916666666666666,
+      "predicted_mean": 0.8440627541355191,
+      "gap_actual_minus_predicted": -0.05239608746885249
+    },
+    {
+      "range": "90-100%",
+      "n": 8,
+      "correct": 7,
+      "actual_rate": 0.875,
+      "predicted_mean": 0.9380895855996159,
+      "gap_actual_minus_predicted": -0.06308958559961586
+    }
+  ],
+  "market_bands_2026": [
+    {
+      "range": "50-60%",
+      "n": 34,
+      "correct": 18,
+      "actual_rate": 0.5294117647058824,
+      "predicted_mean": 0.5552800256225144,
+      "gap_actual_minus_predicted": -0.02586826091663208
+    },
+    {
+      "range": "60-70%",
+      "n": 20,
+      "correct": 11,
+      "actual_rate": 0.55,
+      "predicted_mean": 0.6515627925643928,
+      "gap_actual_minus_predicted": -0.10156279256439271
+    },
+    {
+      "range": "70-80%",
+      "n": 27,
+      "correct": 20,
+      "actual_rate": 0.7407407407407407,
+      "predicted_mean": 0.7507152046233005,
+      "gap_actual_minus_predicted": -0.009974463882559848
+    },
+    {
+      "range": "80-90%",
+      "n": 22,
+      "correct": 19,
+      "actual_rate": 0.8636363636363636,
+      "predicted_mean": 0.8452483624492729,
+      "gap_actual_minus_predicted": 0.01838800118709072
+    },
+    {
+      "range": "90-100%",
+      "n": 9,
+      "correct": 9,
+      "actual_rate": 1.0,
+      "predicted_mean": 0.9286566835669573,
+      "gap_actual_minus_predicted": 0.0713433164330427
+    }
+  ],
+  "disagreement": {
+    "Opposing sportsbook favorite": {
+      "all": {
+        "n": 20,
+        "wins": 10,
+        "losses": 10,
+        "mean_model_confidence": 0.5898582803774491
+      },
+      "by_week": {
+        "5": {
+          "n": 9,
+          "wins": 6
+        },
+        "6": {
+          "n": 11,
+          "wins": 4
+        }
+      }
+    },
+    "Model >=70%, market <55% for predicted team": {
+      "all": {
+        "n": 5,
+        "wins": 1,
+        "losses": 4,
+        "mean_model_confidence": 0.7791574793260049
+      },
+      "by_week": {
+        "5": {
+          "n": 2,
+          "wins": 1
+        },
+        "6": {
+          "n": 3,
+          "wins": 0
+        }
+      },
+      "games": [
+        {
+          "game": "Pittsburgh at Virginia Tech",
+          "week": 5,
+          "model_confidence": 0.7262,
+          "market_probability_for_model_pick": 0.4066,
+          "model_correct": true
+        },
+        {
+          "game": "USC at Penn State",
+          "week": 6,
+          "model_confidence": 0.8023,
+          "market_probability_for_model_pick": 0.4675,
+          "model_correct": false
+        },
+        {
+          "game": "Sacramento State at Bowling Green",
+          "week": 6,
+          "model_confidence": 0.7644,
+          "market_probability_for_model_pick": 0.295,
+          "model_correct": false
+        },
+        {
+          "game": "Army at Louisiana Tech",
+          "week": 5,
+          "model_confidence": 0.8034,
+          "market_probability_for_model_pick": 0.5427,
+          "model_correct": false
+        },
+        {
+          "game": "Louisiana at Louisiana Tech",
+          "week": 6,
+          "model_confidence": 0.7994,
+          "market_probability_for_model_pick": 0.5108,
+          "model_correct": false
+        }
+      ]
+    },
+    "Model >=80%, market <70% for predicted team": {
+      "all": {
+        "n": 8,
+        "wins": 4,
+        "losses": 4,
+        "mean_model_confidence": 0.81298776423857
+      },
+      "by_week": {
+        "5": {
+          "n": 5,
+          "wins": 3
+        },
+        "6": {
+          "n": 3,
+          "wins": 1
+        }
+      },
+      "games": [
+        {
+          "game": "West Virginia at Iowa State",
+          "week": 5,
+          "model_confidence": 0.8049,
+          "market_probability_for_model_pick": 0.5934,
+          "model_correct": true
+        },
+        {
+          "game": "North Carolina at Pittsburgh",
+          "week": 6,
+          "model_confidence": 0.8432,
+          "market_probability_for_model_pick": 0.5934,
+          "model_correct": false
+        },
+        {
+          "game": "USC at Penn State",
+          "week": 6,
+          "model_confidence": 0.8023,
+          "market_probability_for_model_pick": 0.4675,
+          "model_correct": false
+        },
+        {
+          "game": "Temple at South Florida",
+          "week": 5,
+          "model_confidence": 0.8115,
+          "market_probability_for_model_pick": 0.675,
+          "model_correct": false
+        },
+        {
+          "game": "Tulsa at Navy",
+          "week": 6,
+          "model_confidence": 0.8086,
+          "market_probability_for_model_pick": 0.5514,
+          "model_correct": true
+        },
+        {
+          "game": "Akron at Central Michigan",
+          "week": 5,
+          "model_confidence": 0.8271,
+          "market_probability_for_model_pick": 0.6636,
+          "model_correct": true
+        },
+        {
+          "game": "Ohio at Kent State",
+          "week": 5,
+          "model_confidence": 0.8029,
+          "market_probability_for_model_pick": 0.5934,
+          "model_correct": true
+        },
+        {
+          "game": "Army at Louisiana Tech",
+          "week": 5,
+          "model_confidence": 0.8034,
+          "market_probability_for_model_pick": 0.5427,
+          "model_correct": false
+        }
+      ]
+    },
+    "Model lead over market >=15 percentage points": {
+      "all": {
+        "n": 25,
+        "wins": 15,
+        "losses": 10,
+        "mean_model_confidence": 0.7160530031576353
+      },
+      "by_week": {
+        "5": {
+          "n": 11,
+          "wins": 8
+        },
+        "6": {
+          "n": 14,
+          "wins": 7
+        }
+      }
+    },
+    "Model lead over market >=20 percentage points": {
+      "all": {
+        "n": 14,
+        "wins": 6,
+        "losses": 8,
+        "mean_model_confidence": 0.7250117227138181
+      },
+      "by_week": {
+        "5": {
+          "n": 5,
+          "wins": 3
+        },
+        "6": {
+          "n": 9,
+          "wins": 3
+        }
+      }
+    },
+    "Absolute model/market gap >=20 percentage points": {
+      "all": {
+        "n": 19,
+        "wins": 10,
+        "losses": 9,
+        "mean_model_confidence": 0.6828716589040539
+      },
+      "by_week": {
+        "5": {
+          "n": 7,
+          "wins": 5
+        },
+        "6": {
+          "n": 12,
+          "wins": 5
+        }
+      }
+    },
+    "agree_vs_disagree_fisher_p_two_sided": 0.062370396379561696
+  },
+  "blends": {
+    "0.0": {
+      "all": {
+        "n": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "mean_confidence": 0.7065487622613311,
+        "brier": 0.1913110169364928,
+        "log_loss": 0.5593186125295743
+      },
+      "week5": {
+        "n": 56,
+        "wins": 39,
+        "losses": 17,
+        "accuracy": 0.6964285714285714,
+        "mean_confidence": 0.7199358048479148,
+        "brier": 0.16916229526848361,
+        "log_loss": 0.501620814653406
+      },
+      "week6": {
+        "n": 56,
+        "wins": 38,
+        "losses": 18,
+        "accuracy": 0.6785714285714286,
+        "mean_confidence": 0.6931617196747473,
+        "brier": 0.21345973860450193,
+        "log_loss": 0.6170164104057427
+      },
+      "flipped": 20,
+      "corrected": 10,
+      "broken": 10,
+      "brier_2026_minus_baseline": -0.017672435369151557
+    },
+    "0.16927926947215113": {
+      "all": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.6964285714285714,
+        "mean_confidence": 0.70321698229613,
+        "brier": 0.19119240278476632,
+        "log_loss": 0.5598766679017898
+      },
+      "week5": {
+        "n": 56,
+        "wins": 40,
+        "losses": 16,
+        "accuracy": 0.7142857142857143,
+        "mean_confidence": 0.717206075321581,
+        "brier": 0.1695429225160409,
+        "log_loss": 0.5044055271932962
+      },
+      "week6": {
+        "n": 56,
+        "wins": 38,
+        "losses": 18,
+        "accuracy": 0.6785714285714286,
+        "mean_confidence": 0.6892278892706791,
+        "brier": 0.2128418830534918,
+        "log_loss": 0.6153478086102836
+      },
+      "flipped": 17,
+      "corrected": 9,
+      "broken": 8,
+      "brier_2026_minus_baseline": -0.01779104952087804
+    },
+    "0.25": {
+      "all": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.6964285714285714,
+        "mean_confidence": 0.7022965909091659,
+        "brier": 0.19158216887645924,
+        "log_loss": 0.5611387735867789
+      },
+      "week5": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "accuracy": 0.7321428571428571,
+        "mean_confidence": 0.716320383516673,
+        "brier": 0.17005243970994613,
+        "log_loss": 0.5063782416868217
+      },
+      "week6": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "accuracy": 0.6607142857142857,
+        "mean_confidence": 0.6882727983016588,
+        "brier": 0.21311189804297231,
+        "log_loss": 0.6158993054867359
+      },
+      "flipped": 15,
+      "corrected": 8,
+      "broken": 7,
+      "brier_2026_minus_baseline": -0.01740128342918512
+    },
+    "0.5": {
+      "all": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.6964285714285714,
+        "mean_confidence": 0.7021493502624665,
+        "brier": 0.19461795875130664,
+        "log_loss": 0.5691016625144035
+      },
+      "week5": {
+        "n": 56,
+        "wins": 42,
+        "losses": 14,
+        "accuracy": 0.75,
+        "mean_confidence": 0.7173802433092366,
+        "brier": 0.172974375050415,
+        "log_loss": 0.5151610086760371
+      },
+      "week6": {
+        "n": 56,
+        "wins": 36,
+        "losses": 20,
+        "accuracy": 0.6428571428571429,
+        "mean_confidence": 0.6869184572156966,
+        "brier": 0.21626154245219828,
+        "log_loss": 0.6230423163527699
+      },
+      "flipped": 13,
+      "corrected": 7,
+      "broken": 6,
+      "brier_2026_minus_baseline": -0.014365493554337722
+    },
+    "0.75": {
+      "all": {
+        "n": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.6696428571428571,
+        "mean_confidence": 0.7051562813503706,
+        "brier": 0.20041838656103503,
+        "log_loss": 0.5836402423022038
+      },
+      "week5": {
+        "n": 56,
+        "wins": 40,
+        "losses": 16,
+        "accuracy": 0.7142857142857143,
+        "mean_confidence": 0.7202257656334854,
+        "brier": 0.1779281012898902,
+        "log_loss": 0.52823300497589
+      },
+      "week6": {
+        "n": 56,
+        "wins": 35,
+        "losses": 21,
+        "accuracy": 0.625,
+        "mean_confidence": 0.690086797067256,
+        "brier": 0.22290867183217983,
+        "log_loss": 0.6390474796285176
+      },
+      "flipped": 6,
+      "corrected": 2,
+      "broken": 4,
+      "brier_2026_minus_baseline": -0.00856506574460933
+    },
+    "1.0": {
+      "all": {
+        "n": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "mean_confidence": 0.7147469868378232,
+        "brier": 0.20898345230564436,
+        "log_loss": 0.6063583083511092
+      },
+      "week5": {
+        "n": 56,
+        "wins": 42,
+        "losses": 14,
+        "accuracy": 0.75,
+        "mean_confidence": 0.729742432688334,
+        "brier": 0.18491361842837176,
+        "log_loss": 0.5462816582448102
+      },
+      "week6": {
+        "n": 56,
+        "wins": 35,
+        "losses": 21,
+        "accuracy": 0.625,
+        "mean_confidence": 0.6997515409873127,
+        "brier": 0.23305328618291693,
+        "log_loss": 0.6664349584574083
+      },
+      "flipped": 0,
+      "corrected": 0,
+      "broken": 0,
+      "brier_2026_minus_baseline": 0.0
+    }
+  },
+  "confidence_2024_2025": {
+    "2024": {
+      "n": 752,
+      "reconstructed_model": {
+        "n": 752,
+        "wins": 536,
+        "losses": 216,
+        "accuracy": 0.7127659574468085,
+        "mean_confidence": 0.7313816017833737,
+        "brier": 0.18791298349660185,
+        "log_loss": 0.5521958839513746
+      },
+      "confidence_bands": [
+        {
+          "range": "50-60%",
+          "n": 179,
+          "correct": 99,
+          "actual_rate": 0.553072625698324,
+          "predicted_mean": 0.554420385339539,
+          "gap_actual_minus_predicted": -0.0013477596412149184
+        },
+        {
+          "range": "60-70%",
+          "n": 148,
+          "correct": 95,
+          "actual_rate": 0.6418918918918919,
+          "predicted_mean": 0.6485817201281752,
+          "gap_actual_minus_predicted": -0.0066898282362832795
+        },
+        {
+          "range": "70-80%",
+          "n": 165,
+          "correct": 118,
+          "actual_rate": 0.7151515151515152,
+          "predicted_mean": 0.7482878393374313,
+          "gap_actual_minus_predicted": -0.033136324185916055
+        },
+        {
+          "range": "80-90%",
+          "n": 150,
+          "correct": 121,
+          "actual_rate": 0.8066666666666666,
+          "predicted_mean": 0.8495024442263571,
+          "gap_actual_minus_predicted": -0.04283577755969048
+        },
+        {
+          "range": "90-100%",
+          "n": 110,
+          "correct": 103,
+          "actual_rate": 0.9363636363636364,
+          "predicted_mean": 0.9443160078338164,
+          "gap_actual_minus_predicted": -0.00795237147018002
+        }
+      ]
+    },
+    "2025": {
+      "n": 762,
+      "reconstructed_model": {
+        "n": 762,
+        "wins": 546,
+        "losses": 216,
+        "accuracy": 0.7165354330708661,
+        "mean_confidence": 0.7183519252659141,
+        "brier": 0.18302864310052208,
+        "log_loss": 0.5386634396980715
+      },
+      "confidence_bands": [
+        {
+          "range": "50-60%",
+          "n": 192,
+          "correct": 104,
+          "actual_rate": 0.5416666666666666,
+          "predicted_mean": 0.549532544949375,
+          "gap_actual_minus_predicted": -0.00786587828270835
+        },
+        {
+          "range": "60-70%",
+          "n": 190,
+          "correct": 126,
+          "actual_rate": 0.6631578947368421,
+          "predicted_mean": 0.6513314899446373,
+          "gap_actual_minus_predicted": 0.011826404792204759
+        },
+        {
+          "range": "70-80%",
+          "n": 147,
+          "correct": 107,
+          "actual_rate": 0.7278911564625851,
+          "predicted_mean": 0.7520844870195327,
+          "gap_actual_minus_predicted": -0.024193330556947612
+        },
+        {
+          "range": "80-90%",
+          "n": 131,
+          "correct": 110,
+          "actual_rate": 0.8396946564885496,
+          "predicted_mean": 0.8506044285062837,
+          "gap_actual_minus_predicted": -0.010909772017734132
+        },
+        {
+          "range": "90-100%",
+          "n": 102,
+          "correct": 99,
+          "actual_rate": 0.9705882352941176,
+          "predicted_mean": 0.94250329026148,
+          "gap_actual_minus_predicted": 0.028084945032637587
+        }
+      ]
+    }
+  },
+  "uncertainty": {
+    "description": "Descriptive stratified game-level bootstrap 3000 replicates, equal sample by 2026 week; does not resolve team/week dependence or outcome-selection bias.",
+    "v15_brier_minus_market_brier": [
+      -0.00855101093141725,
+      0.045147194772827366
+    ],
+    "blend_brier_minus_market_brier": [
+      -0.004469163325225957,
+      0.00422157345902012
+    ],
+    "blend_accuracy_minus_v15": [
+      -0.0625,
+      0.0803571428571429
+    ]
+  }
+}
