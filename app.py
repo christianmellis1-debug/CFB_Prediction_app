@@ -32,7 +32,8 @@ import matchup_advantages
 importlib.reload(matchup_advantages)
 from matchup_advantages import (build_advantages, advantage_html, assess, normalize_fbs_schedule,
                                 build_waterfall_profiles, weather_tier_candidate_ids)
-from shadow_tracking import show_shadow_tracking
+from shadow_tracking import show_shadow_tracking, DATA as SHADOW_DATA
+from primary_market_blend import apply_primary_blend, VERSION as PRIMARY_VERSION
 from prospective_weights_archive import show_comparison as show_weight_challenger_comparison
 from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
@@ -2400,6 +2401,25 @@ if weather_candidates:
             "Those games are excluded from the Storm Front tier."
         )
 pred = add_waterfall_value(pred, schedule, waterfall_boxes, selected_week, weather_checks=weather_checks, published_summary=published_current, prior_summary=prior)
+# Value tiers remain calculated from independent V1.5 and their existing
+# football/ATS rules. Test C changes the main straight-up winner AFTER tiers,
+# so a market-dominated probability never becomes a fabricated betting edge.
+try:
+    _frozen_primary = json.loads(SHADOW_DATA.read_text()).get("snapshots", {})
+except (OSError, ValueError, TypeError):
+    _frozen_primary = {}
+pred = apply_primary_blend(
+    pred, games, now_utc=pd.Timestamp.now(tz="UTC"),
+    stale=bool(odds_snapshot.get("stale")),
+    stale_event_ids=odds_snapshot.get("stale_events", {}),
+    frozen_snapshots=_frozen_primary,
+)
+_blended_count = int(pred["Market Blend Used"].sum())
+feed_details.caption(
+    f"Straight-up prediction engine: {PRIMARY_VERSION} for {_blended_count} of {len(pred)} matchups. "
+    "Unpriced, stale, or unverified matchups use V1.5. Archived games before Oct 13, 2026 stay on V1.5; "
+    "started games require a verified pregame frozen snapshot. Six value tiers are independent."
+)
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
 if st.session_state.get("moneyline_history_season") != season:
     line_history.clear()
@@ -3898,14 +3918,14 @@ with tracker_tab:
 
 with about_tab:
     st.markdown("### Read your picks")
-    st.write("DraftKings moneylines come from ESPN’s published odds feed, with other published sportsbooks used as a labeled fallback when needed. +150 means $100 would profit $150; −150 means risking $150 to profit $100. These prices are separate from the model’s win probabilities and do not change its picks.")
+    st.write("DraftKings moneylines come from ESPN’s published odds feed, with other published sportsbooks used as a labeled fallback when needed. +150 means $100 would profit $150; −150 means risking $150 to profit $100. The primary winner model is now Test C: 16.93% V1.5 statistical forecast and 83.07% same-book no-vig moneyline probability. V1.5 remains the fallback when verified pregame odds are missing or stale.")
     st.write("Lines can move or be suspended. DraftKings is preferred, with labeled sportsbook fallbacks when available. Opening lines are not substituted for current prices. Completed-game moneylines come from archived game summaries and are labeled archived.")
     st.write("Each card shows both teams’ win probabilities and the predicted winner. A 70% confidence means an estimated 7 wins out of 10 similar matchups.")
     st.markdown("**Confidence guide** · Very high: 90%+ · High: 80–90% · Moderate: 70–80% · Lean: 60–70% · Toss-up: below 60%.")
     st.write("Away-team picks may carry a venue-risk note. Use that as additional context when comparing games.")
     with st.expander("Model and data details"):
-        st.write(f"Model {MODEL_VERSION}: 35% offense, 35% defense, 20% venue performance, and 10% strength of schedule.")
-        st.write("Preseason strength combines 75% Elo and 25% prior-season efficiency. Current-season statistics gain weight as the season progresses. Only snapshots from before the selected week are used.")
+        st.write(f"Primary forecast: {PRIMARY_VERSION}, a fixed 16.93% independent V1.5 / 83.07% sportsbook probability blend when valid pregame prices exist. Underlying V1.5: 35% offense, 35% defense, 20% venue performance, and 10% strength of schedule. Official six-tier Value Picks remain independent of this market-informed winner estimate.")
+        st.write("V1.5 preseason strength combines 75% Elo and 25% prior-season efficiency. Current-season statistics gain weight as the season progresses. Test C uses bookmaker implied probabilities with the vig removed; it does not provide an independent betting edge against that same bookmaker.")
         st.write("V1.5 adds a season-aware conference calibration for regular-season Power-versus-Group FBS matchups. It was fitted on 2022–23 and evaluated on 2024–25. Same-group games, independents, FCS games and postseason games receive no conference adjustment. Missing conference information also skips the adjustment.")
         st.caption("The adjustment improved historical probability scores but did not improve winner accuracy in every season. It does not establish better betting returns. The realigned 2026 Group of Six is a prospective application; historical scenarios are recalculated using the current model.")
         st.caption(f"Loaded {season}: {len(current):,} team-week rows; {season - 1}: {len(prior):,} rows. Source: SportsDataverse / cfbfastR.")
@@ -3915,7 +3935,7 @@ watch_results(season, original_schedule if mode == "Automatic download" else Non
 # Shared footer, displayed once below the active tab's content.
 st.markdown(
     f'<footer class="prediction-disclaimer" role="note">'
-    f'<strong>Saturday Forecast · {escape(str(MODEL_VERSION))} · Prediction disclaimer</strong><br>'
+    f'<strong>Saturday Forecast · {escape(str(PRIMARY_VERSION))} / V1.5 fallback · Prediction disclaimer</strong><br>'
     'Predictions, win probabilities, value picks, and projected betting returns are estimates, not guarantees. '
     'Actual game results and sportsbook payouts may differ. For informational purposes only; bet responsibly.'
     '</footer>',
