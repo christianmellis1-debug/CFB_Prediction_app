@@ -1,0 +1,285 @@
+{
+  "name": "Test E combined effects from six 2024-selected rules",
+  "candidate_combination": "Add weight differences of triggered E1/E2/E6 around fixed Test C, cap in 5%-65% V1.5; add V1.5 log-odds deltas of triggered E3/E4/E5. No new fitting.",
+  "combinations": {
+    "official_baseline": [],
+    "all_six_selected_2024": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6"
+    ],
+    "football_only_E3_E4_E5": [
+      "E3",
+      "E4",
+      "E5"
+    ],
+    "market_only_E1_E2_E6": [
+      "E1",
+      "E2",
+      "E6"
+    ],
+    "all_except_E2": [
+      "E1",
+      "E3",
+      "E4",
+      "E5",
+      "E6"
+    ]
+  },
+  "scores": {
+    "official_baseline": {
+      "2024": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.1834894,
+        "brier_gain": 0.0,
+        "flips": 0,
+        "corrected": 0,
+        "newly_wrong": 0,
+        "net_winners": 0
+      },
+      "2025": {
+        "n": 720,
+        "wins": 527,
+        "losses": 193,
+        "accuracy": 0.731944,
+        "brier": 0.1822763,
+        "brier_gain": -0.0,
+        "flips": 0,
+        "corrected": 0,
+        "newly_wrong": 0,
+        "net_winners": 0
+      },
+      "2026": {
+        "n": 221,
+        "wins": 169,
+        "losses": 52,
+        "accuracy": 0.764706,
+        "brier": 0.1701468,
+        "brier_gain": -0.0,
+        "flips": 0,
+        "corrected": 0,
+        "newly_wrong": 0,
+        "net_winners": 0
+      },
+      "2026_frozen_W5_6": {
+        "n": 112,
+        "wins": 78,
+        "losses": 34,
+        "accuracy": 0.696429,
+        "brier": 0.1978725,
+        "brier_gain": -0.0,
+        "flips": 0,
+        "corrected": 0,
+        "newly_wrong": 0,
+        "net_winners": 0
+      }
+    },
+    "all_six_selected_2024": {
+      "2024": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.1829545,
+        "brier_gain": 0.0005349,
+        "flips": 14,
+        "corrected": 7,
+        "newly_wrong": 7,
+        "net_winners": 0
+      },
+      "2025": {
+        "n": 720,
+        "wins": 519,
+        "losses": 201,
+        "accuracy": 0.720833,
+        "brier": 0.1840274,
+        "brier_gain": -0.0017511,
+        "flips": 20,
+        "corrected": 6,
+        "newly_wrong": 14,
+        "net_winners": -8
+      },
+      "2026": {
+        "n": 221,
+        "wins": 164,
+        "losses": 57,
+        "accuracy": 0.742081,
+        "brier": 0.1737195,
+        "brier_gain": -0.0035727,
+        "flips": 7,
+        "corrected": 1,
+        "newly_wrong": 6,
+        "net_winners": -5
+      },
+      "2026_frozen_W5_6": {
+        "n": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.2012969,
+        "brier_gain": -0.0034244,
+        "flips": 3,
+        "corrected": 1,
+        "newly_wrong": 2,
+        "net_winners": -1
+      }
+    },
+    "football_only_E3_E4_E5": {
+      "2024": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.1833663,
+        "brier_gain": 0.0001231,
+        "flips": 4,
+        "corrected": 2,
+        "newly_wrong": 2,
+        "net_winners": 0
+      },
+      "2025": {
+        "n": 720,
+        "wins": 526,
+        "losses": 194,
+        "accuracy": 0.730556,
+        "brier": 0.1820839,
+        "brier_gain": 0.0001924,
+        "flips": 3,
+        "corrected": 1,
+        "newly_wrong": 2,
+        "net_winners": -1
+      },
+      "2026": {
+        "n": 221,
+        "wins": 168,
+        "losses": 53,
+        "accuracy": 0.760181,
+        "brier": 0.1701446,
+        "brier_gain": 2.2e-06,
+        "flips": 1,
+        "corrected": 0,
+        "newly_wrong": 1,
+        "net_winners": -1
+      },
+      "2026_frozen_W5_6": {
+        "n": 112,
+        "wins": 77,
+        "losses": 35,
+        "accuracy": 0.6875,
+        "brier": 0.1982183,
+        "brier_gain": -0.0003458,
+        "flips": 1,
+        "corrected": 0,
+        "newly_wrong": 1,
+        "net_winners": -1
+      }
+    },
+    "market_only_E1_E2_E6": {
+      "2024": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.1829478,
+        "brier_gain": 0.0005416,
+        "flips": 14,
+        "corrected": 7,
+        "newly_wrong": 7,
+        "net_winners": 0
+      },
+      "2025": {
+        "n": 720,
+        "wins": 522,
+        "losses": 198,
+        "accuracy": 0.725,
+        "brier": 0.1841393,
+        "brier_gain": -0.001863,
+        "flips": 15,
+        "corrected": 5,
+        "newly_wrong": 10,
+        "net_winners": -5
+      },
+      "2026": {
+        "n": 221,
+        "wins": 163,
+        "losses": 58,
+        "accuracy": 0.737557,
+        "brier": 0.1735039,
+        "brier_gain": -0.0033571,
+        "flips": 6,
+        "corrected": 0,
+        "newly_wrong": 6,
+        "net_winners": -6
+      },
+      "2026_frozen_W5_6": {
+        "n": 112,
+        "wins": 75,
+        "losses": 37,
+        "accuracy": 0.669643,
+        "brier": 0.2005491,
+        "brier_gain": -0.0026766,
+        "flips": 3,
+        "corrected": 0,
+        "newly_wrong": 3,
+        "net_winners": -3
+      }
+    },
+    "all_except_E2": {
+      "2024": {
+        "n": 717,
+        "wins": 509,
+        "losses": 208,
+        "accuracy": 0.709902,
+        "brier": 0.1829755,
+        "brier_gain": 0.0005139,
+        "flips": 10,
+        "corrected": 5,
+        "newly_wrong": 5,
+        "net_winners": 0
+      },
+      "2025": {
+        "n": 720,
+        "wins": 530,
+        "losses": 190,
+        "accuracy": 0.736111,
+        "brier": 0.1824873,
+        "brier_gain": -0.000211,
+        "flips": 5,
+        "corrected": 4,
+        "newly_wrong": 1,
+        "net_winners": 3
+      },
+      "2026": {
+        "n": 221,
+        "wins": 164,
+        "losses": 57,
+        "accuracy": 0.742081,
+        "brier": 0.1723021,
+        "brier_gain": -0.0021553,
+        "flips": 5,
+        "corrected": 0,
+        "newly_wrong": 5,
+        "net_winners": -5
+      },
+      "2026_frozen_W5_6": {
+        "n": 112,
+        "wins": 76,
+        "losses": 36,
+        "accuracy": 0.678571,
+        "brier": 0.1994361,
+        "brier_gain": -0.0015636,
+        "flips": 2,
+        "corrected": 0,
+        "newly_wrong": 2,
+        "net_winners": -2
+      }
+    }
+  },
+  "limitations": "Combined rules are exploratory; each selected from 2024, and 2025/2026 use retrospective/frozen-proxy inputs, not a genuine newly observed live forecast."
+}
