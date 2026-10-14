@@ -45,7 +45,7 @@ def combinations_to_try():
     return results
 
 def metrics(frame,probs,reference=None):
-    y=frame.home_won.to_numpy(dtype=int)
+    y=frame.y.to_numpy(dtype=int)
     pp=np.clip(np.asarray(probs,dtype=float),1e-12,1-1e-12)
     picks=(pp>=.5)
     good=(picks==y)
