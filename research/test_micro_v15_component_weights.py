@@ -136,7 +136,7 @@ def main():
         cand=expit(logit(np.clip(inp,1e-12,1-1e-12))+delta)
         blend=LOCKED_BLEND_MODEL_WEIGHT*cand+(1-LOCKED_BLEND_MODEL_WEIGHT)*market
         for idx,r in enumerate(c.itertuples()):
-            rows.append({"variant":name,"game_id":int(r.id_x),"week":int(r.week),
+            rows.append({"variant":name,"game_id":int(r.id),"week":int(r.week),
               "game":r.game,"prediction_source":r.prediction_provenance,
               "y":int(r.home_won),"v15_home":float(cand[idx]),
               "testc_home":float(blend[idx]),"official_testc_home":float(reference[idx]),
