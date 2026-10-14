@@ -1,0 +1,40 @@
+name: Research Test G asymmetric rushing mismatch
+on:
+  push:
+    branches:
+      - research/test-g-asymmetric-run-mismatch-2026-10-14
+    paths:
+      - 'research/test_g_asymmetric_run.py'
+      - 'research/test_f_rush_pass_matchups.py'
+      - '.github/workflows/test-g-asymmetric-run.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: test-g-asymmetric-run
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install analytical dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Check syntax
+        run: python -m py_compile research/test_g_asymmetric_run.py
+      - name: Run pregame FBS run-offense vs run-defense mismatch backtest
+        run: PYTHONPATH=.:research python -u research/test_g_asymmetric_run.py
+      - name: Save study outputs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_g_asymmetric_run_results.json research/test_g_asymmetric_run_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record asymmetric run mismatch test results'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
