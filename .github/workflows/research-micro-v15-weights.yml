@@ -1,0 +1,39 @@
+name: Research V1.5 micro component weight grid W3-W6
+on:
+  push:
+    branches:
+      - research/test-weights-micro-2026-w3w6-2026-10-13
+    paths:
+      - 'research/test_micro_v15_component_weights.py'
+      - '.github/workflows/research-micro-v15-weights.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: research-micro-v15-weight-grid
+  cancel-in-progress: false
+jobs:
+  run_weight_grid:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install research dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Syntax check
+        run: python -m py_compile research/test_micro_v15_component_weights.py
+      - name: Compute grid versus 2026 Weeks 3 through 6
+        run: PYTHONPATH=. python -u research/test_micro_v15_component_weights.py
+      - name: Save research outcomes only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_micro_weights_results.json research/test_micro_weights_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record component weights W3-W6 head to head outcomes'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
