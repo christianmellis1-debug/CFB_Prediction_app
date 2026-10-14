@@ -1,0 +1,40 @@
+name: Research Test H Run + Pass Double Weakness
+on:
+  push:
+    branches:
+      - research/test-h-run-pass-double-weakness-2026-10-14
+    paths:
+      - 'research/test_h_double_weakness.py'
+      - 'research/test_f_rush_pass_matchups.py'
+      - '.github/workflows/test-h-double-weakness.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: test-h-double-weakness
+  cancel-in-progress: false
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned analysis dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Verify source syntax
+        run: python -m py_compile research/test_h_double_weakness.py
+      - name: Historical run-and-pass mismatch test
+        run: PYTHONPATH=.:research python -u research/test_h_double_weakness.py
+      - name: Save results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_h_double_weak_results.json research/test_h_double_weak_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record two-dimensional offensive mismatch test results'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
