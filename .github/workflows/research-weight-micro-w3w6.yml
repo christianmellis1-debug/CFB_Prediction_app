@@ -1,0 +1,32 @@
+name: Small V1.5 weights Weeks 3-6 research
+on:
+  push:
+    branches:
+      - research/test-weights-micro-2026-w3w6-2026-10-13
+    paths:
+      - 'research/weight_micro_w3w6.py'
+      - '.github/workflows/research-weight-micro-w3w6.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - run: PYTHONPATH=. python -u research/weight_micro_w3w6.py
+      - name: Store research output
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/weight_micro_w3w6_results.json research/weight_micro_w3w6_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save small-weight sensitivity test'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
