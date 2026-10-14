@@ -108,6 +108,9 @@ def run(plays,games):
         h,a=game.home_team,game.away_team
         if not all(team in overall and team in competitive for team in [h,a]):
             continue  # Matched sample prevents cherry-picked comparisons
+        home_gap=abs(overall[h]["pass_rate"]-competitive[h]["pass_rate"])
+        away_gap=abs(overall[a]["pass_rate"]-competitive[a]["pass_rate"])
+        max_gap=max(home_gap,away_gap)
         y=int(game.home_score>game.away_score)
         base=float(game.baseline_home_prob)
         po=predict(base,overall[h],overall[a])
@@ -124,6 +127,11 @@ def run(plays,games):
         rows.append({"game_id":game.game_id,"season":game.season,"week":game.week,
                      "home_team":h,"away_team":a,"actual_home_win":y,
                      "baseline":base,"overall":po,"competitive":pc,"hybrid":ph,
+                     "home_gap_pp":round(home_gap*100,2),"away_gap_pp":round(away_gap*100,2),
+                     "max_gap_pp":round(max_gap*100,2),
+                     "gap_group":"10pp+" if max_gap>=.10 else "under10pp",
+                     "home_competitive_plays":competitive[h]["count"],
+                     "away_competitive_plays":competitive[a]["count"],
                      "home_pass_overall":overall[h]["pass_rate"],
                      "home_pass_competitive":competitive[h]["pass_rate"],
                      "away_pass_overall":overall[a]["pass_rate"],
@@ -142,6 +150,25 @@ def run(plays,games):
                         "log_loss":float(np.mean(-(y*np.log(x)+(1-y)*np.log(1-x))))})
     return detail,pd.DataFrame(summary)
 
+def subgroup_report(detail):
+    """Paired comparisons; all models scored on the exact same games."""
+    if detail.empty:
+        return pd.DataFrame()
+    output=[]
+    for group,x in [("all",detail),
+                    ("10pp+",detail[detail.max_gap_pp>=10]),
+                    ("under10pp",detail[detail.max_gap_pp<10]),
+                    ("15pp+",detail[detail.max_gap_pp>=15]),
+                    ("20pp+",detail[detail.max_gap_pp>=20])]:
+        y=x.actual_home_win.to_numpy()
+        for candidate in ["baseline","overall","competitive","hybrid"]:
+            p=x[candidate].to_numpy()
+            output.append({"gap_group":group,"candidate":candidate,"games":len(x),
+                           "wins":int(((p>=.5)==y).sum()) if len(x) else 0,
+                           "accuracy":float(((p>=.5)==y).mean()) if len(x) else np.nan,
+                           "brier":float(np.mean((p-y)**2)) if len(x) else np.nan})
+    return pd.DataFrame(output)
+
 
 def main():
     parser=argparse.ArgumentParser()
@@ -152,6 +179,7 @@ def main():
     detail,summary=run(pd.read_csv(args.plays),pd.read_csv(args.games))
     detail.to_csv(args.out+"_games.csv",index=False)
     summary.to_csv(args.out+"_summary.csv",index=False)
+    subgroup_report(detail).to_csv(args.out+"_subgroups.csv",index=False)
     print(summary.to_string(index=False) if not summary.empty else "No eligible paired games")
 
 
