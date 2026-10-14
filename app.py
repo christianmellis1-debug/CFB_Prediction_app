@@ -42,6 +42,7 @@ from matchday_live import live_board_rows, live_board_html, game_card_final_scor
 from value_shortlist_ui import render_value_shortlist_cards
 from hashlib import sha256
 from performance_cache import cache_calculation, clear_calculations
+from ats_records import download_ats_lines, calculate_ats_records, ats_label
 
 # Include dependency source in cache keys so rule edits cannot reuse old results.
 _CALCULATION_REVISION = sha256(b"".join(
@@ -292,6 +293,11 @@ def download_summary(year):
         frame = pd.read_csv(BytesIO(response.read()), low_memory=False)
         frame.attrs["fetched_at"] = datetime.now(ZoneInfo("America/Chicago")).strftime("%b %d, %I:%M %p %Z")
         return frame
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def cached_ats_lines(year):
+    return download_ats_lines(year)
 
 
 @st.cache_data(ttl=900, show_spinner=False)
@@ -1742,6 +1748,7 @@ st.markdown("""
 .team-line {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:15px;}
 .team-name {overflow-wrap:anywhere;}
 .team-identity {display:flex;align-items:center;gap:9px;overflow-wrap:anywhere;}
+.team-ats {display:block;margin:4px 0 1px 0;font-size:11px;font-weight:500;line-height:1.3;opacity:.78;font-variant-numeric:tabular-nums;}
 .team-logo {width:30px;height:30px;object-fit:contain;flex:0 0 30px;}
 .team-line strong {white-space:nowrap;}
 .venue-label {font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:1px;display:block;}
@@ -2218,6 +2225,7 @@ with st.sidebar:
         download_live_scores.clear()
         download_live_event.clear()
         download_schedule.clear()
+        cached_ats_lines.clear()
         clear_calculations()
         download_summary.clear()
         download_advantage_boxes.clear()
@@ -2276,6 +2284,20 @@ if "start_date" in schedule:
 with week_col:
     selected_week = st.selectbox("Week", weeks, index=weeks.index(default_week), format_func=lambda w: f"Week {w}")
 games = schedule[schedule["week"] == selected_week]
+# Historical ATS records are descriptive, strictly pregame, and never model inputs.
+try:
+    ats_line_data = cached_ats_lines(season)
+    ats_feed_available = True
+except Exception:
+    ats_line_data = pd.DataFrame()
+    ats_feed_available = False
+ats_records = calculate_ats_records(schedule, ats_line_data, selected_week) if ats_feed_available else {}
+ats_team_names = {
+    int(team_id): str(name)
+    for side in ("home", "away")
+    for team_id, name in zip(schedule[side + "_id"], schedule[side + "_team"])
+    if pd.notna(team_id)
+}
 export_controls = st.container()
 if st.session_state.get("main_app_tabs") == "Compare picks":
     st.session_state["main_app_tabs"] = "Game cards"
@@ -2816,6 +2838,30 @@ with cards_tab:
             "Game status", ["All games", "Upcoming", "Live", "Final"],
             default="All games", key="pick_status", label_visibility="collapsed",
         ) or "All games"
+    with st.expander(f"All team ATS records · through Week {selected_week - 1}", expanded=False):
+        st.caption(
+            "Season-to-date against the spread, before the selected week. "
+            "Regular-season FBS vs FBS games only. Pushes do not count toward ATS win %. "
+            "A missing betting line is excluded, not treated as a pick'em."
+        )
+        if not ats_feed_available:
+            st.info("Verified historical betting lines are temporarily unavailable; ATS records cannot be confirmed.")
+        else:
+            ats_rows = []
+            for team_id, team_name in sorted(ats_team_names.items(), key=lambda item: item[1]):
+                stats = ats_records.get(team_id, {})
+                w, l, p = (int(stats.get(k, 0)) for k in ("wins", "losses", "pushes"))
+                graded, eligible_games = (int(stats.get(k, 0)) for k in ("graded", "eligible"))
+                ats_rows.append({
+                    "Team": team_name, "Wins": w, "Losses": l, "Pushes": p,
+                    "ATS win %": round(100 * w / (w + l), 1) if (w + l) else None,
+                    "Lined / Played": f"{graded}/{eligible_games}",
+                })
+            st.dataframe(
+                pd.DataFrame(ats_rows), hide_index=True, width="stretch",
+                column_config={"ATS win %": st.column_config.NumberColumn("ATS win %", format="%.1f%%")},
+            )
+            st.caption("Lines: SportsDataverse ESPN-derived season betting release. Lined / Played shows historical spread coverage.")
     with st.expander("Favorite teams & saved filters", expanded=False):
         team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
         favorite_choices = sorted(set(team_choices) | set(st.session_state.get("favorite_teams", [])))
@@ -3119,6 +3165,16 @@ with cards_tab:
             away_logo_html = f'<img class="team-logo" src="{logo_sources.get(away_logo, away_logo)}" alt="{away_alt} logo" width="34" height="34" />' if away_logo else ""
             home_logo_html = f'<img class="team-logo" src="{logo_sources.get(home_logo, home_logo)}" alt="{home_alt} logo" width="34" height="34" />' if home_logo else ""
             home_badge, away_badge = "", ""
+            away_ats_html, home_ats_html = "", ""
+            if len(game) == 1:
+                for side in ("away", "home"):
+                    team_id = int(game.iloc[0][side + "_id"])
+                    line = ats_label(ats_records.get(team_id), ats_feed_available)
+                    label_html = '<span class="team-ats">' + escape(line) + '</span>'
+                    if side == "away":
+                        away_ats_html = label_html
+                    else:
+                        home_ats_html = label_html
             if len(game) == 1:
                 for data_side in ("home", "away"):
                     data_label, _, _ = team_data_details(game.iloc[0][data_side + "_id"], published_current, derived_team_data, selected_week)
@@ -3230,8 +3286,8 @@ with cards_tab:
             cards[card_idx] = f"""<article class="pick-card">{gotw_note}
 <div class="card-top"><span class="kickoff">{escape(kickoff)}</span><span class="{badge_class}">{escape(str(r['Confidence Label']))}</span></div>
 <div class="matchup-meta"><span>{escape(venue)}</span><span>{escape(str(r['Status']))}</span></div>
-<div class="{away_team_class}"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}<span>{escape(str(r['Away Team']))}{away_pick_tag}</span></span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
-<div class="{home_team_class}"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}<span>{escape(str(r['Home Team']))}{home_pick_tag}</span></span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
+<div class="{away_team_class}"><div class="team-name"><span class="venue-label">Away</span><span class="team-identity">{away_logo_html}<span>{escape(str(r['Away Team']))}{away_pick_tag}{away_ats_html}</span></span>{away_badge}</div><strong>{r['Away Win %']:.1%}</strong></div>
+<div class="{home_team_class}"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}<span>{escape(str(r['Home Team']))}{home_pick_tag}{home_ats_html}</span></span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 {final_score_html}
 <div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Model win chance</span><strong>{r['Confidence']:.1%}</strong></div>
