@@ -1,0 +1,29 @@
+name: Verify descriptive rushing mismatch game cards
+on:
+  push:
+    branches:
+      - feature/rushing-matchup-diagnostic-2026-10-14
+    paths:
+      - 'app.py'
+      - 'rushing_matchup.py'
+      - 'tests/test_rushing_matchup.py'
+      - '.github/workflows/verify-rushing-matchup.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Compile modified modules
+        run: python -m py_compile app.py rushing_matchup.py matchup_advantages.py primary_market_blend.py
+      - name: Test new rushing matchup
+        run: python -m unittest discover -s tests -p 'test_rushing_matchup.py' -v
+      - name: Verify all existing regression tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v

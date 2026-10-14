@@ -32,6 +32,7 @@ import matchup_advantages
 importlib.reload(matchup_advantages)
 from matchup_advantages import (build_advantages, advantage_html, assess, normalize_fbs_schedule,
                                 build_waterfall_profiles, weather_tier_candidate_ids)
+from rushing_matchup import build_rushing_matchup_insights, rushing_matchup_html
 from shadow_tracking import show_shadow_tracking, DATA as SHADOW_DATA
 from primary_market_blend import apply_primary_blend, VERSION as PRIMARY_VERSION
 from prospective_weights_archive import show_comparison as show_weight_challenger_comparison
@@ -45,12 +46,13 @@ from performance_cache import cache_calculation, clear_calculations
 # Include dependency source in cache keys so rule edits cannot reuse old results.
 _CALCULATION_REVISION = sha256(b"".join(
     (Path(__file__).parent / name).read_bytes()
-    for name in ("app.py", "model_v1_5.py", "matchup_advantages.py", "home_field_advantage_tier6.py", "performance_cache.py")
+    for name in ("app.py", "model_v1_5.py", "matchup_advantages.py", "rushing_matchup.py", "home_field_advantage_tier6.py", "performance_cache.py")
 )).hexdigest()
 _cached_calculation = cache_calculation(_CALCULATION_REVISION)
 add_waterfall_value = _cached_calculation(add_waterfall_value)
 build_advantages = _cached_calculation(build_advantages)
 build_waterfall_profiles = _cached_calculation(build_waterfall_profiles)
+build_rushing_matchup_insights = _cached_calculation(build_rushing_matchup_insights)
 
 st.set_page_config(page_title="Saturday Forecast", page_icon="assets/cfb_icon.svg", layout="wide", initial_sidebar_state="collapsed")
 
@@ -2932,11 +2934,19 @@ with cards_tab:
         card_details = {}
         risky_indices = []
         try:
-            advantage_checks = build_advantages(schedule, download_advantage_boxes(season), selected_week)
+            pregame_boxes = download_advantage_boxes(season)
+            advantage_checks = build_advantages(schedule, pregame_boxes, selected_week)
             advantage_error = "Not enough earlier-week FBS data."
         except (OSError, ValueError, KeyError, TypeError):
             advantage_checks = {}
+            pregame_boxes = pd.DataFrame()
             advantage_error = "Pregame box-score feed unavailable. Try Refresh all data; missing data is not a risk rating."
+        # Research-backed descriptive indicator, kept completely separate
+        # from original probability estimates and value-betting waterfall.
+        try:
+            rush_checks = build_rushing_matchup_insights(schedule, pregame_boxes, selected_week)
+        except (OSError, ValueError, KeyError, TypeError):
+            rush_checks = {}
         logo_urls = tuple(sorted({
             url for column in ("away_id", "home_id")
             for team_id in games[column] if (url := team_logo_url(team_id))
@@ -3168,6 +3178,10 @@ with cards_tab:
                 r["Predicted Winner"],
                 suppress_risk=is_tiered or is_high_confidence,
             )
+            run_detail = rushing_matchup_html(
+                rush_checks.get(str(int(game.iloc[0]["game_id"])), {}),
+                r["Home Team"], r["Away Team"],
+            ) if len(game) == 1 else ""
             scored = assess(check, "home" if r["Predicted Side"] == "Home" else "away")
             is_risky = should_flag_risky(scored, is_tiered, confidence_value)
             if is_risky:
@@ -3198,7 +3212,7 @@ with cards_tab:
                 + escape(str(r.get("Value Source", "Unavailable"))) + '</div></div>'
             ) if r.get("Value Selected", False) else ""
             card_details[card_idx] = (
-                explanation_html + warning + advantage_note
+                explanation_html + warning + advantage_note + run_detail
                 + str(r.get("Line Movement HTML", "")) + matchup_html
                 + f'<div class="card-details"><strong>Prediction details</strong>'
                 + f'<p>Model {escape(str(r["Model Version"]))} · {escape(venue)}.</p>'
