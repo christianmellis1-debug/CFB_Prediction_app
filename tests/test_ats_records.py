@@ -1,4 +1,5 @@
 import pandas as pd
+import unittest
 
 from ats_records import ats_label, calculate_ats_records
 
@@ -38,42 +39,51 @@ def _lines():
     ])
 
 
-def test_ats_results_are_spread_based_and_pregame():
-    records = calculate_ats_records(_games(), _lines(), 4)
-    assert records[1] == dict(wins=0, losses=1, pushes=1, graded=2, eligible=2)
-    assert records[2] == dict(wins=1, losses=0, pushes=0, graded=1, eligible=2)
-    assert records[3] == dict(wins=0, losses=0, pushes=1, graded=1, eligible=2)
-    assert 4 not in records
-    assert 5 not in records
-    assert ats_label(records[2]) == "ATS 1–0–0 · 1/2 lined"
+
+class TestATSRecords(unittest.TestCase):
+    def test_ats_results_are_spread_based_and_pregame(self):
+        records = calculate_ats_records(_games(), _lines(), 4)
+        assert records[1] == dict(wins=0, losses=1, pushes=1, graded=2, eligible=2)
+        assert records[2] == dict(wins=1, losses=0, pushes=0, graded=1, eligible=2)
+        assert records[3] == dict(wins=0, losses=0, pushes=1, graded=1, eligible=2)
+        assert 4 not in records
+        assert 5 not in records
+        assert ats_label(records[2]) == "ATS 1–0–0 · 1/2 lined"
 
 
-def test_week_boundary_does_not_leak_future_scores():
-    records = calculate_ats_records(_games(), _lines(), 2)
-    assert records[1] == dict(wins=0, losses=1, pushes=0, graded=1, eligible=1)
-    assert 3 not in records
+
+    def test_week_boundary_does_not_leak_future_scores(self):
+        records = calculate_ats_records(_games(), _lines(), 2)
+        assert records[1] == dict(wins=0, losses=1, pushes=0, graded=1, eligible=1)
+        assert 3 not in records
 
 
-def test_missing_lines_do_not_inflate_ats_record():
-    records = calculate_ats_records(_games(), pd.DataFrame(), 4)
-    assert records[1]["eligible"] == 2
-    assert records[1]["graded"] == 0
-    assert ats_label(records[1]) == "ATS 0–0–0 · 0/2 lined"
-    assert ats_label(records[1], feed_available=False) == "ATS unavailable"
+
+    def test_missing_lines_do_not_inflate_ats_record(self):
+        records = calculate_ats_records(_games(), pd.DataFrame(), 4)
+        assert records[1]["eligible"] == 2
+        assert records[1]["graded"] == 0
+        assert ats_label(records[1]) == "ATS 0–0–0 · 0/2 lined"
+        assert ats_label(records[1], feed_available=False) == "ATS unavailable"
 
 
-def test_deduplicated_games_count_once_and_no_default_odds():
-    g = _games()
-    duplicated = pd.concat([g, g[g.game_id.eq(101)]], ignore_index=True)
-    lines = _lines().copy()
-    lines.loc[lines.game_id.eq(103), "game_spread_available"] = True
-    # Even if a provider accidentally marks a hardcoded default as available, exclude it.
-    records = calculate_ats_records(duplicated, lines, 4)
-    assert records[1]["eligible"] == 2
-    assert records[2]["graded"] == 1
+
+    def test_deduplicated_games_count_once_and_no_default_odds(self):
+        g = _games()
+        duplicated = pd.concat([g, g[g.game_id.eq(101)]], ignore_index=True)
+        lines = _lines().copy()
+        lines.loc[lines.game_id.eq(103), "game_spread_available"] = True
+        # Even if a provider accidentally marks a hardcoded default as available, exclude it.
+        records = calculate_ats_records(duplicated, lines, 4)
+        assert records[1]["eligible"] == 2
+        assert records[2]["graded"] == 1
 
 
-def test_empty_and_bad_market_schema_are_safe():
-    assert calculate_ats_records(pd.DataFrame(), _lines(), 4) == {}
-    result = calculate_ats_records(_games(), pd.DataFrame([{"game_id": 101}]), 4)
-    assert result[1]["graded"] == 0
+
+    def test_empty_and_bad_market_schema_are_safe(self):
+        assert calculate_ats_records(pd.DataFrame(), _lines(), 4) == {}
+        result = calculate_ats_records(_games(), pd.DataFrame([{"game_id": 101}]), 4)
+        assert result[1]["graded"] == 0
+
+if __name__ == "__main__":
+    unittest.main()
