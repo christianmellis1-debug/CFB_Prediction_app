@@ -1,0 +1,38 @@
+name: Research Test E all six matchup characteristics
+on:
+  push:
+    branches:
+      - research/test-e-six-conditional-signals-2026-10-13
+    paths:
+      - research/test_e_all_six_matchup_factors.py
+      - .github/workflows/test-e-six-matchup-factors.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: test-e-six-matchup-factors
+  cancel-in-progress: false
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Verify candidate experiment script
+        run: python -m py_compile research/test_e_all_six_matchup_factors.py
+      - name: Run six-feature time-separated test
+        run: PYTHONPATH=. python -u research/test_e_all_six_matchup_factors.py
+      - name: Archive only on research branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_e_six_signals_results.json research/test_e_six_signals_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Test E six matchup factors validation results'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
