@@ -14,11 +14,11 @@
     }
   },
   "run_status": {
-    "checked_at": "2026-10-14T06:41:09.042803+00:00",
+    "checked_at": "2026-10-14T13:04:39.835762+00:00",
     "eligible_in_window": 2,
     "missing_events": [],
-    "new_results": 2,
-    "new_snapshots": 2,
+    "new_results": 0,
+    "new_snapshots": 0,
     "selected_total": 0,
     "skipped": {}
   },
