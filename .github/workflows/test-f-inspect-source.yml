@@ -1,0 +1,29 @@
+name: Research Test F inspect team-box source
+on:
+  push:
+    branches:
+      - research/test-f-rush-pass-specific-matchups-2026-10-13
+    paths:
+      - '.github/workflows/test-f-inspect-source.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3
+      - name: Inspect available pregame team-box features
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          url='https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_team_box/team_box_2025.csv'
+          df=pd.read_csv(url,nrows=8)
+          print('ALL_COLUMNS',df.columns.tolist(),flush=True)
+          print('SAMPLE',df.head(2).to_json(orient='records'),flush=True)
+          PY
