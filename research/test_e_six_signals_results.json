@@ -1,6 +1,6 @@
 {
   "experiment": "Test E all six matchup features, 2024 development, 2025 validation, 2026 recent check",
-  "created_utc": "2026-10-14T01:20:41.150040+00:00",
+  "created_utc": "2026-10-14T01:22:32.418251+00:00",
   "weights": {
     "model": 0.16927926947215113,
     "market": 0.8307207305278489
@@ -3620,96 +3620,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.1835282,
-            "log_loss": 0.5423566,
+            "brier": 0.183539,
+            "log_loss": 0.5423958,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -3.89e-05
+            "brier_gain": -4.97e-05
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.182249,
-            "log_loss": 0.5406788,
+            "brier": 0.1822655,
+            "log_loss": 0.5407162,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 2.74e-05
+            "brier_gain": 1.08e-05
           },
           "check_2026": {
             "n": 221,
             "wins": 168,
             "losses": 53,
             "accuracy": 0.760181,
-            "brier": 0.1702603,
-            "log_loss": 0.5081295,
+            "brier": 0.1702594,
+            "log_loss": 0.5081338,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.0001135
+            "brier_gain": -0.0001126
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 77,
             "losses": 35,
             "accuracy": 0.6875,
-            "brier": 0.1980698,
-            "log_loss": 0.5753696,
+            "brier": 0.1980759,
+            "log_loss": 0.5754029,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.0001973
+            "brier_gain": -0.0002035
           },
           "development_2024_triggered": {
-            "n": 95,
-            "wins": 72,
-            "losses": 23,
-            "accuracy": 0.757895,
-            "brier": 0.1708755,
-            "log_loss": 0.5149748,
+            "n": 56,
+            "wins": 43,
+            "losses": 13,
+            "accuracy": 0.767857,
+            "brier": 0.1606172,
+            "log_loss": 0.4932851,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -0.0002933
+            "brier_gain": -0.0006359
           },
           "validation_2025_triggered": {
-            "n": 77,
-            "wins": 57,
-            "losses": 20,
-            "accuracy": 0.74026,
-            "brier": 0.1809298,
-            "log_loss": 0.5392308,
+            "n": 42,
+            "wins": 34,
+            "losses": 8,
+            "accuracy": 0.809524,
+            "brier": 0.1571617,
+            "log_loss": 0.4876464,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0002558
+            "brier_gain": 0.0001851
           },
           "check_2026_triggered": {
-            "n": 33,
-            "wins": 24,
-            "losses": 9,
-            "accuracy": 0.727273,
-            "brier": 0.1729434,
-            "log_loss": 0.5208448,
+            "n": 20,
+            "wins": 13,
+            "losses": 7,
+            "accuracy": 0.65,
+            "brier": 0.1819717,
+            "log_loss": 0.5312519,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.0007602
+            "brier_gain": -0.0012444
           },
           "activation": {
-            "2024": 95,
-            "2025": 77,
-            "2026": 33
+            "2024": 56,
+            "2025": 42,
+            "2026": 20
           }
         },
         "weak_sos_-0.5__off_to_sos_5": {
@@ -3718,96 +3718,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.1835544,
-            "log_loss": 0.5423929,
+            "brier": 0.1835722,
+            "log_loss": 0.5424581,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -6.5e-05
+            "brier_gain": -8.29e-05
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.1822311,
-            "log_loss": 0.5406413,
+            "brier": 0.1822587,
+            "log_loss": 0.5407039,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 4.53e-05
+            "brier_gain": 1.76e-05
           },
           "check_2026": {
             "n": 221,
             "wins": 168,
             "losses": 53,
             "accuracy": 0.760181,
-            "brier": 0.1703364,
-            "log_loss": 0.5083179,
+            "brier": 0.170335,
+            "log_loss": 0.5083257,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.0001896
+            "brier_gain": -0.0001881
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 77,
             "losses": 35,
             "accuracy": 0.6875,
-            "brier": 0.1982015,
-            "log_loss": 0.5756708,
+            "brier": 0.198212,
+            "log_loss": 0.5757278,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.000329
+            "brier_gain": -0.0003395
           },
           "development_2024_triggered": {
-            "n": 95,
-            "wins": 72,
-            "losses": 23,
-            "accuracy": 0.757895,
-            "brier": 0.171073,
-            "log_loss": 0.5152486,
+            "n": 56,
+            "wins": 43,
+            "losses": 13,
+            "accuracy": 0.767857,
+            "brier": 0.1610422,
+            "log_loss": 0.4940825,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -0.0004908
+            "brier_gain": -0.0010609
           },
           "validation_2025_triggered": {
-            "n": 77,
-            "wins": 57,
-            "losses": 20,
-            "accuracy": 0.74026,
-            "brier": 0.1807624,
-            "log_loss": 0.5388806,
+            "n": 42,
+            "wins": 34,
+            "losses": 8,
+            "accuracy": 0.809524,
+            "brier": 0.157045,
+            "log_loss": 0.4874359,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0004231
+            "brier_gain": 0.0003018
           },
           "check_2026_triggered": {
-            "n": 33,
-            "wins": 24,
-            "losses": 9,
-            "accuracy": 0.727273,
-            "brier": 0.1734529,
-            "log_loss": 0.5221066,
+            "n": 20,
+            "wins": 13,
+            "losses": 7,
+            "accuracy": 0.65,
+            "brier": 0.1828063,
+            "log_loss": 0.5333722,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.0012697
+            "brier_gain": -0.002079
           },
           "activation": {
-            "2024": 95,
-            "2025": 77,
-            "2026": 33
+            "2024": 56,
+            "2025": 42,
+            "2026": 20
           }
         },
         "weak_sos_-0.5__off_to_sos_10": {
@@ -3816,96 +3816,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.1836199,
-            "log_loss": 0.5424699,
+            "brier": 0.1836546,
+            "log_loss": 0.5425994,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -0.0001305
+            "brier_gain": -0.0001652
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.1821879,
-            "log_loss": 0.5405515,
+            "brier": 0.1822434,
+            "log_loss": 0.5406778,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 8.85e-05
+            "brier_gain": 3.29e-05
           },
           "check_2026": {
             "n": 221,
             "wins": 168,
             "losses": 53,
             "accuracy": 0.760181,
-            "brier": 0.1705272,
-            "log_loss": 0.5087906,
+            "brier": 0.1705246,
+            "log_loss": 0.5088093,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.0003804
+            "brier_gain": -0.0003778
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 77,
             "losses": 35,
             "accuracy": 0.6875,
-            "brier": 0.1985298,
-            "log_loss": 0.5764228,
+            "brier": 0.1985524,
+            "log_loss": 0.5765452,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.0006573
+            "brier_gain": -0.0006799
           },
           "development_2024_triggered": {
-            "n": 95,
-            "wins": 72,
-            "losses": 23,
-            "accuracy": 0.757895,
-            "brier": 0.171567,
-            "log_loss": 0.51583,
+            "n": 56,
+            "wins": 43,
+            "losses": 13,
+            "accuracy": 0.767857,
+            "brier": 0.1620969,
+            "log_loss": 0.4958925,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -0.0009848
+            "brier_gain": -0.0021156
           },
           "validation_2025_triggered": {
-            "n": 77,
-            "wins": 57,
-            "losses": 20,
-            "accuracy": 0.74026,
-            "brier": 0.1803582,
-            "log_loss": 0.538041,
+            "n": 42,
+            "wins": 34,
+            "losses": 8,
+            "accuracy": 0.809524,
+            "brier": 0.1567825,
+            "log_loss": 0.4869879,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0008274
+            "brier_gain": 0.0005643
           },
           "check_2026_triggered": {
-            "n": 33,
-            "wins": 24,
-            "losses": 9,
-            "accuracy": 0.727273,
-            "brier": 0.1747308,
-            "log_loss": 0.5252726,
+            "n": 20,
+            "wins": 13,
+            "losses": 7,
+            "accuracy": 0.65,
+            "brier": 0.1849022,
+            "log_loss": 0.5387153,
             "winner_flips": 1,
             "fixed": 0,
             "broken": 1,
             "net_wins": -1,
-            "brier_gain": -0.0025476
+            "brier_gain": -0.004175
           },
           "activation": {
-            "2024": 95,
-            "2025": 77,
-            "2026": 33
+            "2024": 56,
+            "2025": 42,
+            "2026": 20
           }
         },
         "weak_sos_-0.75__off_to_sos_3": {
@@ -3914,96 +3914,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.1835039,
-            "log_loss": 0.5422894,
+            "brier": 0.1835117,
+            "log_loss": 0.5423181,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -1.45e-05
+            "brier_gain": -2.23e-05
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.1822706,
-            "log_loss": 0.5407211,
+            "brier": 0.1822799,
+            "log_loss": 0.5407417,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 5.7e-06
+            "brier_gain": -3.6e-06
           },
           "check_2026": {
             "n": 221,
             "wins": 169,
             "losses": 52,
             "accuracy": 0.764706,
-            "brier": 0.1701878,
-            "log_loss": 0.5079418,
+            "brier": 0.1701977,
+            "log_loss": 0.5079813,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -4.09e-05
+            "brier_gain": -5.09e-05
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 78,
             "losses": 34,
             "accuracy": 0.696429,
-            "brier": 0.1979726,
-            "log_loss": 0.5751338,
+            "brier": 0.1979919,
+            "log_loss": 0.5752142,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -0.0001001
+            "brier_gain": -0.0001194
           },
           "development_2024_triggered": {
-            "n": 49,
-            "wins": 41,
-            "losses": 8,
-            "accuracy": 0.836735,
-            "brier": 0.1528128,
-            "log_loss": 0.4805687,
+            "n": 25,
+            "wins": 22,
+            "losses": 3,
+            "accuracy": 0.88,
+            "brier": 0.1385447,
+            "log_loss": 0.4599117,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -0.0002122
+            "brier_gain": -0.0006394
           },
           "validation_2025_triggered": {
-            "n": 36,
-            "wins": 28,
-            "losses": 8,
-            "accuracy": 0.777778,
-            "brier": 0.1602475,
-            "log_loss": 0.4919239,
+            "n": 19,
+            "wins": 16,
+            "losses": 3,
+            "accuracy": 0.842105,
+            "brier": 0.142962,
+            "log_loss": 0.4511735,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0001145
+            "brier_gain": -0.0001366
           },
           "check_2026_triggered": {
-            "n": 18,
-            "wins": 13,
-            "losses": 5,
-            "accuracy": 0.722222,
-            "brier": 0.2077766,
-            "log_loss": 0.6058536,
+            "n": 8,
+            "wins": 5,
+            "losses": 3,
+            "accuracy": 0.625,
+            "brier": 0.2224844,
+            "log_loss": 0.6193804,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -0.0005025
+            "brier_gain": -0.0014061
           },
           "activation": {
-            "2024": 49,
-            "2025": 36,
-            "2026": 18
+            "2024": 25,
+            "2025": 19,
+            "2026": 8
           }
         },
         "weak_sos_-0.75__off_to_sos_5": {
@@ -4012,96 +4012,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.1835131,
-            "log_loss": 0.5422783,
+            "brier": 0.1835262,
+            "log_loss": 0.5423264,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -2.38e-05
+            "brier_gain": -3.69e-05
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.1822667,
-            "log_loss": 0.540711,
+            "brier": 0.1822822,
+            "log_loss": 0.5407452,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 9.6e-06
+            "brier_gain": -5.9e-06
           },
           "check_2026": {
             "n": 221,
             "wins": 169,
             "losses": 52,
             "accuracy": 0.764706,
-            "brier": 0.1702151,
-            "log_loss": 0.5080042,
+            "brier": 0.170232,
+            "log_loss": 0.5080711,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -6.83e-05
+            "brier_gain": -8.52e-05
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 78,
             "losses": 34,
             "accuracy": 0.696429,
-            "brier": 0.1980394,
-            "log_loss": 0.575277,
+            "brier": 0.1980723,
+            "log_loss": 0.5754136,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -0.000167
+            "brier_gain": -0.0001998
           },
           "development_2024_triggered": {
-            "n": 49,
-            "wins": 41,
-            "losses": 8,
-            "accuracy": 0.836735,
-            "brier": 0.1529485,
-            "log_loss": 0.4804058,
+            "n": 25,
+            "wins": 22,
+            "losses": 3,
+            "accuracy": 0.88,
+            "brier": 0.1389629,
+            "log_loss": 0.4601503,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -0.0003479
+            "brier_gain": -0.0010576
           },
           "validation_2025_triggered": {
-            "n": 36,
-            "wins": 28,
-            "losses": 8,
-            "accuracy": 0.777778,
-            "brier": 0.1601694,
-            "log_loss": 0.4917224,
+            "n": 19,
+            "wins": 16,
+            "losses": 3,
+            "accuracy": 0.842105,
+            "brier": 0.1430478,
+            "log_loss": 0.4513063,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0001926
+            "brier_gain": -0.0002224
           },
           "check_2026_triggered": {
-            "n": 18,
-            "wins": 13,
-            "losses": 5,
-            "accuracy": 0.722222,
-            "brier": 0.2081127,
-            "log_loss": 0.6066191,
+            "n": 8,
+            "wins": 5,
+            "losses": 3,
+            "accuracy": 0.625,
+            "brier": 0.2234325,
+            "log_loss": 0.6218624,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -0.0008386
+            "brier_gain": -0.0023542
           },
           "activation": {
-            "2024": 49,
-            "2025": 36,
-            "2026": 18
+            "2024": 25,
+            "2025": 19,
+            "2026": 8
           }
         },
         "weak_sos_-0.75__off_to_sos_10": {
@@ -4110,96 +4110,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.1835337,
-            "log_loss": 0.5422266,
+            "brier": 0.1835605,
+            "log_loss": 0.5423244,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -4.44e-05
+            "brier_gain": -7.11e-05
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.1822567,
-            "log_loss": 0.5406861,
+            "brier": 0.1822874,
+            "log_loss": 0.5407537,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 1.97e-05
+            "brier_gain": -1.11e-05
           },
           "check_2026": {
             "n": 221,
             "wins": 169,
             "losses": 52,
             "accuracy": 0.764706,
-            "brier": 0.1702833,
-            "log_loss": 0.5081591,
+            "brier": 0.1703186,
+            "log_loss": 0.5082991,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -0.0001365
+            "brier_gain": -0.0001718
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 78,
             "losses": 34,
             "accuracy": 0.696429,
-            "brier": 0.1982059,
-            "log_loss": 0.5756324,
+            "brier": 0.198275,
+            "log_loss": 0.5759188,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -0.0003334
+            "brier_gain": -0.0004026
           },
           "development_2024_triggered": {
-            "n": 49,
-            "wins": 41,
-            "losses": 8,
-            "accuracy": 0.836735,
-            "brier": 0.1532498,
-            "log_loss": 0.4796493,
+            "n": 25,
+            "wins": 22,
+            "losses": 3,
+            "accuracy": 0.88,
+            "brier": 0.1399446,
+            "log_loss": 0.4600924,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": -0.0006493
+            "brier_gain": -0.0020393
           },
           "validation_2025_triggered": {
-            "n": 36,
-            "wins": 28,
-            "losses": 8,
-            "accuracy": 0.777778,
-            "brier": 0.159969,
-            "log_loss": 0.4912237,
+            "n": 19,
+            "wins": 16,
+            "losses": 3,
+            "accuracy": 0.842105,
+            "brier": 0.1432449,
+            "log_loss": 0.4516266,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.000393
+            "brier_gain": -0.0004195
           },
           "check_2026_triggered": {
-            "n": 18,
-            "wins": 13,
-            "losses": 5,
-            "accuracy": 0.722222,
-            "brier": 0.2089496,
-            "log_loss": 0.6085216,
+            "n": 8,
+            "wins": 5,
+            "losses": 3,
+            "accuracy": 0.625,
+            "brier": 0.2258249,
+            "log_loss": 0.6281599,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": -0.0016755
+            "brier_gain": -0.0047466
           },
           "activation": {
-            "2024": 49,
-            "2025": 36,
-            "2026": 18
+            "2024": 25,
+            "2025": 19,
+            "2026": 8
           }
         },
         "weak_sos_-1.0__off_to_sos_3": {
@@ -4208,96 +4208,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.1834769,
-            "log_loss": 0.5422233,
+            "brier": 0.1834887,
+            "log_loss": 0.5422627,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": 1.25e-05
+            "brier_gain": 7e-07
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.1822654,
-            "log_loss": 0.5407091,
+            "brier": 0.1822768,
+            "log_loss": 0.540736,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 1.09e-05
+            "brier_gain": -5e-07
           },
           "check_2026": {
             "n": 221,
             "wins": 169,
             "losses": 52,
             "accuracy": 0.764706,
-            "brier": 0.1701235,
-            "log_loss": 0.5077832,
+            "brier": 0.1701403,
+            "log_loss": 0.5078417,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 2.34e-05
+            "brier_gain": 6.5e-06
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 78,
             "losses": 34,
             "accuracy": 0.696429,
-            "brier": 0.197852,
-            "log_loss": 0.5748414,
+            "brier": 0.197882,
+            "log_loss": 0.5749506,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 2.05e-05
+            "brier_gain": -9.5e-06
           },
           "development_2024_triggered": {
-            "n": 21,
-            "wins": 16,
-            "losses": 5,
-            "accuracy": 0.761905,
-            "brier": 0.1998378,
-            "log_loss": 0.6114511,
+            "n": 9,
+            "wins": 8,
+            "losses": 1,
+            "accuracy": 0.888889,
+            "brier": 0.1705474,
+            "log_loss": 0.5826796,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": 0.000427
+            "brier_gain": 5.62e-05
           },
           "validation_2025_triggered": {
-            "n": 20,
-            "wins": 15,
-            "losses": 5,
-            "accuracy": 0.75,
-            "brier": 0.1677903,
-            "log_loss": 0.5042114,
+            "n": 10,
+            "wins": 8,
+            "losses": 2,
+            "accuracy": 0.8,
+            "brier": 0.1472416,
+            "log_loss": 0.4550993,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0003922
+            "brier_gain": -3.59e-05
           },
           "check_2026_triggered": {
-            "n": 7,
-            "wins": 4,
-            "losses": 3,
-            "accuracy": 0.571429,
-            "brier": 0.2503942,
-            "log_loss": 0.7163263,
+            "n": 3,
+            "wins": 2,
+            "losses": 1,
+            "accuracy": 0.666667,
+            "brier": 0.1057512,
+            "log_loss": 0.3356684,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0007378
+            "brier_gain": 0.0004814
           },
           "activation": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
           }
         },
         "weak_sos_-1.0__off_to_sos_5": {
@@ -4306,96 +4306,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.1834678,
-            "log_loss": 0.5421669,
+            "brier": 0.1834877,
+            "log_loss": 0.5422331,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": 2.16e-05
+            "brier_gain": 1.7e-06
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.1822583,
-            "log_loss": 0.5406914,
+            "brier": 0.1822773,
+            "log_loss": 0.5407364,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 1.8e-05
+            "brier_gain": -1e-06
           },
           "check_2026": {
             "n": 221,
             "wins": 169,
             "losses": 52,
             "accuracy": 0.764706,
-            "brier": 0.1701076,
-            "log_loss": 0.507739,
+            "brier": 0.170136,
+            "log_loss": 0.507838,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 3.92e-05
+            "brier_gain": 1.08e-05
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 78,
             "losses": 34,
             "accuracy": 0.696429,
-            "brier": 0.1978379,
-            "log_loss": 0.5747887,
+            "brier": 0.1978887,
+            "log_loss": 0.5749734,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 3.46e-05
+            "brier_gain": -1.62e-05
           },
           "development_2024_triggered": {
-            "n": 21,
-            "wins": 16,
-            "losses": 5,
-            "accuracy": 0.761905,
-            "brier": 0.1995285,
-            "log_loss": 0.6095262,
+            "n": 9,
+            "wins": 8,
+            "losses": 1,
+            "accuracy": 0.888889,
+            "brier": 0.1704675,
+            "log_loss": 0.5803259,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": 0.0007362
+            "brier_gain": 0.0001361
           },
           "validation_2025_triggered": {
-            "n": 20,
-            "wins": 15,
-            "losses": 5,
-            "accuracy": 0.75,
-            "brier": 0.1675338,
-            "log_loss": 0.5035766,
+            "n": 10,
+            "wins": 8,
+            "losses": 2,
+            "accuracy": 0.8,
+            "brier": 0.1472771,
+            "log_loss": 0.4551267,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0006486
+            "brier_gain": -7.15e-05
           },
           "check_2026_triggered": {
-            "n": 7,
-            "wins": 4,
-            "losses": 3,
-            "accuracy": 0.571429,
-            "brier": 0.2498941,
-            "log_loss": 0.7149327,
+            "n": 3,
+            "wins": 2,
+            "losses": 1,
+            "accuracy": 0.666667,
+            "brier": 0.1054388,
+            "log_loss": 0.3353974,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0012379
+            "brier_gain": 0.0007939
           },
           "activation": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
           }
         },
         "weak_sos_-1.0__off_to_sos_10": {
@@ -4404,96 +4404,96 @@
             "wins": 510,
             "losses": 207,
             "accuracy": 0.711297,
-            "brier": 0.183442,
-            "log_loss": 0.5419991,
+            "brier": 0.1834826,
+            "log_loss": 0.5421342,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": 4.74e-05
+            "brier_gain": 6.8e-06
           },
           "validation_2025": {
             "n": 720,
             "wins": 527,
             "losses": 193,
             "accuracy": 0.731944,
-            "brier": 0.1822409,
-            "log_loss": 0.5406488,
+            "brier": 0.1822791,
+            "log_loss": 0.5407389,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 3.54e-05
+            "brier_gain": -2.7e-06
           },
           "check_2026": {
             "n": 221,
             "wins": 169,
             "losses": 52,
             "accuracy": 0.764706,
-            "brier": 0.1700672,
-            "log_loss": 0.5076266,
+            "brier": 0.1701259,
+            "log_loss": 0.5078319,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 7.97e-05
+            "brier_gain": 2.09e-05
           },
           "frozen_2026_W5_6": {
             "n": 112,
             "wins": 78,
             "losses": 34,
             "accuracy": 0.696429,
-            "brier": 0.1978011,
-            "log_loss": 0.5746532,
+            "brier": 0.1979065,
+            "log_loss": 0.575037,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 7.14e-05
+            "brier_gain": -3.4e-05
           },
           "development_2024_triggered": {
-            "n": 21,
-            "wins": 16,
-            "losses": 5,
-            "accuracy": 0.761905,
-            "brier": 0.1986461,
-            "log_loss": 0.6037969,
+            "n": 9,
+            "wins": 8,
+            "losses": 1,
+            "accuracy": 0.888889,
+            "brier": 0.1700625,
+            "log_loss": 0.5724455,
             "winner_flips": 1,
             "fixed": 1,
             "broken": 0,
             "net_wins": 1,
-            "brier_gain": 0.0016187
+            "brier_gain": 0.0005411
           },
           "validation_2025_triggered": {
-            "n": 20,
-            "wins": 15,
-            "losses": 5,
-            "accuracy": 0.75,
-            "brier": 0.1669082,
-            "log_loss": 0.5020429,
+            "n": 10,
+            "wins": 8,
+            "losses": 2,
+            "accuracy": 0.8,
+            "brier": 0.1474012,
+            "log_loss": 0.4553099,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0012742
+            "brier_gain": -0.0001956
           },
           "check_2026_triggered": {
-            "n": 7,
-            "wins": 4,
-            "losses": 3,
-            "accuracy": 0.571429,
-            "brier": 0.2486167,
-            "log_loss": 0.7113846,
+            "n": 3,
+            "wins": 2,
+            "losses": 1,
+            "accuracy": 0.666667,
+            "brier": 0.1046937,
+            "log_loss": 0.3349477,
             "winner_flips": 0,
             "fixed": 0,
             "broken": 0,
             "net_wins": 0,
-            "brier_gain": 0.0025154
+            "brier_gain": 0.001539
           },
           "activation": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
           }
         }
       },
@@ -4502,96 +4502,96 @@
           "id": "weak_sos_-0.5__off_to_sos_10",
           "wins": 527,
           "net_wins": 0,
-          "brier": 0.1821879,
-          "brier_gain": 8.85e-05,
+          "brier": 0.1822434,
+          "brier_gain": 3.29e-05,
           "active": {
-            "2024": 95,
-            "2025": 77,
-            "2026": 33
+            "2024": 56,
+            "2025": 42,
+            "2026": 20
           }
         },
         {
           "id": "weak_sos_-0.5__off_to_sos_5",
           "wins": 527,
           "net_wins": 0,
-          "brier": 0.1822311,
-          "brier_gain": 4.53e-05,
+          "brier": 0.1822587,
+          "brier_gain": 1.76e-05,
           "active": {
-            "2024": 95,
-            "2025": 77,
-            "2026": 33
-          }
-        },
-        {
-          "id": "weak_sos_-1.0__off_to_sos_10",
-          "wins": 527,
-          "net_wins": 0,
-          "brier": 0.1822409,
-          "brier_gain": 3.54e-05,
-          "active": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 56,
+            "2025": 42,
+            "2026": 20
           }
         },
         {
           "id": "weak_sos_-0.5__off_to_sos_3",
           "wins": 527,
           "net_wins": 0,
-          "brier": 0.182249,
-          "brier_gain": 2.74e-05,
+          "brier": 0.1822655,
+          "brier_gain": 1.08e-05,
           "active": {
-            "2024": 95,
-            "2025": 77,
-            "2026": 33
-          }
-        },
-        {
-          "id": "weak_sos_-0.75__off_to_sos_10",
-          "wins": 527,
-          "net_wins": 0,
-          "brier": 0.1822567,
-          "brier_gain": 1.97e-05,
-          "active": {
-            "2024": 49,
-            "2025": 36,
-            "2026": 18
-          }
-        },
-        {
-          "id": "weak_sos_-1.0__off_to_sos_5",
-          "wins": 527,
-          "net_wins": 0,
-          "brier": 0.1822583,
-          "brier_gain": 1.8e-05,
-          "active": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 56,
+            "2025": 42,
+            "2026": 20
           }
         },
         {
           "id": "weak_sos_-1.0__off_to_sos_3",
           "wins": 527,
           "net_wins": 0,
-          "brier": 0.1822654,
-          "brier_gain": 1.09e-05,
+          "brier": 0.1822768,
+          "brier_gain": -5e-07,
           "active": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
+          }
+        },
+        {
+          "id": "weak_sos_-1.0__off_to_sos_5",
+          "wins": 527,
+          "net_wins": 0,
+          "brier": 0.1822773,
+          "brier_gain": -1e-06,
+          "active": {
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
+          }
+        },
+        {
+          "id": "weak_sos_-1.0__off_to_sos_10",
+          "wins": 527,
+          "net_wins": 0,
+          "brier": 0.1822791,
+          "brier_gain": -2.7e-06,
+          "active": {
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
+          }
+        },
+        {
+          "id": "weak_sos_-0.75__off_to_sos_3",
+          "wins": 527,
+          "net_wins": 0,
+          "brier": 0.1822799,
+          "brier_gain": -3.6e-06,
+          "active": {
+            "2024": 25,
+            "2025": 19,
+            "2026": 8
           }
         },
         {
           "id": "weak_sos_-0.75__off_to_sos_5",
           "wins": 527,
           "net_wins": 0,
-          "brier": 0.1822667,
-          "brier_gain": 9.6e-06,
+          "brier": 0.1822822,
+          "brier_gain": -5.9e-06,
           "active": {
-            "2024": 49,
-            "2025": 36,
-            "2026": 18
+            "2024": 25,
+            "2025": 19,
+            "2026": 8
           }
         }
       ],
@@ -4600,96 +4600,96 @@
           "id": "weak_sos_-1.0__off_to_sos_10",
           "wins": 169,
           "net_wins": 0,
-          "brier": 0.1700672,
-          "brier_gain": 7.97e-05,
+          "brier": 0.1701259,
+          "brier_gain": 2.09e-05,
           "active": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
           }
         },
         {
           "id": "weak_sos_-1.0__off_to_sos_5",
           "wins": 169,
           "net_wins": 0,
-          "brier": 0.1701076,
-          "brier_gain": 3.92e-05,
+          "brier": 0.170136,
+          "brier_gain": 1.08e-05,
           "active": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
           }
         },
         {
           "id": "weak_sos_-1.0__off_to_sos_3",
           "wins": 169,
           "net_wins": 0,
-          "brier": 0.1701235,
-          "brier_gain": 2.34e-05,
+          "brier": 0.1701403,
+          "brier_gain": 6.5e-06,
           "active": {
-            "2024": 21,
-            "2025": 20,
-            "2026": 7
+            "2024": 9,
+            "2025": 10,
+            "2026": 3
           }
         },
         {
           "id": "weak_sos_-0.75__off_to_sos_3",
           "wins": 169,
           "net_wins": 0,
-          "brier": 0.1701878,
-          "brier_gain": -4.09e-05,
+          "brier": 0.1701977,
+          "brier_gain": -5.09e-05,
           "active": {
-            "2024": 49,
-            "2025": 36,
-            "2026": 18
+            "2024": 25,
+            "2025": 19,
+            "2026": 8
           }
         },
         {
           "id": "weak_sos_-0.75__off_to_sos_5",
           "wins": 169,
           "net_wins": 0,
-          "brier": 0.1702151,
-          "brier_gain": -6.83e-05,
+          "brier": 0.170232,
+          "brier_gain": -8.52e-05,
           "active": {
-            "2024": 49,
-            "2025": 36,
-            "2026": 18
+            "2024": 25,
+            "2025": 19,
+            "2026": 8
           }
         },
         {
           "id": "weak_sos_-0.75__off_to_sos_10",
           "wins": 169,
           "net_wins": 0,
-          "brier": 0.1702833,
-          "brier_gain": -0.0001365,
+          "brier": 0.1703186,
+          "brier_gain": -0.0001718,
           "active": {
-            "2024": 49,
-            "2025": 36,
-            "2026": 18
+            "2024": 25,
+            "2025": 19,
+            "2026": 8
           }
         },
         {
           "id": "weak_sos_-0.5__off_to_sos_3",
           "wins": 168,
           "net_wins": -1,
-          "brier": 0.1702603,
-          "brier_gain": -0.0001135,
+          "brier": 0.1702594,
+          "brier_gain": -0.0001126,
           "active": {
-            "2024": 95,
-            "2025": 77,
-            "2026": 33
+            "2024": 56,
+            "2025": 42,
+            "2026": 20
           }
         },
         {
           "id": "weak_sos_-0.5__off_to_sos_5",
           "wins": 168,
           "net_wins": -1,
-          "brier": 0.1703364,
-          "brier_gain": -0.0001896,
+          "brier": 0.170335,
+          "brier_gain": -0.0001881,
           "active": {
-            "2024": 95,
-            "2025": 77,
-            "2026": 33
+            "2024": 56,
+            "2025": 42,
+            "2026": 20
           }
         }
       ]
