@@ -1,0 +1,35 @@
+name: Research Test E combined selected rules
+on:
+  push:
+    branches:
+      - research/test-e-six-conditional-signals-2026-10-13
+    paths:
+      - research/test_e_combined_selected.py
+      - .github/workflows/test-e-combined-selected.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Verify combination evaluator
+        run: python -m py_compile research/test_e_combined_selected.py
+      - name: Evaluate fixed six-family combined scenario
+        run: python -u research/test_e_combined_selected.py
+      - name: Commit research-only combination result
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_e_combination_results.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record combined six-factor Test E head-to-head'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
