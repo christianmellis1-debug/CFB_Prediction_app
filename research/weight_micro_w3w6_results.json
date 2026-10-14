@@ -1,0 +1,1928 @@
+{
+  "method": "Unchanged total 100-point V1.5 weights, paired +/-1 and +/-2 point transfer across each component pair; locked 16.93/83.07 Test C; opening DK lines",
+  "warning": "W3/W4 V1.5 retrospective, W5/W6 candidates are reconstruction-delta sensitivity anchored to frozen original V1.5; 2026 outcomes inspected for model selection.",
+  "baseline_weights": {
+    "off": 0.35,
+    "def": 0.35,
+    "venue": 0.2,
+    "sos": 0.1
+  },
+  "candidates": {
+    "baseline": {
+      "off": 0.35,
+      "def": 0.35,
+      "venue": 0.2,
+      "sos": 0.1
+    },
+    "off+1_def-1": {
+      "off": 0.36,
+      "def": 0.33999999999999997,
+      "venue": 0.2,
+      "sos": 0.1
+    },
+    "off-1_def+1": {
+      "off": 0.33999999999999997,
+      "def": 0.36,
+      "venue": 0.2,
+      "sos": 0.1
+    },
+    "off+1_venue-1": {
+      "off": 0.36,
+      "def": 0.35,
+      "venue": 0.19,
+      "sos": 0.1
+    },
+    "off-1_venue+1": {
+      "off": 0.33999999999999997,
+      "def": 0.35,
+      "venue": 0.21000000000000002,
+      "sos": 0.1
+    },
+    "off+1_sos-1": {
+      "off": 0.36,
+      "def": 0.35,
+      "venue": 0.2,
+      "sos": 0.09000000000000001
+    },
+    "off-1_sos+1": {
+      "off": 0.33999999999999997,
+      "def": 0.35,
+      "venue": 0.2,
+      "sos": 0.11
+    },
+    "def+1_venue-1": {
+      "off": 0.35,
+      "def": 0.36,
+      "venue": 0.19,
+      "sos": 0.1
+    },
+    "def-1_venue+1": {
+      "off": 0.35,
+      "def": 0.33999999999999997,
+      "venue": 0.21000000000000002,
+      "sos": 0.1
+    },
+    "def+1_sos-1": {
+      "off": 0.35,
+      "def": 0.36,
+      "venue": 0.2,
+      "sos": 0.09000000000000001
+    },
+    "def-1_sos+1": {
+      "off": 0.35,
+      "def": 0.33999999999999997,
+      "venue": 0.2,
+      "sos": 0.11
+    },
+    "venue+1_sos-1": {
+      "off": 0.35,
+      "def": 0.35,
+      "venue": 0.21000000000000002,
+      "sos": 0.09000000000000001
+    },
+    "venue-1_sos+1": {
+      "off": 0.35,
+      "def": 0.35,
+      "venue": 0.19,
+      "sos": 0.11
+    },
+    "off+2_def-2": {
+      "off": 0.37,
+      "def": 0.32999999999999996,
+      "venue": 0.2,
+      "sos": 0.1
+    },
+    "off-2_def+2": {
+      "off": 0.32999999999999996,
+      "def": 0.37,
+      "venue": 0.2,
+      "sos": 0.1
+    },
+    "off+2_venue-2": {
+      "off": 0.37,
+      "def": 0.35,
+      "venue": 0.18000000000000002,
+      "sos": 0.1
+    },
+    "off-2_venue+2": {
+      "off": 0.32999999999999996,
+      "def": 0.35,
+      "venue": 0.22,
+      "sos": 0.1
+    },
+    "off+2_sos-2": {
+      "off": 0.37,
+      "def": 0.35,
+      "venue": 0.2,
+      "sos": 0.08
+    },
+    "off-2_sos+2": {
+      "off": 0.32999999999999996,
+      "def": 0.35,
+      "venue": 0.2,
+      "sos": 0.12000000000000001
+    },
+    "def+2_venue-2": {
+      "off": 0.35,
+      "def": 0.37,
+      "venue": 0.18000000000000002,
+      "sos": 0.1
+    },
+    "def-2_venue+2": {
+      "off": 0.35,
+      "def": 0.32999999999999996,
+      "venue": 0.22,
+      "sos": 0.1
+    },
+    "def+2_sos-2": {
+      "off": 0.35,
+      "def": 0.37,
+      "venue": 0.2,
+      "sos": 0.08
+    },
+    "def-2_sos+2": {
+      "off": 0.35,
+      "def": 0.32999999999999996,
+      "venue": 0.2,
+      "sos": 0.12000000000000001
+    },
+    "venue+2_sos-2": {
+      "off": 0.35,
+      "def": 0.35,
+      "venue": 0.22,
+      "sos": 0.08
+    },
+    "venue-2_sos+2": {
+      "off": 0.35,
+      "def": 0.35,
+      "venue": 0.18000000000000002,
+      "sos": 0.12000000000000001
+    }
+  },
+  "overall": {
+    "baseline": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17014682439335102,
+      "logloss": 0.5078483186457731,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+1_def-1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17007456806687588,
+      "logloss": 0.5076906374595229,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-1_def+1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17021977952117853,
+      "logloss": 0.5080083264873013,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+1_venue-1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17011451927075272,
+      "logloss": 0.5077492920679277,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-1_venue+1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17018042594037705,
+      "logloss": 0.5079508066416458,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+1_sos-1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17012770324733623,
+      "logloss": 0.5077649561677422,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-1_sos+1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17016704010893594,
+      "logloss": 0.5079351197509586,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "def+1_venue-1": {
+      "n": 221,
+      "wins": 168,
+      "losses": 53,
+      "brier": 0.17018681360632712,
+      "logloss": 0.507907455924096,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def-1_venue+1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.1701075127450611,
+      "logloss": 0.5077912904159028,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "def+1_sos-1": {
+      "n": 221,
+      "wins": 168,
+      "losses": 53,
+      "brier": 0.17020017693079464,
+      "logloss": 0.507923623540633,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def-1_sos+1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.1700943090248473,
+      "logloss": 0.5077761117311266,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "venue+1_sos-1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17016066530801316,
+      "logloss": 0.507865505844994,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "venue-1_sos+1": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17013408926618165,
+      "logloss": 0.5078341323544429,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+2_def-2": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.170003019848234,
+      "logloss": 0.5075353210822366,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-2_def+2": {
+      "n": 221,
+      "wins": 167,
+      "losses": 54,
+      "brier": 0.1702934249082396,
+      "logloss": 0.5081706241148037,
+      "flips": 2,
+      "fixed": 0,
+      "broken": 2
+    },
+    "off+2_venue-2": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17008350470032746,
+      "logloss": 0.5076537270169927,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-2_venue+2": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17021532837802467,
+      "logloss": 0.5080567524329426,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+2_sos-2": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.1701096460393271,
+      "logloss": 0.5076849577757685,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-2_sos+2": {
+      "n": 221,
+      "wins": 168,
+      "losses": 53,
+      "brier": 0.17018838004800446,
+      "logloss": 0.5080254313085203,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def+2_venue-2": {
+      "n": 221,
+      "wins": 168,
+      "losses": 53,
+      "brier": 0.1702274544216921,
+      "logloss": 0.507968639470459,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def-2_venue+2": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17006890444212613,
+      "logloss": 0.5077364334620473,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "def+2_sos-2": {
+      "n": 221,
+      "wins": 168,
+      "losses": 53,
+      "brier": 0.17025430818692294,
+      "logloss": 0.5080018755823803,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def-2_sos+2": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17004269060226174,
+      "logloss": 0.5077071550906715,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "venue+2_sos-2": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17017560523110636,
+      "logloss": 0.5078856848474821,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "venue-2_sos+2": {
+      "n": 221,
+      "wins": 169,
+      "losses": 52,
+      "brier": 0.17012246568755657,
+      "logloss": 0.5078229529938433,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    }
+  },
+  "week": {
+    "3": {
+      "baseline": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12086811096347716,
+        "logloss": 0.38411077181266917,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_def-1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12079303211957834,
+        "logloss": 0.38398289455130036,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_def+1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12094393255958047,
+        "logloss": 0.3842410145450014,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_venue-1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12081274771371121,
+        "logloss": 0.38397276068320746,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_venue+1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12092443477714857,
+        "logloss": 0.3842516024011956,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_sos-1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12081899863862758,
+        "logloss": 0.38395433635489706,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_sos+1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12091788087265126,
+        "logloss": 0.3842691976161129,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+1_venue-1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12088818286511717,
+        "logloss": 0.3841017269062834,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-1_venue+1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12084896696993819,
+        "logloss": 0.38412244508214954,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+1_sos-1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12089468954715091,
+        "logloss": 0.3840841428135668,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-1_sos+1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12084266928224811,
+        "logloss": 0.38414088097517257,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue+1_sos-1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12087475308881955,
+        "logloss": 0.38409326037706815,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue-1_sos+1": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.120861944623434,
+        "logloss": 0.38412927063314384,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_def-2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12071873396724249,
+        "logloss": 0.3838574537988282,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_def+2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12102045911106112,
+        "logloss": 0.38437355195655937,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_venue-2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.1207583552259289,
+        "logloss": 0.38383758354552205,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_venue+2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.1209817080974296,
+        "logloss": 0.3843952359762535,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_sos-2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12077055251214537,
+        "logloss": 0.3837999045611188,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_sos+2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12096829942060223,
+        "logloss": 0.3844296003573701,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+2_venue-2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.1209091630117872,
+        "logloss": 0.38409526563059165,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-2_venue+2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12083077061193678,
+        "logloss": 0.38413679155597313,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+2_sos-2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12092238191315297,
+        "logloss": 0.38406094507828253,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-2_sos+2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12081838721202269,
+        "logloss": 0.38417451786164974,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue+2_sos-2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12088187981782292,
+        "logloss": 0.3840767617298293,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue-2_sos+2": {
+        "n": 53,
+        "wins": 45,
+        "losses": 8,
+        "brier": 0.12085624475937237,
+        "logloss": 0.38414873077866896,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "4": {
+      "baseline": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16133429645973618,
+        "logloss": 0.4908162113608753,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_def-1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.1612599387684048,
+        "logloss": 0.4906575613813429,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_def+1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16141047043352458,
+        "logloss": 0.49097971515057726,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_venue-1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16135291801780557,
+        "logloss": 0.49082044750849274,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_venue+1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16131785660270204,
+        "logloss": 0.4908170603454904,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_sos-1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.1613599011924511,
+        "logloss": 0.4908464304801091,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_sos+1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16131014576896804,
+        "logloss": 0.490789697962374,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+1_venue-1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16142785375855823,
+        "logloss": 0.4909810768902055,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-1_venue+1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16124226379179604,
+        "logloss": 0.49065554634343783,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+1_sos-1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16143502022361464,
+        "logloss": 0.49100777512979626,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-1_sos+1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16123473674148198,
+        "logloss": 0.49062890266407105,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue+1_sos-1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16134240559076657,
+        "logloss": 0.49084472032582394,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue-1_sos+1": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16132770335522228,
+        "logloss": 0.49079134933355906,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_def-2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.1611873904963759,
+        "logloss": 0.4905037802662559,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_def+2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.1614884657428146,
+        "logloss": 0.491148053718378,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_venue-2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16137368575452612,
+        "logloss": 0.4908297174082263,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_venue+2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16130363156050517,
+        "logloss": 0.4908230404829747,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_sos-2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.1613869082812855,
+        "logloss": 0.49088024905620203,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_sos+2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16128749955241473,
+        "logloss": 0.49076699321160294,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+2_venue-2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16152289749534535,
+        "logloss": 0.49115004489710323,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-2_venue+2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16115179298767915,
+        "logloss": 0.49049917761554723,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+2_sos-2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16153685263222048,
+        "logloss": 0.4912034316994283,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-2_sos+2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16113639752235437,
+        "logloss": 0.4904460129075621,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue+2_sos-2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.1613520382362104,
+        "logloss": 0.49087689611209273,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue-2_sos+2": {
+        "n": 56,
+        "wins": 46,
+        "losses": 10,
+        "brier": 0.16132261790682412,
+        "logloss": 0.49077011215669664,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "5": {
+      "baseline": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18372564650189657,
+        "logloss": 0.5364780554553686,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_def-1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.1836823718366485,
+        "logloss": 0.5363462140786021,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_def+1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18376980185914368,
+        "logloss": 0.5366123807756461,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_venue-1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18371182989836493,
+        "logloss": 0.5364109485405443,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_venue+1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18374145474467588,
+        "logloss": 0.5365505410640704,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_sos-1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18365213396353114,
+        "logloss": 0.536262357580674,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_sos+1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.1838009751436225,
+        "logloss": 0.5366997620711745,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+1_venue-1": {
+        "n": 56,
+        "wins": 40,
+        "losses": 16,
+        "brier": 0.18375456771288018,
+        "logloss": 0.5365414707059944,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "def-1_venue+1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.1836967828717239,
+        "logloss": 0.5364149383823574,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+1_sos-1": {
+        "n": 56,
+        "wins": 40,
+        "losses": 16,
+        "brier": 0.18369546423338898,
+        "logloss": 0.5363942415167756,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "def-1_sos+1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18375689565792458,
+        "logloss": 0.5365655141462987,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue+1_sos-1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18366690515050774,
+        "logloss": 0.5363314485056551,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue-1_sos+1": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18378613382146675,
+        "logloss": 0.536629275203035,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_def-2": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.1836399419003574,
+        "logloss": 0.5362168140080326,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_def+2": {
+        "n": 56,
+        "wins": 39,
+        "losses": 17,
+        "brier": 0.183814875217471,
+        "logloss": 0.5367492367064053,
+        "flips": 2,
+        "fixed": 0,
+        "broken": 2
+      },
+      "off+2_venue-2": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18369996591583512,
+        "logloss": 0.5363491340843367,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_venue+2": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18375929016749606,
+        "logloss": 0.5366284833238572,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_sos-2": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18358042648369294,
+        "logloss": 0.5360526221910665,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_sos+2": {
+        "n": 56,
+        "wins": 40,
+        "losses": 16,
+        "brier": 0.1838781303306507,
+        "logloss": 0.5369275197437823,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "def+2_venue-2": {
+        "n": 56,
+        "wins": 40,
+        "losses": 16,
+        "brier": 0.18378348455180632,
+        "logloss": 0.5366050211879057,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "def-2_venue+2": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18366803824529931,
+        "logloss": 0.5363522826802966,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+2_sos-2": {
+        "n": 56,
+        "wins": 40,
+        "losses": 16,
+        "brier": 0.18366631430769556,
+        "logloss": 0.5363139684866536,
+        "flips": 1,
+        "fixed": 0,
+        "broken": 1
+      },
+      "def-2_sos+2": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.1837892469843411,
+        "logloss": 0.5366567221044318,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue+2_sos-2": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.183609898062133,
+        "logloss": 0.5361894440719714,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue-2_sos+2": {
+        "n": 56,
+        "wins": 41,
+        "losses": 15,
+        "brier": 0.18384837621125008,
+        "logloss": 0.5367851100128207,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    },
+    "6": {
+      "baseline": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21201931257169382,
+        "logloss": 0.6133594388024057,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_def-1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21192284725998103,
+        "logloss": 0.613148679313906,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_def+1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21211513571666535,
+        "logloss": 0.6135698037667859,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_venue-1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21193941511971623,
+        "logloss": 0.6131621259295705,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_venue+1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21209924382466586,
+        "logloss": 0.6135572796715169,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+1_sos-1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21203824144783995,
+        "logloss": 0.6133639884796007,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-1_sos+1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21200081083427239,
+        "logloss": 0.6133568612398062,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+1_venue-1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.2120356520133311,
+        "logloss": 0.6133730994250891,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-1_venue+1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21200318668026183,
+        "logloss": 0.613347115141358,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+1_sos-1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21213416832347157,
+        "logloss": 0.6135740768063004,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-1_sos+1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21190445371723812,
+        "logloss": 0.6131458332056093,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue+1_sos-1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21211828067593047,
+        "logloss": 0.6135619381642189,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue-1_sos+1": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.2119209960873135,
+        "logloss": 0.613159588084393,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_def-2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21182578342819283,
+        "logloss": 0.6129376362227905,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_def+2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21221027639390572,
+        "logloss": 0.6137796680693957,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_venue-2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.211859593183177,
+        "logloss": 0.6129654653439142,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_venue+2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.2121791683144932,
+        "logloss": 0.6137555258527908,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off+2_sos-2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.2120575311555141,
+        "logloss": 0.613370356015331,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "off-2_sos+2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21198280085473933,
+        "logloss": 0.6133564066917999,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+2_venue-2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.212052221302299,
+        "logloss": 0.6133881525676715,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-2_venue+2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21198725875411487,
+        "logloss": 0.6133360726085467,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def+2_sos-2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21224890212995645,
+        "logloss": 0.6137894643595796,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "def-2_sos+2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.2117897144372803,
+        "logloss": 0.6129335476374881,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue+2_sos-2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.21221786951826194,
+        "logloss": 0.613767016594732,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      },
+      "venue-2_sos+2": {
+        "n": 56,
+        "wins": 37,
+        "losses": 19,
+        "brier": 0.2118233620373413,
+        "logloss": 0.6129624542656599,
+        "flips": 0,
+        "fixed": 0,
+        "broken": 0
+      }
+    }
+  },
+  "frozen": {
+    "baseline": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.1978724795367952,
+      "logloss": 0.5749187471288872,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+1_def-1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19780260954831477,
+      "logloss": 0.574747446696254,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-1_def+1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19794246878790456,
+      "logloss": 0.575091092271216,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+1_venue-1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.1978256225090406,
+      "logloss": 0.5747865372350575,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-1_venue+1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19792034928467087,
+      "logloss": 0.5750539103677935,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+1_sos-1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19784518770568554,
+      "logloss": 0.5748131730301375,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-1_sos+1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19790089298894745,
+      "logloss": 0.5750283116554904,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "def+1_venue-1": {
+      "n": 112,
+      "wins": 77,
+      "losses": 35,
+      "brier": 0.19789510986310566,
+      "logloss": 0.5749572850655417,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def-1_venue+1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19784998477599286,
+      "logloss": 0.5748810267618577,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "def+1_sos-1": {
+      "n": 112,
+      "wins": 77,
+      "losses": 35,
+      "brier": 0.1979148162784303,
+      "logloss": 0.5749841591615379,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def-1_sos+1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.1978306746875814,
+      "logloss": 0.5748556736759541,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "venue+1_sos-1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.1978925929132191,
+      "logloss": 0.5749466933349369,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "venue-1_sos+1": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19785356495439016,
+      "logloss": 0.574894431643714,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+2_def-2": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19773286266427512,
+      "logloss": 0.5745772251154114,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-2_def+2": {
+      "n": 112,
+      "wins": 76,
+      "losses": 36,
+      "brier": 0.19801257580568835,
+      "logloss": 0.5752644523879005,
+      "flips": 2,
+      "fixed": 0,
+      "broken": 2
+    },
+    "off+2_venue-2": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19777977954950604,
+      "logloss": 0.5746572997141255,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-2_venue+2": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19796922924099467,
+      "logloss": 0.575192004588324,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off+2_sos-2": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19781897881960347,
+      "logloss": 0.5747114891031987,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "off-2_sos+2": {
+      "n": 112,
+      "wins": 77,
+      "losses": 35,
+      "brier": 0.19793046559269503,
+      "logloss": 0.5751419632177911,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def+2_venue-2": {
+      "n": 112,
+      "wins": 77,
+      "losses": 35,
+      "brier": 0.19791785292705263,
+      "logloss": 0.5749965868777887,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def-2_venue+2": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19782764849970708,
+      "logloss": 0.5748441776444216,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "def+2_sos-2": {
+      "n": 112,
+      "wins": 77,
+      "losses": 35,
+      "brier": 0.197957608218826,
+      "logloss": 0.5750517164231166,
+      "flips": 1,
+      "fixed": 0,
+      "broken": 1
+    },
+    "def-2_sos+2": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.1977894807108107,
+      "logloss": 0.5747951348709599,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "venue+2_sos-2": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.19791388379019745,
+      "logloss": 0.5749782303333516,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    },
+    "venue-2_sos+2": {
+      "n": 112,
+      "wins": 78,
+      "losses": 34,
+      "brier": 0.1978358691242957,
+      "logloss": 0.5748737821392403,
+      "flips": 0,
+      "fixed": 0,
+      "broken": 0
+    }
+  },
+  "stat_model": {
+    "baseline": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.18779399579130848,
+      "logloss": 0.5531096518917927,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "off+1_def-1": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18722181620616163,
+      "logloss": 0.5517984179155716,
+      "flips": 28,
+      "fixed": 8,
+      "broken": 20
+    },
+    "off-1_def+1": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.18839781478669082,
+      "logloss": 0.5545083995493966,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "off+1_venue-1": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.18766103592271374,
+      "logloss": 0.5526870457093953,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "off-1_venue+1": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.1879539988141391,
+      "logloss": 0.5535985719134598,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "off+1_sos-1": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18762086066698774,
+      "logloss": 0.5526267196299429,
+      "flips": 28,
+      "fixed": 8,
+      "broken": 20
+    },
+    "off-1_sos+1": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18799662235708572,
+      "logloss": 0.5536693821709038,
+      "flips": 30,
+      "fixed": 9,
+      "broken": 21
+    },
+    "def+1_venue-1": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.1882479872048197,
+      "logloss": 0.5540427053525928,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "def-1_venue+1": {
+      "n": 221,
+      "wins": 156,
+      "losses": 65,
+      "brier": 0.1873649525356035,
+      "logloss": 0.5522442473190045,
+      "flips": 29,
+      "fixed": 8,
+      "broken": 21
+    },
+    "def+1_sos-1": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.18820736844815397,
+      "logloss": 0.5539818628047805,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "def-1_sos+1": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.18740720481041487,
+      "logloss": 0.5523145937717381,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "venue+1_sos-1": {
+      "n": 221,
+      "wins": 156,
+      "losses": 65,
+      "brier": 0.1877656214605556,
+      "logloss": 0.553074534101922,
+      "flips": 29,
+      "fixed": 8,
+      "broken": 21
+    },
+    "venue-1_sos+1": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18784840660282048,
+      "logloss": 0.5532056531088474,
+      "flips": 30,
+      "fixed": 9,
+      "broken": 21
+    },
+    "off+2_def-2": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18668129654351104,
+      "logloss": 0.5505745726018403,
+      "flips": 28,
+      "fixed": 8,
+      "broken": 20
+    },
+    "off-2_def+2": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18903321914779106,
+      "logloss": 0.5559947532364118,
+      "flips": 30,
+      "fixed": 9,
+      "broken": 21
+    },
+    "off+2_venue-2": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.1875546966732426,
+      "logloss": 0.5523302503030815,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "off-2_venue+2": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.18814144845525396,
+      "logloss": 0.5541542955297449,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "off+2_sos-2": {
+      "n": 221,
+      "wins": 156,
+      "losses": 65,
+      "brier": 0.18747654660920193,
+      "logloss": 0.5522197458381768,
+      "flips": 29,
+      "fixed": 8,
+      "broken": 21
+    },
+    "off-2_sos+2": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18822939427518762,
+      "logloss": 0.5543067450172877,
+      "flips": 30,
+      "fixed": 9,
+      "broken": 21
+    },
+    "def+2_venue-2": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.18872646340352475,
+      "logloss": 0.5550430205483149,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "def-2_venue+2": {
+      "n": 221,
+      "wins": 156,
+      "losses": 65,
+      "brier": 0.18696130116061543,
+      "logloss": 0.55144686435418,
+      "flips": 29,
+      "fixed": 8,
+      "broken": 21
+    },
+    "def+2_sos-2": {
+      "n": 221,
+      "wins": 158,
+      "losses": 63,
+      "brier": 0.18864640918568334,
+      "logloss": 0.5549303484733575,
+      "flips": 29,
+      "fixed": 9,
+      "broken": 20
+    },
+    "def-2_sos+2": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18704791994932513,
+      "logloss": 0.5515975672166475,
+      "flips": 30,
+      "fixed": 9,
+      "broken": 21
+    },
+    "venue+2_sos-2": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.1877630676482721,
+      "logloss": 0.5531000073018307,
+      "flips": 28,
+      "fixed": 8,
+      "broken": 20
+    },
+    "venue-2_sos+2": {
+      "n": 221,
+      "wins": 157,
+      "losses": 64,
+      "brier": 0.18792905378003988,
+      "logloss": 0.5533628223478297,
+      "flips": 30,
+      "fixed": 9,
+      "broken": 21
+    }
+  }
+}
