@@ -137,6 +137,8 @@ def build_features(c):
                     offense_abs=float(abs(off)),defense_abs=float(abs(defense)),
                     min_sos=float(min(hs[2],aws[2])),
                     max_off=float(max(hs[0],aws[0])),
+                    home_sos=float(hs[2]),away_sos=float(aws[2]),
+                    home_off=float(hs[0]),away_off=float(aws[0]),
                     prior_fbs_min=int(min(n_games[hi],n_games[ai])),
                     prior_fbs_max=int(max(n_games[hi],n_games[ai])),
                     home_venue_n=prior_home_count,
@@ -228,8 +230,10 @@ def compute(df,spec):
     elif kind=="gap":
         event=np.abs(df.v15.to_numpy(float)-df.market.to_numpy(float))>=spec["threshold"]
     elif kind=="weak_opp":
-        event=(df.min_sos.to_numpy(float)<=spec["threshold"])&\
-              (df.max_off.to_numpy(float)>=.5)
+        event=((df.home_sos.to_numpy(float)<=spec["threshold"])&
+               (df.home_off.to_numpy(float)>=.5)) | (
+               (df.away_sos.to_numpy(float)<=spec["threshold"])&
+               (df.away_off.to_numpy(float)>=.5))
         shift=spec["shift"]
         delta[event]=COEF*shift*(df.sos.to_numpy(float)[event]-df.off.to_numpy(float)[event])
     elif kind=="unit_mismatch":
@@ -364,6 +368,7 @@ def analyze(df):
              for fam,k in selected.items()]
     extra=df[["year","week","game_id","game","home_won","v15","market",
               "off","defense","sos","venue","min_sos","max_off",
+              "home_sos","away_sos","home_off","away_off",
               "prior_fbs_min","home_venue_n","away_venue_n",
               "provenance"]].copy()
     extra["testc_baseline"]=base
