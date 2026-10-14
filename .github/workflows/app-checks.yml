@@ -17,6 +17,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Research 2024 and 2025 ATS discrepancies
+        if: github.event_name == 'pull_request'
+        run: python research/ats_discrepancy_2024_2025.py
       - name: Compile Python source
         run: |
           python -m compileall -q app.py model_v1_5.py matchup_advantages.py
