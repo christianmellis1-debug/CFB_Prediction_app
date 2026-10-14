@@ -1,11 +1,24 @@
 {
-  "results": {},
+  "results": {
+    "401871053": {
+      "away_score": 24.0,
+      "checked_at": "2026-10-14T06:41:09.042789+00:00",
+      "home_score": 27.0,
+      "result": "Not selected"
+    },
+    "401871067": {
+      "away_score": 30.0,
+      "checked_at": "2026-10-14T06:41:09.042771+00:00",
+      "home_score": 33.0,
+      "result": "Not selected"
+    }
+  },
   "run_status": {
-    "checked_at": "2026-10-13T19:57:09.139806+00:00",
+    "checked_at": "2026-10-14T06:41:09.042803+00:00",
     "eligible_in_window": 2,
     "missing_events": [],
-    "new_results": 0,
-    "new_snapshots": 0,
+    "new_results": 2,
+    "new_snapshots": 2,
     "selected_total": 0,
     "skipped": {}
   },
@@ -58,6 +71,52 @@
       "selected": false,
       "week": 7
     },
+    "401871054": {
+      "Confidence": 0.6711143299015521,
+      "Model Version": "V1.5",
+      "Predicted Side": "Away",
+      "Predicted Winner": "Kennesaw State",
+      "Value Line": "Unavailable",
+      "Value Market": "",
+      "Value Pick": "",
+      "Value Price": "Unavailable",
+      "Value Reason": "",
+      "Value Side": "",
+      "Value Source": "",
+      "Value Stage": 0,
+      "Value Tier": "",
+      "away": "Kennesaw State",
+      "away_id": "338",
+      "captured_at": "2026-10-14T06:41:09.042481+00:00",
+      "event_id": "401871054",
+      "home": "Missouri State",
+      "home_id": "2623",
+      "kickoff": "2026-10-14T23:30:00+00:00",
+      "market": {
+        "Away Spread": "-3",
+        "Away Spread Odds": "-112",
+        "DK Away ML": "-162",
+        "DK Home ML": "+136",
+        "Home Spread": "+3",
+        "Home Spread Odds": "-108",
+        "Spread Source": "DraftKings"
+      },
+      "provenance": {
+        "box_sha256": "74a897e3e3de2aeff4459dcc803e168099bdcac606f4e6c52f0823c8a6d7d356",
+        "commit": "5998f1a6637330046d46500e903c986ac8915634",
+        "fallback_team_ids": [],
+        "model": "production model_v1_5.predict_week",
+        "stats_cutoff_exclusive_week": 7,
+        "summary_sha256": "2b3b789b25654c39b99593c4b63c0503587d4bfe7482873ba9935601794d9fa4",
+        "waterfall": "production model_v1_5.add_waterfall_value",
+        "weather_status": "not-requested"
+      },
+      "quote_status": "DraftKings",
+      "scheduled_kickoff": "2026-10-14T23:30:00+00:00",
+      "season": 2026,
+      "selected": false,
+      "week": 7
+    },
     "401871067": {
       "Confidence": 0.5586209651990341,
       "Model Version": "V1.5",
@@ -100,6 +159,52 @@
       },
       "quote_status": "DraftKings",
       "scheduled_kickoff": "2026-10-13T23:00:00+00:00",
+      "season": 2026,
+      "selected": false,
+      "week": 7
+    },
+    "401871068": {
+      "Confidence": 0.5508804016261237,
+      "Model Version": "V1.5",
+      "Predicted Side": "Home",
+      "Predicted Winner": "Sam Houston",
+      "Value Line": "Unavailable",
+      "Value Market": "",
+      "Value Pick": "",
+      "Value Price": "Unavailable",
+      "Value Reason": "",
+      "Value Side": "",
+      "Value Source": "",
+      "Value Stage": 0,
+      "Value Tier": "",
+      "away": "Western Kentucky",
+      "away_id": "98",
+      "captured_at": "2026-10-14T06:41:09.042662+00:00",
+      "event_id": "401871068",
+      "home": "Sam Houston",
+      "home_id": "2534",
+      "kickoff": "2026-10-15T00:00:00+00:00",
+      "market": {
+        "Away Spread": "-1.5",
+        "Away Spread Odds": "-115",
+        "DK Away ML": "-125",
+        "DK Home ML": "+105",
+        "Home Spread": "+1.5",
+        "Home Spread Odds": "-105",
+        "Spread Source": "DraftKings"
+      },
+      "provenance": {
+        "box_sha256": "74a897e3e3de2aeff4459dcc803e168099bdcac606f4e6c52f0823c8a6d7d356",
+        "commit": "5998f1a6637330046d46500e903c986ac8915634",
+        "fallback_team_ids": [],
+        "model": "production model_v1_5.predict_week",
+        "stats_cutoff_exclusive_week": 7,
+        "summary_sha256": "2b3b789b25654c39b99593c4b63c0503587d4bfe7482873ba9935601794d9fa4",
+        "waterfall": "production model_v1_5.add_waterfall_value",
+        "weather_status": "ok"
+      },
+      "quote_status": "DraftKings",
+      "scheduled_kickoff": "2026-10-15T00:00:00+00:00",
       "season": 2026,
       "selected": false,
       "week": 7
