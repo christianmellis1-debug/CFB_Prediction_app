@@ -36,8 +36,8 @@ class MarketMatchupConflictTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.helpers = load_helpers()
-        cls.conflict = cls.helpers["is_market_matchup_conflict"]
-        cls.risky = cls.helpers["should_flag_risky"]
+        cls.conflict = staticmethod(cls.helpers["is_market_matchup_conflict"])
+        cls.risky = staticmethod(cls.helpers["should_flag_risky"])
 
     def test_near_tie_with_one_advantage_flags_and_enters_risky_tab_even_if_tiered(self):
         check = record()
