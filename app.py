@@ -97,7 +97,7 @@ TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
     ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores."),
-    ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners below 80% model confidence with two or fewer of the five matchup advantages for the selected week. Official Tier 1–6 games and High/Very High confidence picks are excluded so the labels do not contradict each other. Missing data is shown separately."),
+    ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners below 80% confidence with two or fewer five-metric advantages, plus market–matchup conflicts. A conflict is a Test C 50–51% toss-up where the selected team has at most one advantage against at least four for its opponent; conflicts are included even when an official tier also applies. Missing matchup data is not scored."),
     ("export", None, "Export your picks", "Use Export picks above the navigation to download all picks for this week or only the picks matching your Game cards filters. Open the CSV in Excel to compare matchups."),
     ("results", "Model results", "Check model performance", "Compare model wins, losses, and accuracy by confidence, plus Value Pick records overall and by tier. Value Pick tracking starts in Week 3; Weeks 1 and 2 are excluded from the tier record."),
     ("scenario", "What-if bets", "Try a betting scenario", "Choose picks and stakes below to see potential profit if they win and the amount lost if they lose. Missing moneylines are excluded. A scenario does not place or record bets."),
@@ -215,11 +215,38 @@ def confidence_performance(frame):
     return pd.DataFrame(rows)
 
 
-def should_flag_risky(scored, value_selected, confidence):
-    """Risk warnings apply only to non-tiered picks below 80% model confidence."""
+def is_market_matchup_conflict(record, selected_side, market_blend_used, confidence):
+    """Flag a near-even Test C winner despite a strong opposing five-metric edge.
+
+    This is descriptive risk screening, not a forecast correction. Missing
+    matchup metrics or V1.5 fallback predictions cannot trigger the flag.
+    The 50–51% band is measured on the actual, unrounded win probability.
+    """
+    if record.get("status") != "ok" or not bool(market_blend_used):
+        return False
+    if selected_side not in ("home", "away"):
+        return False
     try:
         confidence = float(confidence)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
+        return False
+    if not np.isfinite(confidence) or not (0.50 <= confidence <= 0.51):
+        return False
+    selected = assess(record, selected_side)
+    other = assess(record, "away" if selected_side == "home" else "home")
+    return bool(
+        selected is not None and other is not None
+        and selected["count"] <= 1 and other["count"] >= 4
+    )
+
+
+def should_flag_risky(scored, value_selected, confidence, market_conflict=False):
+    """Include near-even market conflicts; retain original non-tiered rule."""
+    if market_conflict:
+        return True
+    try:
+        confidence = float(confidence)
+    except (TypeError, ValueError, OverflowError):
         return False
     return bool(
         scored is not None
@@ -3228,21 +3255,55 @@ with cards_tab:
             is_tiered = bool(r.get("Value Selected", False))
             confidence_value = pd.to_numeric(r.get("Confidence"), errors="coerce")
             is_high_confidence = pd.notna(confidence_value) and float(confidence_value) >= 0.80
+            scored = assess(check, summary_side)
+            market_conflict = is_market_matchup_conflict(
+                check, summary_side, r.get("Market Blend Used", False), confidence_value,
+            )
+            is_risky = should_flag_risky(
+                scored, is_tiered, confidence_value, market_conflict=market_conflict,
+            )
+            if is_risky:
+                risky_indices.append(card_idx)
+            # One clear risk banner, instead of a duplicate embedded in the metric details.
             advantage_note = advantage_html(
-                check,
-                "home" if r["Predicted Side"] == "Home" else "away",
-                r["Predicted Winner"],
-                suppress_risk=is_tiered or is_high_confidence,
+                check, summary_side, r["Predicted Winner"],
+                suppress_risk=is_tiered or is_high_confidence or is_risky,
             )
             run_detail = rushing_matchup_html(
                 rush_checks.get(str(int(game.iloc[0]["game_id"])), {}),
                 r["Home Team"], r["Away Team"],
             ) if len(game) == 1 else ""
-            scored = assess(check, "home" if r["Predicted Side"] == "Home" else "away")
-            is_risky = should_flag_risky(scored, is_tiered, confidence_value)
-            if is_risky:
-                risky_indices.append(card_idx)
-            warning = ('<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;border-radius:10px;background:#e9a23b20"><span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9a23b;color:#171717;font-size:25px;font-weight:900">!</span><div><strong>RISKY PICK · MATCHUP WARNING</strong><br><span>' + str(scored["count"]) + '/5 advantages for ' + escape(str(r["Predicted Winner"])) + '</span></div></div>') if is_risky else ""
+            warning = ""
+            visible_risk = ""
+            if market_conflict:
+                opponent_scored = assess(check, "away" if summary_side == "home" else "home")
+                opponent_count = opponent_scored["count"]
+                venue_warning = " · selected team is on the road" if summary_side == "away" else ""
+                warning = (
+                    '<div style="padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;'
+                    'border-radius:10px;background:#e9a23b20">'
+                    '<strong>⚠ RISKY PICK · MARKET–MATCHUP CONFLICT</strong>'
+                    '<p>' + escape(str(r["Predicted Winner"])) + ': ' + str(scored["count"])
+                    + '/5 advantages; ' + escape(str(summary_opponent)) + ': '
+                    + str(opponent_count) + '/5. Test C winner chance '
+                    + f'{float(confidence_value):.2%}' + escape(venue_warning) + '.</p>'
+                    '<p>The market-weighted pick disagrees with the statistical matchup '
+                    'in an essentially even game. No clear edge: this is a caution flag, '
+                    'not a changed winner or Value Pick tier.</p></div>'
+                )
+                visible_risk = (
+                    '<div style="padding:8px 11px;margin:8px 0;border-left:3px solid #e9a23b;'
+                    'background:#e9a23b18;border-radius:5px;font-size:.88rem">'
+                    '⚠ Market–matchup conflict · No clear edge</div>'
+                )
+            elif is_risky:
+                warning = (
+                    '<div style="padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;'
+                    'border-radius:10px;background:#e9a23b20">'
+                    '<strong>⚠ RISKY PICK · MATCHUP WARNING</strong>'
+                    '<p>' + str(scored["count"]) + '/5 advantages for '
+                    + escape(str(r["Predicted Winner"])) + '.</p></div>'
+                )
             gotw_note = ""
             if bool(r.get("Game of Week", False)):
                 gotw_team = escape(str(r.get("Game of Week Team", "")))
@@ -3291,7 +3352,7 @@ with cards_tab:
 {final_score_html}
 <div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Model win chance</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
+<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{visible_risk}{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
                 if card_index % 2 == 0:
@@ -3361,14 +3422,14 @@ with cards_tab:
                 tour_at("risky")
                 st.subheader(f"Risky picks · {len(risky_indices)}")
                 st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
-                st.write("A warning means a non-tiered pick below 80% model confidence has 0, 1 or 2 of the five matchup advantages. Official Tier 1–6 Value Picks and High/Very High confidence picks (80%+) are excluded so the labels never contradict each other. Applies to P4 vs. P4 (including Notre Dame) and G6 vs. G6.")
+                st.write("This tab includes (1) non-tiered picks below 80% confidence with 0–2 of the five matchup advantages and (2) Market–Matchup Conflicts: Test C selections with 50–51% unrounded win probability and 0–1 advantages against an opponent with at least 4. Market conflicts stay flagged even if an official Value Pick tier applies. The prediction, odds and tier are unchanged.")
                 if not advantage_checks:
                     st.info(advantage_error)
                 elif risky_indices:
                     render_pick_cards(pred.loc[risky_indices], "risky")
                 else:
-                    st.info("No non-tiered picks below 80% confidence meet the risk threshold this week.")
-                st.caption("Tiered games, High/Very High confidence picks (80%+), and games with missing metrics are not rated as risky. Picks and model confidence are unchanged.")
+                    st.info("No qualifying matchup warnings or market–matchup conflicts this week.")
+                st.caption("Ordinary matchup warnings exclude tiered and 80%+ picks; the near-even market-conflict rule is an additional exception. Missing matchup data cannot trigger either warning. Risk flags are descriptive, not proven betting edges, and never change picks or confidence.")
 if performance_tab.open:
     with performance_tab:
         show_weight_challenger_comparison(st, season, selected_week)
