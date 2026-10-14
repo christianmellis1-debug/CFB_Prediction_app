@@ -19,7 +19,7 @@ def season_data(year):
     print("DIAGNOSTIC", year, "schedule", schedule.shape, "odds", odds.shape)
     print("DIAGNOSTIC", year, "odds columns", list(odds.columns))
     print("DIAGNOSTIC", year, "schedule columns", list(schedule.columns))
-    needed = ["game_id", "week", "season_type", "fbs_game", "completed", "home_id", "away_id", "home_team", "away_team", "home_points", "away_points"]
+    needed = ["game_id", "week", "season_type", "home_division", "away_division", "completed", "home_id", "away_id", "home_team", "away_team", "home_points", "away_points"]
     missing = set(needed) - set(schedule.columns)
     if missing:
         raise ValueError(f"Schedule missing: {missing}")
@@ -29,7 +29,7 @@ def season_data(year):
     schedule = schedule.copy()
     schedule = schedule[
         schedule["season_type"].astype(str).str.lower().eq("regular")
-        & truth(schedule["fbs_game"]) & truth(schedule["completed"])
+        & schedule["home_division"].astype(str).str.lower().eq("fbs") & schedule["away_division"].astype(str).str.lower().eq("fbs") & truth(schedule["completed"])
     ].copy()
     for c in ["game_id","week","home_id","away_id","home_points","away_points"]:
         schedule[c] = pd.to_numeric(schedule[c], errors="coerce")
