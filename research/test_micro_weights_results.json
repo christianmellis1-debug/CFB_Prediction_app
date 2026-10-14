@@ -1,0 +1,4475 @@
+{
+  "title": "2026 Weeks3\u20136 paired V1.5 micro-component-weight grid",
+  "created_utc": "2026-10-14T00:32:01.149737+00:00",
+  "grid": "Transfer 1 or 2 percentage points between any ordered pair of V1.5 offense/defense/venue/SOS. Sum stays 100%. Market blend stays 16.9279269/83.0720731.",
+  "n_games": 221,
+  "n_variants": 25,
+  "provenance": {
+    "w3_w4": "Retrospective current-code V1.5 reconstruction checked exactly against pinned research predictions.",
+    "w5_w6": "Original frozen pregame V1.5; reweighted candidate as retrospective log-odds delta without rewriting source.",
+    "market": "Archived DraftKings opening no-vig paired odds from completed matching games; not independently timestamp-verified.",
+    "data_url": "https://raw.githubusercontent.com/christianmellis1-debug/CFB_Prediction_app/research/test-c-head-to-head-weeks3-6-2026-10-13/research/test_c_head_to_head_weeks3_6_games.csv",
+    "model_current_code": true
+  },
+  "selection_on_reconstructed_weeks3_4": "offense+2pp__defense-2pp",
+  "exploratory_best_on_all_4_weeks": "offense+2pp__defense-2pp",
+  "variants": {
+    "official": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.35,
+        "venue": 0.2,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.187794,
+          "log_loss": 0.5531097,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701468,
+          "log_loss": 0.5078483,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1452034,
+            "log_loss": 0.4490386,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208681,
+            "log_loss": 0.3841108,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.185724,
+            "log_loss": 0.5451081,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613343,
+            "log_loss": 0.4908162,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1849136,
+            "log_loss": 0.5462817,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837256,
+            "log_loss": 0.5364781,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2330533,
+            "log_loss": 0.666435,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2120193,
+            "log_loss": 0.6133594,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1660213,
+          "log_loss": 0.4983954,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416581,
+          "log_loss": 0.4389319,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2089835,
+          "log_loss": 0.6063583,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978725,
+          "log_loss": 0.5749187,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense-1pp__defense+1pp": {
+      "weights": {
+        "offense": 0.33999999999999997,
+        "defense": 0.36,
+        "venue": 0.2,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.1883978,
+          "log_loss": 0.5545084,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1702198,
+          "log_loss": 0.5080083,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1457186,
+            "log_loss": 0.4500882,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1209439,
+            "log_loss": 0.384241,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1860957,
+            "log_loss": 0.5461284,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1614105,
+            "log_loss": 0.4909797,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1854287,
+            "log_loss": 0.5474322,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837698,
+            "log_loss": 0.5366124,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2340619,
+            "log_loss": 0.6687909,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2121151,
+            "log_loss": 0.6135698,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1664628,
+          "log_loss": 0.49943,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1417341,
+          "log_loss": 0.4390792,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2097453,
+          "log_loss": 0.6081115,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1979425,
+          "log_loss": 0.5750911,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense+1pp__defense-1pp": {
+      "weights": {
+        "offense": 0.36,
+        "defense": 0.33999999999999997,
+        "venue": 0.2,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1872218,
+          "log_loss": 0.5517984,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1700746,
+          "log_loss": 0.5076906,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1447028,
+            "log_loss": 0.4480254,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.120793,
+            "log_loss": 0.3839829,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.185389,
+            "log_loss": 0.5441644,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1612599,
+            "log_loss": 0.4906576,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1844456,
+            "log_loss": 0.5452666,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1836824,
+            "log_loss": 0.5363462,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 34,
+            "losses": 22,
+            "accuracy": 0.607143,
+            "brier": 0.232072,
+            "log_loss": 0.664178,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2119228,
+            "log_loss": 0.6131487,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1656058,
+          "log_loss": 0.4974179,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1415834,
+          "log_loss": 0.4387882,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.2082588,
+          "log_loss": 0.6047223,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978026,
+          "log_loss": 0.5747474,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense-2pp__defense+2pp": {
+      "weights": {
+        "offense": 0.32999999999999996,
+        "defense": 0.37,
+        "venue": 0.2,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1890332,
+          "log_loss": 0.5559948,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 167,
+          "losses": 54,
+          "accuracy": 0.755656,
+          "brier": 0.1702934,
+          "log_loss": 0.5081706,
+          "flips": 2,
+          "fixes": 0,
+          "breaks": 2
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1462478,
+            "log_loss": 0.451174,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1210205,
+            "log_loss": 0.3843736,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1865043,
+            "log_loss": 0.5472253,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1614885,
+            "log_loss": 0.4911481,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1859915,
+            "log_loss": 0.5487189,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 39,
+            "losses": 17,
+            "accuracy": 0.696429,
+            "brier": 0.1838149,
+            "log_loss": 0.5367492,
+            "flips": 2,
+            "fixes": 0,
+            "breaks": 2
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2350971,
+            "log_loss": 0.6712455,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2122103,
+            "log_loss": 0.6137797,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1669301,
+          "log_loss": 0.5005214,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1418114,
+          "log_loss": 0.4392302,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2105443,
+          "log_loss": 0.6099822,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.1980126,
+          "log_loss": 0.5752645,
+          "flips": 2,
+          "fixes": 0,
+          "breaks": 2
+        }
+      }
+    },
+    "offense+2pp__defense-2pp": {
+      "weights": {
+        "offense": 0.37,
+        "defense": 0.32999999999999996,
+        "venue": 0.2,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1866813,
+          "log_loss": 0.5505746,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.170003,
+          "log_loss": 0.5075353,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1442171,
+            "log_loss": 0.4470487,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1207187,
+            "log_loss": 0.3838575,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1850903,
+            "log_loss": 0.5432971,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1611874,
+            "log_loss": 0.4905038,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1840241,
+            "log_loss": 0.5443863,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1836399,
+            "log_loss": 0.5362168,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 34,
+            "losses": 22,
+            "accuracy": 0.607143,
+            "brier": 0.2311188,
+            "log_loss": 0.6620202,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2118258,
+            "log_loss": 0.6129376,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1652162,
+          "log_loss": 0.4964974,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.14151,
+          "log_loss": 0.4386482,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.2075714,
+          "log_loss": 0.6032032,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1977329,
+          "log_loss": 0.5745772,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense-1pp__venue+1pp": {
+      "weights": {
+        "offense": 0.33999999999999997,
+        "defense": 0.35,
+        "venue": 0.21000000000000002,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.187954,
+          "log_loss": 0.5535986,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701804,
+          "log_loss": 0.5079508,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1453709,
+            "log_loss": 0.4493736,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1209244,
+            "log_loss": 0.3842516,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1855207,
+            "log_loss": 0.5451159,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613179,
+            "log_loss": 0.4908171,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1848831,
+            "log_loss": 0.5463364,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837415,
+            "log_loss": 0.5365505,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2337601,
+            "log_loss": 0.6679849,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2120992,
+            "log_loss": 0.6135573,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1659983,
+          "log_loss": 0.4985623,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.141677,
+          "log_loss": 0.4390008,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2093216,
+          "log_loss": 0.6071606,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1979203,
+          "log_loss": 0.5750539,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense+1pp__venue-1pp": {
+      "weights": {
+        "offense": 0.36,
+        "defense": 0.35,
+        "venue": 0.19,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.187661,
+          "log_loss": 0.552687,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701145,
+          "log_loss": 0.5077493,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1450504,
+            "log_loss": 0.4487404,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208127,
+            "log_loss": 0.3839728,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1859642,
+            "log_loss": 0.5451745,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613529,
+            "log_loss": 0.4908204,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1849797,
+            "log_loss": 0.5463136,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837118,
+            "log_loss": 0.5364109,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2323672,
+            "log_loss": 0.6649511,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2119394,
+            "log_loss": 0.6131621,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1660703,
+          "log_loss": 0.4982845,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416407,
+          "log_loss": 0.438867,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2086734,
+          "log_loss": 0.6056324,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978256,
+          "log_loss": 0.5747865,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense-2pp__venue+2pp": {
+      "weights": {
+        "offense": 0.32999999999999996,
+        "defense": 0.35,
+        "venue": 0.22,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.1881414,
+          "log_loss": 0.5541543,
+          "flips": 2,
+          "fixes": 1,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1702153,
+          "log_loss": 0.5080568,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1455531,
+            "log_loss": 0.4497457,
+            "flips": 2,
+            "fixes": 1,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1209817,
+            "log_loss": 0.3843952,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1853549,
+            "log_loss": 0.5451984,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613036,
+            "log_loss": 0.490823,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1848891,
+            "log_loss": 0.546479,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837593,
+            "log_loss": 0.5366285,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2344872,
+            "log_loss": 0.6696008,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2121792,
+            "log_loss": 0.6137555,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1660017,
+          "log_loss": 0.4987856,
+          "flips": 2,
+          "fixes": 1,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416976,
+          "log_loss": 0.4390737,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2096881,
+          "log_loss": 0.6080399,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1979692,
+          "log_loss": 0.575192,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense+2pp__venue-2pp": {
+      "weights": {
+        "offense": 0.37,
+        "defense": 0.35,
+        "venue": 0.18000000000000002,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.1875547,
+          "log_loss": 0.5523303,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1700835,
+          "log_loss": 0.5076537,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1449117,
+            "log_loss": 0.4484785,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1207584,
+            "log_loss": 0.3838376,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1862403,
+            "log_loss": 0.5453145,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613737,
+            "log_loss": 0.4908297,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1850801,
+            "log_loss": 0.546431,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837,
+            "log_loss": 0.5363491,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2317022,
+            "log_loss": 0.6635335,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2118596,
+            "log_loss": 0.6129655,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1661448,
+          "log_loss": 0.4982291,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416249,
+          "log_loss": 0.438806,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2083912,
+          "log_loss": 0.6049823,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1977798,
+          "log_loss": 0.5746573,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense-1pp__sos+1pp": {
+      "weights": {
+        "offense": 0.33999999999999997,
+        "defense": 0.35,
+        "venue": 0.2,
+        "sos": 0.11
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1879966,
+          "log_loss": 0.5536694,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.170167,
+          "log_loss": 0.5079351,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1454371,
+            "log_loss": 0.4492493,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1209179,
+            "log_loss": 0.3842692,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.185551,
+            "log_loss": 0.5451326,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613101,
+            "log_loss": 0.4907897,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1854382,
+            "log_loss": 0.547634,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.183801,
+            "log_loss": 0.5366998,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2332802,
+            "log_loss": 0.6670677,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2120008,
+            "log_loss": 0.6133569,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1660461,
+          "log_loss": 0.4985105,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416699,
+          "log_loss": 0.4389953,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2093592,
+          "log_loss": 0.6073508,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1979009,
+          "log_loss": 0.5750283,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense+1pp__sos-1pp": {
+      "weights": {
+        "offense": 0.36,
+        "defense": 0.35,
+        "venue": 0.2,
+        "sos": 0.09000000000000001
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1876209,
+          "log_loss": 0.5526267,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701277,
+          "log_loss": 0.507765,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.144984,
+            "log_loss": 0.4488771,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.120819,
+            "log_loss": 0.3839543,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.18593,
+            "log_loss": 0.5451555,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613599,
+            "log_loss": 0.4908464,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1844254,
+            "log_loss": 0.5450151,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1836521,
+            "log_loss": 0.5362624,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 34,
+            "losses": 22,
+            "accuracy": 0.607143,
+            "brier": 0.2328599,
+            "log_loss": 0.6659012,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2120382,
+            "log_loss": 0.613364,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1660205,
+          "log_loss": 0.4983412,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416474,
+          "log_loss": 0.4388714,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.2086426,
+          "log_loss": 0.6054581,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978452,
+          "log_loss": 0.5748132,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "offense-2pp__sos+2pp": {
+      "weights": {
+        "offense": 0.32999999999999996,
+        "defense": 0.35,
+        "venue": 0.2,
+        "sos": 0.12000000000000001
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1882294,
+          "log_loss": 0.5543067,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 168,
+          "losses": 53,
+          "accuracy": 0.760181,
+          "brier": 0.1701884,
+          "log_loss": 0.5080254,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1456853,
+            "log_loss": 0.44951,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1209683,
+            "log_loss": 0.3844296,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1854118,
+            "log_loss": 0.5452296,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1612875,
+            "log_loss": 0.490767,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1859998,
+            "log_loss": 0.5490732,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 40,
+            "losses": 16,
+            "accuracy": 0.714286,
+            "brier": 0.1838781,
+            "log_loss": 0.5369275,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2335414,
+            "log_loss": 0.6678,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2119828,
+            "log_loss": 0.6133564,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1660953,
+          "log_loss": 0.4986871,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416828,
+          "log_loss": 0.4390617,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2097706,
+          "log_loss": 0.6084366,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.1979305,
+          "log_loss": 0.575142,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      }
+    },
+    "offense+2pp__sos-2pp": {
+      "weights": {
+        "offense": 0.37,
+        "defense": 0.35,
+        "venue": 0.2,
+        "sos": 0.08
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 156,
+          "losses": 65,
+          "accuracy": 0.705882,
+          "brier": 0.1874765,
+          "log_loss": 0.5522197,
+          "flips": 2,
+          "fixes": 0,
+          "breaks": 2
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701096,
+          "log_loss": 0.507685,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1447786,
+            "log_loss": 0.4487639,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1207706,
+            "log_loss": 0.3837999,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1861682,
+            "log_loss": 0.5452742,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613869,
+            "log_loss": 0.4908802,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1839726,
+            "log_loss": 0.5438331,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1835804,
+            "log_loss": 0.5360526,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 34,
+            "losses": 22,
+            "accuracy": 0.607143,
+            "brier": 0.2326994,
+            "log_loss": 0.6654655,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2120575,
+            "log_loss": 0.6133704,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.166043,
+          "log_loss": 0.4983472,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416377,
+          "log_loss": 0.4388137,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.208336,
+          "log_loss": 0.6046493,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.197819,
+          "log_loss": 0.5747115,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "defense-1pp__venue+1pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.33999999999999997,
+        "venue": 0.21000000000000002,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 156,
+          "losses": 65,
+          "accuracy": 0.705882,
+          "brier": 0.187365,
+          "log_loss": 0.5522442,
+          "flips": 2,
+          "fixes": 0,
+          "breaks": 2
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701075,
+          "log_loss": 0.5077913,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1448634,
+            "log_loss": 0.4483462,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.120849,
+            "log_loss": 0.3841224,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1851691,
+            "log_loss": 0.5441417,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1612423,
+            "log_loss": 0.4906555,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1843855,
+            "log_loss": 0.5452485,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1836968,
+            "log_loss": 0.5364149,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 34,
+            "losses": 22,
+            "accuracy": 0.607143,
+            "brier": 0.2327649,
+            "log_loss": 0.6656746,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2120032,
+            "log_loss": 0.6133471,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1655709,
+          "log_loss": 0.4975622,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416015,
+          "log_loss": 0.438855,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.2085752,
+          "log_loss": 0.6054616,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.19785,
+          "log_loss": 0.574881,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "defense+1pp__venue-1pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.36,
+        "venue": 0.19,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.188248,
+          "log_loss": 0.5540427,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 168,
+          "losses": 53,
+          "accuracy": 0.760181,
+          "brier": 0.1701868,
+          "log_loss": 0.5079075,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1455586,
+            "log_loss": 0.4497757,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208882,
+            "log_loss": 0.3841017,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1863193,
+            "log_loss": 0.5461643,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1614279,
+            "log_loss": 0.4909811,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1854651,
+            "log_loss": 0.5473912,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 40,
+            "losses": 16,
+            "accuracy": 0.714286,
+            "brier": 0.1837546,
+            "log_loss": 0.5365415,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.233362,
+            "log_loss": 0.6672538,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2120357,
+            "log_loss": 0.6133731,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1664999,
+          "log_loss": 0.4992965,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1417159,
+          "log_loss": 0.4390122,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2094136,
+          "log_loss": 0.6073225,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.1978951,
+          "log_loss": 0.5749573,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      }
+    },
+    "defense-2pp__venue+2pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.32999999999999996,
+        "venue": 0.22,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 156,
+          "losses": 65,
+          "accuracy": 0.705882,
+          "brier": 0.1869613,
+          "log_loss": 0.5514469,
+          "flips": 2,
+          "fixes": 0,
+          "breaks": 2
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1700689,
+          "log_loss": 0.5077364,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1445391,
+            "log_loss": 0.4476988,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208308,
+            "log_loss": 0.3841368,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1846551,
+            "log_loss": 0.5432657,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1611518,
+            "log_loss": 0.4904992,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1838816,
+            "log_loss": 0.5442923,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.183668,
+            "log_loss": 0.5363523,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 34,
+            "losses": 22,
+            "accuracy": 0.607143,
+            "brier": 0.2324968,
+            "log_loss": 0.6649728,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2119873,
+            "log_loss": 0.6133361,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1651492,
+          "log_loss": 0.4967974,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1415462,
+          "log_loss": 0.4387817,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.2081892,
+          "log_loss": 0.6046325,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978276,
+          "log_loss": 0.5748442,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "defense+2pp__venue-2pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.37,
+        "venue": 0.18000000000000002,
+        "sos": 0.1
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.1887265,
+          "log_loss": 0.555043,
+          "flips": 2,
+          "fixes": 1,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 168,
+          "losses": 53,
+          "accuracy": 0.760181,
+          "brier": 0.1702275,
+          "log_loss": 0.5079686,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1459286,
+            "log_loss": 0.450557,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1209092,
+            "log_loss": 0.3840953,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 39,
+            "losses": 17,
+            "accuracy": 0.696429,
+            "brier": 0.1869542,
+            "log_loss": 0.5473096,
+            "flips": 1,
+            "fixes": 1,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1615229,
+            "log_loss": 0.49115,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1860394,
+            "log_loss": 0.5485769,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 40,
+            "losses": 16,
+            "accuracy": 0.714286,
+            "brier": 0.1837835,
+            "log_loss": 0.536605,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2336909,
+            "log_loss": 0.6681311,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2120522,
+            "log_loss": 0.6133882,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.167006,
+          "log_loss": 0.5002647,
+          "flips": 2,
+          "fixes": 1,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1417749,
+          "log_loss": 0.4390959,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2098652,
+          "log_loss": 0.608354,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.1979179,
+          "log_loss": 0.5749966,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      }
+    },
+    "defense-1pp__sos+1pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.33999999999999997,
+        "venue": 0.2,
+        "sos": 0.11
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.1874072,
+          "log_loss": 0.5523146,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1700943,
+          "log_loss": 0.5077761,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1449326,
+            "log_loss": 0.4482274,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208427,
+            "log_loss": 0.3841409,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.185196,
+            "log_loss": 0.5441524,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1612347,
+            "log_loss": 0.4906289,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1849454,
+            "log_loss": 0.5465577,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837569,
+            "log_loss": 0.5365655,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2322794,
+            "log_loss": 0.6647448,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2119045,
+            "log_loss": 0.6131458,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1656184,
+          "log_loss": 0.49751,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1415946,
+          "log_loss": 0.4388503,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2086124,
+          "log_loss": 0.6056512,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978307,
+          "log_loss": 0.5748557,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "defense+1pp__sos-1pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.36,
+        "venue": 0.2,
+        "sos": 0.09000000000000001
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.1882074,
+          "log_loss": 0.5539819,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 168,
+          "losses": 53,
+          "accuracy": 0.760181,
+          "brier": 0.1702002,
+          "log_loss": 0.5079236,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1454952,
+            "log_loss": 0.4499178,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208947,
+            "log_loss": 0.3840841,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1862817,
+            "log_loss": 0.5461393,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.161435,
+            "log_loss": 0.4910078,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1849155,
+            "log_loss": 0.5461042,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 40,
+            "losses": 16,
+            "accuracy": 0.714286,
+            "brier": 0.1836955,
+            "log_loss": 0.5363942,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.233849,
+            "log_loss": 0.6681913,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2121342,
+            "log_loss": 0.6135741,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1664497,
+          "log_loss": 0.4993527,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1417227,
+          "log_loss": 0.4390174,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2093822,
+          "log_loss": 0.6071477,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.1979148,
+          "log_loss": 0.5749842,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      }
+    },
+    "defense-2pp__sos+2pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.32999999999999996,
+        "venue": 0.2,
+        "sos": 0.12000000000000001
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1870479,
+          "log_loss": 0.5515976,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1700427,
+          "log_loss": 0.5077072,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1446835,
+            "log_loss": 0.4474852,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208184,
+            "log_loss": 0.3841745,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1846986,
+            "log_loss": 0.5432733,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1611364,
+            "log_loss": 0.490446,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1850115,
+            "log_loss": 0.546933,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837892,
+            "log_loss": 0.5366567,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2315285,
+            "log_loss": 0.6631214,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2117897,
+            "log_loss": 0.6129335,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1652417,
+          "log_loss": 0.4966974,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1415322,
+          "log_loss": 0.4387727,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.20827,
+          "log_loss": 0.6050272,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1977895,
+          "log_loss": 0.5747951,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "defense+2pp__sos-2pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.37,
+        "venue": 0.2,
+        "sos": 0.08
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 158,
+          "losses": 63,
+          "accuracy": 0.714932,
+          "brier": 0.1886464,
+          "log_loss": 0.5549303,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 221,
+          "wins": 168,
+          "losses": 53,
+          "accuracy": 0.760181,
+          "brier": 0.1702543,
+          "log_loss": 0.5080019,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1458072,
+            "log_loss": 0.4508637,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1209224,
+            "log_loss": 0.3840609,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.186868,
+            "log_loss": 0.5472451,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1615369,
+            "log_loss": 0.4912034,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1849503,
+            "log_loss": 0.5460244,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 40,
+            "losses": 16,
+            "accuracy": 0.714286,
+            "brier": 0.1836663,
+            "log_loss": 0.536314,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2346652,
+            "log_loss": 0.6700132,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2122489,
+            "log_loss": 0.6137895,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.1669027,
+          "log_loss": 0.5003808,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1417885,
+          "log_loss": 0.4391066,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2098077,
+          "log_loss": 0.6080188,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.1979576,
+          "log_loss": 0.5750517,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        }
+      }
+    },
+    "venue-1pp__sos+1pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.35,
+        "venue": 0.19,
+        "sos": 0.11
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1878484,
+          "log_loss": 0.5532057,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701341,
+          "log_loss": 0.5078341,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1452756,
+            "log_loss": 0.4489248,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208619,
+            "log_loss": 0.3841293,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1857697,
+            "log_loss": 0.5451534,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613277,
+            "log_loss": 0.4907913,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1854852,
+            "log_loss": 0.5476182,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1837861,
+            "log_loss": 0.5366293,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.2325824,
+            "log_loss": 0.6655398,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.211921,
+            "log_loss": 0.6131596,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1660799,
+          "log_loss": 0.4983633,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416517,
+          "log_loss": 0.4389281,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2090338,
+          "log_loss": 0.606579,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978536,
+          "log_loss": 0.5748944,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "venue+1pp__sos-1pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.35,
+        "venue": 0.21000000000000002,
+        "sos": 0.09000000000000001
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 156,
+          "losses": 65,
+          "accuracy": 0.705882,
+          "brier": 0.1877656,
+          "log_loss": 0.5530745,
+          "flips": 2,
+          "fixes": 0,
+          "breaks": 2
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701607,
+          "log_loss": 0.5078655,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1451431,
+            "log_loss": 0.4491858,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208748,
+            "log_loss": 0.3840933,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1857053,
+            "log_loss": 0.5451177,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613424,
+            "log_loss": 0.4908447,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1843756,
+            "log_loss": 0.5450219,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1836669,
+            "log_loss": 0.5363314,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 34,
+            "losses": 22,
+            "accuracy": 0.607143,
+            "brier": 0.2335552,
+            "log_loss": 0.6674072,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2121183,
+            "log_loss": 0.6135619,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1659824,
+          "log_loss": 0.4984719,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416655,
+          "log_loss": 0.438938,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.2089654,
+          "log_loss": 0.6062146,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978926,
+          "log_loss": 0.5749467,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "venue-2pp__sos+2pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.35,
+        "venue": 0.18000000000000002,
+        "sos": 0.12000000000000001
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1879291,
+          "log_loss": 0.5533628,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701225,
+          "log_loss": 0.507823,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 42,
+            "losses": 11,
+            "accuracy": 0.792453,
+            "brier": 0.1453597,
+            "log_loss": 0.4488444,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208562,
+            "log_loss": 0.3841487,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1858423,
+            "log_loss": 0.5452536,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.1613226,
+            "log_loss": 0.4907701,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1860908,
+            "log_loss": 0.5490319,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1838484,
+            "log_loss": 0.5367851,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 35,
+            "losses": 21,
+            "accuracy": 0.625,
+            "brier": 0.232143,
+            "log_loss": 0.6647222,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2118234,
+            "log_loss": 0.6129625,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 80,
+          "losses": 29,
+          "accuracy": 0.733945,
+          "brier": 0.1661581,
+          "log_loss": 0.4983758,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416463,
+          "log_loss": 0.4389267,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 77,
+          "losses": 35,
+          "accuracy": 0.6875,
+          "brier": 0.2091169,
+          "log_loss": 0.606877,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1978359,
+          "log_loss": 0.5748738,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    },
+    "venue+2pp__sos-2pp": {
+      "weights": {
+        "offense": 0.35,
+        "defense": 0.35,
+        "venue": 0.22,
+        "sos": 0.08
+      },
+      "all": {
+        "v15": {
+          "n": 221,
+          "wins": 157,
+          "losses": 64,
+          "accuracy": 0.710407,
+          "brier": 0.1877631,
+          "log_loss": 0.5531,
+          "flips": 3,
+          "fixes": 1,
+          "breaks": 2
+        },
+        "testc": {
+          "n": 221,
+          "wins": 169,
+          "losses": 52,
+          "accuracy": 0.764706,
+          "brier": 0.1701756,
+          "log_loss": 0.5078857,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "by_week": {
+        "3": {
+          "v15": {
+            "n": 53,
+            "wins": 43,
+            "losses": 10,
+            "accuracy": 0.811321,
+            "brier": 0.1450946,
+            "log_loss": 0.449366,
+            "flips": 2,
+            "fixes": 1,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 53,
+            "wins": 45,
+            "losses": 8,
+            "accuracy": 0.849057,
+            "brier": 0.1208819,
+            "log_loss": 0.3840768,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "4": {
+          "v15": {
+            "n": 56,
+            "wins": 38,
+            "losses": 18,
+            "accuracy": 0.678571,
+            "brier": 0.1857135,
+            "log_loss": 0.5451821,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 46,
+            "losses": 10,
+            "accuracy": 0.821429,
+            "brier": 0.161352,
+            "log_loss": 0.4908769,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "5": {
+          "v15": {
+            "n": 56,
+            "wins": 42,
+            "losses": 14,
+            "accuracy": 0.75,
+            "brier": 0.1838708,
+            "log_loss": 0.5438386,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          },
+          "testc": {
+            "n": 56,
+            "wins": 41,
+            "losses": 15,
+            "accuracy": 0.732143,
+            "brier": 0.1836099,
+            "log_loss": 0.5361894,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        },
+        "6": {
+          "v15": {
+            "n": 56,
+            "wins": 34,
+            "losses": 22,
+            "accuracy": 0.607143,
+            "brier": 0.2340876,
+            "log_loss": 0.6684562,
+            "flips": 1,
+            "fixes": 0,
+            "breaks": 1
+          },
+          "testc": {
+            "n": 56,
+            "wins": 37,
+            "losses": 19,
+            "accuracy": 0.660714,
+            "brier": 0.2122179,
+            "log_loss": 0.613767,
+            "flips": 0,
+            "fixes": 0,
+            "breaks": 0
+          }
+        }
+      },
+      "reconstructed_w3_4": {
+        "v15": {
+          "n": 109,
+          "wins": 81,
+          "losses": 28,
+          "accuracy": 0.743119,
+          "brier": 0.165963,
+          "log_loss": 0.4985926,
+          "flips": 2,
+          "fixes": 1,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 109,
+          "wins": 91,
+          "losses": 18,
+          "accuracy": 0.834862,
+          "brier": 0.1416739,
+          "log_loss": 0.4389466,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      },
+      "frozen_w5_6": {
+        "v15": {
+          "n": 112,
+          "wins": 76,
+          "losses": 36,
+          "accuracy": 0.678571,
+          "brier": 0.2089792,
+          "log_loss": 0.6061474,
+          "flips": 1,
+          "fixes": 0,
+          "breaks": 1
+        },
+        "testc": {
+          "n": 112,
+          "wins": 78,
+          "losses": 34,
+          "accuracy": 0.696429,
+          "brier": 0.1979139,
+          "log_loss": 0.5749782,
+          "flips": 0,
+          "fixes": 0,
+          "breaks": 0
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Weights are screened post-hoc on already resolved 2026 weeks, so a winner gain alone does not confirm future improvement.",
+    "W5-W6 reweighted candidates are reconstructed log-odds deltas to real frozen original V1.5 probabilities, not archived independent challenger picks.",
+    "The 2026 game set contains 221 paired-price matches; 6 W3/W4 lack valid odds and 2 W6 have no frozen base prediction.",
+    "The Test C blend is very market-heavy, so a change in V1.5 may alter Brier without altering winners.",
+    "Any promotion requires cross-year, genuinely unseen tests and no changes to the independently selected betting waterfall."
+  ]
+}
