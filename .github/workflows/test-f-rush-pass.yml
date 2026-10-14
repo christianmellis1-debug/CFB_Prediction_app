@@ -1,0 +1,39 @@
+name: Research Test F genuine rush pass matchups
+on:
+  push:
+    branches:
+      - research/test-f-rush-pass-specific-matchups-2026-10-13
+    paths:
+      - 'research/test_f_rush_pass_matchups.py'
+      - '.github/workflows/test-f-rush-pass.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: test-f-rush-pass
+  cancel-in-progress: false
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned dependencies
+        run: pip install pandas==2.2.3 numpy==2.2.6 scipy==1.15.3
+      - name: Syntax check
+        run: python -m py_compile research/test_f_rush_pass_matchups.py
+      - name: Evaluate matched 2024–2026 FBS historical games
+        run: PYTHONPATH=. python -u research/test_f_rush_pass_matchups.py
+      - name: Store game-level and aggregate results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/test_f_matchups_results.json research/test_f_matchups_games.csv
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Test F rushing passing matchup backtests'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
