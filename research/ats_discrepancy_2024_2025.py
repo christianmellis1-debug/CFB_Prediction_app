@@ -78,6 +78,10 @@ def run(season, games):
                     "favored_pre_ATS":str(home if better_home else away),
                     "other_pre_ATS":str(away if better_home else home),
                     "net_gap":netgap,"win_gap":wingap,
+                    "home_team":str(g.home_team),"away_team":str(g.away_team),
+                    "home_points":int(g.home_points),"away_points":int(g.away_points),
+                    "stronger_is_home":bool(better_home),
+                    "stronger_line":(-float(spread) if not better_home else float(spread)) if pd.notna(spread) else None,
                     "min_lined_games":min(sum(home),sum(away)),
                     "better_ats_won_su":int((diff>0)==better_home) if diff != 0 else -1,
                     "better_ats_covered":cover,
@@ -123,6 +127,16 @@ if __name__=="__main__":
     for year in [2024,2025]:
         rows.extend(run(year,season_data(year)))
     print("ALL_ROWS",len(rows))
+    for r in sorted((r for r in rows if r["season"]==2025 and r["net_gap"]>=7),key=lambda r:(r["week"],r["game_id"])):
+        line=r["stronger_line"]
+        print("DETAIL2025|"+ "|".join([
+            str(r["week"]),str(r["net_gap"]),str(r["favored_by_ats"]),
+            r["home_team"],r["away_team"],str(r["home_points"]),str(r["away_points"]),
+            f"{line:+g}" if line is not None else "N/A",
+            "W" if r["better_ats_won_su"]==1 else "L",
+            "W" if r["better_ats_covered"]==1 else "L" if r["better_ats_covered"]==0 else "P",
+            r["favored_pre_ATS"],r["other_pre_ATS"],str(r["game_id"])
+        ]))
     summarize(rows,"net_gap")
     summarize(rows,"win_gap")
     summarize(rows,"net_gap",min_sample=3)
