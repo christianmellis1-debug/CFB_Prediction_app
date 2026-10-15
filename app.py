@@ -3374,33 +3374,6 @@ with cards_tab:
                     with st.expander("Details", expanded=False):
                         details = risky_card_details if prefix == "risky" else card_details
                         st.markdown(details[row_id], unsafe_allow_html=True)
-                        # Explicitly requested analysis: keep the same original
-                        # red_zone_matchup_html computations and free cached feed,
-                        # but don't fetch all teams' logs on initial page load.
-                        if float(pick["Confidence"]) < .80 and len(matchup) == 1:
-                            detail_id = int(pick["Game ID"])
-                            rz_key = f"red_zone_detail_{season}_{selected_week}_{detail_id}"
-                            if st.button(
-                                "Load red-zone touchdown comparison",
-                                key=f"load_red_zone_{prefix}_{season}_{selected_week}_{detail_id}",
-                                help="Fetch verified prior-game red-zone touchdown rates for this matchup only.",
-                            ):
-                                with st.spinner("Loading red-zone comparison..."):
-                                    try:
-                                        index = red_zone_team_index(season)
-                                        rz_html = red_zone_matchup_html(
-                                            pick, matchup, schedule, season, selected_week, index,
-                                        )
-                                    except (OSError, ValueError):
-                                        rz_html = ""
-                                st.session_state[rz_key] = rz_html or (
-                                    "Red-zone touchdown comparison unavailable for this matchup."
-                                )
-                            if rz_key in st.session_state:
-                                st.markdown(
-                                    st.session_state[rz_key],
-                                    unsafe_allow_html=True,
-                                )
         gotw_mask = filtered.get("Game of Week", pd.Series(False, index=filtered.index)).fillna(False).astype(bool)
         gotw_rows = filtered.loc[gotw_mask].copy()
         other_rows = filtered.loc[~gotw_mask].copy()
