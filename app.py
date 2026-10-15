@@ -3009,6 +3009,7 @@ with cards_tab:
     if not pred.empty and show_full_cards:
         cards = {}
         card_details = {}
+        risky_card_details = {}
         risky_indices = []
         try:
             pregame_boxes = download_advantage_boxes(season)
@@ -3330,13 +3331,19 @@ with cards_tab:
                 + escape(str(r["Value Line"])) + ' · '
                 + escape(str(r.get("Value Source", "Unavailable"))) + '</div></div>'
             ) if r.get("Value Selected", False) else ""
-            card_details[card_idx] = (
-                explanation_html + warning + advantage_note + run_detail
-                + str(r.get("Line Movement HTML", ""))
+            # The Risky picks tab itself already signals caution, so its
+            # details should not repeat the matchup-warning banner or the
+            # five-metric checklist. Keep the checks for risk selection.
+            other_details = (
+                run_detail + str(r.get("Line Movement HTML", ""))
                 + ('<div class="card-details"><strong>Things to watch</strong>'
                    + risk + missing_data_note + '</div>'
                    if risk or missing_data_note else '')
             )
+            card_details[card_idx] = (
+                explanation_html + warning + advantage_note + other_details
+            )
+            risky_card_details[card_idx] = explanation_html + other_details
             away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
             home_team_class = "team-line predicted-team" if r["Predicted Side"] == "Home" else "team-line"
             away_pick_tag = '<span class="pick-indicator">✓ Pick</span>' if r["Predicted Side"] == "Away" else ""
@@ -3365,7 +3372,8 @@ with cards_tab:
                 with card_columns[card_index % 2], st.container(border=True, key=f"{prefix}_card_{season}_{selected_week}_{card_index}"):
                     st.markdown(card, unsafe_allow_html=True)
                     with st.expander("Details", expanded=False):
-                        st.markdown(card_details[row_id], unsafe_allow_html=True)
+                        details = risky_card_details if prefix == "risky" else card_details
+                        st.markdown(details[row_id], unsafe_allow_html=True)
                         # Explicitly requested analysis: keep the same original
                         # red_zone_matchup_html computations and free cached feed,
                         # but don't fetch all teams' logs on initial page load.
