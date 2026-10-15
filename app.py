@@ -3166,7 +3166,7 @@ with cards_tab:
         for card_idx, r in pred.iterrows():
             badge_class = "badge close" if r["Confidence"] < .7 else "badge"
             risk = '<div class="risk-note">Away-team pick · ' + escape(str(r["Venue Risk"])) + ' venue risk</div>' if r["Venue Risk"] != "Normal" else ""
-            venue = "Neutral site" if r["Neutral Site"] else "Away at home"
+            venue = "Neutral site" if r["Neutral Site"] else ("Road pick" if r["Predicted Side"] == "Away" else "Home pick")
             outcome_class = "badge" if r["Pick Result"] == "Correct" else "badge incorrect" if r["Pick Result"] == "Incorrect" else "badge close"
             final_score_html = game_card_final_score_html(r)
             outcome = f'<div class="result-box"><span class="{outcome_class}">{escape(str(r["Pick Result"]))}</span><div class="result-score">{escape(str(r["Status"]))} · {escape(str(r["Final Score"]))}</div><div>Actual winner: <strong>{escape(str(r["Actual Winner"]))}</strong></div></div>'
@@ -3184,7 +3184,7 @@ with cards_tab:
                 if int(game.iloc[0]["away_id"]) in missing_team_ids:
                     absent.append(str(r["Away Team"]))
                 if absent:
-                    missing_data_note = '<div class="risk-note">Updated pregame metrics unavailable: ' + escape(", ".join(absent)) + ' · prior-data fallback. FCS games are excluded from the scoring fallback; advanced summaries may also be delayed or missing.</div>'
+                    missing_data_note = '<div class="risk-note">Recent team statistics are limited for ' + escape(", ".join(absent)) + '. Treat this pick with extra caution.</div>'
             away_logo = team_logo_url(game.iloc[0]["away_id"]) if len(game) == 1 else ""
             home_logo = team_logo_url(game.iloc[0]["home_id"]) if len(game) == 1 else ""
             away_alt = escape(str(r["Away Team"]), quote=True)
@@ -3227,8 +3227,8 @@ with cards_tab:
             explanation = r.get("Pick Explanation", "")
             if not isinstance(explanation, str) or not explanation.strip():
                 explanation = (
-                    f"The model picks {r['Predicted Winner']} with a {r['Confidence']:.0%} estimated chance to win. "
-                    "A breakdown of the contributing factors is currently unavailable."
+                    f"We're picking {r['Predicted Winner']} in this matchup. "
+                    "There isn't enough verified game information to point to a specific strength."
                 )
             caveats = []
             if len(game) == 1:
@@ -3236,21 +3236,20 @@ with cards_tab:
                     tid = int(game.iloc[0][side_name + "_id"])
                     name = str(game.iloc[0][side_name + "_team"])
                     if tid in derived_team_ids:
-                        caveats.append(name + " uses provisional scoring-based metrics")
+                        caveats.append(name)
                     elif tid not in set(eligible["team_id"]):
-                        caveats.append(name + " has no eligible current-season metrics")
+                        caveats.append(name)
             if caveats:
-                explanation += " Data note: " + "; ".join(caveats) + "."
-            explanation_html = (
-                '<div class="pick-summary"><strong>Why we picked them</strong><p>'
-                + escape(explanation) + '</p></div>'
-            )
-            matchup_html = matchup_insights_html(r, game, published_current, schedule, selected_week, derived_team_ids)
+                explanation += " Some recent game information is limited for " + ", ".join(caveats) + "."
             check = advantage_checks.get(str(int(game.iloc[0]['game_id'])), {"status":"missing", "reason":advantage_error}) if len(game) == 1 else {"status":"missing", "reason":"Game could not be matched."}
             summary_side = "home" if r["Predicted Side"] == "Home" else "away"
             summary_opponent = r["Away Team"] if summary_side == "home" else r["Home Team"]
-            explanation_html += matchup_strengths_html(
+            evidence_html = matchup_strengths_html(
                 check, summary_side, str(r["Predicted Winner"]), str(summary_opponent)
+            )
+            explanation_html = (
+                '<div class="pick-summary"><strong>Why we picked them</strong><p>'
+                + escape(explanation) + '</p>' + evidence_html + '</div>'
             )
             is_tiered = bool(r.get("Value Selected", False))
             confidence_value = pd.to_numeric(r.get("Confidence"), errors="coerce")
@@ -3282,19 +3281,18 @@ with cards_tab:
                 warning = (
                     '<div style="padding:12px 14px;margin-bottom:12px;border:2px solid #e9a23b;'
                     'border-radius:10px;background:#e9a23b20">'
-                    '<strong>⚠ RISKY PICK · MARKET–MATCHUP CONFLICT</strong>'
-                    '<p>' + escape(str(r["Predicted Winner"])) + ': ' + str(scored["count"])
-                    + '/5 advantages; ' + escape(str(summary_opponent)) + ': '
-                    + str(opponent_count) + '/5. Test C winner chance '
-                    + f'{float(confidence_value):.2%}' + escape(venue_warning) + '.</p>'
-                    '<p>The market-weighted pick disagrees with the statistical matchup '
-                    'in an essentially even game. No clear edge: this is a caution flag, '
-                    'not a changed winner or Value Pick tier.</p></div>'
+                    '<strong>⚠ Close game · conflicting signs</strong>'
+                    '<p>' + escape(str(r["Predicted Winner"])) + ' is the pick, but '
+                    + escape(str(summary_opponent))
+                    + ' has more of the measurable matchup strengths'
+                    + escape(venue_warning) + '.</p>'
+                    '<p>This game could go either way. Be cautious about treating '
+                    'either side as a strong favorite.</p></div>'
                 )
                 visible_risk = (
                     '<div style="padding:8px 11px;margin:8px 0;border-left:3px solid #e9a23b;'
                     'background:#e9a23b18;border-radius:5px;font-size:.88rem">'
-                    '⚠ Market–matchup conflict · No clear edge</div>'
+                    '⚠ Close game · Conflicting matchup strengths</div>'
                 )
             elif is_risky:
                 warning = (
@@ -3330,10 +3328,10 @@ with cards_tab:
             ) if r.get("Value Selected", False) else ""
             card_details[card_idx] = (
                 explanation_html + warning + advantage_note + run_detail
-                + str(r.get("Line Movement HTML", "")) + matchup_html
-                + f'<div class="card-details"><strong>Prediction details</strong>'
-                + f'<p>Model {escape(str(r["Model Version"]))} · {escape(venue)}.</p>'
-                + risk + missing_data_note + '</div>'
+                + str(r.get("Line Movement HTML", ""))
+                + ('<div class="card-details"><strong>Things to watch</strong>'
+                   + risk + missing_data_note + '</div>'
+                   if risk or missing_data_note else '')
             )
             away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
             home_team_class = "team-line predicted-team" if r["Predicted Side"] == "Home" else "team-line"
@@ -3351,7 +3349,7 @@ with cards_tab:
 <div class="{home_team_class}"><div class="team-name"><span class="venue-label">Home</span><span class="team-identity">{home_logo_html}<span>{escape(str(r['Home Team']))}{home_pick_tag}{home_ats_html}</span></span>{home_badge}</div><strong>{r['Home Win %']:.1%}</strong></div>
 {final_score_html}
 <div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
-<div class="conf-row"><span>Model win chance</span><strong>{r['Confidence']:.1%}</strong></div>
+<div class="conf-row"><span>Estimated win chance</span><strong>{r['Confidence']:.1%}</strong></div>
 <div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{visible_risk}{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
