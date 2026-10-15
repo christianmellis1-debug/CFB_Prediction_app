@@ -260,6 +260,59 @@ def should_flag_risky(scored, value_selected, confidence, market_conflict=False)
     )
 
 
+def risky_pick_reason_html(record, side, winner, opponent, confidence, market_conflict=False):
+    """Describe why a pick was flagged using the same pregame matchup checks."""
+    if record.get("status") != "ok" or side not in ("home", "away"):
+        return ""
+    scored = assess(record, side)
+    if scored is None:
+        return ""
+    outcomes = scored.get("outcomes", [])
+    if len(outcomes) != 5:
+        return ""
+
+    # These comparisons summarize matchup evidence; they do not determine
+    # the game's winner or modify model confidence.
+    concerns = (
+        f"the rushing matchup looks more favorable for {opponent}",
+        f"the passing matchup looks more favorable for {opponent}",
+        f"{opponent} has been better at stopping the run",
+        f"{opponent}'s defense has allowed a lower completion rate",
+        f"{opponent} has had the better turnover margin",
+    )
+    reasons = [concerns[i] for i, result in enumerate(outcomes)
+               if result == "Disadvantage"]
+    if market_conflict:
+        explanation = (
+            f"This game is extremely close, and most of the matchup strengths "
+            f"favor {opponent} even though we're leaning toward {winner}."
+        )
+    else:
+        explanation = (
+            f"We're picking {winner}, but the matchup comparisons don't show "
+            f"a convincing advantage over {opponent}."
+        )
+
+    if reasons:
+        explanation += " In particular, " + "; ".join(reasons[:2]) + "."
+    else:
+        explanation += " Several important matchup areas are too close to separate the teams."
+
+    if side == "away":
+        explanation += f" {winner} is also playing on the road."
+    elif not market_conflict:
+        try:
+            if float(confidence) < 0.60:
+                explanation += " This one could easily go either way."
+        except (TypeError, ValueError):
+            pass
+
+    return (
+        '<div class="pick-summary"><strong>Why it&#39;s risky</strong><p>'
+        + escape(explanation) + '</p></div>'
+    )
+
+
 def value_pick_performance(frame):
     """Summarize official Value Picks from Week 3 onward."""
     columns = [
@@ -3412,7 +3465,13 @@ with cards_tab:
             card_details[card_idx] = (
                 explanation_html + warning + advantage_note + other_details
             )
-            risky_card_details[card_idx] = explanation_html + other_details
+            risk_explanation = risky_pick_reason_html(
+                check, summary_side, str(r["Predicted Winner"]),
+                str(summary_opponent), confidence_value, market_conflict,
+            ) if is_risky else ""
+            risky_card_details[card_idx] = (
+                explanation_html + risk_explanation + other_details
+            )
             away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
             home_team_class = "team-line predicted-team" if r["Predicted Side"] == "Home" else "team-line"
             away_pick_tag = '<span class="pick-indicator">✓ Pick</span>' if r["Predicted Side"] == "Away" else ""
@@ -3466,14 +3525,14 @@ with cards_tab:
                 tour_at("risky")
                 st.subheader(f"Risky picks · {len(risky_indices)}")
                 st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
-                st.write("This tab includes (1) non-tiered picks below 80% confidence with 0–2 of the five matchup advantages and (2) Market–Matchup Conflicts: Test C selections with 50–51% unrounded win probability and 0–1 advantages against an opponent with at least 4. Market conflicts stay flagged even if an official Value Pick tier applies. The prediction, odds and tier are unchanged.")
+                st.write("These are predictions with limited matchup support or especially close games where several strengths favor the other team. Open Details to see why each pick was flagged. The prediction and betting lines are unchanged.")
                 if not advantage_checks:
                     st.info(advantage_error)
                 elif risky_indices:
                     render_pick_cards(pred.loc[risky_indices], "risky")
                 else:
                     st.info("No qualifying matchup warnings or market–matchup conflicts this week.")
-                st.caption("Ordinary matchup warnings exclude tiered and 80%+ picks; the near-even market-conflict rule is an additional exception. Missing matchup data cannot trigger either warning. Risk flags are descriptive, not proven betting edges, and never change picks or confidence.")
+                st.caption("These concerns are based on earlier FBS games. A risk flag does not mean the pick will lose, and it never changes the prediction or confidence.")
 if performance_tab.open:
     with performance_tab:
         show_weight_challenger_comparison(st, season, selected_week)
