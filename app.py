@@ -261,55 +261,90 @@ def should_flag_risky(scored, value_selected, confidence, market_conflict=False)
 
 
 def risky_pick_reason_html(record, side, winner, opponent, confidence, market_conflict=False):
-    """Describe why a pick was flagged using the same pregame matchup checks."""
+    """Explain specifically how the opposing team could win, using pregame facts."""
     if record.get("status") != "ok" or side not in ("home", "away"):
         return ""
     scored = assess(record, side)
-    if scored is None:
+    other_side = "away" if side == "home" else "home"
+    if scored is None or len(scored.get("outcomes", [])) != 5:
         return ""
-    outcomes = scored.get("outcomes", [])
-    if len(outcomes) != 5:
+    own = record.get(side, [])
+    opposing = record.get(other_side, [])
+    if len(own) != 5 or len(opposing) != 5:
         return ""
 
-    # These comparisons summarize matchup evidence; they do not determine
-    # the game's winner or modify model confidence.
-    concerns = (
-        f"the rushing matchup looks more favorable for {opponent}",
-        f"the passing matchup looks more favorable for {opponent}",
-        f"{opponent} has been better at stopping the run",
-        f"{opponent}'s defense has allowed a lower completion rate",
-        f"{opponent} has had the better turnover margin",
-    )
-    reasons = [concerns[i] for i, result in enumerate(outcomes)
-               if result == "Disadvantage"]
-    if market_conflict:
-        explanation = (
-            f"This game is extremely close, and most of the matchup strengths "
-            f"favor {opponent} even though we're leaning toward {winner}."
-        )
-    else:
-        explanation = (
-            f"We're picking {winner}, but the matchup comparisons don't show "
-            f"a convincing advantage over {opponent}."
-        )
+    # These are observed pregame matchup comparisons, NOT forecast scores.
+    # Ranking only chooses which football explanations to display first.
+    reasons = []
+    for i, outcome in enumerate(scored["outcomes"]):
+        if outcome != "Disadvantage":
+            continue
+        try:
+            picked_value, opposing_value = float(own[i]), float(opposing[i])
+        except (ValueError, TypeError):
+            continue
+        if not (math.isfinite(picked_value) and math.isfinite(opposing_value)):
+            continue
 
+        if i == 0:
+            detail = (
+                f"{opponent}'s rushing matchup looks more favorable based on earlier games "
+                f"({opposing_value:.2f} versus {picked_value:.2f} yards per carry in the "
+                "matchup comparison). That could help them move the chains on the ground."
+            )
+            strength = (opposing_value - picked_value) / 1.0
+        elif i == 1:
+            detail = (
+                f"{opponent} has the better passing matchup ({opposing_value:.1%} "
+                f"versus {picked_value:.1%} in the comparison of passing and pass defense). "
+                "Completing passes consistently could help them sustain drives."
+            )
+            strength = (opposing_value - picked_value) / 0.08
+        elif i == 2:
+            detail = (
+                f"{opponent} has allowed just {opposing_value:.2f} rushing yards per carry "
+                f"compared with {picked_value:.2f} for {winner}. If they shut down "
+                f"{winner}'s ground game, it could force tougher passing situations."
+            )
+            strength = (picked_value - opposing_value) / 1.0
+        elif i == 3:
+            detail = (
+                f"{opponent}'s defense has allowed a {opposing_value:.1%} completion rate "
+                f"compared with {picked_value:.1%} for {winner}. Better pass coverage could "
+                f"make it harder for {winner} to sustain drives."
+            )
+            strength = (picked_value - opposing_value) / 0.08
+        else:
+            detail = (
+                f"{opponent} has the better turnover margin "
+                f"({opposing_value:+.2f} per game versus {picked_value:+.2f} for {winner}). "
+                "Winning the turnover battle could give them extra scoring chances."
+            )
+            strength = (opposing_value - picked_value) / 1.0
+        reasons.append((strength, i, detail))
+
+    reasons.sort(key=lambda item: (-item[0], item[1]))
     if reasons:
-        explanation += " In particular, " + "; ".join(reasons[:2]) + "."
+        intro = f"Here's how {opponent} could beat {winner}:"
+        paragraphs = "".join("<p>" + escape(detail) + "</p>"
+                             for _, _, detail in reasons[:3])
     else:
-        explanation += " Several important matchup areas are too close to separate the teams."
+        intro = (
+            f"{opponent} could still win because the available matchup "
+            f"comparisons are close, without a decisive edge for {winner}."
+        )
+        paragraphs = ""
 
     if side == "away":
-        explanation += f" {winner} is also playing on the road."
-    elif not market_conflict:
-        try:
-            if float(confidence) < 0.60:
-                explanation += " This one could easily go either way."
-        except (TypeError, ValueError):
-            pass
-
+        paragraphs += (
+            "<p>" + escape(f"{opponent} also has home-field advantage "
+                           f"while {winner} must play on the road.") + "</p>"
+        )
+    if market_conflict:
+        paragraphs += "<p>This matchup is essentially a toss-up.</p>"
     return (
         '<div class="pick-summary"><strong>Why it&#39;s risky</strong><p>'
-        + escape(explanation) + '</p></div>'
+        + escape(intro) + '</p>' + paragraphs + '</div>'
     )
 
 
