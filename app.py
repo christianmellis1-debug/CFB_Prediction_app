@@ -34,6 +34,9 @@ from matchup_advantages import (build_advantages, advantage_html, assess, normal
                                 build_waterfall_profiles, weather_tier_candidate_ids)
 from rushing_matchup import build_rushing_matchup_insights, rushing_matchup_html
 from shadow_tracking import show_shadow_tracking, DATA as SHADOW_DATA
+# Reload prediction text after source-only deployments so warm Streamlit sessions do not retain old wording.
+import primary_market_blend
+importlib.reload(primary_market_blend)
 from primary_market_blend import apply_primary_blend, VERSION as PRIMARY_VERSION
 from prospective_weights_archive import show_comparison as show_weight_challenger_comparison
 from weather_context import build_weather_context
@@ -2820,6 +2823,7 @@ with cards_tab:
     tour_at("filters")
     st.markdown(weekly_snapshot_html, unsafe_allow_html=True)
     st.subheader("Matchup center")
+    st.caption("Updated Oct 15 · Clearer game explanations")
     live_mode = st.toggle(
         "Saturday Live Mode",
         value=False,
