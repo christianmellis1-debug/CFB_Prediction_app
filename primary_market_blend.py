@@ -175,20 +175,31 @@ def apply_primary_blend(predictions, games, *, now_utc=None, stale=False,
         side = "Home" if home >= .5 else "Away"
         winner = row["Home Team"] if side == "Home" else row["Away Team"]
         confidence = max(home,1-home)
-        original_winner = df.at[index,"V1.5 Predicted Winner"]
-        original_conf = float(df.at[index,"V1.5 Confidence"])
-        flip = winner != original_winner
+        opponent = row["Away Team"] if side == "Home" else row["Home Team"]
         market_favorite = row["Home Team"] if market >= .5 else row["Away Team"]
-        if flip:
-            explanation = (f"Market-informed Test C picks {winner} with a {confidence:.1%} estimated win chance. "
-                           f"The sportsbook's no-vig odds favor {market_favorite}. "
-                           f"The original V1.5 statistics model preferred {original_winner} ({original_conf:.1%}), "
-                           f"but the pregame market outweighed its estimate in the 16.93% / 83.07% blend.")
+        # Keep the technical blend and prior forecast in the data columns, but
+        # show supporters a plain-English game outlook instead of the formula.
+        if winner != market_favorite:
+            explanation = (
+                f"We're picking {winner} in a possible upset over {opponent}. "
+                "This looks like a close game that could go either way."
+            )
+        elif confidence >= .80:
+            explanation = (
+                f"We're picking {winner} over {opponent}. "
+                f"{winner} heads into this matchup as the clear favorite."
+            )
+        elif confidence >= .60:
+            explanation = (
+                f"We're picking {winner} over {opponent}. "
+                f"{winner} has the edge coming into the game, "
+                f"but {opponent} could still make it competitive."
+            )
         else:
-            explanation = (f"Market-informed Test C favors {winner} with a {confidence:.1%} estimated win chance. "
-                           f"The blend uses 16.93% independent V1.5 team-statistics probability and 83.07% "
-                           f"{provider} no-vig moneyline probability. The original V1.5 pick was "
-                           f"{original_winner} ({original_conf:.1%}).")
+            explanation = (
+                f"We're leaning toward {winner} over {opponent}, "
+                "but this matchup looks very close."
+            )
         df.at[index, "Home Win %"] = home
         df.at[index, "Away Win %"] = 1-home
         df.at[index, "Predicted Winner"] = winner
