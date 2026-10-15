@@ -3391,14 +3391,6 @@ with cards_tab:
                                     st.session_state[rz_key],
                                     unsafe_allow_html=True,
                                 )
-                        st.markdown("**Team statistics & data quality**")
-                        for side in ("away", "home"):
-                            tid = matchup.iloc[0][side + "_id"] if len(matchup) == 1 else None
-                            label, note, metrics = team_data_details(tid, published_current, derived_team_data, selected_week)
-                            st.markdown(f"**{pick[side.title() + ' Team']} · {label}**")
-                            st.caption(note)
-                            for metric, value in metrics.items():
-                                st.write(f"**{metric}:** {value}")
         gotw_mask = filtered.get("Game of Week", pd.Series(False, index=filtered.index)).fillna(False).astype(bool)
         gotw_rows = filtered.loc[gotw_mask].copy()
         other_rows = filtered.loc[~gotw_mask].copy()
