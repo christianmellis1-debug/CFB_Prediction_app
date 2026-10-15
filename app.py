@@ -32,7 +32,7 @@ import matchup_advantages
 importlib.reload(matchup_advantages)
 from matchup_advantages import (build_advantages, advantage_html, assess, normalize_fbs_schedule,
                                 build_waterfall_profiles, weather_tier_candidate_ids)
-from rushing_matchup import build_rushing_matchup_insights, rushing_matchup_html
+from rushing_matchup import build_rushing_matchup_insights
 from shadow_tracking import show_shadow_tracking, DATA as SHADOW_DATA
 # Reload prediction text after source-only deployments so warm Streamlit sessions do not retain old wording.
 import primary_market_blend
@@ -1303,7 +1303,68 @@ def matchup_insights_html(pick, game, published, schedule, week, derived_ids):
     return panel(body)
 
 
-def matchup_strengths_html(record, side, winner, opponent):
+def rushing_story_html(info, side, winner, opponent):
+    """Explain pregame rushing matchups without altering any prediction or tier."""
+    if not info or info.get("status") != "ok" or side not in ("home", "away"):
+        return ""
+    other_side = "away" if side == "home" else "home"
+    own, other = info.get(side), info.get(other_side)
+    if not isinstance(own, dict) or not isinstance(other, dict):
+        return ""
+    try:
+        own_run = float(own["off_ypc"])
+        own_allowed = float(own["allowed_ypc"])
+        other_run = float(other["off_ypc"])
+        other_allowed = float(other["allowed_ypc"])
+        own_off_rank = float(own["off_pct"])
+        other_def_rank = float(other["def_pct"])
+    except (KeyError, TypeError, ValueError):
+        return ""
+    if not all(math.isfinite(x) for x in (
+        own_run, own_allowed, other_run, other_allowed,
+        own_off_rank, other_def_rank,
+    )):
+        return ""
+
+    notes = []
+    if info.get(other_side + "_disadvantaged"):
+        notes.append(
+            f"A key matchup is {winner}'s run defense. They've allowed only "
+            f"{own_allowed:.2f} yards per rush, while {opponent} has averaged "
+            f"{other_run:.2f}. That could make it difficult for {opponent} "
+            "to establish the ground game."
+        )
+    elif own_allowed + 0.75 <= other_allowed:
+        notes.append(
+            f"{winner} has been stronger against the run, allowing "
+            f"{own_allowed:.2f} yards per carry compared with "
+            f"{other_allowed:.2f} for {opponent}."
+        )
+
+    if info.get(side + "_disadvantaged"):
+        notes.append(
+            f"One concern for {winner}: they've gained just "
+            f"{own_run:.2f} yards per rush, while {opponent}'s defense "
+            f"has allowed only {other_allowed:.2f}. Running the ball "
+            "could be a challenge."
+        )
+    elif other_def_rank >= 0.75 and own_off_rank >= 0.40:
+        notes.append(
+            f"There may also be an opportunity for {winner} on the ground: "
+            f"they've averaged {own_run:.2f} yards per carry, and "
+            f"{opponent} has allowed {other_allowed:.2f}."
+        )
+    elif not notes and own_run >= other_run + 0.75:
+        notes.append(
+            f"{winner} has moved the ball more effectively on the ground "
+            f"this season, averaging {own_run:.2f} yards per rush "
+            f"compared with {other_run:.2f} for {opponent}."
+        )
+
+    return "".join("<p>" + escape(note) + "</p>" for note in notes[:2])
+
+
+def matchup_strengths_html(record, side, winner, opponent, skip_rushing=False):
     """Highlight verified pregame strengths, separate from model contributions."""
     if record.get("status") != "ok":
         return ""
@@ -1313,6 +1374,8 @@ def matchup_strengths_html(record, side, winner, opponent):
         return ""
     points = []
     for index in (2, 3, 4):
+        if index == 2 and skip_rushing:
+            continue
         try:
             a, b = float(own[index]), float(other[index])
         except (TypeError, ValueError):
@@ -1338,8 +1401,7 @@ def matchup_strengths_html(record, side, winner, opponent):
     if not points:
         return ""
     return (
-        '<div class="matchup-strengths">' + "".join(points[:2])
-        + '<p class="venue-label">Based on earlier FBS games this season; opponents faced may differ.</p></div>'
+        '<div class="matchup-strengths">' + "".join(points[:2]) + '</div>'
     )
 
 
@@ -3249,12 +3311,23 @@ with cards_tab:
             check = advantage_checks.get(str(int(game.iloc[0]['game_id'])), {"status":"missing", "reason":advantage_error}) if len(game) == 1 else {"status":"missing", "reason":"Game could not be matched."}
             summary_side = "home" if r["Predicted Side"] == "Home" else "away"
             summary_opponent = r["Away Team"] if summary_side == "home" else r["Home Team"]
+            rush_info = rush_checks.get(str(int(game.iloc[0]["game_id"])), {}) if len(game) == 1 else {}
+            rushing_story = rushing_story_html(
+                rush_info, summary_side, str(r["Predicted Winner"]), str(summary_opponent)
+            )
             evidence_html = matchup_strengths_html(
-                check, summary_side, str(r["Predicted Winner"]), str(summary_opponent)
+                check, summary_side, str(r["Predicted Winner"]),
+                str(summary_opponent), skip_rushing=bool(rushing_story),
+            )
+            source_note = (
+                '<p style="font-size:.85rem;opacity:.7">'
+                'Matchup statistics reflect earlier FBS games; opponents faced may differ.</p>'
+                if rushing_story or evidence_html else ''
             )
             explanation_html = (
                 '<div class="pick-summary"><strong>Why we picked them</strong><p>'
-                + escape(explanation) + '</p>' + evidence_html + '</div>'
+                + escape(explanation) + '</p>'
+                + rushing_story + evidence_html + source_note + '</div>'
             )
             is_tiered = bool(r.get("Value Selected", False))
             confidence_value = pd.to_numeric(r.get("Confidence"), errors="coerce")
@@ -3273,10 +3346,6 @@ with cards_tab:
                 check, summary_side, r["Predicted Winner"],
                 suppress_risk=is_tiered or is_high_confidence or is_risky,
             )
-            run_detail = rushing_matchup_html(
-                rush_checks.get(str(int(game.iloc[0]["game_id"])), {}),
-                r["Home Team"], r["Away Team"],
-            ) if len(game) == 1 else ""
             warning = ""
             visible_risk = ""
             if market_conflict:
@@ -3335,7 +3404,7 @@ with cards_tab:
             # details should not repeat the matchup-warning banner or the
             # five-metric checklist. Keep the checks for risk selection.
             other_details = (
-                run_detail + str(r.get("Line Movement HTML", ""))
+                str(r.get("Line Movement HTML", ""))
                 + ('<div class="card-details"><strong>Things to watch</strong>'
                    + risk + missing_data_note + '</div>'
                    if risk or missing_data_note else '')
