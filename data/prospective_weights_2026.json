@@ -1,6 +1,6 @@
 {
   "experiment": "cfb-internal-weights-v1-2026-10-12",
-  "last_run": "2026-10-15T11:55:43.537149+00:00",
+  "last_run": "2026-10-15T17:15:43.239649+00:00",
   "results": {
     "401871053": {
       "away_score": 24.0,
@@ -28,12 +28,12 @@
     }
   },
   "run_summary": {
-    "eligible_pregame_games": 3,
+    "eligible_pregame_games": 0,
     "fetched": 3,
     "missing_event_feeds": {},
     "results_added": 0,
     "skipped": {},
-    "snapshots_added": 3,
+    "snapshots_added": 0,
     "total_locked": 7,
     "total_settled": 4
   },
