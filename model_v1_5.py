@@ -186,13 +186,13 @@ def _completed_history(schedule, target_week):
 
 
 def pick_narrative(winner, opponent, confidence, contributions):
-    """Describe signed model contributions, not causal or matchup-specific claims."""
+    """Plain-language game outlook; reasoning is descriptive, not causal."""
     labels = {
-        "offense": "an edge on offense",
-        "defense": "an edge on defense",
-        "schedule": "the difficulty of each team's schedule",
-        "venue": "past results at home and on the road",
-        "conference": "how teams from these conferences have performed historically",
+        "offense": "a stronger overall offense",
+        "defense": "a stronger overall defense",
+        "schedule": "the quality of opponents faced",
+        "venue": "past performances at home and on the road",
+        "conference": "past results against similar competition",
     }
     support = sorted(((k, v) for k, v in contributions.items() if v > 1e-8),
                      key=lambda item: item[1], reverse=True)
@@ -200,15 +200,15 @@ def pick_narrative(winner, opponent, confidence, contributions):
                      key=lambda item: item[1])
     if support:
         reasons = " and ".join(labels[k] for k, _ in support[:2])
-        text = f"{winner} gets the nod mainly from {reasons}."
+        text = f"We're picking {winner} over {opponent}, mainly because of {reasons}."
     else:
-        text = f"The model has no meaningful separation between {winner} and {opponent}; this is effectively a coin flip."
+        text = f"We're leaning toward {winner}, but this matchup with {opponent} is very close."
     if against:
-        text += f" The biggest factor working against this pick is {labels[against[0][0]]}, which favors {opponent}."
-    if confidence < 0.60 and support:
-        text += " The overall edge is small, so this remains a toss-up."
-    text += f" The model estimates {winner} has a {confidence:.0%} chance to win."
+        text += f" One factor in {opponent}'s favor is {labels[against[0][0]]}."
+    if confidence < 0.60:
+        text += " This game could go either way."
     return text
+
 
 def predict_week(current_summary, prior_summary, schedule, target_week, include_completed=False):
     from matchup_advantages import normalize_fbs_schedule
