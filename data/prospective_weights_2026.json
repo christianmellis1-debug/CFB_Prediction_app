@@ -1,6 +1,6 @@
 {
   "experiment": "cfb-internal-weights-v1-2026-10-12",
-  "last_run": "2026-10-14T21:52:59.135000+00:00",
+  "last_run": "2026-10-15T04:59:56.955905+00:00",
   "results": {
     "401871053": {
       "away_score": 24.0,
@@ -8,22 +8,34 @@
       "home_score": 27.0,
       "winner_side": "home"
     },
+    "401871054": {
+      "away_score": 21.0,
+      "checked_at": "2026-10-15T04:59:56.955861+00:00",
+      "home_score": 24.0,
+      "winner_side": "home"
+    },
     "401871067": {
       "away_score": 30.0,
       "checked_at": "2026-10-14T05:12:51.838313+00:00",
       "home_score": 33.0,
       "winner_side": "home"
+    },
+    "401871068": {
+      "away_score": 16.0,
+      "checked_at": "2026-10-15T04:59:56.955894+00:00",
+      "home_score": 3.0,
+      "winner_side": "away"
     }
   },
   "run_summary": {
     "eligible_pregame_games": 0,
     "fetched": 2,
     "missing_event_feeds": {},
-    "results_added": 0,
+    "results_added": 2,
     "skipped": {},
     "snapshots_added": 0,
     "total_locked": 4,
-    "total_settled": 2
+    "total_settled": 4
   },
   "schema": 1,
   "season": 2026,
