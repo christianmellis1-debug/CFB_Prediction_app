@@ -44,11 +44,11 @@
     }
   },
   "run_status": {
-    "checked_at": "2026-10-16T06:20:10.075655+00:00",
+    "checked_at": "2026-10-16T12:43:15.877637+00:00",
     "eligible_in_window": 3,
     "missing_events": [],
-    "new_results": 3,
-    "new_snapshots": 3,
+    "new_results": 0,
+    "new_snapshots": 0,
     "selected_total": 1,
     "skipped": {}
   },
