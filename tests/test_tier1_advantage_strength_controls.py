@@ -138,7 +138,7 @@ def record(rows):
             "rate":round(w/(w+l),4) if w+l else None,
             "ats_margin_avg":round(float(rows.ats_margin.mean()),2),
             "avg_abs_spread":round(float(rows.spread.abs().mean()),2),
-            "avg_elo_gap":round(float(rows.elo_gap.mean()),1),
+            "avg_elo_gap":round(float(rows.elo_gap.mean()*100.0),1),
             "p4_fraction":round(float((rows.group=="P4").mean()),3),
             "fav_fraction":round(float((rows.spread<=0).mean()),3)}
 
@@ -194,7 +194,7 @@ def stratified(frame):
     # Spread-matched comparison with Elo rating bins, conference group and
     # year. Report only cells where 6/6 and at least one 4/5 control exist.
     f=frame.copy()
-    f["elo_bin"]=pd.cut(f.elo_gap,[-float("inf"),0,150,300,float("inf")],
+    f["elo_bin"]=pd.cut(f.elo_gap,[-float("inf"),0,1.5,3,float("inf")],
         labels=["elo-negative","elo-0to149","elo-150to299","elo-300plus"],right=False)
     cells=[]
     for key,part in f.groupby(["year","spread_bin","elo_bin","group"],observed=True):
