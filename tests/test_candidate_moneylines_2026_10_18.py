@@ -95,7 +95,7 @@ def grade(frame):
         "priced_W":int(priced.su_win.sum()),
         "priced_L":int((~priced.su_win).sum()),
         "priced_SU_pct":round(100*priced.su_win.mean(),2),
-        "odds_provider":dict(priced.provider.value_counts()),
+        "odds_provider":{str(k):int(v) for k,v in priced.provider.value_counts().items()},
         "average_american_odds":round(float(priced.home_ml.mean()),1),
         "median_american_odds":round(float(priced.home_ml.median()),1),
         "mean_implied_market_probability_pct":round(float(100*priced.book_p.mean()),2),
@@ -155,7 +155,7 @@ def run():
     report={
       "data_warning":"Moneyline quotes from ESPN-derived archived game odds JSON; prices could be later snapshots, market availability is incomplete and not verified as pregame. Never impute lines from spreads.",
       "n_odds_attempted":len(tasks),"n_network_fail":len(errors),
-      "network_error_sample":[{"game_id":k,"error":v} for k,v in list(errors.items())[:6]],
+      "network_error_sample":[{"game_id":int(k),"error":v} for k,v in list(errors.items())[:6]],
       "annual":{},
       "all_years":{},
       "by_group":{},
@@ -173,7 +173,7 @@ def run():
          "SU_win":bool(x.su_win),"outcome_margin":float(x.home_margin)}
         for _,x in frame[frame.both.eq(1)&frame.spread.gt(0)].sort_values(["year","week"]).iterrows()
     ]
-    print("RUNDOG_MONEYLINE_REPORT="+json.dumps(report,allow_nan=False),flush=True)
+    print("RUNDOG_MONEYLINE_REPORT="+json.dumps(report,allow_nan=False,default=lambda x:x.item() if isinstance(x,np.generic) else str(x)),flush=True)
     return report
 
 class CandidateMoneylineHistorical(unittest.TestCase):
