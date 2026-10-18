@@ -1,6 +1,6 @@
 {
   "experiment": "v15-market-blend-2026-09-28",
-  "last_run": "2026-10-17T22:21:15.618617+00:00",
+  "last_run": "2026-10-18T07:14:57.685539+00:00",
   "results": {
     "401856705": {
       "away_score": 14.0,
@@ -80,16 +80,46 @@
       "home_score": 17.0,
       "outcome": "loss"
     },
+    "401856719": {
+      "away_score": 27.0,
+      "checked_at": "2026-10-18T07:14:54.731872+00:00",
+      "home_score": 24.0,
+      "outcome": "loss"
+    },
     "401856720": {
       "away_score": 0.0,
       "checked_at": "2026-10-17T22:21:13.563731+00:00",
       "home_score": 31.0,
       "outcome": "win"
     },
+    "401856721": {
+      "away_score": 3.0,
+      "checked_at": "2026-10-18T07:14:54.700132+00:00",
+      "home_score": 31.0,
+      "outcome": "win"
+    },
+    "401856722": {
+      "away_score": 21.0,
+      "checked_at": "2026-10-18T07:14:54.878936+00:00",
+      "home_score": 13.0,
+      "outcome": "loss"
+    },
+    "401856723": {
+      "away_score": 10.0,
+      "checked_at": "2026-10-18T07:14:54.761096+00:00",
+      "home_score": 26.0,
+      "outcome": "loss"
+    },
     "401856724": {
       "away_score": 27.0,
       "checked_at": "2026-10-17T22:21:13.477775+00:00",
       "home_score": 24.0,
+      "outcome": "loss"
+    },
+    "401856726": {
+      "away_score": 31.0,
+      "checked_at": "2026-10-18T07:14:54.894222+00:00",
+      "home_score": 21.0,
       "outcome": "loss"
     },
     "401856807": {
@@ -103,6 +133,12 @@
       "checked_at": "2026-10-11T08:55:00.365785+00:00",
       "home_score": 30.0,
       "outcome": "win"
+    },
+    "401856809": {
+      "away_score": 24.0,
+      "checked_at": "2026-10-18T07:14:55.322139+00:00",
+      "home_score": 28.0,
+      "outcome": "loss"
     },
     "401856817": {
       "away_score": 55.0,
@@ -170,6 +206,12 @@
       "home_score": 41.0,
       "outcome": "win"
     },
+    "401856828": {
+      "away_score": 25.0,
+      "checked_at": "2026-10-18T07:14:55.048036+00:00",
+      "home_score": 53.0,
+      "outcome": "win"
+    },
     "401856829": {
       "away_score": 42.0,
       "checked_at": "2026-10-17T22:21:13.843668+00:00",
@@ -181,6 +223,24 @@
       "checked_at": "2026-10-17T22:21:13.993326+00:00",
       "home_score": 35.0,
       "outcome": "loss"
+    },
+    "401856831": {
+      "away_score": 32.0,
+      "checked_at": "2026-10-18T07:14:55.068389+00:00",
+      "home_score": 35.0,
+      "outcome": "win"
+    },
+    "401856832": {
+      "away_score": 17.0,
+      "checked_at": "2026-10-18T07:14:55.128503+00:00",
+      "home_score": 6.0,
+      "outcome": "win"
+    },
+    "401856833": {
+      "away_score": 27.0,
+      "checked_at": "2026-10-18T07:14:55.198581+00:00",
+      "home_score": 24.0,
+      "outcome": "win"
     },
     "401858245": {
       "away_score": 35.0,
@@ -272,6 +332,30 @@
       "home_score": 14.0,
       "outcome": "win"
     },
+    "401858263": {
+      "away_score": 35.0,
+      "checked_at": "2026-10-18T07:14:55.497273+00:00",
+      "home_score": 43.0,
+      "outcome": "win"
+    },
+    "401858264": {
+      "away_score": 24.0,
+      "checked_at": "2026-10-18T07:14:55.706973+00:00",
+      "home_score": 34.0,
+      "outcome": "win"
+    },
+    "401858265": {
+      "away_score": 34.0,
+      "checked_at": "2026-10-18T07:14:55.732947+00:00",
+      "home_score": 26.0,
+      "outcome": "win"
+    },
+    "401858266": {
+      "away_score": 24.0,
+      "checked_at": "2026-10-18T07:14:55.661268+00:00",
+      "home_score": 20.0,
+      "outcome": "loss"
+    },
     "401858267": {
       "away_score": 21.0,
       "checked_at": "2026-10-17T22:21:14.391401+00:00",
@@ -282,6 +366,12 @@
       "away_score": 13.0,
       "checked_at": "2026-10-17T22:21:14.348235+00:00",
       "home_score": 23.0,
+      "outcome": "win"
+    },
+    "401858269": {
+      "away_score": 41.0,
+      "checked_at": "2026-10-18T07:14:56.267043+00:00",
+      "home_score": 7.0,
       "outcome": "win"
     },
     "401858472": {
@@ -386,17 +476,35 @@
       "home_score": 30.0,
       "outcome": "win"
     },
+    "401858490": {
+      "away_score": 18.0,
+      "checked_at": "2026-10-18T07:14:56.032723+00:00",
+      "home_score": 21.0,
+      "outcome": "win"
+    },
     "401858491": {
       "away_score": 24.0,
       "checked_at": "2026-10-17T22:21:14.587642+00:00",
       "home_score": 21.0,
       "outcome": "win"
     },
+    "401858492": {
+      "away_score": 14.0,
+      "checked_at": "2026-10-18T07:14:56.193451+00:00",
+      "home_score": 17.0,
+      "outcome": "loss"
+    },
     "401858493": {
       "away_score": 38.0,
       "checked_at": "2026-10-17T06:58:59.680358+00:00",
       "home_score": 26.0,
       "outcome": "win"
+    },
+    "401858494": {
+      "away_score": 7.0,
+      "checked_at": "2026-10-18T07:14:56.350619+00:00",
+      "home_score": 17.0,
+      "outcome": "loss"
     },
     "401860898": {
       "away_score": 18.0,
@@ -427,6 +535,18 @@
       "checked_at": "2026-10-11T08:55:00.851153+00:00",
       "home_score": 66.0,
       "outcome": "win"
+    },
+    "401860903": {
+      "away_score": 30.0,
+      "checked_at": "2026-10-18T07:14:56.380478+00:00",
+      "home_score": 48.0,
+      "outcome": "win"
+    },
+    "401860904": {
+      "away_score": 23.0,
+      "checked_at": "2026-10-18T07:14:56.374143+00:00",
+      "home_score": 26.0,
+      "outcome": "loss"
     },
     "401860921": {
       "away_score": 26.0,
@@ -542,6 +662,24 @@
       "home_score": 31.0,
       "outcome": "loss"
     },
+    "401862804": {
+      "away_score": 34.0,
+      "checked_at": "2026-10-18T07:14:56.609384+00:00",
+      "home_score": 38.0,
+      "outcome": "win"
+    },
+    "401862805": {
+      "away_score": 38.0,
+      "checked_at": "2026-10-18T07:14:56.524256+00:00",
+      "home_score": 17.0,
+      "outcome": "loss"
+    },
+    "401862806": {
+      "away_score": 2.0,
+      "checked_at": "2026-10-18T07:14:56.550363+00:00",
+      "home_score": 29.0,
+      "outcome": "win"
+    },
     "401864513": {
       "away_score": 20.0,
       "checked_at": "2026-10-04T08:28:24.402066+00:00",
@@ -583,6 +721,36 @@
       "checked_at": "2026-10-10T08:31:44.190685+00:00",
       "home_score": 13.0,
       "outcome": "loss"
+    },
+    "401864520": {
+      "away_score": 17.0,
+      "checked_at": "2026-10-18T07:14:56.832419+00:00",
+      "home_score": 31.0,
+      "outcome": "win"
+    },
+    "401864521": {
+      "away_score": 21.0,
+      "checked_at": "2026-10-18T07:14:56.771657+00:00",
+      "home_score": 10.0,
+      "outcome": "win"
+    },
+    "401864522": {
+      "away_score": 23.0,
+      "checked_at": "2026-10-18T07:14:56.847027+00:00",
+      "home_score": 41.0,
+      "outcome": "win"
+    },
+    "401864523": {
+      "away_score": 24.0,
+      "checked_at": "2026-10-18T07:14:57.363111+00:00",
+      "home_score": 11.0,
+      "outcome": "win"
+    },
+    "401864524": {
+      "away_score": 31.0,
+      "checked_at": "2026-10-18T07:14:56.877255+00:00",
+      "home_score": 41.0,
+      "outcome": "win"
     },
     "401866430": {
       "away_score": 17.0,
@@ -668,11 +836,29 @@
       "home_score": 14.0,
       "outcome": "win"
     },
+    "401866444": {
+      "away_score": 34.0,
+      "checked_at": "2026-10-18T07:14:57.025299+00:00",
+      "home_score": 14.0,
+      "outcome": "win"
+    },
+    "401866445": {
+      "away_score": 48.0,
+      "checked_at": "2026-10-18T07:14:57.109120+00:00",
+      "home_score": 7.0,
+      "outcome": "win"
+    },
     "401866477": {
       "away_score": 24.0,
       "checked_at": "2026-10-03T23:06:08.915522+00:00",
       "home_score": 20.0,
       "outcome": "loss"
+    },
+    "401866478": {
+      "away_score": 14.0,
+      "checked_at": "2026-10-18T07:14:57.266141+00:00",
+      "home_score": 34.0,
+      "outcome": "win"
     },
     "401869842": {
       "away_score": 29.0,
@@ -703,6 +889,12 @@
       "checked_at": "2026-10-09T09:07:40.914902+00:00",
       "home_score": 49.0,
       "outcome": "loss"
+    },
+    "401869934": {
+      "away_score": 23.0,
+      "checked_at": "2026-10-18T07:14:57.314302+00:00",
+      "home_score": 13.0,
+      "outcome": "win"
     },
     "401869942": {
       "away_score": 31.0,
@@ -751,6 +943,12 @@
       "checked_at": "2026-10-11T08:55:01.505515+00:00",
       "home_score": 32.0,
       "outcome": "loss"
+    },
+    "401869966": {
+      "away_score": 6.0,
+      "checked_at": "2026-10-18T07:14:57.468892+00:00",
+      "home_score": 33.0,
+      "outcome": "win"
     },
     "401870766": {
       "away_score": 3.0,
@@ -823,13 +1021,20 @@
       "checked_at": "2026-10-07T08:41:59.356362+00:00",
       "home_score": 55.0,
       "outcome": "win"
+    },
+    "401871091": {
+      "away_score": 24.0,
+      "checked_at": "2026-10-18T07:14:57.625734+00:00",
+      "home_score": 0.0,
+      "outcome": "win"
     }
   },
   "run_summary": {
-    "eligible_schedule_games": 43,
-    "new_results": 15,
+    "eligible_schedule_games": 52,
+    "new_results": 34,
+    "new_snapshots": 17,
     "skipped: Kickoff time not confirmed": 11,
-    "skipped: No same-book two-sided moneyline": 32
+    "skipped: No same-book two-sided moneyline": 24
   },
   "snapshots": {
     "401856705": {
@@ -1511,6 +1716,176 @@
       "provider": "DraftKings",
       "season": 2026,
       "week": 7
+    },
+    "401856727": {
+      "away": "Texas A&M",
+      "away_id": "245",
+      "away_ml": 490.0,
+      "blend_probability": 0.8481943878142949,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:54.674348+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401856727",
+      "home": "Alabama",
+      "home_id": "333",
+      "home_ml": -675.0,
+      "kickoff": "2026-10-24T19:30:00+00:00",
+      "market_probability": 0.8370993168681029,
+      "model_probability": 0.9026423156108834,
+      "model_signal": "Strong value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -675.0,
+      "picked_side": "home",
+      "picked_team": "Alabama",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401856728": {
+      "away": "LSU",
+      "away_id": "99",
+      "away_ml": -218.0,
+      "blend_probability": 0.6535206090540455,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:54.857580+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401856728",
+      "home": "Auburn",
+      "home_id": "2",
+      "home_ml": 180.0,
+      "kickoff": "2026-10-24T16:00:00+00:00",
+      "market_probability": 0.6574752261956054,
+      "model_probability": 0.634113729221456,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -218.0,
+      "picked_side": "away",
+      "picked_team": "LSU",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401856729": {
+      "away": "Vanderbilt",
+      "away_id": "238",
+      "away_ml": 360.0,
+      "blend_probability": 0.7456307535383544,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:54.846591+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401856729",
+      "home": "Kentucky",
+      "home_id": "96",
+      "home_ml": -470.0,
+      "kickoff": "2026-10-24T23:30:00+00:00",
+      "market_probability": 0.7913616398243045,
+      "model_probability": 0.5212110984818902,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -470.0,
+      "picked_side": "home",
+      "picked_team": "Kentucky",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401856731": {
+      "away": "Tennessee",
+      "away_id": "2633",
+      "away_ml": -155.0,
+      "blend_probability": 0.4391612902320554,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:55.115057+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401856731",
+      "home": "South Carolina",
+      "home_id": "2579",
+      "home_ml": 130.0,
+      "kickoff": "2026-10-24T19:30:00+00:00",
+      "market_probability": 0.4170073589533933,
+      "model_probability": 0.5478794459357085,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": 130.0,
+      "picked_side": "home",
+      "picked_team": "South Carolina",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401856732": {
+      "away": "Ole Miss",
+      "away_id": "145",
+      "away_ml": 130.0,
+      "blend_probability": 0.6002642290977008,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:54.992008+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401856732",
+      "home": "Texas",
+      "home_id": "251",
+      "home_ml": -155.0,
+      "kickoff": "2026-10-24T23:30:00+00:00",
+      "market_probability": 0.5829926410466066,
+      "model_probability": 0.6850227839279566,
+      "model_signal": "Value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -155.0,
+      "picked_side": "home",
+      "picked_team": "Texas",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
     },
     "401856807": {
       "away": "Middle Tennessee",
@@ -2940,6 +3315,108 @@
       "season": 2026,
       "week": 7
     },
+    "401858271": {
+      "away": "Duke",
+      "away_id": "150",
+      "away_ml": 110.0,
+      "blend_probability": 0.46756842361102313,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:55.845981+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401858271",
+      "home": "Virginia",
+      "home_id": "258",
+      "home_ml": -130.0,
+      "kickoff": "2026-10-23T23:00:00+00:00",
+      "market_probability": 0.4572564612326044,
+      "model_probability": 0.5181733260712442,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": 110.0,
+      "picked_side": "away",
+      "picked_team": "Duke",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401858272": {
+      "away": "NC State",
+      "away_id": "152",
+      "away_ml": -278.0,
+      "blend_probability": 0.6886181121831983,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:55.801999+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401858272",
+      "home": "Stanford",
+      "home_id": "24",
+      "home_ml": 225.0,
+      "kickoff": "2026-10-24T02:30:00+00:00",
+      "market_probability": 0.705033164260632,
+      "model_probability": 0.6080629201863319,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -278.0,
+      "picked_side": "away",
+      "picked_team": "NC State",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401858274": {
+      "away": "Pittsburgh",
+      "away_id": "221",
+      "away_ml": 1500.0,
+      "blend_probability": 0.9236903112445942,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:55.848176+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401858274",
+      "home": "Miami",
+      "home_id": "2390",
+      "home_ml": -3600.0,
+      "kickoff": "2026-10-24T16:00:00+00:00",
+      "market_probability": 0.9396411092985318,
+      "model_probability": 0.8454133984649749,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -3600.0,
+      "picked_side": "home",
+      "picked_team": "Miami",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
     "401858472": {
       "away": "Purdue",
       "away_id": "2509",
@@ -3688,6 +4165,108 @@
       "season": 2026,
       "week": 7
     },
+    "401858496": {
+      "away": "Indiana",
+      "away_id": "84",
+      "away_ml": -345.0,
+      "blend_probability": 0.7490144238778831,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:56.198181+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401858496",
+      "home": "Michigan",
+      "home_id": "130",
+      "home_ml": 275.0,
+      "kickoff": "2026-10-24T16:00:00+00:00",
+      "market_probability": 0.7440690150970525,
+      "model_probability": 0.7732835125145527,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -345.0,
+      "picked_side": "away",
+      "picked_team": "Indiana",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401858498": {
+      "away": "Rutgers",
+      "away_id": "164",
+      "away_ml": 650.0,
+      "blend_probability": 0.8604011265376496,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:56.246093+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401858498",
+      "home": "Northwestern",
+      "home_id": "77",
+      "home_ml": -1000.0,
+      "kickoff": "2026-10-24T16:00:00+00:00",
+      "market_probability": 0.8720930232558138,
+      "model_probability": 0.8030243372045205,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -1000.0,
+      "picked_side": "home",
+      "picked_team": "Northwestern",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401858500": {
+      "away": "USC",
+      "away_id": "30",
+      "away_ml": -130.0,
+      "blend_probability": 0.5111735469312848,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:56.808430+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401858500",
+      "home": "Wisconsin",
+      "home_id": "275",
+      "home_ml": 110.0,
+      "kickoff": "2026-10-24T23:30:00+00:00",
+      "market_probability": 0.4572564612326044,
+      "model_probability": 0.7757661397467273,
+      "model_signal": "Strong value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": 110.0,
+      "picked_side": "home",
+      "picked_team": "Wisconsin",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
     "401860898": {
       "away": "Utah State",
       "away_id": "328",
@@ -4061,6 +4640,40 @@
       "provider": "DraftKings",
       "season": 2026,
       "week": 6
+    },
+    "401861965": {
+      "away": "Massachusetts",
+      "away_id": "113",
+      "away_ml": 575.0,
+      "blend_probability": 0.21111939024105403,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:56.514813+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401861965",
+      "home": "UConn",
+      "home_id": "41",
+      "home_ml": -850.0,
+      "kickoff": "2026-10-23T23:00:00+00:00",
+      "market_probability": 0.14205607476635515,
+      "model_probability": 0.5500405591633697,
+      "model_signal": "Pass",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": 575.0,
+      "picked_side": "away",
+      "picked_team": "Massachusetts",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
     },
     "401862786": {
       "away": "North Texas",
@@ -4674,6 +5287,74 @@
       "season": 2026,
       "week": 7
     },
+    "401862807": {
+      "away": "East Carolina",
+      "away_id": "151",
+      "away_ml": 310.0,
+      "blend_probability": 0.7789712139259639,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:56.583220+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401862807",
+      "home": "Memphis",
+      "home_id": "235",
+      "home_ml": -395.0,
+      "kickoff": "2026-10-22T23:30:00+00:00",
+      "market_probability": 0.7659021045164341,
+      "model_probability": 0.8431065339204712,
+      "model_signal": "Strong value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -395.0,
+      "picked_side": "home",
+      "picked_team": "Memphis",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
+    "401862808": {
+      "away": "Army",
+      "away_id": "349",
+      "away_ml": -108.0,
+      "blend_probability": 0.5248376084125245,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:56.641345+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401862808",
+      "home": "Tulsa",
+      "home_id": "202",
+      "home_ml": -112.0,
+      "kickoff": "2026-10-24T00:30:00+00:00",
+      "market_probability": 0.4956702459300312,
+      "model_probability": 0.6679734616364987,
+      "model_signal": "Value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -108.0,
+      "picked_side": "away",
+      "picked_team": "Army",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
+    },
     "401864513": {
       "away": "San Jos\u00e9 State",
       "away_id": "23",
@@ -5081,6 +5762,40 @@
       "provider": "DraftKings",
       "season": 2026,
       "week": 7
+    },
+    "401864525": {
+      "away": "Air Force",
+      "away_id": "2005",
+      "away_ml": -238.0,
+      "blend_probability": 0.7070850726197395,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:57.081355+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401864525",
+      "home": "Wyoming",
+      "home_id": "2751",
+      "home_ml": 195.0,
+      "kickoff": "2026-10-24T01:00:00+00:00",
+      "market_probability": 0.6750312469954812,
+      "model_probability": 0.8643859489871011,
+      "model_signal": "Strong value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -238.0,
+      "picked_side": "away",
+      "picked_team": "Air Force",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
     },
     "401866430": {
       "away": "Akron",
@@ -5795,6 +6510,40 @@
       "provider": "DraftKings",
       "season": 2026,
       "week": 7
+    },
+    "401869845": {
+      "away": "James Madison",
+      "away_id": "256",
+      "away_ml": -425.0,
+      "blend_probability": 0.7917922436112965,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:57.322401+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401869845",
+      "home": "App State",
+      "home_id": "2026",
+      "home_ml": 330.0,
+      "kickoff": "2026-10-22T23:00:00+00:00",
+      "market_probability": 0.7768331562167907,
+      "model_probability": 0.8652024375892318,
+      "model_signal": "Strong value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -425.0,
+      "picked_side": "away",
+      "picked_team": "James Madison",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
     },
     "401869932": {
       "away": "Arkansas State",
@@ -6611,6 +7360,40 @@
       "provider": "DraftKings",
       "season": 2026,
       "week": 7
+    },
+    "401871069": {
+      "away": "Missouri State",
+      "away_id": "2623",
+      "away_ml": 120.0,
+      "blend_probability": 0.596525136973803,
+      "blend_signal": "Pass",
+      "captured_at": "2026-10-18T07:14:57.526148+00:00",
+      "experiment": "v15-market-blend-2026-09-28",
+      "game_id": "401871069",
+      "home": "Delaware",
+      "home_id": "48",
+      "home_ml": -142.0,
+      "kickoff": "2026-10-20T23:00:00+00:00",
+      "market_probability": 0.5634920634920635,
+      "model_probability": 0.7586315722148016,
+      "model_signal": "Strong value",
+      "model_weight": 0.16927926947215113,
+      "pick_ml": -142.0,
+      "picked_side": "home",
+      "picked_team": "Delaware",
+      "provenance": {
+        "code_commit": "799f8ef549f2ec2eb2dfd643ca59be23da8aabcd",
+        "current_summary_sha256": "4144d189cfe3b68387b74caff9886accfb6cac1b70b494390b05447a8f2224f4",
+        "fallback_team_ids": [],
+        "frozen_model_sha256": "f15804f96897db883b4a6a7596cf932f1619284e535638179b4781edf1978f8e",
+        "model_version": "V1.5",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "schedule_sha256": "d0f7d46c143916ac56dd78dd8c8e0d552c56ce1e3a303e5414f3ad54f5a33310",
+        "summary_cutoff_exclusive": 8
+      },
+      "provider": "Draft Kings",
+      "season": 2026,
+      "week": 8
     },
     "401871070": {
       "away": "New Mexico State",
