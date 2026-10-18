@@ -150,6 +150,12 @@
       "home_score": 21.0,
       "result": "Not selected"
     },
+    "401858492": {
+      "away_score": 14.0,
+      "checked_at": "2026-10-18T12:10:38.275041+00:00",
+      "home_score": 17.0,
+      "result": "Not selected"
+    },
     "401858493": {
       "away_score": 38.0,
       "checked_at": "2026-10-17T06:08:45.972687+00:00",
@@ -350,10 +356,10 @@
     }
   },
   "run_status": {
-    "checked_at": "2026-10-18T06:34:20.635302+00:00",
+    "checked_at": "2026-10-18T12:10:38.275085+00:00",
     "eligible_in_window": 0,
     "missing_events": [],
-    "new_results": 33,
+    "new_results": 1,
     "new_snapshots": 0,
     "selected_total": 24,
     "skipped": {}
