@@ -1,6 +1,6 @@
 {
   "experiment": "cfb-internal-weights-v1-2026-10-12",
-  "last_run": "2026-10-18T04:56:25.867610+00:00",
+  "last_run": "2026-10-18T11:34:16.517842+00:00",
   "results": {
     "401856719": {
       "away_score": 27.0,
@@ -80,6 +80,12 @@
       "home_score": 6.0,
       "winner_side": "away"
     },
+    "401856833": {
+      "away_score": 27.0,
+      "checked_at": "2026-10-18T11:34:16.517786+00:00",
+      "home_score": 24.0,
+      "winner_side": "away"
+    },
     "401858263": {
       "away_score": 35.0,
       "checked_at": "2026-10-18T04:56:25.867266+00:00",
@@ -116,6 +122,12 @@
       "home_score": 23.0,
       "winner_side": "home"
     },
+    "401858269": {
+      "away_score": 41.0,
+      "checked_at": "2026-10-18T11:34:16.517743+00:00",
+      "home_score": 7.0,
+      "winner_side": "away"
+    },
     "401858488": {
       "away_score": 19.0,
       "checked_at": "2026-10-17T20:49:44.895485+00:00",
@@ -140,6 +152,12 @@
       "home_score": 21.0,
       "winner_side": "away"
     },
+    "401858492": {
+      "away_score": 14.0,
+      "checked_at": "2026-10-18T11:34:16.517824+00:00",
+      "home_score": 17.0,
+      "winner_side": "home"
+    },
     "401858493": {
       "away_score": 38.0,
       "checked_at": "2026-10-17T04:50:12.483576+00:00",
@@ -156,6 +174,12 @@
       "away_score": 30.0,
       "checked_at": "2026-10-18T04:56:25.867531+00:00",
       "home_score": 48.0,
+      "winner_side": "home"
+    },
+    "401860904": {
+      "away_score": 23.0,
+      "checked_at": "2026-10-18T11:34:16.517830+00:00",
+      "home_score": 26.0,
       "winner_side": "home"
     },
     "401860923": {
@@ -212,6 +236,12 @@
       "home_score": 31.0,
       "winner_side": "home"
     },
+    "401864521": {
+      "away_score": 21.0,
+      "checked_at": "2026-10-18T11:34:16.517800+00:00",
+      "home_score": 10.0,
+      "winner_side": "away"
+    },
     "401864522": {
       "away_score": 23.0,
       "checked_at": "2026-10-18T04:56:25.867448+00:00",
@@ -252,6 +282,12 @@
       "away_score": 34.0,
       "checked_at": "2026-10-18T04:56:25.867372+00:00",
       "home_score": 14.0,
+      "winner_side": "away"
+    },
+    "401866445": {
+      "away_score": 48.0,
+      "checked_at": "2026-10-18T11:34:16.517816+00:00",
+      "home_score": 7.0,
       "winner_side": "away"
     },
     "401866478": {
@@ -323,13 +359,13 @@
   },
   "run_summary": {
     "eligible_pregame_games": 0,
-    "fetched": 34,
+    "fetched": 6,
     "missing_event_feeds": {},
-    "results_added": 28,
+    "results_added": 6,
     "skipped": {},
     "snapshots_added": 0,
     "total_locked": 59,
-    "total_settled": 53
+    "total_settled": 59
   },
   "schema": 1,
   "season": 2026,
