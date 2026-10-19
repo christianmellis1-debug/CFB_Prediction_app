@@ -203,3 +203,42 @@ for _,row in selected.sort_values(["week","group","matchup"]).iterrows():
             pick[name]={"homeTeamOdds":p.get("homeTeamOdds"),"awayTeamOdds":p.get("awayTeamOdds"),"spread":p.get("spread"),"details":p.get("details")}
     except Exception as e:pick={"error":str(e)[:100]}
     print("ODDS_GAME",json.dumps({"week":int(row.week),"game_id":gid,"matchup":row.matchup,"team":row.higher_qbr_team,"win":int(row.win),"group":row.group,"def_gap":round(row.def_gap,3),"spreads":spreads,"archived":arch,"pickcenter":pick}),flush=True)
+
+
+# Check whether promising QBR gaps merely identify market favorites.
+market=market.dropna(subset=["game_id","home_team_spread"])
+market["home_team_spread"]=numeric(market.home_team_spread)
+market=market[market.game_spread_available.astype(str).str.casefold().isin(["true","t","1","1.0","yes"])]
+market=market[~market.odds_source.astype(str).str.casefold().eq("default")]
+market=market.drop_duplicates(subset=["game_id"],keep="last").set_index("game_id")
+data["qbr_gap"]=(data.hqb_qbr-data.aqb_qbr).abs()
+data["qbr_home"]=data.apply(lambda x:x.higher_qbr_team==x.matchup.rsplit(" at ",1)[-1],axis=1)
+data["home_line"]=data.game_id.map(market.home_team_spread)
+data["pick_favorite"]=data.apply(lambda x: bool((x.home_line<0)==x.qbr_home) if pd.notna(x.home_line) and x.home_line!=0 else None,axis=1)
+for grp in ["P4","G6","ALL"]:
+    base=data if grp=="ALL" else data[data.group==grp]
+    if grp=="ALL":base=base[base.group.isin(["P4","G6"])]
+    for lo,hi in [(0,10),(10,20),(20,30),(30,40),(40,101)]:
+        f=base[(base.qbr_gap>=lo)&(base.qbr_gap<hi)]
+        good=f[f.pick_favorite==True];dogs=f[f.pick_favorite==False]
+        print("MAGNITUDE_MARKET",json.dumps({"group":grp,"bin":f"{lo}-{hi}","games":len(f),"wins":int(f.win.sum()),"fav_games":len(good),"fav_wins":int(good.win.sum()),"dog_games":len(dogs),"dog_wins":int(dogs.win.sum()),"odds_unavailable":int(f.pick_favorite.isna().sum())}),flush=True)
+near=data[(data.group=="P4")&(data.qbr_gap<10)].sort_values(["week","matchup"])
+roi_profit=0;roi_count=0
+for _,row in near.iterrows():
+    market_line=float(row.home_line) if pd.notna(row.home_line) else None
+    ml=None;src=None
+    try:
+        ev=jsonget("https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="+row.game_id)
+        for price in ev.get("pickcenter",[]):
+            prov=price.get("provider",{}).get("name","")
+            if prov.lower() != "draftkings":continue
+            side="homeTeamOdds" if row.qbr_home else "awayTeamOdds"
+            ml=price.get(side,{}).get("moneyLine")
+            src=prov
+            break
+    except Exception as exc:src=str(exc)[:90]
+    if ml is not None and int(ml)!=0:
+        num=int(ml);ret=(10000/abs(num) if num<0 else num) if row.win else -100
+        roi_profit+=ret;roi_count+=1
+    print("P4_SMALL_QBR_GAME",json.dumps({"week":int(row.week),"matchup":row.matchup,"team":row.higher_qbr_team,"qbr_gap":round(row.qbr_gap,1),"win":int(row.win),"home_line":market_line,"was_favorite":row.pick_favorite,"moneyline":ml,"source":src}),flush=True)
+print("P4_SMALL_QBR_ROI",json.dumps({"bets":roi_count,"profit_100_per_game":round(roi_profit,2),"roi_pct":round(roi_profit/roi_count,4) if roi_count else None}),flush=True)
