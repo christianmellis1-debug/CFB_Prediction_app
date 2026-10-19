@@ -1,0 +1,75 @@
+name: Research QBR 2026 Backtest
+on:
+  push:
+    branches: [research/qbr-2026-backtest]
+  workflow_dispatch:
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Analyze FBS higher prior-game QBR
+        run: |
+          python - <<'PY'
+          import requests, collections, csv, io, time
+          from datetime import datetime
+          s=requests.Session()
+          def get(url):
+              r=s.get(url,timeout=35);r.raise_for_status();return r.json()
+          # Weekly completed games and actual starter QBR from ESPN's event-level data
+          weeks={}
+          for week in range(1,8):
+              u=f'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates=2026&seasontype=2&week={week}&groups=80&limit=500'
+              j=get(u); games=[]
+              for ev in j.get('events',[]):
+                  comp=ev.get('competitions',[{}])[0]
+                  if not comp.get('status',{}).get('type',{}).get('completed',False):continue
+                  ts=comp.get('competitors',[])
+                  if len(ts)!=2:continue
+                  h=next((x for x in ts if x.get('homeAway')=='home'),None)
+                  a=next((x for x in ts if x.get('homeAway')=='away'),None)
+                  if not h or not a:continue
+                  games.append(dict(id=ev['id'],week=week,date=ev.get('date'),home=h['team']['displayName'],away=a['team']['displayName'],hid=h['team']['id'],aid=a['team']['id'],winner='home' if h.get('winner') else 'away' if a.get('winner') else None))
+              weeks[week]=games
+              print('SCHEDULE',week,'completed_games',len(games),flush=True)
+          # Get official per-game QBR from ESPN's QBR weekly feed; it includes game IDs.
+          bygame=collections.defaultdict(dict)
+          for week in range(1,8):
+              u=f'https://site.web.api.espn.com/apis/fitt/v3/sports/football/college-football/qbr?qbrType=weeks&season=2026&week={week}&seasontype=2&isqualified=false&limit=1000'
+              try:
+                  j=get(u); athletes=j.get('athletes',[])
+                  print('QBR_FEED',week,'records',len(athletes),flush=True)
+                  labs=j.get('categories',[{}])[0].get('labels',[])
+                  for rec in athletes:
+                      ath=rec['athlete']; game=rec.get('game',{}).get('id')
+                      if not game: continue
+                      val=dict(zip(labs,rec.get('categories',[{}])[0].get('totals',[])))
+                      q=val.get('QBR') or val.get('Total QBR') or val.get('totalQBR') or val.get('qbr')
+                      if q is None:
+                          for k,v in val.items():
+                              if 'qbr' in k.lower() and 'rank' not in k.lower():
+                                  q=v;break
+                      if q is not None:
+                          bygame[str(game)][str(ath['teamId'])]=(ath.get('displayName'),float(q))
+                  print('QBR_MATCHED_GAMES',week,sum(1 for g in weeks[week] if str(g['id']) in bygame), 'labels',labs,flush=True)
+              except Exception as e:print('QBR_FEED_ERROR',week,str(e)[:200],flush=True)
+          # Most recent PRIOR match only, valid only if each team has exactly one QB record
+          previous={}
+          for week in range(1,8):
+              wins=losses=missing=0
+              examples=[]
+              for g in sorted(weeks[week],key=lambda z:z['date']):
+                  h=previous.get(str(g['hid']));a=previous.get(str(g['aid']))
+                  if h and a and h[1]!=a[1]:
+                      higher='home' if h[1]>a[1] else 'away'
+                      won=(higher==g['winner'])
+                      wins+=won;losses+=not won
+                      examples.append([g['away'],g['home'],a[1],h[1],higher,won])
+                  else:missing+=1
+                  rec=bygame.get(str(g['id']),{})
+                  for teamid in [g['hid'],g['aid']]:
+                      if str(teamid) in rec:
+                          previous[str(teamid)]=rec[str(teamid)]
+              print('RESULT',week,wins,losses,missing,'pct',round(100*wins/(wins+losses),1) if wins+losses else 'NA',flush=True)
+              print('EXAMPLES',week,repr(examples[:8]),flush=True)
+          PY
