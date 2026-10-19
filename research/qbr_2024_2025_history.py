@@ -147,6 +147,26 @@ for yr in [2024,2025,2026]:
     odds=odds[odds.game_spread_available.astype(str).str.lower().isin(["true","t","1","1.0","yes","y"])]
     odds=odds[~odds.odds_source.astype(str).str.lower().eq("default")]
     odds=odds.drop_duplicates(["game_id"],keep="last").set_index("game_id")
+    broad_baseline=collections.Counter()
+    for rec in agree:
+        eid=rec["game_id"];line=odds.loc[eid] if eid in odds.index else None
+        home_spread=float(line.home_team_spread) if line is not None and pd.notna(line.home_team_spread) else None
+        if home_spread is None or home_spread==0:continue
+        fav_side="home" if home_spread<0 else "away"
+        favorite_win=int((rec["pick_side"]==fav_side)==bool(rec["won"]))
+        broad_baseline["games"]+=1;broad_baseline["fav_wins"]+=favorite_win
+        broad_baseline["qbr_run_wins"]+=rec["won"]
+        game=canon.loc[eid]
+        try:
+            home_margin=float(game.home_points)-float(game.away_points)
+            side_margin=home_margin if rec["pick_side"]=="home" else -home_margin
+            side_spread=home_spread if rec["pick_side"]=="home" else -home_spread
+            ats_result=side_margin+side_spread
+            broad_baseline["qbr_run_ats_w"]+=ats_result>0
+            broad_baseline["qbr_run_ats_l"]+=ats_result<0
+            broad_baseline["qbr_run_ats_p"]+=ats_result==0
+        except (ValueError,TypeError):pass
+    textrow("BROAD_MARKET",{"year":yr,**dict(broad_baseline)})
     profits=[];fav_profits=[];favwins=0;favcount=0;fav_candidates=0;dogs=0;wkprof=collections.defaultdict(list)
     ats=collections.Counter();fav_ats=collections.Counter();by_status=collections.defaultdict(list)
     for rec in candidate:
