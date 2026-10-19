@@ -181,3 +181,25 @@ for i,row in selected.iterrows():
         print("ESPN_ODDS_SCHEMA",row.game_id,"pickcenter",repr(ev.get("pickcenter"))[:2000],
             "header_odds",repr(ev.get("header",{}).get("competitions",[{}])[0].get("odds"))[:1200],flush=True)
     except Exception as e:print("ESPN_ODDS_ERROR",row.game_id,str(e)[:150],flush=True)
+
+
+archive_path="data/archived_moneylines_2026.json"
+try:
+    with open(archive_path,encoding="utf8") as f: archived=json.load(f).get("events",{})
+except Exception: archived={}
+market["game_id"]=market.game_id.astype(str)
+for _,row in selected.sort_values(["week","group","matchup"]).iterrows():
+    gid=row.game_id
+    line=market[market.game_id.eq(gid)]
+    spreads=[]
+    for _,v in line.iterrows():
+        spreads.append({"home_spread":v.home_team_spread,"source":v.odds_source,"available":v.game_spread_available})
+    arch=archived.get(gid,{}).get("quotes",{})
+    pick={}
+    try:
+        ev=jsonget("https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="+gid)
+        for p in ev.get("pickcenter",[]) or ev.get("header",{}).get("competitions",[{}])[0].get("odds",[]):
+            name=p.get("provider",{}).get("name","unknown") if isinstance(p.get("provider"),dict) else "unknown"
+            pick[name]={"homeTeamOdds":p.get("homeTeamOdds"),"awayTeamOdds":p.get("awayTeamOdds"),"spread":p.get("spread"),"details":p.get("details")}
+    except Exception as e:pick={"error":str(e)[:100]}
+    print("ODDS_GAME",json.dumps({"week":int(row.week),"game_id":gid,"matchup":row.matchup,"team":row.higher_qbr_team,"win":int(row.win),"group":row.group,"def_gap":round(row.def_gap,3),"spreads":spreads,"archived":arch,"pickcenter":pick}),flush=True)
