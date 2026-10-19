@@ -162,3 +162,22 @@ for wk in range(2,8):
     report(data[(data.week==wk)&(data.group.isin(["P4","G6"]))&(data.agrees==True)],"ALL_QUALIFYING_WEEK_"+str(wk))
 report(data[(data.group.isin(["P4","G6"]))&(data.agrees==True)],"ALL_QUALIFYING_COMBINED")
 print("DONE",flush=True)
+
+
+selected=data[(data.group.isin(["P4","G6"]))&(data.agrees==True)].copy()
+selected["def_gap"]=(selected.home_run_def_ypc-selected.away_run_def_ypc).abs()
+selected=selected[selected.def_gap>=2]
+print("SELECTED",len(selected),flush=True)
+market_url="https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_betting/betting_2026.csv"
+try:
+    market=frameget(market_url)
+    print("MARKET_SCHEMA",repr(market.columns.tolist()),"N",len(market),flush=True)
+    print("MARKET_SAMPLE",repr(market.iloc[0].to_dict()),flush=True)
+except Exception as e: print("MARKET_ERROR",str(e)[:300],flush=True)
+for i,row in selected.iterrows():
+    if i>2:break
+    try:
+        ev=jsonget("https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="+row.game_id)
+        print("ESPN_ODDS_SCHEMA",row.game_id,"pickcenter",repr(ev.get("pickcenter"))[:2000],
+            "header_odds",repr(ev.get("header",{}).get("competitions",[{}])[0].get("odds"))[:1200],flush=True)
+    except Exception as e:print("ESPN_ODDS_ERROR",row.game_id,str(e)[:150],flush=True)
