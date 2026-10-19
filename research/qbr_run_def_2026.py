@@ -216,13 +216,13 @@ data["qbr_home"]=data.apply(lambda x:x.higher_qbr_team==x.matchup.rsplit(" at ",
 data["home_line"]=data.game_id.map(market.home_team_spread)
 data["pick_favorite"]=data.apply(lambda x: bool((x.home_line<0)==x.qbr_home) if pd.notna(x.home_line) and x.home_line!=0 else None,axis=1)
 for grp in ["P4","G6","ALL"]:
-    base=data if grp=="ALL" else data[data.group==grp]
+    base=data[data.agrees==True]\n    if grp!="ALL":base=base[base.group==grp]
     if grp=="ALL":base=base[base.group.isin(["P4","G6"])]
     for lo,hi in [(0,10),(10,20),(20,30),(30,40),(40,101)]:
         f=base[(base.qbr_gap>=lo)&(base.qbr_gap<hi)]
         good=f[f.pick_favorite==True];dogs=f[f.pick_favorite==False]
         print("MAGNITUDE_MARKET",json.dumps({"group":grp,"bin":f"{lo}-{hi}","games":len(f),"wins":int(f.win.sum()),"fav_games":len(good),"fav_wins":int(good.win.sum()),"dog_games":len(dogs),"dog_wins":int(dogs.win.sum()),"odds_unavailable":int(f.pick_favorite.isna().sum())}),flush=True)
-near=data[(data.group=="P4")&(data.qbr_gap<10)].sort_values(["week","matchup"])
+near=data[(data.agrees==True)&(data.group=="P4")&(data.qbr_gap<10)].sort_values(["week","matchup"])
 roi_profit=0;roi_count=0
 for _,row in near.iterrows():
     market_line=float(row.home_line) if pd.notna(row.home_line) else None
