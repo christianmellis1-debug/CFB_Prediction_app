@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v4
+      - name: Analyze higher QBR and run defense
+        run: python research/qbr_run_def_2026.py
       - name: Analyze FBS higher prior-game QBR
         run: |
           python - <<'PY'
