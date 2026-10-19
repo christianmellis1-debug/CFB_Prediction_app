@@ -51,6 +51,9 @@ for yr in [2024,2025,2026]:
     s["is_done"]=s.completed.astype(str).str.lower().isin(["true","t","1","1.0","yes","y"])
     canon=s.set_index("game_id")
     fbs=set(s.home_id)|set(s.away_id)
+    if yr==2026:
+        allteams=getjson('https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams?limit=500&groups=80')
+        fbs={str(team['team']['id']) for team in allteams.get('sports',[{}])[0].get('leagues',[{}])[0].get('teams',[])}
     maxweek=7 if yr==2026 else 15
     qbr_by_game=collections.defaultdict(dict)
     games_by_week={}
