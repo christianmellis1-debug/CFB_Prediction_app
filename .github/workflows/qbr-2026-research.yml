@@ -9,6 +9,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Install research dependencies
+        run: python -m pip install pandas requests
       - name: Analyze higher QBR and run defense
         run: python research/qbr_run_def_2026.py
       - name: Analyze FBS higher prior-game QBR
