@@ -16,6 +16,12 @@ jobs:
           s=requests.Session()
           def get(url):
               r=s.get(url,timeout=35);r.raise_for_status();return r.json()
+          # Get current FBS team IDs to exclude opponents from other divisions.
+          teams=get('https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams?limit=500&groups=80')
+          fbs=set()
+          for item in teams.get('sports',[{}])[0].get('leagues',[{}])[0].get('teams',[]):
+              fbs.add(str(item.get('team',{}).get('id')))
+          print('FBS_IDS',len(fbs),flush=True)
           # Weekly completed games and actual starter QBR from ESPN's event-level data
           weeks={}
           for week in range(1,8):
@@ -29,6 +35,7 @@ jobs:
                   h=next((x for x in ts if x.get('homeAway')=='home'),None)
                   a=next((x for x in ts if x.get('homeAway')=='away'),None)
                   if not h or not a:continue
+                  if str(h['team']['id']) not in fbs or str(a['team']['id']) not in fbs:continue
                   games.append(dict(id=ev['id'],week=week,date=ev.get('date'),home=h['team']['displayName'],away=a['team']['displayName'],hid=h['team']['id'],aid=a['team']['id'],winner='home' if h.get('winner') else 'away' if a.get('winner') else None))
               weeks[week]=games
               print('SCHEDULE',week,'completed_games',len(games),flush=True)
@@ -44,7 +51,7 @@ jobs:
                       ath=rec['athlete']; game=rec.get('game',{}).get('id')
                       if not game: continue
                       val=dict(zip(labs,rec.get('categories',[{}])[0].get('totals',[])))
-                      q=val.get('QBR') or val.get('Total QBR') or val.get('totalQBR') or val.get('qbr')
+                      q=val.get('TQBR')
                       if q is None:
                           for k,v in val.items():
                               if 'qbr' in k.lower() and 'rank' not in k.lower():
@@ -53,7 +60,7 @@ jobs:
                           bygame[str(game)][str(ath['teamId'])]=(ath.get('displayName'),float(q))
                   print('QBR_MATCHED_GAMES',week,sum(1 for g in weeks[week] if str(g['id']) in bygame), 'labels',labs,flush=True)
               except Exception as e:print('QBR_FEED_ERROR',week,str(e)[:200],flush=True)
-          # Most recent PRIOR match only, valid only if each team has exactly one QB record
+          # Most recent PRIOR game per team, restricted by week and date
           previous={}
           for week in range(1,8):
               wins=losses=missing=0
