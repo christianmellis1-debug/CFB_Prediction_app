@@ -67,7 +67,6 @@ for yr in [2024,2025,2026]:
             if not h or not a:continue
             hid=str(h["team"]["id"]);aid=str(a["team"]["id"]);eid=str(ev["id"])
             if hid not in fbs or aid not in fbs:continue
-            if eid not in canon.index:continue
             games.append(dict(id=eid,year=yr,week=wk,date=ev["date"],home=h["team"]["displayName"],away=a["team"]["displayName"],
                               hid=hid,aid=aid,winner="home" if h.get("winner") else "away" if a.get("winner") else None))
         games_by_week[wk]=sorted(games,key=lambda x:x["date"])
@@ -107,7 +106,7 @@ for yr in [2024,2025,2026]:
     for wk in range(1,maxweek+1):
         for g in games_by_week[wk]:
             h=previous.get(g["hid"]);a=previous.get(g["aid"])
-            if wk>=2 and h is not None and a is not None and h[1]!=a[1]:
+            if wk>=2 and h is not None and a is not None and h[1]!=a[1] and g["id"] in canon.index:
                 high="home" if h[1]>a[1] else "away"
                 w=int(high==g["winner"])
                 canon_g=canon.loc[g["id"]]
@@ -146,6 +145,7 @@ for yr in [2024,2025,2026]:
     odds=odds[~odds.odds_source.astype(str).str.lower().eq("default")]
     odds=odds.drop_duplicates(["game_id"],keep="last").set_index("game_id")
     profits=[];fav_profits=[];favwins=0;favcount=0;fav_candidates=0;dogs=0;wkprof=collections.defaultdict(list)
+    ats=collections.Counter();fav_ats=collections.Counter();by_status=collections.defaultdict(list)
     for rec in candidate:
         eid=rec["game_id"];line=odds.loc[eid] if eid in odds.index else None
         home_spread=float(line.home_team_spread) if line is not None and pd.notna(line.home_team_spread) else None
@@ -153,6 +153,19 @@ for yr in [2024,2025,2026]:
         is_fav=fav==rec["pick_side"] if fav else None
         if is_fav: fav_candidates+=1
         elif is_fav==False:dogs+=1
+        by_status["favorite" if is_fav else "underdog" if is_fav is False else "unpriced"].append(rec)
+        if home_spread is not None and eid in canon.index:
+            game=canon.loc[eid]
+            try:
+                home_margin=float(game.home_points)-float(game.away_points)
+                side_margin=home_margin if rec["pick_side"]=="home" else -home_margin
+                side_spread=home_spread if rec["pick_side"]=="home" else -home_spread
+                final_ats=side_margin+side_spread
+                ats["W" if final_ats>0 else "L" if final_ats<0 else "P"]+=1
+                if fav:
+                    f_ats=(home_margin+home_spread)* (1 if fav=="home" else -1)
+                    fav_ats["W" if f_ats>0 else "L" if f_ats<0 else "P"]+=1
+            except (TypeError,ValueError):pass
         ml=None;opp_ml=None;provider=None
         try:
             e=getjson("https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="+eid)
@@ -181,6 +194,7 @@ for yr in [2024,2025,2026]:
                         "qbr_gap":rec["qbr_gap"],"def_ypc_gap":rec["ypc_gap"],"home_ypc":rec["home_ypc"],"away_ypc":rec["away_ypc"],
                         "selection_favorite":is_fav,"home_spread":home_spread,"dk_moneyline":ml,"pnl_100":round(pnl,2) if pnl is not None else None,
                         "provider":provider})
+    textrow("YEAR_DETAIL",{"year":yr,"as_market_favorite":win_stats(by_status["favorite"]),"as_underdog":win_stats(by_status["underdog"]),"candidate_ats":dict(ats),"favorite_ats_same_games":dict(fav_ats)})
     textrow("YEAR_SUMMARY",{"year":yr,**win_stats(candidate),"favorites":fav_candidates,"underdogs":dogs,
                              "favorite_wins":favwins,"favorite_count":favcount,
                              "moneyline_coverage":len(profits),"net_100":round(sum(profits),2),"roi_pct":round(sum(profits)/len(profits),2) if profits else None,
