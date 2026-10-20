@@ -70,7 +70,8 @@ class TestCProductionTests(unittest.TestCase):
         self.assertEqual(row['Bet Line'],'-160')
         self.assertAlmostEqual(row['Model Edge'],.20-160/260)
         self.assertAlmostEqual(row['Expected Value'],.20*(100/160)-.80)
-        self.assertIn('original V1.5',str(row['Pick Explanation']))
+        self.assertIn("We're leaning toward Away over Home", str(row['Pick Explanation']))
+        self.assertNotIn("V1.5", str(row['Pick Explanation']))
         pd.testing.assert_frame_equal(self.frame,copy_of_original)
 
     def test_stale_or_missing_quotes_do_not_change_prediction(self):
