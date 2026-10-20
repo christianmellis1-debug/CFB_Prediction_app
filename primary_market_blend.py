@@ -71,7 +71,8 @@ def _set_betting_fields(df, index, winner_side, original_home, row, book_home=No
 
 
 def apply_primary_blend(predictions, games, *, now_utc=None, stale=False,
-                        stale_event_ids=(), frozen_snapshots=None):
+                        stale_event_ids=(), frozen_snapshots=None,
+                        odds_retrieved_utc=None):
     """Post-tier display transform: select winners using valid pregame quotes.
 
     Future games may use fresh quotes. After kickoff, only a previously frozen
@@ -84,6 +85,11 @@ def apply_primary_blend(predictions, games, *, now_utc=None, stale=False,
     now = _utc(now_utc) if now_utc is not None else datetime.now(timezone.utc)
     if now is None:
         raise ValueError("Invalid now_utc")
+    # Use the timestamp from the successful (possibly cached) sportsbook feed,
+    # never the time Streamlit reruns to render a page.
+    odds_retrieved = _utc(odds_retrieved_utc)
+    if odds_retrieved is not None and odds_retrieved > now:
+        odds_retrieved = None
     df = predictions.copy(deep=True)
     for old, new in (
         ("Home Win %", "V1.5 Home Win %"),
@@ -140,7 +146,7 @@ def apply_primary_blend(predictions, games, *, now_utc=None, stale=False,
             book_home = row.get("Home ML")
             book_away = row.get("Away ML")
             market = market_home_probability(book_home, book_away)
-            quote_timestamp = now.isoformat()
+            quote_timestamp = odds_retrieved.isoformat() if odds_retrieved else None
         else:
             frozen = frozen_snapshots.get(gid)
             if not frozen or str(frozen.get("home")) != str(row["Home Team"]) or str(frozen.get("away")) != str(row["Away Team"]):
