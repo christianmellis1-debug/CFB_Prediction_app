@@ -2645,6 +2645,11 @@ feed_details.caption(
     "Independent V1.5 chance at least 70% and sportsbook no-vig chance below 55%. "
     "Future flagged matchups appear in Risky picks but are excluded from official Value Picks and moneyline parlays."
 )
+feed_details.caption(
+    f"G6 home-underdog research: {int(pred['G6 Home Underdog Research'].sum())} candidate(s). "
+    "Independent V1.5 picks a G6 home underdog at +150 or longer. "
+    "Research flags do not change winner predictions, official Value Picks, or parlays."
+)
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
 if st.session_state.get("moneyline_history_season") != season:
     line_history.clear()
@@ -3203,6 +3208,34 @@ with cards_tab:
         }))
         logo_sources = embedded_team_logos(logo_urls)
 
+        # Research watchlist uses the full selected slate, never the Game Cards
+        # search/status filters. It is informational, not an official betting tier.
+        underdog_research = pred.loc[
+            pred["G6 Home Underdog Research"].fillna(False).astype(bool)
+        ].copy()
+        if not underdog_research.empty:
+            st.markdown("#### 🔎 G6 home-underdog research watchlist")
+            st.caption(
+                "Independent V1.5 favors a G6 home team priced at +150 or longer. "
+                "Historical exploratory group: 11–8 through 2026 Week 7; "
+                "not an official Value Pick or a recommended wager."
+            )
+            for _, research_row in underdog_research.iterrows():
+                r_name = str(research_row["Research Underdog Team"])
+                r_line = int(research_row["Research Underdog ML"])
+                r_probability = float(research_row["Research Underdog Model %"])
+                r_market = float(research_row["Research Underdog Market %"])
+                caution = (
+                    " · ⚠ ALSO HIGH RISK: G6 confidence conflict"
+                    if bool(research_row.get("G6 Confidence Conflict", False)) else ""
+                )
+                st.markdown(
+                    f"**{escape(str(research_row['Away Team']))} at {escape(str(research_row['Home Team']))}** "
+                    f"— independent pick: **{escape(r_name)}** · "
+                    f"archived/current ML: **+{r_line}** · "
+                    f"V1.5: **{r_probability:.1%}** · "
+                    f"no-vig sportsbook: **{r_market:.1%}**{caution}"
+                )
         # Spotlight uses the official Game of the Week from the full slate,
         # independent of the Game Cards search or status filters.
         featured, is_consensus = select_matchday_spotlight(pred)
@@ -3510,6 +3543,24 @@ with cards_tab:
                     '<p>' + str(scored["count"]) + '/5 advantages for '
                     + escape(str(r["Predicted Winner"])) + '.</p></div>'
                 )
+            research_note = ""
+            if bool(r.get("G6 Home Underdog Research", False)):
+                research_team = escape(str(r.get("Research Underdog Team", "")))
+                research_line = int(r.get("Research Underdog ML"))
+                research_model = float(r.get("Research Underdog Model %"))
+                research_market = float(r.get("Research Underdog Market %"))
+                research_book = escape(str(r.get("Research Underdog Book", "Sportsbook")))
+                research_note = (
+                    '<div style="padding:10px 12px;margin:10px 0;border-left:4px solid #64748b;'
+                    'border-radius:6px;background:#64748b18;font-size:.9rem">'
+                    '<strong>🔎 G6 HOME UNDERDOG · RESEARCH FLAG</strong>'
+                    f'<p>The independent forecast favors {research_team} at {research_model:.1%}, '
+                    f'while {research_book} pricing puts the team at {research_market:.1%} '
+                    f'(moneyline +{research_line}).</p>'
+                    '<p>This is a historical research candidate, not an official Value Pick. '
+                    'The displayed main forecast may disagree with the independent estimate. '
+                    'Do not treat this flag as a recommendation to bet.</p></div>'
+                )
             gotw_note = ""
             if bool(r.get("Game of Week", False)):
                 gotw_team = escape(str(r.get("Game of Week Team", "")))
@@ -3544,14 +3595,14 @@ with cards_tab:
                    if risk or missing_data_note else '')
             )
             card_details[card_idx] = (
-                explanation_html + warning + advantage_note + other_details
+                explanation_html + warning + research_note + advantage_note + other_details
             )
             risk_explanation = risky_pick_reason_html(
                 check, summary_side, str(r["Predicted Winner"]),
                 str(summary_opponent), confidence_value, market_conflict,
             ) if is_risky else ""
             risky_card_details[card_idx] = (
-                explanation_html + warning + risk_explanation + other_details
+                explanation_html + warning + research_note + risk_explanation + other_details
             )
             away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
             home_team_class = "team-line predicted-team" if r["Predicted Side"] == "Home" else "team-line"
@@ -3570,7 +3621,7 @@ with cards_tab:
 {final_score_html}
 <div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Estimated win chance</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{visible_risk}{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
+<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{visible_risk}{('<div style="padding:8px 11px;margin:8px 0;border-left:3px solid #64748b;background:#64748b18;border-radius:5px;font-size:.88rem"><strong>🔎 G6 HOME UNDERDOG · RESEARCH ONLY</strong></div>' if bool(r.get('G6 Home Underdog Research', False)) else '')}{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
                 if card_index % 2 == 0:
