@@ -103,7 +103,7 @@ TOUR_STEPS = [
     ("schedule", None, "Choose your games", "Choose Season and Week just below. Kickoff times use Central Time with AM/PM. Only regular-season FBS vs. FBS matchups are included."),
     ("filters", "Game cards", "Find your teams", "Search a team, choose favorites, or narrow the confidence and game-status filters below. Reset filters brings back the full slate."),
     ("cards", "Game cards", "Read a game card", "The cards below show predicted winners, win probabilities, available moneylines and spreads, expected game-window weather, and live or final scores."),
-    ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners below 80% confidence with two or fewer five-metric advantages, plus market–matchup conflicts. A conflict is a Test C 50–51% toss-up where the selected team has at most one advantage against at least four for its opponent; conflicts are included even when an official tier also applies. Missing matchup data is not scored."),
+    ("risky", "Risky picks", "Review matchup warnings", "This tab lists non-tiered predicted winners below 80% confidence with two or fewer five-metric advantages, plus near-even market/matchup conflicts and high-risk G6 Confidence Conflicts. G6 conflicts occur when independent V1.5 gives a team at least 70% but same-book, no-vig pricing puts it below 55%. These appear in Risky picks even for tiered or high-confidence games. Missing odds or metrics do not trigger a conflict."),
     ("export", None, "Export your picks", "Use Export picks above the navigation to download all picks for this week or only the picks matching your Game cards filters. Open the CSV in Excel to compare matchups."),
     ("results", "Model results", "Check model performance", "Compare model wins, losses, and accuracy by confidence, plus Value Pick records overall and by tier. Value Pick tracking starts in Week 3; Weeks 1 and 2 are excluded from the tier record."),
     ("scenario", "What-if bets", "Try a betting scenario", "Choose picks and stakes below to see potential profit if they win and the amount lost if they lose. Missing moneylines are excluded. A scenario does not place or record bets."),
@@ -2640,6 +2640,11 @@ feed_details.caption(
     "Unpriced, stale, or unverified matchups use V1.5. Archived games before Oct 13, 2026 stay on V1.5; "
     "started games require a verified pregame frozen snapshot. Six value tiers are independent."
 )
+feed_details.caption(
+    f"G6 confidence conflicts: {int(pred['G6 Confidence Conflict'].sum())} verified game(s). "
+    "Independent V1.5 chance at least 70% and sportsbook no-vig chance below 55%. "
+    "Future flagged matchups appear in Risky picks but are excluded from official Value Picks and moneyline parlays."
+)
 line_history = st.session_state.setdefault("moneyline_observations_v1", {})
 if st.session_state.get("moneyline_history_season") != season:
     line_history.clear()
@@ -2719,6 +2724,7 @@ with value_tab:
         """,
         unsafe_allow_html=True,
     )
+    st.caption("Future G6 confidence-conflict matchups are listed in Risky picks, not official Value Picks.")
     value_picks = pred[pred["Value Selected"]].sort_values("Value Rank")
     tier_names = ("Complete Game", "Storm Front", "Takeaway Trouble", "Parlay Bridge", "Home Turf Hammer", "Home Field Advantage")
     tier_counts = pd.to_numeric(value_picks["Value Stage"], errors="coerce").value_counts()
@@ -3600,14 +3606,22 @@ with cards_tab:
                 tour_at("risky")
                 st.subheader(f"Risky picks · {len(risky_indices)}")
                 st.caption(f"All flagged picks for {season}, Week {selected_week}. Game-card filters do not limit this list.")
-                st.write("These are predictions with limited matchup support or especially close games where several strengths favor the other team. Open Details to see why each pick was flagged. The prediction and betting lines are unchanged.")
+                st.write(
+                    "Includes weak matchup support, near-even forecasts with conflicting football signs, "
+                    "and G6 Confidence Conflicts. In the historical research, G6 conflicts went 4–19. "
+                    "Open Details to see the specific warning. The winner forecast remains visible."
+                )
                 if not advantage_checks:
                     st.info(advantage_error)
-                elif risky_indices:
+                if risky_indices:
                     render_pick_cards(pred.loc[risky_indices], "risky")
                 else:
-                    st.info("No qualifying matchup warnings or market–matchup conflicts this week.")
-                st.caption("These concerns are based on earlier FBS games. A risk flag does not mean the pick will lose, and it never changes the prediction or confidence.")
+                    st.info("No qualifying matchup warnings or G6 confidence conflicts this week.")
+                st.caption(
+                    "Risk warnings are not guaranteed losses. Future G6 conflict games are excluded "
+                    "from the official Value Shortlist and recommended moneyline parlays. "
+                    "The original predictions, lines and historical settled records are unchanged."
+                )
 if performance_tab.open:
     with performance_tab:
         show_weight_challenger_comparison(st, season, selected_week)
