@@ -73,6 +73,14 @@ def apply_g6_conflict_flags(predictions, schedule, *,
     out["Conflict Market %"] = float("nan")
     out["Conflict Team"] = ""
     out["Conflict Odds Source"] = ""
+    # Separate observational flag: selected G6 home underdog at +150 or longer.
+    # It never promotes a candidate into the official waterfall or a parlay.
+    out["G6 Home Underdog Research"] = False
+    out["Research Underdog Team"] = ""
+    out["Research Underdog ML"] = float("nan")
+    out["Research Underdog Model %"] = float("nan")
+    out["Research Underdog Market %"] = float("nan")
+    out["Research Underdog Book"] = ""
     if out.empty or "game_id" not in schedule:
         return out
 
@@ -128,6 +136,7 @@ def apply_g6_conflict_flags(predictions, schedule, *,
             continue
         provider = None
         book_probability = None
+        selected_moneyline = None
         if (now < kickoff and str(row.get("Status")) == "Awaiting final"):
             if stale or gid in stale_ids:
                 continue
@@ -136,6 +145,7 @@ def apply_g6_conflict_flags(predictions, schedule, *,
                 continue
             book_probability = paired_market_probability(
                 row.get("Home ML"), row.get("Away ML"), side)
+            selected_moneyline = row.get("Home ML") if side == "home" else row.get("Away ML")
         else:
             frozen = snapshots.get(gid)
             if not isinstance(frozen, dict):
@@ -164,8 +174,25 @@ def apply_g6_conflict_flags(predictions, schedule, *,
                 continue
             book_probability = paired_market_probability(
                 frozen.get("home_ml"), frozen.get("away_ml"), side)
+            selected_moneyline = frozen.get("home_ml") if side == "home" else frozen.get("away_ml")
         if book_probability is None:
             continue
+        # Research only. Require independent V1.5 to pick the home team,
+        # valid same-book two-sided prices, and an outright home dog +150+.
+        # Keep the gate distinct from the 70/55 safety warning.
+        try:
+            home_line = float(str(selected_moneyline).strip().replace("+", "").replace("−", "-"))
+        except (TypeError, ValueError, OverflowError):
+            home_line = float("nan")
+        if (side == "home" and 0.5 <= base_p <= 1.0
+                and math.isfinite(home_line) and home_line.is_integer()
+                and home_line >= 150 and book_probability < .5):
+            out.at[index, "G6 Home Underdog Research"] = True
+            out.at[index, "Research Underdog Team"] = str(game["home_team"])
+            out.at[index, "Research Underdog ML"] = home_line
+            out.at[index, "Research Underdog Model %"] = base_p
+            out.at[index, "Research Underdog Market %"] = book_probability
+            out.at[index, "Research Underdog Book"] = provider
         if base_p >= MODEL_MIN and book_probability < MARKET_MAX:
             out.at[index, "G6 Confidence Conflict"] = True
             out.at[index, "Conflict V1.5 %"] = base_p
