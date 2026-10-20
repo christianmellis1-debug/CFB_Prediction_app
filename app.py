@@ -38,6 +38,7 @@ from shadow_tracking import show_shadow_tracking, DATA as SHADOW_DATA
 import primary_market_blend
 importlib.reload(primary_market_blend)
 from primary_market_blend import apply_primary_blend, VERSION as PRIMARY_VERSION
+from forecast_comparison import forecast_comparison_html
 import confidence_conflict
 importlib.reload(confidence_conflict)
 from confidence_conflict import apply_g6_conflict_flags, omit_risky_value_recommendations
@@ -2633,6 +2634,7 @@ pred = apply_primary_blend(
     stale=bool(odds_snapshot.get("stale")),
     stale_event_ids=odds_snapshot.get("stale_events", {}),
     frozen_snapshots=_frozen_primary,
+    odds_retrieved_utc=odds_snapshot.get("generation"),
 )
 _blended_count = int(pred["Market Blend Used"].sum())
 feed_details.caption(
@@ -3483,6 +3485,9 @@ with cards_tab:
                 + escape(explanation) + '</p>'
                 + rushing_story + evidence_html + source_note + '</div>'
             )
+            # Detailed forecast transparency belongs inside the existing
+            # expandable Details, not in the main card's compact layout.
+            comparison_html = forecast_comparison_html(r)
             is_tiered = bool(r.get("Value Selected", False))
             confidence_value = pd.to_numeric(r.get("Confidence"), errors="coerce")
             is_high_confidence = pd.notna(confidence_value) and float(confidence_value) >= 0.80
@@ -3610,14 +3615,14 @@ with cards_tab:
                    if risk or missing_data_note else '')
             )
             card_details[card_idx] = (
-                explanation_html + warning + research_note + advantage_note + other_details
+                comparison_html + explanation_html + warning + research_note + advantage_note + other_details
             )
             risk_explanation = risky_pick_reason_html(
                 check, summary_side, str(r["Predicted Winner"]),
                 str(summary_opponent), confidence_value, market_conflict,
             ) if is_risky else ""
             risky_card_details[card_idx] = (
-                explanation_html + warning + research_note + risk_explanation + other_details
+                comparison_html + explanation_html + warning + research_note + risk_explanation + other_details
             )
             away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
             home_team_class = "team-line predicted-team" if r["Predicted Side"] == "Home" else "team-line"
