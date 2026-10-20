@@ -107,6 +107,55 @@ class TestG6ConfidenceConflict(unittest.TestCase):
             started, self.game(), now_utc="2026-10-25T12:00:00Z",
             frozen_snapshots=bad).iloc[0]["G6 Confidence Conflict"])
 
+    def test_home_research_flag_requires_selected_dog_plus_150(self):
+        p = self.prediction(**{"Home ML":"+160", "Away ML":"-192"})
+        row = self.flagged(picks=p)
+        self.assertTrue(row["G6 Home Underdog Research"])
+        self.assertEqual(row["Research Underdog Team"], "Delaware")
+        self.assertEqual(row["Research Underdog ML"], 160)
+        self.assertAlmostEqual(row["Research Underdog Model %"], .77)
+        self.assertLess(row["Research Underdog Market %"], .5)
+        self.assertFalse(row["G6 Confidence Conflict"])
+
+        # A research designation cannot create an official Value Pick or
+        # change an existing betting waterfall selection.
+        self.assertTrue(omit_risky_value_recommendations(
+            pd.DataFrame([row])).iloc[0]["Value Selected"])
+
+        home_favorite = self.prediction(**{"Home ML":"-150", "Away ML":"+130"})
+        self.assertFalse(self.flagged(picks=home_favorite)["G6 Home Underdog Research"])
+        borderline = self.prediction(**{"Home ML":"+149", "Away ML":"-170"})
+        self.assertFalse(self.flagged(picks=borderline)["G6 Home Underdog Research"])
+        road = self.prediction(**{"Predicted Side":"Away", "Predicted Winner":"Missouri State",
+                                  "Away ML":"+170", "Home ML":"-200"})
+        self.assertFalse(self.flagged(picks=road)["G6 Home Underdog Research"])
+        self.assertFalse(self.flagged(stale=True)["G6 Home Underdog Research"])
+        self.assertFalse(self.flagged(games=self.game(home_conference="Big Ten"),
+                                      picks=p)["G6 Home Underdog Research"])
+
+    def test_research_and_high_risk_can_coexist(self):
+        p = self.prediction(**{"Home ML":"+160", "Away ML":"-192"})
+        row = self.flagged(picks=p)
+        self.assertTrue(row["G6 Home Underdog Research"])
+        self.assertTrue(row["G6 Confidence Conflict"])
+        # High-risk exclusion wins over an informational research signal.
+        self.assertFalse(omit_risky_value_recommendations(
+            pd.DataFrame([row])).iloc[0]["Value Selected"])
+
+    def test_started_home_research_uses_frozen_only(self):
+        finished = self.prediction(Status="Final")
+        frozen = {"42": dict(home="Delaware", away="Missouri State",
+                             home_id="11", away_id="12", picked_side="home",
+                             model_probability=.61, provider="DraftKings",
+                             home_ml=160, away_ml=-192,
+                             captured_at="2026-10-23T12:00:00Z",
+                             kickoff=self.KICK)}
+        row = apply_g6_conflict_flags(finished, self.game(),
+                                      now_utc="2026-10-25T12:00:00Z",
+                                      frozen_snapshots=frozen).iloc[0]
+        self.assertTrue(row["G6 Home Underdog Research"])
+        self.assertFalse(row["G6 Confidence Conflict"])
+
     def test_suppress_future_value_but_not_historical_or_model(self):
         flagged = apply_g6_conflict_flags(self.prediction(), self.game(), now_utc=self.NOW)
         omitted = omit_risky_value_recommendations(flagged).iloc[0]
