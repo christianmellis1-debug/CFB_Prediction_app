@@ -76,6 +76,8 @@ def apply_g6_conflict_flags(predictions, schedule, *,
     # Separate observational flag: selected G6 home underdog at +150 or longer.
     # It never promotes a candidate into the official waterfall or a parlay.
     out["G6 Home Underdog Research"] = False
+    out["G6 Home Underdog Secondary"] = False
+    out["Research Underdog Band"] = ""
     out["Research Underdog Team"] = ""
     out["Research Underdog ML"] = float("nan")
     out["Research Underdog Model %"] = float("nan")
@@ -187,7 +189,16 @@ def apply_g6_conflict_flags(predictions, schedule, *,
         if (side == "home" and 0.5 <= base_p <= 1.0
                 and math.isfinite(home_line) and home_line.is_integer()
                 and home_line >= 150 and book_probability < .5):
-            out.at[index, "G6 Home Underdog Research"] = True
+            # The +199 cutoff is a frozen research hypothesis, not a
+            # validated profitability threshold. Keep +200+ games as
+            # a separate secondary observational cohort to avoid losing
+            # prospectively comparable outcomes.
+            primary = home_line <= 199
+            out.at[index, "G6 Home Underdog Research"] = primary
+            out.at[index, "G6 Home Underdog Secondary"] = not primary
+            out.at[index, "Research Underdog Band"] = (
+                "Primary: +150 to +199" if primary else "Secondary: +200 or longer"
+            )
             out.at[index, "Research Underdog Team"] = str(game["home_team"])
             out.at[index, "Research Underdog ML"] = home_line
             out.at[index, "Research Underdog Model %"] = base_p
