@@ -81,7 +81,7 @@ class MarketMatchupConflictTests(unittest.TestCase):
         self.assertIn("market_conflict=market_conflict", code)
         self.assertIn("risky_indices.append(card_idx)", code)
         self.assertIn('render_pick_cards(pred.loc[risky_indices], "risky")', code)
-        self.assertIn("MARKET–MATCHUP CONFLICT", code)
+        self.assertIn("Close game · conflicting signs", code)
         self.assertIn("{visible_risk}{moneylines}", code)
 
 
