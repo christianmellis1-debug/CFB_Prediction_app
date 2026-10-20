@@ -3217,7 +3217,7 @@ with cards_tab:
             st.markdown("#### 🔎 G6 home-underdog research watchlist")
             st.caption(
                 "Independent V1.5 favors a G6 home team priced at +150 or longer. "
-                "Historical exploratory group: 11–8 through 2026 Week 7; "
+                "Historical exploratory group: 11–8, +75.8% flat-stake ML ROI through 2026 Week 7; "
                 "not an official Value Pick or a recommended wager."
             )
             for _, research_row in underdog_research.iterrows():
