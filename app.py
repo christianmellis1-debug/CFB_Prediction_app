@@ -3216,7 +3216,7 @@ with cards_tab:
         if not underdog_research.empty:
             st.markdown("#### 🔎 G6 home-underdog research watchlist")
             st.caption(
-                "Independent V1.5 favors a G6 home team priced at +150 or longer. "
+                "Independent statistical analysis favors a G6 home underdog priced at +150 or longer. "
                 "Historical exploratory group: 11–8, +70.5% flat-stake ML ROI through 2026 Week 7; "
                 "not an official Value Pick or a recommended wager."
             )
@@ -3233,8 +3233,8 @@ with cards_tab:
                     f"**{escape(str(research_row['Away Team']))} at {escape(str(research_row['Home Team']))}** "
                     f"— independent pick: **{escape(r_name)}** · "
                     f"archived/current ML: **+{r_line}** · "
-                    f"V1.5: **{r_probability:.1%}** · "
-                    f"no-vig sportsbook: **{r_market:.1%}**{caution}"
+                    f"Independent estimate: **{r_probability:.1%}** · "
+                    f"sportsbook estimate: **{r_market:.1%}**{caution}"
                 )
         # Spotlight uses the official Game of the Week from the full slate,
         # independent of the Game Cards search or status filters.
@@ -3554,7 +3554,7 @@ with cards_tab:
                     '<div style="padding:10px 12px;margin:10px 0;border-left:4px solid #64748b;'
                     'border-radius:6px;background:#64748b18;font-size:.9rem">'
                     '<strong>🔎 G6 HOME UNDERDOG · RESEARCH FLAG</strong>'
-                    f'<p>The independent forecast favors {research_team} at {research_model:.1%}, '
+                    f'<p>Our independent analysis favors {research_team} at {research_model:.1%}, '
                     f'while {research_book} pricing puts the team at {research_market:.1%} '
                     f'(moneyline +{research_line}).</p>'
                     '<p>This is a historical research candidate, not an official Value Pick. '
