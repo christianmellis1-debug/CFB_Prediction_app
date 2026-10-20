@@ -108,12 +108,12 @@ class TestG6ConfidenceConflict(unittest.TestCase):
             frozen_snapshots=bad).iloc[0]["G6 Confidence Conflict"])
 
     def test_home_research_flag_requires_selected_dog_plus_150(self):
-        p = self.prediction(**{"Home ML":"+160", "Away ML":"-192"})
+        p = self.prediction(**{"Home ML":"+160", "Away ML":"-192", "Confidence":.61})
         row = self.flagged(picks=p)
         self.assertTrue(row["G6 Home Underdog Research"])
         self.assertEqual(row["Research Underdog Team"], "Delaware")
         self.assertEqual(row["Research Underdog ML"], 160)
-        self.assertAlmostEqual(row["Research Underdog Model %"], .77)
+        self.assertAlmostEqual(row["Research Underdog Model %"], .61)
         self.assertLess(row["Research Underdog Market %"], .5)
         self.assertFalse(row["G6 Confidence Conflict"])
 
