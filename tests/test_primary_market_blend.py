@@ -74,6 +74,48 @@ class TestCProductionTests(unittest.TestCase):
         self.assertNotIn("V1.5", str(row['Pick Explanation']))
         pd.testing.assert_frame_equal(self.frame,copy_of_original)
 
+    def test_odds_refresh_time_comes_from_retrieval_not_render(self):
+        # Browser rerenders must never manufacture a newer sportsbook quote time.
+        source_time = "2026-10-16T10:15:00+00:00"
+        row = self.blended(odds_retrieved_utc=source_time)
+        self.assertEqual(
+            row["Blend Odds Timestamp"],
+            "2026-10-16T10:15:00+00:00",
+        )
+        self.assertEqual(row["Blend Odds Provider"], "DraftKings")
+        self.assertTrue(row["Market Blend Used"])
+
+    def test_unknown_or_future_source_timestamp_is_not_fabricated(self):
+        row = self.blended()
+        self.assertTrue(row["Market Blend Used"])
+        self.assertTrue(
+            pd.isna(row["Blend Odds Timestamp"]),
+            "Without a feed timestamp, the UI should say time unavailable",
+        )
+        future = self.blended(odds_retrieved_utc="2026-10-16T13:00:00+00:00")
+        self.assertTrue(pd.isna(future["Blend Odds Timestamp"]))
+
+    def test_frozen_pregame_has_true_capture_timestamp(self):
+        self.frame.loc[0, "Status"] = "In progress"
+        self.now = "2026-10-18T12:00:00Z"
+        captured = "2026-10-16T12:00:00Z"
+        frozen = {"123": dict(
+            home="Home", away="Away", picked_side="home",
+            model_probability=.8, home_ml=140, away_ml=-160,
+            provider="DraftKings", captured_at=captured,
+            kickoff="2026-10-17T19:00:00Z",
+        )}
+        row = self.blended(
+            frozen_snapshots=frozen,
+            odds_retrieved_utc="2026-10-18T11:58:00Z",
+        )
+        self.assertTrue(row["Market Blend Used"])
+        self.assertEqual(
+            row["Blend Odds Timestamp"],
+            "2026-10-16T12:00:00+00:00",
+        )
+        self.assertIn("frozen pregame", row["Prediction Source"])
+
     def test_stale_or_missing_quotes_do_not_change_prediction(self):
         self.assertEqual(self.blended(stale=True)['Predicted Winner'],'Home')
         self.assertEqual(self.blended(stale_event_ids=['123'])['Predicted Winner'],'Home')
