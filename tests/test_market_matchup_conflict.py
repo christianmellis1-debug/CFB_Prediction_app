@@ -84,7 +84,9 @@ class MarketMatchupConflictTests(unittest.TestCase):
         self.assertIn("Close game · conflicting signs", code)
         self.assertIn("{visible_risk}", code)
         self.assertIn("{moneylines}", code)
-        self.assertIn("G6 HOME UNDERDOG · RESEARCH ONLY", code)
+        self.assertIn("G6 HOME UNDERDOG", code)
+        self.assertIn("PRIMARY +150–199", code)
+        self.assertIn("SECONDARY +200+", code)
 
 
 if __name__ == "__main__":
