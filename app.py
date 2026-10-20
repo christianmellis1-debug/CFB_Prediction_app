@@ -3440,8 +3440,10 @@ with cards_tab:
             market_conflict = is_market_matchup_conflict(
                 check, summary_side, r.get("Market Blend Used", False), confidence_value,
             )
+            g6_conflict = bool(r.get("G6 Confidence Conflict", False))
             is_risky = should_flag_risky(
-                scored, is_tiered, confidence_value, market_conflict=market_conflict,
+                scored, is_tiered, confidence_value,
+                market_conflict=market_conflict, g6_conflict=g6_conflict,
             )
             if is_risky:
                 risky_indices.append(card_idx)
@@ -3452,7 +3454,29 @@ with cards_tab:
             )
             warning = ""
             visible_risk = ""
-            if market_conflict:
+            if g6_conflict:
+                independent_team = escape(str(r.get("Conflict Team", "")))
+                independent_chance = float(r["Conflict V1.5 %"])
+                market_chance = float(r["Conflict Market %"])
+                odds_source = escape(str(r.get("Conflict Odds Source", "Sportsbook")))
+                warning = (
+                    '<div style="padding:12px 14px;margin-bottom:12px;border:2px solid #e05d52;'
+                    'border-radius:10px;background:#e05d521a">'
+                    '<strong>⚠ HIGH RISK · G6 CONFIDENCE CONFLICT</strong>'
+                    '<p>The independent forecast favors ' + independent_team
+                    + f' at {independent_chance:.1%}, but {odds_source} pricing '
+                    + f'implies only {market_chance:.1%} after removing the bookmaker margin.</p>'
+                    '<p>Historically this pattern went 4–19 in G6 matchups (2024–2026 Weeks 5–7). '
+                    'Avoid treating this independent moneyline pick as a recommended bet. '
+                    'This is not an automatic recommendation to bet the opponent.</p></div>'
+                )
+                visible_risk = (
+                    '<div style="padding:9px 12px;margin:8px 0;border-left:4px solid #e05d52;'
+                    'background:#e05d5220;border-radius:6px;font-size:.88rem">'
+                    '<strong>⚠ HIGH RISK · G6 CONFIDENCE CONFLICT</strong>'
+                    '<span> · 4–19 in the historical research sample</span></div>'
+                )
+            elif market_conflict:
                 opponent_scored = assess(check, "away" if summary_side == "home" else "home")
                 opponent_count = opponent_scored["count"]
                 venue_warning = " · selected team is on the road" if summary_side == "away" else ""
@@ -3521,7 +3545,7 @@ with cards_tab:
                 str(summary_opponent), confidence_value, market_conflict,
             ) if is_risky else ""
             risky_card_details[card_idx] = (
-                explanation_html + risk_explanation + other_details
+                explanation_html + warning + risk_explanation + other_details
             )
             away_team_class = "team-line predicted-team" if r["Predicted Side"] == "Away" else "team-line"
             home_team_class = "team-line predicted-team" if r["Predicted Side"] == "Home" else "team-line"
