@@ -133,6 +133,62 @@ class TestG6ConfidenceConflict(unittest.TestCase):
         self.assertFalse(self.flagged(games=self.game(home_conference="Big Ten"),
                                       picks=p)["G6 Home Underdog Research"])
 
+    def test_research_price_bands_are_mutually_exclusive(self):
+        for price, away_price, primary in (
+            (150, -180, True),
+            (199, -235, True),
+            (200, -240, False),
+            (225, -275, False),
+            (149, -175, False),
+        ):
+            with self.subTest(price=price):
+                p = self.prediction(**{
+                    "Home ML": f"+{price}", "Away ML": str(away_price),
+                    "Confidence": .61,
+                })
+                row = self.flagged(picks=p)
+                self.assertEqual(bool(row["G6 Home Underdog Research"]), primary)
+                self.assertEqual(
+                    bool(row["G6 Home Underdog Secondary"]), price >= 200)
+                if price >= 150:
+                    self.assertEqual(
+                        row["Research Underdog Band"],
+                        ("Primary: +150 to +199"
+                         if primary else "Secondary: +200 or longer"))
+                self.assertTrue(
+                    omit_risky_value_recommendations(
+                        pd.DataFrame([row])).iloc[0]["Value Selected"]
+                )
+
+    def test_research_invalid_prices_do_not_flag_both_bands(self):
+        for lines in (
+            {"Home ML": "Unavailable", "Away ML": "-240"},
+            {"Home ML": "+200", "Away ML": "-5000"},
+            {"Home ML": "+200", "Away ML": "Unavailable"},
+        ):
+            with self.subTest(lines=lines):
+                row = self.flagged(picks=self.prediction(**lines))
+                self.assertFalse(row["G6 Home Underdog Research"])
+                self.assertFalse(row["G6 Home Underdog Secondary"])
+        row = self.flagged(
+            picks=self.prediction(**{"Home ML":"+250","Away ML":"-300"}),
+            stale=True)
+        self.assertFalse(row["G6 Home Underdog Secondary"])
+
+    def test_secondary_research_started_game_requires_frozen_quotes(self):
+        done = self.prediction(Status="Final")
+        snap = {"42": dict(home="Delaware", away="Missouri State",
+                           home_id="11", away_id="12", picked_side="home",
+                           model_probability=.61, provider="DraftKings",
+                           home_ml=225, away_ml=-270,
+                           captured_at="2026-10-23T12:00:00Z",
+                           kickoff=self.KICK)}
+        row = apply_g6_conflict_flags(
+            done, self.game(), now_utc="2026-10-25T12:00:00Z",
+            frozen_snapshots=snap).iloc[0]
+        self.assertTrue(row["G6 Home Underdog Secondary"])
+        self.assertFalse(row["G6 Home Underdog Research"])
+
     def test_research_and_high_risk_can_coexist(self):
         p = self.prediction(**{"Home ML":"+160", "Away ML":"-192"})
         row = self.flagged(picks=p)
