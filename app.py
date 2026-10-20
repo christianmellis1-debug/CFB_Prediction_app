@@ -38,6 +38,9 @@ from shadow_tracking import show_shadow_tracking, DATA as SHADOW_DATA
 import primary_market_blend
 importlib.reload(primary_market_blend)
 from primary_market_blend import apply_primary_blend, VERSION as PRIMARY_VERSION
+import confidence_conflict
+importlib.reload(confidence_conflict)
+from confidence_conflict import apply_g6_conflict_flags, omit_risky_value_recommendations
 from prospective_weights_archive import show_comparison as show_weight_challenger_comparison
 from weather_context import build_weather_context
 from live_scores import parse_live_scores, overlay_live_scores
@@ -243,9 +246,9 @@ def is_market_matchup_conflict(record, selected_side, market_blend_used, confide
     )
 
 
-def should_flag_risky(scored, value_selected, confidence, market_conflict=False):
-    """Include near-even market conflicts; retain original non-tiered rule."""
-    if market_conflict:
+def should_flag_risky(scored, value_selected, confidence, market_conflict=False, g6_conflict=False):
+    """Always show G6 conflict warnings, even on high-confidence or tiered games."""
+    if market_conflict or g6_conflict:
         return True
     try:
         confidence = float(confidence)
@@ -1646,7 +1649,10 @@ def future_priced_picks(predictions, game_schedule, now_utc):
         date = starts.get((row["Home Team"], row["Away Team"]))
         mask.append(pd.notna(date) and date > now_utc and row["Status"] == "Awaiting final"
                     and format_moneyline(row["Bet Line"]) != "Unavailable")
-    return result.loc[pd.Series(mask, index=result.index, dtype=bool)]
+    eligible = pd.Series(mask, index=result.index, dtype=bool)
+    if "G6 Confidence Conflict" in result:
+        eligible &= ~result["G6 Confidence Conflict"].fillna(False).astype(bool)
+    return result.loc[eligible]
 
 
 def christians_parlay(predictions, game_schedule, now_utc, stake=10.0):
@@ -1661,6 +1667,7 @@ def christians_parlay(predictions, game_schedule, now_utc, stake=10.0):
 
     pool = predictions[
         predictions["Value Selected"].fillna(False).astype(bool)
+        & ~predictions.get("G6 Confidence Conflict", pd.Series(False, index=predictions.index)).fillna(False).astype(bool)
         & pd.to_numeric(predictions.get("Week"), errors="coerce").ge(3)
     ].copy()
     if pool.empty:
@@ -2612,8 +2619,17 @@ try:
     _frozen_primary = json.loads(SHADOW_DATA.read_text()).get("snapshots", {})
 except (OSError, ValueError, TypeError):
     _frozen_primary = {}
+# Flag risk from independent V1.5 before the main forecast uses Test C.
+_now_utc = pd.Timestamp.now(tz="UTC")
+pred = apply_g6_conflict_flags(
+    pred, games, now_utc=_now_utc,
+    stale=bool(odds_snapshot.get("stale")),
+    stale_event_ids=odds_snapshot.get("stale_events", {}),
+    frozen_snapshots=_frozen_primary,
+)
+pred = omit_risky_value_recommendations(pred)
 pred = apply_primary_blend(
-    pred, games, now_utc=pd.Timestamp.now(tz="UTC"),
+    pred, games, now_utc=_now_utc,
     stale=bool(odds_snapshot.get("stale")),
     stale_event_ids=odds_snapshot.get("stale_events", {}),
     frozen_snapshots=_frozen_primary,
