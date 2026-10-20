@@ -175,10 +175,11 @@ def apply_g6_conflict_flags(predictions, schedule, *,
     return out
 
 
-def omit_risky_moneyline_recommendations(predictions):
-    """Suppress prospective moneyline recommendations, never historical grades.
+def omit_risky_value_recommendations(predictions):
+    """Keep risky games visible, but remove future official Value Picks.
 
-    ATS picks and completed-game archived selections are not rewritten.
+    Existing historical grades and original candidate metadata are preserved.
+    No change to the separate predicted winner or either ATS/ML model.
     """
     out = predictions.copy(deep=True)
     if "G6 Confidence Conflict" not in out or "Value Selected" not in out:
@@ -186,7 +187,6 @@ def omit_risky_moneyline_recommendations(predictions):
     mask = (
         out["G6 Confidence Conflict"].fillna(False).eq(True)
         & out["Value Selected"].fillna(False).eq(True)
-        & out["Value Market"].eq("Moneyline")
         & out["Status"].eq("Awaiting final")
     )
     if not mask.any():
