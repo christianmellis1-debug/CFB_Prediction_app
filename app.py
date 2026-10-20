@@ -38,6 +38,8 @@ from shadow_tracking import show_shadow_tracking, DATA as SHADOW_DATA
 import primary_market_blend
 importlib.reload(primary_market_blend)
 from primary_market_blend import apply_primary_blend, VERSION as PRIMARY_VERSION
+import forecast_comparison
+importlib.reload(forecast_comparison)
 from forecast_comparison import forecast_comparison_html
 import confidence_conflict
 importlib.reload(confidence_conflict)
