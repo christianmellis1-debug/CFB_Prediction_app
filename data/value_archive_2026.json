@@ -336,6 +336,12 @@
       "home_score": 24.0,
       "result": "Not selected"
     },
+    "401871055": {
+      "away_score": 26.0,
+      "checked_at": "2026-10-21T06:32:49.859390+00:00",
+      "home_score": 23.0,
+      "result": "Not selected"
+    },
     "401871067": {
       "away_score": 30.0,
       "checked_at": "2026-10-14T06:41:09.042771+00:00",
@@ -348,19 +354,31 @@
       "home_score": 3.0,
       "result": "Not selected"
     },
+    "401871069": {
+      "away_score": 38.0,
+      "checked_at": "2026-10-21T06:32:49.859428+00:00",
+      "home_score": 61.0,
+      "result": "Not selected"
+    },
     "401871091": {
       "away_score": 24.0,
       "checked_at": "2026-10-18T06:34:20.635284+00:00",
       "home_score": 0.0,
       "result": "Win"
+    },
+    "401871092": {
+      "away_score": 13.0,
+      "checked_at": "2026-10-21T06:32:49.859412+00:00",
+      "home_score": 20.0,
+      "result": "Not selected"
     }
   },
   "run_status": {
-    "checked_at": "2026-10-20T22:37:54.716742+00:00",
-    "eligible_in_window": 3,
+    "checked_at": "2026-10-21T06:32:49.859444+00:00",
+    "eligible_in_window": 1,
     "missing_events": [],
-    "new_results": 0,
-    "new_snapshots": 0,
+    "new_results": 3,
+    "new_snapshots": 1,
     "selected_total": 24,
     "skipped": {}
   },
@@ -3123,6 +3141,52 @@
       },
       "quote_status": "DraftKings",
       "scheduled_kickoff": "2026-10-20T23:00:00+00:00",
+      "season": 2026,
+      "selected": false,
+      "week": 8
+    },
+    "401871070": {
+      "Confidence": 0.5918623733372003,
+      "Model Version": "V1.5",
+      "Predicted Side": "Away",
+      "Predicted Winner": "New Mexico State",
+      "Value Line": "Unavailable",
+      "Value Market": "",
+      "Value Pick": "",
+      "Value Price": "Unavailable",
+      "Value Reason": "",
+      "Value Side": "",
+      "Value Source": "",
+      "Value Stage": 0,
+      "Value Tier": "",
+      "away": "New Mexico State",
+      "away_id": "166",
+      "captured_at": "2026-10-21T06:32:49.859226+00:00",
+      "event_id": "401871070",
+      "home": "Sam Houston",
+      "home_id": "2534",
+      "kickoff": "2026-10-22T00:00:00+00:00",
+      "market": {
+        "Away Spread": "-2.5",
+        "Away Spread Odds": "-115",
+        "DK Away ML": "-135",
+        "DK Home ML": "+114",
+        "Home Spread": "+2.5",
+        "Home Spread Odds": "-105",
+        "Spread Source": "DraftKings"
+      },
+      "provenance": {
+        "box_sha256": "1abb187645267e9ce4140d4d54caa11f79e4543f4e37f6cebd69037002f40041",
+        "commit": "3e47030ff3f26f02610d232ffe6681f4c7c63c62",
+        "fallback_team_ids": [],
+        "model": "production model_v1_5.predict_week",
+        "stats_cutoff_exclusive_week": 8,
+        "summary_sha256": "c1de39b3852e711ec0b34a65c1401db5316d4b6f0a9c88eb89c9c06c7de44d6c",
+        "waterfall": "production model_v1_5.add_waterfall_value",
+        "weather_status": "not-requested"
+      },
+      "quote_status": "DraftKings",
+      "scheduled_kickoff": "2026-10-22T00:00:00+00:00",
       "season": 2026,
       "selected": false,
       "week": 8
