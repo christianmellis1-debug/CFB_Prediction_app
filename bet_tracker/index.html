@@ -29,5 +29,11 @@
 <h3>Your betting stats</h3><div id="stats" class="stats"></div><p class="muted">Win rate excludes pending bets, pushes and voids. ROI = settled net profit ÷ settled stakes (void stakes excluded). Each parlay counts as one bet. Unsettled stakes include tickets needing review. These are your recorded bets, not the model's prediction record.</p>
 <div class="table"><table><thead><tr><th>Pick / matchup</th><th>Season / week</th><th>Stake</th><th>Odds / book</th><th>Result</th><th>Return</th><th>Net profit</th><th>Manage</th></tr></thead><tbody id="rows"></tbody></table></div>
 <p id="empty"></p><details><summary>Backup and restore</summary><p>Export saves all records. Import merges a backup by bet ID; existing records with the same ID are kept. Keep backups private.</p><div class="actions"><button id="backup">Download backup</button><label>Restore backup<input id="restore" type="file" accept="application/json,.json"></label></div></details>
+<details id="clearHistoryPanel"><summary>Clear betting history</summary>
+<p class="muted">This permanently removes <strong id="clearHistoryCount">all saved wagers</strong> from this browser, including settled and pending bets, and resets your statistics. It cannot be undone unless you previously downloaded a backup. This does not affect your DraftKings account.</p>
+<p class="muted">Consider using <strong>Download backup</strong> above before clearing. To confirm, type <strong>CLEAR</strong> exactly.</p>
+<div class="actions"><label>Confirmation<input id="clearHistoryConfirm" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="5" placeholder="Type CLEAR"></label>
+<button id="clearHistoryButton" type="button" disabled>Clear all betting history</button></div>
+</details>
 <script src="core.js?v=4"></script><script src="ui.js?v=4"></script><script src="receipt_parser.js?v=1"></script><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script><script src="import_ui.js?v=1"></script></body></html>
 
