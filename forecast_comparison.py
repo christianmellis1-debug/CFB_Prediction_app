@@ -88,7 +88,12 @@ def forecast_comparison_html(row):
             + f" · {escape(provider)}"
             + (f" · {escape(when)}" if when else " · time unavailable")
         )
-        if independent_home is not None and (independent_home >= .5) != (combined_home >= .5):
+        # Use the same derived flag as the matchup cards and filter.
+        # Retain the probability check for callers supplying older row schemas.
+        split = row.get("Forecasts Disagree")
+        if split is None:
+            split = independent_home is not None and (independent_home >= .5) != (combined_home >= .5)
+        if bool(split):
             status += " · <strong>Forecasts disagree on the winner</strong>"
     else:
         status = (
