@@ -1,6 +1,6 @@
 {
   "experiment": "cfb-internal-weights-v1-2026-10-12",
-  "last_run": "2026-10-23T05:11:39.708017+00:00",
+  "last_run": "2026-10-23T11:56:08.343893+00:00",
   "results": {
     "401856719": {
       "away_score": 27.0,
@@ -400,13 +400,13 @@
     }
   },
   "run_summary": {
-    "eligible_pregame_games": 2,
+    "eligible_pregame_games": 3,
     "fetched": 5,
     "missing_event_feeds": {},
-    "results_added": 3,
+    "results_added": 0,
     "skipped": {},
-    "snapshots_added": 2,
-    "total_locked": 68,
+    "snapshots_added": 3,
+    "total_locked": 71,
     "total_settled": 66
   },
   "schema": 1,
@@ -2744,6 +2744,112 @@
       "season": 2026,
       "week": 8
     },
+    "401858272": {
+      "away": "NC State",
+      "away_id": "152",
+      "captured_at": "2026-10-23T11:56:08.343841+00:00",
+      "definitions": {
+        "Balanced defense 25%": {
+          "defense": {
+            "epa": 0.25,
+            "explosive": 0.25,
+            "red_zone": 0.25,
+            "success": 0.25
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        },
+        "Defensive red zone 30%": {
+          "defense": {
+            "epa": 0.3,
+            "explosive": 0.15,
+            "red_zone": 0.3,
+            "success": 0.25
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        },
+        "Offensive EPA 60%": {
+          "defense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          },
+          "offense": {
+            "epa": 0.6,
+            "explosive": 0.1,
+            "red_zone": 0.1,
+            "success": 0.2
+          }
+        },
+        "V1.5 current": {
+          "defense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        }
+      },
+      "event_id": "401858272",
+      "experiment": "cfb-internal-weights-v1-2026-10-12",
+      "home": "Stanford",
+      "home_id": "24",
+      "kickoff": "2026-10-24T02:30:00+00:00",
+      "models": {
+        "Balanced defense 25%": {
+          "confidence": 0.6201822113538766,
+          "home_win_probability": 0.37981778864612337,
+          "predicted_side": "away"
+        },
+        "Defensive red zone 30%": {
+          "confidence": 0.6349298427714013,
+          "home_win_probability": 0.3650701572285987,
+          "predicted_side": "away"
+        },
+        "Offensive EPA 60%": {
+          "confidence": 0.6258645473883101,
+          "home_win_probability": 0.3741354526116899,
+          "predicted_side": "away"
+        },
+        "V1.5 current": {
+          "confidence": 0.6427510003527721,
+          "home_win_probability": 0.35724899964722784,
+          "predicted_side": "away"
+        }
+      },
+      "provenance": {
+        "challenger_sha256": "c0acaee65b8eed8e52f124a284e131256495e9216e44e1b77fe084894ac7d633",
+        "current_summary_sha256": "76cbeabb1bcc6eadd3916f5d82b9661c14120b19ffc02da0cd711689b9393419",
+        "git_sha": "507028949901117ac87ba52ebc41e5eff17d19c6",
+        "model_sha256": "548ff2fba63c534b6afdeee623c4282f0abebbfe75974ead7b8e3c99789cf946",
+        "model_version": "V1.5",
+        "notes": "Four identical input snapshots; only offensive/defensive internal weights differ.",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "provisional_team_ids": [],
+        "schedule_sha256": "e5d7b858d473f0f7bd2ec7445ba026cdce468e0259f426f94daae4a4913a7972",
+        "stats_cutoff_exclusive_week": 8,
+        "week": 8
+      },
+      "scheduled_kickoff": "2026-10-24T02:30:00+00:00",
+      "season": 2026,
+      "week": 8
+    },
     "401858488": {
       "away": "Ohio State",
       "away_id": "194",
@@ -4758,6 +4864,112 @@
       "season": 2026,
       "week": 8
     },
+    "401862808": {
+      "away": "Army",
+      "away_id": "349",
+      "captured_at": "2026-10-23T11:56:08.343706+00:00",
+      "definitions": {
+        "Balanced defense 25%": {
+          "defense": {
+            "epa": 0.25,
+            "explosive": 0.25,
+            "red_zone": 0.25,
+            "success": 0.25
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        },
+        "Defensive red zone 30%": {
+          "defense": {
+            "epa": 0.3,
+            "explosive": 0.15,
+            "red_zone": 0.3,
+            "success": 0.25
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        },
+        "Offensive EPA 60%": {
+          "defense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          },
+          "offense": {
+            "epa": 0.6,
+            "explosive": 0.1,
+            "red_zone": 0.1,
+            "success": 0.2
+          }
+        },
+        "V1.5 current": {
+          "defense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        }
+      },
+      "event_id": "401862808",
+      "experiment": "cfb-internal-weights-v1-2026-10-12",
+      "home": "Tulsa",
+      "home_id": "202",
+      "kickoff": "2026-10-24T00:30:00+00:00",
+      "models": {
+        "Balanced defense 25%": {
+          "confidence": 0.7362882757107532,
+          "home_win_probability": 0.2637117242892468,
+          "predicted_side": "away"
+        },
+        "Defensive red zone 30%": {
+          "confidence": 0.7317280627446023,
+          "home_win_probability": 0.2682719372553977,
+          "predicted_side": "away"
+        },
+        "Offensive EPA 60%": {
+          "confidence": 0.6925043353569218,
+          "home_win_probability": 0.30749566464307826,
+          "predicted_side": "away"
+        },
+        "V1.5 current": {
+          "confidence": 0.7093176873986347,
+          "home_win_probability": 0.2906823126013654,
+          "predicted_side": "away"
+        }
+      },
+      "provenance": {
+        "challenger_sha256": "c0acaee65b8eed8e52f124a284e131256495e9216e44e1b77fe084894ac7d633",
+        "current_summary_sha256": "76cbeabb1bcc6eadd3916f5d82b9661c14120b19ffc02da0cd711689b9393419",
+        "git_sha": "507028949901117ac87ba52ebc41e5eff17d19c6",
+        "model_sha256": "548ff2fba63c534b6afdeee623c4282f0abebbfe75974ead7b8e3c99789cf946",
+        "model_version": "V1.5",
+        "notes": "Four identical input snapshots; only offensive/defensive internal weights differ.",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "provisional_team_ids": [],
+        "schedule_sha256": "e5d7b858d473f0f7bd2ec7445ba026cdce468e0259f426f94daae4a4913a7972",
+        "stats_cutoff_exclusive_week": 8,
+        "week": 8
+      },
+      "scheduled_kickoff": "2026-10-24T00:30:00+00:00",
+      "season": 2026,
+      "week": 8
+    },
     "401864520": {
       "away": "Nevada",
       "away_id": "2440",
@@ -5287,6 +5499,112 @@
       "scheduled_kickoff": "2026-10-17T19:30:00+00:00",
       "season": 2026,
       "week": 7
+    },
+    "401864525": {
+      "away": "Air Force",
+      "away_id": "2005",
+      "captured_at": "2026-10-23T11:56:08.343791+00:00",
+      "definitions": {
+        "Balanced defense 25%": {
+          "defense": {
+            "epa": 0.25,
+            "explosive": 0.25,
+            "red_zone": 0.25,
+            "success": 0.25
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        },
+        "Defensive red zone 30%": {
+          "defense": {
+            "epa": 0.3,
+            "explosive": 0.15,
+            "red_zone": 0.3,
+            "success": 0.25
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        },
+        "Offensive EPA 60%": {
+          "defense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          },
+          "offense": {
+            "epa": 0.6,
+            "explosive": 0.1,
+            "red_zone": 0.1,
+            "success": 0.2
+          }
+        },
+        "V1.5 current": {
+          "defense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          },
+          "offense": {
+            "epa": 0.4,
+            "explosive": 0.15,
+            "red_zone": 0.15,
+            "success": 0.3
+          }
+        }
+      },
+      "event_id": "401864525",
+      "experiment": "cfb-internal-weights-v1-2026-10-12",
+      "home": "Wyoming",
+      "home_id": "2751",
+      "kickoff": "2026-10-24T01:00:00+00:00",
+      "models": {
+        "Balanced defense 25%": {
+          "confidence": 0.8168647768872743,
+          "home_win_probability": 0.18313522311272565,
+          "predicted_side": "away"
+        },
+        "Defensive red zone 30%": {
+          "confidence": 0.8220349911694844,
+          "home_win_probability": 0.1779650088305156,
+          "predicted_side": "away"
+        },
+        "Offensive EPA 60%": {
+          "confidence": 0.8297535086420853,
+          "home_win_probability": 0.17024649135791475,
+          "predicted_side": "away"
+        },
+        "V1.5 current": {
+          "confidence": 0.824459173319554,
+          "home_win_probability": 0.17554082668044604,
+          "predicted_side": "away"
+        }
+      },
+      "provenance": {
+        "challenger_sha256": "c0acaee65b8eed8e52f124a284e131256495e9216e44e1b77fe084894ac7d633",
+        "current_summary_sha256": "76cbeabb1bcc6eadd3916f5d82b9661c14120b19ffc02da0cd711689b9393419",
+        "git_sha": "507028949901117ac87ba52ebc41e5eff17d19c6",
+        "model_sha256": "548ff2fba63c534b6afdeee623c4282f0abebbfe75974ead7b8e3c99789cf946",
+        "model_version": "V1.5",
+        "notes": "Four identical input snapshots; only offensive/defensive internal weights differ.",
+        "prior_summary_sha256": "4d6d5fd61c05cef1348bd623c79ce5d6ba54532571876a7ba0ba7c6de29d4d44",
+        "provisional_team_ids": [],
+        "schedule_sha256": "e5d7b858d473f0f7bd2ec7445ba026cdce468e0259f426f94daae4a4913a7972",
+        "stats_cutoff_exclusive_week": 8,
+        "week": 8
+      },
+      "scheduled_kickoff": "2026-10-24T01:00:00+00:00",
+      "season": 2026,
+      "week": 8
     },
     "401866441": {
       "away": "Ball State",
