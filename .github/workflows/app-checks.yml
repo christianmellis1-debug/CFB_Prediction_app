@@ -20,5 +20,7 @@ jobs:
       - name: Compile Python source
         run: |
           python -m compileall -q app.py model_v1_5.py matchup_advantages.py
+      - name: Run screenshot receipt and wager grading tests
+        run: node --test tests/test_receipt_import.js
       - name: Run regression tests
         run: python -m unittest discover -s tests -p 'test_*.py' -v
