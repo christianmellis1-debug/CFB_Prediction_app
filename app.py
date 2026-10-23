@@ -3075,25 +3075,27 @@ with cards_tab:
             "not treated as a pick'em."
         )
         if not ats_feed_available:
-            st.info("Verified historical betting lines are temporarily unavailable; ATS records cannot be confirmed.")
-        else:
-            ats_rows = []
-            for team_id, team_name in sorted(ats_team_names.items(), key=lambda item: item[1]):
-                stats = ats_records.get(team_id, {})
-                w, l, p = (int(stats.get(k, 0)) for k in ("wins", "losses", "pushes"))
-                graded, eligible_games = (int(stats.get(k, 0)) for k in ("graded", "eligible"))
-                actual = overall_records.get(team_id, {"wins": 0, "losses": 0})
-                ats_rows.append({
-                    "Team": team_name,
-                    "Overall W–L": f"{actual['wins']}–{actual['losses']}",
-                    "ATS wins": w, "ATS losses": l, "ATS pushes": p,
-                    "ATS win %": round(100 * w / (w + l), 1) if (w + l) else None,
-                    "Lined / Played": f"{graded}/{eligible_games}",
-                })
-            st.dataframe(
-                pd.DataFrame(ats_rows), hide_index=True, width="stretch",
-                column_config={"ATS win %": st.column_config.NumberColumn("ATS win %", format="%.1f%%")},
-            )
+            st.info("Verified historical betting lines are temporarily unavailable. Overall team records remain available.")
+        ats_rows = []
+        for team_id, team_name in sorted(ats_team_names.items(), key=lambda item: item[1]):
+            stats = ats_records.get(team_id, {})
+            w, l, p = (int(stats.get(k, 0)) for k in ("wins", "losses", "pushes"))
+            graded, eligible_games = (int(stats.get(k, 0)) for k in ("graded", "eligible"))
+            actual = overall_records.get(team_id, {"wins": 0, "losses": 0})
+            ats_rows.append({
+                "Team": team_name,
+                "Overall W–L": f"{actual['wins']}–{actual['losses']}",
+                "ATS wins": w if ats_feed_available else None,
+                "ATS losses": l if ats_feed_available else None,
+                "ATS pushes": p if ats_feed_available else None,
+                "ATS win %": round(100 * w / (w + l), 1) if ats_feed_available and (w + l) else None,
+                "Lined / Played": f"{graded}/{eligible_games}" if ats_feed_available else "Unavailable",
+            })
+        st.dataframe(
+            pd.DataFrame(ats_rows), hide_index=True, width="stretch",
+            column_config={"ATS win %": st.column_config.NumberColumn("ATS win %", format="%.1f%%")},
+        )
+        if ats_feed_available:
             st.caption("Lines: SportsDataverse ESPN-derived season betting release. Lined / Played shows historical spread coverage.")
     with st.expander("Favorite teams & saved filters", expanded=False):
         team_choices = sorted(set(schedule["home_team"]) | set(schedule["away_team"]))
