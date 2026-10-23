@@ -70,3 +70,15 @@ test('parlays are detected and not eligible for automatic import',()=>{
  const r=receipts.parse('Same Game Parlay\nTexas -110\nWager $10.00');
  assert.equal(r.unsupported,true);
 });
+
+test('clear betting history requires exact confirmation',()=>{
+ const original=[bet(),bet({id:'test-2',market:'spread',line:3.5})];
+ assert.throws(()=>core.clearHistory(''),/Type CLEAR/);
+ assert.throws(()=>core.clearHistory('clear'),/Type CLEAR/);
+ assert.throws(()=>core.clearHistory('CLEAR '),/Type CLEAR/);
+ const cleared=core.clearHistory('CLEAR');
+ assert.deepEqual(cleared,[]);
+ assert.equal(original.length,2);
+ assert.equal(core.stats(cleared).bets,0);
+ assert.equal(core.stats(cleared).profit,0);
+});

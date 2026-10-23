@@ -81,7 +81,11 @@
     const profit=round(rows.reduce((s,b)=>s+(b.profit||0),0));
     return {bets:rows.length,won,lost,push:rows.filter(b=>b.status==='Push').length,void:rows.filter(b=>b.status==='Void').length,pending:total(b=>['Pending','Needs review'].includes(b.status)),settledStake,profit,returned:round(rows.reduce((s,b)=>s+(b.returned||0),0)),roi:settledStake?profit/settledStake:null,winRate:won+lost?won/(won+lost):null};
   }
-  root.TrackerCore={validate,grade,outcome,stats};
+  function clearHistory(confirmation) {
+    if(confirmation!=='CLEAR') throw Error('Type CLEAR to confirm deleting all betting history.');
+    return [];
+  }
+  root.TrackerCore={validate,grade,outcome,stats,clearHistory};
   if(typeof module!=='undefined') module.exports=root.TrackerCore;
 })(typeof window==='undefined'?globalThis:window);
 
