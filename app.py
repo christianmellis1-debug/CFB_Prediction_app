@@ -40,7 +40,7 @@ importlib.reload(primary_market_blend)
 from primary_market_blend import apply_primary_blend, VERSION as PRIMARY_VERSION
 import forecast_comparison
 importlib.reload(forecast_comparison)
-from forecast_comparison import forecast_comparison_html
+from forecast_comparison import forecast_comparison_html, filter_forecast_rows
 import confidence_conflict
 importlib.reload(confidence_conflict)
 from confidence_conflict import apply_g6_conflict_flags, omit_risky_value_recommendations
@@ -3096,16 +3096,7 @@ with cards_tab:
         st.checkbox("Favorites only", key="pick_favorites_only")
         st.button("Reset filters", on_click=reset_pick_filters,
                   help="Resets matchup filters and keeps your favorite-team list.")
-    filtered = pred.copy()
-    if forecast_filter == "Different winners":
-        filtered = filtered[filtered["Forecasts Disagree"].fillna(False)]
-    elif forecast_filter == "Same winner":
-        filtered = filtered[
-            filtered["Market Blend Used"].fillna(False)
-            & ~filtered["Forecasts Disagree"].fillna(False)
-        ]
-    elif forecast_filter == "No sportsbook comparison":
-        filtered = filtered[~filtered["Market Blend Used"].fillna(False)]
+    filtered = filter_forecast_rows(pred.copy(), forecast_filter)
     if query.strip():
         matched = filtered["Home Team"].str.contains(query.strip(), case=False, regex=False) | filtered["Away Team"].str.contains(query.strip(), case=False, regex=False)
         filtered = filtered[matched]
