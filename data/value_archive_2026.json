@@ -228,6 +228,12 @@
       "home_score": 29.0,
       "result": "Win"
     },
+    "401862807": {
+      "away_score": 34.0,
+      "checked_at": "2026-10-23T06:27:56.426771+00:00",
+      "home_score": 41.0,
+      "result": "Not selected"
+    },
     "401864520": {
       "away_score": 17.0,
       "checked_at": "2026-10-18T06:34:20.635031+00:00",
@@ -300,6 +306,12 @@
       "home_score": 32.0,
       "result": "Not selected"
     },
+    "401869845": {
+      "away_score": 31.0,
+      "checked_at": "2026-10-23T06:27:56.426785+00:00",
+      "home_score": 34.0,
+      "result": "Not selected"
+    },
     "401869934": {
       "away_score": 23.0,
       "checked_at": "2026-10-18T06:34:20.635292+00:00",
@@ -342,6 +354,12 @@
       "home_score": 23.0,
       "result": "Not selected"
     },
+    "401871056": {
+      "away_score": 34.0,
+      "checked_at": "2026-10-23T06:27:56.426752+00:00",
+      "home_score": 6.0,
+      "result": "Not selected"
+    },
     "401871067": {
       "away_score": 30.0,
       "checked_at": "2026-10-14T06:41:09.042771+00:00",
@@ -380,12 +398,12 @@
     }
   },
   "run_status": {
-    "checked_at": "2026-10-22T22:44:28.568093+00:00",
-    "eligible_in_window": 3,
+    "checked_at": "2026-10-23T06:27:56.426801+00:00",
+    "eligible_in_window": 2,
     "missing_events": [],
-    "new_results": 0,
-    "new_snapshots": 0,
-    "selected_total": 24,
+    "new_results": 3,
+    "new_snapshots": 2,
+    "selected_total": 25,
     "skipped": {}
   },
   "schema": 1,
@@ -1357,6 +1375,52 @@
       "selected": false,
       "week": 7
     },
+    "401858271": {
+      "Confidence": 0.5589014594022828,
+      "Model Version": "V1.5",
+      "Predicted Side": "Away",
+      "Predicted Winner": "Duke",
+      "Value Line": "Unavailable",
+      "Value Market": "",
+      "Value Pick": "",
+      "Value Price": "Unavailable",
+      "Value Reason": "",
+      "Value Side": "",
+      "Value Source": "",
+      "Value Stage": 0,
+      "Value Tier": "",
+      "away": "Duke",
+      "away_id": "150",
+      "captured_at": "2026-10-23T06:27:56.426645+00:00",
+      "event_id": "401858271",
+      "home": "Virginia",
+      "home_id": "258",
+      "kickoff": "2026-10-23T23:00:00+00:00",
+      "market": {
+        "Away Spread": "+2.5",
+        "Away Spread Odds": "-110",
+        "DK Away ML": "+120",
+        "DK Home ML": "-142",
+        "Home Spread": "-2.5",
+        "Home Spread Odds": "-110",
+        "Spread Source": "DraftKings"
+      },
+      "provenance": {
+        "box_sha256": "1abb187645267e9ce4140d4d54caa11f79e4543f4e37f6cebd69037002f40041",
+        "commit": "535caed94d02d909777af2b676cf2a76ac917995",
+        "fallback_team_ids": [],
+        "model": "production model_v1_5.predict_week",
+        "stats_cutoff_exclusive_week": 8,
+        "summary_sha256": "c1de39b3852e711ec0b34a65c1401db5316d4b6f0a9c88eb89c9c06c7de44d6c",
+        "waterfall": "production model_v1_5.add_waterfall_value",
+        "weather_status": "not-requested"
+      },
+      "quote_status": "DraftKings",
+      "scheduled_kickoff": "2026-10-23T23:00:00+00:00",
+      "season": 2026,
+      "selected": false,
+      "week": 8
+    },
     "401858488": {
       "Confidence": 0.6390314674337091,
       "Model Version": "V1.5",
@@ -1816,6 +1880,52 @@
       "season": 2026,
       "selected": true,
       "week": 7
+    },
+    "401861965": {
+      "Confidence": 0.5766283088823165,
+      "Model Version": "V1.5",
+      "Predicted Side": "Away",
+      "Predicted Winner": "Massachusetts",
+      "Value Line": "-675",
+      "Value Market": "Moneyline",
+      "Value Pick": "UConn",
+      "Value Price": "-675",
+      "Value Reason": "Official Tier 4 SU rule: Week 8 FBS vs FBS favorite priced -675, inside the validated -505 through -1000 range.",
+      "Value Side": "Home",
+      "Value Source": "DraftKings",
+      "Value Stage": 4,
+      "Value Tier": "Tier 4: Parlay Bridge",
+      "away": "Massachusetts",
+      "away_id": "113",
+      "captured_at": "2026-10-23T06:27:56.426480+00:00",
+      "event_id": "401861965",
+      "home": "UConn",
+      "home_id": "41",
+      "kickoff": "2026-10-23T23:00:00+00:00",
+      "market": {
+        "Away Spread": "+14.5",
+        "Away Spread Odds": "-110",
+        "DK Away ML": "+490",
+        "DK Home ML": "-675",
+        "Home Spread": "-14.5",
+        "Home Spread Odds": "-110",
+        "Spread Source": "DraftKings"
+      },
+      "provenance": {
+        "box_sha256": "1abb187645267e9ce4140d4d54caa11f79e4543f4e37f6cebd69037002f40041",
+        "commit": "535caed94d02d909777af2b676cf2a76ac917995",
+        "fallback_team_ids": [],
+        "model": "production model_v1_5.predict_week",
+        "stats_cutoff_exclusive_week": 8,
+        "summary_sha256": "c1de39b3852e711ec0b34a65c1401db5316d4b6f0a9c88eb89c9c06c7de44d6c",
+        "waterfall": "production model_v1_5.add_waterfall_value",
+        "weather_status": "not-requested"
+      },
+      "quote_status": "DraftKings",
+      "scheduled_kickoff": "2026-10-23T23:00:00+00:00",
+      "season": 2026,
+      "selected": true,
+      "week": 8
     },
     "401862800": {
       "Confidence": 0.6204618425427122,
