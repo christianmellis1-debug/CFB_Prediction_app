@@ -115,3 +115,22 @@ def forecast_comparison_html(row):
         'Both are estimates, not betting recommendations. '
         'Official Value Picks use separate rules.</p></section>'
     )
+
+
+def filter_forecast_rows(rows, selection):
+    """Filter genuine independent vs sportsbook-adjusted winner comparisons.
+
+    Missing, stale, or historically unverified sportsbook adjustments belong
+    exclusively to the 'No sportsbook comparison' group, never 'Same winner'.
+    """
+    if selection == "All forecasts" or rows.empty:
+        return rows
+    compared = rows["Market Blend Used"].fillna(False).astype(bool)
+    disagreed = rows["Forecasts Disagree"].fillna(False).astype(bool) & compared
+    if selection == "Different winners":
+        return rows.loc[disagreed]
+    if selection == "Same winner":
+        return rows.loc[compared & ~disagreed]
+    if selection == "No sportsbook comparison":
+        return rows.loc[~compared]
+    return rows
