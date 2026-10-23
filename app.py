@@ -3067,7 +3067,7 @@ with cards_tab:
         f"↔ {comparison_count} forecast split{'s' if comparison_count != 1 else ''} "
         f"among {comparable_count} sportsbook-adjusted game{'s' if comparable_count != 1 else ''} this week."
     )
-    with st.expander(f"All team ATS records · through Week {selected_week - 1}", expanded=False):
+    with st.expander(f"All team records · through Week {selected_week - 1}", expanded=False):
         st.caption(
             "Records reflect completed games before the selected week. Overall W–L includes "
             "regular-season games against FCS opponents; ATS covers FBS vs FBS only. "
