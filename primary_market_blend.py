@@ -103,6 +103,8 @@ def apply_primary_blend(predictions, games, *, now_utc=None, stale=False,
         df[new] = df[old].copy()
     df["Prediction Source"] = FALLBACK
     df["Market Blend Used"] = False
+    # Only a genuine applied pregame market blend can produce a forecast split.
+    df["Forecasts Disagree"] = False
     df["Blend Odds Provider"] = "Unavailable"
     df["Blend Odds Timestamp"] = "Unavailable"
 
@@ -217,6 +219,7 @@ def apply_primary_blend(predictions, games, *, now_utc=None, stale=False,
         df.at[index, "Pick Explanation"] = explanation
         df.at[index, "Prediction Source"] = VERSION + (" · frozen pregame" if not is_future else " · current pregame")
         df.at[index, "Market Blend Used"] = True
+        df.at[index, "Forecasts Disagree"] = (base_home >= 0.5) != (home >= 0.5)
         df.at[index, "Blend Odds Provider"] = provider
         df.at[index, "Blend Odds Timestamp"] = quote_timestamp
         _set_betting_fields(df,index,side,base_home,row,book_home=book_home,book_away=book_away)
