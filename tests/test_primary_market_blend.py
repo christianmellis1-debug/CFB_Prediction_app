@@ -63,6 +63,7 @@ class TestCProductionTests(unittest.TestCase):
         self.assertAlmostEqual(row['Confidence'],1-expected)
         self.assertEqual(row['Model Version'],VERSION)
         self.assertTrue(row['Market Blend Used'])
+        self.assertTrue(row['Forecasts Disagree'])
         self.assertEqual(row['V1.5 Predicted Winner'],'Home')
         self.assertEqual(row['Value Pick'],'Home')
         self.assertEqual(row['Value Side'],'Home')
@@ -124,6 +125,7 @@ class TestCProductionTests(unittest.TestCase):
         row=apply_primary_blend(bad,self.games,now_utc=self.now).iloc[0]
         self.assertEqual(row['Prediction Source'],FALLBACK)
         self.assertFalse(row['Market Blend Used'])
+        self.assertFalse(row['Forecasts Disagree'])
 
     def test_market_rejects_nonstandard_or_crossed_prices(self):
         for h,a in [('-600','-600'),('Unavailable','-110'),('+70','-100'),
@@ -140,6 +142,7 @@ class TestCProductionTests(unittest.TestCase):
         self.assertEqual(out['Predicted Winner'],'Home')
         self.assertEqual(out['Pick Result'],'Pending')
         self.assertFalse(out['Market Blend Used'])
+        self.assertFalse(out['Forecasts Disagree'])
 
     def test_started_games_use_only_frozen_pregame_prices(self):
         self.frame.loc[0,'Status']='Final'
@@ -159,6 +162,7 @@ class TestCProductionTests(unittest.TestCase):
         self.assertEqual(row['Pick Result'],'Correct')
         self.assertEqual(row['Value Pick'],'Home')
         self.assertIn('frozen pregame',row['Prediction Source'])
+        self.assertTrue(row['Forecasts Disagree'])
         bad=copy.deepcopy(frozen)
         bad['123']['captured_at']='2026-10-17T20:00:00Z'
         self.assertEqual(self.blended(frozen_snapshots=bad)['Predicted Winner'],'Home')
@@ -169,6 +173,7 @@ class TestCProductionTests(unittest.TestCase):
         row=self.blended()
         self.assertEqual(row['Predicted Winner'],'Home')
         self.assertEqual(row['V1.5 Predicted Winner'],'Home')
+        self.assertFalse(row['Forecasts Disagree'])
         self.assertEqual(row['Confidence Label'],'High')
         self.assertNotEqual(row['Confidence'],.80)
 
