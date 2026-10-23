@@ -24,15 +24,27 @@
     if(b?.type==='parlay') return validateParlay(b);
     if(b?.type && b.type!=='single') throw Error('Unsupported bet type.');
     if (!b || typeof b !== 'object' || typeof b.id !== 'string' || !b.id || b.id.length>100) throw Error('Invalid bet ID.');
-    for (const k of ['gameId','home','away','team','created']) if(typeof b[k]!=='string'||!b[k]||b[k].length>200) throw Error('Invalid bet details.');
-    if(![b.home,b.away].includes(b.team)||b.home===b.away) throw Error('Pick must be one of the teams.');
+    for (const k of ['gameId','home','away','created']) if(typeof b[k]!=='string'||!b[k]||b[k].length>200) throw Error('Invalid bet details.');
+    if(b.home===b.away) throw Error('Invalid matchup.');
+    const market=b.market||'moneyline';
+    if(!['moneyline','spread','total'].includes(market)) throw Error('Unsupported wager market.');
+    const team=market==='total'?'':b.team;
+    if(market!=='total'&&![b.home,b.away].includes(team)) throw Error('Pick must be one of the teams.');
+    const side=market==='total'?b.side||'':null;
+    if(market==='total'&&!['Over','Under'].includes(side)) throw Error('Total needs an Over or Under selection.');
+    const line=market==='moneyline'?null:Number(b.line);
+    if(market!=='moneyline'&&(!Number.isFinite(line)||Math.abs(line)>200||b.line===''||b.line==null)) throw Error('Enter the spread or total points line.');
+    if(market==='total'&&line<0) throw Error('Total points line cannot be negative.');
     if(!Number.isInteger(b.season)||b.season<2001||b.season>2100||!Number.isInteger(b.week)||b.week<1||b.week>30) throw Error('Invalid season or week.');
-    if(!Number.isFinite(b.stake)||b.stake<0.01||b.stake>100000||!Number.isInteger(b.odds)||Math.abs(b.odds)<100||Math.abs(b.odds)>1000000) throw Error('Enter a positive stake and valid American moneyline (such as -150 or +120).');
+    if(!Number.isFinite(b.stake)||b.stake<0.01||b.stake>100000||!Number.isInteger(b.odds)||Math.abs(b.odds)<100||Math.abs(b.odds)>1000000) throw Error('Enter a positive stake and valid American odds (such as -150 or +120).');
     if(!['Auto','Won','Lost','Push','Void'].includes(b.override)) throw Error('Invalid result override.');
     if(!['Pending','Won','Lost','Push'].includes(b.autoResult)) throw Error('Invalid automatic result.');
     const receiptReturn=b.receiptReturn==null?null:b.receiptReturn;
     if(receiptReturn!==null&&(!Number.isFinite(receiptReturn)||receiptReturn<b.stake||receiptReturn>1000000000)) throw Error('Receipt payout must include the stake and be at least the stake.');
-    return {receiptReturn:receiptReturn===null?null:round(receiptReturn),id:b.id,gameId:b.gameId,home:b.home,away:b.away,team:b.team,created:b.created,season:b.season,week:b.week,stake:round(b.stake),odds:b.odds,book:String(b.book||'').slice(0,100),override:b.override,autoResult:b.autoResult};
+    const source=b.source==='screenshot'?'screenshot':'manual';
+    const receiptId=String(b.receiptId||'').trim().slice(0,100);
+    const placedAt=String(b.placedAt||'').trim().slice(0,80);
+    return {type:'single',market,line,side,source,receiptId,placedAt,receiptReturn:receiptReturn===null?null:round(receiptReturn),id:b.id,gameId:b.gameId,home:b.home,away:b.away,team,created:b.created,season:b.season,week:b.week,stake:round(b.stake),odds:b.odds,book:String(b.book||'').slice(0,100),override:b.override,autoResult:b.autoResult};
   }
   function grade(b,games) {
     if(b.type==='parlay') {
@@ -42,7 +54,17 @@
     const g=games.find(g=>g.id===b.gameId&&g.season===b.season&&g.home===b.home&&g.away===b.away);
     if(!g) return {...b};
     let autoResult='Pending';
-    if(g.completed&&Number.isFinite(g.homeScore)&&Number.isFinite(g.awayScore)) autoResult=g.homeScore===g.awayScore?'Push':((g.homeScore>g.awayScore?g.home:g.away)===b.team?'Won':'Lost');
+    if(g.completed&&Number.isFinite(g.homeScore)&&Number.isFinite(g.awayScore)) {
+      if(b.market==='spread'){
+        const margin=(b.team===g.home?g.homeScore-g.awayScore:g.awayScore-g.homeScore)+b.line;
+        autoResult=Math.abs(margin)<1e-8?'Push':margin>0?'Won':'Lost';
+      } else if(b.market==='total'){
+        const delta=g.homeScore+g.awayScore-b.line;
+        autoResult=Math.abs(delta)<1e-8?'Push':((delta>0)===(b.side==='Over')?'Won':'Lost');
+      } else {
+        autoResult=g.homeScore===g.awayScore?'Push':((g.homeScore>g.awayScore?g.home:g.away)===b.team?'Won':'Lost');
+      }
+    }
     return {...b,autoResult};
   }
   function outcome(b) {
