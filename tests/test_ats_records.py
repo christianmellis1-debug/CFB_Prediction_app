@@ -1,7 +1,8 @@
 import pandas as pd
 import unittest
 
-from ats_records import ats_label, calculate_ats_records
+from ats_records import (ats_label, calculate_ats_records,
+                         calculate_overall_records, overall_ats_label)
 
 
 def _games():
@@ -41,6 +42,44 @@ def _lines():
 
 
 class TestATSRecords(unittest.TestCase):
+    def test_overall_record_includes_fcs_but_not_future_or_incomplete_games(self):
+        # Team 1 beat team 2 in Week 1, lost at team 3 in Week 2,
+        # beat the FCS opponent in Week 2, then had a scheduled Week 4 win.
+        actual = calculate_overall_records(_games(), week=4, season=2026)
+        self.assertEqual(actual[1], {"wins": 2, "losses": 1})
+        self.assertEqual(actual[2], {"wins": 1, "losses": 1})
+        self.assertEqual(actual[3], {"wins": 1, "losses": 1})
+        self.assertEqual(actual[5], {"wins": 0, "losses": 1})
+        self.assertNotIn(4, actual)
+
+    def test_overall_record_is_not_dependent_on_betting_lines(self):
+        actual = calculate_overall_records(_games(), week=4, season=2026)
+        ats = calculate_ats_records(_games(), _lines(), 4)
+        self.assertEqual(overall_ats_label(actual[1], ats[1]), "W–L 2–1 · ATS 0–1–1")
+        self.assertEqual(
+            overall_ats_label(actual[1], ats[1], ats_feed_available=False),
+            "W–L 2–1 · ATS unavailable",
+        )
+        self.assertEqual(overall_ats_label(None, None), "W–L 0–0 · ATS 0–0–0")
+
+    def test_overall_records_deduplicate_and_respect_season_and_week(self):
+        games = _games()
+        copy = games.loc[games.game_id.eq(101)].copy()
+        out_of_season = copy.copy()
+        out_of_season["season"] = 2025
+        out_of_season["game_id"] = 9999
+        duplicated = pd.concat([games, copy, out_of_season], ignore_index=True)
+        actual = calculate_overall_records(duplicated, 4, 2026)
+        self.assertEqual(actual[1], {"wins": 2, "losses": 1})
+        self.assertEqual(calculate_overall_records(duplicated, 1, 2026), {})
+
+    def test_overall_records_missing_scores_do_not_count(self):
+        games = _games()
+        games.loc[games.game_id.eq(106), "away_points"] = None
+        records = calculate_overall_records(games, 4, 2026)
+        self.assertEqual(records[1], {"wins": 1, "losses": 1})
+        self.assertEqual(calculate_overall_records(pd.DataFrame(), 4), {})
+
     def test_ats_results_are_spread_based_and_pregame(self):
         records = calculate_ats_records(_games(), _lines(), 4)
         assert records[1] == dict(wins=0, losses=1, pushes=1, graded=2, eligible=2)
