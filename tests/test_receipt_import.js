@@ -1,7 +1,9 @@
-const assert=require('node:assert/strict');
-const test=require('node:test');
-const core=require('../bet_tracker/core.js');
-const receipts=require('../bet_tracker/receipt_parser.js');
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import '../bet_tracker/core.js';
+import '../bet_tracker/receipt_parser.js';
+const core=globalThis.TrackerCore;
+const receipts=globalThis.ReceiptParser;
 
 const game={id:'123',home:'Texas',away:'Oklahoma',season:2026,week:8,completed:true,homeScore:28,awayScore:24};
 function bet(fields={}){
