@@ -2995,7 +2995,7 @@ def matchday_timeline_html(entries):
 def reset_pick_filters():
     defaults = {"pick_query": "", "pick_level": "All confidence levels",
                 "pick_order": "Highest confidence", "pick_status": "All games",
-                "pick_odds": "All odds", "pick_quality": "All data",
+                "pick_forecast": "All forecasts", "pick_odds": "All odds", "pick_quality": "All data",
                 "pick_outcome": "All results", "pick_favorites_only": False}
     for key, value in defaults.items():
         st.session_state[key] = value
@@ -3051,6 +3051,19 @@ with cards_tab:
             "Game status", ["All games", "Upcoming", "Live", "Final"],
             default="All games", key="pick_status", label_visibility="collapsed",
         ) or "All games"
+    comparison_count = int(pred["Forecasts Disagree"].fillna(False).sum())
+    comparable_count = int(pred["Market Blend Used"].fillna(False).sum())
+    forecast_filter = st.selectbox(
+        "Forecast comparison",
+        ["All forecasts", "Different winners", "Same winner", "No sportsbook comparison"],
+        key="pick_forecast",
+        help="Compare the independent analysis with the sportsbook-adjusted forecast. "
+             "Only valid applied pregame odds count; missing or unverified odds do not imply agreement.",
+    )
+    st.caption(
+        f"↔ {comparison_count} forecast split{'s' if comparison_count != 1 else ''} "
+        f"among {comparable_count} sportsbook-adjusted game{'s' if comparable_count != 1 else ''} this week."
+    )
     with st.expander(f"All team ATS records · through Week {selected_week - 1}", expanded=False):
         st.caption(
             "Season-to-date against the spread, before the selected week. "
@@ -3084,6 +3097,15 @@ with cards_tab:
         st.button("Reset filters", on_click=reset_pick_filters,
                   help="Resets matchup filters and keeps your favorite-team list.")
     filtered = pred.copy()
+    if forecast_filter == "Different winners":
+        filtered = filtered[filtered["Forecasts Disagree"].fillna(False)]
+    elif forecast_filter == "Same winner":
+        filtered = filtered[
+            filtered["Market Blend Used"].fillna(False)
+            & ~filtered["Forecasts Disagree"].fillna(False)
+        ]
+    elif forecast_filter == "No sportsbook comparison":
+        filtered = filtered[~filtered["Market Blend Used"].fillna(False)]
     if query.strip():
         matched = filtered["Home Team"].str.contains(query.strip(), case=False, regex=False) | filtered["Away Team"].str.contains(query.strip(), case=False, regex=False)
         filtered = filtered[matched]
@@ -3490,6 +3512,21 @@ with cards_tab:
             # Detailed forecast transparency belongs inside the existing
             # expandable Details, not in the main card's compact layout.
             comparison_html = forecast_comparison_html(r)
+            # Only an actual verified market-adjusted winner change earns this flag.
+            forecast_split_note = ""
+            if bool(r.get("Forecasts Disagree", False)):
+                original_team = escape(str(r["V1.5 Predicted Winner"]))
+                adjusted_team = escape(str(r["Predicted Winner"]))
+                independent_chance = float(r["V1.5 Confidence"])
+                adjusted_chance = float(r["Confidence"])
+                forecast_split_note = (
+                    '<div style="margin:8px 0;padding:9px 11px;border:1px solid #d49b45;'
+                    'border-radius:7px;background:#d49b4515;font-size:.87rem">'
+                    '<strong>↔ FORECAST SPLIT</strong><div style="margin-top:4px">'
+                    f'Independent: <strong>{original_team} {independent_chance:.1%}</strong>'
+                    ' · With sportsbook odds: '
+                    f'<strong>{adjusted_team} {adjusted_chance:.1%}</strong></div></div>'
+                )
             is_tiered = bool(r.get("Value Selected", False))
             confidence_value = pd.to_numeric(r.get("Confidence"), errors="coerce")
             is_high_confidence = pd.notna(confidence_value) and float(confidence_value) >= 0.80
@@ -3643,7 +3680,7 @@ with cards_tab:
 {final_score_html}
 <div class="pick-result confidence-{confidence_band}"><div class="pick-label">Predicted winner</div><div class="pick-winner">{escape(str(r['Predicted Winner']))}</div>
 <div class="conf-row"><span>Estimated win chance</span><strong>{r['Confidence']:.1%}</strong></div>
-<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{visible_risk}{('<div style="padding:8px 11px;margin:8px 0;border-left:3px solid #64748b;background:#64748b18;border-radius:5px;font-size:.88rem"><strong>🔎 G6 HOME UNDERDOG · ' + ('PRIMARY +150–199' if has_primary_research else 'SECONDARY +200+') + ' · RESEARCH ONLY</strong></div>' if has_primary_research or has_secondary_research else '')}{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
+<div class="conf-track" role="img" aria-label="Estimated win probability {r['Confidence']:.1%}"><div class="conf-fill" style="width:{r['Confidence'] * 100:.1f}%"></div></div></div>{forecast_split_note}{visible_risk}{('<div style="padding:8px 11px;margin:8px 0;border-left:3px solid #64748b;background:#64748b18;border-radius:5px;font-size:.88rem"><strong>🔎 G6 HOME UNDERDOG · ' + ('PRIMARY +150–199' if has_primary_research else 'SECONDARY +200+') + ' · RESEARCH ONLY</strong></div>' if has_primary_research or has_secondary_research else '')}{moneylines}{weather_html}{waterfall_note}{outcome}</article>"""
         def render_pick_cards(rows, prefix):
             for card_index, (row_id, pick) in enumerate(rows.iterrows()):
                 if card_index % 2 == 0:
