@@ -89,6 +89,68 @@ def calculate_ats_records(schedule, lines, week):
     return records
 
 
+def calculate_overall_records(schedule, week, season=None):
+    """Straight-up W-L through the prior week, including FCS opponents.
+
+    Keep regular-season completed games with verified scores. Unlike ATS, an
+    actual win/loss does not require a betting line or an FBS opponent.
+    """
+    if schedule is None or schedule.empty:
+        return {}
+    needed = {"week", "home_id", "away_id", "home_points", "away_points"}
+    if not needed.issubset(schedule.columns):
+        return {}
+    games = schedule.copy()
+    games["week"] = _ids(games, "week")
+    games = games[games["week"].ge(0) & games["week"].lt(int(week))].copy()
+    if season is not None:
+        if "season" not in games:
+            return {}
+        games = games[pd.to_numeric(games["season"], errors="coerce").eq(int(season))]
+    if "season_type" in games:
+        games = games[games["season_type"].astype(str).str.lower().eq("regular")]
+    if "completed" not in games:
+        return {}
+    games = games[_is_true(games["completed"])].copy()
+    for field in ("home_id", "away_id", "home_points", "away_points"):
+        games[field] = _ids(games, field)
+    games = games.dropna(subset=("home_id", "away_id", "home_points", "away_points"))
+    if "game_id" in games:
+        games["game_id"] = _ids(games, "game_id")
+        # Some uploaded files omit game IDs; do not discard their valid scores.
+        games["_unique_game"] = games["game_id"].astype("string").fillna(
+            games["week"].astype("string") + "/" +
+            games["home_id"].astype("string") + "/" +
+            games["away_id"].astype("string")
+        )
+        games = games.drop_duplicates(subset="_unique_game", keep="last")
+    else:
+        games = games.drop_duplicates(subset=("week", "home_id", "away_id"), keep="last")
+
+    records = {}
+    for _, game in games.iterrows():
+        home_id, away_id = int(game["home_id"]), int(game["away_id"])
+        if home_id == away_id:
+            continue
+        home_points, away_points = float(game["home_points"]), float(game["away_points"])
+        if home_points == away_points:
+            continue  # no football tie should be graded as a win or loss
+        for tid, won in ((home_id, home_points > away_points),
+                         (away_id, away_points > home_points)):
+            record = records.setdefault(tid, {"wins": 0, "losses": 0})
+            record["wins" if won else "losses"] += 1
+    return records
+
+
+def overall_ats_label(overall, ats, ats_feed_available=True):
+    """Display actual W-L directly before the independent ATS record."""
+    if overall is None:
+        overall_label = "W–L 0–0"
+    else:
+        overall_label = f"W–L {int(overall['wins'])}–{int(overall['losses'])}"
+    return overall_label + " · " + ats_label(ats, ats_feed_available)
+
+
 def ats_label(record, feed_available=True):
     """Small, honest card label. Coverage warning when lines are missing."""
     if not feed_available:
