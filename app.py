@@ -51,7 +51,8 @@ from matchday_live import live_board_rows, live_board_html, game_card_final_scor
 from value_shortlist_ui import render_value_shortlist_cards
 from hashlib import sha256
 from performance_cache import cache_calculation, clear_calculations
-from ats_records import download_ats_lines, calculate_ats_records, ats_label
+from ats_records import (download_ats_lines, calculate_ats_records,
+                         calculate_overall_records, overall_ats_label)
 
 # Include dependency source in cache keys so rule edits cannot reuse old results.
 _CALCULATION_REVISION = sha256(b"".join(
@@ -2482,6 +2483,8 @@ except Exception:
     ats_line_data = pd.DataFrame()
     ats_feed_available = False
 ats_records = calculate_ats_records(schedule, ats_line_data, selected_week) if ats_feed_available else {}
+# Full schedule includes FCS opponents that are excluded from model/ATS matchups.
+overall_records = calculate_overall_records(original_schedule, selected_week, season=season)
 ats_team_names = {
     int(team_id): str(name)
     for side in ("home", "away")
@@ -3066,9 +3069,10 @@ with cards_tab:
     )
     with st.expander(f"All team ATS records · through Week {selected_week - 1}", expanded=False):
         st.caption(
-            "Season-to-date against the spread, before the selected week. "
-            "Regular-season FBS vs FBS games only. Pushes do not count toward ATS win %. "
-            "A missing betting line is excluded, not treated as a pick'em."
+            "Records reflect completed games before the selected week. Overall W–L includes "
+            "regular-season games against FCS opponents; ATS covers FBS vs FBS only. "
+            "Pushes do not count toward ATS win %. A missing betting line is excluded, "
+            "not treated as a pick'em."
         )
         if not ats_feed_available:
             st.info("Verified historical betting lines are temporarily unavailable; ATS records cannot be confirmed.")
@@ -3078,8 +3082,11 @@ with cards_tab:
                 stats = ats_records.get(team_id, {})
                 w, l, p = (int(stats.get(k, 0)) for k in ("wins", "losses", "pushes"))
                 graded, eligible_games = (int(stats.get(k, 0)) for k in ("graded", "eligible"))
+                actual = overall_records.get(team_id, {"wins": 0, "losses": 0})
                 ats_rows.append({
-                    "Team": team_name, "Wins": w, "Losses": l, "Pushes": p,
+                    "Team": team_name,
+                    "Overall W–L": f"{actual['wins']}–{actual['losses']}",
+                    "ATS wins": w, "ATS losses": l, "ATS pushes": p,
                     "ATS win %": round(100 * w / (w + l), 1) if (w + l) else None,
                     "Lined / Played": f"{graded}/{eligible_games}",
                 })
@@ -3434,7 +3441,7 @@ with cards_tab:
             if len(game) == 1:
                 for side in ("away", "home"):
                     team_id = int(game.iloc[0][side + "_id"])
-                    line = ats_label(ats_records.get(team_id), ats_feed_available)
+                    line = overall_ats_label(overall_records.get(team_id), ats_records.get(team_id), ats_feed_available)
                     label_html = '<span class="team-ats">' + escape(line) + '</span>'
                     if side == "away":
                         away_ats_html = label_html
