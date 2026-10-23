@@ -20,6 +20,12 @@ jobs:
       - name: Compile Python source
         run: |
           python -m compileall -q app.py model_v1_5.py matchup_advantages.py
+      - name: Check bet tracker JavaScript syntax
+        run: |
+          node --check bet_tracker/core.js
+          node --check bet_tracker/ui.js
+          node --check bet_tracker/receipt_parser.js
+          node --check bet_tracker/import_ui.js
       - name: Run screenshot receipt and wager grading tests
         run: node --test tests/test_receipt_import.js
       - name: Run regression tests
