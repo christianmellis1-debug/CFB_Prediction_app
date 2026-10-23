@@ -1,7 +1,8 @@
 """Regression coverage for the new expandable forecast transparency panel."""
 import unittest
+import pandas as pd
 
-from forecast_comparison import forecast_comparison_html, _display_time
+from forecast_comparison import forecast_comparison_html, filter_forecast_rows, _display_time
 
 
 class ForecastComparisonTests(unittest.TestCase):
@@ -28,6 +29,26 @@ class ForecastComparisonTests(unittest.TestCase):
         self.assertIn("DraftKings", result)
         self.assertIn("Oct 20, 2026", result)
         self.assertIn("CDT", result)
+
+    def test_forecast_filter_excludes_missing_odds_from_agreements(self):
+        slate = pd.DataFrame([
+            {"Game ID": 1, "Market Blend Used": True, "Forecasts Disagree": True},
+            {"Game ID": 2, "Market Blend Used": True, "Forecasts Disagree": False},
+            {"Game ID": 3, "Market Blend Used": False, "Forecasts Disagree": False},
+            {"Game ID": 4, "Market Blend Used": False, "Forecasts Disagree": True},
+        ])
+        self.assertEqual(filter_forecast_rows(slate, "All forecasts")["Game ID"].tolist(), [1, 2, 3, 4])
+        self.assertEqual(filter_forecast_rows(slate, "Different winners")["Game ID"].tolist(), [1])
+        self.assertEqual(filter_forecast_rows(slate, "Same winner")["Game ID"].tolist(), [2])
+        self.assertEqual(filter_forecast_rows(slate, "No sportsbook comparison")["Game ID"].tolist(), [3, 4])
+
+    def test_explicit_flag_controls_comparison_details(self):
+        # Even if independently constructed values disagree, the app's verified
+        # flag determines the display when present.
+        row = dict(self.row, **{"Forecasts Disagree": False})
+        self.assertNotIn("Forecasts disagree on the winner", forecast_comparison_html(row))
+        row["Forecasts Disagree"] = True
+        self.assertIn("Forecasts disagree on the winner", forecast_comparison_html(row))
 
     def test_fallback_does_not_label_independent_as_market_adjusted(self):
         no_price = dict(self.row, **{
